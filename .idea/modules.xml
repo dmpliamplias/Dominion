@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dominion.iml" filepath="$PROJECT_DIR$/dominion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dominion-gui/dominion-gui.iml" filepath="$PROJECT_DIR$/dominion-gui/dominion-gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dominion-model/dominion-model.iml" filepath="$PROJECT_DIR$/dominion-model/dominion-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dominion-view/dominion-view.iml" filepath="$PROJECT_DIR$/dominion-view/dominion-view.iml" />
+    </modules>
+  </component>
+</project>
