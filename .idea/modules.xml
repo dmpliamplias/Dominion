@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/businesslayer/businesslayer.iml" filepath="$PROJECT_DIR$/businesslayer/businesslayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/datalayer/datalayer.iml" filepath="$PROJECT_DIR$/datalayer/datalayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/dominion.iml" filepath="$PROJECT_DIR$/dominion.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dominion-gui/dominion-gui.iml" filepath="$PROJECT_DIR$/dominion-gui/dominion-gui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dominion-model/dominion-model.iml" filepath="$PROJECT_DIR$/dominion-model/dominion-model.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dominion-view/dominion-view.iml" filepath="$PROJECT_DIR$/dominion-view/dominion-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/presentationlayer/presentationlayer.iml" filepath="$PROJECT_DIR$/presentationlayer/presentationlayer.iml" />
     </modules>
   </component>
 </project>
