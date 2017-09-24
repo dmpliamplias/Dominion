@@ -12,8 +12,9 @@ public class GameStartController {
 
         Settings settings = new Settings();
         settings.setSound(true);
+        _model.setSettings(settings);
 
-        displaySettings(settings);
+        refreshView();
     }
 
     public GameStartController(GameStartView view, GameStartModel model, int userId){
@@ -24,8 +25,9 @@ public class GameStartController {
         initialize();
     }
 
-    private void displaySettings(Settings settings){
-        _view.lbl.setText("Sound is on: " + settings.isSoundOn());
+    private void refreshView()
+    {
+        _view.displayModel(_model);
     }
 
 

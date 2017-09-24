@@ -28,13 +28,17 @@ public class GameStartView {
 
     }
 
+    protected void displayModel(GameStartModel model){
+        lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());
+        //...conitinue...
+    }
 
-    public void start() {
+    protected void start() {
         _stage.show();
     }
 
 
-    public void stop(){
+    protected void stop(){
         _stage.hide();
     }
 }
