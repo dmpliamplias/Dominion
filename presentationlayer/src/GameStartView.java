@@ -28,8 +28,8 @@ public class GameStartView {
 
     }
 
-    protected void displayModel(GameStartModel model){
-        lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());
+    protected void refresh(){
+        lbl.setText("Sound is on: "+ _model.getSettings().isSoundOn());
         //...conitinue...
     }
 

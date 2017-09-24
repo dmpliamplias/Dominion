@@ -27,7 +27,7 @@ public class GameStartController {
 
     private void refreshView()
     {
-        _view.displayModel(_model);
+        _view.refresh();
     }
 
 
