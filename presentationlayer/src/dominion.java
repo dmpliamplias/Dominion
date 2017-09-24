@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 public class dominion extends Application {
@@ -13,9 +14,16 @@ public class dominion extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // first call Login Page and after successfull login call the 'GamestartView'
+        // and give the userId to the Gamestartcontroller, so he can load the user settings, etc.
+
         model = new GameStartModel();
         view = new GameStartView(primaryStage, model);
-        controller = new GameStartController(view, model);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameStartView.fxml"));
+        loader.setController(new GameStartController(view, model, 1));
+
+        view.start();
     }
 
     @Override
