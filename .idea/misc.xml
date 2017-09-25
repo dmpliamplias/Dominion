@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/dominion-gui/pom.xml" />
         <option value="$PROJECT_DIR$/dominion-model/pom.xml" />
         <option value="$PROJECT_DIR$/dominion-view/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </set>
     </option>
   </component>

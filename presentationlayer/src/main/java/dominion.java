@@ -1,6 +1,11 @@
+import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.ObjectUpdateService;
+import com.weddingcrashers.service.ObjectUpdateServiceImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class dominion extends Application {
 
@@ -23,7 +28,7 @@ public class dominion extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameStartView.fxml"));
         loader.setController(new GameStartController(view, model, 1));
 
-        view.start();
+     view.start();
     }
 
     @Override
