@@ -6,7 +6,7 @@ public class GameStartController {
     private final GameStartView _view;
     private final GameStartModel _model;
     private final int _userId;
-    @FXML
+
     public void initialize() {
         // load settings from database instead of following code:
         // main.java.com.weddingcrashers.model.Settings settings = dbContext.Users.Load(userId).main.java.com.weddingcrashers.model.Settings  ==> this is just an example on how to do it.

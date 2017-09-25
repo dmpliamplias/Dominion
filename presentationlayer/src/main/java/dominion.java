@@ -9,9 +9,9 @@ import java.util.List;
 
 public class dominion extends Application {
 
-    private GameStartModel model;
-    private GameStartView view;
-    private GameStartController controller;
+    private LoginModel model;
+    private LoginView view;
+    private LoginController controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -22,13 +22,13 @@ public class dominion extends Application {
         // first call Login Page and after successfull login call the 'GamestartView'
         // and give the userId to the Gamestartcontroller, so he can load the user settings, etc.
 
-        model = new GameStartModel();
-        view = new GameStartView(primaryStage, model);
+        model = new LoginModel();
+        view = new LoginView(primaryStage, model);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameStartView.fxml"));
-        loader.setController(new GameStartController(view, model, 1));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
+        loader.setController(new LoginController(view, model));
 
-     view.start();
+        view.start();
     }
 
     @Override
