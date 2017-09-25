@@ -10,7 +10,7 @@ public class Server extends Thread {
     int _port;
     int _maxPlayers;
 
-    ArrayList<Socket> clients = new ArrayList<Socket>();
+    ArrayList<Client> clients = new ArrayList<Client>();
 
     public Server(int port, int maxPlayers){
         _port = port;
@@ -28,10 +28,14 @@ public class Server extends Thread {
             ServerSocket serverSocket = new ServerSocket(_port);
             while(clients.size() < _maxPlayers){
                 Socket socket = serverSocket.accept();
-                clients.add(socket);
 
-                for(Socket client : clients){
-                    PrintWriter writer =  new PrintWriter(client.getOutputStream());
+                Client clientThread = new Client(socket);
+                clientThread.start();
+                clients.add(clientThread);
+
+                for(Client client : clients){
+                    Socket clientSocket = client.get_clientSocket();
+                    PrintWriter writer =  new PrintWriter(clientSocket.getOutputStream());
                     writer.write("There are :" + clients.size() + " Players registered.");
                     writer.flush();
                 }
