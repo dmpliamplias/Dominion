@@ -1,3 +1,5 @@
+package Repositories;
+
 import com.weddingcrashers.model.User;
 
 public class UserRepo {

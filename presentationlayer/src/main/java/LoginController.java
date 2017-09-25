@@ -1,4 +1,4 @@
-import com.weddingcrashers.model.Settings;
+import Repositories.UserRepo;
 import com.weddingcrashers.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
