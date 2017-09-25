@@ -1,3 +1,4 @@
+import com.weddingcrashers.model.Settings;
 import javafx.fxml.FXML;
 
 public class GameStartController {
@@ -8,7 +9,7 @@ public class GameStartController {
     @FXML
     public void initialize() {
         // load settings from database instead of following code:
-        // Settings settings = dbContext.Users.Load(userId).Settings  ==> this is just an example on how to do it.
+        // main.java.com.weddingcrashers.model.Settings settings = dbContext.Users.Load(userId).main.java.com.weddingcrashers.model.Settings  ==> this is just an example on how to do it.
 
         Settings settings = new Settings();
         settings.setSound(true);

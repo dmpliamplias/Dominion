@@ -1,3 +1,5 @@
+import com.weddingcrashers.model.Settings;
+
 public class GameStartModel {
     private Settings settings;
 
