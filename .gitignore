@@ -1,6 +1,7 @@
 businesslayer/target
 datalayer/target
 presentationlayer/target
+fxtemplate/target
 .idea/workspace.xml
 .idea/libraries
 .idea/uiDesigner.xml
