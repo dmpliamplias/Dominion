@@ -21,6 +21,7 @@ public final class EntityManagerFactory {
     /** The entity manager factory. */
     private static final javax.persistence.EntityManagerFactory entityManagerFactory;
 
+
     // ---- Constructor
 
     /** Static block which gets performed after class is initialized. */
@@ -41,7 +42,7 @@ public final class EntityManagerFactory {
     }
 
     public static void close() {
-
+        entityManagerFactory.close();
     }
 
 }

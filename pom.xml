@@ -11,13 +11,12 @@
         <relativePath>parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>com.wedingcrashers.dominion</groupId>
     <artifactId>build</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>datalayer</module>
+        <module>fxtemplate</module>
         <module>businesslayer</module>
         <module>presentationlayer</module>
     </modules>
