@@ -1,26 +1,31 @@
-package com.weddingcrashers;
+package StartUp;
 
+import SplashScreen.SplashScreenController;
+import SplashScreen.SplashScreenModel;
+import SplashScreen.SplashScreenView;
+import com.weddingcrashers.ServiceLocator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 /**
- * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
- * is licensed under the terms of the BSD 3-clause license (see the file
- * license.txt).
- *
- * @author Brad Richards
+ * Framework for professional applications:
+ * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
+ * All rights reserved. This code 5 is licensed under the terms of the BSD 3-clause license
+ * For more details please see the file "license.txt").
+ *  @author Brad Richards, small changes from Michel Schlatter
  */
-public class JavaFX_App_Template extends Application {
-    private static JavaFX_App_Template mainProgram; // singleton
-    private Splash_View splashView;
-    private App_View view;
+
+public class Dominion extends Application {
+
+    private static Dominion mainProgram; // singleton
+    private SplashScreenView splashView;
+    private LoginView view;
 
     private ServiceLocator serviceLocator; // resources, after initialization
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     /**
      * Note: This method is called on the main thread, not the JavaFX
@@ -46,6 +51,10 @@ public class JavaFX_App_Template extends Application {
         }
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     /**
      * This method is called after init(), and is called on the JavaFX
      * Application Thread, so we can display a GUI. We have two GUIs: a splash
@@ -59,9 +68,9 @@ public class JavaFX_App_Template extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create and display the splash screen and model
-        Splash_Model splashModel = new Splash_Model();
-        splashView = new Splash_View(primaryStage, splashModel);
-//        new Splash_Controller(this, splashModel, splashView);
+        SplashScreenModel splashModel = new SplashScreenModel();
+        splashView = new SplashScreenView(primaryStage, splashModel);
+        new SplashScreenController(this, splashModel, splashView);
         splashView.start();
 
         // Display the splash screen and begin the initialization
@@ -85,9 +94,9 @@ public class JavaFX_App_Template extends Application {
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
-        App_Model model = new App_Model();
-        view = new App_View(appStage, model);
-        new App_Controller(model, view);
+        LoginModel model = new LoginModel();
+        view = new LoginView(appStage, model);
+        new LoginController(view, model);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -117,13 +126,11 @@ public class JavaFX_App_Template extends Application {
             view.stop();
         }
 
-        // More cleanup code as needed
-
         serviceLocator.getLogger().info("Application terminated");
     }
 
     // Static getter for a reference to the main program object
-    protected static JavaFX_App_Template getMainProgram() {
+    protected static Dominion getMainProgram() {
         return mainProgram;
     }
 }

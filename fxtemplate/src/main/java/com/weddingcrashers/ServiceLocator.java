@@ -3,7 +3,6 @@ package com.weddingcrashers;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
  * is licensed under the terms of the BSD 3-clause license (see the file
@@ -19,8 +18,8 @@ public class ServiceLocator {
     private static ServiceLocator serviceLocator; // singleton
 
     // Application-global constants
-    final private Class<?> APP_CLASS = JavaFX_App_Template.class;
-    final private String APP_NAME = "JavaFX_App_Template";
+    final private Class<?> APP_CLASS = ServiceLocator.class; //Dominion.class;
+    final private String APP_NAME = "Dominion";
     
     // Supported locales (for translations)
     final private Locale[] locales = new Locale[] { new Locale("en"), new Locale("de") };

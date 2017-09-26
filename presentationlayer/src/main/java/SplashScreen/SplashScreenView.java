@@ -1,6 +1,6 @@
-package com.weddingcrashers;
+package SplashScreen;
 
-
+import com.weddingcrashers.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -10,21 +10,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.net.URL;
-
 /**
- * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
- * is licensed under the terms of the BSD 3-clause license (see the file
- * license.txt).
- *
- * @author Brad Richards
+ * Framework for professional applications:
+ * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
+ * All rights reserved. This code 5 is licensed under the terms of the BSD 3-clause license
+ * For more details please see the file "license.txt").
+ *  @author Brad Richards, small changes from Michel Schlatter
  */
-public class Splash_View extends View<Splash_Model> {
+
+public class SplashScreenView extends View<SplashScreenModel> {
     ProgressBar progress;
     private Label lblStatus;
 
-    public Splash_View(Stage stage, Splash_Model model) {
+    public SplashScreenView(Stage stage, SplashScreenModel model) {
         super(stage, model);
         stage.initStyle(StageStyle.TRANSPARENT); // also undecorated
     }
@@ -49,3 +47,5 @@ public class Splash_View extends View<Splash_Model> {
         return scene;
     }
 }
+
+

@@ -17,7 +17,7 @@ public class GameStartView {
         _stage = stage;
         _model = model;
 
-        _stage.setTitle("Dominion Start");
+        _stage.setTitle("StartUp.Dominion Start");
         _stage.setHeight(500);
         _stage.setWidth(800);
 
