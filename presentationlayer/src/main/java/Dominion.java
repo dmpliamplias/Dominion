@@ -1,6 +1,9 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 public class Dominion extends Application {
 

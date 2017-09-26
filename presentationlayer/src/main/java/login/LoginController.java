@@ -1,3 +1,5 @@
+package login;
+
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.repositories.UserRepo;
 import gamestart.GameStartController;

@@ -1,3 +1,5 @@
+package login;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -6,15 +8,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 public class LoginView {
 
-    protected Button login;
-    protected Button cancel;
-    protected TextField email;
-    protected  PasswordField pw;
-    protected  Label error;
+    Button login;
+    Button cancel;
+    TextField email;
+    PasswordField pw;
+    Label error;
 
     LoginModel _model;
     Stage _stage;
@@ -46,25 +47,25 @@ public class LoginView {
 
     }
 
-    protected void refreshModel(){
+    void refreshModel(){
         _model.setPassword(pw.getText());
         _model.setEmail(email.getText());
     }
 
-    protected Stage getStage(){
+    Stage getStage(){
         return _stage;
     }
 
-    protected  void setLoginError(){
+    void setLoginError(){
         error.setText("Wrong Login or PW");
     }
 
-    protected void start() {
+    public void start() {
         _stage.show();
     }
 
 
-    protected void stop(){
+    public void stop(){
         _stage.hide();
     }
 

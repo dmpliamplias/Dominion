@@ -1,4 +1,7 @@
+package login;
+
 public class LoginModel {
+
     private String email;
     private String password;
 
@@ -17,6 +20,5 @@ public class LoginModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }
