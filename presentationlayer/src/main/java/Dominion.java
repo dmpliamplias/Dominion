@@ -1,13 +1,8 @@
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.ObjectUpdateService;
-import com.weddingcrashers.service.ObjectUpdateServiceImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-import java.util.List;
-
-public class dominion extends Application {
+public class Dominion extends Application {
 
     private LoginModel model;
     private LoginView view;
@@ -25,7 +20,7 @@ public class dominion extends Application {
         model = new LoginModel();
         view = new LoginView(primaryStage, model);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
         loader.setController(new LoginController(view, model));
 
         view.start();

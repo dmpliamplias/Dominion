@@ -1,4 +1,4 @@
-package Repositories;
+package com.weddingcrashers.repositories;
 
 import com.weddingcrashers.model.User;
 

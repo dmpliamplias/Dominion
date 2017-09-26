@@ -1,9 +1,12 @@
+package gamestart;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class GameStartView {
+
     final private Stage _stage;
     final private GameStartModel _model;
 
@@ -33,12 +36,12 @@ public class GameStartView {
         //...conitinue...
     }
 
-    protected void start() {
+    public void start() {
         _stage.show();
     }
 
-
-    protected void stop(){
+    public void stop(){
         _stage.hide();
     }
+
 }

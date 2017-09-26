@@ -2,22 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="782d5421-c5d3-476f-a849-967d8467dd30" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/Card.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/Card.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/InstructionType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/InstructionType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/KingCard.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCard.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/KingCardType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCardType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/MoneyCard.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyCard.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/MoneyType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/PointCardType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCardType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/BusinessModels/PointCards.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCards.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/Repositories/HighScoreRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/HighScoreRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/Repositories/SettingsRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/SettingsRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/Repositories/UserRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/UserRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/Server/Client.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/businesslayer/src/Server/Server.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_h2database_h2_1_4_196.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_11_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_2_spec_1_0_1_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/GameStartController.java" afterPath="$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/GameStartModel.java" afterPath="$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartModel.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/GameStartView.fxml" afterPath="$PROJECT_DIR$/presentationlayer/src/main/resources/gamestart/GameStartView.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/GameStartView.java" afterPath="$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/Login.fxml" afterPath="$PROJECT_DIR$/presentationlayer/src/main/resources/login/LoginView.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/dominion.java" afterPath="$PROJECT_DIR$/presentationlayer/src/main/java/Dominion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/businesslayer.iml" afterPath="$PROJECT_DIR$/businesslayer/businesslayer.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/pom.xml" afterPath="$PROJECT_DIR$/businesslayer/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/Card.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/Card.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/InstructionType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/InstructionType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCard.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCardType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCardType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyCard.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCardType.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCardType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCards.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCards.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/HighScoreRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/HighScoreRepo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/SettingsRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/SettingsRepo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/UserRepo.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/UserRepo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java" afterPath="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parent/pom.xml" afterPath="$PROJECT_DIR$/parent/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presentationlayer/pom.xml" afterPath="$PROJECT_DIR$/presentationlayer/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java" afterPath="$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,11 +61,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+              <folding>
+                <element signature="e#267#275#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="90">
+              <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -75,21 +121,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/presentationlayer/src/GameStartView.fxml" />
-        <option value="$PROJECT_DIR$/businesslayer/src/Settings.java" />
-        <option value="$PROJECT_DIR$/datalayer/src/Sound.java" />
-        <option value="$PROJECT_DIR$/datalayer/src/Settings.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/GameStartModel.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/dominion.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/GameStartController.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/GameStartView.java" />
         <option value="$PROJECT_DIR$/dominion.iml" />
         <option value="$PROJECT_DIR$/presentationlayer/src/main/java/GameStartController.java" />
-        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/dominion.java" />
         <option value="$PROJECT_DIR$/businesslayer/src/UserRepo.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/main/java/LoginModel.java" />
-        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java" />
         <option value="$PROJECT_DIR$/presentationlayer/src/main/java/LoginView.java" />
         <option value="$PROJECT_DIR$/businesslayer/src/Card.java" />
         <option value="$PROJECT_DIR$/businesslayer/src/MoneyCard.java" />
@@ -109,6 +148,29 @@
         <option value="$PROJECT_DIR$/businesslayer/src/Server/ClientTask.java" />
         <option value="$PROJECT_DIR$/businesslayer/src/Server/Client.java" />
         <option value="$PROJECT_DIR$/businesslayer/src/Server/Server.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/UserRepo.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/SettingsRepo.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/HighScoreRepo.java" />
+        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java" />
+        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartView.java" />
+        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/dominion.java" />
+        <option value="$PROJECT_DIR$/presentationlayer/src/main/java/Dominion.java" />
+        <option value="$PROJECT_DIR$/datalayer/src/main/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/businesslayer/pom.xml" />
+        <option value="$PROJECT_DIR$/presentationlayer/pom.xml" />
+        <option value="$PROJECT_DIR$/parent/pom.xml" />
+        <option value="$PROJECT_DIR$/datalayer/pom.xml" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCard.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/Card.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/InstructionType.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCardType.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyType.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCards.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCardType.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyCard.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java" />
+        <option value="$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -156,6 +218,50 @@
             </path>
             <path>
               <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="weddingcrashers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="weddingcrashers" type="462c0819:PsiDirectoryNode" />
+              <item name="businessmodels" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="businesslayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="weddingcrashers" type="462c0819:PsiDirectoryNode" />
+              <item name="repositories" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
               <item name="datalayer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -171,11 +277,98 @@
             </path>
             <path>
               <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="datalayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="datalayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="weddingcrashers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="datalayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="datalayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="cleanDB" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="datalayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
               <item name="parent" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
               <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gamestart" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="gamestart" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dominion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="presentationlayer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -191,6 +384,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/businesslayer/src/main/java" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="gamestart" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/presentationlayer/src/main/resources/login" />
+      <recent name="$PROJECT_DIR$/presentationlayer/src/main/resources/gamestart" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -204,7 +408,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.dominion">
+  <component name="RunManager" selected="Application.Dominion">
+    <configuration name="Dominion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="Dominion" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="presentationlayer" />
+      <envs />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="WIDTH" value="400" />
@@ -285,23 +503,9 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="dominion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="dominion" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="presentationlayer" />
-      <envs />
-    </configuration>
     <recent_temporary>
       <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.dominion" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Dominion" />
       </list>
     </recent_temporary>
   </component>
@@ -327,18 +531,20 @@
       <workItem from="1506290203011" duration="164000" />
       <workItem from="1506353448091" duration="163000" />
       <workItem from="1506355192175" duration="6397000" />
-      <workItem from="1506417391544" duration="334000" />
+      <workItem from="1506417391544" duration="1357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11454000" />
+    <option name="totallyTimeSpent" value="12477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="0" width="1922" height="1201" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -346,17 +552,20 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32909092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32909092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20704375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991228" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -365,14 +574,10 @@
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991228" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,53 +591,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java</url>
-          <line>25</line>
+          <line>29</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java</url>
-          <line>39</line>
+          <line>43</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/presentationlayer/src/main/java/Dominion.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartView.fxml" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartModel.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartController.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/dominion.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dominion-gui/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/dominion-model/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/dominion-view/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/dominion-gui/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/dominion-model/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dominion-view/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartView.fxml" />
-    <entry file="file://$PROJECT_DIR$/businesslayer/src/Settings.java" />
-    <entry file="file://$PROJECT_DIR$/datalayer/src/Sound.java" />
-    <entry file="file://$PROJECT_DIR$/datalayer/src/Settings.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/dominion.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartModel.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartController.java" />
     <entry file="file://$PROJECT_DIR$/presentationlayer/src/GameStartView.java" />
     <entry file="file://$PROJECT_DIR$/dominion.iml">
       <provider selected="true" editor-type-id="text-editor">
@@ -441,7 +621,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/GameStartModel.java">
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
@@ -453,6 +633,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -467,29 +648,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/GameStartController.java">
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/dominion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="30" column="8" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/GameStartView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="35" column="23" lean-forward="false" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -499,19 +665,19 @@
         <state relative-caret-position="63">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <element signature="e#111#112#0" expanded="true" />
-            <element signature="e#139#140#0" expanded="true" />
-            <element signature="e#181#182#0" expanded="true" />
-            <element signature="e#215#216#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#281#282#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#111#112#0" expanded="false" />
+            <element signature="e#139#140#0" expanded="false" />
+            <element signature="e#181#182#0" expanded="false" />
+            <element signature="e#215#216#0" expanded="false" />
+            <element signature="e#250#251#0" expanded="false" />
+            <element signature="e#281#282#0" expanded="false" />
+            <element signature="e#329#330#0" expanded="false" />
+            <element signature="e#369#370#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/Login.fxml">
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/resources/login/LoginView.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="32" />
@@ -523,29 +689,17 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/javafx-src.zip!/javafx/scene/Node.java" />
-    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
-            <element signature="e#1373#1374#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/javafx-src.zip!/javafx/event/Event.java" />
     <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/LoginView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1439#1440#0" expanded="true" />
-            <element signature="e#1477#1478#0" expanded="true" />
-            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1410#1411#0" expanded="false" />
+            <element signature="e#1439#1440#0" expanded="false" />
+            <element signature="e#1477#1478#0" expanded="false" />
+            <element signature="e#1527#1528#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,10 +811,190 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="33" column="48" lean-forward="false" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/gamestart/GameStartView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datalayer/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="38" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presentationlayer/src/main/java/Dominion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presentationlayer/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="21" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parent/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="958">
+          <caret line="68" column="25" lean-forward="false" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datalayer/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="38" lean-forward="false" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/Card.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCards.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/PointCardType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/UserRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/SettingsRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/repositories/HighScoreRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/MoneyCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCardType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/KingCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/businessmodels/InstructionType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businesslayer/src/main/java/com/weddingcrashers/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+          <folding>
+            <element signature="e#267#275#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
           <folding />
         </state>
       </provider>

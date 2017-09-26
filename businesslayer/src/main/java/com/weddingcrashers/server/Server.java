@@ -1,9 +1,8 @@
-package Server;
+package com.weddingcrashers.server;
 
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.server.ExportException;
 import java.util.ArrayList;
 
 public class Server extends Thread {

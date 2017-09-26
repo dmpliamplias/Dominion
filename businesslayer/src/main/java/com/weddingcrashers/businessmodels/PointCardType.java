@@ -1,4 +1,4 @@
-package BusinessModels;
+package com.weddingcrashers.businessmodels;
 
 public enum PointCardType {
     Estate, // Anwesen

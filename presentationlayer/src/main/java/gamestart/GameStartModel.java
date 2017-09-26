@@ -1,3 +1,5 @@
+package gamestart;
+
 import com.weddingcrashers.model.Settings;
 
 public class GameStartModel {

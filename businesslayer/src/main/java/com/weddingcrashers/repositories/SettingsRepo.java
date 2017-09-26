@@ -1,4 +1,4 @@
-package Repositories;
+package com.weddingcrashers.repositories;
 
 public class SettingsRepo {
 }

@@ -1,6 +1,6 @@
-package BusinessModels;
+package com.weddingcrashers.businessmodels;
 
-public class KingCard extends Card{
+public class KingCard extends Card {
 
     InstructionType[] instructionTypes;
     KingCardType kingCardType;

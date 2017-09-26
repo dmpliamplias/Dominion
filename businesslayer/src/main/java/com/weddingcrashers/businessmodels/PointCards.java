@@ -1,4 +1,4 @@
-package BusinessModels;
+package com.weddingcrashers.businessmodels;
 
 public class PointCards extends Card {
 

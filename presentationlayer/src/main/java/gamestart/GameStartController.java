@@ -1,5 +1,6 @@
+package gamestart;
+
 import com.weddingcrashers.model.Settings;
-import javafx.fxml.FXML;
 
 public class GameStartController {
 

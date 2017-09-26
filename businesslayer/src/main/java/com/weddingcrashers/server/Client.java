@@ -1,9 +1,8 @@
-package Server;
+package com.weddingcrashers.server;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.stream.Stream;
 
 public class Client extends Thread {
     Socket _clientSocket;

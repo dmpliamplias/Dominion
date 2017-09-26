@@ -1,6 +1,6 @@
-package BusinessModels;
+package com.weddingcrashers.businessmodels;
 
-public class MoneyCard  extends  Card{
+public class MoneyCard  extends Card {
     MoneyType moneyType;
     int value;
 
