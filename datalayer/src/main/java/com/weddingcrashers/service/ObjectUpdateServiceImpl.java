@@ -7,6 +7,11 @@ import java.util.List;
 
 import static com.weddingcrashers.util.EntityManagerFactory.getEntityManager;
 
+/**
+ * Implements {@link ObjectUpdateService}.
+ *
+ * @author dmpliamplias
+ */
 public class ObjectUpdateServiceImpl implements ObjectUpdateService {
 
     /**
