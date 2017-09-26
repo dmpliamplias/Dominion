@@ -1,7 +1,5 @@
-package com.weddingcrashers.appClasses;
+package com.weddingcrashers;
 
-import com.weddingcrashers.ServiceLocator;
-import com.weddingcrashers.abstractClasses.Controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

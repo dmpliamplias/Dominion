@@ -1,9 +1,9 @@
-package com.weddingcrashers.splashScreen;
+package com.weddingcrashers;
 
 import com.weddingcrashers.ServiceLocator;
-import com.weddingcrashers.abstractClasses.Model;
-import com.weddingcrashers.commonClasses.Configuration;
-import com.weddingcrashers.commonClasses.Translator;
+import com.weddingcrashers.Model;
+import com.weddingcrashers.Configuration;
+import com.weddingcrashers.Translator;
 import javafx.concurrent.Task;
 
 import java.util.logging.FileHandler;

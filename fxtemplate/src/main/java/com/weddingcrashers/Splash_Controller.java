@@ -1,7 +1,5 @@
-package com.weddingcrashers.splashScreen;
+package com.weddingcrashers;
 
-import com.weddingcrashers.JavaFX_App_Template;
-import com.weddingcrashers.abstractClasses.Controller;
 import javafx.concurrent.Worker;
 
 /**

@@ -1,4 +1,4 @@
-package com.weddingcrashers.commonClasses;
+package com.weddingcrashers;
 
 import com.weddingcrashers.ServiceLocator;
 

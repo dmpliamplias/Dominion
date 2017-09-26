@@ -1,8 +1,5 @@
 package com.weddingcrashers;
 
-import com.weddingcrashers.commonClasses.Configuration;
-import com.weddingcrashers.commonClasses.Translator;
-
 import java.util.Locale;
 import java.util.logging.Logger;
 

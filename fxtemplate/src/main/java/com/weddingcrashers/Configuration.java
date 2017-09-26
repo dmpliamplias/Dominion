@@ -1,4 +1,4 @@
-package com.weddingcrashers.commonClasses;
+package com.weddingcrashers;
 
 import com.weddingcrashers.ServiceLocator;
 
@@ -34,7 +34,7 @@ public class Configuration {
         // Load default properties from wherever the code is
         defaultOptions = new Properties();
         String defaultFilename = sl.getAPP_NAME() + "_defaults.cfg";
-        InputStream inStream = sl.getAPP_CLASS().getResourceAsStream(defaultFilename);
+        InputStream inStream = sl.getAPP_CLASS().getResourceAsStream("/" + defaultFilename);
         try {
             defaultOptions.load(inStream);
             logger.config("Default configuration file found");

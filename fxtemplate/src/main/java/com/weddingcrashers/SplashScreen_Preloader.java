@@ -1,4 +1,4 @@
-package com.weddingcrashers.splashScreen;
+package com.weddingcrashers;
 
 import javafx.application.Preloader;
 import javafx.scene.Scene;

@@ -1,8 +1,5 @@
-package com.weddingcrashers.appClasses;
+package com.weddingcrashers;
 
-import com.weddingcrashers.ServiceLocator;
-import com.weddingcrashers.abstractClasses.View;
-import com.weddingcrashers.commonClasses.Translator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
