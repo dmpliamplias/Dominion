@@ -1,4 +1,4 @@
-package com.weddingcrashers.abstractClasses;
+package com.weddingcrashers;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;

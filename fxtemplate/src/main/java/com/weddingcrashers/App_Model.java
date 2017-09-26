@@ -1,7 +1,7 @@
-package com.weddingcrashers.appClasses;
+package com.weddingcrashers;
 
 import com.weddingcrashers.ServiceLocator;
-import com.weddingcrashers.abstractClasses.Model;
+import com.weddingcrashers.Model;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code

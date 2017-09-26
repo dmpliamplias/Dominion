@@ -1,7 +1,6 @@
-package com.weddingcrashers.splashScreen;
+package com.weddingcrashers;
 
 
-import com.weddingcrashers.abstractClasses.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -10,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
@@ -42,8 +44,7 @@ public class Splash_View extends View<Splash_Model> {
         root.setBottom(bottomBox);
 
         Scene scene = new Scene(root, 300, 300, Color.TRANSPARENT);
-        scene.getStylesheets().addAll(
-                this.getClass().getResource("splash.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("/splash.css").toExternalForm());
 
         return scene;
     }

@@ -1,10 +1,5 @@
 package com.weddingcrashers;
 
-import com.weddingcrashers.appClasses.App_Controller;
-import com.weddingcrashers.appClasses.App_Model;
-import com.weddingcrashers.appClasses.App_View;
-import com.weddingcrashers.splashScreen.Splash_Model;
-import com.weddingcrashers.splashScreen.Splash_View;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

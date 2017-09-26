@@ -1,4 +1,4 @@
-package com.weddingcrashers.abstractClasses;
+package com.weddingcrashers;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
