@@ -1,6 +1,8 @@
-datalayer/target
-businesslayer/target
-datalayer/target
-parent/target
-presentationlayer/target
+businesslayer/target/
+datalayer/target/
+fxtemplate/target/
+presentationlayer/target/
+.idea/libraries/
+.idea/inspectionProfiles/
 .idea/workspace.xml
+.idea/uiDesigner.xml

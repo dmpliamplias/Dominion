@@ -24,7 +24,6 @@
         <dependency>
             <groupId>com.weddingcrashers.dominion</groupId>
             <artifactId>fxtemplate</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
