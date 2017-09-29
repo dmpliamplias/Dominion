@@ -1,5 +1,7 @@
 package com.weddingcrashers.businessmodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class MoneyCard  extends Card {
     MoneyType moneyType;
     int value;

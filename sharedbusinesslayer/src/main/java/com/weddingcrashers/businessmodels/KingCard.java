@@ -1,12 +1,36 @@
 package com.weddingcrashers.businessmodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class KingCard extends Card {
 
-    InstructionType[] instructionTypes;
-    KingCardType kingCardType;
+   int buys;
+   int actions;
+   int cards;
 
-    public KingCard(){
-        this.instructionTypes = new InstructionType[2];
+    KingCardType kingCardType;
+    public int getBuys() {
+        return buys;
+    }
+
+    public void setBuys(int buys) {
+        this.buys = buys;
+    }
+
+    public int getActions() {
+        return actions;
+    }
+
+    public void setActions(int actions) {
+        this.actions = actions;
+    }
+
+    public int getCards() {
+        return cards;
+    }
+
+    public void setCards(int cards) {
+        this.cards = cards;
     }
 
     public KingCardType getKingCardType() {
@@ -17,20 +41,8 @@ public class KingCard extends Card {
         this.kingCardType = kingCardType;
     }
 
-    public InstructionType[] getInstructionTypes() {
-        return instructionTypes;
-    }
 
-    public void addInstructionTypes(InstructionType instructionType) throws Exception {
-        if(instructionTypes[0] == null){
-            instructionTypes[0] = instructionType;
-        }else if(instructionTypes[1] == null){
-            instructionTypes[1] = instructionType;
-        }else {
-            throw new Exception("Can not add more than 2 InstructionType to Base_Type KingCard");
-        }
-        this.instructionTypes = instructionTypes;
-    }
+
 
 
 

@@ -1,9 +1,23 @@
 package com.weddingcrashers.servermodels;
 
+import com.weddingcrashers.model.User;
+
+/**
+ *  @author Michel Schlatter
+ *  */
 public class LoginContainer extends Container {
     private String Email;
     private String Password;
-    private boolean success;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     public LoginContainer(){
         setMethod(Methods.Login);
@@ -25,11 +39,4 @@ public class LoginContainer extends Container {
         Password = password;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 }

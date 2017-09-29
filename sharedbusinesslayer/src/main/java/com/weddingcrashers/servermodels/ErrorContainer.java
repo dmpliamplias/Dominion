@@ -1,5 +1,7 @@
 package com.weddingcrashers.servermodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class ErrorContainer extends Container {
     private String error;
 

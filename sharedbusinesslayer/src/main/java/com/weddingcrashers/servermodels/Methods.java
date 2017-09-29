@@ -1,5 +1,7 @@
 package com.weddingcrashers.servermodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public enum Methods {
     Login,
     ShuffleCards,

@@ -1,9 +1,6 @@
 package com.weddingcrashers.service;
 
-import com.weddingcrashers.service.ObjectUpdateService;
-import com.weddingcrashers.service.ObjectUpdateServiceImpl;
-import com.weddingcrashers.service.UserService;
-import com.weddingcrashers.service.UserServiceImpl;
+import com.weddingcrashers.clientconnectionutils.ServerConnectionService;
 
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -35,6 +32,7 @@ public class ServiceLocator {
     // Resources
     private Logger logger;
     private Translator translator;
+    ServerConnectionService serverConnectionService;
 
     // Services
     private static ObjectUpdateService objectUpdateService;
@@ -96,5 +94,14 @@ public class ServiceLocator {
     public void setTranslator(Translator translator) {
         this.translator = translator;
     }
+
+    public ServerConnectionService getServerConnectionService() {
+        return serverConnectionService;
+    }
+
+    public void setServerConnectionService(ServerConnectionService serverConnectionService) {
+        this.serverConnectionService = serverConnectionService;
+    }
+
 
 }

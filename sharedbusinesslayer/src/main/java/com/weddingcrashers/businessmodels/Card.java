@@ -1,5 +1,8 @@
 package com.weddingcrashers.businessmodels;
 
+/**
+ *  @author Michel Schlatter
+ *  */
 public class Card {
     String name;
     int Cost;

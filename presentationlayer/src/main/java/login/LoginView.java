@@ -8,7 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class LoginView {
 
     Button login;
@@ -57,7 +59,7 @@ public class LoginView {
     }
 
     void setLoginError(){
-        error.setText("Wrong Login or PW");
+        error.setText(_model.getError());
     }
 
     public void start() {

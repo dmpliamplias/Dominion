@@ -1,5 +1,7 @@
 package com.weddingcrashers.businessmodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class PointCards extends Card {
 
     PointCardType pointCardType;

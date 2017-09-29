@@ -1,10 +1,20 @@
 package login;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class LoginModel {
 
     private String email;
     private String password;
+    private String error;
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
     public String getEmail() {
         return email;
     }

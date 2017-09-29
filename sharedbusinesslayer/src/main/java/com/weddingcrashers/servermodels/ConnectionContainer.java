@@ -1,5 +1,7 @@
 package com.weddingcrashers.servermodels;
-
+/**
+ *  @author Michel Schlatter
+ *  */
 public class ConnectionContainer extends Container {
     int id;
 

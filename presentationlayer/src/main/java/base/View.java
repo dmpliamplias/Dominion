@@ -44,4 +44,8 @@ public abstract class View<M extends Model> {
     public Stage getStage() {
         return stage;
     }
+
+    public void alert(String msg){
+        alert(msg);
+    }
 }

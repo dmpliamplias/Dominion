@@ -26,12 +26,8 @@ public class LoginManager {
 
        if(user != null){
           if(user.getPassword().equals(Utils.hashPassword(password))) {
-              loginContainer.setSuccess(true);
-          }else{
-              loginContainer.setSuccess(false);
+              loginContainer.setUser(user);
           }
-       }else{
-           loginContainer.setSuccess(false);
        }
 
         ServerUtils.sendObject(_client, loginContainer);
