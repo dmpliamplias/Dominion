@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="businesslayer" />
         <module name="datalayer" />
-        <module name="fxtemplate" />
         <module name="presentationlayer" />
+        <module name="sharedbusinesslayer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +22,10 @@
       <module name="fxtemplate" target="1.8" />
       <module name="parent" target="1.8" />
       <module name="presentationlayer" target="1.8" />
+      <module name="server" target="1.8" />
+      <module name="shared-businessmodel" target="1.8" />
+      <module name="sharedbusinesslayer" target="1.8" />
+      <module name="sharedbusinessmodel" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

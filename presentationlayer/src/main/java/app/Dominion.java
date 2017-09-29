@@ -1,15 +1,15 @@
 package app;
 
-import splashscreen.SplashScreenController;
-import splashscreen.SplashScreenModel;
-import splashscreen.SplashScreenView;
-import com.weddingcrashers.ServiceLocator;
+import com.weddingcrashers.service.ServiceLocator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
+import splashscreen.SplashScreenController;
+import splashscreen.SplashScreenModel;
+import splashscreen.SplashScreenView;
 
 /**
  * Framework for professional applications:

@@ -1,7 +1,7 @@
-businesslayer/target/
-datalayer/target/
-fxtemplate/target/
+server/businesslayer/target/
+server/datalayer/target/
 presentationlayer/target/
+sharedbusinesslayer/target/
 .idea/libraries/
 .idea/inspectionProfiles/
 .idea/workspace.xml

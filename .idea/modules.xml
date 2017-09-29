@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/businesslayer/businesslayer.iml" filepath="$PROJECT_DIR$/businesslayer/businesslayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datalayer/datalayer.iml" filepath="$PROJECT_DIR$/datalayer/datalayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fxtemplate/fxtemplate.iml" filepath="$PROJECT_DIR$/fxtemplate/fxtemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/businesslayer/businesslayer.iml" filepath="$PROJECT_DIR$/server/businesslayer/businesslayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/datalayer/datalayer.iml" filepath="$PROJECT_DIR$/server/datalayer/datalayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent/parent.iml" filepath="$PROJECT_DIR$/parent/parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/presentationlayer/presentationlayer.iml" filepath="$PROJECT_DIR$/presentationlayer/presentationlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sharedbusinesslayer/sharedbusinesslayer.iml" filepath="$PROJECT_DIR$/sharedbusinesslayer/sharedbusinesslayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/sharedbusinessmodel.iml" filepath="$PROJECT_DIR$/parent/sharedbusinessmodel.iml" />
     </modules>
   </component>
 </project>

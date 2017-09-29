@@ -5,7 +5,9 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/parent/pom.xml" />
-        <option value="$PROJECT_DIR$/fxtemplate/pom.xml" />
+        <option value="$PROJECT_DIR$/server/pom.xml" />
+        <option value="$PROJECT_DIR$/sharedbusinessmodel/pom.xml" />
+        <option value="$PROJECT_DIR$/sharedbusinesslayer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
