@@ -1,13 +1,19 @@
 package com.weddingcrashers.server;
 
-import java.io.PrintWriter;
+import com.weddingcrashers.servermodels.ConnectionContainer;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ *  @author Michel Schlatter
+ *  */
+
 public class Server extends Thread {
     int _port;
     int _maxPlayers;
+    private static int idCounter = 0;
 
     ArrayList<Client> clients = new ArrayList<Client>();
 
@@ -28,18 +34,18 @@ public class Server extends Thread {
             while(clients.size() < _maxPlayers){
                 Socket socket = serverSocket.accept();
 
-                Client clientThread = new Client(socket);
+                Client clientThread = new Client(socket, ++idCounter);
                 clientThread.start();
                 clients.add(clientThread);
 
-                for(Client client : clients){
-                    Socket clientSocket = client.get_clientSocket();
-                    PrintWriter writer =  new PrintWriter(clientSocket.getOutputStream());
-                    writer.write("There are :" + clients.size() + " Players registered.");
-                    writer.flush();
-                }
+                ConnectionContainer c = new ConnectionContainer();
+                c.setId(idCounter);
+                ServerUtils.sendObject(clientThread ,c);
             }
         } catch (Exception ex){
+            for(Client client : clients){
+                ServerUtils.sendError(client,ex);
+            }
 
         }
 

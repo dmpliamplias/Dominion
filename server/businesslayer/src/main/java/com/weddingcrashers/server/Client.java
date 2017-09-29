@@ -1,27 +1,49 @@
 package com.weddingcrashers.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
+import com.weddingcrashers.managers.LoginManager;
+import com.weddingcrashers.servermodels.Container;
+import com.weddingcrashers.servermodels.Methods;
 
+import java.io.ObjectInputStream;
+import java.net.Socket;
+/**
+ *  @author Michel Schlatter
+ *  */
 public class Client extends Thread {
     Socket _clientSocket;
+    int _clientId;
 
-    public Client(Socket clientSocket) {
+    LoginManager _loginManager;
+
+    public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
+        _clientId = id;
+
+        _loginManager = new LoginManager(this);
     }
 
     @Override
     public void run() {
         try {
-            InputStream stream =  _clientSocket.getInputStream();
-            // Listen to what he says....send Object with PlayMethod, Cards, usw.
-        } catch (IOException e) {
-            e.printStackTrace();
+            ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
+            Container container = (Container)objectInputStream.readObject();
+
+        } catch (Exception ex) {
+           ServerUtils.sendError(this,ex);
         }
     }
 
     public Socket get_clientSocket() {
         return _clientSocket;
+    }
+
+    public int getClientId() {
+        return _clientId;
+    }
+
+    private void runMethod(Container c){
+        if(c.getMethod() == Methods.Login){
+
+        }
     }
 }
