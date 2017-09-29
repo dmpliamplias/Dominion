@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "SETTINGS")
-public class Settings implements Serializable {
+public class Settings extends BaseEntity {
 
     // ---- Members
 
@@ -33,10 +33,6 @@ public class Settings implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public long getUser() {

@@ -1,7 +1,6 @@
 package com.weddingcrashers.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "HIGHSCORE")
-public class Highscore implements Serializable {
+public class Highscore extends BaseEntity {
 
     // ---- Members
 
@@ -34,13 +33,9 @@ public class Highscore implements Serializable {
 
 
     // ---- Methods
-    
+
     public long getId() {
         return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public long getUserid() {

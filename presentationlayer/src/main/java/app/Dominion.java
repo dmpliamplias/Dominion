@@ -1,6 +1,8 @@
 package app;
 
+import com.weddingcrashers.model.User;
 import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.UserService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -100,6 +102,12 @@ public class Dominion extends Application {
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
+        final User user = new User();
+        user.setUserEmail("gaga@g.com");
+        user.setUserName("bög");
+        user.setPassword("3wadawdawdawd");
+        final UserService userService = ServiceLocator.getUserService();
+        userService.create(user);
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected

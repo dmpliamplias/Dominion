@@ -10,6 +10,13 @@ import com.weddingcrashers.model.User;
 public interface UserService {
 
     /**
+     * Creates a new user.
+     *
+     * @param user the user to create.
+     */
+    public void create(User user);
+
+    /**
      * Returns the user for the given email address.
      *
      * @param email the email address.

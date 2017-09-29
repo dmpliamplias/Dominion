@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
 /**
  * Implements {@link UserService}.
  *
@@ -18,8 +20,25 @@ import javax.persistence.criteria.Root;
  */
 public class UserServiceImpl implements UserService {
 
+    // ---- Members
+
+    /** The object update service. */
+    private final ObjectUpdateService objectUpdateService = new ObjectUpdateServiceImpl();
+
+
+    // ---- Methods
+
+    @Override
+    public void create(final User user) {
+        notNull(user);
+
+        objectUpdateService.create(user);
+    }
+
     @Override
     public User getUserByEmail(final String email) {
+        notNull(email);
+
         final EntityManager em = EntityManagerFactory.getEntityManager();
         final EntityTransaction tx = em.getTransaction();
         User user = null;

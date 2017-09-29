@@ -6,15 +6,9 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
- * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
- * is licensed under the terms of the BSD 3-clause license (see the file
- * license.txt).
- * 
- * The singleton instance of this class provide central storage for resources
- * used by the program. It also defines application-global constants, such as
- * the application name.
- * 
- * @author Brad Richards
+ * Service locator.
+ *
+ * @author dmpliamplias
  */
 public class ServiceLocator {
 
@@ -26,16 +20,17 @@ public class ServiceLocator {
 
     // ---- Members
 
-    // Supported locales (for translations)
+    /** The locales. */
     final private Locale[] locales = new Locale[] { new Locale("en"), new Locale("de") };
-
-    // Resources
+    /** The logger. */
     private Logger logger;
+    /** The translator. */
     private Translator translator;
-    ServerConnectionService serverConnectionService;
-
-    // Services
+    /** The server connection service. */
+    private ServerConnectionService serverConnectionService;
+    /** The object update service. */
     private static ObjectUpdateService objectUpdateService;
+    /** The user service. */
     private static UserService userService;
 
 
