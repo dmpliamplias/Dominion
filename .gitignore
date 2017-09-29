@@ -6,3 +6,4 @@ sharedbusinesslayer/target/
 .idea/inspectionProfiles/
 .idea/workspace.xml
 .idea/uiDesigner.xml
+*.DS_STORE
