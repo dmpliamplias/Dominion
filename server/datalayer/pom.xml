@@ -45,7 +45,8 @@
                                 <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
                             </processors>
                             <!-- source output directory -->
-                            <outputDirectory>target/metamodel</outputDirectory>
+                            <outputDirectory>generated</outputDirectory>
+                            <outputDirectory>target/generated</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

@@ -2,6 +2,7 @@ server/businesslayer/target/
 server/datalayer/target/
 presentationlayer/target/
 sharedbusinesslayer/target/
+datalayer/generated/
 .idea/libraries/
 .idea/inspectionProfiles/
 .idea/workspace.xml
