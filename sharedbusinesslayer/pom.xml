@@ -15,10 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>com.weddingcrashers.dominion</groupId>
-            <artifactId>shared-businesslayer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.weddingcrashers.dominion</groupId>
             <artifactId>businesslayer</artifactId>
         </dependency>
     </dependencies>
