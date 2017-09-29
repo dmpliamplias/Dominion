@@ -2,6 +2,7 @@ package com.weddingcrashers.server;
 
 import com.weddingcrashers.managers.LoginManager;
 import com.weddingcrashers.servermodels.Container;
+import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.Methods;
 
 import java.io.ObjectInputStream;
@@ -43,7 +44,10 @@ public class Client extends Thread {
 
     private void runMethod(Container c){
         if(c.getMethod() == Methods.Login){
-
+            LoginContainer lc = (LoginContainer) c;
+            _loginManager.login(lc.getEmail(), lc.getPassword());
+        }else if(c.getMethod() == Methods.GetRankings){
+            //.... continue
         }
     }
 }

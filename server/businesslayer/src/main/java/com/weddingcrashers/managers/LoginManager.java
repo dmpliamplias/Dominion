@@ -20,7 +20,7 @@ public class LoginManager {
         _userService = ServiceLocator.getUserService();
     }
 
-    public void Login(String email, String password){
+    public void login(String email, String password){
        User user = _userService.getUserByEmail(email);
         LoginContainer loginContainer = new LoginContainer();
 
@@ -29,7 +29,6 @@ public class LoginManager {
               loginContainer.setUser(user);
           }
        }
-
         ServerUtils.sendObject(_client, loginContainer);
     }
 }
