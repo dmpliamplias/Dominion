@@ -1,8 +1,8 @@
-package StartUp;
+package app;
 
-import SplashScreen.SplashScreenController;
-import SplashScreen.SplashScreenModel;
-import SplashScreen.SplashScreenView;
+import splashscreen.SplashScreenController;
+import splashscreen.SplashScreenModel;
+import splashscreen.SplashScreenView;
 import com.weddingcrashers.ServiceLocator;
 import javafx.application.Application;
 import javafx.application.Platform;

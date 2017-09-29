@@ -1,8 +1,7 @@
-package SplashScreen;
+package splashscreen;
 
 import com.weddingcrashers.Model;
 import com.weddingcrashers.ServiceLocator;
-import com.weddingcrashers.Translator;
 import javafx.concurrent.Task;
 
 /**

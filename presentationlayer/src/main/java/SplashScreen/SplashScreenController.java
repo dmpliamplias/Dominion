@@ -1,8 +1,8 @@
-package SplashScreen;
+package splashscreen;
 
 import com.weddingcrashers.Controller;
 import javafx.concurrent.Worker;
-import StartUp.Dominion;
+import app.Dominion;
 
 /**
  * Framework for professional applications:

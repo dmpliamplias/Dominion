@@ -1,4 +1,4 @@
-package SplashScreen;
+package splashscreen;
 
 import com.weddingcrashers.View;
 import javafx.scene.Scene;
