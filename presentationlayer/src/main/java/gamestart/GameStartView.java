@@ -1,25 +1,30 @@
 package gamestart;
 
+import base.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class GameStartView {
+/**
+ *  author Manuel Wirz
+ *  */
 
-    final private Stage _stage;
-    final private GameStartModel _model;
+public class GameStartView extends View<GameStartModel> {
 
     protected Label lbl;
 
-    public GameStartView(Stage stage, GameStartModel model)
-    {
-        _stage = stage;
-        _model = model;
+    public GameStartView(Stage stage, GameStartModel model) {
 
-        _stage.setTitle("StartUp.Dominion Start");
-        _stage.setHeight(500);
-        _stage.setWidth(800);
+        super(stage, model);
+
+    }
+
+    public Scene create_GUI(){
+
+        stage.setTitle("StartUp.Dominion Start");
+        stage.setHeight(500);
+        stage.setWidth(800);
 
         BorderPane root = new BorderPane();
         lbl = new Label();
@@ -29,19 +34,23 @@ public class GameStartView {
         //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
         stage.setScene(scene);
 
+
+        return scene;
     }
 
+
     protected void refresh(){
-        lbl.setText("Sound is on: "+ _model.getSettings().isSoundOn());
+        lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());
         //...conitinue...
     }
 
     public void start() {
-        _stage.show();
+        stage.show();
     }
 
     public void stop(){
-        _stage.hide();
+        stage.hide();
     }
 
 }
+

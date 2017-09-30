@@ -1,8 +1,11 @@
 package login;
+
+import base.Model;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class LoginModel {
+public class LoginModel extends Model {
 
     private String email;
     private String password;

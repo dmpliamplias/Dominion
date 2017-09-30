@@ -1,8 +1,13 @@
 package gamestart;
 
+import base.Model;
 import com.weddingcrashers.model.Settings;
 
-public class GameStartModel {
+/**
+ *  author Manuel Wirz
+ *  */
+
+public class GameStartModel extends Model {
     private Settings settings;
 
     public Settings getSettings() {
