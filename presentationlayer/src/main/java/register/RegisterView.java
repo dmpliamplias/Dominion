@@ -9,12 +9,11 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-/** @author Murat Kelleci
-        *
-        */
+/**
+ * @author Murat Kelleci
+ */
 
 public class RegisterView {
-
 
 
     Button register;
@@ -49,36 +48,37 @@ public class RegisterView {
         stage.setScene(scene);
     }
 
-        void refreshModel(){
+    void refreshModel() {
         this.model.setPassword(pw.getText());
         this.model.setPassword(pw_confirm.getText());
         this.model.setEmail(email.getText());
     }
 
-    void refreshView(){
-            // umgekehrte von refreshmodel
+    void refreshView() {
+        // umgekehrte von refreshmodel
         error.setText(this.model.getError());
     }
 
-    void setError(){
+    void setError() {
         error.setText(this.model.getError());
     }
 
-        Stage getStage() {
-            return this.stage;
+    Stage getStage() {
+        return this.stage;
 
-        }
-
-
-        void setLoginError(){
-            error.setText("Wrong PW und Login");
     }
-    public void start(){
+
+
+    void setLoginError() {
+        error.setText("Wrong PW und Login");
+    }
+
+    public void start() {
         this.stage.show();
     }
 
 
-    public void stop(){
+    public void stop() {
         this.stage.hide();
     }
 

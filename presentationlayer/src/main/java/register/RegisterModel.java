@@ -8,6 +8,7 @@ public class RegisterModel {
     private String email;
     private String password;
     private String password_confirm;
+    private String error;
 
     public String getError() {
         return error;
@@ -16,8 +17,6 @@ public class RegisterModel {
     public void setError(String error) {
         this.error = error;
     }
-
-    private String error;
 
     public String getEmail() {
         return email;

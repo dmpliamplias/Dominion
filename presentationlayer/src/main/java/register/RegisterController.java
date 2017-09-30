@@ -8,7 +8,7 @@ import com.weddingcrashers.service.ServiceLocator;
 /** @author Murat Kelleci
  *
  */
-
+// TODO: 30.09.2017 murat extends Controler<..,..> siehe ConnectionController => mache dies auch bei Models und View
 public class RegisterController {
 
         private final RegisterView view;
@@ -16,8 +16,9 @@ public class RegisterController {
         private final ServerConnectionService connection;
 
         public RegisterController(RegisterView view, RegisterModel model){
-            this.view = view;
-            this.model = model;
+            // TODO: 30.09.2017 murat => super(model,view);
+            this.view = view;// TODO: 30.09.2017 murat => löschen
+            this.model = model; // TODO: 30.09.2017 murat => löschen
             this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
 
 
@@ -35,8 +36,8 @@ public class RegisterController {
         String pw_confirm=this.view.pw_confirm.getText();
         String email = this.view.email.getText();
 
-        if (pw !=pw_confirm){
-
+        if (pw !=pw_confirm){ // TODO: 30.09.2017 murat => referenztypen über equals vergleichen.
+            // TODO: 30.09.2017  murat über den server machen.
            User user =  ServiceLocator.getUserService().getUserByEmail(email);
            if(user == null){
                //über user UserService Kreiieren
