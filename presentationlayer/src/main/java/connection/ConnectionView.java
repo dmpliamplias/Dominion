@@ -15,6 +15,10 @@ public class ConnectionView extends View<ConnectionModel> {
     public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
     }
+	
+	/**
+ *  @author Vanessa Cajochen
+ *  */
 
     public Scene create_GUI(){
         BorderPane root = new BorderPane();
