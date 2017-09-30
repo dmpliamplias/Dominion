@@ -1,17 +1,17 @@
 package login;
 
+import app.PLServiceLocator;
 import base.Controller;
-import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.service.ServerConnectionService;
+import app.ServerConnectionService;
+import com.sun.xml.internal.bind.v2.TODO;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.service.ServiceLocator;
 import gamestart.GameStartController;
 import gamestart.GameStartModel;
 import gamestart.GameStartView;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
 
 /**
  *  @author Michel Schlatter
@@ -22,7 +22,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
     public LoginController(LoginView view, LoginModel model){
         super(model, view);
-        _connection = ServiceLocator.getServiceLocator().getServerConnectionService();
+        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLoginController(this);
+        _connection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
         initialize();
     }
@@ -47,21 +48,26 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
            try {
                _connection.sendObject(loginContainer);
-               LoginContainer result = _connection.<LoginContainer>receiveObject();
-               User user = result.getUser();
-               if(user != null){ // success
-                   goToStartView(user);
-               }else{
-                   //unsuccessfull login, show error
-                   model.setError(ServiceLocator.getServiceLocator().getTranslator().getString("LoginView_LoginError"));
-                   view.setLoginError();
-               }
            } catch (Exception e) {
-               e.printStackTrace();
+              view.alert(e.getMessage());
            }
 
 
        }
+  }
+
+  public void handleServerAnswer(LoginContainer result){
+      Platform.runLater(() -> {
+          User user = result.getUser();
+          if(user != null){ // success
+              goToStartView(user);
+          }else{
+              //unsuccessfull login, show error
+              // TODO: Vanessa add translator code
+              model.setError(ServiceLocator.getServiceLocator().getTranslator().getString("LoginView_LoginError"));
+              view.setLoginError();
+          }
+      });
   }
 
   // change to goToWhatEverView ...

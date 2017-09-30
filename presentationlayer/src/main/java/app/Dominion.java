@@ -81,7 +81,7 @@ public class Dominion extends Application {
 
     /**
      * This method is called when the splash screen has finished initializing
-     * the application. The initialized resources are in a ServiceLocator
+     * the application. The initialized resources are in a PLServiceLocator
      * singleton. Our task is to now create the application MVC components, to
      * hide the splash screen, and to display the application GUI.
      *

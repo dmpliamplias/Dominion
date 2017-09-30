@@ -1,9 +1,12 @@
 package register;
 
 
+import app.PLServiceLocator;
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.ServerConnectionService;
+import app.ServerConnectionService;
+import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.service.ServiceLocator;
+import javafx.application.Platform;
 
 /** @author Murat Kelleci
  *
@@ -17,9 +20,10 @@ public class RegisterController {
 
         public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRegisterController(this);
             this.view = view;// TODO: 30.09.2017 murat => löschen
             this.model = model; // TODO: 30.09.2017 murat => löschen
-            this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
+            this.connection= PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
 
             initialize();
@@ -31,6 +35,14 @@ public class RegisterController {
                 this.register();
             });
         }
+
+        public void handleServerAnswer(RegisterContainer rc){
+            Platform.runLater(() ->{
+                User user = rc.getUser();
+                // if user == null => user already exists, else user is correctly registered and can login now.
+            });
+        }
+
     public void register(){
         String pw = this.view.pw.getText();
         String pw_confirm=this.view.pw_confirm.getText();

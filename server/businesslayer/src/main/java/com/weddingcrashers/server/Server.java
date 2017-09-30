@@ -12,10 +12,13 @@ import java.util.ArrayList;
  *  */
 
 public class Server extends Thread {
+    private static Server server;
+
     int _port;
     int _maxPlayers;
     private static int idCounter = 0;
     private LobbyManager lobbyManager;
+
 
     ArrayList<Client> clients = new ArrayList<Client>();
 
@@ -25,8 +28,14 @@ public class Server extends Thread {
         this.lobbyManager = new LobbyManager();
     }
     public static void startServer(int port, int maxPlayers){
-        Server s = new Server(1, maxPlayers);
-        s.start();
+        if(server == null) {
+            server = new Server(1, maxPlayers);
+            server.start();
+        }
+    }
+
+    public static Server getInstance(){
+        return server;
     }
 
 

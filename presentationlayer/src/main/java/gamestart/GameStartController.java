@@ -1,10 +1,10 @@
 package gamestart;
 
+import app.PLServiceLocator;
 import base.Controller;
-import com.weddingcrashers.model.Settings;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.service.ServerConnectionService;
+import app.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class GameStartController extends Controller <GameStartModel, GameStartVi
     public GameStartController(GameStartView view, GameStartModel model, User user){
         super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
-        _connection = ServiceLocator.getServiceLocator().getServerConnectionService();
+        _connection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
         initialize();
     }

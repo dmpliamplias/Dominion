@@ -1,7 +1,5 @@
 package com.weddingcrashers.service;
 
-import com.weddingcrashers.util.H2Database;
-
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -27,9 +25,6 @@ public class ServiceLocator {
     private Logger logger;
     /** The translator. */
     private Translator translator;
-
-    /** The server connection service. */
-    private ServerConnectionService serverConnectionService;
 
     /** The object update service. */
     private static ObjectUpdateService objectUpdateService;
@@ -107,13 +102,6 @@ public class ServiceLocator {
         this.translator = translator;
     }
 
-    public ServerConnectionService getServerConnectionService() {
-        return serverConnectionService;
-    }
-
-    public void setServerConnectionService(ServerConnectionService serverConnectionService) {
-        this.serverConnectionService = serverConnectionService;
-    }
 
 
 }
