@@ -8,21 +8,21 @@ import java.util.List;
  *
  * @author dmpliamplias
  */
-public interface ObjectUpdateService {
+interface ObjectUpdateService {
 
     /**
      * Creates a new entity.
      *
      * @param entity the entity to create.
      */
-    public void create(Object entity);
+    void create(Object entity);
 
     /**
      * Updates the given entity.
      *
      * @param entity the entity to update.
      */
-    public void update(Object entity);
+    void update(Object entity);
 
     /**
      * Deletes the data for the given id and class.
@@ -30,7 +30,7 @@ public interface ObjectUpdateService {
      * @param id the id of the data to delete.
      * @param clazz the corresponding class.
      */
-    public void delete(long id, Class clazz);
+    void delete(long id, Class clazz);
 
     /**
      * Lists all data for the given class.
@@ -39,6 +39,6 @@ public interface ObjectUpdateService {
      * @param <T> the class type.
      * @return all data for the given class.
      */
-    public<T> List<T> list(Class clazz);
+    <T> List<T> list(Class clazz);
 
 }

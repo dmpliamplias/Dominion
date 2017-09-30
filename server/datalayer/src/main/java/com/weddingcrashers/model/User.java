@@ -1,7 +1,6 @@
 package com.weddingcrashers.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * User entity.
@@ -19,13 +18,13 @@ public class User extends BaseEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String userName;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String userEmail;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
 

@@ -1,7 +1,6 @@
 package com.weddingcrashers.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Settings entity.
@@ -19,10 +18,11 @@ public class Settings extends BaseEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "USER_ID")
-    private long user;
+    @Column(name = "USER_ID", nullable = false)
+    @OneToOne
+    private User user;
 
-    @Column(name = "PRIVATE_SETTINGS")
+    @Column(name = "PRIVATE_SETTINGS", nullable = false)
     private String settings;
 
     /** Sound is on indicator. */
@@ -35,11 +35,11 @@ public class Settings extends BaseEntity {
         return id;
     }
 
-    public long getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(final long user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 

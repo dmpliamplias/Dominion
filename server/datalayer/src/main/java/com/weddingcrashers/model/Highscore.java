@@ -1,7 +1,7 @@
 package com.weddingcrashers.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Highscore entity.
@@ -19,16 +19,17 @@ public class Highscore extends BaseEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "USER_ID")
-    private long userid;
+    @Column(name = "USER_ID", nullable = false)
+    @ManyToOne
+    private User user;
 
-    @Column(name = "DATE_OF_HIGHSCORE")
-    private Date dateOfHighscore;
+    @Column(name = "DATE_OF_HIGHSCORE", nullable = false)
+    private LocalDateTime dateOfHighscore;
 
-    @Column(name = "POINTS")
+    @Column(name = "POINTS", nullable = false)
     private int points;
 
-    @Column(name = "DURATION_FOR_HIGHSCORE")
+    @Column(name = "DURATION_FOR_HIGHSCORE", nullable = false)
     private int durationForHighscore;
 
 
@@ -38,19 +39,19 @@ public class Highscore extends BaseEntity {
         return id;
     }
 
-    public long getUserid() {
-        return userid;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserid(final long userid) {
-        this.userid = userid;
+    public void setUser(final User userid) {
+        this.user = userid;
     }
 
-    public Date getDateOfHighscore() {
+    public LocalDateTime getDateOfHighscore() {
         return dateOfHighscore;
     }
 
-    public void setDateOfHighscore(final Date dateOfHighscore) {
+    public void setDateOfHighscore(final LocalDateTime dateOfHighscore) {
         this.dateOfHighscore = dateOfHighscore;
     }
 

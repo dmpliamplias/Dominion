@@ -1,34 +1,39 @@
 package com.weddingcrashers.service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.weddingcrashers.util.EntityManagerFactory.getEntityManager;
+import static org.apache.commons.lang3.Validate.notNull;
 
 /**
  * Implements {@link ObjectUpdateService}.
  *
  * @author dmpliamplias
  */
-public class ObjectUpdateServiceImpl implements ObjectUpdateService {
+class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService {
+
+    // ---- Methods
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void create(Object entity) {
+        notNull(entity);
+
         final EntityManager em = getEntityManager();
-        final EntityTransaction tx = em.getTransaction();
         try {
-            tx.begin();
+            startTransaction(em);
             em.persist(entity);
-            em.flush();
-            tx.commit();
+            commitTransaction(em);
         }
         catch (Exception e) {
-            tx.rollback();
+            logException(getServiceLogger(), e);
+            rollbackTransaction(em);
+        }
+        finally {
+            em.close();
         }
     }
 
@@ -37,16 +42,20 @@ public class ObjectUpdateServiceImpl implements ObjectUpdateService {
      */
     @Override
     public void update(Object entity) {
+        notNull(entity);
+
         final EntityManager em = getEntityManager();
-        final EntityTransaction tx = em.getTransaction();
         try {
-            tx.begin();
+            startTransaction(em);
             em.merge(entity);
-            em.flush();
-            tx.commit();
+            commitTransaction(em);
         }
         catch (Exception e) {
-            em.getTransaction().rollback();
+            logException(getServiceLogger(), e);
+            rollbackTransaction(em);
+        }
+        finally {
+            em.close();
         }
     }
 
@@ -56,16 +65,20 @@ public class ObjectUpdateServiceImpl implements ObjectUpdateService {
     @Override
     @SuppressWarnings("unchecked")
     public void delete(long id, Class clazz) {
+        notNull(clazz);
+
         final EntityManager em = getEntityManager();
-        final EntityTransaction tx = em.getTransaction();
         try {
-            tx.begin();
             final Object entity = em.find(clazz, id);
             em.remove(entity);
-            em.flush();
-            tx.commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
+            commitTransaction(em);
+        }
+        catch (Exception e) {
+            logException(getServiceLogger(), e);
+            rollbackTransaction(em);
+        }
+        finally {
+            em.close();
         }
     }
 
@@ -75,16 +88,15 @@ public class ObjectUpdateServiceImpl implements ObjectUpdateService {
     @Override
     @SuppressWarnings("unchecked")
     public<T> List<T> list(Class clazz) {
+        notNull(clazz);
+
         final EntityManager em = getEntityManager();
-        List<T> entities = new ArrayList<>();
-        try {
-            em.getTransaction().begin();
-            entities = em.createQuery("from " + clazz.getSimpleName()).getResultList();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        }
-        return entities;
+        return em.createQuery("from " + clazz.getSimpleName()).getResultList();
+    }
+
+    @Override
+    protected Class getSubClass() {
+        return ObjectUpdateServiceImpl.class;
     }
 
 }

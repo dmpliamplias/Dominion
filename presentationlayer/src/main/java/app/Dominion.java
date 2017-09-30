@@ -104,7 +104,7 @@ public class Dominion extends Application {
         serviceLocator = ServiceLocator.getServiceLocator();
         final User user = new User();
         user.setUserEmail("gaga@g.com");
-        user.setUserName("bög");
+        user.setUserName("BéééééééééG");
         user.setPassword("3wadawdawdawd");
         final UserService userService = ServiceLocator.getUserService();
         userService.create(user);

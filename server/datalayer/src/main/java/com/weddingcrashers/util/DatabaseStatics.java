@@ -7,6 +7,8 @@ package com.weddingcrashers.util;
  */
 public class DatabaseStatics {
 
+    // ---- Statics
+
     /** The persistence unit name. */
     public static final String UNIT_NAME = "dominion";
     /** The database URL. */

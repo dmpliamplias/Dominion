@@ -15,9 +15,6 @@ public final class EntityManagerFactory {
 
     // ---- Members
 
-    /** The database name. */
-    private static final String DATABASE_NAME = "weddingcrashers_dominion";
-
     /** The entity manager factory. */
     private static final javax.persistence.EntityManagerFactory entityManagerFactory;
 
@@ -37,10 +34,18 @@ public final class EntityManagerFactory {
 
     // ---- Methods
 
+    /**
+     * Returns an entity manager instance.
+     *
+     * @return an entity manager instance.
+     */
     public static EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
 
+    /**
+     * Closes the entity manager factory.
+     */
     public static void close() {
         entityManagerFactory.close();
     }

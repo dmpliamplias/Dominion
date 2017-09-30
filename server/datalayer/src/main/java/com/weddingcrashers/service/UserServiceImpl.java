@@ -5,11 +5,12 @@ import com.weddingcrashers.model.User_;
 import com.weddingcrashers.util.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import java.util.List;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -18,7 +19,7 @@ import static org.apache.commons.lang3.Validate.notNull;
  *
  * @author dmpliamplias.
  */
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseService implements UserService {
 
     // ---- Members
 
@@ -31,32 +32,45 @@ public class UserServiceImpl implements UserService {
     @Override
     public void create(final User user) {
         notNull(user);
-
         objectUpdateService.create(user);
+    }
+
+    @Override
+    public void update(User user) {
+        notNull(user);
+        objectUpdateService.update(user);
     }
 
     @Override
     public User getUserByEmail(final String email) {
         notNull(email);
 
+        // get em and cb builder
         final EntityManager em = EntityManagerFactory.getEntityManager();
-        final EntityTransaction tx = em.getTransaction();
-        User user = null;
-        try {
-            tx.begin();
-            final CriteriaBuilder cb = em.getCriteriaBuilder();
-            final CriteriaQuery<User> query = cb.createQuery(User.class);
-            final Root<User> from = query.from(User.class);
-            query.select(from);
-            query.where(cb.equal(from.get(User_.userEmail), email));
-            final TypedQuery<User> typedQuery = em.createQuery(query);
-            user = typedQuery.getSingleResult();
-            tx.commit();
-        }
-        catch (Exception e) {
-            tx.rollback();
-        }
-        return user;
+        final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        // define root and query
+        final CriteriaQuery<User> query = cb.createQuery(User.class);
+        final Root<User> from = query.from(User.class);
+
+        // query select root
+        query.select(from);
+        // where clause
+        query.where(cb.equal(from.get(User_.userEmail), email));
+
+        // execute query
+        final TypedQuery<User> typedQuery = em.createQuery(query);
+        return typedQuery.getSingleResult();
+    }
+
+    @Override
+    public List<User> list() {
+        return objectUpdateService.list(User.class);
+    }
+
+    @Override
+    protected Class getSubClass() {
+        return UserServiceImpl.class;
     }
 
 }

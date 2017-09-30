@@ -2,6 +2,8 @@ package com.weddingcrashers.service;
 
 import com.weddingcrashers.model.User;
 
+import java.util.List;
+
 /**
  * Service for creating & updating users.
  *
@@ -14,7 +16,14 @@ public interface UserService {
      *
      * @param user the user to create.
      */
-    public void create(User user);
+    void create(User user);
+
+    /**
+     * Updates the given user.
+     *
+     * @param user the user to update.
+     */
+    void update(User user);
 
     /**
      * Returns the user for the given email address.
@@ -22,6 +31,8 @@ public interface UserService {
      * @param email the email address.
      * @return the user for the given email address.
      */
-    public User getUserByEmail(String email);
+    User getUserByEmail(String email);
+
+    List<User> list();
 
 }
