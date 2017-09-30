@@ -1,6 +1,6 @@
 package login;
 
-import com.weddingcrashers.clientconnectionutils.ServerConnectionService;
+import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.service.ServiceLocator;

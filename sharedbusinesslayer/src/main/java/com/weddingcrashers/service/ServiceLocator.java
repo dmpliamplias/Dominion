@@ -1,7 +1,5 @@
 package com.weddingcrashers.service;
 
-import com.weddingcrashers.clientconnectionutils.ServerConnectionService;
-
 import java.util.Locale;
 import java.util.logging.Logger;
 
