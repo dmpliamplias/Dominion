@@ -43,7 +43,8 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      */
     private void join(String url, int port){
         try {
-            PLServiceLocator.getPLServiceLocator().setServerConnectionService(new ServerConnectionService(url,port));
+            ServerConnectionService serverConnectionService = new ServerConnectionService(url,port);
+            PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
         } catch (IOException e) {
             this.view.alert(e.getMessage());
         }

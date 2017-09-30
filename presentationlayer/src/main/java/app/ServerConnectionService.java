@@ -3,6 +3,13 @@ package app;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import gamestart.GameStartController;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import login.LoginController;
 import register.RegisterController;
 
@@ -76,15 +83,48 @@ public class ServerConnectionService extends Thread{
         }
     }
 
+    // TODO: 30.09.2017 Michel displays correctly?
+    private void displayError(String msg){
+        Platform.runLater(()->{
+            Stage dialog = new Stage();
+            BorderPane root = new BorderPane();
+            Label lbl = new Label();
+            lbl.setText(msg);
+            Button btnClose = new Button();
+            btnClose.setText("Close");
+            
+            root.getChildren().add(lbl);
+            root.getChildren().add(btnClose);
+            Scene scene = new Scene(root);
+
+
+            dialog.setScene(scene);
+           // dialog.initOwner(stage);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+
+            dialog.showAndWait();
+
+            btnClose.setOnAction((e) -> {
+                dialog.close();
+            });
+            
+            dialog.show();
+
+        });
+
+    }
+
+
     ConnectionController connectionController;
     GameStartController gameStartController;
     LoginController loginController;
     RegisterController registerController;
 
-
     public ConnectionController getConnectionController() {
         return connectionController;
     }
+
+
 
     public void setConnectionController(ConnectionController connectionController) {
         this.connectionController = connectionController;
