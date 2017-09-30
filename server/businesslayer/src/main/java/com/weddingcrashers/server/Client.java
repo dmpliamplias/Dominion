@@ -1,18 +1,24 @@
 package com.weddingcrashers.server;
 
 import com.weddingcrashers.managers.LoginManager;
-import com.weddingcrashers.servermodels.Container;
-import com.weddingcrashers.servermodels.LoginContainer;
-import com.weddingcrashers.servermodels.Methods;
+import com.weddingcrashers.model.User;
+import com.weddingcrashers.servermodels.*;
 
+import javax.swing.text.View;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+
 /**
  *  @author Michel Schlatter
  *  */
 public class Client extends Thread {
     Socket _clientSocket;
     int _clientId;
+    User user;
+
+    ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
+    ArrayList<Client> otherClients;
 
     LoginManager _loginManager;
 
@@ -46,8 +52,39 @@ public class Client extends Thread {
         if(c.getMethod() == Methods.Login){
             LoginContainer lc = (LoginContainer) c;
             _loginManager.login(lc.getEmail(), lc.getPassword());
-        }else if(c.getMethod() == Methods.GetRankings){
+        }else if(c.getMethod() == Methods.SetViewStatus){
+            ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
+            this.viewStatus = vc.getViewStatus();
+        }
+        else if(c.getMethod() == Methods.GetRankings){
             //.... continue
         }
+    }
+
+    public ArrayList<Client> getOtherClients() {
+        return otherClients;
+    }
+
+    public ArrayList<Client> getAllClients() {
+       ArrayList<Client> clients = new ArrayList<Client>();
+       clients.addAll(getOtherClients());
+       clients.add(this);
+       return clients;
+    }
+
+    public void setOtherClients(ArrayList<Client> otherClients) {
+        this.otherClients = otherClients;
+    }
+
+    public ViewStatus getViewStatus() {
+        return viewStatus;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

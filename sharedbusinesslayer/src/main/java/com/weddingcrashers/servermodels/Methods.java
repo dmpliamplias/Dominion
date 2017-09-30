@@ -7,5 +7,8 @@ public enum Methods {
     Login,
     ShuffleCards,
     GetRankings,
+    SetViewStatus,
+    Lobby_Players,
+    Chat,
     Client_Server_Error,
 }

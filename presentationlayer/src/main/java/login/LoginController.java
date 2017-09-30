@@ -1,6 +1,7 @@
 package login;
 
 import base.Controller;
+import com.weddingcrashers.servermodels.ViewStatus;
 import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
@@ -9,6 +10,8 @@ import gamestart.GameStartController;
 import gamestart.GameStartModel;
 import gamestart.GameStartView;
 import javafx.fxml.FXMLLoader;
+
+import java.io.IOException;
 
 /**
  *  @author Michel Schlatter
@@ -26,7 +29,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
 
     public void initialize() {
-       view.login.setOnAction((event) -> {
+
+        view.login.setOnAction((event) -> {
            view.refreshModel();
            this.login();
        });

@@ -2,6 +2,8 @@ package com.weddingcrashers.service;
 
 import com.weddingcrashers.servermodels.ConnectionContainer;
 import com.weddingcrashers.servermodels.Container;
+import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.servermodels.ViewStatusUpdateContainer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,6 +42,12 @@ public class ServerConnectionService {
     public <T extends  Container> T receiveObject() throws  IOException, ClassNotFoundException{
         ObjectInputStream objectInputStream = new ObjectInputStream(_connection.getInputStream());
         return (T)objectInputStream.readObject();
+    }
+
+    public void updateViewStatus(ViewStatus status) throws IOException{
+        ViewStatusUpdateContainer vc = new ViewStatusUpdateContainer();
+        vc.setViewStatus(status);
+        sendObject(vc);
     }
 
     /**

@@ -30,6 +30,9 @@ public class ServiceLocator {
 
     /** The server connection service. */
     private ServerConnectionService serverConnectionService;
+
+    /** The object update service. */
+    private static ObjectUpdateService objectUpdateService;
     /** The user service. */
     private static UserService userService;
     /** The highscore service. */
@@ -58,7 +61,7 @@ public class ServiceLocator {
      * Constructor.
      */
     private ServiceLocator() {
-        new H2Database();
+        objectUpdateService = new ObjectUpdateServiceImpl();
         userService = new UserServiceImpl();
         highscoreService = new HighscoreServiceImpl();
         settingsService = new SettingsServiceImpl();
@@ -66,6 +69,11 @@ public class ServiceLocator {
 
 
     // ---- Methods
+
+
+    public static ObjectUpdateService getObjectUpdateService() {
+        return objectUpdateService;
+    }
 
     public static UserService getUserService() {
         return userService;
@@ -106,5 +114,6 @@ public class ServiceLocator {
     public void setServerConnectionService(ServerConnectionService serverConnectionService) {
         this.serverConnectionService = serverConnectionService;
     }
+
 
 }

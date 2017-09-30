@@ -3,6 +3,11 @@ package gamestart;
 import base.Controller;
 import com.weddingcrashers.model.Settings;
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.service.ServerConnectionService;
+import com.weddingcrashers.service.ServiceLocator;
+
+import java.io.IOException;
 
 /**
  *  author Manuel Wirz
@@ -10,15 +15,15 @@ import com.weddingcrashers.model.User;
 
 public class GameStartController extends Controller <GameStartModel, GameStartView> {
 
+    private final ServerConnectionService _connection;
     private final User _user;
 
     public void initialize() {
-        // load settings from database instead of following code:
-        // main.java.com.weddingcrashers.model.Settings settings = dbContext.Users.Load(userId).main.java.com.weddingcrashers.model.Settings  ==> this is just an example on how to do it.
-
-        Settings settings = new Settings();
-        settings.setSound(true);
-        model.setSettings(settings);
+        try {
+            _connection.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
+        } catch (IOException e) {
+            this.view.alert(e.getMessage());
+        }
 
         refreshView();
     }
@@ -26,6 +31,7 @@ public class GameStartController extends Controller <GameStartModel, GameStartVi
     public GameStartController(GameStartView view, GameStartModel model, User user){
         super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
+        _connection = ServiceLocator.getServiceLocator().getServerConnectionService();
 
         initialize();
     }
