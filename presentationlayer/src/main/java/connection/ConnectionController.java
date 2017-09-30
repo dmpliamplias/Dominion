@@ -6,9 +6,11 @@ import com.weddingcrashers.service.ServiceLocator;
 
 import java.io.IOException;
 
+
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
     public ConnectionController(ConnectionModel model, ConnectionView view){
+
         super(model,view);
     }
     public void connect(String url, int port){

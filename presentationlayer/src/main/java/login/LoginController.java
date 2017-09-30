@@ -1,5 +1,6 @@
 package login;
 
+import base.Controller;
 import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
@@ -12,15 +13,12 @@ import javafx.fxml.FXMLLoader;
 /**
  *  @author Michel Schlatter
  *  */
-public class LoginController {
+public class LoginController extends Controller<LoginModel, LoginView>{
 
-    private final LoginView _view;
-    private final LoginModel _model;
     private final ServerConnectionService _connection;
 
     public LoginController(LoginView view, LoginModel model){
-        _view = view;
-        _model = model;
+        super(model, view);
         _connection = ServiceLocator.getServiceLocator().getServerConnectionService();
 
         initialize();
@@ -28,15 +26,15 @@ public class LoginController {
 
 
     public void initialize() {
-       _view.login.setOnAction((event) -> {
-           _view.refreshModel();
+       view.login.setOnAction((event) -> {
+           view.refreshModel();
            this.login();
        });
     }
 
   public void login(){
-       String pw = _view.pw.getText();
-       String email = _view.pw.getText();
+       String pw = view.pw.getText();
+       String email = view.pw.getText();
 
        if(pw != null && !pw.isEmpty() && email != null && !email.isEmpty()){
            LoginContainer loginContainer = new LoginContainer();
@@ -51,8 +49,8 @@ public class LoginController {
                    goToStartView(user);
                }else{
                    //unsuccessfull login, show error
-                   _model.setError(ServiceLocator.getServiceLocator().getTranslator().getString("LoginView_LoginError"));
-                   _view.setLoginError();
+                   model.setError(ServiceLocator.getServiceLocator().getTranslator().getString("LoginView_LoginError"));
+                   view.setLoginError();
                }
            } catch (Exception e) {
                e.printStackTrace();
@@ -65,17 +63,17 @@ public class LoginController {
   // change to goToWhatEverView ...
   private void goToStartView(User user){
      GameStartModel model = new GameStartModel();
-     GameStartView view = new GameStartView(_view.getStage(), model);
+     GameStartView view = new GameStartView(this.view.getStage(), model);
 
      FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/GameStartView.fxml"));
      loader.setController(new GameStartController(view, model, user));
 
-     this._view.stop();
+     this.view.stop();
      view.start();
  }
 
  private void setError(){
-      _view.setLoginError();
+      view.setLoginError();
  }
 
 

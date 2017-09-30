@@ -1,12 +1,15 @@
 package gamestart;
 
+import base.Controller;
 import com.weddingcrashers.model.Settings;
 import com.weddingcrashers.model.User;
 
-public class GameStartController {
+/**
+ *  author Manuel Wirz
+ *  */
 
-    private final GameStartView _view;
-    private final GameStartModel _model;
+public class GameStartController extends Controller <GameStartModel, GameStartView> {
+
     private final User _user;
 
     public void initialize() {
@@ -15,14 +18,13 @@ public class GameStartController {
 
         Settings settings = new Settings();
         settings.setSound(true);
-        _model.setSettings(settings);
+        model.setSettings(settings);
 
         refreshView();
     }
 
     public GameStartController(GameStartView view, GameStartModel model, User user){
-        _view = view;
-        _model = model;
+        super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
 
         initialize();
@@ -30,7 +32,8 @@ public class GameStartController {
 
     private void refreshView()
     {
-        _view.refresh();
+
+        view.refresh();
     }
 
 

@@ -1,5 +1,6 @@
 package login;
 
+import base.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +12,8 @@ import javafx.stage.Stage;
 /**
  *  @author Michel Schlatter
  *  */
-public class LoginView {
+
+public class LoginView extends View<LoginModel>{
 
     Button login;
     Button cancel;
@@ -19,57 +21,59 @@ public class LoginView {
     PasswordField pw;
     Label error;
 
-    LoginModel _model;
-    Stage _stage;
 
-    public LoginView(Stage stage, LoginModel model)
-    {
-        _stage = stage;
-        _model = model;
+    public LoginView(Stage stage, LoginModel model){
+        super(stage, model);
+    }
 
-        _stage.setTitle("Login");
-        _stage.setHeight(500);
-        _stage.setWidth(800);
+    public Scene create_GUI() {
+
+        stage.setTitle( "Login" );
+        stage.setHeight( 500 );
+        stage.setWidth( 800 );
 
         BorderPane root = new BorderPane();
-       login = new Button();
-       login.setText("Login");
-       cancel = new Button();
-       cancel.setText("Cancel");
-       email = new TextField();
-       pw = new PasswordField();
+        login = new Button();
+        login.setText( "Login" );
+        cancel = new Button();
+        cancel.setText( "Cancel" );
+        email = new TextField();
+        pw = new PasswordField();
 
         HBox box = new HBox();
-        box.getChildren().addAll(email,pw,login,cancel);
-        root.setCenter(box);
+        box.getChildren().addAll( email, pw, login, cancel );
+        root.setCenter( box );
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene( root );
         //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
-        stage.setScene(scene);
+        stage.setScene( scene );
 
+        return scene;
     }
+
 
     void refreshModel(){
-        _model.setPassword(pw.getText());
-        _model.setEmail(email.getText());
+        model.setPassword(pw.getText());
+        model.setEmail(email.getText());
     }
 
-    Stage getStage(){
-        return _stage;
+    public Stage getStage(){
+        return stage;
     }
 
     void setLoginError(){
-        error.setText(_model.getError());
+        error.setText(model.getError());
     }
 
     public void start() {
-        _stage.show();
+        stage.show();
     }
 
 
     public void stop(){
-        _stage.hide();
+        stage.hide();
     }
 
 
 }
+
