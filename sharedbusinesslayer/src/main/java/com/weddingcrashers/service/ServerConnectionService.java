@@ -1,4 +1,4 @@
-package com.weddingcrashers.clientconnectionutils;
+package com.weddingcrashers.service;
 
 import com.weddingcrashers.servermodels.ConnectionContainer;
 import com.weddingcrashers.servermodels.Container;
@@ -30,7 +30,6 @@ public class ServerConnectionService {
     public int get_clientId() {
         return _clientId;
     }
-
 
     public  <T extends Container> void  sendObject(T object) throws  IOException{
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(_connection.getOutputStream());

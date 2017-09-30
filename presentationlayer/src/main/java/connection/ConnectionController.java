@@ -1,7 +1,7 @@
 package connection;
 
 import base.Controller;
-import com.weddingcrashers.clientconnectionutils.ServerConnectionService;
+import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 
 import java.io.IOException;
