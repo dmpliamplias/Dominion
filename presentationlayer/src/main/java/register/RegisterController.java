@@ -1,12 +1,9 @@
 package register;
 
 
-import app.PLServiceLocator;
 import com.weddingcrashers.model.User;
-import app.ServerConnectionService;
-import com.weddingcrashers.servermodels.RegisterContainer;
+import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
-import javafx.application.Platform;
 
 /** @author Murat Kelleci
  *
@@ -18,37 +15,28 @@ public class RegisterController {
         private final RegisterModel model;
         private final ServerConnectionService connection;
 
-        public RegisterController(RegisterView view, RegisterModel model){
+    public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRegisterController(this);
-            this.view = view;// TODO: 30.09.2017 murat => löschen
-            this.model = model; // TODO: 30.09.2017 murat => löschen
-            this.connection= PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        this.view = view;// TODO: 30.09.2017 murat => löschen
+        this.model = model; // TODO: 30.09.2017 murat => löschen
+        this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
 
-
-            initialize();
+        initialize();
         }
 
-        public void initialize() {
-            this.view.register.setOnAction((event) -> {
-                this.view.refreshModel();
-                this.register();
+    public void initialize() {
+
+        this.view.register.setOnAction((event) -> {
+            this.view.refreshModel();
+            this.register();
             });
         }
-
-        public void handleServerAnswer(RegisterContainer rc){
-            Platform.runLater(() ->{
-                User user = rc.getUser();
-                // if user == null => user already exists, else user is correctly registered and can login now.
-            });
-        }
-
     public void register(){
         String pw = this.view.pw.getText();
         String pw_confirm=this.view.pw_confirm.getText();
         String email = this.view.email.getText();
 
-        if (pw !=pw_confirm){ // TODO: 30.09.2017 murat => referenztypen über equals vergleichen.
+        if (!pw.equals(pw_confirm)){ // TODO: 30.09.2017 murat => referenztypen über equals vergleichen.
             // TODO: 30.09.2017  murat über den server machen.
            User user =  ServiceLocator.getUserService().getUserByEmail(email);
            if(user == null){
