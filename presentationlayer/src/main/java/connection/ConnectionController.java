@@ -55,4 +55,16 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             this.view.alert(e.getMessage());
         }
     }
+    
+    /**
+     *  @author Vanessa Cajochen
+     *  */
+    
+    ConnectionView.btnstartS.setOnAction(new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event) {
+					 ConnectionView.create_Dialog();
+                }
+    }
+        
+    
 }
