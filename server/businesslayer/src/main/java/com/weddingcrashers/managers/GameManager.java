@@ -1,10 +1,15 @@
 package com.weddingcrashers.managers;
 
+import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;
 import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;
+
+import java.util.Collections;
+import java.util.List;
+
 
 public class GameManager extends Manager {
 
@@ -23,5 +28,13 @@ public class GameManager extends Manager {
                 ServerUtils.sendObject(c, gc);
             }
         }
+
     }
+    /**
+     * @author Murat Kelleci
+     */
+    public static void shuffle(List<Card> cardDeck){
+        Collections.shuffle(cardDeck);
+    }
+
 }
