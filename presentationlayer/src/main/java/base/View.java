@@ -3,16 +3,30 @@ package base;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * View base model.
+ *
+ * @param <M> the type of the model.
+ */
 public abstract class View<M extends Model> {
+
+    // ---- Members
+
+    /** The stage. */
     protected Stage stage;
+    /** The scene. */
     protected Scene scene;
+    /** The model. */
     protected M model;
+
+
+    // ---- Constructor
 
     /**
      * Set any options for the stage in the subclass constructor
      *
-     * @param stage
-     * @param model
+     * @param stage the stage.
+     * @param model the model.
      */
     protected View(Stage stage, M model) {
         this.stage = stage;
@@ -21,6 +35,9 @@ public abstract class View<M extends Model> {
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
     }
+
+
+    // ---- Methods
 
     protected abstract Scene create_GUI();
 
@@ -48,4 +65,5 @@ public abstract class View<M extends Model> {
     public void alert(String msg){
         alert(msg);
     }
+
 }

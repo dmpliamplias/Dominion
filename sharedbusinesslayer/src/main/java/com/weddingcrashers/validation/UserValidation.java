@@ -15,7 +15,7 @@ public class UserValidation {
     private static final UserService userService = new UserServiceImpl();
 
     /** The user. */
-    private final User user;
+    private final String email;
 
     /** The validation result. */
     private ValidationResult validationResult = OK;
@@ -26,10 +26,10 @@ public class UserValidation {
     /**
      * Constructor.
      *
-     * @param user the user.
+     * @param email the email.
      */
-    public UserValidation(User user) {
-        this.user = user;
+    public UserValidation(String email) {
+        this.email = email;
     }
 
     // ---- Methods
@@ -40,7 +40,7 @@ public class UserValidation {
      * @return the validation result.
      */
     public ValidationResult validate() {
-        final User userByEmail = userService.getUserByEmail(user.getUserEmail());
+        final User userByEmail = userService.getUserByEmail(email);
         if (userByEmail != null) {
             validationResult = EMAIL_ALREADY_EXISTS;
         }

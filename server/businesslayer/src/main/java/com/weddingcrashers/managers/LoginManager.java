@@ -6,19 +6,18 @@ import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.ServerUtils;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.RegisterContainer;
-import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.UserService;
 
 /**
  *  @author Michel Schlatter
  *  */
-public class LoginManager extends Manager{
+public class LoginManager extends Manager {
     UserService _userService;
 
     public LoginManager(Client c)
     {
         super(c);
-        _userService = ServiceLocator.getUserService();
+        _userService = serviceLocator.getUserService();
     }
 
     public void login(String email, String password){

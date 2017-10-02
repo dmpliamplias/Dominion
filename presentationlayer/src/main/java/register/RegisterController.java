@@ -4,14 +4,14 @@ package register;
 import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
-import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.validation.UserValidation;
+import com.weddingcrashers.validation.ValidationResult;
 
 import java.io.IOException;
 
-/** @author Murat Kelleci
- *
+/**
+ * @author Murat Kelleci
  */
 // TODO: 30.09.2017 murat extends Controler<..,..> siehe ConnectionController => mache dies auch bei Models und View
 public class RegisterController extends Controller<RegisterModel, RegisterView> {
@@ -39,18 +39,20 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         }
     public void register(){
         String pw = this.view.pw.getText();
-        String pw_confirm=this.view.pw_confirm.getText();
+        String pw_confirm = this.view.pw_confirm.getText();
         String email = this.view.email.getText();
 
-        if (!pw.equals(pw_confirm)){ // TODO: 30.09.2017 murat => referenztypen über equals vergleichen.
-            // TODO: 30.09.2017  murat über den server machen.
-           User user =  ServiceLocator.getUserService().getUserByEmail(email);
-           if(user == null){
-               //über user UserService Kreiieren
-           }else{
-               this.model.setError(ServiceLocator.getServiceLocator().
-                       getTranslator().getString("RegisterView_Error_EmailAlreadyExists"));
-           }
+        if (!pw.equals(pw_confirm)) {
+            final UserValidation userValidation = new UserValidation(email);
+            final ValidationResult validate = userValidation.validate();
+            switch (validate) {
+                case OK:
+                    break;
+                case EMAIL_ALREADY_EXISTS:
+                    break;
+                default:
+                    break;
+            }
             // TODO: 29.09.17  Eine Methode die überprüft ob die Emailadresse schon verwendet wird = Abgleich mit DB.
             // TODO: 29.09.17  Eine Methode die mein PW mit meinem PW_Confirm vergleicht. Abgleich Feld Pw und Pw_Confirm
                 }

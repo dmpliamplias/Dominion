@@ -1,5 +1,7 @@
 package com.weddingcrashers.service;
 
+import com.weddingcrashers.db.H2Database;
+
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -26,14 +28,12 @@ public class ServiceLocator {
     /** The translator. */
     private Translator translator;
 
-    /** The object update service. */
-    private static ObjectUpdateService objectUpdateService;
     /** The user service. */
-    private static UserService userService;
+    private final UserService userService;
     /** The highscore service. */
-    private static HighscoreService highscoreService;
+    private final HighscoreService highscoreService;
     /** The settings service. */
-    private static SettingsService settingsService;
+    private final SettingsService settingsService;
 
 
     // ---- Factory methods
@@ -56,7 +56,7 @@ public class ServiceLocator {
      * Constructor.
      */
     private ServiceLocator() {
-        objectUpdateService = new ObjectUpdateServiceImpl();
+        new H2Database();
         userService = new UserServiceImpl();
         highscoreService = new HighscoreServiceImpl();
         settingsService = new SettingsServiceImpl();
@@ -65,20 +65,15 @@ public class ServiceLocator {
 
     // ---- Methods
 
-
-    public static ObjectUpdateService getObjectUpdateService() {
-        return objectUpdateService;
-    }
-
-    public static UserService getUserService() {
+    public UserService getUserService() {
         return userService;
     }
 
-    public static HighscoreService getHighscoreService() {
+    public HighscoreService getHighscoreService() {
         return highscoreService;
     }
 
-    public static SettingsService getSettingsService() {
+    public SettingsService getSettingsService() {
         return settingsService;
     }
 
