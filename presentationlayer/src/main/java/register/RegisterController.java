@@ -5,8 +5,7 @@ import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.validation.UserValidation;
-import com.weddingcrashers.validation.ValidationResult;
+
 
 import java.io.IOException;
 
@@ -41,17 +40,19 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String pw = this.view.pw.getText();
         String pw_confirm = this.view.pw_confirm.getText();
         String email = this.view.email.getText();
+        RegisterValidator regValidator = new RegisterValidator();
 
-        if (!pw.equals(pw_confirm)) {
-            final UserValidation userValidation = new UserValidation(email);
-            final ValidationResult validate = userValidation.validate();
-            switch (validate) {
-                case OK:
-                    break;
-                case EMAIL_ALREADY_EXISTS:
-                    break;
-                default:
-                    break;
+        String message = regValidator.validateModel(this.model);
+
+        if(message != null){
+            // Ich würde die Error-Message nicht im Model speichern. Sondern der View direkt übergeben und so anzeigen lassen.
+            // this.model.setError(message);
+            //setError();
+            this.model.setError(message);
+            setError();
+        }else {
+            this.view.clearErrorText();
+        }
             }
             // TODO: 29.09.17  Eine Methode die überprüft ob die Emailadresse schon verwendet wird = Abgleich mit DB.
             // TODO: 29.09.17  Eine Methode die mein PW mit meinem PW_Confirm vergleicht. Abgleich Feld Pw und Pw_Confirm
@@ -59,7 +60,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             }
 
         public void setError() {
-            this.view.setLoginError();
+            this.model.setLoginError();
         }
 
 

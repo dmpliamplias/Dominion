@@ -4,50 +4,47 @@ import base.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
  * @author Murat Kelleci
  */
 
-public class RegisterView extends View<RegisterModel> {
-
+public class RegisterView extends View<RegisterModel>{
 
     Button register;
     Button cancel;
     TextField email;
     PasswordField pw;
     PasswordField pw_confirm;
-
-    RegisterModel model;
-    Stage stage;
     Label error;
 
-    public RegisterView(Stage stage, RegisterModel model) {
-        super(stage,model);
+    public RegisterView(Stage stage, RegisterModel model){
+        super(stage, model);
     }
 
-    @Override
-    protected Scene create_GUI() {
-        this.stage.setTitle("Register");
-        this.stage.setHeight(500.00);
-        this.stage.setWidth(800.00);
+    public Scene create_GUI(){
 
-        BorderPane core = new BorderPane();
-        register = new Button("Register");
+        this.stage.setTitle("Register page");
+        this.stage.setWidth(800);
+        this.stage.setHeight(500);
+
+        BorderPane root = new BorderPane();
+        register =new Button("Register");
         cancel = new Button("Cancel");
         email = new TextField();
         pw = new PasswordField();
-        pw_confirm = new PasswordField();
+        pw_confirm= new PasswordField();
 
-        VBox vbox = new VBox();
-        vbox.getChildren().addAll(register, cancel, email, pw, pw_confirm);
-        core.setCenter(vbox);
-        Scene scene = new Scene(core);
+        VBox box = new VBox();
+        box.getChildren().addAll(email, pw, pw_confirm);
+        root.setCenter(box);
+
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         return scene;
     }
@@ -60,6 +57,9 @@ public class RegisterView extends View<RegisterModel> {
     }
 
     void refreshView() {
+        this.model.getPassword();
+        this.model.getPassword_confirm();
+        this.model.getEmail();
         // umgekehrte von refreshmodel
         error.setText(this.model.getError());
     }
@@ -68,8 +68,14 @@ public class RegisterView extends View<RegisterModel> {
         error.setText(this.model.getError());
     }
 
-    void setLoginError() {
-        error.setText("Wrong PW und Login");
+    public Stage getStage() {
+        return this.stage;
+
+    }
+
+
+    void setRegisterError() {
+        error.setText(model.getError());
     }
 
     public void start() {

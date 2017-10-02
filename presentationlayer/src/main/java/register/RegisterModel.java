@@ -2,6 +2,9 @@ package register;
 
 import base.Model;
 
+
+
+
 public class RegisterModel extends Model {
 
     /** @author Murat Kelleci
@@ -35,7 +38,7 @@ public class RegisterModel extends Model {
 
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password){
         this.password = password;
 
     }
@@ -46,8 +49,7 @@ public class RegisterModel extends Model {
     }
 
     public void setPassword_confirm(String password_confirm){
-
-        this.password_confirm=password_confirm;
+        this.password_confirm = password_confirm;
     }
 
 }
