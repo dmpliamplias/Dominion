@@ -11,6 +11,13 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 public class ConnectionView extends View<ConnectionModel> {
+	
+    Button startS;
+    Button joinS;
+    Button help;
+    Button btnConnect;
+    TextField fldPort;
+		
 
     public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
@@ -27,9 +34,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		FlowPane fp = new FlowPane();
 		
 		// Creating and labeling 3 buttons
-		Button startS = new Button("Start Server");
-		Button joinS = new Button("Join Server");
-		Button help = new Button("Help");
+		startS = new Button("Start Server");
+		joinS = new Button("Join Server");
+		help = new Button("Help");
 		
 		// Set size for the buttons and FlowPane
 		startS.setPrefSize(150, 30);
@@ -76,9 +83,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		GridPane gp2 = new GridPane();
 		
 		// Creating and labeling button, label, textfield
-		Button btnConnect = new Button("Connect");			
+		btnConnect = new Button("Connect");			
 		Label lblPort = new Label("Port");
-	    	TextField fldPort = new TextField();
+	    	fldPort = new TextField();
 		Label lblInfo = new Label("Insert port number");
 	    	    			
 		// Set size for the buttons and FlowPane
