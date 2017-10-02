@@ -20,7 +20,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
 
     private  void initialize(){
-	ConnectionView.btnstartS.setOnAction(new EventHandler<ActionEvent>(){
+	ConnectionView.startS.setOnAction(new EventHandler<ActionEvent>(){
 		public void handle(ActionEvent event) {
 			 ConnectionView.create_Dialog();
                 }
