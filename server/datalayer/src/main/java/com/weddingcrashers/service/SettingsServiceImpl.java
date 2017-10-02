@@ -2,7 +2,6 @@ package com.weddingcrashers.service;
 
 import com.weddingcrashers.model.Settings;
 import com.weddingcrashers.model.User;
-import org.apache.commons.lang3.Validate;
 
 import static org.apache.commons.lang3.Validate.notNull;
 

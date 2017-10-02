@@ -2,7 +2,6 @@ package register;
 
 
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 
 /** @author Murat Kelleci
@@ -13,13 +12,13 @@ public class RegisterController {
 
         private final RegisterView view;
         private final RegisterModel model;
-        private final ServerConnectionService connection;
+//        private final ServerConnectionService connection;
 
     public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
         this.view = view;// TODO: 30.09.2017 murat => löschen
         this.model = model; // TODO: 30.09.2017 murat => löschen
-        this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
+//        this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
 
         initialize();
         }

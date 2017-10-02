@@ -128,7 +128,6 @@ public class Dominion extends Application {
      */
     @Override
     public void stop() {
-//        serviceLocator.getConfiguration().save();
         if (view != null) {
             // Make the view invisible
             view.stop();

@@ -1,9 +1,8 @@
 package login;
 
 import app.PLServiceLocator;
-import base.Controller;
 import app.ServerConnectionService;
-import com.sun.xml.internal.bind.v2.TODO;
+import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.service.ServiceLocator;
