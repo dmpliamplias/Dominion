@@ -69,12 +69,6 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             this.view.alert(e.getMessage());
         }
     }
-    
-    /**
-     *  @author Vanessa Cajochen
-     *  */
-    
 
-        
     
 }
