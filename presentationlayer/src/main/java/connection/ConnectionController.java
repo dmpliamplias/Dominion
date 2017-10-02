@@ -27,7 +27,8 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
     }
 	ConnectionView.btnConnect.setOnAction(new EventHandler<ActionEvent>(){
 		public void handle(ActionEvent event) {
-			 ConnectionController.createServer();
+			int port = Integer.parseInt(ConnectionView.fldPort.getText());
+			 ConnectionController.createServer(port);
                 }
     }				     
 					     
