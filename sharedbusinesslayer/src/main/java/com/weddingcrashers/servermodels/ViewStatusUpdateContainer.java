@@ -1,9 +1,11 @@
 package com.weddingcrashers.servermodels;
 
+import java.io.Serializable;
+
 /**
  * @author  Michel Schlatter
  */
-public class ViewStatusUpdateContainer extends Container {
+public class ViewStatusUpdateContainer extends Container implements Serializable {
     ViewStatus viewStatus;
 
     public ViewStatusUpdateContainer(){

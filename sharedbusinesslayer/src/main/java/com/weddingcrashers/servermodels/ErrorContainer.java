@@ -1,8 +1,11 @@
 package com.weddingcrashers.servermodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class ErrorContainer extends Container {
+public class ErrorContainer extends Container implements Serializable {
     private String error;
 
     public String getError() {

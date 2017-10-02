@@ -3,6 +3,7 @@ package com.weddingcrashers.server;
 import com.weddingcrashers.managers.LobbyManager;
 import com.weddingcrashers.servermodels.ConnectionContainer;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class Server extends Thread {
     private static Server server;
+    private static ServerSocket serverSocket;
 
     int _port;
     int _maxPlayers;
@@ -21,14 +23,26 @@ public class Server extends Thread {
 
     ArrayList<Client> clients = new ArrayList<Client>();
 
-    public Server(int port, int maxPlayers){
+    private Server(int port, int maxPlayers){
         _port = port;
         _maxPlayers = maxPlayers;
     }
+
     public static void startServer(int port, int maxPlayers){
         if(server == null) {
-            server = new Server(1, maxPlayers);
+            server = new Server(port, maxPlayers);
             server.start();
+        }
+    }
+
+    public static void dispose(){
+        if(server != null && !serverSocket.isClosed()){
+            try {
+                serverSocket.close();
+                server = null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -40,8 +54,8 @@ public class Server extends Thread {
     @Override
     public void run() {
         try {
-            ServerSocket serverSocket = new ServerSocket(_port);
-            while(clients.size() < _maxPlayers){
+            serverSocket = new ServerSocket(_port);
+            while(clients.size() < _maxPlayers && !serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
 
                 Client clientThread = new Client(socket, ++idCounter);

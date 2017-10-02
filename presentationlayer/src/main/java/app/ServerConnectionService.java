@@ -30,10 +30,7 @@ public class ServerConnectionService extends Thread{
 
     public ServerConnectionService(String url, int port) throws IOException{
         _connection = new Socket(url,port);
-
-        try {
-            _clientId = this.<ConnectionContainer>receiveObject().getId();
-        }catch(ClassNotFoundException ex){}
+        this.start();
     }
 
     public Socket getConnection() {
@@ -44,12 +41,22 @@ public class ServerConnectionService extends Thread{
         return _clientId;
     }
 
+    public void dispose(){
+        try {
+            if(_connection != null && !_connection.isClosed()) {
+                _connection.close();
+            }
+        } catch (IOException e) {
+            displayError(e.getMessage());
+        }
+    }
 
     @Override
     public void run() {
-        while(true){
+        while(!_connection.isClosed()){
             try {
                 Container c = this.<Container>receiveObject();
+                runMethod(c);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -77,7 +84,12 @@ public class ServerConnectionService extends Thread{
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
-        if(c.getMethod() == Methods.Login && loginController != null){
+        if(c.getMethod() == Methods.Connect){
+            ConnectionContainer connectionContainer = (ConnectionContainer)c;
+            this._clientId = connectionContainer.getId();
+            System.out.println("I'm client: " + this._clientId);
+        }
+        else if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
         }else if(c.getMethod() == Methods.Chat && gameController != null){
             // Manu run in your Controller, but with Platform.runLater(()->{}) because you're not on javafx thread anymore...

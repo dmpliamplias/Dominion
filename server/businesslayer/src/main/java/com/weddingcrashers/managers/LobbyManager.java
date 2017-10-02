@@ -28,11 +28,11 @@ public class LobbyManager extends Manager{
 
         LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
         lc.setUserNames(users);
-        ServerUtils.sendObject(c,lc);
 
         for(Client client : c.getAllClients()){
             if(client.getViewStatus() == ViewStatus.Lobby) {
                 ServerUtils.sendObject(client, lc);
+                System.out.println("Sended  lobby and my status is:" + client.getViewStatus());
             }
         }
     }

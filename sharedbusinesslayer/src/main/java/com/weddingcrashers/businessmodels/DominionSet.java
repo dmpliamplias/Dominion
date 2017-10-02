@@ -1,11 +1,12 @@
 package com.weddingcrashers.businessmodels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author  Michel Schlatter
  */
-public class DominionSet {
+public class DominionSet implements Serializable {
     ArrayList<Card> trayStack; // Ablagestappel
     ArrayList<Card> pullStack; // Ziehstappel
 

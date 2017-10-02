@@ -1,8 +1,11 @@
 package com.weddingcrashers.businessmodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class MoneyCard  extends Card {
+public class MoneyCard  extends Card implements Serializable {
     MoneyType moneyType;
     int value;
 

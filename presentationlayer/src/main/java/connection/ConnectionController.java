@@ -15,8 +15,13 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
+        initialize();
     }
 
+
+    private  void initialize(){
+        createServer(8486);
+    }
     /**
      *@author Michel Schlatter
      * @param port
@@ -29,6 +34,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             // TODO: 30.09.2017  vannessa, teste ob das geht und anzeigen! (inkl. port)
             return PLServiceLocator.getPLServiceLocator().getServerConnectionService().getConnection().getRemoteSocketAddress();
         } catch (Exception e) {
+            int i = 1;
             this.view.alert(e.getMessage());
         }
         return null;

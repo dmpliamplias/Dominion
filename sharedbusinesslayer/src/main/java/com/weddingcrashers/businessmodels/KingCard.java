@@ -1,8 +1,11 @@
 package com.weddingcrashers.businessmodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class KingCard extends Card {
+public class KingCard extends Card implements Serializable {
 
    int buys;
    int actions;

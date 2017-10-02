@@ -2,10 +2,12 @@ package com.weddingcrashers.servermodels;
 
 import com.weddingcrashers.model.User;
 
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class LoginContainer extends Container {
+public class LoginContainer extends Container  implements Serializable {
     private String Email;
     private String Password;
     private User user;

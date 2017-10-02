@@ -2,7 +2,9 @@ package com.weddingcrashers.servermodels;
 
 import com.weddingcrashers.businessmodels.DominionSet;
 
-public class GameContainer extends Container{
+import java.io.Serializable;
+
+public class GameContainer extends Container implements Serializable {
     String chatMsg;
     DominionSet dominionSet;
 

@@ -1,9 +1,11 @@
 package com.weddingcrashers.businessmodels;
 
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class Card {
+public class Card implements Serializable {
     String name;
     int Cost;
 

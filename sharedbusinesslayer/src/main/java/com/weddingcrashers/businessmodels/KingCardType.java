@@ -1,8 +1,11 @@
 package com.weddingcrashers.businessmodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public enum KingCardType {
+public enum KingCardType implements Serializable {
     Action,
     Attack,
     Reaction,

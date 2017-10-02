@@ -2,10 +2,11 @@ package com.weddingcrashers.servermodels;
 
 import com.weddingcrashers.model.Highscore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RankingContainer extends  Container {
+public class RankingContainer extends  Container implements Serializable {
     List<Highscore> highScores;
 
     public RankingContainer(){

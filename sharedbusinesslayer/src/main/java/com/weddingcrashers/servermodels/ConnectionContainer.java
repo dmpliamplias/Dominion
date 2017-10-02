@@ -1,8 +1,11 @@
 package com.weddingcrashers.servermodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class ConnectionContainer extends Container {
+public class ConnectionContainer extends Container implements Serializable {
     int id;
 
     public ConnectionContainer(){

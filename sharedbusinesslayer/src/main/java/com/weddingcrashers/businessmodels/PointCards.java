@@ -1,8 +1,11 @@
 package com.weddingcrashers.businessmodels;
+
+import java.io.Serializable;
+
 /**
  *  @author Michel Schlatter
  *  */
-public class PointCards extends Card {
+public class PointCards extends Card implements Serializable {
 
     PointCardType pointCardType;
     int value;

@@ -1,5 +1,6 @@
 package app;
 
+import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;
 import connection.ConnectionController;
 import connection.ConnectionModel;
@@ -125,7 +126,10 @@ public class Dominion extends Application {
             view.stop();
         }
 
-        serviceLocator.getLogger().info("Application terminated");
+        Server.dispose();
+        PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
+
+        //serviceLocator.getLogger().info("Application terminated");
     }
 
     // Static getter for a reference to the main program object

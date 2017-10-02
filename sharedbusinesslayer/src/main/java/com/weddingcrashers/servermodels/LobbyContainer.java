@@ -2,10 +2,11 @@ package com.weddingcrashers.servermodels;
 
 import com.weddingcrashers.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LobbyContainer extends Container {
+public class LobbyContainer extends Container implements Serializable {
     HashMap<Integer, User> users;
     ArrayList<Integer> clientIds_startGame;
 
