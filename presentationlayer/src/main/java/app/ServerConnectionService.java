@@ -1,7 +1,6 @@
 package app;
 
 import Game.GameController;
-import Ranking.RankingController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import lobby.LobbyController;
@@ -86,7 +85,7 @@ public class ServerConnectionService extends Thread{
             lobbyController.handleServerAnswer_startGame();
         }else if(c.getMethod() == Methods.Rankings){
             RankingContainer rc = (RankingContainer)c;
-            rankingController.(rc.getHighScores());
+            rankingController.handleServerAnswer(rc.getHighScores());
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
@@ -173,4 +172,4 @@ public class ServerConnectionService extends Thread{
 
 
     }
-}
+

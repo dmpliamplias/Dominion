@@ -38,31 +38,14 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             });
         }
 
-    public void register(){
+    public void register() {
         String pw = this.view.pw.getText();
         String pw_confirm = this.view.pw_confirm.getText();
         String email = this.view.email.getText();
-        RegisterValidator regValidator = new RegisterValidator();
 
-        String message = regValidator.validateModel(this.model);
-
-        if(message != null){
-            // Ich würde die Error-Message nicht im Model speichern. Sondern der View direkt übergeben und so anzeigen lassen.
-            // this.model.setError(message);
-            //setError();
-            this.model.setError(message);
-            setError();
-        }else {
-            this.view.clearErrorText();
-        }
-            }
-            // TODO: 29.09.17  Eine Methode die überprüft ob die Emailadresse schon verwendet wird = Abgleich mit DB.
-            // TODO: 29.09.17  Eine Methode die mein PW mit meinem PW_Confirm vergleicht. Abgleich Feld Pw und Pw_Confirm
-                }
-            }
-
+    }
         public void setError() {
-            this.model.setLoginError();
+            //this.model.setLoginError();
         }
 
 
