@@ -116,9 +116,4 @@ public class ConnectionView extends View<ConnectionModel> {
         return scene2;
     }
        
-    
-    public Stage getStage(){
-        return stage;
-    }
-
 }
