@@ -1,6 +1,5 @@
 package com.weddingcrashers.managers;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;

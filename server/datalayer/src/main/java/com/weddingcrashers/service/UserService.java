@@ -5,7 +5,7 @@ import com.weddingcrashers.model.User;
 import java.util.List;
 
 /**
- * Service for creating & updating users.
+ * Service for creating, updating and deleting users.
  *
  * @author dmpliamplias
  */
@@ -16,14 +16,22 @@ public interface UserService {
      *
      * @param user the user to create.
      */
-    void create(User user);
+    User create(User user);
 
     /**
      * Updates the given user.
      *
      * @param user the user to update.
      */
-    void update(User user);
+    User update(User user);
+
+    /**
+     * Deletes the given user.
+     *
+     * @param user the user to delete.
+     * @return {@code true} if the user was deleted, {@code false} otherwise.
+     */
+    boolean delete(User user);
 
     /**
      * Returns the user for the given email address.
@@ -33,6 +41,11 @@ public interface UserService {
      */
     User getUserByEmail(String email);
 
+    /**
+     * Lists all users.
+     *
+     * @return a list with all users.
+     */
     List<User> list();
 
 }

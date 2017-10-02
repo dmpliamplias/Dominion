@@ -1,4 +1,4 @@
-package Ranking;
+package ranking;
 
 import base.View;
 import javafx.scene.Scene;

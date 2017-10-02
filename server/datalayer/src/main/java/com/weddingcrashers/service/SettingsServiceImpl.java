@@ -15,16 +15,17 @@ public class SettingsServiceImpl extends BaseService implements SettingsService 
     // ---- Members
 
     /** The object update service. */
-    private final ObjectUpdateService objectUpdateService = new ObjectUpdateServiceImpl();
+    @SuppressWarnings("unchecked")
+    private final ObjectUpdateService<Settings> objectUpdateService = new ObjectUpdateServiceImpl();
 
 
     // ---- Methods
 
     @Override
-    public void create(final Settings settings) {
+    public Settings create(final Settings settings) {
         notNull(settings);
 
-        objectUpdateService.create(settings);
+        return objectUpdateService.create(settings);
     }
 
     @Override

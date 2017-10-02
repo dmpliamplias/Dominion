@@ -1,4 +1,4 @@
-package com.weddingcrashers.util;
+package com.weddingcrashers.db;
 
 /**
  * Statics which were used in the context of the database.

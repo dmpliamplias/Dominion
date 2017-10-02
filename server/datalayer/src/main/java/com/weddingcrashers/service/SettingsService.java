@@ -15,7 +15,7 @@ public interface SettingsService {
      *
      * @param settings the settings to save.
      */
-    void create(Settings settings);
+    Settings create(Settings settings);
 
     /**
      * Loads the settings for the given user.

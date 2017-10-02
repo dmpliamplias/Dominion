@@ -1,4 +1,4 @@
-package Ranking;
+package ranking;
 
 import base.Model;
 import com.weddingcrashers.model.Highscore;

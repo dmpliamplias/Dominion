@@ -1,5 +1,7 @@
 package com.weddingcrashers.service;
 
+import com.weddingcrashers.model.BaseEntity;
+
 import java.util.List;
 
 /**
@@ -7,38 +9,39 @@ import java.util.List;
  * other actions on entities.
  *
  * @author dmpliamplias
+ * @param <T> the type of the entity.
  */
-interface ObjectUpdateService {
+interface ObjectUpdateService<T extends BaseEntity> {
 
     /**
      * Creates a new entity.
      *
      * @param entity the entity to create.
      */
-    void create(Object entity);
+    T create(T entity);
 
     /**
      * Updates the given entity.
      *
      * @param entity the entity to update.
+     * @return {@code true} if the entity was updated, {@code false} otherwise.
      */
-    void update(Object entity);
+    T update(T entity);
 
     /**
-     * Deletes the data for the given id and class.
+     * Deletes the given entity.
      *
-     * @param id the id of the data to delete.
-     * @param clazz the corresponding class.
+     * @param entity the entity to delete.
+     * @return {@code true} if the entity was deleted, {@code false} otherwise.
      */
-    void delete(long id, Class clazz);
+    boolean delete(T entity);
 
     /**
-     * Lists all data for the given class.
+     * Lists all entries the given entity class.
      *
-     * @param clazz the class to list.
-     * @param <T> the class type.
-     * @return all data for the given class.
+     * @param clazz the entity class to list.
+     * @return all entries.
      */
-    <T> List<T> list(Class clazz);
+    List<T> list(Class clazz);
 
 }

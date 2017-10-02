@@ -1,15 +1,14 @@
 package com.weddingcrashers.service;
 
+import com.weddingcrashers.db.EntityManagerFactory;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.model.User_;
-import com.weddingcrashers.util.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 import java.util.List;
 
 import static org.apache.commons.lang3.Validate.notNull;
@@ -24,21 +23,28 @@ public class UserServiceImpl extends BaseService implements UserService {
     // ---- Members
 
     /** The object update service. */
-    private final ObjectUpdateService objectUpdateService = new ObjectUpdateServiceImpl();
+    @SuppressWarnings("unchecked")
+    private final ObjectUpdateService<User> objectUpdateService = new ObjectUpdateServiceImpl();
 
 
     // ---- Methods
 
     @Override
-    public void create(final User user) {
+    public User create(final User user) {
         notNull(user);
-        objectUpdateService.create(user);
+        return objectUpdateService.create(user);
     }
 
     @Override
-    public void update(User user) {
+    public User update(User user) {
         notNull(user);
-        objectUpdateService.update(user);
+        return objectUpdateService.update(user);
+    }
+
+    @Override
+    public boolean delete(User user) {
+        notNull(user);
+        return objectUpdateService.delete(user);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.weddingcrashers.service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.logging.Logger;
 
 import static java.util.logging.Level.SEVERE;
@@ -16,6 +17,12 @@ public abstract class BaseService {
 
     /** The logger. */
     protected static Logger LOG;
+
+    /** The entity manager to commit and flush the transaction. */
+    private EntityManager em;
+
+    /** The database transaction. */
+    private EntityTransaction transaction;
 
 
     // ---- Methods
@@ -45,25 +52,23 @@ public abstract class BaseService {
      * @param em the entity manager.
      */
     protected void startTransaction(final EntityManager em) {
-        em.getTransaction().begin();
+        this.em = em;
+        transaction = em.getTransaction();
+        transaction.begin();
     }
 
     /**
-     * Commits the database transaction.
-     *
-     * @param em the entity manager.
+     * Commits the database transaction and flush.
      */
-    protected void commitTransaction(final EntityManager em) {
-        em.getTransaction().commit();
+    protected void commitTransaction() {
         em.flush();
+        transaction.commit();
     }
 
     /**
      * Rollback the database transaction.
-     *
-     * @param em the entity manager.
      */
-    protected void rollbackTransaction(final EntityManager em) {
+    protected void rollbackTransaction() {
         em.getTransaction().rollback();
     }
 
@@ -76,6 +81,15 @@ public abstract class BaseService {
     protected void logException(Logger logger, Exception e) {
         // TODO: 30.09.2017 check instance of the exception and log which and what gone wrong
         logger.log(SEVERE, e.getMessage());
+    }
+
+    /**
+     * Releases the needed resources.
+     */
+    protected void releaseResources() {
+        em.close();
+        em = null;
+        transaction = null;
     }
 
 }

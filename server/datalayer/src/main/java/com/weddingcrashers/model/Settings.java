@@ -13,12 +13,7 @@ public class Settings extends BaseEntity {
 
     // ---- Members
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private long id;
-
-    @Column(name = "USER_ID", nullable = false)
+//    @Column(name = "USER_ID", nullable = false)
     @OneToOne
     private User user;
 
@@ -29,11 +24,20 @@ public class Settings extends BaseEntity {
     private boolean sound;
 
 
-    // ---- Methods
+    // ---- Fluent API
 
-    public long getId() {
-        return id;
+    public Settings user(User user) {
+        this.setUser(user);
+        return this;
     }
+
+    public Settings settings(String settings) {
+        this.setSettings(settings);
+        return this;
+    }
+
+
+    // ---- Methods
 
     public User getUser() {
         return user;

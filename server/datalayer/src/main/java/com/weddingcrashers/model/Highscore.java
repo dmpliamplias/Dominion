@@ -14,12 +14,7 @@ public class Highscore extends BaseEntity {
 
     // ---- Members
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private long id;
-
-    @Column(name = "USER_ID", nullable = false)
+//    @Column(name = "USER_ID", nullable = false)
     @ManyToOne
     private User user;
 
@@ -33,25 +28,44 @@ public class Highscore extends BaseEntity {
     private int durationForHighscore;
 
 
-    // ---- Methods
+    // ---- Fluent API
 
-    public long getId() {
-        return id;
+    public Highscore user(User user) {
+        this.setUser(user);
+        return this;
     }
+
+    public Highscore dateOfHighscore(LocalDateTime dateOfHighscore) {
+        this.setDateOfHighscore(dateOfHighscore);
+        return this;
+    }
+
+    public Highscore points(int points) {
+        this.setPoints(points);
+        return this;
+    }
+
+    public Highscore durationForHighscore(int durationForHighscore) {
+        this.setDurationForHighscore(durationForHighscore);
+        return this;
+    }
+
+
+    // ---- Methods
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(final User userid) {
-        this.user = userid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDateTime getDateOfHighscore() {
         return dateOfHighscore;
     }
 
-    public void setDateOfHighscore(final LocalDateTime dateOfHighscore) {
+    public void setDateOfHighscore(LocalDateTime dateOfHighscore) {
         this.dateOfHighscore = dateOfHighscore;
     }
 
@@ -59,7 +73,7 @@ public class Highscore extends BaseEntity {
         return points;
     }
 
-    public void setPoints(final int points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -67,7 +81,7 @@ public class Highscore extends BaseEntity {
         return durationForHighscore;
     }
 
-    public void setDurationForHighscore(final int durationForHighscore) {
+    public void setDurationForHighscore(int durationForHighscore) {
         this.durationForHighscore = durationForHighscore;
     }
 

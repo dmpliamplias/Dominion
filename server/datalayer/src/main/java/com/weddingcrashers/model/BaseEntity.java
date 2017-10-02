@@ -2,9 +2,7 @@ package com.weddingcrashers.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,9 +12,14 @@ import java.time.LocalDateTime;
  * @author dmpliamplias
  */
 @MappedSuperclass
-abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     // ---- Members
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private long id;
 
     /** Creation date. */
     @Column(name = "CREATION_DATE", nullable = false)
@@ -24,7 +27,6 @@ abstract class BaseEntity implements Serializable {
 
 
     // ---- Constructor
-
     /**
      * Constructor.
      */
@@ -32,11 +34,20 @@ abstract class BaseEntity implements Serializable {
         // nop
     }
 
+
     // ---- Methods
 
     @PrePersist
     public void onCreate() {
         this.creationDate = LocalDateTime.now();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
 }

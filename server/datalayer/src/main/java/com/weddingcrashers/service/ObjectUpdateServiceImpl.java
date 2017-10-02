@@ -1,9 +1,12 @@
 package com.weddingcrashers.service;
 
+import com.weddingcrashers.model.BaseEntity;
+import com.weddingcrashers.model.User;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.weddingcrashers.util.EntityManagerFactory.getEntityManager;
+import static com.weddingcrashers.db.EntityManagerFactory.getEntityManager;
 import static org.apache.commons.lang3.Validate.notNull;
 
 /**
@@ -19,44 +22,48 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
      * {@inheritDoc}
      */
     @Override
-    public void create(Object entity) {
+    public BaseEntity create(BaseEntity entity) {
         notNull(entity);
 
         final EntityManager em = getEntityManager();
         try {
             startTransaction(em);
             em.persist(entity);
-            commitTransaction(em);
+            commitTransaction();
+            entity = em.find(entity.getClass(), entity.getId());
         }
         catch (Exception e) {
             logException(getServiceLogger(), e);
-            rollbackTransaction(em);
+            rollbackTransaction();
         }
         finally {
-            em.close();
+            releaseResources();
         }
+        return entity;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(Object entity) {
+    public BaseEntity update(BaseEntity entity) {
         notNull(entity);
 
         final EntityManager em = getEntityManager();
         try {
             startTransaction(em);
             em.merge(entity);
-            commitTransaction(em);
+            commitTransaction();
+            entity = em.find(entity.getClass(), entity);
         }
         catch (Exception e) {
             logException(getServiceLogger(), e);
-            rollbackTransaction(em);
+            rollbackTransaction();
         }
         finally {
-            em.close();
+            releaseResources();
         }
+        return entity;
     }
 
     /**
@@ -64,22 +71,25 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void delete(long id, Class clazz) {
-        notNull(clazz);
+    public boolean delete(BaseEntity entity) {
+        notNull(entity);
 
         final EntityManager em = getEntityManager();
+        boolean deleted = false;
         try {
-            final Object entity = em.find(clazz, id);
+            entity = em.find(entity.getClass(), entity.getId());
             em.remove(entity);
-            commitTransaction(em);
+            commitTransaction();
+            deleted = true;
         }
         catch (Exception e) {
             logException(getServiceLogger(), e);
-            rollbackTransaction(em);
+            rollbackTransaction();
         }
         finally {
-            em.close();
+            releaseResources();
         }
+        return deleted;
     }
 
     /**
@@ -87,7 +97,7 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
      */
     @Override
     @SuppressWarnings("unchecked")
-    public<T> List<T> list(Class clazz) {
+    public List<BaseEntity> list(Class clazz) {
         notNull(clazz);
 
         final EntityManager em = getEntityManager();

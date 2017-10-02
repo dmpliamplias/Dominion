@@ -1,9 +1,12 @@
-package com.weddingcrashers.util;
+package com.weddingcrashers.db;
+
+import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.UserServiceImpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static com.weddingcrashers.util.DatabaseStatics.DATABASE_URL;
+import static com.weddingcrashers.db.DatabaseStatics.DATABASE_URL;
 import static java.sql.DriverManager.getConnection;
 import static org.h2.tools.Server.createTcpServer;
 
@@ -25,6 +28,9 @@ public final class H2Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        final UserServiceImpl userService = new UserServiceImpl();
+//        final User dyoni = new User().name("dmpliamplias").email("dyoni@pop.agri.ch").password("banana");
+//        userService.create(dyoni);
     }
 
 

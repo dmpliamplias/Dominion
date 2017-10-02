@@ -1,12 +1,11 @@
 package com.weddingcrashers.service;
 
 import com.weddingcrashers.model.Highscore;
-import org.apache.commons.lang3.Validate;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.weddingcrashers.util.EntityManagerFactory.getEntityManager;
+import static com.weddingcrashers.db.EntityManagerFactory.getEntityManager;
 import static org.apache.commons.lang3.Validate.notNull;
 
 /**
@@ -19,27 +18,17 @@ public class HighscoreServiceImpl extends BaseService implements HighscoreServic
     // ---- Members
 
     /** The object update service. */
-    private final ObjectUpdateService objectUpdateService = new ObjectUpdateServiceImpl();
+    @SuppressWarnings("unchecked")
+    private final ObjectUpdateService<Highscore> objectUpdateService = new ObjectUpdateServiceImpl();
 
 
     // ---- Methods
 
     @Override
-    public void saveHighscore(final Highscore highscore) {
+    public Highscore saveHighscore(Highscore highscore) {
         notNull(highscore);
 
-        final EntityManager em = getEntityManager();
-        try {
-            startTransaction(em);
-            objectUpdateService.create(highscore);
-            commitTransaction(em);
-        }
-        catch (Exception e) {
-            rollbackTransaction(em);
-        }
-        finally {
-            em.close();
-        }
+        return objectUpdateService.create(highscore);
     }
 
     @Override

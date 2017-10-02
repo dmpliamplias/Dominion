@@ -1,9 +1,9 @@
-package com.weddingcrashers.util;
+package com.weddingcrashers.db;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import static com.weddingcrashers.util.DatabaseStatics.UNIT_NAME;
+import static com.weddingcrashers.db.DatabaseStatics.UNIT_NAME;
 
 /**
  * The entity manager util class. It provides an entity

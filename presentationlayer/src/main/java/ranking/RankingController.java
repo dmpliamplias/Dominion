@@ -1,4 +1,4 @@
-package Ranking;
+package ranking;
 
 import app.PLServiceLocator;
 import app.ServerConnectionService;

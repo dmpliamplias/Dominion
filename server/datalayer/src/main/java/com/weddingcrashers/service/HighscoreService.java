@@ -16,7 +16,7 @@ public interface HighscoreService {
      *
      * @param highscore the highscore to save.
      */
-    void saveHighscore(Highscore highscore);
+    Highscore saveHighscore(Highscore highscore);
 
     /**
      * Gets the 10 highest scores.

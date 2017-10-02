@@ -13,11 +13,6 @@ public class User extends BaseEntity {
 
     // ---- Members
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private long id;
-
     @Column(name = "NAME", nullable = false)
     private String userName;
 
@@ -28,11 +23,25 @@ public class User extends BaseEntity {
     private String password;
 
 
-    // ---- Methods
+    // ---- Fluent API
 
-    public long getId() {
-        return id;
+    public User name(String name) {
+        this.setUserName(name);
+        return this;
     }
+
+    public User email(String email) {
+        this.setUserEmail(email);
+        return this;
+    }
+
+    public User password(String password) {
+        this.setPassword(password);
+        return this;
+    }
+
+
+    // ---- Methods
 
     public String getUserName() {
         return userName;
