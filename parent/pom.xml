@@ -16,6 +16,7 @@
         <hibernate.version>5.2.11.Final</hibernate.version>
         <javax.persistence.version>1.0.2</javax.persistence.version>
         <apache.lang3.version>3.6</apache.lang3.version>
+        <apache.validator.version>1.6</apache.validator.version>
         <juint.version>4.12</juint.version>
     </properties>
 
@@ -55,6 +56,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${apache.validator.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
