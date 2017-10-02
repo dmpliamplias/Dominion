@@ -20,6 +20,19 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
 
     private  void initialize(){
+	ConnectionView.btnstartS.setOnAction(new EventHandler<ActionEvent>(){
+		public void handle(ActionEvent event) {
+			 ConnectionView.create_Dialog();
+                }
+    }
+	ConnectionView.btnConnect.setOnAction(new EventHandler<ActionEvent>(){
+		public void handle(ActionEvent event) {
+			 ConnectionController.createServer();
+                }
+    }				     
+					     
+					     
+	    	    
         createServer(8486);
     }
     /**
@@ -60,11 +73,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      *  @author Vanessa Cajochen
      *  */
     
-    ConnectionView.btnstartS.setOnAction(new EventHandler<ActionEvent>(){
-				public void handle(ActionEvent event) {
-					 ConnectionView.create_Dialog();
-                }
-    }
+
         
     
 }
