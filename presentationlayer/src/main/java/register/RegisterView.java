@@ -1,5 +1,6 @@
 package register;
 
+import base.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -13,7 +14,7 @@ import javafx.scene.control.TextField;
  * @author Murat Kelleci
  */
 
-public class RegisterView {
+public class RegisterView extends View<RegisterModel> {
 
 
     Button register;
@@ -27,9 +28,11 @@ public class RegisterView {
     Label error;
 
     public RegisterView(Stage stage, RegisterModel model) {
-        this.stage = stage;
-        this.model = model;
+        super(stage,model);
+    }
 
+    @Override
+    protected Scene create_GUI() {
         this.stage.setTitle("Register");
         this.stage.setHeight(500.00);
         this.stage.setWidth(800.00);
@@ -46,7 +49,9 @@ public class RegisterView {
         core.setCenter(vbox);
         Scene scene = new Scene(core);
         stage.setScene(scene);
+        return scene;
     }
+
 
     void refreshModel() {
         this.model.setPassword(pw.getText());
@@ -62,12 +67,6 @@ public class RegisterView {
     void setError() {
         error.setText(this.model.getError());
     }
-
-    Stage getStage() {
-        return this.stage;
-
-    }
-
 
     void setLoginError() {
         error.setText("Wrong PW und Login");

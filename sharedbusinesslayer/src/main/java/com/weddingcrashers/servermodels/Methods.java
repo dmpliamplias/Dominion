@@ -10,5 +10,7 @@ public enum Methods {
     SetViewStatus,
     Lobby_Players,
     Chat,
+    Register,
+    Connect,
     Client_Server_Error,
 }

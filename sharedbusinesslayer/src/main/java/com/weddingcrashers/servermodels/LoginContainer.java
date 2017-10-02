@@ -18,9 +18,8 @@ public class LoginContainer extends Container {
         this.user = user;
     }
 
-
     public LoginContainer(){
-        setMethod(Methods.Login);
+        super(Methods.Login);
     }
 
     public String getEmail() {

@@ -16,7 +16,6 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
     }
 
     /**
@@ -45,6 +44,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         try {
             ServerConnectionService serverConnectionService = new ServerConnectionService(url,port);
             PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
         } catch (IOException e) {
             this.view.alert(e.getMessage());
         }

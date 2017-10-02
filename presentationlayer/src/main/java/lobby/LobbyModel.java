@@ -1,4 +1,4 @@
-package gamestart;
+package lobby;
 
 import base.Model;
 import com.weddingcrashers.model.Settings;
@@ -7,7 +7,7 @@ import com.weddingcrashers.model.Settings;
  *  author Manuel Wirz
  *  */
 
-public class GameStartModel extends Model {
+public class LobbyModel extends Model {
     private Settings settings;
 
     public Settings getSettings() {

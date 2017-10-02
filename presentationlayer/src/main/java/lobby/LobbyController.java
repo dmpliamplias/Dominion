@@ -1,11 +1,10 @@
-package gamestart;
+package lobby;
 
 import app.PLServiceLocator;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.ViewStatus;
 import app.ServerConnectionService;
-import com.weddingcrashers.service.ServiceLocator;
 
 import java.io.IOException;
 
@@ -13,22 +12,12 @@ import java.io.IOException;
  *  author Manuel Wirz
  *  */
 
-public class GameStartController extends Controller <GameStartModel, GameStartView> {
+public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private final ServerConnectionService _connection;
     private final User _user;
 
-    public void initialize() {
-        try {
-            _connection.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
-        } catch (IOException e) {
-            this.view.alert(e.getMessage());
-        }
-
-        refreshView();
-    }
-
-    public GameStartController(GameStartView view, GameStartModel model, User user){
+    public LobbyController(LobbyView view, LobbyModel model, User user){
         super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
         _connection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
@@ -36,11 +25,12 @@ public class GameStartController extends Controller <GameStartModel, GameStartVi
         initialize();
     }
 
-    private void refreshView()
-    {
-
-        view.refresh();
+    public void initialize() {
+        try {
+            _connection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+        } catch (IOException e) {
+            this.view.alert(e.getMessage());
+        }
     }
-
 
 }

@@ -34,9 +34,8 @@ public class SplashScreenModel extends Model {
 
             // delete this and add real code!
             Integer i = 0;
-            for(; i < 1000000000; i++) {
-                if ((i % 1000000) == 0)
-                    this.updateProgress(i, 1000000000);
+            for(; i < 10000; i++) {
+                    this.updateProgress(i, 10000);
             }
 
             return null;

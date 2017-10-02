@@ -3,13 +3,12 @@ package login;
 import app.PLServiceLocator;
 import base.Controller;
 import app.ServerConnectionService;
-import com.sun.xml.internal.bind.v2.TODO;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.service.ServiceLocator;
-import gamestart.GameStartController;
-import gamestart.GameStartModel;
-import gamestart.GameStartView;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
@@ -30,6 +29,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
 
     public void initialize() {
+        // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
         view.login.setOnAction((event) -> {
            view.refreshModel();
@@ -51,8 +51,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
            } catch (Exception e) {
               view.alert(e.getMessage());
            }
-
-
        }
   }
 
@@ -72,11 +70,11 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
   // change to goToWhatEverView ...
   private void goToStartView(User user){
-     GameStartModel model = new GameStartModel();
-     GameStartView view = new GameStartView(this.view.getStage(), model);
+     LobbyModel model = new LobbyModel();
+     LobbyView view = new LobbyView(this.view.getStage(), model);
 
-     FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/GameStartView.fxml"));
-     loader.setController(new GameStartController(view, model, user));
+     FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/LobbyView.fxml"));
+     loader.setController(new LobbyController(view, model, user));
 
      this.view.stop();
      view.start();

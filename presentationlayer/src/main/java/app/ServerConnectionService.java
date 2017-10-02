@@ -2,7 +2,7 @@ package app;
 
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
-import gamestart.GameStartController;
+import lobby.LobbyController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -74,12 +74,13 @@ public class ServerConnectionService extends Thread{
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
-        if(c.getMethod() == Methods.Login){
+        if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
-        }else if(c.getMethod() == Methods.Chat){
+        }else if(c.getMethod() == Methods.Chat ){
             // Manu run in your Controller, but with Platform.runLater(()->{}) because you're not on javafx thread anymore...
         }else if(c.getMethod() == Methods.Client_Server_Error){
-            // handle error here...
+            ErrorContainer ec = (ErrorContainer)c;
+            displayError(ec.getError());
         }
     }
 
@@ -116,7 +117,7 @@ public class ServerConnectionService extends Thread{
 
 
     ConnectionController connectionController;
-    GameStartController gameStartController;
+    LobbyController lobbyController;
     LoginController loginController;
     RegisterController registerController;
 
@@ -130,12 +131,12 @@ public class ServerConnectionService extends Thread{
         this.connectionController = connectionController;
     }
 
-    public GameStartController getGameStartController() {
-        return gameStartController;
+    public LobbyController getLobbyController() {
+        return lobbyController;
     }
 
-    public void setGameStartController(GameStartController gameStartController) {
-        this.gameStartController = gameStartController;
+    public void setLobbyController(LobbyController lobbyController) {
+        this.lobbyController = lobbyController;
     }
 
     public LoginController getLoginController() {

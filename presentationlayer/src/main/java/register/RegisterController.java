@@ -1,31 +1,37 @@
 package register;
 
 
+import app.PLServiceLocator;
+import app.ServerConnectionService;
+import base.Controller;
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.ServerConnectionService;
+import com.weddingcrashers.servermodels.ViewStatus;
 import com.weddingcrashers.service.ServiceLocator;
+
+import java.io.IOException;
 
 /** @author Murat Kelleci
  *
  */
 // TODO: 30.09.2017 murat extends Controler<..,..> siehe ConnectionController => mache dies auch bei Models und View
-public class RegisterController {
+public class RegisterController extends Controller<RegisterModel, RegisterView> {
 
-        private final RegisterView view;
-        private final RegisterModel model;
-        private final ServerConnectionService connection;
+    private final ServerConnectionService connection;
 
     public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
-        this.view = view;// TODO: 30.09.2017 murat => löschen
-        this.model = model; // TODO: 30.09.2017 murat => löschen
-        this.connection=ServiceLocator.getServiceLocator().getServerConnectionService();
+        super(model,view);
+        this.connection= PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
         initialize();
         }
 
     public void initialize() {
-
+        try {
+            connection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+        } catch (IOException e) {
+            this.view.alert(e.getMessage());
+        }
         this.view.register.setOnAction((event) -> {
             this.view.refreshModel();
             this.register();

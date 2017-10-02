@@ -5,6 +5,7 @@ package com.weddingcrashers.servermodels;
  */
 public enum ViewStatus {
     Login,
+    Register,
     Lobby,
     Ranking,
     Game

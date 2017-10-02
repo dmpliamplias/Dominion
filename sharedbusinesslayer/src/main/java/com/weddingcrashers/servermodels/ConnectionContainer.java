@@ -5,6 +5,10 @@ package com.weddingcrashers.servermodels;
 public class ConnectionContainer extends Container {
     int id;
 
+    public ConnectionContainer(){
+        super(Methods.Connect);
+    }
+
     public int getId() {
         return id;
     }

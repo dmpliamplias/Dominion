@@ -5,8 +5,12 @@ package com.weddingcrashers.servermodels;
 public class ErrorContainer extends Container {
     private String error;
 
+    public String getError() {
+        return error;
+    }
+
     public ErrorContainer(String error) {
+        super(Methods.Client_Server_Error);
         this.error = error;
-        this.setMethod(Methods.Client_Server_Error);
     }
 }

@@ -1,4 +1,4 @@
-package gamestart;
+package lobby;
 
 import base.View;
 import javafx.scene.Scene;
@@ -10,11 +10,11 @@ import javafx.stage.Stage;
  *  author Manuel Wirz
  *  */
 
-public class GameStartView extends View<GameStartModel> {
+public class LobbyView extends View<LobbyModel> {
 
     protected Label lbl;
 
-    public GameStartView(Stage stage, GameStartModel model) {
+    public LobbyView(Stage stage, LobbyModel model) {
 
         super(stage, model);
 

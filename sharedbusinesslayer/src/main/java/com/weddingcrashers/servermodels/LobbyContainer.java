@@ -8,6 +8,10 @@ import java.util.HashMap;
 public class LobbyContainer extends Container {
     HashMap<Integer, User> users;
 
+    public LobbyContainer(Methods method){
+        super(method);
+    }
+
     public HashMap<Integer, User> getUserNames() {
         return users;
     }
