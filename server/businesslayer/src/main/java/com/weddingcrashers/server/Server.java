@@ -17,7 +17,6 @@ public class Server extends Thread {
     int _port;
     int _maxPlayers;
     private static int idCounter = 0;
-    private LobbyManager lobbyManager;
 
 
     ArrayList<Client> clients = new ArrayList<Client>();
@@ -25,7 +24,6 @@ public class Server extends Thread {
     public Server(int port, int maxPlayers){
         _port = port;
         _maxPlayers = maxPlayers;
-        this.lobbyManager = new LobbyManager();
     }
     public static void startServer(int port, int maxPlayers){
         if(server == null) {
@@ -55,7 +53,7 @@ public class Server extends Thread {
                 c.setId(idCounter);
                 ServerUtils.sendObject(clientThread ,c);
 
-                lobbyManager.broadCastPlayersToAllClients(clientThread);
+                LobbyManager.broadCastPlayersToAllClients(clientThread);
             }
         } catch (Exception ex){
             for(Client client : clients){

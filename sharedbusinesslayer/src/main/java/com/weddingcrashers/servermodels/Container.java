@@ -5,13 +5,14 @@ package com.weddingcrashers.servermodels;
 public abstract class Container {
     private Methods method;
 
+    public Container(Methods method){
+        this.method = method;
+    }
     public Methods getMethod() {
         return method;
     }
 
-    public void setMethod(Methods method) {
-        this.method = method;
-    }
+
 
 
 }

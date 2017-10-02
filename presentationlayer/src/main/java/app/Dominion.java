@@ -3,6 +3,9 @@ package app;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.UserService;
+import connection.ConnectionController;
+import connection.ConnectionModel;
+import connection.ConnectionView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -25,7 +28,7 @@ public class Dominion extends Application {
 
     private static Dominion mainProgram; // singleton
     private SplashScreenView splashView;
-    private LoginView view;
+    private ConnectionView view;
 
     private ServiceLocator serviceLocator; // resources, after initialization
 
@@ -96,9 +99,9 @@ public class Dominion extends Application {
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
-        LoginModel model = new LoginModel();
-        view = new LoginView(appStage, model);
-        new LoginController(view, model);
+        ConnectionModel model = new ConnectionModel();
+        view = new ConnectionView(appStage, model);
+        new ConnectionController(model,view);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();

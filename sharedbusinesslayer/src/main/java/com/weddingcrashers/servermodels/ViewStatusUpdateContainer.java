@@ -7,7 +7,7 @@ public class ViewStatusUpdateContainer extends Container {
     ViewStatus viewStatus;
 
     public ViewStatusUpdateContainer(){
-        this.setMethod(Methods.SetViewStatus);
+        super(Methods.SetViewStatus);
     }
 
     public ViewStatus getViewStatus() {

@@ -1,5 +1,6 @@
 package com.weddingcrashers.server;
 
+import com.weddingcrashers.managers.LobbyManager;
 import com.weddingcrashers.managers.LoginManager;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
@@ -21,12 +22,14 @@ public class Client extends Thread {
     ArrayList<Client> otherClients;
 
     LoginManager _loginManager;
+    LobbyManager _lobbyManager;
 
     public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
         _clientId = id;
 
         _loginManager = new LoginManager(this);
+        _lobbyManager = new LobbyManager(this);
     }
 
     @Override
@@ -50,11 +53,13 @@ public class Client extends Thread {
 
     private void runMethod(Container c){
         if(c.getMethod() == Methods.Login){
-            LoginContainer lc = (LoginContainer) c;
+            LoginContainer lc = (LoginContainer)c;
             _loginManager.login(lc.getEmail(), lc.getPassword());
         }else if(c.getMethod() == Methods.SetViewStatus){
             ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
             this.viewStatus = vc.getViewStatus();
+        }else if(c.getMethod() == Methods.Register){
+
         }
         else if(c.getMethod() == Methods.GetRankings){
             //.... continue

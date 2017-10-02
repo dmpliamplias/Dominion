@@ -1,6 +1,8 @@
 package register;
 
-public class RegisterModel {
+import base.Model;
+
+public class RegisterModel extends Model {
 
     /** @author Murat Kelleci
  **/
