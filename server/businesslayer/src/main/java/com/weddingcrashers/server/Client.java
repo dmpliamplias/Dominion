@@ -1,11 +1,12 @@
 package com.weddingcrashers.server;
 
+import com.weddingcrashers.managers.GameManager;
 import com.weddingcrashers.managers.LobbyManager;
 import com.weddingcrashers.managers.LoginManager;
+import com.weddingcrashers.managers.RankingManager;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 
-import javax.swing.text.View;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class Client extends Thread {
 
     LoginManager _loginManager;
     LobbyManager _lobbyManager;
+    GameManager _gameManager;
+    RankingManager _rankingsManager;
 
     public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
@@ -30,6 +33,8 @@ public class Client extends Thread {
 
         _loginManager = new LoginManager(this);
         _lobbyManager = new LobbyManager(this);
+        _gameManager = new GameManager(this);
+        _rankingsManager = new RankingManager(this);
     }
 
     @Override
@@ -59,10 +64,17 @@ public class Client extends Thread {
             ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
             this.viewStatus = vc.getViewStatus();
         }else if(c.getMethod() == Methods.Register){
-
+            LoginContainer lc = (LoginContainer)c;
+            _loginManager.createUser(lc.getUser());
+        } else if(c.getMethod() == Methods.Chat){
+            GameContainer gc = (GameContainer)c;
+            _gameManager.broadCastChatMessageToAllClients(gc.getChatMsg());
+        }else if(c.getMethod() == Methods.StartGame){
+            LobbyContainer lc = (LobbyContainer)c;
+            _lobbyManager.startGame(lc.getClientIds_startGame());
         }
-        else if(c.getMethod() == Methods.GetRankings){
-            //.... continue
+        else if(c.getMethod() == Methods.Rankings){
+            _rankingsManager.sendRanking();
         }
     }
 

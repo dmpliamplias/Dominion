@@ -12,22 +12,23 @@ import java.io.IOException;
 /**
  * @author Murat Kelleci
  */
-// TODO: 30.09.2017 murat extends Controler<..,..> siehe ConnectionController => mache dies auch bei Models und View
+
 public class RegisterController extends Controller<RegisterModel, RegisterView> {
 
-    private final ServerConnectionService connection;
+    private final ServerConnectionService _serverConnection;
 
     public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
         super(model,view);
-        this.connection= PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRegisterController(this);
 
         initialize();
         }
 
     public void initialize() {
         try {
-            connection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+            _serverConnection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage());
         }
@@ -36,6 +37,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             this.register();
             });
         }
+
     public void register(){
         String pw = this.view.pw.getText();
         String pw_confirm = this.view.pw_confirm.getText();

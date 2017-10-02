@@ -3,26 +3,43 @@ package ranking;
 import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
+import com.weddingcrashers.model.Highscore;
+import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 
 import java.io.IOException;
+import java.util.List;
+
 
 public class RankingController extends Controller<RankingModel, RankingView> {
 
-    private final ServerConnectionService _connection;
+    private final ServerConnectionService _serverConnection;
 
     public RankingController(RankingModel model, RankingView view){
         super(model,view);
-        _connection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRankingController(this);
+        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
         initialize();
     }
 
     public void initialize() {
         try {
-            _connection.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
+            _serverConnection.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage());
         }
+
+        // get Ranking from Server
+        RankingContainer rc = new RankingContainer();
+        try {
+            _serverConnection.sendObject(rc);
+        } catch (IOException e) {
+            this.view.alert(e.getMessage());
+        }
+    }
+
+    public void handleServerAnswer(List<Highscore> highscoreList){
+        // TODO: 02.10.2017 Murat => Display Highscores.
     }
 }

@@ -3,12 +3,16 @@ package com.weddingcrashers.servermodels;
 import com.weddingcrashers.businessmodels.DominionSet;
 
 public class GameContainer extends Container{
+    String chatMsg;
+    DominionSet dominionSet;
+
+
     public String getChatMsg() {
-        return ChatMsg;
+        return chatMsg;
     }
 
     public void setChatMsg(String chatMsg) {
-        ChatMsg = chatMsg;
+        this.chatMsg = chatMsg;
     }
 
     public DominionSet getDominionSet() {
@@ -18,9 +22,6 @@ public class GameContainer extends Container{
     public void setDominionSet(DominionSet dominionSet) {
         this.dominionSet = dominionSet;
     }
-
-    String ChatMsg;
-    DominionSet dominionSet;
 
     public GameContainer(Methods method){
         super(method);

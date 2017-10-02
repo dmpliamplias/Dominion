@@ -7,12 +7,21 @@ import java.util.HashMap;
 
 public class LobbyContainer extends Container {
     HashMap<Integer, User> users;
+    ArrayList<Integer> clientIds_startGame;
 
     public LobbyContainer(Methods method){
         super(method);
     }
+    
+    public ArrayList<Integer> getClientIds_startGame() {
+        return clientIds_startGame;
+    }
 
-    public HashMap<Integer, User> getUserNames() {
+    public void setClientIds_startGame(ArrayList<Integer> clientIds_startGame) {
+        this.clientIds_startGame = clientIds_startGame;
+    }
+
+    public HashMap<Integer, User> getPlayers() {
         return users;
     }
 

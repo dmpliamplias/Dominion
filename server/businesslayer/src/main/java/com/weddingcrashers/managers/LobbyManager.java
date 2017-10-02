@@ -36,4 +36,15 @@ public class LobbyManager extends Manager{
             }
         }
     }
+
+    public void startGame(ArrayList<Integer> clientIds){
+        LobbyContainer lc = new LobbyContainer(Methods.StartGame);
+        for(Integer clientId : clientIds){
+            for(Client c : client.getAllClients()){
+                if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
+                    ServerUtils.sendObject(c, lc);
+                }
+            }
+        }
+    }
 }

@@ -4,6 +4,7 @@ import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;
 import com.weddingcrashers.servermodels.Methods;
+import com.weddingcrashers.servermodels.ViewStatus;
 
 public class GameManager extends Manager {
 
@@ -18,7 +19,9 @@ public class GameManager extends Manager {
         gc.setChatMsg(msg);
 
         for(Client c : client.getOtherClients()){
-            ServerUtils.sendObject(c, gc);
+            if(c.getViewStatus() == ViewStatus.Game) {
+                ServerUtils.sendObject(c, gc);
+            }
         }
     }
 }

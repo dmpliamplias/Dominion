@@ -1,37 +1,44 @@
 package lobby;
 
+import app.PLServiceLocator;
 import base.View;
+import com.weddingcrashers.service.ServiceLocator;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- *  author Manuel Wirz
+ *  author Michel Schlatter
  *  */
 
 public class LobbyView extends View<LobbyModel> {
 
     protected Label lbl;
+    protected ListView lvPlayers;
+    protected Button btnStart;
 
     public LobbyView(Stage stage, LobbyModel model) {
-
         super(stage, model);
-
     }
 
     public Scene create_GUI(){
 
-        stage.setTitle("StartUp.Dominion Start");
+        stage.setTitle(ServiceLocator.getServiceLocator().getTranslator().getString("LobbyView_Title"));
         stage.setHeight(500);
         stage.setWidth(800);
 
         BorderPane root = new BorderPane();
         lbl = new Label();
-        root.setCenter(lbl);
+        lvPlayers = new ListView();
+        lvPlayers.setDisable(true);
+        root.getChildren().addAll(lvPlayers, lbl);
 
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
 
 

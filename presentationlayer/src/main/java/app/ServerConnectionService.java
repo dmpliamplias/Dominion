@@ -1,5 +1,7 @@
 package app;
 
+import Game.GameController;
+import Ranking.RankingController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import lobby.LobbyController;
@@ -11,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import login.LoginController;
+import ranking.RankingController;
 import register.RegisterController;
 
 import java.io.IOException;
@@ -24,6 +27,7 @@ import java.net.Socket;
 public class ServerConnectionService extends Thread{
     private  Socket _connection;
     private int _clientId;
+    private  boolean isHoster;
 
     public ServerConnectionService(String url, int port) throws IOException{
         _connection = new Socket(url,port);
@@ -76,9 +80,15 @@ public class ServerConnectionService extends Thread{
     private void runMethod(Container c){
         if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
-        }else if(c.getMethod() == Methods.Chat ){
+        }else if(c.getMethod() == Methods.Chat && gameController != null){
             // Manu run in your Controller, but with Platform.runLater(()->{}) because you're not on javafx thread anymore...
-        }else if(c.getMethod() == Methods.Client_Server_Error){
+        } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
+            lobbyController.handleServerAnswer_startGame();
+        }else if(c.getMethod() == Methods.Rankings){
+            RankingContainer rc = (RankingContainer)c;
+            rankingController.(rc.getHighScores());
+        }
+        else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
             displayError(ec.getError());
         }
@@ -120,6 +130,8 @@ public class ServerConnectionService extends Thread{
     LobbyController lobbyController;
     LoginController loginController;
     RegisterController registerController;
+    GameController gameController;
+    RankingController rankingController;
 
     public ConnectionController getConnectionController() {
         return connectionController;
@@ -131,30 +143,34 @@ public class ServerConnectionService extends Thread{
         this.connectionController = connectionController;
     }
 
-    public LobbyController getLobbyController() {
-        return lobbyController;
-    }
-
     public void setLobbyController(LobbyController lobbyController) {
         this.lobbyController = lobbyController;
-    }
-
-    public LoginController getLoginController() {
-        return loginController;
     }
 
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
 
-    public RegisterController getRegisterController() {
-        return registerController;
-    }
-
     public void setRegisterController(RegisterController registerController) {
         this.registerController = registerController;
     }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public void setRankingController(RankingController rankingController) {
+        this.rankingController = rankingController;
+    }
+
+    public boolean isHoster() {
+        return isHoster;
+    }
+
+    public void setIsHoster(boolean hoster) {
+        isHoster = hoster;
+    }
 
 
+    }
 }

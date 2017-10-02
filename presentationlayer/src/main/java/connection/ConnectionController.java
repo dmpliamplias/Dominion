@@ -4,7 +4,6 @@ import app.PLServiceLocator;
 import base.Controller;
 import com.weddingcrashers.server.Server;
 import app.ServerConnectionService;
-import com.weddingcrashers.service.ServiceLocator;
 
 import java.io.IOException;
 import java.net.SocketAddress;
@@ -26,7 +25,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
     private SocketAddress createServer(int port){
         try {
             Server.startServer(port,4);
-            join("localhost", port);
+            join("localhost", port,true);
             // TODO: 30.09.2017  vannessa, teste ob das geht und anzeigen! (inkl. port)
             return PLServiceLocator.getPLServiceLocator().getServerConnectionService().getConnection().getRemoteSocketAddress();
         } catch (Exception e) {
@@ -40,11 +39,12 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      * @param url
      * @param port
      */
-    private void join(String url, int port){
+    private void join(String url, int port, boolean isHoster){
         try {
             ServerConnectionService serverConnectionService = new ServerConnectionService(url,port);
             PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
             PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setIsHoster(isHoster);
         } catch (IOException e) {
             this.view.alert(e.getMessage());
         }

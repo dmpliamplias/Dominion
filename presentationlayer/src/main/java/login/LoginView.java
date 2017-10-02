@@ -65,15 +65,6 @@ public class LoginView extends View<LoginModel>{
         error.setText(model.getError());
     }
 
-    public void start() {
-        stage.show();
-    }
-
-
-    public void stop(){
-        stage.hide();
-    }
-
 
 }
 

@@ -17,12 +17,12 @@ import javafx.fxml.FXMLLoader;
  *  */
 public class LoginController extends Controller<LoginModel, LoginView>{
 
-    private final ServerConnectionService _connection;
+    private final ServerConnectionService _serverConnection;
 
     public LoginController(LoginView view, LoginModel model){
         super(model, view);
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLoginController(this);
-        _connection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
 
         initialize();
     }
@@ -47,7 +47,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
            loginContainer.setPassword(pw);
 
            try {
-               _connection.sendObject(loginContainer);
+               _serverConnection.sendObject(loginContainer);
            } catch (Exception e) {
               view.alert(e.getMessage());
            }

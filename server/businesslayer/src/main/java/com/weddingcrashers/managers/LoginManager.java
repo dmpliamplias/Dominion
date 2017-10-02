@@ -32,7 +32,7 @@ public class LoginManager extends Manager {
         ServerUtils.sendObject(client, loginContainer);
     }
 
-    public void CreateUser(User u){
+    public void createUser(User u){
         _userService.create(u);
 
         RegisterContainer rc = new RegisterContainer();
