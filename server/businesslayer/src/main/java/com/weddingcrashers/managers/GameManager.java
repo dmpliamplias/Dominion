@@ -13,12 +13,17 @@ import java.util.List;
 
 
 public class GameManager extends Manager {
-
+    
+    private static List<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
+    
     public GameManager(Client client){
         super(client);
     }
-
-
+    
+    public static  void initialize(){
+        unusedCards = new ArrayList<Card>();
+        // TODO: 03.10.2017 add card set here and delete cards from the list, when user pulls it. 
+    }
 
     private void afterGameTurn(GameContainer container){
       int nxtId = getNextTurnClientId();
