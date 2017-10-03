@@ -5,6 +5,7 @@ import base.Controller;
 import com.weddingcrashers.server.Server;
 import app.ServerConnectionService;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.SocketAddress;
 
@@ -20,21 +21,13 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
 
     private  void initialize(){
-	ConnectionView.startS.setOnAction(new EventHandler<ActionEvent>(){
-		public void handle(ActionEvent event) {
-			 ConnectionView.create_Dialog();
-                }
-    }
-	ConnectionView.btnConnect.setOnAction(new EventHandler<ActionEvent>(){
-		public void handle(ActionEvent event) {
-			int port = Integer.parseInt(ConnectionView.fldPort.getText());
-			 ConnectionController.createServer(port);
-                }
-    }				     
-					     
-					     
-	    	    
-        createServer(8486);
+
+        view.startS.setOnAction((event) ->view.create_Dialog());
+
+        view.btnConnect.setOnAction((event)->{
+            int port = Integer.parseInt(view.fldPort.getText());
+            createServer(port);
+        });
     }
     /**
      *@author Michel Schlatter

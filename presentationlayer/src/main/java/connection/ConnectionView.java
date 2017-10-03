@@ -3,11 +3,14 @@ package connection;
 import base.View;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ConnectionView extends View<ConnectionModel> {
@@ -76,7 +79,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		Stage secondStage = new Stage();
 		
 		secondStage.initOwner(stage);
-		secondStage.initModality(Modality.WINDOW_MODAL);					
+		secondStage.initModality(Modality.WINDOW_MODAL);
 		
 		BorderPane root2 = new BorderPane();
 		Scene scene2 = new Scene(root2,400,220);
