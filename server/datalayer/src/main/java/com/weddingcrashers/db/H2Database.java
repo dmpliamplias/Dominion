@@ -1,10 +1,10 @@
 package com.weddingcrashers.db;
 
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.UserServiceImpl;
+import org.h2.tools.Server;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import static com.weddingcrashers.db.DatabaseStatics.DATABASE_URL;
 import static java.sql.DriverManager.getConnection;
@@ -17,6 +17,12 @@ import static org.h2.tools.Server.createTcpServer;
  */
 public final class H2Database {
 
+    // ---- Statics
+
+    /** The logger */
+    private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
+
+
     // ----- Constructor
 
     /**
@@ -26,11 +32,8 @@ public final class H2Database {
         try {
             establishConnection();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.severe(e.getMessage());
         }
-//        final UserServiceImpl userService = new UserServiceImpl();
-//        final User dyoni = new User().name("dmpliamplias").email("dyoni@pop.agri.ch").password("banana");
-//        userService.create(dyoni);
     }
 
 
@@ -53,6 +56,17 @@ public final class H2Database {
         Class.forName("org.h2.Driver");
         Connection connection = getConnection(DATABASE_URL, "sa", "sa");
         System.out.println("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
+    }
+
+    /**
+     * Shuts down the database.
+     */
+    public static void shutdownDatabase() {
+        try {
+            Server.shutdownTcpServer(DATABASE_URL, "sa", false, true);
+        } catch (SQLException e) {
+            LOG.severe(e.getMessage());
+        }
     }
 
 }

@@ -12,6 +12,8 @@ import splashscreen.SplashScreenController;
 import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
 
+import static com.weddingcrashers.db.H2Database.shutdownDatabase;
+
 /**
  * Framework for professional applications:
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
@@ -128,6 +130,7 @@ public class Dominion extends Application {
 
         Server.dispose();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
+        shutdownDatabase();
 
         //serviceLocator.getLogger().info("Application terminated");
     }
