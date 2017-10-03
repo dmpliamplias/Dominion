@@ -65,6 +65,8 @@ public class RankingView extends View<RankingModel> {
 
             this.stage.setScene(scene);
             this.stage.show();
+
+            return scene;
         }
     }
 
