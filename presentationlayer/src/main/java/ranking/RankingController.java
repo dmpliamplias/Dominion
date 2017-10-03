@@ -4,6 +4,7 @@ import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.model.Highscore;
+import com.weddingcrashers.model.Highscore_;
 import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 
@@ -38,8 +39,14 @@ public class RankingController extends Controller<RankingModel, RankingView> {
             this.view.alert(e.getMessage());
         }
     }
-
+    ///** @author Murat Kelleci
+    //
     public void handleServerAnswer(List<Highscore> highscoreList){
         // TODO: 02.10.2017 Murat => Display Highscores.
+
+        model.setHighscores(highscoreList);
+        view.bindModeltoView();
     }
-}
+
+
+    }

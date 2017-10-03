@@ -3,16 +3,16 @@ package ranking;
 import base.Model;
 import com.weddingcrashers.model.Highscore;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RankingModel extends Model {
-    ArrayList<Highscore> highscores;
+    List<Highscore> highscores;
 
-    public ArrayList<Highscore> getHighscores() {
+    public List<Highscore> getHighscores() {
         return highscores;
     }
 
-    public void setHighscores(ArrayList<Highscore> highscores) {
+    public void setHighscores(List<Highscore> highscores) {
         this.highscores = highscores;
     }
 }

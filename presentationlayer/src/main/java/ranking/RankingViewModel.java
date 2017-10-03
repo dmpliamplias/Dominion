@@ -9,15 +9,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class RankingViewModel {
 
-    private RankingViewModel(String name,int points){
+    private final SimpleStringProperty name;
+    private final SimpleIntegerProperty points;
+
+
+    protected RankingViewModel(String name,int points){
         this.name= new SimpleStringProperty(name);
         this.points=new SimpleIntegerProperty(points);
 
+
     }
-
-
-    private final SimpleStringProperty name;
-    private final SimpleIntegerProperty points;
 
     public String getName() {
        return name.get();
