@@ -66,6 +66,7 @@ public class RankingView extends View<RankingModel> {
             this.stage.setScene(scene);
             this.stage.show();
         }
+        return null;
     }
 
         public void bindModeltoView () {
@@ -73,7 +74,7 @@ public class RankingView extends View<RankingModel> {
             ArrayList<RankingViewModel> vmList = new ArrayList<RankingViewModel>();
 
             for (Highscore hs : model.getHighscores()) {
-                RankingViewModel vm = new RankingViewModel();
+                RankingViewModel vm = new RankingViewModel("", 0);
                 vm.setName(hs.getUser().getUserName());
                 vm.setPoints(hs.getPoints());
                 vmList.add(vm);
