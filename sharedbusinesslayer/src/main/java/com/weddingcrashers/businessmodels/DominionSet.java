@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class DominionSet implements Serializable {
     ArrayList<Card> trayStack; // Ablagestappel
     ArrayList<Card> pullStack; // Ziehstappel
+    int clientId;
 
     public ArrayList<Card> getTrayStack() {
         return trayStack;
@@ -26,6 +27,13 @@ public class DominionSet implements Serializable {
         this.pullStack = pullStack;
     }
 
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
 
 
 

@@ -10,6 +10,8 @@ public class LobbyContainer extends Container implements Serializable {
     HashMap<Integer, User> users;
     ArrayList<Integer> clientIds_startGame;
 
+    boolean yourTurn;
+
     public LobbyContainer(Methods method){
         super(method);
     }
@@ -30,5 +32,12 @@ public class LobbyContainer extends Container implements Serializable {
         this.users = users;
     }
 
+    public boolean isYourTurn() {
+        return yourTurn;
+    }
+
+    public void setYourTurn(boolean yourTurn) {
+        this.yourTurn = yourTurn;
+    }
 
 }

@@ -5,17 +5,8 @@ import com.weddingcrashers.businessmodels.DominionSet;
 import java.io.Serializable;
 
 public class GameContainer extends Container implements Serializable {
-    String chatMsg;
     DominionSet dominionSet;
-
-
-    public String getChatMsg() {
-        return chatMsg;
-    }
-
-    public void setChatMsg(String chatMsg) {
-        this.chatMsg = chatMsg;
-    }
+    boolean yourTurn;
 
     public DominionSet getDominionSet() {
         return dominionSet;
@@ -28,5 +19,13 @@ public class GameContainer extends Container implements Serializable {
     public GameContainer(Methods method){
         super(method);
     }
+    public boolean isYourTurn() {
+        return yourTurn;
+    }
+
+    public void setYourTurn(boolean yourTurn) {
+        this.yourTurn = yourTurn;
+    }
+
 
 }

@@ -11,7 +11,7 @@ public class GameController extends Controller<GameModel, GameView> {
     private final ServerConnectionService _serverConnection;
 
 
-    public GameController(GameModel model, GameView view){
+    public GameController(GameModel model, GameView view, boolean myTurn){
         super(model,view);
         _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setGameController(this);

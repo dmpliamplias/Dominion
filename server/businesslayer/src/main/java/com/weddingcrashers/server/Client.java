@@ -1,9 +1,6 @@
 package com.weddingcrashers.server;
 
-import com.weddingcrashers.managers.GameManager;
-import com.weddingcrashers.managers.LobbyManager;
-import com.weddingcrashers.managers.LoginManager;
-import com.weddingcrashers.managers.RankingManager;
+import com.weddingcrashers.managers.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 
@@ -17,6 +14,7 @@ import java.util.ArrayList;
 public class Client extends Thread {
     Socket _clientSocket;
     int _clientId;
+    boolean isActive; // his turn;
     User user;
 
     ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
@@ -26,6 +24,7 @@ public class Client extends Thread {
     LobbyManager _lobbyManager;
     GameManager _gameManager;
     RankingManager _rankingsManager;
+    ChatManager _chatManager;
 
     public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
@@ -35,6 +34,7 @@ public class Client extends Thread {
         _lobbyManager = new LobbyManager(this);
         _gameManager = new GameManager(this);
         _rankingsManager = new RankingManager(this);
+        _chatManager = new ChatManager(this);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class Client extends Thread {
             LoginContainer lc = (LoginContainer)c;
             _loginManager.createUser(lc.getUser());
         } else if(c.getMethod() == Methods.Chat){
-            GameContainer gc = (GameContainer)c;
-            _gameManager.broadCastChatMessageToAllClients(gc.getChatMsg());
+            ChatContainer cc = (ChatContainer) c;
+            _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
         }else if(c.getMethod() == Methods.StartGame){
             LobbyContainer lc = (LobbyContainer)c;
             _lobbyManager.startGame(lc.getClientIds_startGame());
@@ -103,5 +103,13 @@ public class Client extends Thread {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

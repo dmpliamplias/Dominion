@@ -92,9 +92,10 @@ public class ServerConnectionService extends Thread{
         else if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
         }else if(c.getMethod() == Methods.Chat && gameController != null){
+            ChatContainer chatContainer = (ChatContainer)c;
             // Manu run in your Controller, but with Platform.runLater(()->{}) because you're not on javafx thread anymore...
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
-            lobbyController.handleServerAnswer_startGame();
+            lobbyController.handleServerAnswer_startGame(((LobbyContainer)c).isYourTurn());
         }else if(c.getMethod() == Methods.Rankings){
             RankingContainer rc = (RankingContainer)c;
             rankingController.handleServerAnswer(rc.getHighScores());

@@ -8,6 +8,7 @@ import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -39,9 +40,13 @@ public class LobbyManager extends Manager{
 
     public void startGame(ArrayList<Integer> clientIds){
         LobbyContainer lc = new LobbyContainer(Methods.StartGame);
+        int lowestClientId = Collections.min(clientIds);
+
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
                 if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
+                    c.setActive(c.getClientId() == lowestClientId); // first registered can start first.
+                    lc.setYourTurn(c.isActive());
                     ServerUtils.sendObject(c, lc);
                 }
             }

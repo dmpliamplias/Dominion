@@ -7,6 +7,7 @@ import com.weddingcrashers.servermodels.GameContainer;
 import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,24 +18,47 @@ public class GameManager extends Manager {
         super(client);
     }
 
-    
-    public void broadCastChatMessageToAllClients(String msg){
-        // TODO: 02.10.2017 Manuel => broadcast you can use... 
-        GameContainer gc = new GameContainer(Methods.Chat);
-        gc.setChatMsg(msg);
 
-        for(Client c : client.getOtherClients()){
-            if(c.getViewStatus() == ViewStatus.Game) {
-                ServerUtils.sendObject(c, gc);
-            }
+
+    private void afterGameTurn(GameContainer container){
+      int nxtId = getNextTurnClientId();
+
+      container.getDominionSet().setClientId(client.getClientId());
+
+      for(Client c : client.getAllClients()){ // send container to all clients
+          container.setYourTurn(c.getClientId() == nxtId); // the user can see if the next turn is his turn
+          ServerUtils.sendObject(c, container);
+      }
+    }
+
+    private int getNextTurnClientId(){
+        int currentIdActive = client.getClientId();
+        List<Integer> ids = new ArrayList<Integer>();
+
+        for(Client c : client.getAllClients()){
+            ids.add(c.getClientId());
+        }
+        Collections.sort(ids);
+        int min = ids.get(0);
+        int max = ids.get(ids.size()-1);
+
+        int currentIdx = ids.indexOf(currentIdActive);
+        int nxtIdx = ++currentIdx;
+
+        if(nxtIdx > (ids.size()-1)){
+            nxtIdx = 0;
         }
 
+        int nxtIdActive = ids.get(nxtIdx);
+        return nxtIdActive;
     }
+
     /**
      * @author Murat Kelleci
      */
     public static void shuffle(List<Card> cardDeck){
         Collections.shuffle(cardDeck);
     }
+
 
 }

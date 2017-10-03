@@ -72,10 +72,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         });
     }
 
-    public void handleServerAnswer_startGame() {
+    public void handleServerAnswer_startGame(boolean myTurn) {
         GameModel gameModel = new GameModel();
         GameView gameView = new GameView(this.view.getStage(), gameModel);
-        GameController gameController = new GameController(gameModel, gameView);
+        GameController gameController = new GameController(gameModel, gameView, myTurn);
 
         this.view.stop();
         gameView.start();
