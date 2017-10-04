@@ -21,6 +21,12 @@
             <groupId>com.weddingcrashers.dominion</groupId>
             <artifactId>sharedbusinesslayer</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${juint.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 
