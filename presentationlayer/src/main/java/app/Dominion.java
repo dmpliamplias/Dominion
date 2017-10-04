@@ -130,10 +130,10 @@ public class Dominion extends Application {
 
         Server.dispose();
         // TODO: 03.10.2017 hier nochmals NPE migi bei shutdown von app
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
+//        PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
         shutdownDatabase();
 
-        serviceLocator.getLogger().info("Application terminated");
+        ServiceLocator.getLogger().info("Application terminated");
     }
 
     // Static getter for a reference to the main program object

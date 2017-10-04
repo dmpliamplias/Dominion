@@ -2,7 +2,6 @@ package com.weddingcrashers.service;
 
 import com.weddingcrashers.db.H2Database;
 
-import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -17,14 +16,12 @@ public class ServiceLocator {
     /** The service locator singleton. */
     private static ServiceLocator serviceLocator;
 
+    /** The logger. */
+    private static final Logger LOG = Logger.getLogger(ServiceLocator.class.getSimpleName());
+
 
     // ---- Members
 
-    /** The locales. */
-    final private Locale[] locales = new Locale[] { new Locale("en"), new Locale("de") };
-
-    /** The logger. */
-    private Logger logger;
     /** The translator. */
     private Translator translator;
 
@@ -57,6 +54,8 @@ public class ServiceLocator {
      */
     private ServiceLocator() {
         new H2Database();
+        translator = new Translator("de");
+
         userService = new UserServiceImpl();
         highscoreService = new HighscoreServiceImpl();
         settingsService = new SettingsServiceImpl();
@@ -64,6 +63,10 @@ public class ServiceLocator {
 
 
     // ---- Methods
+
+    public static Logger getLogger() {
+        return LOG;
+    }
 
     public UserService getUserService() {
         return userService;
@@ -77,26 +80,12 @@ public class ServiceLocator {
         return settingsService;
     }
 
-    public Logger getLogger() {
-        return logger;
-    }
-
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
-
-    public Locale[] getLocales() {
-        return locales;
-    }
-
     public Translator getTranslator() {
         return translator;
     }
-    
-    public void setTranslator(Translator translator) {
-        this.translator = translator;
+
+    public void setTranslator(String locale) {
+        this.translator = new Translator(locale);
     }
-
-
-
+    
 }

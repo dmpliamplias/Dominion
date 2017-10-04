@@ -9,12 +9,20 @@ import java.util.logging.Logger;
 
 public class Translator {
 
+    // ---- Statics
+
+    /** The supported locales. */
+    private static final Locale[] availableLocales = {Locale.GERMAN, Locale.ENGLISH};
+
+    /** The suffix for the translation files. */
+    private static final String SUFFIX = ".properties";
+
+    /** The logger. */
+    private static final Logger logger = ServiceLocator.getLogger();
+
+
     // ---- Members
 
-    /** The service locator. */
-    private ServiceLocator sl = ServiceLocator.getServiceLocator();
-    /** The logger. */
-    private Logger logger = sl.getLogger();
     /** The current locale. */
     private Locale currentLocale;
     /** The translation properties. */
@@ -33,11 +41,10 @@ public class Translator {
         // If not, use VM default locale
         Locale locale = Locale.getDefault();
         if (localeString != null) {
-            Locale[] availableLocales = sl.getLocales();
-            for (int i = 0; i < availableLocales.length; i++) {
-                String tmpLang = availableLocales[i].getLanguage();
+            for (Locale availableLocale : availableLocales) {
+                String tmpLang = availableLocale.getLanguage();
                 if (localeString.substring(0, tmpLang.length()).equals(tmpLang)) {
-                    locale = availableLocales[i];
+                    locale = availableLocale;
                     break;
                 }
             }
@@ -45,7 +52,7 @@ public class Translator {
 
         // Load the resource strings
         translations = new Properties();
-        final InputStream in = getClass().getResourceAsStream("/translation/trans_" + locale);
+        final InputStream in = getClass().getResourceAsStream("/translation/trans_" + locale + SUFFIX);
         try {
             translations.load(in);
         } catch (IOException e) {

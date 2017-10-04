@@ -58,8 +58,7 @@ public final class H2Database {
      * Establish the connection to the H2 database.
      */
     private static Server establishConnection() throws ClassNotFoundException, SQLException {
-        final Server tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", "9092");
-        tcpServer.start();
+        final Server tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", "9092").start();
         Class.forName("org.h2.Driver");
         Connection connection = getConnection(DATABASE_URL, "sa", "sa");
         LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
@@ -71,6 +70,7 @@ public final class H2Database {
      */
     public static void shutdownDatabase() {
         tcpServer.stop();
+        LOG.info("Shutdown the tcp server listening on port " + tcpServer.getPort());
     }
 
 }

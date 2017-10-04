@@ -1,6 +1,11 @@
 package com.weddingcrashers.validation;
 
-public enum ValidationResult {
+/**
+ * User validation result enum.
+ *
+ * @author dmpliamplias
+ */
+public enum UserValidationResult {
 
     /** OK. */
     OK,
