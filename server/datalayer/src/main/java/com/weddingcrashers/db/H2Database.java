@@ -23,6 +23,12 @@ public final class H2Database {
     private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
 
 
+    // ---- Members
+
+    /** The h2 tcp server. */
+    private static Server tcpServer;
+
+
     // ----- Constructor
 
     /**
@@ -30,7 +36,7 @@ public final class H2Database {
      */
     public H2Database() {
         try {
-            establishConnection();
+            tcpServer = establishConnection();
         } catch (Exception e) {
             LOG.severe(e.getMessage());
         }
@@ -51,22 +57,20 @@ public final class H2Database {
     /**
      * Establish the connection to the H2 database.
      */
-    private void establishConnection() throws ClassNotFoundException, SQLException {
-        createTcpServer("-tcpAllowOthers", "-tcpPort", "9092").start();
+    private static Server establishConnection() throws ClassNotFoundException, SQLException {
+        final Server tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", "9092");
+        tcpServer.start();
         Class.forName("org.h2.Driver");
         Connection connection = getConnection(DATABASE_URL, "sa", "sa");
-        System.out.println("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
+        LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
+        return tcpServer;
     }
 
     /**
      * Shuts down the database.
      */
     public static void shutdownDatabase() {
-        try {
-            Server.shutdownTcpServer(DATABASE_URL, "sa", false, true);
-        } catch (SQLException e) {
-            LOG.severe(e.getMessage());
-        }
+        tcpServer.stop();
     }
 
 }

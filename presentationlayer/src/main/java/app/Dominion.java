@@ -133,7 +133,7 @@ public class Dominion extends Application {
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
         shutdownDatabase();
 
-        //serviceLocator.getLogger().info("Application terminated");
+        serviceLocator.getLogger().info("Application terminated");
     }
 
     // Static getter for a reference to the main program object
