@@ -15,8 +15,9 @@
     <dependencies>
         <dependency>
             <groupId>com.weddingcrashers.dominion</groupId>
-            <artifactId>shared-businesslayer</artifactId>
+            <artifactId>sharedbusinesslayer</artifactId>
         </dependency>
+        <!-- TODO why presentationlayer has dependency for shared and normal.  -->
         <dependency>
             <groupId>com.weddingcrashers.dominion</groupId>
             <artifactId>businesslayer</artifactId>

@@ -9,23 +9,17 @@
         <module name="businesslayer" />
         <module name="datalayer" />
         <module name="presentationlayer" />
-        <module name="sharedbusinesslayer" />
+        <module name="shared-businesslayer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="build" target="1.8" />
       <module name="businesslayer" target="1.8" />
       <module name="datalayer" target="1.8" />
-      <module name="dominion" target="1.8" />
-      <module name="dominion-gui" target="1.5" />
-      <module name="dominion-model" target="1.5" />
-      <module name="dominion-view" target="1.5" />
-      <module name="fxtemplate" target="1.8" />
       <module name="parent" target="1.8" />
       <module name="presentationlayer" target="1.8" />
       <module name="server" target="1.8" />
-      <module name="shared-businessmodel" target="1.8" />
-      <module name="sharedbusinesslayer" target="1.8" />
-      <module name="sharedbusinessmodel" target="1.8" />
+      <module name="shared-businesslayer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
