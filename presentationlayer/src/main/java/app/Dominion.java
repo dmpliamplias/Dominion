@@ -129,7 +129,7 @@ public class Dominion extends Application {
         }
 
         Server.dispose();
-        // TODO: 03.10.2017 hier nochmals NPE migi bei shutdown von app
+        // TODO: 03.10.2017 mschaltter hier nochmals NPE bei shutdown von app
 //        PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
         shutdownDatabase();
 
