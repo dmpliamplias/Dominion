@@ -1,7 +1,5 @@
 package com.weddingcrashers.managers.util;
 
-import com.weddingcrashers.managers.ChatManager;
-import com.weddingcrashers.managers.LobbyManager;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.Server;
 

@@ -24,8 +24,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${juint.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

@@ -3,9 +3,8 @@ server/datalayer/target/
 presentationlayer/target/
 sharedbusinesslayer/target/
 datalayer/generated/
-.idea/
 .idea/inspectionProfiles/
-
+.idea/libraries/
 .idea/uiDesigner.xml
+.idea/workspace.xml
 *.DS_STORE
-**.iml
