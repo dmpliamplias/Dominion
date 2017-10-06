@@ -5,6 +5,7 @@ import app.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnection.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

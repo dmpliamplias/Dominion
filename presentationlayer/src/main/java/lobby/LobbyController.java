@@ -12,9 +12,11 @@ import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;
 import app.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 
 import java.io.IOException;
@@ -33,13 +35,14 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private final User _user;
     private ObservableList<String> list = FXCollections.observableArrayList();
     private HashMap<Integer, User> players;
+    Translator _translator;
 
     public LobbyController(LobbyView view, LobbyModel model, User user){
         super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
         _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
-
+        _translator = ServiceLocator.getServiceLocator().getTranslator();
         initialize();
     }
 
@@ -47,7 +50,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         try {
             _serverConnection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         view.btnStart.setDisable(!PLServiceLocator.getPLServiceLocator().getServerConnectionService().isHoster()); // only hoster can start game.
@@ -85,7 +88,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
             if(names.size() < 2){
                 // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
-                this.view.alert(ServiceLocator.getServiceLocator().getTranslator().getString("LobbyView_NotEnoughPlayers"));
+                this.view.alert(_translator.getString("LobbyView_NotEnoughPlayers"),
+                        Alert.AlertType.WARNING);
             }else {
                 ArrayList<Integer> clientIds = new ArrayList<Integer>();
 
@@ -101,7 +105,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                 try {
                     _serverConnection.sendObject(lc);
                 } catch (IOException e) {
-                    view.alert(e.getMessage());
+                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
     }

@@ -15,9 +15,9 @@ import javafx.stage.Stage;
 
 public class ConnectionView extends View<ConnectionModel> {
 	
-    Button startS;
-    Button joinS;
-    Button help;
+    Button btnStartS;
+    Button btnJoinS;
+    Button btnHelp;
     Button btnConnect;
     TextField fldPort;
 		
@@ -37,14 +37,14 @@ public class ConnectionView extends View<ConnectionModel> {
 		FlowPane fp = new FlowPane();
 		
 		// Creating and labeling 3 buttons
-		startS = new Button("Start Server");
-		joinS = new Button("Join Server");
-		help = new Button("Help");
+		btnStartS = new Button("Start Server");
+		btnJoinS = new Button("Join Server");
+		btnHelp = new Button("Help");
 		
 		// Set size for the buttons and FlowPane
-		startS.setPrefSize(150, 30);
-		joinS.setPrefSize(150, 30);
-		help.setPrefSize(150, 30);		
+		btnStartS.setPrefSize(150, 30);
+		btnJoinS.setPrefSize(150, 30);
+		btnHelp.setPrefSize(150, 30);
 		fp.setPrefSize(450, 100);
 		
 		// Asign FlowPane and GridPane to BorderPane
@@ -64,18 +64,18 @@ public class ConnectionView extends View<ConnectionModel> {
 		}
 		
 		// Asign column and row to buttons
-		gp.setConstraints(startS, 1, 1);
-		gp.setConstraints(joinS, 1, 3);
-		gp.setConstraints(help, 1, 5);
+		gp.setConstraints(btnStartS, 1, 1);
+		gp.setConstraints(btnJoinS, 1, 3);
+		gp.setConstraints(btnHelp, 1, 5);
 		
-		gp.getChildren().addAll(joinS, startS, help);
+		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 		stage.setTitle("Connection");
 		stage.setScene(scene);
 
         return scene;
     }
     
-    public Scene create_Dialog(){
+    public Stage create_Dialog(){
 		Stage secondStage = new Stage();
 		
 		secondStage.initOwner(stage);
@@ -123,7 +123,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		secondStage.setTitle("Insert Port");
 		secondStage.setScene(scene2);		
     	    	
-        return scene2;
+        return secondStage;
     }
        
 }

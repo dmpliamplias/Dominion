@@ -8,23 +8,25 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import static java.lang.System.out;
+
 /**
  *  @author Michel Schlatter
  *  */
 public class Client extends Thread {
-    Socket _clientSocket;
-    int _clientId;
-    boolean isActive; // his turn;
-    User user;
+    private Socket _clientSocket;
+    private int _clientId;
+    private boolean isActive; // his turn;
+    private User user;
 
-    ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
-    ArrayList<Client> otherClients;
+    private ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
+    private ArrayList<Client> otherClients;
 
-    LoginManager _loginManager;
-    LobbyManager _lobbyManager;
-    GameManager _gameManager;
-    RankingManager _rankingsManager;
-    ChatManager _chatManager;
+    private LoginManager _loginManager;
+    private LobbyManager _lobbyManager;
+    private GameManager _gameManager;
+    private RankingManager _rankingsManager;
+    private ChatManager _chatManager;
 
     public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
@@ -57,6 +59,8 @@ public class Client extends Thread {
     }
 
     private void runMethod(Container c){
+        out.println("Server got message =>  Method: " + c.getMethod() + " ClientId: "+ _clientId);
+
         if(c.getMethod() == Methods.Login){
             LoginContainer lc = (LoginContainer)c;
             _loginManager.login(lc.getEmail(), lc.getPassword());

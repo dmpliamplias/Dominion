@@ -6,6 +6,7 @@ import app.ServerConnectionService;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.service.ServiceLocator;
+import javafx.scene.control.Alert;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
@@ -49,7 +50,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
            try {
                _serverConnection.sendObject(loginContainer);
            } catch (Exception e) {
-              view.alert(e.getMessage());
+              view.alert(e.getMessage(), Alert.AlertType.ERROR);
            }
        }
   }

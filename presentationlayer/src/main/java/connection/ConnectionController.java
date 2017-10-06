@@ -4,8 +4,10 @@ import app.PLServiceLocator;
 import base.Controller;
 import com.weddingcrashers.server.Server;
 import app.ServerConnectionService;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
+import javafx.scene.control.Alert;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.SocketAddress;
 
@@ -14,20 +16,38 @@ import java.net.SocketAddress;
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
+    Translator _translator;
+
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
         initialize();
+
+        _translator = ServiceLocator.getServiceLocator().getTranslator();
     }
 
 
     private  void initialize(){
 
-        view.startS.setOnAction((event) -> {
-            view.create_Dialog();
+        view.btnStartS.setOnAction((event) -> {
+            view.create_Dialog().show();
 
             view.btnConnect.setOnAction((event2)->{
-                int port = Integer.parseInt(view.fldPort.getText());
-                createServer(port);
+                String portStr = view.fldPort.getText();
+                if(portStr == null || portStr.equals("")){
+                    this.view.alert(_translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
+                    return;
+                }
+                int port = Integer.parseInt(portStr);
+                SocketAddress socketAddress = createServer(port);
+                view.btnConnect.setDisable(true);
+                view.btnJoinS.setDisable(true);
+                view.btnStartS.setDisable(true);
+
+                String address = socketAddress.toString();
+                System.out.println("Socketadress: " + address);
+                // TODO: 03.10.2017 Vanessa => show address to user =>  in a textfield with a button to copy
+                // the address to clipboard (like on github to copy the remote adress)
+                // TODO: 03.10.2017  after that, the user should click 'continue' and than he gets to the lobby....
             });});
 
 
@@ -41,11 +61,10 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         try {
             Server.startServer(port,4);
             join("localhost", port,true);
-            // TODO: 30.09.2017  vannessa, teste ob das geht und anzeigen! (inkl. port)
             return PLServiceLocator.getPLServiceLocator().getServerConnectionService().getConnection().getRemoteSocketAddress();
         } catch (Exception e) {
             int i = 1;
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
         return null;
     }
@@ -57,12 +76,14 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      */
     private void join(String url, int port, boolean isHoster){
         try {
-            ServerConnectionService serverConnectionService = new ServerConnectionService(url,port);
-            PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().setIsHoster(isHoster);
+            if(PLServiceLocator.getPLServiceLocator().getServerConnectionService() == null) {
+                ServerConnectionService serverConnectionService = new ServerConnectionService(url, port);
+                PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
+                PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
+                PLServiceLocator.getPLServiceLocator().getServerConnectionService().setIsHoster(isHoster);
+            }
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
