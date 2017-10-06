@@ -10,7 +10,7 @@ import static java.sql.DriverManager.getConnection;
 import static org.h2.tools.Server.createTcpServer;
 
 /**
- * H2Database provider.
+ * H2 database provider.
  *
  * @author dmpliamplias
  */
@@ -21,6 +21,7 @@ public final class H2Database {
     /** The logger */
     private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
 
+    /** The database port. */
     private static final String PORT = "9092";
 
 
