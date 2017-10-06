@@ -67,12 +67,12 @@ public class ServiceLocator {
 
     // ---- Methods
 
-    public static void shutdownDatabase() {
-        h2Database.shutdownDatabase();
-    }
-
     public static Logger getLogger() {
         return LOG;
+    }
+
+    public void shutdownDatabase() {
+        h2Database.shutdownDatabase();
     }
 
     public UserService getUserService() {

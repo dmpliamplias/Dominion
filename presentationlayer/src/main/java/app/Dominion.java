@@ -13,7 +13,6 @@ import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
 
 import static com.weddingcrashers.service.ServiceLocator.getLogger;
-import static com.weddingcrashers.service.ServiceLocator.shutdownDatabase;
 
 /**
  * Framework for professional applications:
@@ -135,7 +134,7 @@ public class Dominion extends Application {
         if (serverConnectionService != null) {
             serverConnectionService.dispose();
         }
-        shutdownDatabase();
+        serviceLocator.shutdownDatabase();
 
         getLogger().info("Application terminated");
     }
