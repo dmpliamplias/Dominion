@@ -36,7 +36,7 @@ public class GameView extends View<GameModel> {
          *  author Manuel Wirz
          *  */
 
-        // ----- Chatview ------- TODO@Vanessa HBox deiner Gameview hinzufügen
+        // ----- Chatview ------- TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
         this.chatPane = new BorderPane();
         this.messages = new TextArea();
