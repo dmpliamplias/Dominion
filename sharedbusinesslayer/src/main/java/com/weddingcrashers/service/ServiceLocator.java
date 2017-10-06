@@ -19,6 +19,9 @@ public class ServiceLocator {
     /** The logger. */
     private static final Logger LOG = Logger.getLogger(ServiceLocator.class.getSimpleName());
 
+    /** The H2 database. */
+    private static H2Database h2Database;
+
 
     // ---- Members
 
@@ -53,7 +56,7 @@ public class ServiceLocator {
      * Constructor.
      */
     private ServiceLocator() {
-        new H2Database();
+        h2Database = new H2Database();
         translator = new Translator("de");
 
         userService = new UserServiceImpl();
@@ -63,6 +66,10 @@ public class ServiceLocator {
 
 
     // ---- Methods
+
+    public static void shutdownDatabase() {
+        h2Database.shutdownDatabase();
+    }
 
     public static Logger getLogger() {
         return LOG;
