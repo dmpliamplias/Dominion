@@ -26,27 +26,27 @@ import static java.lang.System.out;
  *  @author Michel Schlatter
  *  */
 public class ServerConnectionService extends Thread{
-    private  Socket _connection;
-    private int _clientId;
+    private  Socket connection;
+    private int clientId;
     private  boolean isHoster;
 
     public ServerConnectionService(String url, int port) throws IOException{
-        _connection = new Socket(url,port);
+        connection = new Socket(url,port);
         this.start();
     }
 
     public Socket getConnection() {
-        return _connection;
+        return connection;
     }
 
-    public int get_clientId() {
-        return _clientId;
+    public int getClientId() {
+        return clientId;
     }
 
     public void dispose(){
         try {
-            if(_connection != null && !_connection.isClosed()) {
-                _connection.close();
+            if(connection != null && !connection.isClosed()) {
+                connection.close();
             }
         } catch (IOException e) {
             displayError(e.getMessage());
@@ -55,7 +55,7 @@ public class ServerConnectionService extends Thread{
 
     @Override
     public void run() {
-        while(!_connection.isClosed()){
+        while(!connection.isClosed()){
             try {
                 Container c = this.<Container>receiveObject();
                 runMethod(c);
@@ -67,15 +67,15 @@ public class ServerConnectionService extends Thread{
 
 
     public  <T extends Container> void  sendObject(T object) throws  IOException{
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(_connection.getOutputStream());
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(connection.getOutputStream());
         objectOutputStream.writeObject(object);
         objectOutputStream.flush();
 
-        out.println("Client sent message: " + object.getMethod() + "  to Client: " + _clientId);
+        out.println("Client sent message: " + object.getMethod() + "  to Client: " + clientId);
     }
 
     private <T extends  Container> T receiveObject() throws  IOException, ClassNotFoundException{
-        ObjectInputStream objectInputStream = new ObjectInputStream(_connection.getInputStream());
+        ObjectInputStream objectInputStream = new ObjectInputStream(connection.getInputStream());
         return (T)objectInputStream.readObject();
     }
 
@@ -88,12 +88,12 @@ public class ServerConnectionService extends Thread{
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
-        out.println("Client received message Method: " + c.getMethod() + "  to Client: " + _clientId);
+        out.println("Client received message Method: " + c.getMethod() + "  to Client: " + clientId);
 
         if(c.getMethod() == Methods.Connect){
             ConnectionContainer connectionContainer = (ConnectionContainer)c;
-            this._clientId = connectionContainer.getId();
-            System.out.println("I'm client: " + this._clientId);
+            this.clientId = connectionContainer.getId();
+            System.out.println("I'm client: " + this.clientId);
         }
         else if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
