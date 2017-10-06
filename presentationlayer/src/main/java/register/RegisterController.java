@@ -5,6 +5,7 @@ import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.servermodels.ViewStatus;
+import javafx.scene.control.Alert;
 
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         try {
             _serverConnection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
         this.view.register.setOnAction((event) -> {
             this.view.refreshModel();

@@ -5,14 +5,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class GameView extends View<GameModel> {
 
     BorderPane chatPane;
-    TextArea messages;
-    Button sendButton;
+    TextArea chatMessages;
+    TextField chatWriteText;
+    Button chatSendButton;
 
 
     public GameView(Stage stage, GameModel model){
@@ -36,20 +42,25 @@ public class GameView extends View<GameModel> {
          *  author Manuel Wirz
          *  */
 
-        // ----- Chatview ------- TODO@Vanessa HBox deiner Gameview hinzufügen
+        // ----- Chatview ------- TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
         this.chatPane = new BorderPane();
-        this.messages = new TextArea();
-        this.sendButton  = new Button("send");
+        this.chatMessages = new TextArea();
+        this.chatSendButton  = new Button("send");
+        this.chatWriteText = new TextField();
 
         // Add children to Borderpane
-        chatPane.getChildren().add( messages );
-        chatPane.getChildren().add( sendButton );
+        chatPane.getChildren().add( chatMessages );
+        chatPane.getChildren().add( chatSendButton );
+        chatPane.getChildren().add( chatWriteText );
+
 
         // set the Aligment
-        chatPane.setCenter( messages );
-        chatPane.setBottom( sendButton );
+        chatPane.setCenter( chatMessages );
+        chatPane.setBottom( chatWriteText );
+        chatPane.setBottom( chatSendButton );
 
+        // Layout
 
 
 

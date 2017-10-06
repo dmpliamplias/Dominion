@@ -1,6 +1,7 @@
 package base;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
@@ -62,8 +63,11 @@ public abstract class View<M extends Model> {
         return stage;
     }
 
-    public void alert(String msg){
-        alert(msg);
+    public void alert(String msg, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType, msg);
+        alert.showAndWait();
+
+
     }
 
 }

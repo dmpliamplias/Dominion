@@ -129,8 +129,10 @@ public class Dominion extends Application {
         }
 
         Server.dispose();
-        // TODO: 03.10.2017 mschaltter hier nochmals NPE bei shutdown von app
-//        PLServiceLocator.getPLServiceLocator().getServerConnectionService().dispose();
+        ServerConnectionService serverConnectionService = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        if(serverConnectionService != null) {
+            serverConnectionService.dispose();
+        }
         shutdownDatabase();
 
         ServiceLocator.getLogger().info("Application terminated");

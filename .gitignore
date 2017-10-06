@@ -8,4 +8,5 @@ datalayer/generated/
 .idea/libraries/
 .idea/uiDesigner.xml
 .idea/workspace.xml
+.idea/codeStyleSettings.xml
 *.DS_STORE

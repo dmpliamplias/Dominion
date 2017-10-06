@@ -7,6 +7,7 @@ import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.model.Highscore_;
 import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +29,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         try {
             _serverConnection.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         // get Ranking from Server
@@ -36,7 +37,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         try {
             _serverConnection.sendObject(rc);
         } catch (IOException e) {
-            this.view.alert(e.getMessage());
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
     ///** @author Murat Kelleci
