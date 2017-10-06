@@ -9,9 +9,6 @@ import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
-/**
- *  author Manuel Wirz
- *  */
 
 public class GameController extends Controller<GameModel, GameView> {
     private final ServerConnectionService serverConnection;
@@ -32,10 +29,15 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
+    /**
+     *  author Manuel Wirz
+     *  */
+
+
     // TODO Manuel send Objects via ServerConnectionService
     public void sendMessage(){
 
-        view.chatSendButton.setOnAction((event) -> {
+        view.btnChatSend.setOnAction((event) -> {
 
            // serverConnection.sendObject();
 

@@ -15,10 +15,10 @@ import java.awt.*;
 
 public class GameView extends View<GameModel> {
 
-    BorderPane chatPane;
-    TextArea chatMessages;
-    TextField chatWriteText;
-    Button chatSendButton;
+     BorderPane chatPane;
+     TextArea textAreaChat;
+     TextField textFieldChat;
+     Button btnChatSend;
 
 
     public GameView(Stage stage, GameModel model){
@@ -45,20 +45,20 @@ public class GameView extends View<GameModel> {
         // ----- Chatview ------- TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
         this.chatPane = new BorderPane();
-        this.chatMessages = new TextArea();
-        this.chatSendButton  = new Button("send");
-        this.chatWriteText = new TextField();
+        this.textAreaChat = new TextArea();
+        this.btnChatSend  = new Button("send");
+        this.textFieldChat= new TextField();
 
         // Add children to Borderpane
-        chatPane.getChildren().add( chatMessages );
-        chatPane.getChildren().add( chatSendButton );
-        chatPane.getChildren().add( chatWriteText );
+        chatPane.getChildren().add( textAreaChat );
+        chatPane.getChildren().add( btnChatSend );
+        chatPane.getChildren().add( textFieldChat );
 
 
         // set the Aligment
-        chatPane.setCenter( chatMessages );
-        chatPane.setBottom( chatWriteText );
-        chatPane.setBottom( chatSendButton );
+        chatPane.setCenter( textAreaChat );
+        chatPane.setBottom( textFieldChat );
+        chatPane.setBottom( btnChatSend );
 
         // Layout
 
