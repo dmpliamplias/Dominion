@@ -20,6 +20,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import static java.lang.System.out;
+
 /**
  *  @author Michel Schlatter
  *  */
@@ -68,6 +70,8 @@ public class ServerConnectionService extends Thread{
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(_connection.getOutputStream());
         objectOutputStream.writeObject(object);
         objectOutputStream.flush();
+
+        out.println("Client sent message: " + object.getMethod() + "  to Client: " + _clientId);
     }
 
     private <T extends  Container> T receiveObject() throws  IOException, ClassNotFoundException{
@@ -84,6 +88,8 @@ public class ServerConnectionService extends Thread{
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
+        out.println("Client received message Method: " + c.getMethod() + "  to Client: " + _clientId);
+
         if(c.getMethod() == Methods.Connect){
             ConnectionContainer connectionContainer = (ConnectionContainer)c;
             this._clientId = connectionContainer.getId();

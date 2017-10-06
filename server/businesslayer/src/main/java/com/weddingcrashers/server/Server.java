@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import static java.lang.System.out;
 
 /**
  *  @author Michel Schlatter
@@ -55,6 +56,7 @@ public class Server extends Thread {
     public void run() {
         try {
             serverSocket = new ServerSocket(_port);
+            out.println("Server started");
             while(clients.size() < _maxPlayers && !serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
 
@@ -62,6 +64,8 @@ public class Server extends Thread {
                 clientThread.start();
                 clients.add(clientThread);
                 setOtherClientsForAllClients();
+
+                out.println("Client accepted id:" + idCounter);
 
                 ConnectionContainer c = new ConnectionContainer();
                 c.setId(idCounter);

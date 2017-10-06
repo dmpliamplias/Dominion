@@ -6,6 +6,8 @@ import com.weddingcrashers.servermodels.ErrorContainer;
 import java.io.ObjectOutputStream;
 import java.net.SocketException;
 
+import static java.lang.System.out;
+
 /**
  *  @author Michel Schlatter
  *  */
@@ -17,6 +19,9 @@ public class ServerUtils {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(c.get_clientSocket().getOutputStream());
                 objectOutputStream.writeObject(object);
                 objectOutputStream.flush();
+
+                out.println("Server sent message: " + object.getMethod() + "  to Client: " + c.getClientId());
+
             }
         }catch(SocketException sEx){
             sEx.printStackTrace();
