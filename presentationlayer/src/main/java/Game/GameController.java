@@ -35,7 +35,7 @@ public class GameController extends Controller<GameModel, GameView> {
     // TODO Manuel send Objects via ServerConnectionService
     public void sendMessage(){
 
-        view.sendButton.setOnAction((event) -> {
+        view.chatSendButton.setOnAction((event) -> {
 
            // serverConnection.sendObject();
 
