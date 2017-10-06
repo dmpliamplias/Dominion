@@ -52,6 +52,7 @@ public class RegisterModel extends Model {
         this.password_confirm = password_confirm;
     }
 
+
 }
 
 

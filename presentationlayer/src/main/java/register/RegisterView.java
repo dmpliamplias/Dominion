@@ -64,7 +64,7 @@ public class RegisterView extends View<RegisterModel>{
         error.setText(this.model.getError());
     }
 
-    void setError() {
+    void setError(String string) {
         error.setText(this.model.getError());
     }
 

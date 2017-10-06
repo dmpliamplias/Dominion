@@ -18,7 +18,7 @@ import java.lang.*;
 
 
 
-//** @author Murat Kelleci
+//** @author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
 //
 public class RankingView extends View<RankingModel> {
 
@@ -29,6 +29,7 @@ public class RankingView extends View<RankingModel> {
     public RankingView(Stage stage, RankingModel model) {
         super(stage, model);
     }
+
     @Override
     protected Scene create_GUI() {
 
@@ -68,15 +69,17 @@ public class RankingView extends View<RankingModel> {
 
             return scene;
         }
-        return null;
+
     }
 
         public void bindModeltoView () {
 
             ArrayList<RankingViewModel> vmList = new ArrayList<RankingViewModel>();
 
+
+            // For Loop from Script Kaspar Riesen Programming 1
             for (Highscore hs : model.getHighscores()) {
-                RankingViewModel vm = new RankingViewModel("", 0);
+                RankingViewModel vm = new RankingViewModel();
                 vm.setName(hs.getUser().getUserName());
                 vm.setPoints(hs.getPoints());
                 vmList.add(vm);

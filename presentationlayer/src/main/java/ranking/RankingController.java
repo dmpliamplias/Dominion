@@ -17,6 +17,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
 
     private final ServerConnectionService _serverConnection;
 
+    //** @author Michel Schlatter
+
     public RankingController(RankingModel model, RankingView view){
         super(model,view);
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRankingController(this);
