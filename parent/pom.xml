@@ -75,7 +75,7 @@
             </dependency>
             <dependency>
                 <groupId>com.weddingcrashers.dominion</groupId>
-                <artifactId>shared-businesslayer</artifactId>
+                <artifactId>sharedbusinesslayer</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

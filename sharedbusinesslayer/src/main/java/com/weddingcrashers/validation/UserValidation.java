@@ -5,9 +5,9 @@ import com.weddingcrashers.service.UserService;
 import com.weddingcrashers.service.UserServiceImpl;
 import org.apache.commons.validator.routines.EmailValidator;
 
-import static com.weddingcrashers.validation.ValidationResult.EMAIL_ALREADY_EXISTS;
-import static com.weddingcrashers.validation.ValidationResult.EMAIL_IS_INVALID;
-import static com.weddingcrashers.validation.ValidationResult.OK;
+import static com.weddingcrashers.validation.UserValidationResult.EMAIL_ALREADY_EXISTS;
+import static com.weddingcrashers.validation.UserValidationResult.EMAIL_IS_INVALID;
+import static com.weddingcrashers.validation.UserValidationResult.OK;
 
 public class UserValidation {
 
@@ -20,7 +20,7 @@ public class UserValidation {
     private final String email;
 
     /** The validation result. */
-    private ValidationResult validationResult = OK;
+    private UserValidationResult validationResult = OK;
 
 
     // ---- Constructor
@@ -41,7 +41,7 @@ public class UserValidation {
      *
      * @return the validation result.
      */
-    public ValidationResult validate() {
+    public UserValidationResult validate() {
         final boolean valid = EmailValidator.getInstance().isValid(email);
         if (!valid) {
             return EMAIL_IS_INVALID;

@@ -1,10 +1,10 @@
 package com.weddingcrashers.db;
 
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.UserServiceImpl;
+import org.h2.tools.Server;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import static com.weddingcrashers.db.DatabaseStatics.DATABASE_URL;
 import static java.sql.DriverManager.getConnection;
@@ -17,6 +17,18 @@ import static org.h2.tools.Server.createTcpServer;
  */
 public final class H2Database {
 
+    // ---- Statics
+
+    /** The logger */
+    private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
+
+
+    // ---- Members
+
+    /** The h2 tcp server. */
+    private static Server tcpServer;
+
+
     // ----- Constructor
 
     /**
@@ -24,13 +36,10 @@ public final class H2Database {
      */
     public H2Database() {
         try {
-            establishConnection();
+            tcpServer = establishConnection();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.severe(e.getMessage());
         }
-//        final UserServiceImpl userService = new UserServiceImpl();
-//        final User dyoni = new User().name("dmpliamplias").email("dyoni@pop.agri.ch").password("banana");
-//        userService.create(dyoni);
     }
 
 
@@ -48,11 +57,20 @@ public final class H2Database {
     /**
      * Establish the connection to the H2 database.
      */
-    private void establishConnection() throws ClassNotFoundException, SQLException {
-        createTcpServer("-tcpAllowOthers", "-tcpPort", "9092").start();
+    private static Server establishConnection() throws ClassNotFoundException, SQLException {
+        final Server tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", "9092").start();
         Class.forName("org.h2.Driver");
         Connection connection = getConnection(DATABASE_URL, "sa", "sa");
-        System.out.println("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
+        LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
+        return tcpServer;
+    }
+
+    /**
+     * Shuts down the database.
+     */
+    public static void shutdownDatabase() {
+        tcpServer.stop();
+        LOG.info("Shutdown the tcp server listening on port " + tcpServer.getPort());
     }
 
 }

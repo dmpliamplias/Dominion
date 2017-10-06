@@ -19,7 +19,11 @@
         </dependency>
         <dependency>
             <groupId>com.weddingcrashers.dominion</groupId>
-            <artifactId>shared-businesslayer</artifactId>
+            <artifactId>sharedbusinesslayer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 

@@ -8,6 +8,6 @@
     <file url="file://$PROJECT_DIR$/server/businesslayer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/datalayer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sharedbusinesslayer" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sharedbusinessmodel" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

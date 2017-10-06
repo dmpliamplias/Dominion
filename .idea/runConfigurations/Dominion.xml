@@ -1,6 +1,11 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Dominion" type="Application" factoryName="Application" nameIsGenerated="true">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <pattern>
+        <option name="PATTERN" value="app.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
     <option name="MAIN_CLASS_NAME" value="app.Dominion" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="" />
