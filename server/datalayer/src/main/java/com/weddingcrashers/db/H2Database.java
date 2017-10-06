@@ -3,7 +3,6 @@ package com.weddingcrashers.db;
 import org.h2.tools.Server;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import static com.weddingcrashers.db.DatabaseStatics.DATABASE_URL;
@@ -22,6 +21,8 @@ public final class H2Database {
     /** The logger */
     private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
 
+    private static final String PORT = "9092";
+
 
     // ---- Members
 
@@ -29,40 +30,21 @@ public final class H2Database {
     private static Server tcpServer;
 
 
-    // ----- Constructor
-
-    /**
-     * Constructor.
-     */
-    public H2Database() {
-        try {
-            tcpServer = establishConnection();
-        } catch (Exception e) {
-            LOG.severe(e.getMessage());
-        }
-    }
-
-
     // ---- Methods
-
-    /**
-     * Starts the h2 database.
-     *
-     * @param args the args.
-     */
-    public static void main(String[] args) {
-        new H2Database();
-    }
 
     /**
      * Establish the connection to the H2 database.
      */
-    private Server establishConnection() throws ClassNotFoundException, SQLException {
-        final Server tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", "9092").start();
-        Class.forName("org.h2.Driver");
-        Connection connection = getConnection(DATABASE_URL, "sa", "sa");
-        LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog());
-        return tcpServer;
+    public void establishConnection() {
+        try {
+            tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", PORT).start();
+            Class.forName("org.h2.Driver");
+            Connection connection = getConnection(DATABASE_URL, "sa", "sa");
+            LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog() + "on port " + PORT);
+        }
+        catch (Exception e) {
+            LOG.severe(e.getMessage());
+        }
     }
 
     /**

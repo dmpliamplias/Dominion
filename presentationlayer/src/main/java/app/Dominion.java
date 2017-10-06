@@ -104,6 +104,7 @@ public class Dominion extends Application {
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
+        serviceLocator.startDatabase();
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected

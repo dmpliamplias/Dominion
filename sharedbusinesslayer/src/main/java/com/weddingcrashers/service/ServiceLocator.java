@@ -19,11 +19,11 @@ public class ServiceLocator {
     /** The logger. */
     private static final Logger LOG = Logger.getLogger(ServiceLocator.class.getSimpleName());
 
-    /** The H2 database. */
-    private static H2Database h2Database;
-
 
     // ---- Members
+
+    /** The H2 database. */
+    private H2Database h2Database;
 
     /** The translator. */
     private Translator translator;
@@ -69,6 +69,10 @@ public class ServiceLocator {
 
     public static Logger getLogger() {
         return LOG;
+    }
+
+    public void startDatabase() {
+        h2Database.establishConnection();
     }
 
     public void shutdownDatabase() {
