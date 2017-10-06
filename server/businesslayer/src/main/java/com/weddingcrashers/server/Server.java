@@ -22,7 +22,7 @@ public class Server extends Thread {
     private static int idCounter = 0;
 
 
-    ArrayList<Client> clients = new ArrayList<Client>();
+    static ArrayList<Client> clients = new ArrayList<Client>();
 
     private Server(int port, int maxPlayers){
         _port = port;
@@ -40,6 +40,9 @@ public class Server extends Thread {
         if(server != null && !serverSocket.isClosed()){
             try {
                 serverSocket.close();
+                for(Client c: clients){
+                    c.dispose();
+                }
                 server = null;
             } catch (IOException e) {
                 e.printStackTrace();

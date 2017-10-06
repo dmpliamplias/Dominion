@@ -4,6 +4,7 @@ import com.weddingcrashers.managers.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -42,9 +43,11 @@ public class Client extends Thread {
     @Override
     public void run() {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
-            Container container = (Container)objectInputStream.readObject();
-
+            // TODO: 06.10.2017 migi check if while is needed => else the run methode is after one run finished ?! 
+            while(_clientSocket != null && ! _clientSocket.isClosed()) {
+                ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
+                Container container = (Container) objectInputStream.readObject();
+            }
         } catch (Exception ex) {
            ServerUtils.sendError(this,ex);
         }
@@ -91,6 +94,13 @@ public class Client extends Thread {
        clients.addAll(getOtherClients());
        clients.add(this);
        return clients;
+    }
+
+
+    public void dispose() throws IOException {
+        if(_clientSocket != null && !_clientSocket.isClosed()) {
+            _clientSocket.close();
+        }
     }
 
     public void setOtherClients(ArrayList<Client> otherClients) {
