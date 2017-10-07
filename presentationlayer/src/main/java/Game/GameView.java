@@ -1,6 +1,7 @@
 package Game;
 
 import base.View;
+import com.weddingcrashers.service.ServiceLocator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,16 +10,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.awt.*;
 
 public class GameView extends View<GameModel> {
 
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
      BorderPane chatPane;
      protected TextArea textAreaChat;
      protected TextField textFieldChat;
      protected Button btnChatSend;
+     protected Button btnSendText;
+
+
 
 
     public GameView(Stage stage, GameModel model){
@@ -32,6 +42,7 @@ public class GameView extends View<GameModel> {
 
 
         BorderPane root = new BorderPane();
+        root.getChildren().add( chatPane );
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
@@ -46,22 +57,29 @@ public class GameView extends View<GameModel> {
 
         this.chatPane = new BorderPane();
         this.textAreaChat = new TextArea();
-        this.btnChatSend  = new Button("send");
+        // Button soll send Message heissen
+        this.btnChatSend  = new Button(translator.getString( "GameViewBtnSend"));
         this.textFieldChat= new TextField();
+        // Button soll Good Play heissen
+        this.btnSendText = new Button( translator.getString( "GameViewBtnSendText" ));
 
         // Add children to Borderpane
-        chatPane.getChildren().add( textAreaChat );
-        chatPane.getChildren().add( btnChatSend );
-        chatPane.getChildren().add( textFieldChat );
+        this.chatPane.getChildren().add( textAreaChat );
+        this.chatPane.getChildren().add( btnChatSend );
+        this.chatPane.getChildren().add( textFieldChat );
+        this.chatPane.getChildren().add( btnSendText );
 
 
         // set the Aligment
-        chatPane.setCenter( textAreaChat );
-        chatPane.setBottom( textFieldChat );
-        chatPane.setBottom( btnChatSend );
+        this.chatPane.setCenter( textAreaChat );
+        this.chatPane.setBottom( textFieldChat );
+        this.chatPane.setBottom( btnChatSend );
 
-        // Layout
-
+        // Layout button as a cycle
+        double circleSize =1.5;
+        this.btnSendText.setShape( new Circle( circleSize ) );
+        this.btnSendText.setMaxSize( 2*circleSize, 2*circleSize );
+        this.btnSendText.setMinSize( 2*circleSize, 2*circleSize );
 
 
 

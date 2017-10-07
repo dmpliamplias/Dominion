@@ -1,5 +1,7 @@
 package base;
 
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -20,6 +22,7 @@ public abstract class View<M extends Model> {
     /** The model. */
     protected M model;
 
+    protected Translator translator;
 
     // ---- Constructor
 
@@ -35,6 +38,7 @@ public abstract class View<M extends Model> {
 
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
+        translator = ServiceLocator.getServiceLocator().getTranslator();
     }
 
 

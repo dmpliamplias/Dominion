@@ -16,13 +16,10 @@ import java.net.SocketAddress;
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
-    Translator _translator;
 
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
         initialize();
-
-        _translator = ServiceLocator.getServiceLocator().getTranslator();
     }
 
 
@@ -34,7 +31,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((event2)->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
-                    this.view.alert(_translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
+                    this.view.alert(translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
                     return;
                 }
                 int port = Integer.parseInt(portStr);

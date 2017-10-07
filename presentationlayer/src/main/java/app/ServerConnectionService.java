@@ -99,7 +99,7 @@ public class ServerConnectionService extends Thread{
             loginController.handleServerAnswer((LoginContainer)c);
         }else if(c.getMethod() == Methods.Chat && gameController != null){
             ChatContainer chatContainer = (ChatContainer)c;
-            gameController.recievedMessage(chatContainer );
+            gameController.receiveMessage(chatContainer );
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
             lobbyController.handleServerAnswer_startGame(((LobbyContainer)c).isYourTurn());
         }else if(c.getMethod() == Methods.Rankings){

@@ -5,8 +5,11 @@ import app.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Separator;
 
 import java.io.IOException;
 
@@ -19,8 +22,6 @@ public class GameController extends Controller<GameModel, GameView> {
         super(model,view);
         serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setGameController(this);
-
-        sendMessage();
 
         initialize();
 
@@ -46,6 +47,7 @@ public class GameController extends Controller<GameModel, GameView> {
             String message  = view.textFieldChat.getText();
             ChatContainer cc = new ChatContainer();
             cc.setMsg(message );
+
             try {
                 serverConnection.sendObject(cc);
             } catch (IOException e) {
@@ -55,13 +57,31 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    //TODO Manuel vervollständigen
+    public void sendButtonText(){
 
-    public void recievedMessage(ChatContainer chatContainer){
+        view.btnSendText.setOnAction( event -> {
+
+            ChatContainer cc = new ChatContainer();
+            cc.setMsg( view.btnSendText.getText());
+
+            try {
+                serverConnection.sendObject( cc );
+            } catch (IOException e) {
+                view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            }
+
+
+        } );
+    }
+
+
+    public void receiveMessage(ChatContainer chatContainer){
 
         Platform.runLater(() -> {
-            
-            view.textAreaChat.setText( chatContainer.getMsg() );
+
+            String beforeText = view.textAreaChat.getText();
+            String newText = beforeText += System.getProperty("line.separator") + chatContainer.getMsg();
+            view.textAreaChat.setText(newText);
 
         });
 

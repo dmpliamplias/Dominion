@@ -1,6 +1,7 @@
 package base;
 
 import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 
 /**
  * Controller base class.
@@ -18,7 +19,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     protected M model;
     /** The view. */
     protected V view;
-
+    protected Translator translator;
 
     // ---- Constructor
 
@@ -31,6 +32,8 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     protected Controller(M model, V view) {
         this.model = model;
         this.view = view;
+        translator = ServiceLocator.getServiceLocator().getTranslator();
+
     }
 
 }
