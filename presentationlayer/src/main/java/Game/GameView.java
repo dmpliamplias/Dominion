@@ -16,9 +16,9 @@ import java.awt.*;
 public class GameView extends View<GameModel> {
 
      BorderPane chatPane;
-     TextArea textAreaChat;
-     TextField textFieldChat;
-     Button btnChatSend;
+     protected TextArea textAreaChat;
+     protected TextField textFieldChat;
+     protected Button btnChatSend;
 
 
     public GameView(Stage stage, GameModel model){
@@ -67,6 +67,14 @@ public class GameView extends View<GameModel> {
 
 
         return scene;
+    }
+
+    public void start() {
+        stage.show();
+    }
+
+    public void stop(){
+        stage.hide();
     }
 
 }
