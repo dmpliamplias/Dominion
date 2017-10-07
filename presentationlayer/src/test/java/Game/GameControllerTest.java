@@ -3,7 +3,9 @@ package Game;
 import app.PLServiceLocator;
 import app.SeverConnectionServiceTest;
 import com.weddingcrashers.server.Server;
+import com.weddingcrashers.servermodels.ChatContainer;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +33,7 @@ public class GameControllerTest {
         }
         return null;
     }
-
+    // TODO@Migi: Es wird nur ein Client erzeugt?!
    // Method from ServerConnectionService + added 2 clients
     private void join(String url, int port, boolean isHoster) {
         try {
@@ -58,11 +60,29 @@ public class GameControllerTest {
     }
 
     // Method for testing the communication between server and client
+
+    // TODO@Manuel : Ergänzen
     @Test
+
+    /*
     public void Test_Chat() {
-        // serverConnection_client1.sendObject( null );
-        // serverConnection_client2.receiveObject();
+        ChatContainer cc = new ChatContainer();
+        String test = new String( "Testnachricht" );
+        cc.setMsg( test );
+        try {
+            serverConnection_client1.sendObject( cc );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            serverConnection_client1.receiveObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
+    */
 
     // Close Clients and Server
     @After
