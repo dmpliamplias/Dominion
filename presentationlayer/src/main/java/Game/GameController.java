@@ -57,11 +57,11 @@ public class GameController extends Controller<GameModel, GameView> {
 
     //TODO Manuel vervollständigen
 
-    public void recievedMessage(ChatContainer recievedMessage){
+    public void recievedMessage(ChatContainer chatContainer){
 
         Platform.runLater(() -> {
-
-            view.textAreaChat.setText( recievedMessage.getMsg() );
+            
+            view.textAreaChat.setText( chatContainer.getMsg() );
 
         });
 
