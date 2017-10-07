@@ -43,6 +43,7 @@ public class GameView extends View<GameModel> {
 
         BorderPane root = new BorderPane();
         root.getChildren().add( chatPane );
+        root.setRight( chatPane );
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
