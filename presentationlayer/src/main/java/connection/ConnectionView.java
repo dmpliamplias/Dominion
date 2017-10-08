@@ -20,6 +20,8 @@ public class ConnectionView extends View<ConnectionModel> {
     Button btnHelp;
     Button btnConnect;
     TextField fldPort;
+    Label lblPort;
+    Label lblInfo;
 		
 
     public ConnectionView(Stage stage, ConnectionModel model){
@@ -87,9 +89,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button("Connect");			
-		Label lblPort = new Label("Port");
+		lblPort = new Label("Port");
 	    	fldPort = new TextField();
-		Label lblInfo = new Label("Insert port number");
+		lblInfo = new Label("Insert port number");
 	    	    			
 		// Set size for the buttons and FlowPane
 		btnConnect.setPrefSize(80, 30);
@@ -125,5 +127,77 @@ public class ConnectionView extends View<ConnectionModel> {
     	    	
         return secondStage;
     }
+	
+	
+    public Stage create_Info(){
+		Stage thirdStage = new Stage();
+		
+		thirdStage.initOwner(stage);
+		thirdStage.initModality(Modality.WINDOW_MODAL);					
+		
+		BorderPane root = new BorderPane();
+		Scene scene = new Scene(root,400,220);
+		GridPane gp = new GridPane();
+
+		
+		// Creating and labeling button, label, textfield
+		Button btnOK = new Button("OK");			
+		lblPort = new Label("Port");
+		fldPort = new TextField();
+		Label lblIP = new Label("IP");
+		TextField fldIP = new TextField();
+		lblInfo = new Label("Note this info");
+		fldPort.setText(socketAddress.getPort());
+		fldPort.setEditable(false);
+		fldIP.setText(socketAddress.getAddress());
+		fldIP.setEditable(false);
+	    
+	    			
+		// Set size for the buttons and FlowPane
+		btnOK.setPrefSize(80, 30);
+		lblPort.setPrefSize(50, 30);
+		fldPort.setPrefSize(150, 30);
+		lblIP.setPrefSize(50, 30);
+		fldIP.setPrefSize(150, 30);
+
+		
+		// Asign GridPane to BorderPane
+		root.setCenter(gp);
+		
+		
+		// Creating columns with different sizes
+		ColumnConstraints column = new ColumnConstraints(50);
+		ColumnConstraints column1 = new ColumnConstraints(50);
+		ColumnConstraints column2 = new ColumnConstraints(150);
+		ColumnConstraints column3 = new ColumnConstraints(80);
+		ColumnConstraints column4 = new ColumnConstraints(120);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4);
+					
+		
+		// Creating 8 rows
+		for (int i = 0; i<8;i++){
+			RowConstraints row = new RowConstraints(30);
+			gp.getRowConstraints().add(row);			
+		}
+		
+		// Asign buttons, label, textfield to column, row
+		gp.setConstraints(lblInfo, 2, 1);
+	   	gp.setConstraints(lblPort, 1, 3);
+	    	gp.setConstraints(fldPort, 2, 3);
+	    	gp.setConstraints(lblIP, 1, 4);
+	    	gp.setConstraints(fldIP, 2, 4);
+	    	gp.setConstraints(btnOK, 3, 5);
+	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
+		
+
+		thirdStage.setTitle("Info");
+		thirdStage.setScene(scene);								
+		
+		secondStage.close();
+
+    	    	
+        return thirdStage;
+    }
+	
        
 }
