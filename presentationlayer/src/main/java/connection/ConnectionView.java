@@ -23,6 +23,7 @@ public class ConnectionView extends View<ConnectionModel> {
     TextField fldPort;
     Label lblPort;
     Label lblInfo;
+    Stage secondStage;
 		
 
     public ConnectionView(Stage stage, ConnectionModel model){
@@ -79,7 +80,7 @@ public class ConnectionView extends View<ConnectionModel> {
     }
     
     public Stage create_Dialog(){
-		Stage secondStage = new Stage();
+		secondStage = new Stage();
 		
 		secondStage.initOwner(stage);
 		secondStage.initModality(Modality.WINDOW_MODAL);
