@@ -33,16 +33,18 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
-        this.view.register.setOnAction((event) -> {
+        this.view.btnRegister.setOnAction((event) -> {
             this.view.refreshModel();
             this.register();
             });
         }
 
     public void register() {
-        String pw = this.view.pw.getText();
-        String pw_confirm = this.view.pw_confirm.getText();
-        String email = this.view.email.getText();
+        String pw = this.view.txtPw.getText();
+        String pw_confirm = this.view.txtPw_confirm.getText();
+        String email = this.view.txtEmail.getText();
+
+        //TODO for Murat Methode goToLoginView sauber fertig implementieren
 
     }
         public void setError() {
