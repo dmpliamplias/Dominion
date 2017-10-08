@@ -48,12 +48,15 @@ public class RankingView extends View<RankingModel> {
             TableColumn userNameColumn = new TableColumn("User Name");
             userNameColumn.setCellValueFactory(
                     new PropertyValueFactory<RankingViewModel, String>("name"));
+
             TableColumn userHighScore = new TableColumn("Highscore Points");
             userHighScore.setCellValueFactory(
                     new PropertyValueFactory<RankingViewModel, Integer>("points"));
 
+            TableColumn rankingPosition = new TableColumn("Position");
+
             this.table.setItems(dataModel);
-            this.table.getColumns().addAll(userNameColumn, userHighScore);
+            this.table.getColumns().addAll(rankingPosition,userNameColumn, userHighScore);
 
             final VBox vbox = new VBox();
             vbox.setSpacing(4);

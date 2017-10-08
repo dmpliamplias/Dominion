@@ -12,6 +12,8 @@ import lobby.LobbyModel;
 import lobby.LobbyView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import register.RegisterModel;
+import register.RegisterView;
 
 /**
  *  @author Michel Schlatter
@@ -80,6 +82,14 @@ public class LoginController extends Controller<LoginModel, LoginView>{
      this.view.stop();
      view.start();
  }
+    //** @author Murat Kelleci - on 8.10.17
+    private void goToRegisterView(User user) {
+        RegisterModel model = new RegisterModel();
+        RegisterView view = new RegisterView(this.view.getStage(), model);
+
+        this.view.stop();
+        view.start();
+    }
 
  private void setError(){
       view.setLoginError();
