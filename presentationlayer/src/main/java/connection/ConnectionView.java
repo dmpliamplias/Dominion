@@ -191,7 +191,7 @@ public class ConnectionView extends View<ConnectionModel> {
 	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
 		
 
-		thirdStage.setTitle("Info");
+		thirdStage.setTitle("Connection Info");
 		thirdStage.setScene(scene);								
 		
 		secondStage.close();
