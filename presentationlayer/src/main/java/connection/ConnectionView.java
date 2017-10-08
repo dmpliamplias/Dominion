@@ -19,6 +19,7 @@ public class ConnectionView extends View<ConnectionModel> {
     Button btnJoinS;
     Button btnHelp;
     Button btnConnect;
+    Button btnOK;
     TextField fldPort;
     Label lblPort;
     Label lblInfo;
@@ -141,7 +142,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		
 		// Creating and labeling button, label, textfield
-		Button btnOK = new Button("OK");			
+		btnOK = new Button("OK");			
 		lblPort = new Label("Port");
 		fldPort = new TextField();
 		Label lblIP = new Label("IP");
