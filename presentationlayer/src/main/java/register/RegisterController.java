@@ -43,6 +43,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String pw = this.view.txtPw.getText();
         String pw_confirm = this.view.txtPw_confirm.getText();
         String email = this.view.txtEmail.getText();
+        String userName=this.view.txtUserName.getText();
 
         //TODO for Murat Methode goToLoginView sauber fertig implementieren
 

@@ -22,6 +22,7 @@ public class RegisterView extends View<RegisterModel>{
     Button btnRegister;
     Button btnCancel;
     TextField txtEmail;
+    TextField txtUserName;
     PasswordField txtPw;
     PasswordField txtPw_confirm;
     Label error;
@@ -84,6 +85,11 @@ public class RegisterView extends View<RegisterModel>{
         txtPw_confirm= new PasswordField();
         grid.add(txtPw_confirm,1,3);
 
+        Label UserName = new Label("User Name");
+        grid.add(UserName,0,4);
+        txtUserName=new TextField();
+        grid.add(txtUserName,1,4);
+
 
         root.setCenter(grid);
 
@@ -97,12 +103,14 @@ public class RegisterView extends View<RegisterModel>{
         this.model.setPassword(txtPw.getText());
         this.model.setPassword(txtPw_confirm.getText());
         this.model.setEmail(txtEmail.getText());
+        this.model.setUserName((txtUserName.getText()));
     }
 
     void refreshView() {
         this.model.getPassword();
         this.model.getPassword_confirm();
         this.model.getEmail();
+        this.model.getUserName();
         // umgekehrte von refreshmodel
         error.setText(this.model.getError());
     }

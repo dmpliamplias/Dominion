@@ -4,16 +4,19 @@ import base.Model;
 
 
 
+/**
+ * @author Murat Kelleci
+ */
 
 public class RegisterModel extends Model {
 
-    /** @author Murat Kelleci
- **/
 
-    private String email;
-    private String password;
-    private String password_confirm;
-    private String error;
+
+    public String email;
+    public String userName;
+    public String password;
+    public String password_confirm;
+    public String error;
 
     public String getError() {
         return error;
@@ -33,10 +36,19 @@ public class RegisterModel extends Model {
 
     }
 
+    public String getUserName(){
+        return this.userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName=userName;
+    }
+
     public String getPassword() {
         return password;
 
     }
+
 
     public void setPassword(String password){
         this.password = password;
