@@ -148,9 +148,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		Label lblIP = new Label("IP");
 		TextField fldIP = new TextField();
 		lblInfo = new Label("Note this info");
-		fldPort.setText(socketAddress.getPort());
+	//	fldPort.setText(socketAddress.getPort());
 		fldPort.setEditable(false);
-		fldIP.setText(socketAddress.getAddress());
+	//	fldIP.setText(socketAddress.getAddress());
 		fldIP.setEditable(false);
 	    
 	    			
