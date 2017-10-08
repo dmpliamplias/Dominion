@@ -39,13 +39,21 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 view.btnConnect.setDisable(true);
                 view.btnJoinS.setDisable(true);
                 view.btnStartS.setDisable(true);
+                
+                
 
                 String address = socketAddress.toString();
                 System.out.println("Socketadress: " + address);
                 // TODO: 03.10.2017 Vanessa => show address to user =>  in a textfield with a button to copy
                 // the address to clipboard (like on github to copy the remote adress)
                 // TODO: 03.10.2017  after that, the user should click 'continue' and than he gets to the lobby....
-            });});
+                
+                view.create_Info().show();
+                
+                 view.btnOK.setOnAction((event3) -> {
+               // TODO: 03.10.2017 Migi, wie chani da Loginview ufrüefe?
+                
+            });});});
 
 
     }
