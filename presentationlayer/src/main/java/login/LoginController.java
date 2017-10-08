@@ -32,7 +32,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
-        view.login.setOnAction((event) -> {
+        view.btnLogin.setOnAction((event) -> {
            view.refreshModel();
            this.login();
        });

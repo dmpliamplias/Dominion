@@ -10,47 +10,48 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 /**
- *  @author Michel Schlatter
+ *  @author updated by Murat Kelleci 8.10.17 - Some changes
+ *
  *  */
 
-public class LoginView extends View<LoginModel>{
-
-    Button login;
-    Button cancel;
-    TextField email;
-    PasswordField pw;
-    Label error;
+public class LoginView extends View<LoginModel> {
 
 
-    public LoginView(Stage stage, LoginModel model){
+    protected Button btnLogin;
+    protected Button btnSign;
+    protected TextField email;
+    protected PasswordField pw;
+    protected Label lblError;
+
+
+    public LoginView(Stage stage, LoginModel model) {
         super(stage, model);
     }
 
     public Scene create_GUI() {
 
-        stage.setTitle( "Login" );
-        stage.setHeight( 500 );
-        stage.setWidth( 800 );
+        this.stage.setTitle("Login Page");
+        this.stage.setHeight(500);
+        this.stage.setWidth(800);
 
         BorderPane root = new BorderPane();
-        login = new Button();
-        login.setText( "Login" );
-        cancel = new Button();
-        cancel.setText( "Cancel" );
+        btnLogin = new Button();
+        btnLogin.setText("Login");
+        btnSign = new Button();
+        btnSign.setText("Sign Up");
         email = new TextField();
         pw = new PasswordField();
 
         HBox box = new HBox();
-        box.getChildren().addAll( email, pw, login, cancel );
-        root.setCenter( box );
+        box.getChildren().addAll(email, pw, btnLogin, btnSign);
+        root.setCenter(box);
 
-        Scene scene = new Scene( root );
+        Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
-        stage.setScene( scene );
+        this.stage.setScene(scene);
 
         return scene;
     }
-
 
     void refreshModel(){
         model.setPassword(pw.getText());
@@ -58,11 +59,11 @@ public class LoginView extends View<LoginModel>{
     }
 
     public Stage getStage(){
-        return stage;
+        return this.stage;
     }
 
     void setLoginError(){
-        error.setText(model.getError());
+        lblError.setText(model.getError());
     }
 
 
