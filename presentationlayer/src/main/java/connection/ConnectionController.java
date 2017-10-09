@@ -72,6 +72,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
               view.btnOK.setOnAction((event2) ->{
                   view.refreshModelFromInfoDialog();
                   this.join(model.getIP(), model.getPort(),false);
+                  goToLoginView();
               });
               stage.show();
         });
