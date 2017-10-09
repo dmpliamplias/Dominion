@@ -144,9 +144,9 @@ public class ConnectionView extends View<ConnectionModel> {
 	public Stage createConnectedInfoDialog(){
 		Stage stage = createConnectionDialog();
 		btnOK.setPrefSize(80, 30);
-		lblInfo.setText("Note this info");
-		btnOK.setText("OK");
-		stage.setTitle("Connection Info");
+		lblInfo.setText(translator.getString("connectionview_notethisinfo"));
+		btnOK.setText(translator.getString("ok"));
+		stage.setTitle(translator.getString("connectionview_connectioninfo_titel"));
 
 		fldIP.setDisable(true);
 		fldPort.setDisable(true);

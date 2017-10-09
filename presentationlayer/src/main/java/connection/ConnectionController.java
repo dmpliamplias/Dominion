@@ -69,11 +69,6 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
         view.btnJoinS.setOnAction((event) -> {
           Stage stage =  view.createJoinDialog();
-          view.btnOK.setText("Connect to Server");
-          view.btnOK.setPrefSize(160,30);
-          view.fldPort.setDisable(false);
-          view.fldIP.setDisable(false);
-
               view.btnOK.setOnAction((event2) ->{
                   view.refreshModelFromInfoDialog();
                   this.join(model.getIP(), model.getPort(),false);
