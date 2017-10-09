@@ -65,7 +65,7 @@ public class RegisterView extends View<RegisterModel>{
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnRegister);
         hbBtn.getChildren().add(btnCancel);
-        grid.add(hbBtn, 1, 4);
+        grid.add(hbBtn, 1, 5);
 
 
         // Creation of all needed TextFields
@@ -79,7 +79,7 @@ public class RegisterView extends View<RegisterModel>{
         txtPw = new PasswordField();
         grid.add(txtPw,1,2);
 
-        Label pwconfirm=new Label("Email bestätigen");
+        Label pwconfirm=new Label("Password bestätigen");
         grid.add(pwconfirm,0,3);
         txtPw_confirm= new PasswordField();
         grid.add(txtPw_confirm,1,3);

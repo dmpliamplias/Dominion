@@ -4,8 +4,13 @@ package register;
 import app.PLServiceLocator;
 import app.ServerConnectionService;
 import base.Controller;
+import com.weddingcrashers.model.User;
+import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.service.UserService;
 import javafx.scene.control.Alert;
+import login.LoginModel;
+import login.LoginView;
 
 
 import java.io.IOException;
@@ -27,7 +32,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     public void initialize() {
         try {
-            serverConnectionService.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus(ViewStatus.Login); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -35,7 +40,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         //TODO for Murat ActionEvent click on Cancel delete all fields
 
         this.view.btnRegister.setOnAction((event) -> {
-            this.view.refreshModel();
+            view.refreshModel();
             this.register();
             });
         }
@@ -44,13 +49,26 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String pw = this.view.txtPw.getText();
         String pw_confirm = this.view.txtPw_confirm.getText();
         String email = this.view.txtEmail.getText();
-        String userName=this.view.txtUserName.getText();
+        String userName = this.view.txtUserName.getText();
+
+        if(!(pw.isEmpty() || pw==pw_confirm|| email.isEmpty() || userName.isEmpty()));
+            RegisterContainer registerContainer = new RegisterContainer();
+
+
+    }
 
         //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
 
         //TODO for Murat Methode goToLoginView sauber fertig implementieren
 
+    private void goToLoginView(){
+        LoginModel model =new LoginModel();
+        LoginView view =new LoginView(this.view.getStage(), model);
+        this.view.stop();
+        view.start();
+
     }
+
         public void setError() {
             //this.model.setLoginError();
         }

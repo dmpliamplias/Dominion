@@ -87,7 +87,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     private void goToRegisterView() {
         RegisterModel model = new RegisterModel();
         RegisterView view = new RegisterView(this.view.getStage(), model);
-
         this.view.stop();
         view.start();
     }
