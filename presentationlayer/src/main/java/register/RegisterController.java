@@ -7,11 +7,12 @@ import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.UserService;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import login.LoginModel;
 import login.LoginView;
-
 
 import java.io.IOException;
 
@@ -40,8 +41,8 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         //TODO for Murat ActionEvent click on Cancel delete all fields
 
         this.view.btnRegister.setOnAction((event) -> {
-            view.refreshModel();
             this.register();
+            view.refreshModel();
             });
         }
 
@@ -51,11 +52,32 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String email = this.view.txtEmail.getText();
         String userName = this.view.txtUserName.getText();
 
-        if(!(pw.isEmpty() || pw==pw_confirm|| email.isEmpty() || userName.isEmpty()));
-            RegisterContainer registerContainer = new RegisterContainer();
+        if (!(pw.isEmpty() || pw == pw_confirm || email.isEmpty() || userName.isEmpty())) ;
+        User user = new User();
+        user.setUserEmail(email);
+        user.setUserName(userName);
+        user.setPassword(pw);
+        RegisterContainer registerContainer = new RegisterContainer();
+        registerContainer.setUser(user);
 
+
+        try {
+            serverConnectionService.sendObject(registerContainer);
+        } catch (Exception e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
 
     }
+
+    public void handleServerAnswer(RegisterContainer member){
+        Platform.runLater(() -> {
+            User user = member.getUser();
+            if(user != null){
+                goToLoginView();
+            }
+        });
+    }
+
 
         //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
 
@@ -69,9 +91,9 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     }
 
-        public void setError() {
-            //this.model.setLoginError();
-        }
+        private void setError(){
+            view.setError("error");
+}
 
 
 
