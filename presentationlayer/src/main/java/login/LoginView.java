@@ -45,7 +45,6 @@ public class LoginView extends View<LoginModel> {
         grPa.setVgap(10);
         grPa.setPadding(new Insets(25, 25, 25, 25));
 
-        Scene scene1 = new Scene(grPa, 300, 275);
         stage.setScene(scene);
 
         //Creation of all needed Buttons and Fields

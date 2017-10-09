@@ -48,7 +48,6 @@ public class RegisterView extends View<RegisterModel>{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Scene scene1 = new Scene(grid, 300, 275);
         stage.setScene(scene);
 
         // Creation of all needed Buttons
