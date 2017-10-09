@@ -19,14 +19,15 @@ public class ConnectionView extends View<ConnectionModel> {
     Button btnJoinS;
     Button btnHelp;
     Button btnConnect;
+
     Button btnOK;
     TextField fldPort;
     Label lblPort;
     Label lblInfo;
     Stage secondStage;
-		
+	TextField fldIP;
 
-    public ConnectionView(Stage stage, ConnectionModel model){
+	public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
     }
 	
@@ -129,13 +130,47 @@ public class ConnectionView extends View<ConnectionModel> {
     	    	
         return secondStage;
     }
-	
-	
-    public Stage create_Info(){
-		Stage thirdStage = new Stage();
+
+    public void refreshInfoDialog(){
+    	fldPort.setText(Integer.toString(model.getPort()));
+		fldIP.setText(model.getIP());
+	}
+
+	public void refreshModelFromInfoDialog(){
+    	model.setPort(Integer.parseInt(fldPort.getText()));
+    	model.setIP(fldIP.getText());
+	}
+
+	public Stage createConnectedInfoDialog(){
+		Stage stage = createConnectionDialog();
+		btnOK.setPrefSize(80, 30);
+		lblInfo.setText("Note this info");
+		btnOK.setText("OK");
+		stage.setTitle("Connection Info");
+
+		fldIP.setDisable(true);
+		fldPort.setDisable(true);
+
+		return stage;
+	}
+
+	public Stage createJoinDialog(){
+		Stage stage = createConnectionDialog();
+		btnOK.setPrefSize(160, 30);
+		lblInfo.setText("Enter the Data your hoster gave you...");
+		btnOK.setText("Connect to Server");
+		stage.setTitle("Join Server");
+
+		fldIP.setDisable(true);
+		fldPort.setDisable(true);
+		return stage;
+	}
+
+    private Stage createConnectionDialog(){
+		Stage connectionDialogStage = new Stage();
 		
-		thirdStage.initOwner(stage);
-		thirdStage.initModality(Modality.WINDOW_MODAL);					
+		connectionDialogStage.initOwner(stage);
+		connectionDialogStage.initModality(Modality.WINDOW_MODAL);
 		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,400,220);
@@ -143,25 +178,19 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		
 		// Creating and labeling button, label, textfield
-		btnOK = new Button("OK");			
 		lblPort = new Label("Port");
+		lblInfo = new Label();
 		fldPort = new TextField();
 		Label lblIP = new Label("IP");
-		TextField fldIP = new TextField();
-		lblInfo = new Label("Note this info");
-	//	fldPort.setText(socketAddress.getPort());
-		fldPort.setEditable(false);
-	//	fldIP.setText(socketAddress.getAddress());
-		fldIP.setEditable(false);
-	    
-	    			
+		fldIP = new TextField();
+		btnOK = new Button("OK");
+
 		// Set size for the buttons and FlowPane
-		btnOK.setPrefSize(80, 30);
+
 		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
 		lblIP.setPrefSize(50, 30);
 		fldIP.setPrefSize(150, 30);
-
 		
 		// Asign GridPane to BorderPane
 		root.setCenter(gp);
@@ -192,13 +221,11 @@ public class ConnectionView extends View<ConnectionModel> {
 	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
 		
 
-		thirdStage.setTitle("Connection Info");
-		thirdStage.setScene(scene);								
-		
-		secondStage.close();
+		connectionDialogStage.setScene(scene);
 
+		if(secondStage != null) secondStage.close();
     	    	
-        return thirdStage;
+        return connectionDialogStage;
     }
 	
        

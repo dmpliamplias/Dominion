@@ -2,11 +2,20 @@ package connection;
 
 import app.PLServiceLocator;
 import base.Controller;
+import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Server;
 import app.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -45,17 +54,32 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
                 String address = socketAddress.toString();
                 System.out.println("Socketadress: " + address);
-                // TODO: 03.10.2017 Vanessa => show address to user =>  in a textfield with a button to copy
-                // the address to clipboard (like on github to copy the remote adress)
-                // TODO: 03.10.2017  after that, the user should click 'continue' and than he gets to the lobby....
 
-                view.create_Info().show();
+                model.setIP(socketAddress.getHostName());
+                model.setPort(socketAddress.getPort());
+
+                view.createConnectedInfoDialog().show();
+                view.refreshInfoDialog();
 
                  view.btnOK.setOnAction((event3) -> {
-               // TODO: 03.10.2017 Migi, wie chani da Loginview ufrüefe?
+                    goToLoginView();
+                });
+            });
+        });
 
-            });});});
+        view.btnJoinS.setOnAction((event) -> {
+          Stage stage =  view.createJoinDialog();
+          view.btnOK.setText("Connect to Server");
+          view.btnOK.setPrefSize(160,30);
+          view.fldPort.setDisable(false);
+          view.fldIP.setDisable(false);
 
+              view.btnOK.setOnAction((event2) ->{
+                  view.refreshModelFromInfoDialog();
+                  this.join(model.getIP(), model.getPort(),false);
+              });
+              stage.show();
+        });
 
     }
     /**
@@ -94,5 +118,14 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         }
     }
 
+
+    private void goToLoginView(){
+        LoginModel model = new LoginModel();
+        LoginView view = new LoginView(this.view.getStage(), model);
+        LoginController loginController = new LoginController(view,model);
+
+        this.view.stop();
+        view.start();
+    }
     
 }

@@ -88,7 +88,8 @@ public class ServerConnectionService extends Thread{
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
-        out.println("Client received message Method: " + c.getMethod() + "  to Client: " + clientId);
+        String additive = clientId > 0 ?" to Client: " + clientId : "";
+        out.println("Client received message. Method: \"" + c.getMethod() + "\"" + additive);
 
         if(c.getMethod() == Methods.Connect){
             ConnectionContainer connectionContainer = (ConnectionContainer)c;
