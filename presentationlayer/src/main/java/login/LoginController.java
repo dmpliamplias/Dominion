@@ -37,7 +37,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
         view.btnLogin.setOnAction((event) -> {
            view.refreshModel();
            this.login();
-       });
+
+       }); //** @author Murat Kelleci
+
+        view.btnSignUp.setOnAction((event)-> this.goToRegisterView());
     }
 
   public void login(){
@@ -84,10 +87,9 @@ public class LoginController extends Controller<LoginModel, LoginView>{
  }
     //** @author Murat Kelleci - on 8.10.17
     //TODO for Murat Methode sauber fertig implementieren.
-    private void goToRegisterView(User user) {
+    private void goToRegisterView() {
         RegisterModel model = new RegisterModel();
-        RegisterView view;
-        view = new RegisterView(this.view.getStage(), model);
+        RegisterView view = new RegisterView(this.view.getStage(), model);
 
         this.view.stop();
         view.start();

@@ -21,7 +21,7 @@ public class LoginView extends View<LoginModel> {
 
 
     protected Button btnLogin;
-    protected Button btnSign;
+    protected Button btnSignUp;
     protected TextField user;
     protected PasswordField pw;
     protected Label lblError;
@@ -53,14 +53,14 @@ public class LoginView extends View<LoginModel> {
         btnLogin = new Button();
         btnLogin.setText("Login");
         btnLogin.setPrefSize(130,40);
-        btnSign = new Button();
-        btnSign.setText("Sign Up");
-        btnSign.setPrefSize(130,40);
+        btnSignUp = new Button();
+        btnSignUp.setText("Sign Up");
+        btnSignUp.setPrefSize(130,40);
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnLogin);
-        hbBtn.getChildren().add(btnSign);
+        hbBtn.getChildren().add(btnSignUp);
         grPa.add(hbBtn, 1, 4);
 
         Label userName = new Label("User Name:");
