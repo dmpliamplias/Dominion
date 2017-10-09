@@ -15,21 +15,18 @@ import java.util.List;
 
 public class RankingController extends Controller<RankingModel, RankingView> {
 
-    private final ServerConnectionService _serverConnection;
 
     //** @author Michel Schlatter
 
     public RankingController(RankingModel model, RankingView view){
         super(model,view);
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRankingController(this);
-        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
-
+        serverConnectionService.setRankingController(this);
         initialize();
     }
 
     public void initialize() {
         try {
-            _serverConnection.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -37,7 +34,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         // get Ranking from Server
         RankingContainer rc = new RankingContainer();
         try {
-            _serverConnection.sendObject(rc);
+            serverConnectionService.sendObject(rc);
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }

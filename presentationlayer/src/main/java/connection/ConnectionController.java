@@ -9,6 +9,7 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
 /**
@@ -16,10 +17,12 @@ import java.net.SocketAddress;
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
+    Translator _translator;
 
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
         initialize();
+        _translator = ServiceLocator.getServiceLocator().getTranslator();
     }
 
 
@@ -31,28 +34,26 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((event2)->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
-                    this.view.alert(translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
+                    this.view.alert(_translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
                     return;
                 }
                 int port = Integer.parseInt(portStr);
-                SocketAddress socketAddress = createServer(port);
+                InetSocketAddress socketAddress = createServer(port);
                 view.btnConnect.setDisable(true);
                 view.btnJoinS.setDisable(true);
                 view.btnStartS.setDisable(true);
-                
-                
 
                 String address = socketAddress.toString();
                 System.out.println("Socketadress: " + address);
                 // TODO: 03.10.2017 Vanessa => show address to user =>  in a textfield with a button to copy
                 // the address to clipboard (like on github to copy the remote adress)
                 // TODO: 03.10.2017  after that, the user should click 'continue' and than he gets to the lobby....
-                
+
                 view.create_Info().show();
-                
+
                  view.btnOK.setOnAction((event3) -> {
                // TODO: 03.10.2017 Migi, wie chani da Loginview ufrüefe?
-                
+
             });});});
 
 
@@ -62,11 +63,12 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      * @param port
      * @return ip address
      */
-    private SocketAddress createServer(int port){
+    private InetSocketAddress createServer(int port){
         try {
             Server.startServer(port,4);
             join("localhost", port,true);
-            return PLServiceLocator.getPLServiceLocator().getServerConnectionService().getConnection().getRemoteSocketAddress();
+            return ((InetSocketAddress)PLServiceLocator.getPLServiceLocator()
+                    .getServerConnectionService().getConnection().getRemoteSocketAddress());
         } catch (Exception e) {
             int i = 1;
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);

@@ -1,5 +1,7 @@
 package base;
 
+import app.PLServiceLocator;
+import app.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 
@@ -20,6 +22,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     /** The view. */
     protected V view;
     protected Translator translator;
+    protected ServerConnectionService serverConnectionService;
 
     // ---- Constructor
 
@@ -33,7 +36,10 @@ public abstract class Controller<M extends Model, V extends View<M>> {
         this.model = model;
         this.view = view;
         translator = ServiceLocator.getServiceLocator().getTranslator();
-
+        PLServiceLocator plServiceLocator = PLServiceLocator.getPLServiceLocator();
+        if( plServiceLocator != null) {
+            serverConnectionService = plServiceLocator.getServerConnectionService();
+        }
     }
 
 }

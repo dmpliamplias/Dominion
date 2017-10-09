@@ -16,12 +16,10 @@ import java.io.IOException;
 
 public class RegisterController extends Controller<RegisterModel, RegisterView> {
 
-    private final ServerConnectionService _serverConnection;
 
     public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
         super(model,view);
-        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRegisterController(this);
 
         initialize();
@@ -29,7 +27,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     public void initialize() {
         try {
-            _serverConnection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }

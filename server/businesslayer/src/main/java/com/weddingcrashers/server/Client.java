@@ -47,6 +47,7 @@ public class Client extends Thread {
             while(_clientSocket != null && ! _clientSocket.isClosed()) {
                 ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
                 Container container = (Container) objectInputStream.readObject();
+                runMethod(container);
             }
         } catch (Exception ex) {
            ServerUtils.sendError(this,ex);

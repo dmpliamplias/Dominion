@@ -20,13 +20,10 @@ import register.RegisterView;
  *  */
 public class LoginController extends Controller<LoginModel, LoginView>{
 
-    private final ServerConnectionService _serverConnection;
 
     public LoginController(LoginView view, LoginModel model){
         super(model, view);
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLoginController(this);
-        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
-
+        serverConnectionService.setLoginController(this);
         initialize();
     }
 
@@ -53,7 +50,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
            loginContainer.setPassword(pw);
 
            try {
-               _serverConnection.sendObject(loginContainer);
+               serverConnectionService.sendObject(loginContainer);
            } catch (Exception e) {
               view.alert(e.getMessage(), Alert.AlertType.ERROR);
            }

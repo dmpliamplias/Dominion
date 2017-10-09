@@ -20,7 +20,6 @@ public class ChatManager extends Manager {
         ChatContainer cc = new ChatContainer();
         cc.setMsg(msg);
 
-
         for(Client c : client.getOtherClients()){
             if(c.getViewStatus() == ViewStatus.Game) {
                 ServerUtils.sendObject(c, cc);

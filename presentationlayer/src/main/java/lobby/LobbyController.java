@@ -31,7 +31,6 @@ import java.util.Map;
 
 public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
-    private final ServerConnectionService _serverConnection;
     private final User _user;
     private ObservableList<String> list = FXCollections.observableArrayList();
     private HashMap<Integer, User> players;
@@ -40,7 +39,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     public LobbyController(LobbyView view, LobbyModel model, User user){
         super(model,view);
         _user = user; // I think you need id here for set ranking when game is over...
-        _serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
         _translator = ServiceLocator.getServiceLocator().getTranslator();
         initialize();
@@ -48,7 +46,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void initialize() {
         try {
-            _serverConnection.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -103,7 +101,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                 lc.setClientIds_startGame(clientIds);
 
                 try {
-                    _serverConnection.sendObject(lc);
+                    serverConnectionService.sendObject(lc);
                 } catch (IOException e) {
                     view.alert(e.getMessage(), Alert.AlertType.ERROR);
                 }
