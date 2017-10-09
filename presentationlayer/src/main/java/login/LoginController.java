@@ -30,7 +30,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
         initialize();
     }
 
-
+    //TODO for Murat create an ActionEvent when clicking on Register button
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
@@ -83,7 +83,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
      view.start();
  }
     //** @author Murat Kelleci - on 8.10.17
-    // TODO for Murat Methode sauber fertig implementieren.
+    //TODO for Murat Methode sauber fertig implementieren.
     private void goToRegisterView(User user) {
         RegisterModel model = new RegisterModel();
         RegisterView view;

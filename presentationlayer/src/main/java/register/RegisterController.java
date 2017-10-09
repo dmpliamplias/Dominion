@@ -33,6 +33,9 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
+
+        //TODO for Murat ActionEvent click on Cancel delete all fields
+
         this.view.btnRegister.setOnAction((event) -> {
             this.view.refreshModel();
             this.register();
@@ -44,6 +47,8 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String pw_confirm = this.view.txtPw_confirm.getText();
         String email = this.view.txtEmail.getText();
         String userName=this.view.txtUserName.getText();
+
+        //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
 
         //TODO for Murat Methode goToLoginView sauber fertig implementieren
 
