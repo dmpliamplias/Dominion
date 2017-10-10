@@ -42,7 +42,6 @@ public class GameView extends View<GameModel> {
 
 
         BorderPane root = new BorderPane();
-        root.getChildren().add( chatPane );
         root.setRight( chatPane );
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
@@ -64,17 +63,17 @@ public class GameView extends View<GameModel> {
         // Button soll Good Play heissen
         this.btnSendText = new Button( translator.getString( "GameViewBtnSendText" ));
 
+        // set the Aligment
+        this.chatPane.setCenter( textAreaChat );
+        this.chatPane.setBottom( textFieldChat );
+        this.chatPane.setBottom( btnChatSend );
+
         // Add children to Borderpane
         this.chatPane.getChildren().add( textAreaChat );
         this.chatPane.getChildren().add( btnChatSend );
         this.chatPane.getChildren().add( textFieldChat );
         this.chatPane.getChildren().add( btnSendText );
 
-
-        // set the Aligment
-        this.chatPane.setCenter( textAreaChat );
-        this.chatPane.setBottom( textFieldChat );
-        this.chatPane.setBottom( btnChatSend );
 
         // Layout button as a cycle
         double circleSize =1.5;
