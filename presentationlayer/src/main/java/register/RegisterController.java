@@ -34,6 +34,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     public void initialize() {
         // TODO: 10.10.2017  murat due das unskommentierte wieder ine? wieso hesches usegno?
+        // TODO:10.10.2017 wollte nur etwas überprüfen.
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
         } catch (IOException e) {
