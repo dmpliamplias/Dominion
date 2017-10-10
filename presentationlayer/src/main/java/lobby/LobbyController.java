@@ -36,10 +36,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private HashMap<Integer, User> players;
     Translator _translator;
 
-    public LobbyController(LobbyView view, LobbyModel model, User user){
+    public LobbyController(LobbyView view, LobbyModel model){
         super(model,view);
+<<<<<<< Updated upstream
         initialize();
         _user = user; // I think you need id here for set ranking when game is over...
+=======
+        _user = plServiceLocator.getUser();
+        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
+>>>>>>> Stashed changes
         _translator = ServiceLocator.getServiceLocator().getTranslator();
 
     }

@@ -14,6 +14,7 @@ import lobby.LobbyModel;
 import lobby.LobbyView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import register.RegisterController;
 import register.RegisterModel;
 import register.RegisterView;
 
@@ -46,8 +47,9 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     }
 
   public void login(){
-       String pw = view.pw.getText();
-       String email = view.pw.getText();
+       view.refreshModel();
+       String pw = model.getPassword();
+       String email = model.getEmail();
 
        if(pw != null && !pw.isEmpty() && email != null && !email.isEmpty()){
            LoginContainer loginContainer = new LoginContainer();
@@ -66,7 +68,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       Platform.runLater(() -> {
           User user = result.getUser();
           if(user != null){ // success
-              goToStartView(user);
+              plServiceLocator.setUser(user);
+              goToLobbyView(user);
           }else{
               //unsuccessfull login, show error
               // TODO: Vanessa add translator code
@@ -77,12 +80,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
   }
 
   // change to goToWhatEverView ...
-  private void goToStartView(User user){
+  private void goToLobbyView(User user){
      LobbyModel model = new LobbyModel();
      LobbyView view = new LobbyView(this.view.getStage(), model);
-
-     FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/LobbyView.fxml"));
-     loader.setController(new LobbyController(view, model, user));
+     LobbyController lobbyController = new LobbyController(view,model);
 
      this.view.stop();
      view.start();
@@ -92,6 +93,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     private void goToRegisterView() {
         RegisterModel model = new RegisterModel();
         RegisterView view = new RegisterView(this.view.getStage(), model);
+        // TODO: 10.10.2017 Murat...hier hast du den RegisterController vergessen zu instanzieren
+        RegisterController registerController = new RegisterController(view,model);
         this.view.stop();
         view.start();
     }

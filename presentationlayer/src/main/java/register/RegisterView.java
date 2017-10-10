@@ -100,18 +100,9 @@ public class RegisterView extends View<RegisterModel>{
 
     void refreshModel() {
         this.model.setPassword(txtPw.getText());
-        this.model.setPassword(txtPw_confirm.getText());
+        this.model.setPassword_confirm(txtPw_confirm.getText());
         this.model.setEmail(txtEmail.getText());
         this.model.setUserName((txtUserName.getText()));
-    }
-
-    void refreshView() {
-        this.model.getPassword();
-        this.model.getPassword_confirm();
-        this.model.getEmail();
-        this.model.getUserName();
-        // umgekehrte von refreshmodel
-        error.setText(this.model.getError());
     }
 
     void setError(String string) {

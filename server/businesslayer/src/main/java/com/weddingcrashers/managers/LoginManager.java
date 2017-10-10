@@ -36,7 +36,7 @@ public class LoginManager extends Manager {
         User user = _userService.create(u);
 
         RegisterContainer rc = new RegisterContainer();
-        rc.setUser(user); // TODO: 02.10.2017 Michel => ändere zu user der von DB
+        rc.setUser(user);
         ServerUtils.sendObject(client, rc);
     }
 }

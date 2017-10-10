@@ -72,8 +72,8 @@ public class Client extends Thread {
             ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
             this.viewStatus = vc.getViewStatus();
         }else if(c.getMethod() == Methods.Register){
-            LoginContainer lc = (LoginContainer)c;
-            _loginManager.createUser(lc.getUser());
+            RegisterContainer rc = (RegisterContainer)c;
+            _loginManager.createUser(rc.getUser());
         } else if(c.getMethod() == Methods.Chat){
             ChatContainer cc = (ChatContainer) c;
             _chatManager.broadCastChatMessageToAllClients(cc.getMsg());

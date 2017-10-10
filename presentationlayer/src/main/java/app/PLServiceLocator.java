@@ -1,5 +1,7 @@
 package app;
 
+import com.weddingcrashers.model.User;
+
 public class PLServiceLocator {
     private static PLServiceLocator sl;
 
@@ -11,6 +13,7 @@ public class PLServiceLocator {
     }
 
     private  ServerConnectionService serverConnectionService;
+    private User user;
 
     public ServerConnectionService getServerConnectionService() {
         return serverConnectionService;
@@ -20,5 +23,13 @@ public class PLServiceLocator {
         this.serverConnectionService = serverConnectionService;
     }
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

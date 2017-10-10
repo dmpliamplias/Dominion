@@ -23,7 +23,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     protected V view;
     protected Translator translator;
     protected ServerConnectionService serverConnectionService;
-
+    protected  PLServiceLocator plServiceLocator;
     // ---- Constructor
 
     /**
@@ -36,7 +36,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
         this.model = model;
         this.view = view;
         translator = ServiceLocator.getServiceLocator().getTranslator();
-        PLServiceLocator plServiceLocator = PLServiceLocator.getPLServiceLocator();
+        plServiceLocator = PLServiceLocator.getPLServiceLocator();
         if( plServiceLocator != null) {
             serverConnectionService = plServiceLocator.getServerConnectionService();
         }
