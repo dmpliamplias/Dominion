@@ -44,41 +44,31 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
-
+            view.refreshModel();
             });
         }
 
     public void register() {
-        view.refreshModel();
-        String pw = model.getPassword();
-        String pw_confirm = model.getPassword_confirm();
-        String email = model.getEmail();
-        String userName = model.getUserName();
+        String pw = this.view.txtPw.getText();
+        String pw_confirm = this.view.txtPw_confirm.getText();
+        String email = this.view.txtEmail.getText();
+        String userName = this.view.txtUserName.getText();
 
-        // TODO: 10.10.2017  murat => pw.equals(pw_confirm) da string ein objekt und ein objekt immer ein referenztyp ist, immer mit equals
-        // vergleichen ansonsten prüft du nur ob die speicheradresse die selbe ist und nicht den inhalt davon.
+        if (!(pw.isEmpty() || pw == pw_confirm || email.isEmpty() || userName.isEmpty())) ;
+        User user = new User();
+        user.setUserEmail(email);
+        user.setUserName(userName);
+        user.setPassword(pw);
+        RegisterContainer registerContainer = new RegisterContainer();
+        registerContainer.setUser(user);
 
-        if (pw != null && !pw.isEmpty() && pw.equals(pw_confirm)
-                && email != null && !email.isEmpty() &&
-                userName != null && !userName.isEmpty()) {
 
-            // TODO: 10.10.2017 murat validate email
-            User user = new User();
-            user.setUserEmail(email);
-            user.setUserName(userName);
-            user.setPassword(pw);
-            RegisterContainer registerContainer = new RegisterContainer();
-            registerContainer.setUser(user);
-
-            try {
-                serverConnectionService.sendObject(registerContainer);
-            } catch (IOException e) {
-                view.alert(e.getMessage(), Alert.AlertType.CONFIRMATION.ERROR);
-            }
-        }else{
-            // TODO: 10.10.2017 murat => text in translator einfügen.
-            view.alert("Bitte alle Felder ausfüllen.", Alert.AlertType.INFORMATION);
+        try {
+            serverConnectionService.sendObject(registerContainer);
+        } catch (Exception e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
+
     }
 
     public void handleServerAnswer(RegisterContainer member){
@@ -90,13 +80,25 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         });
     }
 
+
+        //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
+
+        //TODO for Murat Methode goToLoginView sauber fertig implementieren
+
     private void goToLoginView(){
         LoginModel model =new LoginModel();
         LoginView view =new LoginView(this.view.getStage(), model);
         LoginController loginController = new LoginController(view,model);
         this.view.stop();
         view.start();
+
     }
+
+        private void setError(){
+            view.setError("error");
+}
+
+
 
     }
 

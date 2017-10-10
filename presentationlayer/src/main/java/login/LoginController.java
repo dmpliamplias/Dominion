@@ -1,7 +1,5 @@
 package login;
 
-import Game.GameController;
-import Game.GameModel;
 import app.PLServiceLocator;
 import base.Controller;
 import app.ServerConnectionService;
@@ -34,7 +32,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
-
         view.btnLogin.setOnAction((event) -> {
            view.refreshModel();
            this.login();
@@ -42,14 +39,11 @@ public class LoginController extends Controller<LoginModel, LoginView>{
        }); //** @author Murat Kelleci
 
         view.btnSignUp.setOnAction((event)-> this.goToRegisterView());
-
-        view.btnLobbyView.setOnAction((event)-> this.goToLobbyView());
     }
 
   public void login(){
-       view.refreshModel();
-       String pw = model.getPassword();
-       String email = model.getEmail();
+       String pw = view.pw.getText();
+       String email = view.pw.getText();
 
        if(pw != null && !pw.isEmpty() && email != null && !email.isEmpty()){
            LoginContainer loginContainer = new LoginContainer();
@@ -68,8 +62,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       Platform.runLater(() -> {
           User user = result.getUser();
           if(user != null){ // success
+              goToRegisterView();
               plServiceLocator.setUser(user);
-              goToLobbyView(user);
           }else{
               //unsuccessfull login, show error
               // TODO: Vanessa add translator code
@@ -82,7 +76,9 @@ public class LoginController extends Controller<LoginModel, LoginView>{
   private void goToLobbyView(User user){
      LobbyModel model = new LobbyModel();
      LobbyView view = new LobbyView(this.view.getStage(), model);
-     LobbyController lobbyController = new LobbyController(view,model);
+
+     FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/LobbyView.fxml"));
+     loader.setController(new LobbyController(view, model));
 
      this.view.stop();
      view.start();
@@ -104,8 +100,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
             this.view.stop();
             view.start();
     }
-
-
 
  private void setError(){
       view.setLoginError();
