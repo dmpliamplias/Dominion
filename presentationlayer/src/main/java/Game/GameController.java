@@ -21,12 +21,9 @@ public class GameController extends Controller<GameModel, GameView> {
     public GameController(GameModel model, GameView view, boolean myTurn){
         super(model,view);
         serverConnection = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setGameController(this);
-
         initialize();
 
     }
-
 
 
     public void initialize() {
@@ -36,6 +33,16 @@ public class GameController extends Controller<GameModel, GameView> {
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
+
+        view.btnChatSend.setOnAction( event -> {
+            sendMessage();
+        } );
+
+        view.btnSendText.setOnAction( event -> {
+            sendButtonText();
+        } );
+
+
     }
 
     /**
@@ -44,7 +51,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void sendMessage(){
 
-        view.btnChatSend.setOnAction((event) -> {
 
             String message  = view.textFieldChat.getText();
             ChatContainer cc = new ChatContainer();
@@ -55,13 +61,9 @@ public class GameController extends Controller<GameModel, GameView> {
             } catch (IOException e) {
                 view.alert(e.getMessage(), Alert.AlertType.ERROR);
             }
-
-        });
     }
 
     public void sendButtonText(){
-
-        view.btnSendText.setOnAction( event -> {
 
             ChatContainer cc = new ChatContainer();
             cc.setMsg( view.btnSendText.getText());
@@ -71,9 +73,6 @@ public class GameController extends Controller<GameModel, GameView> {
             } catch (IOException e) {
                 view.alert(e.getMessage(), Alert.AlertType.ERROR);
             }
-
-
-        } );
     }
 
 
