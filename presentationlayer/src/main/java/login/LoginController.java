@@ -79,7 +79,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       });
   }
 
-  // change to goToWhatEverView ...
   private void goToLobbyView(User user){
      LobbyModel model = new LobbyModel();
      LobbyView view = new LobbyView(this.view.getStage(), model);

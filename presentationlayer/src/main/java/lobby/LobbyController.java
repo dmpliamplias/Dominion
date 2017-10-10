@@ -38,15 +38,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public LobbyController(LobbyView view, LobbyModel model){
         super(model,view);
-<<<<<<< Updated upstream
         initialize();
-        _user = user; // I think you need id here for set ranking when game is over...
-=======
-        _user = plServiceLocator.getUser();
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
->>>>>>> Stashed changes
-        _translator = ServiceLocator.getServiceLocator().getTranslator();
-
+        _user = plServiceLocator.getUser(); // I think you need id here for set ranking when game is over...
+        serverConnectionService.setLobbyController(this);
     }
 
     public void initialize() {
@@ -73,6 +67,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private void goToGameView(){
         GameModel model = new GameModel();
         GameView view = new GameView(this.view.getStage(), model);
+        GameController gameController = new GameController(model,view, serverConnectionService.isHoster());
 
         this.view.stop();
         view.start();
