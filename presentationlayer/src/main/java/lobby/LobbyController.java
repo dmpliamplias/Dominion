@@ -39,7 +39,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     public LobbyController(LobbyView view, LobbyModel model){
         super(model,view);
         _user = plServiceLocator.getUser(); // I think you need id here for set ranking when game is over...
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
+        serverConnectionService.setLobbyController(this);
         initialize();
     }
 
@@ -50,9 +50,13 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        view.btnStart.setDisable(!PLServiceLocator.getPLServiceLocator().getServerConnectionService().isHoster()); // only hoster can start game.
+        view.btnStart.setDisable(!serverConnectionService.isHoster()); // only hoster can start game.
         view.btnStart.setOnAction((event) -> {
            startGame();
+        });
+
+        view.btnGameView.setOnAction((event) -> {
+            goToGameView();
         });
     }
 

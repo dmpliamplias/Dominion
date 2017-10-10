@@ -39,6 +39,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
        }); //** @author Murat Kelleci
 
         view.btnSignUp.setOnAction((event)-> this.goToRegisterView());
+
+        view.btnLobbyView.setOnAction((event -> {
+            goToLobbyView();
+        }));
     }
 
   public void login(){
@@ -73,12 +77,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       });
   }
 
-  private void goToLobbyView(User user){
+  private void goToLobbyView(){
      LobbyModel model = new LobbyModel();
      LobbyView view = new LobbyView(this.view.getStage(), model);
-
-     FXMLLoader loader = new FXMLLoader(getClass().getResource("gamestart/LobbyView.fxml"));
-     loader.setController(new LobbyController(view, model));
+     LobbyController lobbyController = new LobbyController(view, model);
 
      this.view.stop();
      view.start();
@@ -92,13 +94,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
         RegisterController registerController = new RegisterController(view,model);
         this.view.stop();
         view.start();
-    }
-
-    private void goToLobbyView(){
-            LobbyModel model = new LobbyModel();
-            LobbyView view = new LobbyView(this.view.getStage(), model);
-            this.view.stop();
-            view.start();
     }
 
  private void setError(){

@@ -46,9 +46,9 @@ public class LobbyView extends View<LobbyModel> {
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle( "Lobby");
+        stage.setTitle( "Game");
 
-
+        btnStart = new Button("Game View");
         return scene;
     }
 
