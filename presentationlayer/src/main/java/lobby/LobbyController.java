@@ -47,9 +47,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     public void initialize() {
 
         view.btnGameView.setOnAction( event -> {
-            goToLoginView();
+            goToGameView();
         } );
-
+        
        try {
             serverConnectionService.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
@@ -60,10 +60,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         view.btnStart.setOnAction((event) -> {
            startGame();
         });
+
+
     }
 
 
-    private void goToLoginView(){
+    private void goToGameView(){
         GameModel model = new GameModel();
         GameView view = new GameView(this.view.getStage(), model);
 
