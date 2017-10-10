@@ -34,11 +34,11 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     public void initialize() {
         // TODO: 10.10.2017  murat due das unskommentierte wieder ine? wieso hesches usegno?
-        //try {
-        //    serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
-        //} catch (IOException e) {
-         //   this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
-        //}
+        try {
+            serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
+        } catch (IOException e) {
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
 
         //TODO for Murat ActionEvent click on Cancel delete all fields
 
