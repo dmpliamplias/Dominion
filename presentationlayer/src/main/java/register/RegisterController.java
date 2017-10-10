@@ -26,17 +26,17 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
     public RegisterController(RegisterView view, RegisterModel model){
             // TODO: 30.09.2017 murat => super(model,view);
         super(model,view);
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setRegisterController(this);
+        serverConnectionService.setRegisterController(this);
 
         initialize();
         }
 
     public void initialize() {
-        try {
-            serverConnectionService.updateViewStatus(ViewStatus.Login); // set ViewStatus for Server
-        } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
-        }
+        //try {
+        //    serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
+        //} catch (IOException e) {
+         //   this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        //}
 
         //TODO for Murat ActionEvent click on Cancel delete all fields
 

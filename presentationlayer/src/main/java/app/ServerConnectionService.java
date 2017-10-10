@@ -95,17 +95,19 @@ public class ServerConnectionService extends Thread{
             ConnectionContainer connectionContainer = (ConnectionContainer)c;
             this.clientId = connectionContainer.getId();
             System.out.println("I'm client: " + this.clientId);
-        }
-        else if(c.getMethod() == Methods.Login && loginController != null){
+        }else if(c.getMethod()==Methods.Register && registerController != null) {
+            registerController.handleServerAnswer((RegisterContainer)c);
+        }else if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
         }else if(c.getMethod() == Methods.Chat && gameController != null){
             ChatContainer chatContainer = (ChatContainer)c;
             gameController.receiveMessage(chatContainer );
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
             lobbyController.handleServerAnswer_startGame(((LobbyContainer)c).isYourTurn());
-        }else if(c.getMethod() == Methods.Rankings){
-            RankingContainer rc = (RankingContainer)c;
+        }else if(c.getMethod() == Methods.Rankings) {
+            RankingContainer rc = (RankingContainer) c;
             rankingController.handleServerAnswer(rc.getHighScores());
+
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
