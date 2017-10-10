@@ -1,14 +1,11 @@
 package register;
 
 
-import app.PLServiceLocator;
-import app.ServerConnectionService;
+
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.service.ServiceLocator;
-import com.weddingcrashers.service.UserService;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import login.LoginController;
@@ -25,14 +22,14 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
 
     public RegisterController(RegisterView view, RegisterModel model){
-            // TODO: 30.09.2017 murat => super(model,view);
+        // TODO: 30.09.2017 murat => super(model,view);
         super(model,view);
         serverConnectionService.setRegisterController(this);
 
         initialize();
-        }
+    }
 
-    public void initialize() {
+    private void initialize() {
 
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
@@ -45,16 +42,16 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
             view.refreshModel();
-            });
-        }
+        });
+    }
 
-    public void register() {
+    private void register() {
         String pw = this.view.txtPw.getText();
         String pw_confirm = this.view.txtPw_confirm.getText();
         String email = this.view.txtEmail.getText();
         String userName = this.view.txtUserName.getText();
 
-        if (!(pw.isEmpty() || pw == pw_confirm || email.isEmpty() || userName.isEmpty())) ;
+        if (!(pw.isEmpty() || pw.equals(pw_confirm) || email.isEmpty() || userName.isEmpty()));
         User user = new User();
         user.setUserEmail(email);
         user.setUserName(userName);
@@ -81,9 +78,9 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
     }
 
 
-        //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
+    //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
 
-        //TODO for Murat Methode goToLoginView sauber fertig implementieren
+    //TODO for Murat Methode goToLoginView sauber fertig implementieren
     //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class
     private void goToLoginView(){
         LoginModel model =new LoginModel();
@@ -94,11 +91,11 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     }
 
-        private void setError(){
-            view.setError("error");
-}
-
-
-
+    private void setError(){
+        view.setError("error");
     }
+
+
+
+}
 
