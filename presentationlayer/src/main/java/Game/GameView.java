@@ -22,7 +22,6 @@ public class GameView extends View<GameModel> {
      *  author Manuel Wirz
      *  */
 
-     BorderPane chatPane;
      protected TextArea textAreaChat;
      protected TextField textFieldChat;
      protected Button btnChatSend;
@@ -37,11 +36,8 @@ public class GameView extends View<GameModel> {
 
     public Scene create_GUI(){
 
-
-
-
-
         BorderPane root = new BorderPane();
+        BorderPane chatPane = new BorderPane();
         root.setRight( chatPane );
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
@@ -55,24 +51,19 @@ public class GameView extends View<GameModel> {
 
         // ----- Chatview ------- TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
-        this.chatPane = new BorderPane();
         this.textAreaChat = new TextArea();
         // Button soll send Message heissen
-        this.btnChatSend  = new Button(translator.getString( "GameViewBtnSend"));
+        this.btnChatSend  = new Button("Send");
         this.textFieldChat= new TextField();
         // Button soll Good Play heissen
-        this.btnSendText = new Button( translator.getString( "GameViewBtnSendText" ));
+        this.btnSendText = new Button("Send Good Play");
 
-        // set the Aligment
-        this.chatPane.setCenter( textAreaChat );
-        this.chatPane.setBottom( textFieldChat );
-        this.chatPane.setBottom( btnChatSend );
 
         // Add children to Borderpane
-        this.chatPane.getChildren().add( textAreaChat );
-        this.chatPane.getChildren().add( btnChatSend );
-        this.chatPane.getChildren().add( textFieldChat );
-        this.chatPane.getChildren().add( btnSendText );
+        chatPane.getChildren().add( textAreaChat );
+        chatPane.getChildren().add( btnChatSend );
+        chatPane.getChildren().add( textFieldChat );
+        chatPane.getChildren().add( btnSendText );
 
 
         // Layout button as a cycle
@@ -80,8 +71,6 @@ public class GameView extends View<GameModel> {
         this.btnSendText.setShape( new Circle( circleSize ) );
         this.btnSendText.setMaxSize( 2*circleSize, 2*circleSize );
         this.btnSendText.setMinSize( 2*circleSize, 2*circleSize );
-
-
 
 
         return scene;

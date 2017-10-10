@@ -27,6 +27,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+
+
     public void initialize() {
         try {
             serverConnection.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server

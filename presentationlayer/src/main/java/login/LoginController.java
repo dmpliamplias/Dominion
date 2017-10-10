@@ -1,5 +1,7 @@
 package login;
 
+import Game.GameController;
+import Game.GameModel;
 import app.PLServiceLocator;
 import base.Controller;
 import app.ServerConnectionService;
@@ -31,6 +33,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
+
         view.btnLogin.setOnAction((event) -> {
            view.refreshModel();
            this.login();
@@ -38,6 +41,8 @@ public class LoginController extends Controller<LoginModel, LoginView>{
        }); //** @author Murat Kelleci
 
         view.btnSignUp.setOnAction((event)-> this.goToRegisterView());
+
+        view.btnLobbyView.setOnAction((event)-> this.goToLobbyView());
     }
 
   public void login(){
@@ -90,6 +95,15 @@ public class LoginController extends Controller<LoginModel, LoginView>{
         this.view.stop();
         view.start();
     }
+
+    private void goToLobbyView(){
+            LobbyModel model = new LobbyModel();
+            LobbyView view = new LobbyView(this.view.getStage(), model);
+            this.view.stop();
+            view.start();
+    }
+
+
 
  private void setError(){
       view.setLoginError();

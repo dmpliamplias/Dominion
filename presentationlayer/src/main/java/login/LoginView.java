@@ -25,6 +25,7 @@ public class LoginView extends View<LoginModel> {
     protected TextField user;
     protected PasswordField pw;
     protected Label lblError;
+    protected Button btnLobbyView;
 
 
     public LoginView(Stage stage, LoginModel model) {
@@ -55,11 +56,13 @@ public class LoginView extends View<LoginModel> {
         btnSignUp = new Button();
         btnSignUp.setText("Sign Up");
         btnSignUp.setPrefSize(130,40);
+        btnLobbyView = new Button( "Lobby" );
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnLogin);
         hbBtn.getChildren().add(btnSignUp);
+        hbBtn.getChildren().add( btnLobbyView );
         grPa.add(hbBtn, 1, 4);
 
         Label userName = new Label("User Name:");

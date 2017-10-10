@@ -38,14 +38,19 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public LobbyController(LobbyView view, LobbyModel model, User user){
         super(model,view);
-        _user = user; // I think you need id here for set ranking when game is over...
-        PLServiceLocator.getPLServiceLocator().getServerConnectionService().setLobbyController(this);
-        _translator = ServiceLocator.getServiceLocator().getTranslator();
         initialize();
+        _user = user; // I think you need id here for set ranking when game is over...
+        _translator = ServiceLocator.getServiceLocator().getTranslator();
+
     }
 
     public void initialize() {
-        try {
+
+        view.btnGameView.setOnAction( event -> {
+            goToLoginView();
+        } );
+
+       try {
             serverConnectionService.updateViewStatus(ViewStatus.Lobby); // set ViewStatus for Server
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
@@ -57,6 +62,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         });
     }
 
+
+    private void goToLoginView(){
+        GameModel model = new GameModel();
+        GameView view = new GameView(this.view.getStage(), model);
+
+        this.view.stop();
+        view.start();
+
+    }
     public void handleServerAnswer_newPlayer(LobbyContainer lc){
         Platform.runLater(() -> {
             String res = "";
