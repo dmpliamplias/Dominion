@@ -33,8 +33,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         }
 
     public void initialize() {
-        // TODO: 10.10.2017  murat due das unskommentierte wieder ine? wieso hesches usegno?
-        // TODO:10.10.2017 wollte nur etwas überprüfen.
+
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
         } catch (IOException e) {
@@ -85,7 +84,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
 
         //TODO for Murat Methode goToLoginView sauber fertig implementieren
-
+    //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class
     private void goToLoginView(){
         LoginModel model =new LoginModel();
         LoginView view =new LoginView(this.view.getStage(), model);
