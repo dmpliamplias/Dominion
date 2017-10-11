@@ -63,13 +63,14 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         RegisterContainer registerContainer = new RegisterContainer();
         //registerContainer.setUser(null);//mit MIchel abklären
 
-        if (!(pw.isEmpty() && pw.equals(pw_confirm) && !email.isEmpty() && !userName.isEmpty())) {
+        if (!(pw.isEmpty() || pw.equals(pw_confirm) || !email.isEmpty() || !userName.isEmpty())) {
 
             User user = new User();
             if (validate(email)){
                 user.setUserEmail(email);
+
             } else {
-                setErrorMail();
+                setInfoMail();
             }
 
             user.setUserName(userName);
@@ -90,10 +91,15 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         Platform.runLater(() -> {
             User user = memberContainer.getUser();
 
+            if (user.getUserEmail()==null){
+                setEmailExistsInfo();
+            } else {
+
             if (user.getUserName() == null) {
-                setUserExistsError();
+                setUserExistsInfo();
             } else {
                 goToLoginView();
+            }
             }
         });
     }
@@ -121,17 +127,21 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         this.view.alert("setError", Alert.AlertType.WARNING);
     }
 
-    private void setErrorMail(){
-        this.view.alert("errorMail", Alert.AlertType.WARNING);
+    private void setInfoMail(){
+        this.view.alert("errorMail", Alert.AlertType.INFORMATION);
     }
 
-    private void setUserExistsError(){
+    private void setUserExistsInfo(){
 
-        this.view.alert("errorUser", Alert.AlertType.WARNING);
+        this.view.alert("errorUser", Alert.AlertType.INFORMATION);
 
     }
 
+    private void setEmailExistsInfo() {
 
+        this.view.alert("Email Already Exists", Alert.AlertType.INFORMATION);
+
+    }
 
 }
 
