@@ -3,6 +3,7 @@ package app;
 import Game.GameController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
+import javafx.scene.control.Alert;
 import lobby.LobbyController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -117,30 +118,8 @@ public class ServerConnectionService extends Thread{
     // TODO: 30.09.2017 Michel displays correctly?
     private void displayError(String msg){
         Platform.runLater(()->{
-            Stage dialog = new Stage();
-            BorderPane root = new BorderPane();
-            Label lbl = new Label();
-            lbl.setText(msg);
-            Button btnClose = new Button();
-            btnClose.setText("Close");
-            
-            root.getChildren().add(lbl);
-            root.getChildren().add(btnClose);
-            Scene scene = new Scene(root);
-
-
-            dialog.setScene(scene);
-           // dialog.initOwner(stage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
-
-            dialog.showAndWait();
-
-            btnClose.setOnAction((e) -> {
-                dialog.close();
-            });
-            
-            dialog.show();
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, msg);
+            alert.showAndWait();
         });
 
     }

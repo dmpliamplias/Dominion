@@ -39,10 +39,11 @@ public class Server extends Thread {
     public static void dispose(){
         if(server != null && !serverSocket.isClosed()){
             try {
-                serverSocket.close();
                 for(Client c: clients){
                     c.dispose();
+                    c = null;
                 }
+                serverSocket.close();
                 server = null;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -78,7 +79,9 @@ public class Server extends Thread {
             }
         } catch (Exception ex){
             for(Client client : clients){
-                ServerUtils.sendError(client,ex);
+                if(!client.get_clientSocket().isClosed()) {
+                    ServerUtils.sendError(client, ex);
+                }
             }
 
         }
