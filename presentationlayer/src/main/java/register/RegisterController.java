@@ -91,16 +91,12 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         Platform.runLater(() -> {
             User user = memberContainer.getUser();
 
-            if (user.getUserEmail()==null){
-                setEmailExistsInfo();
-            } else {
-
             if (user.getUserName() == null) {
                 setUserExistsInfo();
             } else {
                 goToLoginView();
             }
-            }
+
         });
     }
 
@@ -133,15 +129,12 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     private void setUserExistsInfo(){
 
-        this.view.alert("errorUser", Alert.AlertType.INFORMATION);
+        this.view.alert("This User exists already!", Alert.AlertType.INFORMATION);
 
     }
 
-    private void setEmailExistsInfo() {
 
-        this.view.alert("Email Already Exists", Alert.AlertType.INFORMATION);
 
-    }
 
 }
 
