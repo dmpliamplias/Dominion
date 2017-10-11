@@ -1,7 +1,6 @@
 package register;
 
 
-
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.RegisterContainer;
@@ -11,15 +10,22 @@ import javafx.scene.control.Alert;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 import java.io.IOException;
 
 /**
- * @author Murat Kelleci
+ * @author Murat Kelleci  , Co-Author Michel Schlatter has fixed some bug fixes
  */
 
 public class RegisterController extends Controller<RegisterModel, RegisterView> {
 
+// Pattern-Definition E-Mail
+    // https://stackoverflow.com/questions/8204680/java-regex-email
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public RegisterController(RegisterView view, RegisterModel model){
         // TODO: 30.09.2017 murat => super(model,view);
@@ -30,6 +36,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
     }
 
     private void initialize() {
+
 
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
@@ -45,20 +52,31 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         });
     }
 
+
+
     private void register() {
         String pw = this.view.txtPw.getText();
         String pw_confirm = this.view.txtPw_confirm.getText();
         String email = this.view.txtEmail.getText();
         String userName = this.view.txtUserName.getText();
 
-        if (!(pw.isEmpty() || pw.equals(pw_confirm) || email.isEmpty() || userName.isEmpty()));
-        User user = new User();
-        user.setUserEmail(email);
-        user.setUserName(userName);
-        user.setPassword(pw);
         RegisterContainer registerContainer = new RegisterContainer();
-        registerContainer.setUser(user);
+        //registerContainer.setUser(null);//mit MIchel abklären
 
+        if (!(pw.isEmpty() && pw.equals(pw_confirm) && !email.isEmpty() && !userName.isEmpty())) {
+
+            User user = new User();
+            if (validate(email)){
+                user.setUserEmail(email);
+            } else {
+                setErrorMail();
+            }
+
+            user.setUserName(userName);
+            user.setPassword(pw);
+            registerContainer.setUser(user);
+
+        }
 
         try {
             serverConnectionService.sendObject(registerContainer);
@@ -68,10 +86,13 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     }
 
-    public void handleServerAnswer(RegisterContainer member){
+    public void handleServerAnswer(RegisterContainer memberContainer){
         Platform.runLater(() -> {
-            User user = member.getUser();
-            if(user != null){
+            User user = memberContainer.getUser();
+
+            if (user.getUserName() == null) {
+                setUserExistsError();
+            } else {
                 goToLoginView();
             }
         });
@@ -91,8 +112,23 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     }
 
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
     private void setError(){
-        view.setError("error");
+        this.view.alert("setError", Alert.AlertType.WARNING);
+    }
+
+    private void setErrorMail(){
+        this.view.alert("errorMail", Alert.AlertType.WARNING);
+    }
+
+    private void setUserExistsError(){
+
+        this.view.alert("errorUser", Alert.AlertType.WARNING);
+
     }
 
 
