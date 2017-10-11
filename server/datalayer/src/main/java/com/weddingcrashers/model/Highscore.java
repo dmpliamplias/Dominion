@@ -14,7 +14,6 @@ public class Highscore extends BaseEntity {
 
     // ---- Members
 
-//    @Column(name = "USER_ID", nullable = false)
     @ManyToOne
     private User user;
 

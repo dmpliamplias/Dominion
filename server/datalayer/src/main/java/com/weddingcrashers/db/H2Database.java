@@ -41,7 +41,7 @@ public final class H2Database {
             tcpServer = createTcpServer("-tcpAllowOthers", "-tcpPort", PORT).start();
             Class.forName("org.h2.Driver");
             Connection connection = getConnection(DATABASE_URL, "sa", "sa");
-            LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog() + "on port " + PORT);
+            LOG.info("Connection Established: " + connection.getMetaData().getDatabaseProductName() + "/" + connection.getCatalog() + " on port: " + PORT);
         }
         catch (Exception e) {
             LOG.severe(e.getMessage());
@@ -53,7 +53,7 @@ public final class H2Database {
      */
     public void shutdownDatabase() {
         tcpServer.stop();
-        LOG.info("Shutdown the tcp server listening on port " + tcpServer.getPort());
+        LOG.info("Shutdown the tcp server listening on port: " + tcpServer.getPort());
     }
 
 }

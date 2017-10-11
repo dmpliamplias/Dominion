@@ -13,7 +13,6 @@ public class Settings extends BaseEntity {
 
     // ---- Members
 
-//    @Column(name = "USER_ID", nullable = false)
     @OneToOne
     private User user;
 

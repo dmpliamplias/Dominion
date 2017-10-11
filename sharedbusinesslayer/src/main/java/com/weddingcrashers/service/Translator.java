@@ -7,15 +7,26 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
+
+/**
+ * Translator.
+ *
+ * @author dmpliamplias
+ */
 public class Translator {
 
     // ---- Statics
 
     /** The supported locales. */
-    private static final Locale[] availableLocales = {Locale.GERMAN, Locale.ENGLISH};
+    private static final Locale[] availableLocales = {GERMAN, ENGLISH};
 
     /** The suffix for the translation files. */
     private static final String SUFFIX = ".properties";
+
+    /** The path to translation resources. */
+    private static final String PATH = "/translation/trans";
 
     /** The logger. */
     private static final Logger logger = ServiceLocator.getLogger();
@@ -32,14 +43,12 @@ public class Translator {
     // ---- Constructor
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param localeString the locale.
      */
     public Translator(String localeString) {
-        // Can we find the language in our supported locales?
-        // If not, use VM default locale
-        Locale locale = Locale.getDefault();
+        Locale locale = null;
         if (localeString != null) {
             for (Locale availableLocale : availableLocales) {
                 String tmpLang = availableLocale.getLanguage();
@@ -52,34 +61,51 @@ public class Translator {
 
         // Load the resource strings
         translations = new Properties();
-        final InputStream in = getClass().getResourceAsStream("/translation/trans_" + locale + SUFFIX);
+
+        boolean isDefault = false;
+        InputStream in;
+        if (locale == null) {
+            // fallback properties
+            in = getClass().getResourceAsStream(PATH + SUFFIX);
+            isDefault = true;
+        }
+        else {
+            // locale properties
+            in = getClass().getResourceAsStream(PATH + "_" + locale + SUFFIX);
+        }
         try {
             translations.load(in);
         } catch (IOException e) {
             logger.warning("Could not load translation");
         }
-        Locale.setDefault(locale); // Change VM default (for dialogs, etc.)
+        if (isDefault) {
+            locale = GERMAN;
+        }
+        Locale.setDefault(locale);
         currentLocale = locale;
 
         logger.info("Loaded resources for " + locale.getLanguage());
     }
 
     /**
-     * Return the current locale; this is useful for formatters, etc.
+     * @return the current locale.
      */
     public Locale getCurrentLocale() {
         return currentLocale;
     }
 
     /**
-     * Public method to get string resources, default to "--" *
+     * Returns the value for the given key from the translation properties file.
+     *
+     * @param key the key to load the value for.
+     * @return the value for the given key.
      */
     public String getString(String key) {
         try {
             return translations.getProperty(key);
         } catch (MissingResourceException e) {
-            logger.warning("Missing string: " + key);
-            return "--";
+            logger.warning("Missing value for key: " + key);
+            return "NOT DEFINED";
         }
     }
 }
