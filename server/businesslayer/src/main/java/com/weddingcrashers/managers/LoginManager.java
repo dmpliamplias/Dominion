@@ -22,7 +22,7 @@ public class LoginManager extends Manager {
 
     public void login(String email, String password){
        User user = _userService.getUserByEmail(email);
-        LoginContainer loginContainer = new LoginContainer();
+       LoginContainer loginContainer = new LoginContainer();
 
        if(user != null){
           if(user.getPassword().equals(Utils.hashPassword(password))) {

@@ -46,8 +46,9 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     }
 
   public void login(){
-       String pw = view.pw.getText();
-       String email = view.pw.getText();
+        view.refreshModel();
+       String pw = model.getPassword();
+       String email = model.getEmail();
 
        if(pw != null && !pw.isEmpty() && email != null && !email.isEmpty()){
            LoginContainer loginContainer = new LoginContainer();

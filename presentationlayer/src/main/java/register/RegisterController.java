@@ -48,22 +48,25 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
-            view.refreshModel();
+
         });
     }
 
 
 
     private void register() {
-        String pw = this.view.txtPw.getText();
-        String pw_confirm = this.view.txtPw_confirm.getText();
-        String email = this.view.txtEmail.getText();
-        String userName = this.view.txtUserName.getText();
+        view.refreshModel();
+        String pw = model.getPassword();
+        String pw_confirm = model.getPassword_confirm();
+        String email = model.getEmail();
+        String userName = model.getUserName();
 
-        RegisterContainer registerContainer = new RegisterContainer();
-        //registerContainer.setUser(null);//mit MIchel abklären
 
-        if (!(pw.isEmpty() || pw.equals(pw_confirm) || !email.isEmpty() || !userName.isEmpty())) {
+        if (pw != null && !pw.isEmpty() && pw.equals(pw_confirm)
+                && email != null && !email.isEmpty() &&
+                userName != null && !userName.isEmpty()) {
+
+            RegisterContainer registerContainer = new RegisterContainer();
 
             User user = new User();
             if (validate(email)){
@@ -77,13 +80,15 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             user.setPassword(pw);
             registerContainer.setUser(user);
 
+            try {
+                serverConnectionService.sendObject(registerContainer);
+            } catch (Exception e) {
+                view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            }
+
         }
 
-        try {
-            serverConnectionService.sendObject(registerContainer);
-        } catch (Exception e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
-        }
+
 
     }
 
@@ -91,7 +96,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         Platform.runLater(() -> {
             User user = memberContainer.getUser();
 
-            if (user.getUserName() == null) {
+            if (user == null) {
                 setUserExistsInfo();
             } else {
                 goToLoginView();
