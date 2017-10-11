@@ -1,28 +1,23 @@
 package connection;
 
 import app.PLServiceLocator;
-import base.Controller;
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.server.Server;
 import app.ServerConnectionService;
+import base.Controller;
+import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import lobby.LobbyController;
-import lobby.LobbyModel;
-import lobby.LobbyView;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 
 /**
- * @author  Michel Schlatter & Vanessa Cajochen
+ * @author Michel Schlatter
+ * @author Vanessa Cajochen
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
