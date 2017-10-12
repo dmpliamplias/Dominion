@@ -82,7 +82,8 @@ public class ConnectionView extends View<ConnectionModel> {
     
     public Stage create_Dialog(){
 		secondStage = new Stage();
-		
+
+
 		secondStage.initOwner(stage);
 		secondStage.initModality(Modality.WINDOW_MODAL);
 		
@@ -93,7 +94,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button("Connect");			
 		lblPort = new Label("Port");
-	    	fldPort = new TextField();
+		fldPort = new TextField();
 		lblInfo = new Label("Insert port number");
 	    	    			
 		// Set size for the buttons and FlowPane
@@ -161,8 +162,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnOK.setText("Connect to Server");
 		stage.setTitle("Join Server");
 
-		fldIP.setDisable(true);
-		fldPort.setDisable(true);
+		// TODO@Vanessa wieder ändern
+		fldIP.setDisable(false);
+		fldPort.setDisable(false);
 		return stage;
 	}
 

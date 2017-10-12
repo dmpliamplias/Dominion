@@ -43,6 +43,7 @@ public class GameController extends Controller<GameModel, GameView> {
         } );
 
 
+
     }
 
     /**
@@ -63,6 +64,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
     }
 
+
     public void sendButtonText(){
 
             ChatContainer cc = new ChatContainer();
@@ -80,6 +82,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         Platform.runLater(() -> {
 
+            System.out.println("Empfangen");
             String beforeText = view.textAreaChat.getText();
             String newText = beforeText += System.getProperty("line.separator") + chatContainer.getMsg();
             view.textAreaChat.setText(newText);
