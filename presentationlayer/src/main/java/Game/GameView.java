@@ -37,6 +37,8 @@ public class GameView extends View<GameModel> {
 
     public Scene create_GUI(){
 
+        stage.setWidth( 1000 );
+        stage.setHeight( 1000 );
         BorderPane root = new BorderPane();
         GridPane chatPane = new GridPane();
         root.setRight( chatPane );
@@ -45,8 +47,7 @@ public class GameView extends View<GameModel> {
         stage.setScene(scene);
         stage.setFullScreen( false );
         stage.setTitle( "Dominion" );
-        stage.setWidth( 1000 );
-        stage.setHeight( 1000 );
+
 
 
         chatPane.setAlignment(Pos.BOTTOM_RIGHT);
@@ -70,7 +71,7 @@ public class GameView extends View<GameModel> {
 
 
         this.btnChatSend  = new Button();
-        this.btnChatSend.setPrefSize(150, 30);
+        this.btnChatSend.setPrefSize(150, 50);
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
@@ -78,7 +79,7 @@ public class GameView extends View<GameModel> {
 
 
         this.btnSendText = new Button();
-        this.btnSendText.setPrefSize(150, 30);
+        this.btnSendText.setPrefSize(150, 50);
 
 
         // Create HBox +

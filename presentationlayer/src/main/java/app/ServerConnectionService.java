@@ -106,7 +106,11 @@ public class ServerConnectionService extends Thread{
             lobbyController.handleServerAnswer_startGame(((LobbyContainer)c).isYourTurn());
         }else if(c.getMethod() == Methods.Rankings) {
             RankingContainer rc = (RankingContainer) c;
-            rankingController.handleServerAnswer(rc.getHighScores());
+            rankingController.handleServerAnswer( rc.getHighScores() );
+
+        //TODO Migi mach das else if statement lauft bitte
+        }else if(c.getMethod() == Methods.Chat && lobbyController != null){
+            lobbyController.receiveMessage( (ChatContainer)c );
 
         }
         else if(c.getMethod() == Methods.Client_Server_Error){

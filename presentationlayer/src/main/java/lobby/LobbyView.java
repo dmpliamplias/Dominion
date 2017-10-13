@@ -22,7 +22,7 @@ public class LobbyView extends View<LobbyModel> {
     protected ListView lvPlayers;
     protected Button btnStart;
     protected Button btnGameView;
-    protected TextArea textAreaChat;
+    protected TextArea txtAreaChat;
     protected TextField textFieldChat;
     protected Button btnChatSend;
 
@@ -33,22 +33,21 @@ public class LobbyView extends View<LobbyModel> {
     public Scene create_GUI(){
 
         stage.setHeight(900);
-        stage.setWidth(1400);
+        stage.setWidth(1500);
 
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();
         root.setCenter( gridPane );
-        // lbl = new Label();
-        // btnGameView = new Button("GameView");
-        // lvPlayers = new ListView();
-        // lvPlayers.setDisable(true);
-        // gridPane.add( btnGameView,1,1 );
-        // root.getChildren().addAll(lvPlayers, lbl);
+        lbl = new Label();
+        btnGameView = new Button("GameView");
+        lvPlayers = new ListView();
+        lvPlayers.setDisable(true);
+        gridPane.add( btnGameView,1,1 );
+        root.getChildren().addAll(lvPlayers, lbl);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle( "Game");
 
 
         gridPane.setAlignment(Pos.BOTTOM_RIGHT);
@@ -64,17 +63,17 @@ public class LobbyView extends View<LobbyModel> {
 
         // Chatview
 
-        this.textAreaChat = new TextArea();
-        this.textAreaChat.setEditable( false );
-        this.textAreaChat.setPromptText( "Chat Room" );
+        this.txtAreaChat = new TextArea();
+        this.txtAreaChat.setEditable( false );
+        this.txtAreaChat.setPromptText( "Chat Room" );
 
 
         this.btnChatSend  = new Button();
-        this.btnChatSend.setPrefSize(150, 30);
+        this.btnChatSend.setPrefSize(250, 50);
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
-        this.textFieldChat.setPrefSize( 350,50 );
+        this.textFieldChat.setPrefSize( 450,50 );
 
         // create HBox for chat
 
@@ -83,9 +82,9 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(textFieldChat);
         hBox.getChildren().add(btnChatSend);
         gridPane.add(hBox, 1, 3);
-        gridPane.add( textAreaChat, 1,2 );
+        gridPane.add( txtAreaChat, 1,2 );
 
-        //setTexts();
+        setTexts();
 
         btnStart = new Button("Game View");
 
@@ -94,10 +93,10 @@ public class LobbyView extends View<LobbyModel> {
     }
 
 
-    //TODO Manuel anpassen
     protected void setTexts() {
 
-       // this.stage.setTitle(getText("LobbyView_Title"));
+       this.stage.setTitle(getText("LobbyView_Title"));
+       this.btnChatSend.setText( translator.getString( "send" ) );
 
     }
 
