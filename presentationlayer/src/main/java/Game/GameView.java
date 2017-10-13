@@ -43,10 +43,10 @@ public class GameView extends View<GameModel> {
         Scene scene = new Scene(root, 1500, 1500);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
-        stage.setFullScreen( true );
+        stage.setFullScreen( false );
         stage.setTitle( "Dominion" );
-        stage.setWidth( 150 );
-        stage.setHeight( 150 );
+        stage.setWidth( 1500 );
+        stage.setHeight( 1500 );
 
 
         chatPane.setAlignment(Pos.CENTER);
