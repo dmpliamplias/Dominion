@@ -22,7 +22,7 @@ public final class H2Database {
     private static final Logger LOG = Logger.getLogger(H2Database.class.getSimpleName());
 
     /** The database port. */
-    private static final String PORT = "10101";
+    private static final String PORT = "9092";
 
 
     // ---- Members
