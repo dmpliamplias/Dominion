@@ -67,21 +67,23 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void sendButtonText(){
 
-            ChatContainer cc = new ChatContainer();
-            cc.setMsg( view.btnSendText.getText());
+        String message  = view.btnSendText.getText();
+        ChatContainer cc = new ChatContainer();
+        cc.setMsg(message );
+        String before = view.textAreaChat.getText();
+        String newText = before +=  message +  System.getProperty("line.separator");
+        view.textAreaChat.setText( newText );
 
+        try {
+            serverConnectionService.sendObject( cc );
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
 // TODO: 12.10.2017  Manu => wenn du schribsch den trägs au grad ih, ich shicks nur de andere clients, nöd dir auno (wills du ja de sender bish
         // und weisch was d schribsch. + add no de name vom client über 'plServiceLocator.getUser().getUserName()'
         //denn no farbig über d id vom client 'serverConnectionService.getClientId()'
         // es sind max 4 clients...den chash ja für 1 = blau für 2 = gelb usw.....
-
-
-            try {
-                serverConnectionService.sendObject( cc );
-            } catch (IOException e) {
-                view.alert(e.getMessage(), Alert.AlertType.ERROR);
-            }
-    }
 
 
     public void receiveMessage(ChatContainer chatContainer){
