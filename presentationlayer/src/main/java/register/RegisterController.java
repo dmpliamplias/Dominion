@@ -73,20 +73,22 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             User user = new User();
             if (validate(email)){
                 user.setUserEmail(email);
+                user.setUserName(userName);
+                user.setPassword(pw);
+                registerContainer.setUser(user);
+
+                try {
+                    serverConnectionService.sendObject(registerContainer);
+                } catch (Exception e) {
+                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                }
+
 
             } else {
                 setInfoMail();
             }
 
-            user.setUserName(userName);
-            user.setPassword(pw);
-            registerContainer.setUser(user);
 
-            try {
-                serverConnectionService.sendObject(registerContainer);
-            } catch (Exception e) {
-                view.alert(e.getMessage(), Alert.AlertType.ERROR);
-            }
 
         }else{
 
