@@ -94,9 +94,6 @@ public class LoginView extends View<LoginModel> {
         return this.stage;
     }
 
-    void setLoginError(){
-        lblError.setText(model.getError());
-    }
 
 
 }

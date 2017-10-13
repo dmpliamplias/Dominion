@@ -67,13 +67,11 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       Platform.runLater(() -> {
           User user = result.getUser();
           if(user != null){ // success
-              goToRegisterView();
+              goToLobbyView();
               plServiceLocator.setUser(user);
           }else{
               //unsuccessfull login, show error
-              // TODO: Vanessa add translator code
-              model.setError(ServiceLocator.getServiceLocator().getTranslator().getString("LoginView_LoginError"));
-              view.setLoginError();
+              view.alert(translator.getString("LoginView_LoginError"), Alert.AlertType.WARNING);
           }
       });
   }
@@ -96,10 +94,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
         this.view.stop();
         view.start();
     }
-
- private void setError(){
-      view.setLoginError();
- }
 
 
 

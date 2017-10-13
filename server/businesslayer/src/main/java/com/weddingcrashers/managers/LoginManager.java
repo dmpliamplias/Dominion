@@ -25,7 +25,8 @@ public class LoginManager extends Manager {
        LoginContainer loginContainer = new LoginContainer();
 
        if(user != null){
-          if(user.getPassword().equals(Utils.hashPassword(password))) {
+           // TODO: 13.10.2017  Dyoni:  if(user.getPassword().equals(Utils.hashPassword(password))) {
+          if(user.getPassword().equals(password)) {
               loginContainer.setUser(user);
           }
        }
