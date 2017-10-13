@@ -45,6 +45,7 @@ public abstract class View<M extends Model> {
     // ---- Methods
 
     protected abstract Scene create_GUI();
+    protected abstract void setTexts();
 
     /**
      * Display the view

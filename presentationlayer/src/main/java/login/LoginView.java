@@ -24,9 +24,11 @@ public class LoginView extends View<LoginModel> {
     protected Button btnSignUp;
     protected TextField user;
     protected PasswordField pw;
-    protected Label lblError;
     protected Button btnLobbyView;
 
+
+    private Label lblPw;
+    private Label lblEmail;
 
     public LoginView(Stage stage, LoginModel model) {
         super(stage, model);
@@ -37,7 +39,7 @@ public class LoginView extends View<LoginModel> {
         BorderPane root = new BorderPane();
         Scene scene=new Scene(root,500,450);
         GridPane grPa = new GridPane();
-        this.stage.setTitle("Login Page");
+
         this.stage.setHeight(500);
         this.stage.setWidth(800);
 
@@ -51,12 +53,10 @@ public class LoginView extends View<LoginModel> {
         //Creation of all needed Buttons and Fields
 
         btnLogin = new Button();
-        btnLogin.setText("Login");
         btnLogin.setPrefSize(130,40);
         btnSignUp = new Button();
-        btnSignUp.setText("Sign Up");
         btnSignUp.setPrefSize(130,40);
-        btnLobbyView = new Button( "Lobby" );
+        btnLobbyView = new Button( );
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
@@ -65,13 +65,13 @@ public class LoginView extends View<LoginModel> {
         hbBtn.getChildren().add( btnLobbyView );
         grPa.add(hbBtn, 1, 4);
 
-        Label userName = new Label("User Name:");
-        grPa.add(userName, 0, 1);
+        lblEmail = new Label();
+        grPa.add(lblEmail, 0, 1);
         user = new TextField();
         grPa.add(user,1,1);
 
-        Label password = new Label("Password:");
-        grPa.add(password, 0, 2);
+        lblPw = new Label();
+        grPa.add(lblPw, 0, 2);
         pw = new PasswordField();
         grPa.add(pw,1,2);
 
@@ -85,6 +85,18 @@ public class LoginView extends View<LoginModel> {
     }
 
 
+    protected void setTexts(){
+        this.stage.setTitle(getText("LoginView_Title"));
+        lblPw.setText(getText("Password"));
+        btnLobbyView.setText(getText("LoginView_btnGoToLobbyView"));
+        lblEmail.setText(getText("Email"));
+        btnLogin.setText(getText("Login"));
+        btnSignUp.setText(getText("Register"));
+    }
+
+    private String getText(String key){
+        return translator.getString(key);
+    }
     void refreshModel(){
         model.setPassword(pw.getText());
         model.setEmail(user.getText());
