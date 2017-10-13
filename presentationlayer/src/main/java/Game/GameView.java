@@ -41,12 +41,12 @@ public class GameView extends View<GameModel> {
         GridPane chatPane = new GridPane();
         root.setRight( chatPane );
         Scene scene = new Scene(root, 1500, 1500);
-        //scene.getStylesheets().add(getClass().getResource("GameView.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("/Game/GameView.css").toExternalForm());
         stage.setScene(scene);
         stage.setFullScreen( false );
         stage.setTitle( "Dominion" );
-        stage.setWidth( 1500 );
-        stage.setHeight( 1500 );
+        stage.setWidth( 1000 );
+        stage.setHeight( 1000 );
 
 
         chatPane.setAlignment(Pos.BOTTOM_RIGHT);
@@ -75,8 +75,6 @@ public class GameView extends View<GameModel> {
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
         this.textFieldChat.setPrefSize( 350,50 );
-        this.textFieldChat.setStyle( "-fx-text-inner-color: blue;" );
-        this.textFieldChat.setStyle("-fx-control-inner-background: black");
 
 
         this.btnSendText = new Button("Good Play");

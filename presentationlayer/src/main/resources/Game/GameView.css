@@ -1,0 +1,24 @@
+.text-field{
+
+    -fx-background-color: black;
+    -fx-text-fill: coral;
+
+}
+
+.text-area{
+
+    -fx-background-color: gray;
+}
+
+.button{
+
+    -fx-background-color: black;
+    -fx-text-fill: coral;
+}
+
+.root{
+
+    -fx-background-image: url("Tranzparent-Hintergrund.gif");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1000, 1000;
+}
