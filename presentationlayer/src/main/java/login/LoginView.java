@@ -81,6 +81,7 @@ public class LoginView extends View<LoginModel> {
         //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
         this.stage.setScene(scene);
 
+        setTexts();
         return scene;
     }
 
