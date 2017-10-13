@@ -44,10 +44,15 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        //TODO for Murat ActionEvent click on Cancel delete all fields + added go to LobbyView
+        //TODO for Murat ActionEvent click on Cancel delete all fields
 
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
+        });
+
+        this.view.btnCancel.setOnAction((event) ->{
+            this.cancel();
+
         });
     }
 
@@ -61,9 +66,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String userName = model.getUserName();
 
 
-        if (pw != null && !pw.isEmpty() && pw.equals(pw_confirm)
-                && email != null && !email.isEmpty() &&
-                userName != null && !userName.isEmpty()) {
+        if (pw != null && !pw.isEmpty() && pw.equals(pw_confirm) && email != null && !email.isEmpty() && userName != null && !userName.isEmpty()) {
 
             RegisterContainer registerContainer = new RegisterContainer();
 
@@ -86,8 +89,6 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             }
 
         }
-
-
 
     }
 
@@ -121,6 +122,14 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
     public static boolean validate(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
+    }
+
+    public void cancel(){
+        view.refreshModel();
+        view.txtUserName.clear();
+        view.txtEmail.clear();
+        view.txtPw.clear();
+        view.txtPw_confirm.clear();
     }
 
 
