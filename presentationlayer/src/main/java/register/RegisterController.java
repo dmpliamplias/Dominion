@@ -88,6 +88,9 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
                 view.alert(e.getMessage(), Alert.AlertType.ERROR);
             }
 
+        }else{
+
+            view.alert( translator.getString("RegisterView_Error_uncompletedFields"), Alert.AlertType.WARNING);
         }
 
     }
@@ -126,10 +129,8 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     public void cancel(){
         view.refreshModel();
-        view.txtUserName.clear();
-        view.txtEmail.clear();
-        view.txtPw.clear();
-        view.txtPw_confirm.clear();
+        goToLoginView();
+
     }
 
 
