@@ -1,0 +1,17 @@
+.text-field{
+
+    -fx-background-color: black;
+    -fx-text-fill: coral;
+
+}
+
+.text-area{
+
+    -fx-background-color: gray;
+}
+
+.button{
+
+    -fx-background-color: black;
+    -fx-text-fill: coral;
+}

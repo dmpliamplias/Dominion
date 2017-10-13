@@ -40,6 +40,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         super(model,view);
         _user = plServiceLocator.getUser(); // I think you need id here for set ranking when game is over...
         serverConnectionService.setLobbyController(this);
+        translator = ServiceLocator.getServiceLocator().getTranslator();
         initialize();
     }
 
@@ -62,6 +63,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
 
     private void goToGameView(){
+        System.out.println("wisuuuu ");
         GameModel model = new GameModel();
         GameView view = new GameView(this.view.getStage(), model);
         GameController gameController = new GameController(model,view, serverConnectionService.isHoster());
@@ -99,7 +101,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
             if(names.size() < 2){
                 // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
-                this.view.alert(_translator.getString("LobbyView_NotEnoughPlayers"),
+                this.view.alert(translator.getString("LobbyView_NotEnoughPlayers"),
                         Alert.AlertType.WARNING);
             }else {
                 ArrayList<Integer> clientIds = new ArrayList<Integer>();
