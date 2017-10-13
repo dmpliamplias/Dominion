@@ -1,15 +1,11 @@
 package Game;
 
-import app.PLServiceLocator;
-import app.ServerConnectionService;
+
 import base.Controller;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.service.ServiceLocator;
-import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Separator;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -56,6 +52,10 @@ public class GameController extends Controller<GameModel, GameView> {
             String message  = view.textFieldChat.getText();
             ChatContainer cc = new ChatContainer();
             cc.setMsg(message );
+            String before = view.textAreaChat.getText();
+            String newText = before +=  message +  System.getProperty("line.separator");
+            view.textAreaChat.setText( newText );
+            view.textFieldChat.clear();
 
             try {
                 serverConnectionService.sendObject(cc);
@@ -69,6 +69,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
             ChatContainer cc = new ChatContainer();
             cc.setMsg( view.btnSendText.getText());
+
 // TODO: 12.10.2017  Manu => wenn du schribsch den trägs au grad ih, ich shicks nur de andere clients, nöd dir auno (wills du ja de sender bish
         // und weisch was d schribsch. + add no de name vom client über 'plServiceLocator.getUser().getUserName()'
         //denn no farbig über d id vom client 'serverConnectionService.getClientId()'
@@ -87,21 +88,20 @@ public class GameController extends Controller<GameModel, GameView> {
 
         Platform.runLater(() -> {
 
-            System.out.println("Empfangen");
             String beforeText = view.textAreaChat.getText();
-            String newText = beforeText += System.getProperty("line.separator") + CreateChatText(chatContainer);
+            String newText = beforeText +=   createChatText(chatContainer) + System.getProperty("line.separator");
             view.textAreaChat.setText(newText);
 
         });
 
     }
 
-    private String CreateChatText(ChatContainer chatContainer){
+    private String createChatText(ChatContainer chatContainer){
         Color c = getColorByClientId(chatContainer);
         // TODO: 12.10.2017 lock here how to set color https://stackoverflow.com/questions/30114478/is-it-possible-to-set-different-colors-for-different-lines-in-a-javafx-textfield
         // you hava to replace Textares with InlineCssTextArea or HTMLEDITOR ==> google helps
 
-        String msg = plServiceLocator.getUser().getUserName() + " :" + chatContainer.getMsg();
+        String msg = /*plServiceLocator.getUser().getUserName() + " :" + */chatContainer.getMsg();
         return msg;
     }
 

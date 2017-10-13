@@ -40,13 +40,13 @@ public class GameView extends View<GameModel> {
         BorderPane root = new BorderPane();
         GridPane chatPane = new GridPane();
         root.setRight( chatPane );
-        Scene scene = new Scene(root, 2000, 2000);
+        Scene scene = new Scene(root, 1500, 1500);
         //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
         stage.setScene(scene);
-        // stage.setFullScreen( true );
+        stage.setFullScreen( true );
         stage.setTitle( "Dominion" );
-        stage.setWidth( 2000 );
-        stage.setHeight( 2000 );
+        stage.setWidth( 150 );
+        stage.setHeight( 150 );
 
 
         chatPane.setAlignment(Pos.CENTER);

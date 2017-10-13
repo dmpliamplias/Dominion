@@ -44,11 +44,10 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        //TODO for Murat ActionEvent click on Cancel delete all fields
+        //TODO for Murat ActionEvent click on Cancel delete all fields + added go to LobbyView
 
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
-
         });
     }
 
@@ -123,6 +122,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
     }
+
 
     private void setError(){
         this.view.alert("setError", Alert.AlertType.WARNING);
