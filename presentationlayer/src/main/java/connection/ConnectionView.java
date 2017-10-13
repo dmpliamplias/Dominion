@@ -79,8 +79,13 @@ public class ConnectionView extends View<ConnectionModel> {
 
         return scene;
     }
-    
-    public Stage create_Dialog(){
+
+	@Override
+	protected void setTexts() {
+
+	}
+
+	public Stage create_Dialog(){
 		secondStage = new Stage();
 
 

@@ -95,6 +95,11 @@ public class GameView extends View<GameModel> {
         return scene;
     }
 
+    @Override
+    protected void setTexts() {
+        
+    }
+
     public void start() {
         stage.show();
     }

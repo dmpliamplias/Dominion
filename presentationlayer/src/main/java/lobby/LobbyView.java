@@ -52,6 +52,11 @@ public class LobbyView extends View<LobbyModel> {
         return scene;
     }
 
+    @Override
+    protected void setTexts() {
+
+    }
+
 
     protected void refresh(){
         lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());

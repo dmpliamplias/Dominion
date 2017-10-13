@@ -75,7 +75,12 @@ public class RankingView extends View<RankingModel> {
 
     }
 
-        public void bindModeltoView () {
+    @Override
+    protected void setTexts() {
+
+    }
+
+    public void bindModeltoView () {
 
             ArrayList<RankingViewModel> vmList = new ArrayList<RankingViewModel>();
 

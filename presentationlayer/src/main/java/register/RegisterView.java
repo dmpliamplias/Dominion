@@ -97,6 +97,11 @@ public class RegisterView extends View<RegisterModel>{
         return scene;
     }
 
+    @Override
+    protected void setTexts() {
+
+    }
+
 
     void refreshModel() {
         this.model.setPassword(txtPw.getText());
