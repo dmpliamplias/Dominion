@@ -69,7 +69,7 @@ public class GameView extends View<GameModel> {
         this.textAreaChat.setPromptText( "Chat Room" );
 
 
-        this.btnChatSend  = new Button("Send");
+        this.btnChatSend  = new Button();
         this.btnChatSend.setPrefSize(150, 30);
 
         this.textFieldChat= new TextField();
@@ -77,8 +77,8 @@ public class GameView extends View<GameModel> {
         this.textFieldChat.setPrefSize( 350,50 );
 
 
-        this.btnSendText = new Button("Good Play");
-        this.btnSendText.setShape( new Circle( 40 ) );
+        this.btnSendText = new Button();
+        this.btnSendText.setPrefSize(150, 30);
 
 
         // Create HBox +
@@ -90,14 +90,21 @@ public class GameView extends View<GameModel> {
         chatPane.add(hbChat, 1, 3);
         chatPane.add( textAreaChat, 1,2 );
 
+        setTexts();
 
 
         return scene;
     }
 
-    @Override
     protected void setTexts() {
-        
+
+        this.btnChatSend.setText( translator.getString( "send" ) );
+        this.btnSendText.setText( translator.getString( "nice!" ) );
+    }
+
+
+    private String getText(String key) {
+        return translator.getString( key );
     }
 
     public void start() {

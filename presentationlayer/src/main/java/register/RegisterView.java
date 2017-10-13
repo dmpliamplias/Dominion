@@ -97,7 +97,7 @@ public class RegisterView extends View<RegisterModel>{
         return scene;
     }
 
-    @Override
+    //TODO Murat anpassen
     protected void setTexts() {
 
     }

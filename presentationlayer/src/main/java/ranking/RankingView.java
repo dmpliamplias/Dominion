@@ -75,7 +75,7 @@ public class RankingView extends View<RankingModel> {
 
     }
 
-    @Override
+    //TODO Murat anpassen
     protected void setTexts() {
 
     }

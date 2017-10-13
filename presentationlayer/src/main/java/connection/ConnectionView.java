@@ -80,7 +80,7 @@ public class ConnectionView extends View<ConnectionModel> {
         return scene;
     }
 
-	@Override
+	//TODO Vanessa Methode anpassen
 	protected void setTexts() {
 
 	}

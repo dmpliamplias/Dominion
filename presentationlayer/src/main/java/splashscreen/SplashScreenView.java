@@ -47,7 +47,7 @@ public class SplashScreenView extends View<SplashScreenModel> {
         return scene;
     }
 
-    @Override
+    //TODO anpassen bei Bedarf?
     protected void setTexts() {
 
     }

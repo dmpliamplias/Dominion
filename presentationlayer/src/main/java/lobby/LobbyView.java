@@ -52,7 +52,7 @@ public class LobbyView extends View<LobbyModel> {
         return scene;
     }
 
-    @Override
+    //TODO Manuel anpassen
     protected void setTexts() {
 
     }
