@@ -71,7 +71,7 @@ public class GameView extends View<GameModel> {
         this.btnChatSend.setPrefSize(150, 30);
         this.textFieldChat= new TextField();
         this.textFieldChat.setPrefSize( 300,70 );
-        this.btnSendText = new Button("Send Good Play");
+        this.btnSendText = new Button("Good Play");
 
 
         // Create HBox +
