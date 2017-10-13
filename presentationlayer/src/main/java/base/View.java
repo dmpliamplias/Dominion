@@ -35,10 +35,11 @@ public abstract class View<M extends Model> {
     protected View(Stage stage, M model) {
         this.stage = stage;
         this.model = model;
+        translator = ServiceLocator.getServiceLocator().getTranslator();
 
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
-        translator = ServiceLocator.getServiceLocator().getTranslator();
+
     }
 
 
