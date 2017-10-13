@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class ChatContainer extends Container implements Serializable{
     String msg;
+    int clientId;
 
     public ChatContainer(){
         super(Methods.Chat);
@@ -18,5 +19,13 @@ public class ChatContainer extends Container implements Serializable{
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }

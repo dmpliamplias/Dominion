@@ -19,6 +19,7 @@ public class ChatManager extends Manager {
         // TODO: 02.10.2017 Manuel => broadcast you can use...
         ChatContainer cc = new ChatContainer();
         cc.setMsg(msg);
+        cc.setClientId(this.client.getClientId());
 
         for(Client c : client.getOtherClients()){
             if(c.getViewStatus() == ViewStatus.Game) {
