@@ -41,7 +41,7 @@ public class GameView extends View<GameModel> {
         GridPane chatPane = new GridPane();
         root.setRight( chatPane );
         Scene scene = new Scene(root, 1500, 1500);
-        //scene.getStylesheets().add(getClass().getResource("lobby.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("GameView.css").toExternalForm());
         stage.setScene(scene);
         stage.setFullScreen( false );
         stage.setTitle( "Dominion" );
@@ -49,7 +49,7 @@ public class GameView extends View<GameModel> {
         stage.setHeight( 1500 );
 
 
-        chatPane.setAlignment(Pos.CENTER);
+        chatPane.setAlignment(Pos.BOTTOM_RIGHT);
         chatPane.setHgap(10);
         chatPane.setVgap(10);
         chatPane.setPadding(new Insets(25, 25, 25, 25));
@@ -67,12 +67,20 @@ public class GameView extends View<GameModel> {
         this.textAreaChat = new TextArea();
         this.textAreaChat.setEditable( false );
         this.textAreaChat.setPromptText( "Chat Room" );
+
+
         this.btnChatSend  = new Button("Send");
         this.btnChatSend.setPrefSize(150, 30);
+
         this.textFieldChat= new TextField();
-        this.textFieldChat.setPrefSize( 300,70 );
+        this.textFieldChat.setPromptText( "Enter Text" );
+        this.textFieldChat.setPrefSize( 350,50 );
+        this.textFieldChat.setStyle( "-fx-text-inner-color: blue;" );
+        this.textFieldChat.setStyle("-fx-control-inner-background: black");
+
+
         this.btnSendText = new Button("Good Play");
-        this.btnSendText.setShape( new Circle( 30 ) );
+        this.btnSendText.setShape( new Circle( 40 ) );
 
 
         // Create HBox +
