@@ -5,6 +5,7 @@ import com.weddingcrashers.model.User;
 import com.weddingcrashers.model.User_;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -32,7 +33,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User create(final User user) {
         notNull(user);
-        return objectUpdateService.create(user);
+        final User userByEmail = getUserByEmail(user.getUserEmail());
+        if (userByEmail == null) {
+            return objectUpdateService.create(user);
+        }
+        return userByEmail;
     }
 
     @Override
@@ -66,6 +71,13 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         // execute query
         final TypedQuery<User> typedQuery = em.createQuery(query);
+        try {
+            typedQuery.getSingleResult();
+        }
+        catch (NoResultException e) {
+            // if not result exists return null
+            return null;
+        }
         return typedQuery.getSingleResult();
     }
 

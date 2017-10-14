@@ -47,6 +47,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 view.btnJoinS.setDisable(true);
                 view.btnStartS.setDisable(true);
 
+                // TODO: 14.10.2017 mschlatter: When typing port out of range NPE and programm shuts down
                 String address = socketAddress.toString();
                 System.out.println("Socketadress: " + address);
 
