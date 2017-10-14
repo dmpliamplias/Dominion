@@ -19,13 +19,18 @@ import javafx.scene.control.TextField;
 
 public class RegisterView extends View<RegisterModel>{
 
-    Button btnRegister;
-    Button btnCancel;
-    TextField txtEmail;
-    TextField txtUserName;
-    PasswordField txtPw;
-    PasswordField txtPw_confirm;
-    Label error;
+    protected Button btnRegister;
+    protected Button btnCancel;
+    protected TextField txtEmail;
+    protected TextField txtUserName;
+    protected PasswordField txtPw;
+    protected PasswordField txtPw_confirm;
+    protected Label error;
+
+    private Label lblEmail;
+    private Label lblPw;
+    private Label lblPwconfirm;
+    private Label lblUserName;
 
     public RegisterView(Stage stage, RegisterModel model){
         super(stage, model);
@@ -37,7 +42,7 @@ public class RegisterView extends View<RegisterModel>{
         Scene scene = new Scene(root,600,500);
         GridPane grid = new GridPane();
 
-        this.stage.setTitle("Register page");
+
         this.stage.setWidth(800);
         this.stage.setHeight(500);
 
@@ -53,11 +58,11 @@ public class RegisterView extends View<RegisterModel>{
         // Creation of all needed Buttons
         this.btnRegister =new Button();
         this.btnRegister.setPrefSize(130,40);
-        this.btnRegister.setText("Register");
+
 
         this.btnCancel = new Button();
         this.btnCancel.setPrefSize(130,40);
-        this.btnCancel.setText("Cancel");
+
 
 
         // Creation of HBox
@@ -69,36 +74,49 @@ public class RegisterView extends View<RegisterModel>{
 
 
         // Creation of all needed TextFields
-        Label Email= new Label("Email");
-        grid.add(Email,0,1);
+        lblEmail= new Label();
+        grid.add(lblEmail,0,1);
         txtEmail = new TextField();
         grid.add(txtEmail,1,1);
 
-        Label pw=new Label("Password");
-        grid.add(pw,0,2);
+        lblPw=new Label();
+        grid.add(lblPw,0,2);
         txtPw = new PasswordField();
         grid.add(txtPw,1,2);
 
-        Label pwconfirm=new Label("Password bestätigen");
-        grid.add(pwconfirm,0,3);
+        lblPwconfirm=new Label();
+        grid.add(lblPwconfirm,0,3);
         txtPw_confirm= new PasswordField();
         grid.add(txtPw_confirm,1,3);
 
-        Label UserName = new Label("User Name");
-        grid.add(UserName,0,4);
+        lblUserName = new Label();
+        grid.add(lblUserName,0,4);
         txtUserName=new TextField();
         grid.add(txtUserName,1,4);
 
 
         root.setCenter(grid);
 
+        this.stage.setScene(scene);
 
-        stage.setScene(scene);
+        setTexts();
         return scene;
     }
 
     //TODO Murat anpassen
+
+    private String getText(String key){
+        return translator.getString(key);
+    }
     protected void setTexts() {
+
+        this.stage.setTitle(getText("RegisterView_Titel"));
+        this.btnRegister.setText(getText("Register"));
+        this.btnCancel.setText(getText("cancel"));
+        this.lblEmail.setText(getText("Email"));
+        this.lblPw.setText(getText("Password"));
+        this.lblPwconfirm.setText(getText("Password_Confirmation"));
+        this.lblUserName.setText(getText("Username"));
 
     }
 
