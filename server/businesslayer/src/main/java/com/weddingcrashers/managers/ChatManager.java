@@ -22,7 +22,7 @@ public class ChatManager extends Manager {
         cc.setClientId(this.client.getClientId());
 
         for(Client c : client.getOtherClients()){
-            if(c.getViewStatus() == ViewStatus.Game) {
+            if(c.getViewStatus() == ViewStatus.Game || c.getViewStatus() == ViewStatus.Lobby) {
                 ServerUtils.sendObject(c, cc);
             }
         }

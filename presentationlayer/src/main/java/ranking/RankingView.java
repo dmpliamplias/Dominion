@@ -30,30 +30,35 @@ public class RankingView extends View<RankingModel> {
         super(stage, model);
     }
 
+    protected Label lblRanking;
+    protected TableColumn userNameColumn;
+    protected TableColumn userHighScore;
+    protected TableColumn rankingPosition;
+
     @Override
     protected Scene create_GUI() {
 
         {
 
-            this.stage.setTitle("Ranking");
+
             this.stage.setWidth(300);
             this.stage.setHeight(500);
 
             table.setEditable(false);
 
-            final Label label = new Label("Highscore List Alltime");
-            label.setFont(new Font("Helvetica", 16));
+            lblRanking = new Label();
+            lblRanking.setFont(new Font("Helvetica", 16));
 
 
-            TableColumn userNameColumn = new TableColumn("User Name");
+            userNameColumn = new TableColumn();
             userNameColumn.setCellValueFactory(
                     new PropertyValueFactory<RankingViewModel, String>("name"));
 
-            TableColumn userHighScore = new TableColumn("Highscore Points");
+            userHighScore = new TableColumn();
             userHighScore.setCellValueFactory(
                     new PropertyValueFactory<RankingViewModel, Integer>("points"));
 
-            TableColumn rankingPosition = new TableColumn("Position");
+            rankingPosition = new TableColumn();
 
             this.table.setItems(dataModel);
             this.table.getColumns().addAll(rankingPosition,userNameColumn, userHighScore);
@@ -61,7 +66,7 @@ public class RankingView extends View<RankingModel> {
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
             vbox.setPadding(new Insets(8, 0, 0, 8));
-            vbox.getChildren().addAll(label, table);
+            vbox.getChildren().addAll(lblRanking, table);
 
             Scene scene = new Scene(table);
 
@@ -70,6 +75,7 @@ public class RankingView extends View<RankingModel> {
             this.stage.setScene(scene);
             this.stage.show();
 
+            setTexts();
             return scene;
         }
 
@@ -77,7 +83,17 @@ public class RankingView extends View<RankingModel> {
 
     //TODO Murat anpassen
     protected void setTexts() {
+        this.stage.setTitle(getText("Ranking_Page"));
+        this.lblRanking.setText(getText("Highscore_Alltime"));
+        this.userNameColumn.setText(getText("Username"));
+        this.userHighScore.setText(getText("Highscore_Points"));
+        this.rankingPosition.setText(getText("RankingPosition"));
 
+
+
+    }
+    private String getText(String key){
+        return translator.getString(key);
     }
 
     public void bindModeltoView () {
