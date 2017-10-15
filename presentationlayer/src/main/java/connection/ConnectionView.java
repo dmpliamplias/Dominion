@@ -18,14 +18,15 @@ public class ConnectionView extends View<ConnectionModel> {
     Button btnStartS;
     Button btnJoinS;
     Button btnHelp;
-    Button btnConnect;
 
-    Button btnOK;
-    TextField fldPort;
-    Label lblPort;
-    Label lblInfo;
-    Stage secondStage;
-    TextField fldIP;
+    Button btnConnect;
+	Button btnOK;
+	TextField fldPort;
+	Label lblPort;
+	Label lblInfo;
+	Label lblIP;
+	Stage secondStage;
+	TextField fldIP;
 
 	public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
@@ -36,15 +37,15 @@ public class ConnectionView extends View<ConnectionModel> {
  *  */
 
     public Scene create_GUI(){
-        	BorderPane root = new BorderPane();
+		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,450,400);
 		GridPane gp = new GridPane();
 		FlowPane fp = new FlowPane();
 		
-		// Creating and labeling 3 buttons
-		btnStartS = new Button("Start Server");
-		btnJoinS = new Button("Join Server");
-		btnHelp = new Button("Help");
+		// Creating 3 buttons
+		btnStartS = new Button();
+		btnJoinS = new Button();
+		btnHelp = new Button();
 		
 		// Set size for the buttons and FlowPane
 		btnStartS.setPrefSize(150, 30);
@@ -74,20 +75,38 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(btnHelp, 1, 5);
 		
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
-		stage.setTitle("Connection");
 		stage.setScene(scene);
 
+		setTexts();
         return scene;
     }
 
-	//TODO Vanessa Methode anpassen
-	protected void setTexts() {
 
+	protected void setTexts() {
+		this.stage.setTitle(getText("ConnectionView_stage_Title"));
+		btnStartS.setText(getText("ConnectionView_btnStartS"));
+		btnJoinS.setText(getText("ConnectionView_btnJoinS"));
+		btnHelp.setText(getText("ConnectionView_btnHelp"));
+
+	}
+
+	//TODO Mige: Ich bekomme eine Nullpointer Exception wenn ich diese buttons in die Methode setText schreibe
+	// da die Methode setTexts aufgerufen wird beim 1 Fenster und die Buttons noch gar nicht existieren
+	// Eine andere Idee?
+	protected void setTexts2() {
+		btnConnect.setText(getText("ConnectionView_btnConnect"));
+		btnOK.setText(getText("ConnectionView_btnOK"));
+		lblPort.setText(getText("ConnectionView_lblPort"));
+		lblInfo.setText(getText("ConnectionView_lblInfo"));
+		secondStage.setTitle(getText("ConnectionView_secondStage_Title"));
+	}
+
+	private String getText(String key){
+		return translator.getString(key);
 	}
 
 	public Stage create_Dialog(){
 		secondStage = new Stage();
-
 
 		secondStage.initOwner(stage);
 		secondStage.initModality(Modality.WINDOW_MODAL);
@@ -97,10 +116,10 @@ public class ConnectionView extends View<ConnectionModel> {
 		GridPane gp2 = new GridPane();
 		
 		// Creating and labeling button, label, textfield
-		btnConnect = new Button("Connect");			
-		lblPort = new Label("Port");
+		btnConnect = new Button();
+		lblPort = new Label();
 		fldPort = new TextField();
-		lblInfo = new Label("Insert port number");
+		lblInfo = new Label();
 	    	    			
 		// Set size for the buttons and FlowPane
 		btnConnect.setPrefSize(80, 30);
@@ -131,9 +150,8 @@ public class ConnectionView extends View<ConnectionModel> {
 	 	gp2.setConstraints(btnConnect, 3, 5);
 		gp2.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
 		
-		secondStage.setTitle("Insert Port");
-		secondStage.setScene(scene2);		
-    	    	
+		secondStage.setScene(scene2);
+		setTexts2();
         return secondStage;
     }
 
@@ -147,6 +165,7 @@ public class ConnectionView extends View<ConnectionModel> {
     	model.setIP(fldIP.getText());
 	}
 
+	//TODO Vanessa setText ändern
 	public Stage createConnectedInfoDialog(){
 		Stage stage = createConnectionDialog();
 		btnOK.setPrefSize(80, 30);
@@ -164,7 +183,6 @@ public class ConnectionView extends View<ConnectionModel> {
 		Stage stage = createConnectionDialog();
 		btnOK.setPrefSize(160, 30);
 		lblInfo.setText("Enter the Data your hoster gave you...");
-		btnOK.setText("Connect to Server");
 		stage.setTitle("Join Server");
 
 		// TODO@Vanessa wieder ändern
@@ -185,12 +203,12 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		
 		// Creating and labeling button, label, textfield
-		lblPort = new Label("Port");
+		lblPort = new Label();
 		lblInfo = new Label();
 		fldPort = new TextField();
-		Label lblIP = new Label("IP");
+		lblIP = new Label();
 		fldIP = new TextField();
-		btnOK = new Button("OK");
+		btnOK = new Button();
 
 		// Set size for the buttons and FlowPane
 
@@ -221,17 +239,16 @@ public class ConnectionView extends View<ConnectionModel> {
 		// Asign buttons, label, textfield to column, row
 		gp.setConstraints(lblInfo, 2, 1);
 	   	gp.setConstraints(lblPort, 1, 3);
-	    	gp.setConstraints(fldPort, 2, 3);
-	    	gp.setConstraints(lblIP, 1, 4);
-	    	gp.setConstraints(fldIP, 2, 4);
-	    	gp.setConstraints(btnOK, 3, 5);
-	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
+		gp.setConstraints(fldPort, 2, 3);
+	    gp.setConstraints(lblIP, 1, 4);
+	    gp.setConstraints(fldIP, 2, 4);
+	    gp.setConstraints(btnOK, 3, 5);
+	    gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
 		
 
 		connectionDialogStage.setScene(scene);
 
 		if(secondStage != null) secondStage.close();
-    	    	
         return connectionDialogStage;
     }
 	
