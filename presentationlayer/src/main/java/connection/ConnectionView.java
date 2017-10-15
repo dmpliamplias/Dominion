@@ -95,7 +95,8 @@ public class ConnectionView extends View<ConnectionModel> {
 	// Eine andere Idee?
 	protected void setTexts2() {
 		btnConnect.setText(getText("ConnectionView_btnConnect"));
-		btnOK.setText(getText("ConnectionView_btnOK"));
+		//TODO Vanessa evt. setText3
+		//btnOK.setText(getText("ConnectionView_btnOK"));
 		lblPort.setText(getText("ConnectionView_lblPort"));
 		lblInfo.setText(getText("ConnectionView_lblInfo"));
 		secondStage.setTitle(getText("ConnectionView_secondStage_Title"));
