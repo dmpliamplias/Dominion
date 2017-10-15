@@ -25,7 +25,7 @@ public class ConnectionView extends View<ConnectionModel> {
     Label lblPort;
     Label lblInfo;
     Stage secondStage;
-	TextField fldIP;
+    TextField fldIP;
 
 	public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
