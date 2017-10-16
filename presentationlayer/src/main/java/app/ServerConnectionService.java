@@ -100,6 +100,8 @@ public class ServerConnectionService extends Thread{
             registerController.handleServerAnswer((RegisterContainer)c);
         }else if(c.getMethod() == Methods.Login && loginController != null){
             loginController.handleServerAnswer((LoginContainer)c);
+        }else if(c.getMethod() == Methods.Login_SetUser_TestPurposesOnly && loginController != null){
+            loginController.handleServerAnswer_TestPurposeLogin((LoginContainer)c);
         }else if(c.getMethod() == Methods.Chat && gameController != null){
             gameController.receiveMessage((ChatContainer) c);
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
@@ -109,7 +111,8 @@ public class ServerConnectionService extends Thread{
             rankingController.handleServerAnswer( rc.getHighScores() );
         }else if(c.getMethod() == Methods.Chat && lobbyController != null){
             lobbyController.receiveMessage( (ChatContainer)c );
-
+        }else if(c.getMethod() == Methods.Lobby_Players && lobbyController != null){
+            lobbyController.handleServerAnswer_newPlayer((LobbyContainer) c);
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;

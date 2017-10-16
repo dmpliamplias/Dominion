@@ -75,8 +75,6 @@ public class Server extends Thread {
                 ConnectionContainer c = new ConnectionContainer();
                 c.setId(idCounter);
                 ServerUtils.sendObject(clientThread ,c);
-
-                LobbyManager.broadCastPlayersToAllClients(clientThread);
             }
         } catch (Exception ex){
             for(Client client : clients){

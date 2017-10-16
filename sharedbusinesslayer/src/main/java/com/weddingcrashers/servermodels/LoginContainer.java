@@ -20,8 +20,8 @@ public class LoginContainer extends Container  implements Serializable {
         this.user = user;
     }
 
-    public LoginContainer(){
-        super(Methods.Login);
+    public LoginContainer(Methods method){
+        super(method);
     }
 
     public String getEmail() {

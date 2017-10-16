@@ -1,8 +1,8 @@
 package lobby;
 
-import app.PLServiceLocator;
 import base.View;
-import com.weddingcrashers.service.ServiceLocator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  *  author Michel Schlatter
  *  */
@@ -21,12 +23,14 @@ import javafx.stage.Stage;
 public class LobbyView extends View<LobbyModel> {
 
     protected Label lbl;
-    protected ListView lvPlayers;
+    protected ListView<String> lvPlayers;
     protected Button btnStart;
     protected Button btnGameView;
     protected TextField textFieldChat;
     protected Button btnChatSend;
     protected VBox chatContent;
+
+    protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
     public LobbyView(Stage stage, LobbyModel model) {
         super(stage, model);
@@ -42,11 +46,11 @@ public class LobbyView extends View<LobbyModel> {
         root.setCenter( gridPane );
         lbl = new Label();
         btnGameView = new Button("GameView");
-        lvPlayers = new ListView();
-        lvPlayers.setDisable(true);
-        gridPane.add( btnGameView,1,1 );
-        root.getChildren().addAll(lvPlayers, lbl);
+        lvPlayers = new ListView<String>(observablePlayerList);
 
+        gridPane.add( btnGameView,1,1 );
+        root.getChildren().addAll(lbl);
+        root.setRight(lvPlayers);
         Scene scene = new Scene(root);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
@@ -81,6 +85,9 @@ public class LobbyView extends View<LobbyModel> {
 
         chatContent = new VBox();
         chatContent.setStyle(cssLayout);
+
+        lvPlayers.setStyle(cssLayout);
+
 
         // create HBox for chat
 

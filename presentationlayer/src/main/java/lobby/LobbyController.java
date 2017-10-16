@@ -3,17 +3,16 @@ package lobby;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
+import app.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import java.util.Map;
 public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private final User _user;
-    private ObservableList<String> list = FXCollections.observableArrayList();
     private HashMap<Integer, User> players;
     Translator translator;
 
@@ -59,6 +57,17 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         view.btnChatSend.setOnAction( event -> {
             sendMessage();
         } );
+
+        loadData();
+    }
+
+    private void loadData(){
+        LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
+        try {
+            serverConnectionService.sendObject(lc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
 
@@ -78,12 +87,13 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             players = lc.getPlayers();
             Iterator iter = lc.getPlayers().entrySet().iterator();
 
+            view.observablePlayerList.clear();
             while (iter.hasNext()) {
                 Map.Entry<Integer, User> item = (Map.Entry) iter.next();
-                list.add( item.getKey() + ": " + item.getValue().getUserName() );
+                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName() );
             }
 
-            view.lvPlayers.setItems( list );
+            view.lvPlayers.setItems( view.observablePlayerList);
             view.lvPlayers.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
         } );
     }
@@ -101,8 +111,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         if (names.size() < 2) {
             // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
-            this.view.alert( translator.getString( "LobbyView_NotEnoughPlayers" ),
-                    Alert.AlertType.WARNING );
+            view.alert( translator.getString( "LobbyView_NotEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
             ArrayList<Integer> clientIds = new ArrayList<Integer>();
 
@@ -135,7 +144,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( chatMessage );
-        view.setChatMessage(chatMessage, getColorByClientId(cc));
+        view.setChatMessage(chatMessage, ViewUtils.getColorByClientId(cc.getClientId()));
         view.textFieldChat.clear();
 
         try {
@@ -147,34 +156,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void receiveMessage(ChatContainer chatContainer) {
             Platform.runLater( () -> {
-                view.setChatMessage(chatContainer.getMsg(), getColorByClientId(chatContainer));
+                view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
             } );
 
-    }
-
-
-    /**
-     * Author Michel Schlatter
-     * @param chatContainer
-     * @return
-     */
-    private Color getColorByClientId(ChatContainer chatContainer) {
-
-        int id = chatContainer.getClientId();
-        Color color = Color.WHITE;
-
-        if (id == 1) {
-            color = Color.BLUE;
-        }
-        if (id == 2) {
-            color = Color.RED;
-        }
-        if (id == 3) {
-            color = Color.PURPLE;
-        }
-        if (id == 4) {
-            color = Color.GREEN;
-        }
-        return color;
     }
 }
