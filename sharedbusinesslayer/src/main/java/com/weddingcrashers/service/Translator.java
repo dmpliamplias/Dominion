@@ -47,7 +47,7 @@ public class Translator {
      *
      * @param localeString the locale.
      */
-    public Translator(String localeString) {
+    Translator(String localeString) {
         Locale locale = null;
         if (localeString != null) {
             for (Locale availableLocale : availableLocales) {

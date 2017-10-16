@@ -21,7 +21,9 @@ public abstract class View<M extends Model> {
     protected Scene scene;
     /** The model. */
     protected M model;
-
+    /** The service locator. */
+    protected ServiceLocator serviceLocator;
+    /** The translator. */
     protected Translator translator;
 
     // ---- Constructor
@@ -35,11 +37,11 @@ public abstract class View<M extends Model> {
     protected View(Stage stage, M model) {
         this.stage = stage;
         this.model = model;
-        translator = ServiceLocator.getServiceLocator().getTranslator();
 
+        serviceLocator = ServiceLocator.getServiceLocator();
+        translator = serviceLocator.getTranslator();
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
-
     }
 
 
@@ -72,8 +74,15 @@ public abstract class View<M extends Model> {
     public void alert(String msg, Alert.AlertType alertType){
         Alert alert = new Alert(alertType, msg);
         alert.showAndWait();
+    }
 
-
+    /**
+     * Switch the translator to the corresponding locale.
+     *
+     * @param locale the locale to switch the translator for.
+     */
+    public void switchTranslator(String locale) {
+        serviceLocator.setTranslator(locale);
     }
 
 }
