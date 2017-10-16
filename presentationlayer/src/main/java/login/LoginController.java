@@ -40,9 +40,6 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 
         view.btnSignUp.setOnAction((event)-> this.goToRegisterView());
 
-        view.btnLobbyView.setOnAction((event -> {
-            goToLobbyView();
-        }));
     }
 
   public void login(){

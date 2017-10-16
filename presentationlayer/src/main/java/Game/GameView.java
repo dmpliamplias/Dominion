@@ -1,46 +1,41 @@
 package Game;
 
 import base.View;
-import com.weddingcrashers.service.ServiceLocator;
 import javafx.geometry.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-import java.awt.*;
 
 public class GameView extends View<GameModel> {
 
 
-    /**
-     *  author Manuel Wirz
-     *  */
-
-     protected TextArea textAreaChat;
      protected TextField textFieldChat;
      protected Button btnChatSend;
      protected Button btnSendText;
-
-
-
+     protected GridPane chatPane;
+     protected HBox hbChat;
+     protected VBox chatContent;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
+
+    /**
+     *  author Manuel Wirz
+     *  */
 
     public Scene create_GUI(){
 
         stage.setWidth( 1000 );
         stage.setHeight( 1000 );
         BorderPane root = new BorderPane();
-        GridPane chatPane = new GridPane();
+        chatPane = new GridPane();
         root.setRight( chatPane );
         Scene scene = new Scene(root, 1500, 1500);
         scene.getStylesheets().addAll(this.getClass().getResource("/Game/GameView.css").toExternalForm());
@@ -57,17 +52,11 @@ public class GameView extends View<GameModel> {
 
 
 
-        /**
-         *  author Manuel Wirz
-         *  */
+
 
         // ----- Chatview -------
         //
         // TODO@Vanessa BorderPane deiner Gameview hinzufügen
-
-        this.textAreaChat = new TextArea();
-        this.textAreaChat.setEditable( false );
-        this.textAreaChat.setPromptText( "Chat Room" );
 
 
         this.btnChatSend  = new Button();
@@ -81,21 +70,30 @@ public class GameView extends View<GameModel> {
         this.btnSendText = new Button();
         this.btnSendText.setPrefSize(150, 50);
 
+        String cssLayout =
+                "-fx-border-color: red;\n" +
+                "-fx-border-insets: 5;\n" +
+                "-fx-border-width: 3;\n" +
+                "-fx-border-style: dashed;\n";
+
+        chatContent = new VBox();
+        chatContent.setStyle(cssLayout);
+
 
         // Create HBox +
-        HBox hbChat = new HBox(10);
+        hbChat = new HBox(10);
         hbChat.setAlignment(Pos.CENTER);
         hbChat.getChildren().add(textFieldChat);
         hbChat.getChildren().add(btnChatSend);
         hbChat.getChildren().add(btnSendText);
+        chatPane.add(chatContent,1,0);
         chatPane.add(hbChat, 1, 3);
-        chatPane.add( textAreaChat, 1,2 );
-
         setTexts();
 
 
         return scene;
     }
+
 
     protected void setTexts() {
 
@@ -115,5 +113,19 @@ public class GameView extends View<GameModel> {
     public void stop(){
         stage.hide();
     }
+
+    /**
+     * Author Michel Schlatter
+     * @param msg
+     * @param color
+     */
+    protected  void setChatMessage(String msg, Color color){
+        Label lbl = new Label();
+        lbl.setText(msg);
+        lbl.setTextFill(color);
+        this.chatContent.getChildren().add(lbl);
+    }
+
+
 
 }
