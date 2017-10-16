@@ -46,7 +46,7 @@ public final class SecurityUtils {
             skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         }
         catch (NoSuchAlgorithmException e) {
-            // TODO: 14.10.2017 log
+            ServiceLocator.getLogger().warning(e.getMessage());
         }
         byte[] testHash = new byte[0];
         try {
@@ -55,7 +55,7 @@ public final class SecurityUtils {
             }
         }
         catch (InvalidKeySpecException e) {
-            // TODO: 14.10.2017 log
+            ServiceLocator.getLogger().warning(e.getMessage());
         }
 
         int diff = hash.length ^ testHash.length;

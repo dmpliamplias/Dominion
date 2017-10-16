@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
+import static java.util.logging.Logger.getLogger;
+
 public class SecurityUtils {
     // ---- Statics
 
@@ -41,7 +43,7 @@ public class SecurityUtils {
                 hash = skf.generateSecret(spec).getEncoded();
             }
         } catch (InvalidKeySpecException e) {
-            // TODO: 14.10.2017 log & return
+            getLogger(SecurityUtils.class.getSimpleName()).warning(e.getMessage());
         }
         return iterations + ":" + toHex(salt) + ":" + toHex(hash);
     }
@@ -54,7 +56,7 @@ public class SecurityUtils {
         try {
             sr = SecureRandom.getInstance("SHA1PRNG");
         } catch (NoSuchAlgorithmException e) {
-            // TODO: 14.10.2017 log
+            getLogger(SecurityUtils.class.getSimpleName()).warning(e.getMessage());
         }
         final byte[] salt = new byte[16];
         if (sr != null) {
