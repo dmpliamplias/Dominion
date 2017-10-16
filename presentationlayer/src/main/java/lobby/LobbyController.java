@@ -131,12 +131,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void sendMessage() {
 
-        String chatMessage = view.textFieldChat.getText();
+        String chatMessage =  plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer();
+        cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( chatMessage );
-        String before = view.txtAreaChat.getText();
-        String newText = before += chatMessage + System.getProperty( "line.separator" );
-        view.txtAreaChat.setText( newText );
+        view.setChatMessage(chatMessage, getColorByClientId(cc));
         view.textFieldChat.clear();
 
         try {
@@ -147,44 +146,35 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
     public void receiveMessage(ChatContainer chatContainer) {
-
-        Platform.runLater( () -> {
-
-            String beforeText = view.txtAreaChat.getText();
-            String newText = beforeText += createChatText( chatContainer ) + System.getProperty( "line.separator" );
-            view.txtAreaChat.setText( newText );
-
-        } );
+            Platform.runLater( () -> {
+                view.setChatMessage(chatContainer.getMsg(), getColorByClientId(chatContainer));
+            } );
 
     }
 
-    private String createChatText(ChatContainer chatContainer) {
-        Color c = getColorByClientId( chatContainer );
-        String msg = plServiceLocator.getUser().getUserName() + ": " + chatContainer.getMsg();
-        return msg;
-    }
 
+    /**
+     * Author Michel Schlatter
+     * @param chatContainer
+     * @return
+     */
     private Color getColorByClientId(ChatContainer chatContainer) {
-        int clientId = chatContainer.getClientId();
-        Color c = Color.WHITE;
 
-        switch (clientId) {
-            case 1:
-                c = Color.BLUE;
-                break;
-            case 2:
-                c = Color.YELLOW;
-                break;
-            case 3:
-                c = Color.GREEN;
-                break;
-            case 4:
-                c = Color.RED;
-                break;
+        int id = chatContainer.getClientId();
+        Color color = Color.WHITE;
+
+        if (id == 1) {
+            color = Color.BLUE;
         }
-
-        return c;
-
-
+        if (id == 2) {
+            color = Color.RED;
+        }
+        if (id == 3) {
+            color = Color.PURPLE;
+        }
+        if (id == 4) {
+            color = Color.GREEN;
+        }
+        return color;
     }
 }

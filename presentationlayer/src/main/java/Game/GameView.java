@@ -1,7 +1,6 @@
 package Game;
 
 import base.View;
-import com.weddingcrashers.service.ServiceLocator;
 import javafx.geometry.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,25 +10,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.awt.*;
+
 
 public class GameView extends View<GameModel> {
 
 
-    /**
-     *  author Manuel Wirz
-     *  */
-
      protected TextField textFieldChat;
      protected Button btnChatSend;
      protected Button btnSendText;
-     protected  GridPane chatPane;
-     protected  HBox hbChat;
+     protected GridPane chatPane;
+     protected HBox hbChat;
      protected VBox chatContent;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
+
+    /**
+     *  author Manuel Wirz
+     *  */
 
     public Scene create_GUI(){
 
@@ -53,9 +52,7 @@ public class GameView extends View<GameModel> {
 
 
 
-        /**
-         *  author Manuel Wirz
-         *  */
+
 
         // ----- Chatview -------
         //
@@ -73,7 +70,8 @@ public class GameView extends View<GameModel> {
         this.btnSendText = new Button();
         this.btnSendText.setPrefSize(150, 50);
 
-        String cssLayout = "-fx-border-color: red;\n" +
+        String cssLayout =
+                "-fx-border-color: red;\n" +
                 "-fx-border-insets: 5;\n" +
                 "-fx-border-width: 3;\n" +
                 "-fx-border-style: dashed;\n";
@@ -96,17 +94,6 @@ public class GameView extends View<GameModel> {
         return scene;
     }
 
-    /**
-     * Author Michel Schlatter
-     * @param msg
-     * @param color
-     */
-    protected  void setChatMessage(String msg, Color color){
-        Label lbl = new Label();
-        lbl.setText(msg);
-        lbl.setTextFill(color);
-        this.chatContent.getChildren().add(lbl);
-    }
 
     protected void setTexts() {
 
@@ -126,5 +113,19 @@ public class GameView extends View<GameModel> {
     public void stop(){
         stage.hide();
     }
+
+    /**
+     * Author Michel Schlatter
+     * @param msg
+     * @param color
+     */
+    protected  void setChatMessage(String msg, Color color){
+        Label lbl = new Label();
+        lbl.setText(msg);
+        lbl.setTextFill(color);
+        this.chatContent.getChildren().add(lbl);
+    }
+
+
 
 }

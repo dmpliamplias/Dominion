@@ -53,10 +53,10 @@ public class GameController extends Controller<GameModel, GameView> {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
-        cc.setMsg( view.textFieldChat.getText());
+        cc.setMsg( message);
         view.textFieldChat.clear();
-
         view.setChatMessage(message, getColorByClientId(cc));
+
         try {
             serverConnectionService.sendObject( cc );
         } catch (IOException e) {
@@ -73,6 +73,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         String message = plServiceLocator.getUser().getUserName() + ": " + view.btnSendText.getText();
         ChatContainer cc = new ChatContainer();
+        cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( message );
 
         view.setChatMessage(message, getColorByClientId(cc));
@@ -108,10 +109,10 @@ public class GameController extends Controller<GameModel, GameView> {
             color = Color.BLUE;
         }
         if (id == 2) {
-            color = Color.YELLOW;
+            color = Color.RED;
         }
         if (id == 3) {
-            color = Color.RED;
+            color = Color.PURPLE;
         }
         if (id == 4) {
             color = Color.GREEN;

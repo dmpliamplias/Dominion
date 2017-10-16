@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -22,9 +24,9 @@ public class LobbyView extends View<LobbyModel> {
     protected ListView lvPlayers;
     protected Button btnStart;
     protected Button btnGameView;
-    protected TextArea txtAreaChat;
     protected TextField textFieldChat;
     protected Button btnChatSend;
+    protected VBox chatContent;
 
     public LobbyView(Stage stage, LobbyModel model) {
         super(stage, model);
@@ -63,10 +65,6 @@ public class LobbyView extends View<LobbyModel> {
 
         // Chatview
 
-        this.txtAreaChat = new TextArea();
-        this.txtAreaChat.setEditable( false );
-        this.txtAreaChat.setPromptText( "Chat Room" );
-
 
         this.btnChatSend  = new Button();
         this.btnChatSend.setPrefSize(250, 50);
@@ -75,14 +73,23 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldChat.setPromptText( "Enter Text" );
         this.textFieldChat.setPrefSize( 450,50 );
 
+        String cssLayout =
+                "-fx-border-color: red;\n" +
+                "-fx-border-insets: 5;\n" +
+                "-fx-border-width: 3;\n" +
+                "-fx-border-style: dashed;\n";
+
+        chatContent = new VBox();
+        chatContent.setStyle(cssLayout);
+
         // create HBox for chat
 
         HBox hBox = new HBox(10);
         hBox.setAlignment( Pos.CENTER);
         hBox.getChildren().add(textFieldChat);
         hBox.getChildren().add(btnChatSend);
-        gridPane.add(hBox, 1, 3);
-        gridPane.add( txtAreaChat, 1,2 );
+        gridPane.add(chatContent, 1, 0);
+        gridPane.add( hBox, 1,3 );
 
         setTexts();
 
@@ -100,6 +107,7 @@ public class LobbyView extends View<LobbyModel> {
 
     }
 
+
     private String getText(String key){
         return translator.getString(key);
     }
@@ -116,6 +124,18 @@ public class LobbyView extends View<LobbyModel> {
 
     public void stop(){
         stage.hide();
+    }
+
+    /**
+     * Author Michel Schlatter
+     * @param msg
+     * @param color
+     */
+    protected  void setChatMessage(String msg, Color color){
+        Label lbl = new Label();
+        lbl.setText(msg);
+        lbl.setTextFill(color);
+        this.chatContent.getChildren().add(lbl);
     }
 
 }
