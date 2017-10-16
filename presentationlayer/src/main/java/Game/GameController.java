@@ -90,11 +90,15 @@ public class GameController extends Controller<GameModel, GameView> {
     // Method for to receive the chatContainer from the server and set new text in the chat
     public void receiveMessage(ChatContainer chatContainer) {
 
+        String c = getColorByIDasAString( chatContainer );
+
         Platform.runLater( () -> {
 
             String beforeText = view.textAreaChat.getText();
             String newText = beforeText += createChatText( chatContainer ) + System.getProperty( "line.separator" );
             view.textAreaChat.replaceText( newText );
+            view.textAreaChat.setStyle( beforeText.length(), (beforeText.length() + newText.length()),
+                    "-fx-fill: "+ c);
 
 
         } );
@@ -117,16 +121,16 @@ public class GameController extends Controller<GameModel, GameView> {
         String color = new String();
 
         if (id == 1) {
-            color = "blue";
+            color = "BLUE;";
         }
         if (id == 2) {
-            color = "yellow";
+            color = "YELLOW;";
         }
         if (id == 3) {
-            color = "red";
+            color = "RED;";
         }
         if (id == 4) {
-            color = "green";
+            color = "GREEN;";
         }
         return color;
     }
