@@ -160,7 +160,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private String createChatText(ChatContainer chatContainer) {
         Color c = getColorByClientId( chatContainer );
-        String msg = /*plServiceLocator.getUser().getUserName() + " :" + */chatContainer.getMsg();
+        String msg = plServiceLocator.getUser().getUserName() + ": " + chatContainer.getMsg();
         return msg;
     }
 

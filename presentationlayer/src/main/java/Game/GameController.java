@@ -54,7 +54,7 @@ public class GameController extends Controller<GameModel, GameView> {
             cc.setMsg(message );
             String before = view.textAreaChat.getText();
             String newText = before +=  message +  System.getProperty("line.separator");
-            view.textAreaChat.setText( newText );
+            view.textAreaChat.setText(newText );
             view.textFieldChat.clear();
 
             try {
@@ -72,7 +72,7 @@ public class GameController extends Controller<GameModel, GameView> {
         cc.setMsg(message );
         String before = view.textAreaChat.getText();
         String newText = before +=  message +  System.getProperty("line.separator");
-        view.textAreaChat.setText( newText );
+        view.textAreaChat.setText(newText );
 
         try {
             serverConnectionService.sendObject( cc );
@@ -80,10 +80,6 @@ public class GameController extends Controller<GameModel, GameView> {
             view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
-// TODO: 12.10.2017  Manu => wenn du schribsch den trägs au grad ih, ich shicks nur de andere clients, nöd dir auno (wills du ja de sender bish
-        // und weisch was d schribsch. + add no de name vom client über 'plServiceLocator.getUser().getUserName()'
-        //denn no farbig über d id vom client 'serverConnectionService.getClientId()'
-        // es sind max 4 clients...den chash ja für 1 = blau für 2 = gelb usw.....
 
 
     public void receiveMessage(ChatContainer chatContainer){
@@ -100,10 +96,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     private String createChatText(ChatContainer chatContainer){
         Color c = getColorByClientId(chatContainer);
-        // TODO: 12.10.2017 lock here how to set color https://stackoverflow.com/questions/30114478/is-it-possible-to-set-different-colors-for-different-lines-in-a-javafx-textfield
-        // you hava to replace Textares with InlineCssTextArea or HTMLEDITOR ==> google helps
 
-        String msg = /*plServiceLocator.getUser().getUserName() + " :" + */chatContainer.getMsg();
+        String msg = plServiceLocator.getUser().getUserName() + ": " + chatContainer.getMsg();
         return msg;
     }
 
