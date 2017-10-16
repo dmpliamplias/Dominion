@@ -46,12 +46,16 @@ public final class H2Database {
         catch (Exception e) {
             LOG.severe(e.getMessage());
         }
+        new EntityManagerFactory();
     }
 
     /**
      * Shuts down the database.
      */
     public void shutdownDatabase() {
+        // Close entitymanager
+        EntityManagerFactory.close();
+        LOG.info("Closed entity manager factory");
         tcpServer.stop();
         LOG.info("Shutdown the tcp server listening on port: " + tcpServer.getPort());
     }
