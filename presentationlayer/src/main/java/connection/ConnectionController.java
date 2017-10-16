@@ -54,7 +54,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 model.setIP(socketAddress.getHostName());
                 model.setPort(socketAddress.getPort());
 
-                view.createConnectedInfoDialog().show();
+                view.createConnectedDialog().show();
                 view.refreshInfoDialog();
 
                  view.btnOK.setOnAction((event3) -> {

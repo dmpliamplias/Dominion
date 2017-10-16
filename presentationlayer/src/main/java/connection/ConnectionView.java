@@ -12,21 +12,27 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ConnectionView extends View<ConnectionModel> {
 	
     Button btnStartS;
     Button btnJoinS;
     Button btnHelp;
-
     Button btnConnect;
 	Button btnOK;
+	Button btnCopyPort;
+	Button btnCopyIP;
 	TextField fldPort;
+	TextField fldIP;
 	Label lblPort;
 	Label lblInfo;
 	Label lblIP;
-	Stage secondStage;
-	TextField fldIP;
+	Stage stageCreateDialog;
+	Stage stageConnectedDialog;
+	Stage stageJoinDialog;
+
 
 	public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
@@ -81,36 +87,12 @@ public class ConnectionView extends View<ConnectionModel> {
         return scene;
     }
 
-
-	protected void setTexts() {
-		this.stage.setTitle(getText("ConnectionView_stage_Title"));
-		btnStartS.setText(getText("ConnectionView_btnStartS"));
-		btnJoinS.setText(getText("ConnectionView_btnJoinS"));
-		btnHelp.setText(getText("ConnectionView_btnHelp"));
-
-	}
-
-	//TODO Mige: Ich bekomme eine Nullpointer Exception wenn ich diese buttons in die Methode setText schreibe
-	// da die Methode setTexts aufgerufen wird beim 1 Fenster und die Buttons noch gar nicht existieren
-	// Eine andere Idee?
-	protected void setTexts2() {
-		btnConnect.setText(getText("ConnectionView_btnConnect"));
-		//TODO Vanessa evt. setText3
-		//btnOK.setText(getText("ConnectionView_btnOK"));
-		lblPort.setText(getText("ConnectionView_lblPort"));
-		lblInfo.setText(getText("ConnectionView_lblInfo"));
-		secondStage.setTitle(getText("ConnectionView_secondStage_Title"));
-	}
-
-	private String getText(String key){
-		return translator.getString(key);
-	}
-
+	// Stage where you enter your port number
 	public Stage create_Dialog(){
-		secondStage = new Stage();
+		stageCreateDialog = new Stage();
 
-		secondStage.initOwner(stage);
-		secondStage.initModality(Modality.WINDOW_MODAL);
+		stageCreateDialog.initOwner(stage);
+		stageCreateDialog.initModality(Modality.WINDOW_MODAL);
 		
 		BorderPane root2 = new BorderPane();
 		Scene scene2 = new Scene(root2,400,220);
@@ -150,58 +132,26 @@ public class ConnectionView extends View<ConnectionModel> {
 	 	gp2.setConstraints(fldPort, 2, 3);
 	 	gp2.setConstraints(btnConnect, 3, 5);
 		gp2.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
-		
-		secondStage.setScene(scene2);
-		setTexts2();
-        return secondStage;
+
+		stageCreateDialog.setScene(scene2);
+		setTexts();
+        return stageCreateDialog;
     }
 
-    public void refreshInfoDialog(){
-    	fldPort.setText(Integer.toString(model.getPort()));
-		fldIP.setText(model.getIP());
-	}
+	// stage where it shows port and IP
+    public Stage createConnectedDialog(){
+		stageConnectedDialog = new Stage();
 
-	public void refreshModelFromInfoDialog(){
-    	model.setPort(Integer.parseInt(fldPort.getText()));
-    	model.setIP(fldIP.getText());
-	}
-
-	//TODO Vanessa setText ändern
-	public Stage createConnectedInfoDialog(){
-		Stage stage = createConnectionDialog();
-		btnOK.setPrefSize(80, 30);
-		lblInfo.setText(translator.getString("connectionview_notethisinfo"));
-		btnOK.setText(translator.getString("ok"));
-		stage.setTitle(translator.getString("connectionview_connectioninfo_titel"));
-
-		fldIP.setDisable(true);
-		fldPort.setDisable(true);
-
-		return stage;
-	}
-
-	public Stage createJoinDialog(){
-		Stage stage = createConnectionDialog();
-		btnOK.setPrefSize(160, 30);
-		lblInfo.setText("Enter the Data your hoster gave you...");
-		stage.setTitle("Join Server");
-
-		// TODO@Vanessa wieder ändern
-		fldIP.setDisable(false);
-		fldPort.setDisable(false);
-		return stage;
-	}
-
-    private Stage createConnectionDialog(){
-		Stage connectionDialogStage = new Stage();
-		
-		connectionDialogStage.initOwner(stage);
-		connectionDialogStage.initModality(Modality.WINDOW_MODAL);
+		stageConnectedDialog.initOwner(stage);
+		stageConnectedDialog.initModality(Modality.WINDOW_MODAL);
 		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,400,220);
 		GridPane gp = new GridPane();
+		gp.setVgap(10);
 
+		// Asign GridPane to BorderPane
+		root.setCenter(gp);
 		
 		// Creating and labeling button, label, textfield
 		lblPort = new Label();
@@ -210,25 +160,41 @@ public class ConnectionView extends View<ConnectionModel> {
 		lblIP = new Label();
 		fldIP = new TextField();
 		btnOK = new Button();
+		btnCopyPort = new Button();
+		btnCopyIP = new Button();
 
 		// Set size for the buttons and FlowPane
-
 		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
 		lblIP.setPrefSize(50, 30);
 		fldIP.setPrefSize(150, 30);
-		
-		// Asign GridPane to BorderPane
-		root.setCenter(gp);
-		
-		
+		btnCopyPort.setPrefSize(30, 30);
+		btnCopyIP.setPrefSize(30, 30);
+		btnOK.setPrefSize(60, 30);
+
+		// Image Copy to ClipBoard
+		Image imgClipBoard = new Image(getClass().getResourceAsStream("CopyToClipboard.png"));
+		ImageView imgViewPort = new ImageView();
+		ImageView imgViewIP = new ImageView();
+		imgViewPort.setImage(imgClipBoard);
+		imgViewPort.setFitHeight(20);
+		imgViewPort.setFitWidth(20);
+		imgViewIP.setImage(imgClipBoard);
+		imgViewIP.setFitHeight(20);
+		imgViewIP.setFitWidth(20);
+		btnCopyPort.setGraphic(imgViewPort);
+		btnCopyIP.setGraphic(imgViewIP);
+
+
 		// Creating columns with different sizes
 		ColumnConstraints column = new ColumnConstraints(50);
 		ColumnConstraints column1 = new ColumnConstraints(50);
 		ColumnConstraints column2 = new ColumnConstraints(150);
-		ColumnConstraints column3 = new ColumnConstraints(80);
-		ColumnConstraints column4 = new ColumnConstraints(120);
-		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4);
+		ColumnConstraints column3 = new ColumnConstraints(30);
+		ColumnConstraints column4 = new ColumnConstraints(20);
+		ColumnConstraints column5 = new ColumnConstraints(60);
+		ColumnConstraints column6 = new ColumnConstraints(40);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
 					
 		
 		// Creating 8 rows
@@ -239,19 +205,141 @@ public class ConnectionView extends View<ConnectionModel> {
 		
 		// Asign buttons, label, textfield to column, row
 		gp.setConstraints(lblInfo, 2, 1);
-	   	gp.setConstraints(lblPort, 1, 3);
-		gp.setConstraints(fldPort, 2, 3);
-	    gp.setConstraints(lblIP, 1, 4);
-	    gp.setConstraints(fldIP, 2, 4);
-	    gp.setConstraints(btnOK, 3, 5);
-	    gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
-		
+	   	gp.setConstraints(lblPort, 1, 2);
+		gp.setConstraints(fldPort, 2, 2);
+	    gp.setConstraints(lblIP, 1, 3);
+	    gp.setConstraints(fldIP, 2, 3);
+	    gp.setConstraints(btnOK, 5, 4);
+		gp.setConstraints(btnCopyPort, 3, 2);
+		gp.setConstraints(btnCopyIP, 3, 3);
+		gp.setColumnSpan(lblInfo, 5);
+	    gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
 
-		connectionDialogStage.setScene(scene);
+		fldIP.setDisable(true);
+		fldPort.setDisable(true);
 
-		if(secondStage != null) secondStage.close();
-        return connectionDialogStage;
+		stageConnectedDialog.setScene(scene);
+
+		if(stageCreateDialog != null) stageCreateDialog.close();
+		setTexts();
+        return stageConnectedDialog;
     }
-	
+
+	// stage where the user has to enter port and IP
+	public Stage createJoinDialog(){
+		stageJoinDialog = new Stage();
+
+		stageJoinDialog.initOwner(stage);
+		stageJoinDialog.initModality(Modality.WINDOW_MODAL);
+
+		BorderPane root = new BorderPane();
+		Scene scene = new Scene(root,400,220);
+		GridPane gp = new GridPane();
+		gp.setVgap(10);
+
+		// Asign GridPane to BorderPane
+		root.setCenter(gp);
+
+		// Creating and labeling button, label, textfield
+		lblPort = new Label();
+		lblInfo = new Label();
+		fldPort = new TextField();
+		lblIP = new Label();
+		fldIP = new TextField();
+		btnOK = new Button();
+
+		// Set size for the buttons and FlowPane
+		lblPort.setPrefSize(50, 30);
+		fldPort.setPrefSize(150, 30);
+		lblIP.setPrefSize(50, 30);
+		fldIP.setPrefSize(150, 30);
+		btnOK.setPrefSize(90, 30);
+
+
+		// Creating columns with different sizes
+		ColumnConstraints column = new ColumnConstraints(50);
+		ColumnConstraints column1 = new ColumnConstraints(50);
+		ColumnConstraints column2 = new ColumnConstraints(150);
+		ColumnConstraints column3 = new ColumnConstraints(10);
+		ColumnConstraints column4 = new ColumnConstraints(10);
+		ColumnConstraints column5 = new ColumnConstraints(90);
+		ColumnConstraints column6 = new ColumnConstraints(40);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
+
+
+		// Creating 8 rows
+		for (int i = 0; i<8;i++){
+			RowConstraints row = new RowConstraints(30);
+			gp.getRowConstraints().add(row);
+		}
+
+		// Asign buttons, label, textfield to column, row
+		gp.setConstraints(lblInfo, 2, 1);
+		gp.setConstraints(lblPort, 1, 2);
+		gp.setConstraints(fldPort, 2, 2);
+		gp.setConstraints(lblIP, 1, 3);
+		gp.setConstraints(fldIP, 2, 3);
+		gp.setConstraints(btnOK, 5, 4);
+		gp.setColumnSpan(lblInfo, 5);
+		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
+
+		fldIP.setDisable(false);
+		fldPort.setDisable(false);
+
+		stageJoinDialog.setScene(scene);
+
+		if(stageCreateDialog != null) stageCreateDialog.close();
+		setTexts();
+		return stageJoinDialog;
+	}
+
+
+	public void refreshInfoDialog(){
+		fldPort.setText(Integer.toString(model.getPort()));
+		fldIP.setText(model.getIP());
+	}
+
+	public void refreshModelFromInfoDialog(){
+		model.setPort(Integer.parseInt(fldPort.getText()));
+		model.setIP(fldIP.getText());
+	}
+
+
+	private String getText(String key){
+		return translator.getString(key);
+	}
+
+
+	protected void setTexts() {
+		this.stage.setTitle(getText("ConnectionView_stage_Title"));
+		btnStartS.setText(getText("ConnectionView_btnStartS"));
+		btnJoinS.setText(getText("ConnectionView_btnJoinS"));
+		btnHelp.setText(getText("ConnectionView_btnHelp"));
+
+		if (stageCreateDialog!= null){
+			lblPort.setText(getText("ConnectionView_lblPort"));
+			lblInfo.setText(getText("ConnectionView_lblInfo"));
+			stageCreateDialog.setTitle(getText("ConnectionView_secondStage_Title"));
+			btnConnect.setText(getText("ConnectionView_btnConnect"));
+		}
+
+		if (stageConnectedDialog!= null){
+			lblPort.setText(getText("ConnectionView_lblPort"));
+			lblInfo.setText(getText("connectionview_notethisinfo"));
+			lblIP.setText(getText("ConnectionView_lblIP"));
+			btnOK.setText(getText("ok"));
+			stageConnectedDialog.setTitle(getText("connectionview_connectioninfo_titel"));
+		}
+
+		if (stageJoinDialog!=null){
+			lblPort.setText(getText("ConnectionView_lblPort"));
+			lblInfo.setText(getText("ConnectionView_enterInfo"));
+			lblIP.setText(getText("ConnectionView_lblIP"));
+			btnOK.setText(getText("ConnectionView_btnConnect"));
+			stageJoinDialog.setTitle(getText("ConnectionView_joinDialog_Title"));
+		}
+
+	}
+
        
 }
