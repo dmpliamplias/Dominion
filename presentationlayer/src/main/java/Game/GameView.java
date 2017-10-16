@@ -13,6 +13,7 @@ import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.InlineCssTextArea;
 
 import java.awt.*;
 
@@ -23,7 +24,7 @@ public class GameView extends View<GameModel> {
      *  author Manuel Wirz
      *  */
 
-     protected TextArea textAreaChat;
+     protected InlineCssTextArea textAreaChat;
      protected TextField textFieldChat;
      protected Button btnChatSend;
      protected Button btnSendText;
@@ -65,9 +66,8 @@ public class GameView extends View<GameModel> {
         //
         // TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
-        this.textAreaChat = new TextArea();
+        this.textAreaChat = new InlineCssTextArea();
         this.textAreaChat.setEditable( false );
-        this.textAreaChat.setPromptText( "Chat Room" );
 
 
         this.btnChatSend  = new Button();

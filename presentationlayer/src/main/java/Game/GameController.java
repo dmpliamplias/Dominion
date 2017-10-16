@@ -14,9 +14,9 @@ import java.io.IOException;
 public class GameController extends Controller<GameModel, GameView> {
 
 
-    public GameController(GameModel model, GameView view, boolean myTurn){
-        super(model,view);
-        serverConnectionService.setGameController(this);
+    public GameController(GameModel model, GameView view, boolean myTurn) {
+        super( model, view );
+        serverConnectionService.setGameController( this );
         initialize();
 
     }
@@ -24,10 +24,10 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void initialize() {
         try {
-            serverConnectionService.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus( ViewStatus.Game ); // set ViewStatus for Server
 
         } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
         view.btnChatSend.setOnAction( event -> {
@@ -39,87 +39,93 @@ public class GameController extends Controller<GameModel, GameView> {
         } );
 
 
-
     }
 
     /**
-     *  author Manuel Wirz
-     *  */
+     * author Manuel Wirz
+     */
 
-    public void sendMessage(){
+    // Method to send the ChatContainer to the server and display the message in the own screen
 
-
-            String message  = view.textFieldChat.getText();
-            ChatContainer cc = new ChatContainer();
-            cc.setMsg(message );
-            String before = view.textAreaChat.getText();
-            String newText = before +=  message +  System.getProperty("line.separator");
-            view.textAreaChat.setText(newText );
-            view.textFieldChat.clear();
-
-            try {
-                serverConnectionService.sendObject(cc);
-            } catch (IOException e) {
-                view.alert(e.getMessage(), Alert.AlertType.ERROR);
-            }
-    }
+    public void sendMessage() {
 
 
-    public void sendButtonText(){
-
-        String message  = view.btnSendText.getText();
+        String message = view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer();
-        cc.setMsg(message );
+        cc.setMsg( message );
         String before = view.textAreaChat.getText();
-        String newText = before +=  message +  System.getProperty("line.separator");
-        view.textAreaChat.setText(newText );
+        String newText = before += message + System.getProperty( "line.separator" );
+        view.textAreaChat.replaceText( newText );
+        view.textFieldChat.clear();
 
         try {
             serverConnectionService.sendObject( cc );
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
     }
 
 
-    public void receiveMessage(ChatContainer chatContainer){
+    //TODO SendButton doesnt work twice
 
-        Platform.runLater(() -> {
+    // Button to send predefined text to the server and display the message on the own screen
+
+    public void sendButtonText() {
+
+        String message = view.btnSendText.getText();
+        ChatContainer cc = new ChatContainer();
+        cc.setMsg( message );
+        String before = view.textAreaChat.getText();
+        String newText = before += message + System.getProperty( "line.separator" );
+        view.textAreaChat.replaceText( newText );
+
+        try {
+            serverConnectionService.sendObject( cc );
+        } catch (IOException e) {
+            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+        }
+    }
+
+
+    // Method for to receive the chatContainer from the server and set new text in the chat
+    public void receiveMessage(ChatContainer chatContainer) {
+
+        Platform.runLater( () -> {
 
             String beforeText = view.textAreaChat.getText();
-            String newText = beforeText +=   createChatText(chatContainer) + System.getProperty("line.separator");
-            view.textAreaChat.setText(newText);
+            String newText = beforeText += createChatText( chatContainer ) + System.getProperty( "line.separator" );
+            view.textAreaChat.replaceText( newText );
 
-        });
+        } );
 
     }
 
-    private String createChatText(ChatContainer chatContainer){
-        Color c = getColorByClientId(chatContainer);
+    // Method to get the user and the message from the chatContainer
+    private String createChatText(ChatContainer chatContainer) {
 
         String msg = plServiceLocator.getUser().getUserName() + ": " + chatContainer.getMsg();
         return msg;
     }
 
-    private Color getColorByClientId(ChatContainer chatContainer){
-       int id = chatContainer.getClientId();
-       Color c = Color.WHITE;
 
-       switch(id) {
-           case 1:
-               c = Color.BLUE;
-               break;
-           case 2:
-               c = Color.YELLOW;
-               break;
-           case 3:
-               c = Color.GREEN;
-               break;
-           case 4:
-               c = Color.RED;
-               break;
-       }
+    // Method for saving clients color
+    private String getColorByIDasAString(ChatContainer chatContainer) {
 
-       return c;
+        int id = chatContainer.getClientId();
+        String color = new String();
+
+        if (id == 1) {
+            color = "BLUE";
+        }
+        if (id == 2) {
+            color = "YELLOW";
+        }
+        if (id == 3) {
+            color = "RED";
+        }
+        if (id == 4) {
+            color = "GREEN";
+        }
+        return color;
     }
 }

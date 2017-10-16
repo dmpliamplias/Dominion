@@ -127,7 +127,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     /**
      * author Manuel Wirz
      */
-    // ChatController
+    // ChatController same Logic as in the GameController -> Look there for the comments for each method
 
     public void sendMessage() {
 
