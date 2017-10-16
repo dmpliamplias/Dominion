@@ -57,6 +57,14 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 view.createConnectedDialog().show();
                 view.refreshInfoDialog();
 
+                view.btnCopyPort.setOnAction((event4)->{
+                    model.CopytoCbPort();
+                });
+
+                view.btnCopyIP.setOnAction((event5)->{
+                    model.CopytoCbIP();
+                });
+
                  view.btnOK.setOnAction((event3) -> {
                     goToLoginView();
                 });

@@ -231,7 +231,7 @@ public class ConnectionView extends View<ConnectionModel> {
         return stageConnectedDialog;
     }
 
-    
+
 	// stage where the user has to enter port and IP
 	public Stage createJoinDialog(){
 		stageJoinDialog = new Stage();
