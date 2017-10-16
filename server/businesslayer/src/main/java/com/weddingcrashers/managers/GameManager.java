@@ -2,10 +2,8 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.ServerUtils;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;
-import com.weddingcrashers.servermodels.Methods;
-import com.weddingcrashers.servermodels.ViewStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -3,6 +3,7 @@ package com.weddingcrashers.server;
 import com.weddingcrashers.managers.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,9 +1,8 @@
 package com.weddingcrashers.managers;
 
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.ServerUtils;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.ChatContainer;
-import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;
 
 public class ChatManager extends Manager {

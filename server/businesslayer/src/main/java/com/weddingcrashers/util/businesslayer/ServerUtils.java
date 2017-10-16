@@ -1,5 +1,6 @@
-package com.weddingcrashers.server;
+package com.weddingcrashers.util.businesslayer;
 
+import com.weddingcrashers.server.Client;
 import com.weddingcrashers.servermodels.Container;
 import com.weddingcrashers.servermodels.ErrorContainer;
 

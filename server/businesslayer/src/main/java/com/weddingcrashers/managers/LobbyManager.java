@@ -2,7 +2,7 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.ServerUtils;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.LobbyContainer;
 import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.servermodels.ViewStatus;

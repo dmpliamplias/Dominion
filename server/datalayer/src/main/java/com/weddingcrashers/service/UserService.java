@@ -42,6 +42,14 @@ public interface UserService {
     User getUserByEmail(String email);
 
     /**
+     * Gets the password for the given user.
+     *
+     * @param user the user.
+     * @return the password.
+     */
+    String getPasswordFor(User user);
+
+    /**
      * Lists all users.
      *
      * @return a list with all users.

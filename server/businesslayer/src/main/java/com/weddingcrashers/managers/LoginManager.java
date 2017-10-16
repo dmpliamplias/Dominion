@@ -1,12 +1,13 @@
 package com.weddingcrashers.managers;
 
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.repositories.Utils;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.ServerUtils;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.service.UserService;
+
+import static com.weddingcrashers.util.businesslayer.SecurityUtils.validatePassword;
 
 /**
  *  @author Michel Schlatter
@@ -25,8 +26,7 @@ public class LoginManager extends Manager {
        LoginContainer loginContainer = new LoginContainer();
 
        if(user != null){
-           // TODO: 13.10.2017  Dyoni:  if(user.getPassword().equals(Utils.hashPassword(password))) {
-          if(user.getPassword().equals(password)) {
+          if (validatePassword(user, password)) {
               loginContainer.setUser(user);
           }
        }

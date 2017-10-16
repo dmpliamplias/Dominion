@@ -2,12 +2,10 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.ServerUtils;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.service.ServiceLocator;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

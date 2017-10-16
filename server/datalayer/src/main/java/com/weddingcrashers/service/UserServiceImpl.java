@@ -3,6 +3,7 @@ package com.weddingcrashers.service;
 import com.weddingcrashers.db.EntityManagerFactory;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.model.User_;
+import com.weddingcrashers.util.datalayer.SecurityUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
 import java.util.List;
 
 import static org.apache.commons.lang3.Validate.notNull;
@@ -35,6 +37,8 @@ public class UserServiceImpl extends BaseService implements UserService {
         notNull(user);
         final User userByEmail = getUserByEmail(user.getUserEmail());
         if (userByEmail == null) {
+            final String hashedPassword = SecurityUtils.generatePBKDF2WithHMACSHA1Password(user.getPassword());
+            user.setPassword(hashedPassword);
             return objectUpdateService.create(user);
         }
         return userByEmail;
@@ -61,13 +65,13 @@ public class UserServiceImpl extends BaseService implements UserService {
         final CriteriaBuilder cb = em.getCriteriaBuilder();
 
         // define root and query
-        final CriteriaQuery<User> query = cb.createQuery(User.class);
+        CriteriaQuery<User> query = cb.createQuery(User.class);
         final Root<User> from = query.from(User.class);
 
         // query select root
         query.select(from);
         // where clause
-        query.where(cb.equal(from.get(User_.userEmail), email));
+        query = getUserByQuery(from, cb, query, User_.userEmail, email);
 
         // execute query
         final TypedQuery<User> typedQuery = em.createQuery(query);
@@ -81,6 +85,14 @@ public class UserServiceImpl extends BaseService implements UserService {
         return typedQuery.getSingleResult();
     }
 
+    public String getPasswordFor(User user) {
+        notNull(user);
+
+        final EntityManager entityManager = EntityManagerFactory.getEntityManager();
+        final User foundUser = entityManager.find(user.getClass(), user.getId());
+        return foundUser.getPassword();
+    }
+
     @Override
     public List<User> list() {
         return objectUpdateService.list(User.class);
@@ -89,6 +101,21 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     protected Class getSubClass() {
         return UserServiceImpl.class;
+    }
+
+    /**
+     * Returns the query with the given specification.
+     *
+     * @param from the root of the query.
+     * @param cb the criteria builder.
+     * @param query the query.
+     * @param attribute the attribute to check.
+     * @param value the value to check.
+     * @return the query for the given specification.
+     */
+    private CriteriaQuery<User> getUserByQuery(Root<User> from, CriteriaBuilder cb, CriteriaQuery<User> query, SingularAttribute<User, String> attribute, String value) {
+        query.where(cb.equal(from.get(attribute), value));
+        return query;
     }
 
 }
