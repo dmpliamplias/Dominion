@@ -79,7 +79,6 @@ public class GameView extends View<GameModel> {
                 "-fx-border-style: dashed;\n";
 
         chatContent = new VBox();
-        chatContent.getChildren().add(new Label("sdnfsdkjnfkjsdnfjksdnf"));
         chatContent.setStyle(cssLayout);
 
 
