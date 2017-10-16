@@ -2,13 +2,9 @@ package com.weddingcrashers.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.Logger;
-
-import static java.util.Locale.ENGLISH;
-import static java.util.Locale.GERMAN;
 
 /**
  * Translator.
@@ -17,10 +13,20 @@ import static java.util.Locale.GERMAN;
  */
 public class Translator {
 
-    // ---- Statics
+    /**
+     * Enum for language.
+     */
+    public enum Language {
+        /** German. */
+        GERMAN,
+        /** Swiss german. */
+        SWISS_GERMAN,
+        /** English. */
+        ENGLISH
+    }
 
-    /** The supported locales. */
-    private static final Locale[] availableLocales = {GERMAN, ENGLISH};
+
+    // ---- Statics
 
     /** The suffix for the translation files. */
     private static final String SUFFIX = ".properties";
@@ -34,8 +40,6 @@ public class Translator {
 
     // ---- Members
 
-    /** The current locale. */
-    private Locale currentLocale;
     /** The translation properties. */
     private Properties translations;
 
@@ -45,53 +49,39 @@ public class Translator {
     /**
      * Constructor.
      *
-     * @param localeString the locale.
+     * @param language the language.
      */
-    Translator(String localeString) {
-        Locale locale = null;
-        if (localeString != null) {
-            for (Locale availableLocale : availableLocales) {
-                String tmpLang = availableLocale.getLanguage();
-                if (localeString.substring(0, tmpLang.length()).equals(tmpLang)) {
-                    locale = availableLocale;
-                    break;
-                }
-            }
-        }
-
-        // Load the resource strings
+    Translator(Language language) {
         translations = new Properties();
 
-        boolean isDefault = false;
+        String languageAbbrev = null;
+        switch (language) {
+            case GERMAN:
+                languageAbbrev = "de";
+                break;
+            case SWISS_GERMAN:
+                languageAbbrev = "de_CH";
+            case ENGLISH:
+                languageAbbrev = "en";
+                break;
+            default:
+                break;
+        }
         InputStream in;
-        if (locale == null) {
-            // fallback properties
+        if (languageAbbrev == null) {
             in = getClass().getResourceAsStream(PATH + SUFFIX);
-            isDefault = true;
         }
         else {
             // locale properties
-            in = getClass().getResourceAsStream(PATH + "_" + locale + SUFFIX);
+            in = getClass().getResourceAsStream(PATH + "_" + languageAbbrev + SUFFIX);
         }
         try {
             translations.load(in);
         } catch (IOException e) {
-            logger.warning("Could not load translation");
+            logger.warning("Could not load translation for" + language.name().toLowerCase());
         }
-        if (isDefault) {
-            locale = GERMAN;
-        }
-        Locale.setDefault(locale);
-        currentLocale = locale;
 
-        logger.info("Loaded resources for " + locale.getLanguage());
-    }
-
-    /**
-     * @return the current locale.
-     */
-    public Locale getCurrentLocale() {
-        return currentLocale;
+        logger.info("Loaded resources for " + language.name().toLowerCase());
     }
 
     /**

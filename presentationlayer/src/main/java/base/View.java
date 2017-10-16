@@ -2,6 +2,7 @@ package base;
 
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import com.weddingcrashers.service.Translator.Language;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -77,12 +78,12 @@ public abstract class View<M extends Model> {
     }
 
     /**
-     * Switch the translator to the corresponding locale.
+     * The language to switch the translator for.
      *
-     * @param locale the locale to switch the translator for.
+     * @param language the language to switch.
      */
-    public void switchTranslator(String locale) {
-        serviceLocator.setTranslator(locale);
+    public void switchTranslator(Language language) {
+        serviceLocator.setTranslator(language);
         setTexts();
     }
 

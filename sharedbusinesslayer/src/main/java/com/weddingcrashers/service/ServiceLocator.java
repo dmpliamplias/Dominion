@@ -1,8 +1,11 @@
 package com.weddingcrashers.service;
 
 import com.weddingcrashers.db.H2Database;
+import com.weddingcrashers.service.Translator.Language;
 
 import java.util.logging.Logger;
+
+import static com.weddingcrashers.service.Translator.Language.GERMAN;
 
 /**
  * Service locator.
@@ -57,7 +60,7 @@ public class ServiceLocator {
      */
     private ServiceLocator() {
         h2Database = new H2Database();
-        translator = new Translator("de");
+        translator = new Translator(GERMAN);
 
         userService = new UserServiceImpl();
         highscoreService = new HighscoreServiceImpl();
@@ -95,8 +98,8 @@ public class ServiceLocator {
         return translator;
     }
 
-    public void setTranslator(String locale) {
-        this.translator = new Translator(locale);
+    public void setTranslator(Language language) {
+        this.translator = new Translator(language);
     }
     
 }
