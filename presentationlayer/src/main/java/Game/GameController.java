@@ -52,12 +52,11 @@ public class GameController extends Controller<GameModel, GameView> {
 
         String message = plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer();
-        cc.setMsg( message );
-        String before = view.textAreaChat.getText();
-        String newText = before += message + System.getProperty( "line.separator" );
-        view.textAreaChat.replaceText( newText );
+        cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
+        cc.setMsg( view.textFieldChat.getText());
         view.textFieldChat.clear();
 
+        view.setChatMessage(message, getColorByClientId(cc));
         try {
             serverConnectionService.sendObject( cc );
         } catch (IOException e) {
@@ -75,9 +74,8 @@ public class GameController extends Controller<GameModel, GameView> {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.btnSendText.getText();
         ChatContainer cc = new ChatContainer();
         cc.setMsg( message );
-        String before = view.textAreaChat.getText();
-        String newText = before += message + System.getProperty( "line.separator" );
-        view.textAreaChat.replaceText( newText );
+
+        view.setChatMessage(message, getColorByClientId(cc));
 
         try {
             serverConnectionService.sendObject( cc );
@@ -89,48 +87,34 @@ public class GameController extends Controller<GameModel, GameView> {
 
     // Method for to receive the chatContainer from the server and set new text in the chat
     public void receiveMessage(ChatContainer chatContainer) {
-
-        String c = getColorByIDasAString( chatContainer );
-
         Platform.runLater( () -> {
-
-            String beforeText = view.textAreaChat.getText();
-            String newText = beforeText += createChatText( chatContainer ) + System.getProperty( "line.separator" );
-            view.textAreaChat.replaceText( newText );
-            view.textAreaChat.setStyle( beforeText.length(), (beforeText.length() + newText.length()),
-                    "-fx-fill: "+ c);
-
-
+            view.setChatMessage(chatContainer.getMsg(), getColorByClientId(chatContainer));
         } );
 
     }
 
-    // Method to get the user and the message from the chatContainer
-    private String createChatText(ChatContainer chatContainer) {
 
-        String msg = chatContainer.getMsg();
-        return msg;
-    }
-
-
-
-    // Method for saving clients color
-    private String getColorByIDasAString(ChatContainer chatContainer) {
+    /**
+     * Author Michel Schlatter
+     * @param chatContainer
+     * @return
+     */
+    private Color getColorByClientId(ChatContainer chatContainer) {
 
         int id = chatContainer.getClientId();
-        String color = new String();
+        Color color = Color.WHITE;
 
         if (id == 1) {
-            color = "BLUE;";
+            color = Color.BLUE;
         }
         if (id == 2) {
-            color = "YELLOW;";
+            color = Color.YELLOW;
         }
         if (id == 3) {
-            color = "RED;";
+            color = Color.RED;
         }
         if (id == 4) {
-            color = "GREEN;";
+            color = Color.GREEN;
         }
         return color;
     }
