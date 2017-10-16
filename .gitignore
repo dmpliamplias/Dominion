@@ -10,3 +10,4 @@ datalayer/generated/
 .idea/workspace.xml
 .idea/codeStyleSettings.xml
 *.DS_STORE
+/.metadata/

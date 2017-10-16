@@ -1,16 +1,14 @@
 package ranking;
 
-import app.PLServiceLocator;
-import app.ServerConnectionService;
-import base.Controller;
-import com.weddingcrashers.model.Highscore;
-import com.weddingcrashers.model.Highscore_;
-import com.weddingcrashers.servermodels.RankingContainer;
-import com.weddingcrashers.servermodels.ViewStatus;
-import javafx.scene.control.Alert;
-
 import java.io.IOException;
 import java.util.List;
+
+import com.weddingcrashers.model.Highscore;
+import com.weddingcrashers.servermodels.RankingContainer;
+import com.weddingcrashers.servermodels.ViewStatus;
+
+import base.Controller;
+import javafx.scene.control.Alert;
 
 
 public class RankingController extends Controller<RankingModel, RankingView> {
