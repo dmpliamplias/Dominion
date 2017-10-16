@@ -207,13 +207,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(lblInfo, 2, 1);
 	   	gp.setConstraints(lblPort, 1, 2);
 		gp.setConstraints(fldPort, 2, 2);
-	    gp.setConstraints(lblIP, 1, 3);
-	    gp.setConstraints(fldIP, 2, 3);
-	    gp.setConstraints(btnOK, 5, 4);
+	    	gp.setConstraints(lblIP, 1, 3);
+	    	gp.setConstraints(fldIP, 2, 3);
+	    	gp.setConstraints(btnOK, 5, 4);
 		gp.setConstraints(btnCopyPort, 3, 2);
 		gp.setConstraints(btnCopyIP, 3, 3);
 		gp.setColumnSpan(lblInfo, 5);
-	    gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
+	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
 
 		fldIP.setDisable(true);
 		fldPort.setDisable(true);
