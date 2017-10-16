@@ -94,9 +94,11 @@ public class ConnectionView extends View<ConnectionModel> {
 		stageCreateDialog.initOwner(stage);
 		stageCreateDialog.initModality(Modality.WINDOW_MODAL);
 		
-		BorderPane root2 = new BorderPane();
-		Scene scene2 = new Scene(root2,400,220);
-		GridPane gp2 = new GridPane();
+		BorderPane root = new BorderPane();
+		Scene scene2 = new Scene(root,400,220);
+		GridPane gp = new GridPane();
+		gp.setVgap(10);
+
 		
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button();
@@ -104,39 +106,43 @@ public class ConnectionView extends View<ConnectionModel> {
 		fldPort = new TextField();
 		lblInfo = new Label();
 	    	    			
-		// Set size for the buttons and FlowPane
-		btnConnect.setPrefSize(80, 30);
+		// Set size for the button, label, textfield
+		btnConnect.setPrefSize(90, 30);
 		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
-		
+
 		// Asign GridPane to BorderPane
-		root2.setCenter(gp2);
-				
+		root.setCenter(gp);
+
 		// Creating columns with different sizes
 		ColumnConstraints column = new ColumnConstraints(50);
 		ColumnConstraints column1 = new ColumnConstraints(50);
 		ColumnConstraints column2 = new ColumnConstraints(150);
-		ColumnConstraints column3 = new ColumnConstraints(80);
-		ColumnConstraints column4 = new ColumnConstraints(120);
-		gp2.getColumnConstraints().addAll(column, column1, column2, column3, column4);
+		ColumnConstraints column3 = new ColumnConstraints(10);
+		ColumnConstraints column4 = new ColumnConstraints(10);
+		ColumnConstraints column5 = new ColumnConstraints(90);
+		ColumnConstraints column6 = new ColumnConstraints(40);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
 							
 		// Creating 8 rows
 		for (int i = 0; i<8;i++){
 			RowConstraints row = new RowConstraints(30);
-			gp2.getRowConstraints().add(row);			
+			gp.getRowConstraints().add(row);
 		}
 		
 		// Asign buttons, label, textfield to column, row
-	  	gp2.setConstraints(lblInfo, 2, 1);
-	 	gp2.setConstraints(lblPort, 1, 3);
-	 	gp2.setConstraints(fldPort, 2, 3);
-	 	gp2.setConstraints(btnConnect, 3, 5);
-		gp2.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
+		gp.setConstraints(lblInfo, 2, 1);
+		gp.setConstraints(lblPort, 1, 2);
+		gp.setConstraints(fldPort, 2, 2);
+	 	gp.setConstraints(btnConnect, 5, 4);
+		gp.setColumnSpan(lblInfo, 5);
+		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
 
 		stageCreateDialog.setScene(scene2);
 		setTexts();
         return stageCreateDialog;
     }
+
 
 	// stage where it shows port and IP
     public Stage createConnectedDialog(){
@@ -163,7 +169,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnCopyPort = new Button();
 		btnCopyIP = new Button();
 
-		// Set size for the buttons and FlowPane
+		// Set size for the buttons, labels, textfields
 		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
 		lblIP.setPrefSize(50, 30);
@@ -172,7 +178,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnCopyIP.setPrefSize(30, 30);
 		btnOK.setPrefSize(60, 30);
 
-		// Image Copy to ClipBoard
+		// Create Image 'Copy to ClipBoard'
 		Image imgClipBoard = new Image(getClass().getResourceAsStream("CopyToClipboard.png"));
 		ImageView imgViewPort = new ImageView();
 		ImageView imgViewIP = new ImageView();
@@ -207,13 +213,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(lblInfo, 2, 1);
 	   	gp.setConstraints(lblPort, 1, 2);
 		gp.setConstraints(fldPort, 2, 2);
-	    	gp.setConstraints(lblIP, 1, 3);
-	    	gp.setConstraints(fldIP, 2, 3);
-	    	gp.setConstraints(btnOK, 5, 4);
+		gp.setConstraints(lblIP, 1, 3);
+		gp.setConstraints(fldIP, 2, 3);
+		gp.setConstraints(btnOK, 5, 4);
 		gp.setConstraints(btnCopyPort, 3, 2);
 		gp.setConstraints(btnCopyIP, 3, 3);
 		gp.setColumnSpan(lblInfo, 5);
-	    	gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
+		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
 
 		fldIP.setDisable(true);
 		fldPort.setDisable(true);
@@ -225,6 +231,7 @@ public class ConnectionView extends View<ConnectionModel> {
         return stageConnectedDialog;
     }
 
+    
 	// stage where the user has to enter port and IP
 	public Stage createJoinDialog(){
 		stageJoinDialog = new Stage();
