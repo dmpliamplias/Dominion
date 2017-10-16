@@ -50,7 +50,7 @@ public class GameController extends Controller<GameModel, GameView> {
     public void sendMessage() {
 
 
-        String message = view.textFieldChat.getText();
+        String message = plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer();
         cc.setMsg( message );
         String before = view.textAreaChat.getText();
@@ -72,7 +72,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void sendButtonText() {
 
-        String message = view.btnSendText.getText();
+        String message = plServiceLocator.getUser().getUserName() + ": " + view.btnSendText.getText();
         ChatContainer cc = new ChatContainer();
         cc.setMsg( message );
         String before = view.textAreaChat.getText();
@@ -96,6 +96,7 @@ public class GameController extends Controller<GameModel, GameView> {
             String newText = beforeText += createChatText( chatContainer ) + System.getProperty( "line.separator" );
             view.textAreaChat.replaceText( newText );
 
+
         } );
 
     }
@@ -103,9 +104,10 @@ public class GameController extends Controller<GameModel, GameView> {
     // Method to get the user and the message from the chatContainer
     private String createChatText(ChatContainer chatContainer) {
 
-        String msg = plServiceLocator.getUser().getUserName() + ": " + chatContainer.getMsg();
+        String msg = chatContainer.getMsg();
         return msg;
     }
+
 
 
     // Method for saving clients color
@@ -115,16 +117,16 @@ public class GameController extends Controller<GameModel, GameView> {
         String color = new String();
 
         if (id == 1) {
-            color = "BLUE";
+            color = "blue";
         }
         if (id == 2) {
-            color = "YELLOW";
+            color = "yellow";
         }
         if (id == 3) {
-            color = "RED";
+            color = "red";
         }
         if (id == 4) {
-            color = "GREEN";
+            color = "green";
         }
         return color;
     }

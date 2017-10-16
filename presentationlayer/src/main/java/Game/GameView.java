@@ -12,8 +12,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.fxmisc.richtext.StyledTextArea;
 
 import java.awt.*;
 
@@ -66,7 +68,8 @@ public class GameView extends View<GameModel> {
         //
         // TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
-        this.textAreaChat = new InlineCssTextArea();
+        this.textAreaChat = new InlineCssTextArea(  );
+
         this.textAreaChat.setEditable( false );
 
 
