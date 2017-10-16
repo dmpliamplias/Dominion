@@ -5,6 +5,7 @@ import base.Controller;
 import app.ServerConnectionService;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.LoginContainer;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.service.ServiceLocator;
 import javafx.scene.control.Alert;
 import lobby.LobbyController;
@@ -15,6 +16,8 @@ import javafx.fxml.FXMLLoader;
 import register.RegisterController;
 import register.RegisterModel;
 import register.RegisterView;
+
+import java.io.IOException;
 
 /**
  *  @author Michel Schlatter
@@ -43,29 +46,51 @@ public class LoginController extends Controller<LoginModel, LoginView>{
     }
 
   public void login(){
-        view.refreshModel();
-       String pw = model.getPassword();
-       String email = model.getEmail();
+       view.refreshModel();
+       if(model.getEmail().equals("go")){
+           User u = new User();
+           u.setUserEmail("anonymous@dom.ch");
+           u.setUserName("Anonymous");
+           u.setPassword("1234");
 
-       if(pw != null && !pw.isEmpty() && email != null && !email.isEmpty()){
-           LoginContainer loginContainer = new LoginContainer();
-           loginContainer.setEmail(email);
-           loginContainer.setPassword(pw);
-
+           LoginContainer lc = new LoginContainer(Methods.Login_SetUser_TestPurposesOnly);
+           lc.setUser(u);
            try {
-               serverConnectionService.sendObject(loginContainer);
-           } catch (Exception e) {
-              view.alert(e.getMessage(), Alert.AlertType.ERROR);
+               serverConnectionService.sendObject(lc);
+           } catch (IOException e) {
+               view.alert(e.getMessage(), Alert.AlertType.ERROR);
+           }
+       }else {
+           String pw = model.getPassword();
+           String email = model.getEmail();
+
+           if (pw != null && !pw.isEmpty() && email != null && !email.isEmpty()) {
+               LoginContainer loginContainer = new LoginContainer(Methods.Login);
+               loginContainer.setEmail(email);
+               loginContainer.setPassword(pw);
+
+               try {
+                   serverConnectionService.sendObject(loginContainer);
+               } catch (Exception e) {
+                   view.alert(e.getMessage(), Alert.AlertType.ERROR);
+               }
            }
        }
+  }
+
+  public void handleServerAnswer_TestPurposeLogin(LoginContainer lc){
+      Platform.runLater(()->{
+          plServiceLocator.setUser(lc.getUser());
+          goToLobbyView();
+      });
   }
 
   public void handleServerAnswer(LoginContainer result){
       Platform.runLater(() -> {
           User user = result.getUser();
           if(user != null){ // success
-              goToLobbyView();
               plServiceLocator.setUser(user);
+              goToLobbyView();
           }else{
               //unsuccessfull login, show error
               view.alert(translator.getString("LoginView_LoginError"), Alert.AlertType.WARNING);

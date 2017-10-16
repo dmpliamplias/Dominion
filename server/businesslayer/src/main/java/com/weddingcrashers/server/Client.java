@@ -72,6 +72,10 @@ public class Client extends Thread {
         }else if(c.getMethod() == Methods.SetViewStatus){
             ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
             this.viewStatus = vc.getViewStatus();
+
+            if(this.viewStatus == ViewStatus.Lobby) {
+                LobbyManager.broadCastPlayersToAllClients(this);
+            }
         }else if(c.getMethod() == Methods.Register){
             RegisterContainer rc = (RegisterContainer)c;
             _loginManager.createUser(rc.getUser());
@@ -81,6 +85,15 @@ public class Client extends Thread {
         }else if(c.getMethod() == Methods.StartGame){
             LobbyContainer lc = (LobbyContainer)c;
             _lobbyManager.startGame(lc.getClientIds_startGame());
+        }
+        else if(c.getMethod() == Methods.Lobby_Players){
+            LobbyContainer lc = (LobbyContainer)c;
+            LobbyManager.getUsers(this);
+        }
+        else if(c.getMethod() == Methods.Login_SetUser_TestPurposesOnly){
+            LoginContainer lc = (LoginContainer)c;
+            this.setUser(lc.getUser());
+            ServerUtils.sendObject(this,lc);
         }
         else if(c.getMethod() == Methods.Rankings){
             _rankingsManager.sendRanking();

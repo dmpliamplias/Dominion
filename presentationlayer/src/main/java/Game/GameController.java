@@ -1,6 +1,7 @@
 package Game;
 
 
+import app.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
@@ -55,7 +56,7 @@ public class GameController extends Controller<GameModel, GameView> {
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( message);
         view.textFieldChat.clear();
-        view.setChatMessage(message, getColorByClientId(cc));
+        view.setChatMessage(message, ViewUtils.getColorByClientId(cc.getClientId()));
 
         try {
             serverConnectionService.sendObject( cc );
@@ -76,7 +77,7 @@ public class GameController extends Controller<GameModel, GameView> {
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( message );
 
-        view.setChatMessage(message, getColorByClientId(cc));
+        view.setChatMessage(message, ViewUtils.getColorByClientId(cc.getClientId()));
 
         try {
             serverConnectionService.sendObject( cc );
@@ -89,34 +90,9 @@ public class GameController extends Controller<GameModel, GameView> {
     // Method for to receive the chatContainer from the server and set new text in the chat
     public void receiveMessage(ChatContainer chatContainer) {
         Platform.runLater( () -> {
-            view.setChatMessage(chatContainer.getMsg(), getColorByClientId(chatContainer));
+            view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
         } );
 
     }
 
-
-    /**
-     * Author Michel Schlatter
-     * @param chatContainer
-     * @return
-     */
-    private Color getColorByClientId(ChatContainer chatContainer) {
-
-        int id = chatContainer.getClientId();
-        Color color = Color.WHITE;
-
-        if (id == 1) {
-            color = Color.BLUE;
-        }
-        if (id == 2) {
-            color = Color.RED;
-        }
-        if (id == 3) {
-            color = Color.PURPLE;
-        }
-        if (id == 4) {
-            color = Color.GREEN;
-        }
-        return color;
-    }
 }

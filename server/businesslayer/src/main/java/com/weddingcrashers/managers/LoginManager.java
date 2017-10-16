@@ -2,6 +2,7 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.RegisterContainer;
@@ -23,11 +24,11 @@ public class LoginManager extends Manager {
 
     public void login(String email, String password){
        User user = _userService.getUserByEmail(email);
-       LoginContainer loginContainer = new LoginContainer();
-
+       LoginContainer loginContainer = new LoginContainer(Methods.Login);
        if(user != null){
           if (validatePassword(user, password)) {
               loginContainer.setUser(user);
+              client.setUser(user);
           }
        }
         ServerUtils.sendObject(client, loginContainer);

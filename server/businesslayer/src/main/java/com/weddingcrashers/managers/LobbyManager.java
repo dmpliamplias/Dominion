@@ -2,6 +2,7 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.server.Server;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.LobbyContainer;
 import com.weddingcrashers.servermodels.Methods;
@@ -21,14 +22,7 @@ public class LobbyManager extends Manager{
     }
 
     public static void broadCastPlayersToAllClients(Client c){
-        HashMap<Integer, User> users = new HashMap<Integer, User>();
-
-       for(Client client : c.getAllClients()){
-           users.put(client.getClientId(), client.getUser());
-       }
-
-        LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
-        lc.setUserNames(users);
+        LobbyContainer lc = getUsers(c);
 
         for(Client client : c.getAllClients()){
             if(client.getViewStatus() == ViewStatus.Lobby) {
@@ -51,5 +45,19 @@ public class LobbyManager extends Manager{
                 }
             }
         }
+    }
+
+    public static LobbyContainer getUsers(Client c){
+        HashMap<Integer, User> users = new HashMap<Integer, User>();
+
+        for(Client client : c.getAllClients()){
+            users.put(client.getClientId(), client.getUser());
+        }
+
+        LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
+        lc.setUserNames(users);
+
+        ServerUtils.sendObject(c, lc);
+        return lc;
     }
 }
