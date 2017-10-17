@@ -32,9 +32,12 @@ public class ConnectionView extends View<ConnectionModel> {
 	Stage stageCreateDialog;
 	Stage stageConnectedDialog;
 	Stage stageJoinDialog;
+    ImageView imgViewDeFlag;
+    ImageView imgViewEngFlag;
+    ImageView imgViewChFlag;
 
 
-	public ConnectionView(Stage stage, ConnectionModel model){
+    public ConnectionView(Stage stage, ConnectionModel model){
         super(stage, model);
     }
 	
@@ -62,19 +65,19 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		// Create Language Icons
 		Image imgDeFlag = new Image(getClass().getResourceAsStream("GermanFlag.png"));
-		ImageView imgViewDeFlag = new ImageView();
+		imgViewDeFlag = new ImageView();
 		imgViewDeFlag.setImage(imgDeFlag);
 		imgViewDeFlag.setFitHeight(40);
 		imgViewDeFlag.setFitWidth(40);
 
 		Image imgChFlag = new Image(getClass().getResourceAsStream("SwissFlag.png"));
-		ImageView imgViewChFlag = new ImageView();
+		imgViewChFlag = new ImageView();
 		imgViewChFlag.setImage(imgChFlag);
 		imgViewChFlag.setFitHeight(40);
 		imgViewChFlag.setFitWidth(40);
 
 		Image imgEngFlag = new Image(getClass().getResourceAsStream("EnglishFlag.png"));
-		ImageView imgViewEngFlag = new ImageView();
+		imgViewEngFlag = new ImageView();
 		imgViewEngFlag.setImage(imgEngFlag);
 		imgViewEngFlag.setFitHeight(40);
 		imgViewEngFlag.setFitWidth(40);

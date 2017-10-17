@@ -15,6 +15,7 @@ import login.LoginView;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -34,6 +35,19 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
 
     private  void initialize(){
+
+        view.imgViewChFlag.setOnMouseClicked((MouseEvent eventCh) -> {
+            System.out.println("Clicked!");
+        });
+
+        view.imgViewDeFlag.setOnMouseClicked((MouseEvent eventDe) -> {
+            System.out.println("Clicked!");
+        });
+
+        view.imgViewEngFlag.setOnMouseClicked((MouseEvent eventEng) -> {
+            System.out.println("Clicked!");
+        });
+
 
         view.btnStartS.setOnAction((event) -> {
             view.create_Dialog().show();
@@ -73,6 +87,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 });
             });
         });
+
 
         view.btnJoinS.setOnAction((event) -> {
           Stage stage =  view.createJoinDialog();
