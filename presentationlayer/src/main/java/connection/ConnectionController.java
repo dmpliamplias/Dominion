@@ -37,15 +37,15 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
     private  void initialize(){
 
         view.imgViewChFlag.setOnMouseClicked((MouseEvent eventCh) -> {
-            System.out.println("Clicked!");
+          ServiceLocator.getServiceLocator().setTranslator(Translator.Language.SWISS_GERMAN);
         });
 
         view.imgViewDeFlag.setOnMouseClicked((MouseEvent eventDe) -> {
-            System.out.println("Clicked!");
+            ServiceLocator.getServiceLocator().setTranslator(Translator.Language.GERMAN);
         });
 
         view.imgViewEngFlag.setOnMouseClicked((MouseEvent eventEng) -> {
-            System.out.println("Clicked!");
+            ServiceLocator.getServiceLocator().setTranslator(Translator.Language.ENGLISH);
         });
 
 
