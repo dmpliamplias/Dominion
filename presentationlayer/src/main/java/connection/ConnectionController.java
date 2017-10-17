@@ -12,6 +12,9 @@ import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -58,11 +61,11 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 view.refreshInfoDialog();
 
                 view.btnCopyPort.setOnAction((event4)->{
-                    model.CopytoCbPort();
+                    CopytoCbPort();
                 });
 
                 view.btnCopyIP.setOnAction((event5)->{
-                    model.CopytoCbIP();
+                    CopytoCbIP();
                 });
 
                  view.btnOK.setOnAction((event3) -> {
@@ -127,5 +130,22 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         this.view.stop();
         view.start();
     }
+
+
+    public void CopytoCbPort (){
+        String str = Integer.toString(model.getPort());
+        StringSelection stringS = new StringSelection(str);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringS, stringS);
+    }
+
+    public void CopytoCbIP (){
+        String str = model.getIP();
+        StringSelection stringS = new StringSelection(str);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringS, stringS);
+    }
+
+
     
 }
