@@ -58,7 +58,30 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnJoinS.setPrefSize(150, 30);
 		btnHelp.setPrefSize(150, 30);
 		fp.setPrefSize(450, 100);
-		
+
+
+		// Create Language Icons
+		Image imgDeFlag = new Image(getClass().getResourceAsStream("GermanFlag.png"));
+		ImageView imgViewDeFlag = new ImageView();
+		imgViewDeFlag.setImage(imgDeFlag);
+		imgViewDeFlag.setFitHeight(40);
+		imgViewDeFlag.setFitWidth(40);
+
+		Image imgChFlag = new Image(getClass().getResourceAsStream("SwissFlag.png"));
+		ImageView imgViewChFlag = new ImageView();
+		imgViewChFlag.setImage(imgChFlag);
+		imgViewChFlag.setFitHeight(40);
+		imgViewChFlag.setFitWidth(40);
+
+		Image imgEngFlag = new Image(getClass().getResourceAsStream("EnglishFlag.png"));
+		ImageView imgViewEngFlag = new ImageView();
+		imgViewEngFlag.setImage(imgEngFlag);
+		imgViewEngFlag.setFitHeight(40);
+		imgViewEngFlag.setFitWidth(40);
+
+		fp.getChildren().addAll(imgViewDeFlag, imgViewChFlag, imgViewEngFlag);
+
+
 		// Asign FlowPane and GridPane to BorderPane
 		root.setTop(fp);
 		root.setCenter(gp);
