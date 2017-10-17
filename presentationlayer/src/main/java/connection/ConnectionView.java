@@ -54,11 +54,11 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnHelp = new Button();
 		
 		// Set size for the buttons and FlowPane
-		btnStartS.setPrefSize(150, 30);
-		btnJoinS.setPrefSize(150, 30);
-		btnHelp.setPrefSize(150, 30);
-		fp.setPrefSize(450, 100);
-
+		btnStartS.setPrefSize(150, 35);
+		btnJoinS.setPrefSize(150, 35);
+		btnHelp.setPrefSize(150, 35);
+		fp.setPrefSize(450, 50);
+        gp.setVgap(20);
 
 		// Create Language Icons
 		Image imgDeFlag = new Image(getClass().getResourceAsStream("GermanFlag.png"));
@@ -93,15 +93,15 @@ public class ConnectionView extends View<ConnectionModel> {
 					}
 		
 		// Creating 8 rows
-		for (int i = 0; i<8;i++){
-			RowConstraints row = new RowConstraints(30);
+		for (int i = 0; i<6;i++){
+			RowConstraints row = new RowConstraints(40);
 			gp.getRowConstraints().add(row);			
 		}
 		
 		// Asign column and row to buttons
 		gp.setConstraints(btnStartS, 1, 1);
-		gp.setConstraints(btnJoinS, 1, 3);
-		gp.setConstraints(btnHelp, 1, 5);
+		gp.setConstraints(btnJoinS, 1, 2);
+		gp.setConstraints(btnHelp, 1, 3);
 		
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 		stage.setScene(scene);
