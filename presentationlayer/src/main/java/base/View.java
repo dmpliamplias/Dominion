@@ -84,6 +84,7 @@ public abstract class View<M extends Model> {
      */
     public void switchTranslator(Language language) {
         serviceLocator.setTranslator(language);
+        this.translator = serviceLocator.getTranslator();
         setTexts();
     }
 

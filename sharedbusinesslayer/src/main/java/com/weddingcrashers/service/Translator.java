@@ -6,6 +6,10 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import static com.weddingcrashers.service.Translator.Language.ENGLISH;
+import static com.weddingcrashers.service.Translator.Language.GERMAN;
+import static com.weddingcrashers.service.Translator.Language.SWISS_GERMAN;
+
 /**
  * Translator.
  *
@@ -42,6 +46,8 @@ public class Translator {
 
     /** The translation properties. */
     private Properties translations;
+    /** The current language. */
+    private Language currentLanguage;
 
 
     // ---- Constructor
@@ -57,14 +63,19 @@ public class Translator {
         String languageAbbrev = null;
         switch (language) {
             case GERMAN:
+                currentLanguage = GERMAN;
                 languageAbbrev = "de";
                 break;
             case SWISS_GERMAN:
+                currentLanguage = SWISS_GERMAN;
                 languageAbbrev = "de_CH";
             case ENGLISH:
+                currentLanguage = ENGLISH;
                 languageAbbrev = "en";
                 break;
             default:
+                currentLanguage = GERMAN;
+                languageAbbrev = "de";
                 break;
         }
         InputStream in;
