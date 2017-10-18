@@ -85,15 +85,13 @@ public class LoginView extends View<LoginModel> {
 
     protected void setTexts(){
         this.stage.setTitle(getText("LoginView_Title"));
+
         lblPw.setText(getText("Password"));
         lblEmail.setText(getText("Email"));
         btnLogin.setText(getText("Login"));
         btnSignUp.setText(getText("Register"));
     }
 
-    private String getText(String key){
-        return translator.getString(key);
-    }
     void refreshModel(){
         model.setPassword(pw.getText());
         model.setEmail(user.getText());

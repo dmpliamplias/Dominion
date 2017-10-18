@@ -48,25 +48,51 @@ public abstract class View<M extends Model> {
 
     // ---- Methods
 
+    /**
+     * Creates the GUI.
+     *
+     * @return the scene.
+     */
     protected abstract Scene create_GUI();
-    protected abstract void setTexts();
 
     /**
-     * Display the view
+     * Sets the texts.
+     */
+    protected abstract void setTexts();
+
+    protected String getText(String key) {
+        return translator.getString(key);
+    }
+
+//    protected abstract HashMap<Labeled, String> labeledToKeyMap();
+
+//    protected void setText() {
+//        final HashMap<Labeled, String> map = labeledToKeyMap();
+//        final Set<Labeled> labeleds = map.keySet();
+//        final Iterator<Labeled> iterator = labeleds.iterator();
+//        final Collection<String> values = map.values();
+//        final Iterator<String> iterator1 = values.iterator();
+//        while (iterator.hasNext()) {
+//            iterator.next().setText(iterator1.next());
+//        }
+//    }
+
+    /**
+     * Display the view.
      */
     public void start() {
         stage.show();
     }
 
     /**
-     * Hide the view
+     * Hide the view.
      */
     public void stop() {
         stage.hide();
     }
 
     /**
-     * Getter for the stage, so that the controller can access window events
+     * Getter for the stage, so that the controller can access window events.
      */
     public Stage getStage() {
         return stage;

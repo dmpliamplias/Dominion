@@ -5,13 +5,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 
 /**
  * @author Murat Kelleci - Update of View - Several changes
@@ -110,6 +110,8 @@ public class RegisterView extends View<RegisterModel>{
     }
     protected void setTexts() {
 
+
+
         this.stage.setTitle(getText("RegisterView_Titel"));
         this.btnRegister.setText(getText("Register"));
         this.btnCancel.setText(getText("cancel"));
@@ -119,6 +121,18 @@ public class RegisterView extends View<RegisterModel>{
         this.lblUserName.setText(getText("Username"));
 
     }
+
+//    @Override
+//    protected HashMap<Labeled, String> labeledToKeyMap() {
+//        final HashMap<Labeled, String> map = new HashMap<>();
+//        map.put(btnRegister, "Register");
+//        map.put(btnCancel, "cancel");
+//        map.put(lblEmail, "Email");
+//        map.put(lblPw, "Password");
+//        map.put(lblPwconfirm, "Password_Confirmation");
+//        map.put(lblUserName, "Username");
+//        return map;
+//    }
 
 
     void refreshModel() {
