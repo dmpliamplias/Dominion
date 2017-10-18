@@ -61,7 +61,6 @@ public class Translator {
         translations = new Properties();
 
         String languageAbbrev = null;
-        InputStream in;
         switch (language) {
             case GERMAN:
                 currentLanguage = GERMAN;
@@ -75,17 +74,14 @@ public class Translator {
                 languageAbbrev = "en";
                 break;
             default:
-                in = getClass().getResourceAsStream(PATH + SUFFIX);
                 break;
         }
-        // TODO: 18.10.17 find solution for defaukt
-        in = getClass().getResourceAsStream(PATH + "_" + languageAbbrev + SUFFIX);
+        final InputStream in = getClass().getResourceAsStream(PATH + "_" + languageAbbrev + SUFFIX);
         try {
             translations.load(in);
         } catch (IOException e) {
             logger.warning("Could not load translation for" + language.name().toLowerCase());
         }
-
         logger.info("Loaded resources for " + language.name().toLowerCase());
     }
 
