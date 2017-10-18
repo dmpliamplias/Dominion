@@ -5,6 +5,13 @@
 
 }
 
+.scroll-pane{
+    -fx-border-color: red;
+    -fx-border-insets: 5;
+    -fx-border-width: 3;
+    -fx-border-style: dashed;
+}
+
 .text-area{
 
     -fx-background-color: gray;
@@ -18,7 +25,6 @@
 
 .root{
 
-    -fx-background-image: url("Tranzparent-Hintergrund.gif");
     -fx-background-repeat: stretch;
     -fx-background-size: 1000, 1000;
 }

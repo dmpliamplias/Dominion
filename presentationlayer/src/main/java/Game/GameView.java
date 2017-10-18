@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -32,11 +33,10 @@ public class GameView extends View<GameModel> {
 
     public Scene create_GUI(){
 
-        stage.setWidth( 1000 );
-        stage.setHeight( 1000 );
+
+        // root settings
+
         BorderPane root = new BorderPane();
-        chatPane = new GridPane();
-        root.setRight( chatPane );
         Scene scene = new Scene(root, 1500, 1500);
         scene.getStylesheets().addAll(this.getClass().getResource("/Game/GameView.css").toExternalForm());
         stage.setScene(scene);
@@ -45,18 +45,39 @@ public class GameView extends View<GameModel> {
 
 
 
+        // root Layout
+        root.setBottom(addChatGridPane());
+        //TODO Venessa u can use for your GUI
+       // root.setCenter();
+       // root.setRight();
+       // root.setTop();
+       // root.setLeft();
+
+
+        setTexts();
+        return scene;
+    }
+
+
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    public GridPane addChatGridPane(){
+
+        chatPane = new GridPane();
+        chatContent = new VBox();
+
+        //GridPane Layout
+
         chatPane.setAlignment(Pos.BOTTOM_RIGHT);
         chatPane.setHgap(10);
         chatPane.setVgap(10);
         chatPane.setPadding(new Insets(25, 25, 25, 25));
 
 
-
-
-
         // ----- Chatview -------
-        //
-        // TODO@Vanessa BorderPane deiner Gameview hinzufügen
 
 
         this.btnChatSend  = new Button();
@@ -70,15 +91,6 @@ public class GameView extends View<GameModel> {
         this.btnSendText = new Button();
         this.btnSendText.setPrefSize(150, 50);
 
-        String cssLayout =
-                "-fx-border-color: red;\n" +
-                "-fx-border-insets: 5;\n" +
-                "-fx-border-width: 3;\n" +
-                "-fx-border-style: dashed;\n";
-
-        chatContent = new VBox();
-        chatContent.setStyle(cssLayout);
-
 
         // Create HBox +
         hbChat = new HBox(10);
@@ -86,12 +98,14 @@ public class GameView extends View<GameModel> {
         hbChat.getChildren().add(textFieldChat);
         hbChat.getChildren().add(btnChatSend);
         hbChat.getChildren().add(btnSendText);
-        chatPane.add(chatContent,1,0);
+        ScrollPane scroll = new ScrollPane();
+        scroll.setContent( chatContent );
+        scroll.setMaxSize( 600, 200);
+        chatPane.add(scroll,1,0);
         chatPane.add(hbChat, 1, 3);
-        setTexts();
 
 
-        return scene;
+        return chatPane;
     }
 
 

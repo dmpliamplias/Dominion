@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -32,43 +33,101 @@ public class LobbyView extends View<LobbyModel> {
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
     public LobbyView(Stage stage, LobbyModel model) {
         super(stage, model);
     }
 
     public Scene create_GUI(){
 
-        stage.setHeight(900);
-        stage.setWidth(1500);
+        // maybe useles??
+        //  lbl = new Label();
+        //  root.getChildren().addAll(lbl);
 
+
+        // root settings
         BorderPane root = new BorderPane();
-        GridPane gridPane = new GridPane();
-        root.setCenter( gridPane );
-        lbl = new Label();
-        btnGameView = new Button("GameView");
-        lvPlayers = new ListView<String>(observablePlayerList);
 
-        gridPane.add( btnGameView,1,1 );
-        root.getChildren().addAll(lbl);
-        root.setRight(lvPlayers);
-        Scene scene = new Scene(root);
+
+        //Scene and stage settings
+        Scene scene = new Scene(root, 1500, 1000);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
 
 
+        // root Layout
+        root.setBottom(addGridPane());
+        root.setCenter(addVBox());
+        root.setRight(addClientList());
+        root.setTop(addMenu());
+        root.setLeft(addGameSettings());
+
+        // For multi language
+        setTexts();
+
+        return scene;
+    }
+
+    public VBox addGameSettings(){
+
+        VBox vBox = new VBox();
+
+
+        return vBox;
+    }
+
+    public HBox addMenu(){
+
+        HBox hBox = new HBox(  );
+        // Test button
+        btnGameView = new Button("GameView");
+
+        hBox.getChildren().addAll( btnGameView );
+
+
+        return hBox;
+    }
+
+    public VBox addClientList(){
+
+        VBox vbox = new VBox(  );
+        lvPlayers = new ListView<String>(observablePlayerList);
+        vbox.setAlignment( Pos.CENTER );
+
+        vbox.getChildren().addAll( lvPlayers );
+
+        return  vbox;
+    }
+
+
+    public VBox addVBox(){
+
+        VBox vbox = new VBox(  );
+        vbox.setAlignment( Pos.CENTER );
+        btnStart = new Button("Start Game");
+        vbox.getChildren().addAll( btnStart );
+
+        return  vbox;
+    }
+
+    public GridPane addGridPane() {
+
+        GridPane gridPane = new GridPane();
+        chatContent = new VBox();
+
+
+         // Layout GridPane
         gridPane.setAlignment(Pos.BOTTOM_RIGHT);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(25, 25, 25, 25));
 
 
-
-        /**
-         *  author Manuel Wirz
-         *  */
-
         // Chatview
-
 
         this.btnChatSend  = new Button();
         this.btnChatSend.setPrefSize(250, 50);
@@ -77,53 +136,40 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldChat.setPromptText( "Enter Text" );
         this.textFieldChat.setPrefSize( 450,50 );
 
-        String cssLayout =
-                "-fx-border-color: red;\n" +
-                "-fx-border-insets: 5;\n" +
-                "-fx-border-width: 3;\n" +
-                "-fx-border-style: dashed;\n";
-
-        chatContent = new VBox();
-        chatContent.setStyle(cssLayout);
-
-        lvPlayers.setStyle(cssLayout);
-
-
-        // create HBox for chat
-
         HBox hBox = new HBox(10);
-        hBox.setAlignment( Pos.CENTER);
+        hBox.setAlignment( Pos.BOTTOM_RIGHT);
         hBox.getChildren().add(textFieldChat);
         hBox.getChildren().add(btnChatSend);
-        gridPane.add(chatContent, 1, 0);
+        ScrollPane scroll = new ScrollPane();
+        scroll.setContent( chatContent );
+        scroll.setMaxSize( 600, 200 );
+        gridPane.add(scroll, 1, 0);
         gridPane.add( hBox, 1,3 );
 
-        setTexts();
+        return gridPane;
+}
 
-        btnStart = new Button("Game View");
 
-
-        return scene;
-    }
 
 
     protected void setTexts() {
 
-       this.stage.setTitle(getText("LobbyView_Title"));
-       this.btnChatSend.setText( translator.getString( "send" ) );
-
+        this.stage.setTitle( getText( "LobbyView_Title" ) );
+        this.btnChatSend.setText( translator.getString( "send" ) );
     }
-
 
     private String getText(String key){
         return translator.getString(key);
     }
 
 
+    /* Maybe useless?
     protected void refresh(){
         lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());
         //...conitinue...
     }
+
+*/
 
     public void start() {
         stage.show();
