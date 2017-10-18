@@ -15,9 +15,12 @@ import login.LoginView;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+
+import static com.weddingcrashers.service.Translator.Language.ENGLISH;
+import static com.weddingcrashers.service.Translator.Language.GERMAN;
+import static com.weddingcrashers.service.Translator.Language.SWISS_GERMAN;
 
 /**
  * @author Michel Schlatter
@@ -36,18 +39,9 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
     private  void initialize(){
 
-        view.imgViewChFlag.setOnMouseClicked((MouseEvent eventCh) -> {
-          ServiceLocator.getServiceLocator().setTranslator(Translator.Language.SWISS_GERMAN);
-        });
-
-        view.imgViewDeFlag.setOnMouseClicked((MouseEvent eventDe) -> {
-            ServiceLocator.getServiceLocator().setTranslator(Translator.Language.GERMAN);
-        });
-
-        view.imgViewEngFlag.setOnMouseClicked((MouseEvent eventEng) -> {
-            ServiceLocator.getServiceLocator().setTranslator(Translator.Language.ENGLISH);
-        });
-
+        view.imgViewChFlag.setOnMouseClicked(e -> view.switchTranslator(SWISS_GERMAN));
+        view.imgViewDeFlag.setOnMouseClicked(e -> view.switchTranslator(GERMAN));
+        view.imgViewEngFlag.setOnMouseClicked(e -> view.switchTranslator(ENGLISH));
 
         view.btnStartS.setOnAction((event) -> {
             view.create_Dialog().show();
