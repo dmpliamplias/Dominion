@@ -115,11 +115,6 @@ public class GameView extends View<GameModel> {
         this.btnSendText.setText( translator.getString( "nice!" ) );
     }
 
-
-    private String getText(String key) {
-        return translator.getString( key );
-    }
-
     public void start() {
         stage.show();
     }

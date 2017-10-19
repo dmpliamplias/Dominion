@@ -105,9 +105,6 @@ public class RegisterView extends View<RegisterModel>{
 
     //TODO Murat anpassen
 
-    private String getText(String key){
-        return translator.getString(key);
-    }
     protected void setTexts() {
 
 
