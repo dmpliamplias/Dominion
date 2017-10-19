@@ -7,10 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -29,23 +28,12 @@ public class UserManagementView extends View<UserManagementModel> {
 
     protected ListView<User> listView;
 
-    /** The name field. */
-    protected TextField name;
-    /** The email field */
-    protected TextField email;
-    /** The password field. */
-    protected TextField password;
-    /** The is blocked checkbox. */
-    protected CheckBox isBlocked;
-    /** The is super user checkbox. */
-    protected CheckBox isSuperUser;
-
     /** The edit button. */
     protected Button editButton;
-    /** The confirm button. */
-    protected Button confirmButton;
-    /** The cancel button. */
-    protected Button cancelButton;
+    /** The go to login button. */
+    protected Button goToLoginButton;
+    /** The go to lobby button. */
+    protected Button goToLobbyButton;
 
     /** The users. */
     protected ObservableList<User> users = FXCollections.observableArrayList();
@@ -76,16 +64,7 @@ public class UserManagementView extends View<UserManagementModel> {
         root.setSpacing(15);
         root.setPadding(new Insets(20));
 
-        // initialize fields
-        name = new TextField();
-        email = new TextField();
-        password = new TextField();
-        isBlocked = new CheckBox();
-        isSuperUser = new CheckBox();
-        confirmButton = new Button();
-        cancelButton = new Button();
-
-        root.getChildren().addAll(addTitle(), addListView(), addEditButton());
+        root.getChildren().addAll(addTitle(), addListView(), addHBox());
 
         final Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -103,6 +82,25 @@ public class UserManagementView extends View<UserManagementModel> {
         title.setText("User Management Dominion");
         title.setFont(Font.font("Arial", NORMAL, 35));
         return title;
+    }
+
+    private HBox addHBox() {
+        final HBox hBox = new HBox();
+        hBox.setSpacing(150);
+        hBox.getChildren().addAll(addEditButton(), addGoToLobbyButton(), addGoToLoginButton());
+        return hBox;
+    }
+
+    private Button addGoToLoginButton() {
+        goToLoginButton = new Button();
+        goToLoginButton.setText("Go back to Login");
+        return goToLoginButton;
+    }
+
+    private Button addGoToLobbyButton() {
+        goToLobbyButton = new Button();
+        goToLobbyButton.setText("Go to Lobby");
+        return goToLobbyButton;
     }
 
     private Button addEditButton() {

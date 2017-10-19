@@ -47,6 +47,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User update(User user) {
         notNull(user);
+
+        final EntityManager em = EntityManagerFactory.getEntityManager();
+        final User contextUser = em.find(user.getClass(), user.getId());
+        contextUser.setUserName(user.getUserName());
+        contextUser.setUserEmail(user.getUserEmail());
+        contextUser.setPassword(SecurityUtils.generatePBKDF2WithHMACSHA1Password(user.getPassword()));
+//        contextUser.setIsBlocked(user.getIsBlocked());
+//        contextUser.setIsSuperUser(user.getIsSuperUser());
+
         return objectUpdateService.update(user);
     }
 
