@@ -103,7 +103,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     private void goToUserManagementView() {
         final UserManagementModel model = new UserManagementModel();
         final UserManagementView view = new UserManagementView(this.view.getStage(), model);
-        final UserManagementController controller = new UserManagementController(model, view);
+        new UserManagementController(model, view);
 
         this.view.stop();
         view.start();

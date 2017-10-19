@@ -1,7 +1,6 @@
 package com.weddingcrashers.service;
 
 import com.weddingcrashers.model.BaseEntity;
-import com.weddingcrashers.model.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -54,7 +53,7 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
             startTransaction(em);
             em.merge(entity);
             commitTransaction();
-            entity = em.find(entity.getClass(), entity);
+            entity = em.find(entity.getClass(), entity.getId());
         }
         catch (Exception e) {
             logException(getServiceLogger(), e);

@@ -3,6 +3,12 @@ package usermanagement;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import lobby.EditUserDialog;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +42,30 @@ public class UserManagementController extends Controller<UserManagementModel, Us
     private void initialize() {
         loadUsers();
         openEditDialog();
+        goToLoginButton();
+        goToLobbyButton();
+    }
+
+    private void goToLoginButton() {
+        view.goToLoginButton.setOnAction(e -> {
+            final LoginModel model = new LoginModel();
+            final LoginView view = new LoginView(this.view.getStage(), model);
+            new LoginController(view, model);
+
+            this.view.stop();
+            view.start();
+        });
+    }
+
+    private void goToLobbyButton() {
+        view.goToLobbyButton.setOnAction(e -> {
+            final LobbyModel model = new LobbyModel();
+            final LobbyView view = new LobbyView(this.view.getStage(), model);
+            new LobbyController(view, model);
+
+            this.view.stop();
+            view.start();
+        });
     }
 
     /**
