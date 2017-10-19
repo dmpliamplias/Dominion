@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class LobbyView extends View<LobbyModel> {
 
-    protected Label lbl;
     protected ListView<String> lvPlayers;
     protected Button btnStart;
     protected Button btnGameView;
@@ -43,11 +42,6 @@ public class LobbyView extends View<LobbyModel> {
     }
 
     public Scene create_GUI(){
-
-        // maybe useles??
-        //  lbl = new Label();
-        //  root.getChildren().addAll(lbl);
-
 
         // root settings
         BorderPane root = new BorderPane();
@@ -155,21 +149,13 @@ public class LobbyView extends View<LobbyModel> {
     protected void setTexts() {
 
         this.stage.setTitle( getText( "LobbyView_Title" ) );
-        this.btnChatSend.setText( translator.getString( "send" ) );
+        this.btnChatSend.setText( getText( "send" ) );
     }
 
     private String getText(String key){
         return translator.getString(key);
     }
 
-
-    /* Maybe useless?
-    protected void refresh(){
-        lbl.setText("Sound is on: "+ model.getSettings().isSoundOn());
-        //...conitinue...
-    }
-
-*/
 
     public void start() {
         stage.show();
