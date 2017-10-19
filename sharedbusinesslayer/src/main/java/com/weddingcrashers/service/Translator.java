@@ -2,7 +2,6 @@ package com.weddingcrashers.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -92,11 +91,13 @@ public class Translator {
      * @return the value for the given key.
      */
     public String getString(String key) {
-        try {
-            return translations.getProperty(key);
-        } catch (MissingResourceException e) {
-            logger.warning("Missing value for key: " + key);
-            return "NOT DEFINED";
+        final String value = translations.getProperty(key);
+        if (value == null) {
+            return "UNDEFINED";
+        }
+        else {
+            return value;
         }
     }
+
 }
