@@ -2,6 +2,8 @@ package app;
 
 import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;
+import connection.ConnectionController;
+import connection.ConnectionModel;
 import connection.ConnectionView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,9 +11,6 @@ import javafx.stage.Stage;
 import splashscreen.SplashScreenController;
 import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
-import usermanagement.UserManagementController;
-import usermanagement.UserManagementModel;
-import usermanagement.UserManagementView;
 
 import static com.weddingcrashers.service.ServiceLocator.getLogger;
 
@@ -100,9 +99,9 @@ public class Dominion extends Application {
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
-//        ConnectionModel model = new ConnectionModel();
-//        view = new ConnectionView(appStage, model);
-//        new ConnectionController(model, view);
+        ConnectionModel model = new ConnectionModel();
+        view = new ConnectionView(appStage, model);
+        new ConnectionController(model, view);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -112,11 +111,8 @@ public class Dominion extends Application {
         // Splash_XXX objects can be garbage collected
         splashView.stop();
         splashView = null;
-        final UserManagementModel model = new UserManagementModel();
-        final UserManagementView view = new UserManagementView(appStage, model);
-        new UserManagementController(model, view);
 
-//        this.view.start();
+        this.view.start();
         view.start();
     }
 
