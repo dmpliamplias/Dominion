@@ -2,8 +2,6 @@ package app;
 
 import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;
-import connection.ConnectionController;
-import connection.ConnectionModel;
 import connection.ConnectionView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,6 +9,9 @@ import javafx.stage.Stage;
 import splashscreen.SplashScreenController;
 import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
+import usermanagement.UserManagementController;
+import usermanagement.UserManagementModel;
+import usermanagement.UserManagementView;
 
 import static com.weddingcrashers.service.ServiceLocator.getLogger;
 
@@ -81,6 +82,7 @@ public class Dominion extends Application {
         splashModel.initialize();
     }
 
+
     /**
      * This method is called when the splash screen has finished initializing
      * the application. The initialized resources are in a PLServiceLocator
@@ -98,9 +100,12 @@ public class Dominion extends Application {
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
-        ConnectionModel model = new ConnectionModel();
-        view = new ConnectionView(appStage, model);
-        new ConnectionController(model, view);
+//        ConnectionModel model = new ConnectionModel();
+//        view = new ConnectionView(appStage, model);
+//        new ConnectionController(model, view);
+        final UserManagementModel model = new UserManagementModel();
+        final UserManagementView view = new UserManagementView(appStage, model);
+        new UserManagementController(model, view);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -111,6 +116,7 @@ public class Dominion extends Application {
         splashView.stop();
         splashView = null;
 
+//        this.view.start();
         view.start();
     }
 
