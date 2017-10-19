@@ -58,7 +58,6 @@ public class EditUserDialog extends Dialog {
         id.setDisable(true);
         final TextField name = new TextField();
         final TextField email = new TextField();
-        // TODO: 19.10.17 check passwordfield
         final PasswordField password = new PasswordField();
         final TextField isBlocked = new TextField();
         final TextField isSuperUser = new TextField();
