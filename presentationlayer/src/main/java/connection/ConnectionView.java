@@ -337,12 +337,6 @@ public class ConnectionView extends View<ConnectionModel> {
 		model.setIP(fldIP.getText());
 	}
 
-
-	private String getText(String key){
-		return translator.getString(key);
-	}
-
-
 	protected void setTexts() {
 		this.stage.setTitle(getText("ConnectionView_stage_Title"));
 		btnStartS.setText(getText("ConnectionView_btnStartS"));

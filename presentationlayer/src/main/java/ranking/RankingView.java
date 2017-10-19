@@ -92,9 +92,6 @@ public class RankingView extends View<RankingModel> {
 
 
     }
-    private String getText(String key){
-        return translator.getString(key);
-    }
 
     public void bindModeltoView () {
 
