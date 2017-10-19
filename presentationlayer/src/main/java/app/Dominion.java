@@ -103,9 +103,6 @@ public class Dominion extends Application {
 //        ConnectionModel model = new ConnectionModel();
 //        view = new ConnectionView(appStage, model);
 //        new ConnectionController(model, view);
-        final UserManagementModel model = new UserManagementModel();
-        final UserManagementView view = new UserManagementView(appStage, model);
-        new UserManagementController(model, view);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -115,6 +112,9 @@ public class Dominion extends Application {
         // Splash_XXX objects can be garbage collected
         splashView.stop();
         splashView = null;
+        final UserManagementModel model = new UserManagementModel();
+        final UserManagementView view = new UserManagementView(appStage, model);
+        new UserManagementController(model, view);
 
 //        this.view.start();
         view.start();

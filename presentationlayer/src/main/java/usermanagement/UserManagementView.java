@@ -27,24 +27,28 @@ public class UserManagementView extends View<UserManagementModel> {
 
     // ---- Members
 
-    /** The name field. */
-    private TextField name;
-    /** The email field */
-    private TextField email;
-    /** The password field. */
-    private TextField password;
-    /** The is blocked checkbox. */
-    private CheckBox isBlocked;
-    /** The is super user checkbox. */
-    private CheckBox isSuperUser;
+    protected ListView<User> listView;
 
+    /** The name field. */
+    protected TextField name;
+    /** The email field */
+    protected TextField email;
+    /** The password field. */
+    protected TextField password;
+    /** The is blocked checkbox. */
+    protected CheckBox isBlocked;
+    /** The is super user checkbox. */
+    protected CheckBox isSuperUser;
+
+    /** The edit button. */
+    protected Button editButton;
     /** The confirm button. */
-    private Button confirmButton;
+    protected Button confirmButton;
     /** The cancel button. */
-    private Button cancelButton;
+    protected Button cancelButton;
 
     /** The users. */
-    private ObservableList<User> users = FXCollections.observableArrayList();
+    protected ObservableList<User> users = FXCollections.observableArrayList();
 
 
     // ---- Constructor
@@ -89,6 +93,11 @@ public class UserManagementView extends View<UserManagementModel> {
         return scene;
     }
 
+    private ListView<User> addListView() {
+        listView = new ListView<>(users);
+        return listView;
+    }
+
     private Label addTitle() {
         final Label title = new Label();
         title.setText("User Management Dominion");
@@ -96,12 +105,8 @@ public class UserManagementView extends View<UserManagementModel> {
         return title;
     }
 
-    private ListView<User> addListView() {
-        return new ListView<>(users);
-    }
-
     private Button addEditButton() {
-        final Button editButton = new Button();
+        editButton = new Button();
         editButton.setAlignment(TOP_RIGHT);
         editButton.setText("Edit User");
         return editButton;
