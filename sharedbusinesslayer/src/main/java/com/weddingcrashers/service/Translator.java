@@ -10,7 +10,7 @@ import static com.weddingcrashers.service.Translator.Language.GERMAN;
 import static com.weddingcrashers.service.Translator.Language.SWISS_GERMAN;
 
 /**
- * Translator.
+ * The translator.
  *
  * @author dmpliamplias
  */
@@ -93,6 +93,7 @@ public class Translator {
     public String getString(String key) {
         final String value = translations.getProperty(key);
         if (value == null) {
+            logger.warning("No value defined for key: " + key);
             return "UNDEFINED";
         }
         else {
