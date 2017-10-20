@@ -159,6 +159,10 @@ public class LobbyView extends View<LobbyModel> {
 
     public void start() {
         stage.show();
+        this.stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
     }
 
     public void stop(){

@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
 
 /**
  * @author Murat Kelleci - Update of View - Several changes
@@ -121,6 +123,8 @@ public class RegisterView extends View<RegisterModel>{
     }
 
 
+
+
     void refreshModel() {
         this.model.setPassword(txtPw.getText());
         this.model.setPassword_confirm(txtPw_confirm.getText());
@@ -144,6 +148,11 @@ public class RegisterView extends View<RegisterModel>{
 
     public void start() {
         this.stage.show();
+        this.stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+
+        });
     }
 
 
