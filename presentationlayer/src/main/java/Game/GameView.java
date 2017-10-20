@@ -122,6 +122,10 @@ public class GameView extends View<GameModel> {
 
     public void start() {
         stage.show();
+        stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
     }
 
     public void stop(){
