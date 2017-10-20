@@ -110,13 +110,13 @@ public class RegisterView extends View<RegisterModel>{
     }
     protected void setTexts() {
 
-        this.stage.setTitle(getText("RegisterView_Titel"));
-        this.btnRegister.setText(getText("Register"));
-        this.btnCancel.setText(getText("cancel"));
-        this.lblEmail.setText(getText("Email"));
-        this.lblPw.setText(getText("Password"));
-        this.lblPwconfirm.setText(getText("Password_Confirmation"));
-        this.lblUserName.setText(getText("Username"));
+        this.stage.setTitle(getText("registerview.titel"));
+        this.btnRegister.setText(getText("logginview.register"));
+        this.btnCancel.setText(getText("btn.cancel"));
+        this.lblEmail.setText(getText("registerview.email"));
+        this.lblPw.setText(getText("registerview.password"));
+        this.lblPwconfirm.setText(getText("registerview.confirmation"));
+        this.lblUserName.setText(getText("registerview.username"));
 
     }
 

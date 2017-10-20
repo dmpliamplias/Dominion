@@ -83,11 +83,11 @@ public class RankingView extends View<RankingModel> {
 
     //TODO Murat anpassen
     protected void setTexts() {
-        this.stage.setTitle(getText("Ranking_Page"));
-        this.lblRanking.setText(getText("Highscore_Alltime"));
-        this.userNameColumn.setText(getText("Username"));
-        this.userHighScore.setText(getText("Highscore_Points"));
-        this.rankingPosition.setText(getText("RankingPosition"));
+        this.stage.setTitle(getText("rankingview.rankingPage"));
+        this.lblRanking.setText(getText("rankingview.highscoreAlltime"));
+        this.userNameColumn.setText(getText("registerview.username"));
+        this.userHighScore.setText(getText("rangkingview.highscorePoints"));
+        this.rankingPosition.setText(getText("rankingview.rankingPosition"));
 
 
 
