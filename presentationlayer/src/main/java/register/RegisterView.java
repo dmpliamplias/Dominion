@@ -12,6 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
 
 /**
  * @author Murat Kelleci - Update of View - Several changes
@@ -107,15 +110,13 @@ public class RegisterView extends View<RegisterModel>{
 
     protected void setTexts() {
 
-
-
-        this.stage.setTitle(getText("RegisterView_Titel"));
-        this.btnRegister.setText(getText("Register"));
-        this.btnCancel.setText(getText("cancel"));
-        this.lblEmail.setText(getText("Email"));
-        this.lblPw.setText(getText("Password"));
-        this.lblPwconfirm.setText(getText("Password_Confirmation"));
-        this.lblUserName.setText(getText("Username"));
+        this.stage.setTitle(getText("registerview.titel"));
+        this.btnRegister.setText(getText("logginview.register"));
+        this.btnCancel.setText(getText("btn.cancel"));
+        this.lblEmail.setText(getText("registerview.email"));
+        this.lblPw.setText(getText("registerview.password"));
+        this.lblPwconfirm.setText(getText("registerview.confirmation"));
+        this.lblUserName.setText(getText("registerview.username"));
 
     }
 
@@ -155,6 +156,11 @@ public class RegisterView extends View<RegisterModel>{
 
     public void start() {
         this.stage.show();
+        this.stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+
+        });
     }
 
 

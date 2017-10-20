@@ -338,32 +338,32 @@ public class ConnectionView extends View<ConnectionModel> {
 	}
 
 	protected void setTexts() {
-		this.stage.setTitle(getText("ConnectionView_stage_Title"));
-		btnStartS.setText(getText("ConnectionView_btnStartS"));
-		btnJoinS.setText(getText("ConnectionView_btnJoinS"));
-		btnHelp.setText(getText("ConnectionView_btnHelp"));
+		this.stage.setTitle(getText("connectionview.stage.first.title"));
+		btnStartS.setText(getText("connectionview.btnStartServer"));
+		btnJoinS.setText(getText("connectionview.btnJoinServer"));
+		btnHelp.setText(getText("connectionview.btnHelp"));
 
 		if (stageCreateDialog!= null){
-			lblPort.setText(getText("ConnectionView_lblPort"));
-			lblInfo.setText(getText("ConnectionView_lblInfo"));
-			stageCreateDialog.setTitle(getText("ConnectionView_secondStage_Title"));
-			btnConnect.setText(getText("ConnectionView_btnConnect"));
+			lblPort.setText(getText("connectionview.lblPort"));
+			lblInfo.setText(getText("connectionview.lblInfo"));
+			stageCreateDialog.setTitle(getText("connectionview.stage.second.title"));
+			btnConnect.setText(getText("connectionview.btnConnect"));
 		}
 
 		if (stageConnectedDialog!= null){
-			lblPort.setText(getText("ConnectionView_lblPort"));
-			lblInfo.setText(getText("connectionview_notethisinfo"));
-			lblIP.setText(getText("ConnectionView_lblIP"));
-			btnOK.setText(getText("ok"));
-			stageConnectedDialog.setTitle(getText("connectionview_connectioninfo_titel"));
+			lblPort.setText(getText("connectionview.lblPort"));
+			lblInfo.setText(getText("connectionview.noteThisInfo"));
+			lblIP.setText(getText("connectionview.lblIp"));
+			btnOK.setText(getText("btn.ok"));
+			stageConnectedDialog.setTitle(getText("connectionview.connectionInfo.titel"));
 		}
 
 		if (stageJoinDialog!=null){
-			lblPort.setText(getText("ConnectionView_lblPort"));
-			lblInfo.setText(getText("ConnectionView_enterInfo"));
-			lblIP.setText(getText("ConnectionView_lblIP"));
-			btnOK.setText(getText("ConnectionView_btnConnect"));
-			stageJoinDialog.setTitle(getText("ConnectionView_joinDialog_Title"));
+			lblPort.setText(getText("connectionview.lblPort"));
+			lblInfo.setText(getText("connectionview.enterInfo"));
+			lblIP.setText(getText("connectionview.lblPort"));
+			btnOK.setText(getText("connectionview.btnConnect"));
+			stageJoinDialog.setTitle(getText("connectionview.joinDialog.title"));
 		}
 
 	}

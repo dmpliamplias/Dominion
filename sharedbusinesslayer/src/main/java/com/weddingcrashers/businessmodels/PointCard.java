@@ -5,10 +5,11 @@ import java.io.Serializable;
 /**
  *  @author Michel Schlatter
  *  */
-public class PointCards extends Card implements Serializable {
+public class PointCard extends Card implements Serializable {
 
     PointCardType pointCardType;
     int value;
+
 
     public PointCardType getPointCardType() {
         return pointCardType;
@@ -25,6 +26,5 @@ public class PointCards extends Card implements Serializable {
     public void setValue(int value) {
         this.value = value;
     }
-
 
 }

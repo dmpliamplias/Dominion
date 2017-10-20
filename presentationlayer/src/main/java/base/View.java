@@ -114,4 +114,6 @@ public abstract class View<M extends Model> {
         setTexts();
     }
 
+
+
 }

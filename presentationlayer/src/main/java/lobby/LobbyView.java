@@ -149,12 +149,16 @@ public class LobbyView extends View<LobbyModel> {
 
     protected void setTexts() {
 
-        this.stage.setTitle( getText( "LobbyView_Title" ) );
-        this.btnChatSend.setText( getText( "send" ) );
+        this.stage.setTitle( getText( "lobbyview.title" ) );
+        this.btnChatSend.setText( getText( "chat.send" ) );
     }
 
     public void start() {
         stage.show();
+        this.stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
     }
 
     public void stop(){

@@ -111,12 +111,16 @@ public class GameView extends View<GameModel> {
 
     protected void setTexts() {
 
-        this.btnChatSend.setText( translator.getString( "send" ) );
-        this.btnSendText.setText( translator.getString( "nice!" ) );
+        this.btnChatSend.setText( translator.getString( "chat.send" ) );
+        this.btnSendText.setText( translator.getString( "chat.nice!" ) );
     }
 
     public void start() {
         stage.show();
+        stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
     }
 
     public void stop(){
