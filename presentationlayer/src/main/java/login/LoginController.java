@@ -93,7 +93,7 @@ public class LoginController extends Controller<LoginModel, LoginView>{
               goToLobbyView();
           }else{
               //unsuccessfull login, show error
-              view.alert(translator.getString("LoginView_LoginError"), Alert.AlertType.WARNING);
+              view.alert(translator.getString("loginview.loginError"), Alert.AlertType.WARNING);
           }
       });
   }

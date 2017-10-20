@@ -111,7 +111,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         if (names.size() < 2) {
             // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
-            view.alert( translator.getString( "LobbyView_NotEnoughPlayers" ), Alert.AlertType.WARNING );
+            view.alert( translator.getString( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
             ArrayList<Integer> clientIds = new ArrayList<Integer>();
 

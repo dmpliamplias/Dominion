@@ -92,7 +92,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
         }else{
 
-            view.alert( translator.getString("RegisterView_Error_uncompletedFields"), Alert.AlertType.WARNING);
+            view.alert( translator.getString("registerview.error.uncompletedFields"), Alert.AlertType.WARNING);
         }
 
     }
