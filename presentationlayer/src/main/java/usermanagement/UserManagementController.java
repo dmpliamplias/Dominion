@@ -2,13 +2,13 @@ package usermanagement;
 
 import base.Controller;
 import com.weddingcrashers.model.User;
-import lobby.EditUserDialog;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
+import usermanagement.dialog.user.EditUserDialog;
 
 import java.util.List;
 import java.util.Optional;
