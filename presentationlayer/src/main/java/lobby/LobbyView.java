@@ -148,8 +148,8 @@ public class LobbyView extends View<LobbyModel> {
 
     protected void setTexts() {
 
-        this.stage.setTitle( getText( "LobbyView_Title" ) );
-        this.btnChatSend.setText( getText( "send" ) );
+        this.stage.setTitle( getText( "lobbyview.title" ) );
+        this.btnChatSend.setText( getText( "chat.send" ) );
     }
 
     private String getText(String key){
