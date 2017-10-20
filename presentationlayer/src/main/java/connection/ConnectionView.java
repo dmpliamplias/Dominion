@@ -360,7 +360,7 @@ public class ConnectionView extends View<ConnectionModel> {
 			lblPort.setText(getText("connectionview.lblPort"));
 			lblInfo.setText(getText("connectionview.noteThisInfo"));
 			lblIP.setText(getText("connectionview.lblIp"));
-			btnOK.setText(getText("Ok"));
+			btnOK.setText(getText("btn.ok"));
 			stageConnectedDialog.setTitle(getText("connectionview.connectionInfo.titel"));
 		}
 
