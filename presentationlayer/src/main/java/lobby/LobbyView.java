@@ -107,7 +107,7 @@ public class LobbyView extends View<LobbyModel> {
         HBox hbox = new HBox(  );
         hbox.setAlignment( Pos.CENTER );
         hbox.setPadding( new Insets( 20, 20, 20, 20 ) );
-        hbox.setSpacing(30);
+        hbox.setSpacing(40);
         btnStart = new Button();
         btnLogout = new Button( );
         hbox.getChildren().addAll( btnStart, btnLogout );

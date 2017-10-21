@@ -116,7 +116,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.observablePlayerList.clear();
             while (iter.hasNext()) {
                 Map.Entry<Integer, User> item = (Map.Entry) iter.next();
-                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName() );
+                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName());
             }
 
             view.lvPlayers.setItems( view.observablePlayerList);
