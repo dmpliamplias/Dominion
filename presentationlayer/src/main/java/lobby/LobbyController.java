@@ -107,6 +107,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     public void handleServerAnswer_newPlayer(LobbyContainer lc) {
         Platform.runLater( () -> {
             String res = "";
@@ -124,6 +127,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         } );
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     public void handleServerAnswer_startGame(boolean myTurn) {
         Platform.runLater(() -> {
             GameModel gameModel = new GameModel();
@@ -135,10 +141,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         });
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     private void startGame() {
-
-        //TODO Migi fix bug
-
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         if (names.size() < 2) {
             // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
