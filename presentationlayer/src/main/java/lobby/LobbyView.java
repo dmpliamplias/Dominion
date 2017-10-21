@@ -46,10 +46,12 @@ public class LobbyView extends View<LobbyModel> {
 
         // root settings
         BorderPane root = new BorderPane();
+        stage.setMaximized( true );
+
 
 
         //Scene and stage settings
-        Scene scene = new Scene(root, 1500, 1000);
+        Scene scene = new Scene(root);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
 
@@ -91,6 +93,7 @@ public class LobbyView extends View<LobbyModel> {
 
         VBox vbox = new VBox(  );
         lvPlayers = new ListView<String>(observablePlayerList);
+        lvPlayers.setMaxSize( 250,185 );
         vbox.setAlignment( Pos.CENTER );
 
         vbox.getChildren().addAll( lvPlayers );
@@ -138,6 +141,8 @@ public class LobbyView extends View<LobbyModel> {
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
         scroll.setMaxSize( 600, 200 );
+        scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
+        scroll.vvalueProperty().bind( chatContent.heightProperty() );
         gridPane.add(scroll, 1, 0);
         gridPane.add( hBox, 1,3 );
 
