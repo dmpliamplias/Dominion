@@ -13,6 +13,8 @@ import usermanagement.dialog.user.EditUserDialog;
 import java.util.List;
 import java.util.Optional;
 
+import static javafx.scene.control.Alert.AlertType.INFORMATION;
+
 /**
  * The user management controller.
  *
@@ -149,7 +151,7 @@ public class UserManagementController extends Controller<UserManagementModel, Us
          * Constructor.
          */
         SelectUserAlert() {
-            super(AlertType.INFORMATION);
+            super(INFORMATION);
             this.setContentText("Please select a user.");
             this.showAndWait();
         }

@@ -18,6 +18,9 @@ import usermanagement.UserManagementView;
 
 import java.io.IOException;
 
+import static app.PLServiceLocator.getPLServiceLocator;
+import static javafx.scene.control.Alert.AlertType.WARNING;
+
 /**
  * @author Michel Schlatter
  */
@@ -88,14 +91,14 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             User user = result.getUser();
             if (user != null) { // success
                 plServiceLocator.setUser(user);
-                if (user.getUserEmail().equals("admin@dominion.com")) {
+                if (user.isSuperUser() && getPLServiceLocator().getServerConnectionService().isHoster()) {
                     goToUserManagementView();
                 } else {
                     goToLobbyView();
                 }
             } else {
                 //unsuccessfull login, show error
-                view.alert(translator.getString("LoginView_LoginError"), Alert.AlertType.WARNING);
+                view.alert(translator.getString("loginview.loginError"), WARNING);
             }
         });
     }
@@ -112,7 +115,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     private void goToLobbyView() {
         LobbyModel model = new LobbyModel();
         LobbyView view = new LobbyView(this.view.getStage(), model);
-        LobbyController lobbyController = new LobbyController(view, model);
+        new LobbyController(view, model);
 
         this.view.stop();
         view.start();
