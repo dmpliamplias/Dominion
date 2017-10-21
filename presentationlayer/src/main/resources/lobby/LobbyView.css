@@ -37,7 +37,7 @@
 }
 .root{
 
-    //-fx-background-image: url""
-    -fx-background-repeat: stretch;
-    -fx-background-size: 500, 500;
+    -fx-background-image: url("pexels-photo-207301.jpeg");
+    -fx-background-size: cover;
+
 }
