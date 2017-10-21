@@ -64,6 +64,9 @@ public class GameManager extends Manager {
         Collections.shuffle(cardDeck);
     }
 
+
+    // jeder spieler bekommt 7 kupfer und 3 anwesen (Pointcards), Estate
+
     public static void createDominionSet(int players){
 
         // PointCards

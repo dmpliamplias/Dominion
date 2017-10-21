@@ -125,12 +125,14 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
     public void handleServerAnswer_startGame(boolean myTurn) {
-        GameModel gameModel = new GameModel();
-        GameView gameView = new GameView( this.view.getStage(), gameModel );
-        GameController gameController = new GameController( gameModel, gameView, myTurn );
+        Platform.runLater(() -> {
+            GameModel gameModel = new GameModel();
+            GameView gameView = new GameView( this.view.getStage(), gameModel );
+            GameController gameController = new GameController( gameModel, gameView, myTurn );
 
-        this.view.stop();
-        gameView.start();
+            this.view.stop();
+            gameView.start();
+        });
     }
 
     private void startGame() {

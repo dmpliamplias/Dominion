@@ -6,6 +6,7 @@ import base.Controller;
 import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import login.LoginController;
@@ -16,7 +17,9 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 
 import static com.weddingcrashers.service.Translator.Language.ENGLISH;
 import static com.weddingcrashers.service.Translator.Language.GERMAN;
@@ -43,10 +46,10 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         view.imgViewDeFlag.setOnMouseClicked(e -> view.switchTranslator(GERMAN));
         view.imgViewEngFlag.setOnMouseClicked(e -> view.switchTranslator(ENGLISH));
 
-        view.btnStartS.setOnAction((event) -> {
+        view.btnStartS.setOnAction((ActionEvent event) -> {
             view.create_Dialog().show();
 
-            view.btnConnect.setOnAction((event2)->{
+            view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
                     this.view.alert(_translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
@@ -62,7 +65,11 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                 String address = socketAddress.toString();
                 System.out.println("Socketadress: " + address);
 
-                model.setIP(socketAddress.getHostName());
+                try {
+                    model.setIP(InetAddress.getLocalHost().getHostAddress());
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
                 model.setPort(socketAddress.getPort());
 
                 view.createConnectedDialog().show();
