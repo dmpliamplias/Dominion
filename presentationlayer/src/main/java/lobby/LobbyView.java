@@ -31,6 +31,8 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnChatSend;
     protected VBox chatContent;
     protected Button btnLogout;
+    protected TextField lblPlayer;
+    protected TextField txtChat;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -59,7 +61,7 @@ public class LobbyView extends View<LobbyModel> {
 
         // root Layout
         root.setBottom(addGridPane());
-        root.setCenter(addHBoxCenter());
+        root.setCenter(addVBoxCenter());
         root.setRight(addClientList());
         root.setTop(addMenu());
         root.setLeft(addGameSettings());
@@ -92,34 +94,45 @@ public class LobbyView extends View<LobbyModel> {
 
     public VBox addClientList(){
 
-        VBox vbox = new VBox(  );
+        VBox vbox = new VBox();
+        vbox.setSpacing( 15 );
+        this.lblPlayer = new TextField(  );
+        this.lblPlayer.setEditable( false );
+        this.lblPlayer.setMaxWidth( 250 );
         lvPlayers = new ListView<String>(observablePlayerList);
-        lvPlayers.setMaxSize( 250,185 );
+        lvPlayers.setMaxSize( 250,280);
         vbox.setAlignment( Pos.CENTER );
 
-        vbox.getChildren().addAll( lvPlayers );
+        vbox.getChildren().addAll( lblPlayer,lvPlayers );
 
         return  vbox;
     }
 
 
-    public HBox addHBoxCenter(){
+    public VBox addVBoxCenter(){
 
-        HBox hbox = new HBox(  );
-        hbox.setAlignment( Pos.BOTTOM_CENTER );
-        hbox.setPadding( new Insets( 20, 20, 20, 20 ) );
-        hbox.setSpacing(45);
+        VBox vBox = new VBox(  );
+        HBox hBox = new HBox(  );
+
+
+
+
+        hBox.setAlignment( Pos.BOTTOM_CENTER );
+        hBox.setSpacing(100);
         btnStart = new Button();
         btnLogout = new Button( );
-        hbox.getChildren().addAll( btnStart, btnLogout );
+        hBox.getChildren().addAll( btnStart, btnLogout );
 
-        return  hbox;
+        vBox.getChildren().addAll( hBox );
+        vBox.setAlignment( Pos.BOTTOM_CENTER );
+
+        return  vBox;
     }
 
     public GridPane addGridPane() {
 
         GridPane gridPane = new GridPane();
-        gridPane.setPrefSize( 100, 400 );
+        gridPane.setPrefSize( 100, 350 );
         chatContent = new VBox();
 
 
@@ -127,7 +140,7 @@ public class LobbyView extends View<LobbyModel> {
         gridPane.setAlignment(Pos.BOTTOM_RIGHT);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(25, 25, 25, 25));
+        gridPane.setPadding(new Insets(3, 3, 3, 3));
 
 
         // Chatview
@@ -139,17 +152,22 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldChat.setPromptText( "Enter Text" );
         this.textFieldChat.setPrefSize( 450,50 );
 
+        this.txtChat = new TextField(  );
+        this.txtChat.setEditable( false );
+        this.txtChat.setMaxWidth( 900 );
+
         HBox hBox = new HBox(10);
         hBox.setAlignment( Pos.BOTTOM_RIGHT);
         hBox.getChildren().add(textFieldChat);
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 600, 250 );
+        scroll.setMaxSize( 900, 210 );
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
-        gridPane.add(scroll, 1, 0);
-        gridPane.add( hBox, 1,3 );
+        gridPane.add(scroll, 0, 1);
+        gridPane.add( hBox, 0,2 );
+        gridPane.add( txtChat, 0,0 );
 
         return gridPane;
 }
@@ -159,18 +177,16 @@ public class LobbyView extends View<LobbyModel> {
 
     protected void setTexts() {
 
+        this.txtChat.setText( getText( "lobbyview.textChat" ) );
         this.stage.setTitle( getText( "lobbyview.title" ) );
         this.btnChatSend.setText( getText( "chat.send" ) );
         this.btnStart.setText( getText("lobbyview.startgame" ));
         this.btnLogout.setText( getText( "lobbyview.logout" ) );
+        this.lblPlayer.setText( getText( "lobbyview.lblPlayer" ) );
     }
 
     public void start() {
         stage.show();
-        this.stage.setOnCloseRequest(evt -> {
-            // prevent window from closing
-            evt.consume();
-        });
     }
 
     public void stop(){
