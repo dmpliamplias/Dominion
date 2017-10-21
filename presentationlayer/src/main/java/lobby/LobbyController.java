@@ -13,6 +13,9 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +61,30 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             sendMessage();
         } );
 
+        view.btnLogout.setOnAction( event -> {
+            logout();
+        } );
+
         loadData();
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    private void logout(){
+
+        //TODO Migi User auf Null setzen
+
+        LoginModel model = new LoginModel();
+        LoginView view = new LoginView( this.view.getStage(), model );
+        LoginController loginController = new LoginController( view, model );
+
+        this.view.stop();
+        view.start();
+
+
+
     }
 
     private void loadData(){
@@ -81,6 +107,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     public void handleServerAnswer_newPlayer(LobbyContainer lc) {
         Platform.runLater( () -> {
             String res = "";
@@ -90,7 +119,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.observablePlayerList.clear();
             while (iter.hasNext()) {
                 Map.Entry<Integer, User> item = (Map.Entry) iter.next();
-                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName() );
+                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName());
             }
 
             view.lvPlayers.setItems( view.observablePlayerList);
@@ -98,15 +127,23 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         } );
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     public void handleServerAnswer_startGame(boolean myTurn) {
-        GameModel gameModel = new GameModel();
-        GameView gameView = new GameView( this.view.getStage(), gameModel );
-        GameController gameController = new GameController( gameModel, gameView, myTurn );
+        Platform.runLater(() -> {
+            GameModel gameModel = new GameModel();
+            GameView gameView = new GameView( this.view.getStage(), gameModel );
+            GameController gameController = new GameController( gameModel, gameView, myTurn );
 
-        this.view.stop();
-        gameView.start();
+            this.view.stop();
+            gameView.start();
+        });
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         if (names.size() < 2) {

@@ -36,5 +36,34 @@ public class DominionSet implements Serializable {
     }
 
 
+    public static ArrayList<MoneyCard> filterMoneyCards(ArrayList<Card> cards){
+        ArrayList<MoneyCard> list = new ArrayList<MoneyCard>();
+        for(Card card : cards){
+            if(card instanceof  MoneyCard){
+                list.add((MoneyCard)card);
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<KingCard> filterKingKards(ArrayList<Card> cards){
+        ArrayList<KingCard> list = new ArrayList<KingCard>();
+        for(Card card : cards){
+            if(card instanceof  KingCard){
+                list.add((KingCard)card);
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<PointCard> filterPointCards(ArrayList<Card> cards){
+        ArrayList<PointCard> list = new ArrayList<PointCard>();
+        for(Card card : cards){
+            if(card instanceof  PointCard){
+                list.add((PointCard)card);
+            }
+        }
+        return list;
+    }
 
 }

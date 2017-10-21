@@ -7,7 +7,6 @@ import java.io.Serializable;
  *  */
 public class MoneyCard  extends Card implements Serializable {
     MoneyType moneyType;
-    int value;
 
     public MoneyType getMoneyType() {
         return moneyType;
@@ -17,13 +16,7 @@ public class MoneyCard  extends Card implements Serializable {
         this.moneyType = moneyType;
     }
 
-    public int getValue() {
-        return value;
-    }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
 
 }

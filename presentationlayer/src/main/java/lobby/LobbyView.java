@@ -30,6 +30,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField textFieldChat;
     protected Button btnChatSend;
     protected VBox chatContent;
+    protected Button btnLogout;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -58,7 +59,7 @@ public class LobbyView extends View<LobbyModel> {
 
         // root Layout
         root.setBottom(addGridPane());
-        root.setCenter(addVBox());
+        root.setCenter(addHBoxCenter());
         root.setRight(addClientList());
         root.setTop(addMenu());
         root.setLeft(addGameSettings());
@@ -102,19 +103,23 @@ public class LobbyView extends View<LobbyModel> {
     }
 
 
-    public VBox addVBox(){
+    public HBox addHBoxCenter(){
 
-        VBox vbox = new VBox(  );
-        vbox.setAlignment( Pos.CENTER );
-        btnStart = new Button("Start Game");
-        vbox.getChildren().addAll( btnStart );
+        HBox hbox = new HBox(  );
+        hbox.setAlignment( Pos.BOTTOM_CENTER );
+        hbox.setPadding( new Insets( 20, 20, 20, 20 ) );
+        hbox.setSpacing(45);
+        btnStart = new Button();
+        btnLogout = new Button( );
+        hbox.getChildren().addAll( btnStart, btnLogout );
 
-        return  vbox;
+        return  hbox;
     }
 
     public GridPane addGridPane() {
 
         GridPane gridPane = new GridPane();
+        gridPane.setPrefSize( 100, 400 );
         chatContent = new VBox();
 
 
@@ -140,7 +145,7 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 600, 200 );
+        scroll.setMaxSize( 600, 250 );
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
         gridPane.add(scroll, 1, 0);
@@ -156,6 +161,8 @@ public class LobbyView extends View<LobbyModel> {
 
         this.stage.setTitle( getText( "lobbyview.title" ) );
         this.btnChatSend.setText( getText( "chat.send" ) );
+        this.btnStart.setText( getText("lobbyview.startgame" ));
+        this.btnLogout.setText( getText( "lobbyview.logout" ) );
     }
 
     public void start() {

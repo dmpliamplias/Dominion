@@ -10,6 +10,12 @@ public class KingCard extends Card implements Serializable {
    int buys;
    int actions;
    int cards;
+   SpecialAction specialAction;
+
+   public KingCard(){
+       super();
+       specialAction = SpecialAction.Undefined;
+   }
 
     KingCardType kingCardType;
     public int getBuys() {
@@ -44,6 +50,17 @@ public class KingCard extends Card implements Serializable {
         this.kingCardType = kingCardType;
     }
 
+    public SpecialAction getSpecialAction() {
+        return specialAction;
+    }
+
+    public void setSpecialAction(SpecialAction specialAction) {
+        this.specialAction = specialAction;
+    }
+
+    public boolean hasSepcialAction(){
+        return this.specialAction != SpecialAction.Undefined;
+    }
 
 
 
