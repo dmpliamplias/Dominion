@@ -71,11 +71,14 @@ public class UserManagementController extends Controller<UserManagementModel, Us
             if (selectedUser == null) {
                 new SelectUserAlert();
             }
-            final EditUserDialog editUserDialog = new EditUserDialog(selectedUser);
-            final Optional<User> userOptional = editUserDialog.showAndWait();
-            if (userOptional.isPresent()) {
-                final User user = userOptional.get();
-                serviceLocator.getUserService().update(user);
+            else {
+                final EditUserDialog editUserDialog = new EditUserDialog(selectedUser);
+                final Optional<User> userOptional = editUserDialog.showAndWait();
+                if (userOptional.isPresent()) {
+                    final User user = userOptional.get();
+                    serviceLocator.getUserService().update(user);
+                    refreshUsers();
+                }
             }
         });
     }
@@ -91,7 +94,7 @@ public class UserManagementController extends Controller<UserManagementModel, Us
             if (userOptional.isPresent()) {
                 final User user = userOptional.get();
                 serviceLocator.getUserService().create(user);
-                loadUsers();
+                refreshUsers();
             }
         });
     }
@@ -105,8 +108,15 @@ public class UserManagementController extends Controller<UserManagementModel, Us
             if (selectedUser == null) {
                 new SelectUserAlert();
             }
-            final DeleteUserDialog deleteUserDialog = new DeleteUserDialog(selectedUser);
-            final Optional<Void> aVoid = deleteUserDialog.showAndWait();
+            else {
+                final DeleteUserDialog deleteUserDialog = new DeleteUserDialog();
+                final Optional<Boolean> optional = deleteUserDialog.showAndWait();
+                final Boolean deleted = optional.get();
+                if (deleted) {
+                    serviceLocator.getUserService().delete(selectedUser);
+                    refreshUsers();
+                }
+            }
         });
     }
 
@@ -117,6 +127,15 @@ public class UserManagementController extends Controller<UserManagementModel, Us
         final List<User> users = serviceLocator.getUserService().list();
         view.users.addAll(users);
         view.listView.setItems(view.users);
+    }
+
+    /**
+     * Refresh users.
+     */
+    private void refreshUsers() {
+        final List<User> users = serviceLocator.getUserService().list();
+        view.users.clear();
+        view.users.addAll(users);
     }
 
     /**

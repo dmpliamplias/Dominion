@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -76,6 +77,18 @@ public class UserManagementView extends View<UserManagementModel> {
 
     private ListView<User> addListView() {
         listView = new ListView<>(users);
+        listView.setCellFactory(param -> new ListCell<User>() {
+            @Override
+            protected void updateItem(final User item, final boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                }
+                else {
+                    setText(item.getUserName() + " (" + item.getUserEmail() + ")");
+                }
+            }
+        });
         return listView;
     }
 
@@ -119,7 +132,7 @@ public class UserManagementView extends View<UserManagementModel> {
 
     @Override
     protected void setTexts() {
-
+        // nop
     }
 
 }

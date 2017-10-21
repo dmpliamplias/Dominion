@@ -76,6 +76,7 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
         final EntityManager em = getEntityManager();
         boolean deleted = false;
         try {
+            startTransaction(em);
             entity = em.find(entity.getClass(), entity.getId());
             em.remove(entity);
             commitTransaction();

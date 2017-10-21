@@ -79,7 +79,6 @@ public abstract class BaseService {
      * @param e the exception which occured.
      */
     protected void logException(Logger logger, Exception e) {
-        // TODO: 30.09.2017 check instance of the exception and log which and what gone wrong
         logger.log(SEVERE, e.getMessage());
     }
 

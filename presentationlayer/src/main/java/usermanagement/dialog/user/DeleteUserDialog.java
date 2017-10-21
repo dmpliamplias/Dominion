@@ -1,18 +1,35 @@
 package usermanagement.dialog.user;
 
-import com.weddingcrashers.model.User;
+import javafx.scene.control.ButtonType;
 import usermanagement.dialog.BaseDialog;
 
-public class DeleteUserDialog extends BaseDialog<Void> {
+import static javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE;
+import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
+
+/**
+ * Delete user dialog.
+ *
+ * @author dmpliamplias
+ */
+public class DeleteUserDialog extends BaseDialog<Boolean> {
+
+    // ---- Constructor
 
     /**
      * Constructor.
-     *
-     * @param user the user.
      */
-    public DeleteUserDialog(User user) {
+    public DeleteUserDialog() {
+        this.setContentText("You really want to delete the user?");
 
+        final ButtonType confirmButton = new ButtonType("Confirm", OK_DONE);
+        final ButtonType cancelButton = new ButtonType("Cancel", CANCEL_CLOSE);
+        this.getDialogPane().getButtonTypes().addAll(confirmButton, cancelButton);
+
+        this.setResultConverter(dialogButton -> dialogButton == confirmButton);
     }
+
+
+    // ---- Methods
 
     @Override
     protected String title() {
