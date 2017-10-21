@@ -9,4 +9,5 @@ public enum KingCardType implements Serializable {
     Action,
     Attack,
     Reaction,
+    Special
 }

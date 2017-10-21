@@ -7,8 +7,10 @@ import java.io.Serializable;
  *  */
 public class Card implements Serializable {
     String name;
-    int Cost;
+    int cost;
     String filePath;
+    int value;
+
 
     public String getName() {
         return name;
@@ -19,11 +21,11 @@ public class Card implements Serializable {
     }
 
     public int getCost() {
-        return Cost;
+        return cost;
     }
 
     public void setCost(int cost) {
-        Cost = cost;
+        this.cost = cost;
     }
 
     public String getFilePath() {
@@ -32,6 +34,14 @@ public class Card implements Serializable {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
 }
