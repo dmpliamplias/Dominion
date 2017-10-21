@@ -137,6 +137,8 @@ public class LobbyView extends View<LobbyModel> {
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
         scroll.setMaxSize( 600, 200 );
+        scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
+        scroll.vvalueProperty().bind( chatContent.heightProperty() );
         gridPane.add(scroll, 1, 0);
         gridPane.add( hBox, 1,3 );
 

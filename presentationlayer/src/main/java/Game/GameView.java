@@ -101,6 +101,8 @@ public class GameView extends View<GameModel> {
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
         scroll.setMaxSize( 600, 200);
+        scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
+        scroll.vvalueProperty().bind( chatContent.heightProperty() );
         chatPane.add(scroll,1,0);
         chatPane.add(hbChat, 1, 3);
 
