@@ -105,7 +105,7 @@ public class LobbyView extends View<LobbyModel> {
     public HBox addHBoxCenter(){
 
         HBox hbox = new HBox(  );
-        hbox.setAlignment( Pos.CENTER );
+        hbox.setAlignment( Pos.BOTTOM_CENTER );
         hbox.setPadding( new Insets( 20, 20, 20, 20 ) );
         hbox.setSpacing(40);
         btnStart = new Button();
@@ -118,6 +118,7 @@ public class LobbyView extends View<LobbyModel> {
     public GridPane addGridPane() {
 
         GridPane gridPane = new GridPane();
+        gridPane.setPrefSize( 100, 400 );
         chatContent = new VBox();
 
 
@@ -143,7 +144,7 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 600, 200 );
+        scroll.setMaxSize( 600, 250 );
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
         gridPane.add(scroll, 1, 0);

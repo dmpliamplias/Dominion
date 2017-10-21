@@ -2,6 +2,7 @@
 
     -fx-background-color: black;
     -fx-text-fill: coral;
+    -fx-font-size: 16;
 
 }
 
@@ -10,6 +11,8 @@
     -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
+    -fx-font-size: 16;
+
 }
 
 .list-view .list-cell:even {
@@ -17,18 +20,17 @@
     -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
+    -fx-font-size: 16;
 }
 .list-view .list-cell:odd {
     -fx-border-color: gold;
     -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
+    -fx-font-size: 16;
+
 }
 
-.text-area{
-
-    -fx-background-color: gray;
-}
 
 .button{
 
