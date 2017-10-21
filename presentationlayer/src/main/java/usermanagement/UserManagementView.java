@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import static javafx.geometry.Pos.TOP_RIGHT;
 import static javafx.scene.text.FontWeight.NORMAL;
 
 /**
@@ -26,14 +25,17 @@ public class UserManagementView extends View<UserManagementModel> {
 
     // ---- Members
 
+    /** The list view. */
     protected ListView<User> listView;
 
     /** The edit button. */
     protected Button editButton;
+    /** The create button. */
+    protected Button createButton;
+    /** The delete button. */
+    protected Button deleteButton;
     /** The go to login button. */
     protected Button goToLoginButton;
-    /** The go to lobby button. */
-    protected Button goToLobbyButton;
 
     /** The users. */
     protected ObservableList<User> users = FXCollections.observableArrayList();
@@ -66,7 +68,7 @@ public class UserManagementView extends View<UserManagementModel> {
 
         root.getChildren().addAll(addTitle(), addListView(), addHBox());
 
-        final Scene scene = new Scene(root);
+        final Scene scene = new Scene(root, 700, 1000);
         stage.setScene(scene);
 
         return scene;
@@ -87,7 +89,7 @@ public class UserManagementView extends View<UserManagementModel> {
     private HBox addHBox() {
         final HBox hBox = new HBox();
         hBox.setSpacing(150);
-        hBox.getChildren().addAll(addEditButton(), addGoToLobbyButton(), addGoToLoginButton());
+        hBox.getChildren().addAll(addEditButton(), addCreateButton(), addDeleteButton(), addGoToLoginButton());
         return hBox;
     }
 
@@ -97,17 +99,22 @@ public class UserManagementView extends View<UserManagementModel> {
         return goToLoginButton;
     }
 
-    private Button addGoToLobbyButton() {
-        goToLobbyButton = new Button();
-        goToLobbyButton.setText("Go to Lobby");
-        return goToLobbyButton;
-    }
-
     private Button addEditButton() {
         editButton = new Button();
-        editButton.setAlignment(TOP_RIGHT);
         editButton.setText("Edit User");
         return editButton;
+    }
+
+    private Button addDeleteButton() {
+        deleteButton = new Button();
+        deleteButton.setText("Delete user");
+        return deleteButton;
+    }
+
+    private Button addCreateButton() {
+        createButton = new Button();
+        createButton.setText("Create user");
+        return createButton;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.weddingcrashers.service;
 import com.weddingcrashers.db.EntityManagerFactory;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.model.User_;
-import com.weddingcrashers.util.datalayer.SecurityUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,6 +13,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import java.util.List;
 
+import static com.weddingcrashers.util.datalayer.SecurityUtils.generatePBKDF2WithHMACSHA1Password;
 import static org.apache.commons.lang3.Validate.notNull;
 
 /**
@@ -37,8 +37,10 @@ public class UserServiceImpl extends BaseService implements UserService {
         notNull(user);
         final User userByEmail = getUserByEmail(user.getUserEmail());
         if (userByEmail == null) {
-            final String hashedPassword = SecurityUtils.generatePBKDF2WithHMACSHA1Password(user.getPassword());
+            final String hashedPassword = generatePBKDF2WithHMACSHA1Password(user.getPassword());
             user.setPassword(hashedPassword);
+            user.setBlocked(false);
+            user.setSuperUser(false);
             return objectUpdateService.create(user);
         }
         return userByEmail;
@@ -52,9 +54,9 @@ public class UserServiceImpl extends BaseService implements UserService {
         final User contextUser = em.find(user.getClass(), user.getId());
         contextUser.setUserName(user.getUserName());
         contextUser.setUserEmail(user.getUserEmail());
-        contextUser.setPassword(SecurityUtils.generatePBKDF2WithHMACSHA1Password(user.getPassword()));
-//        contextUser.setIsBlocked(user.getIsBlocked());
-//        contextUser.setIsSuperUser(user.getIsSuperUser());
+        contextUser.setPassword(generatePBKDF2WithHMACSHA1Password(user.getPassword()));
+        contextUser.setBlocked(user.isBlocked());
+        contextUser.setSuperUser(user.isSuperUser());
 
         return objectUpdateService.update(user);
     }
@@ -94,6 +96,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         return typedQuery.getSingleResult();
     }
 
+    @Override
     public String getPasswordFor(User user) {
         notNull(user);
 

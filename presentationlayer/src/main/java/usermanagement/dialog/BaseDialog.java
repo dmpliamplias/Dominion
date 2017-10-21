@@ -8,10 +8,32 @@ import javafx.scene.control.Dialog;
  * @param <T> the type of the dialog.
  * @author dmpliamplias
  */
-public class BaseDialog<T> extends Dialog {
+public abstract class BaseDialog<T> extends Dialog<T> {
 
-    public BaseDialog() {
+    // ---- Constructor
 
+    /**
+     * Constructor.
+     */
+    protected BaseDialog() {
+        this.setTitle(title());
+        this.setHeaderText(headerText());
     }
+
+    // ---- Methods
+
+    /**
+     * Returns the title of the dialog.
+     *
+     * @return the title of the dialog.
+     */
+    protected abstract String title();
+
+    /**
+     * Returns the header text of the dialog.
+     *
+     * @return the header text of the dialog.
+     */
+    protected abstract String headerText();
 
 }

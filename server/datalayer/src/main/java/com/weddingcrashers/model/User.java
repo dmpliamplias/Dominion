@@ -21,12 +21,12 @@ public class User extends BaseEntity {
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
-//
-//    @Column(name = "IS_BLOCKED", nullable = false)
-//    private boolean isBlocked;
-//
-//    @Column(name = "IS_SUPER_USER", nullable = false)
-//    private boolean isSuperUser;
+
+    @Column(name = "IS_BLOCKED", nullable = false)
+    private boolean isBlocked;
+
+    @Column(name = "IS_SUPER_USER", nullable = false)
+    private boolean isSuperUser;
 
 
     // ---- Fluent API
@@ -45,16 +45,16 @@ public class User extends BaseEntity {
         this.setPassword(password);
         return this;
     }
-//
-//    public User isBlocked(boolean blocked) {
-//        this.setBlocked(blocked);
-//        return this;
-//    }
-//
-//    public User isSuperUser(boolean superUser) {
-//        this.setSuperUser(superUser);
-//        return this;
-//    }
+
+    public User blocked(boolean blocked) {
+        this.setBlocked(blocked);
+        return this;
+    }
+
+    public User superUser(boolean superUser) {
+        this.setSuperUser(superUser);
+        return this;
+    }
 
 
     // ---- Methods
@@ -82,21 +82,21 @@ public class User extends BaseEntity {
     public void setPassword(final String password) {
         this.password = password;
     }
-//
-//    public boolean isBlocked() {
-//        return isBlocked;
-//    }
-//
-//    public void setBlocked(boolean blocked) {
-//        isBlocked = blocked;
-//    }
-//
-//    public boolean isSuperUser() {
-//        return isSuperUser;
-//    }
-//
-//    public void setSuperUser(boolean superUser) {
-//        isSuperUser = superUser;
-//    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    public boolean isSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setSuperUser(boolean superUser) {
+        isSuperUser = superUser;
+    }
 
 }

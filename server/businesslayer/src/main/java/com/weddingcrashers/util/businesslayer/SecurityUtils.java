@@ -9,6 +9,9 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+import static com.weddingcrashers.service.ServiceLocator.getServiceLocator;
+import static javax.crypto.SecretKeyFactory.getInstance;
+
 /**
  * https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  *
@@ -26,14 +29,14 @@ public final class SecurityUtils {
     // ---- Methods
 
     /**
+     * Validates the password.
      *
-     *
-     * @param user
-     * @param typedPassword
-     * @return
+     * @param user the user.
+     * @param typedPassword the typed password.
+     * @return {@code true} if the typed password was correct, {@code false} otherwise.
      */
     public static boolean validatePassword(User user, String typedPassword) {
-        final UserService userService = ServiceLocator.getServiceLocator().getUserService();
+        final UserService userService = getServiceLocator().getUserService();
         final String storedPassword = userService.getPasswordFor(user);
         final String[] parts = storedPassword.split(":");
         final int iterations = Integer.parseInt(parts[0]);
@@ -43,7 +46,7 @@ public final class SecurityUtils {
         final PBEKeySpec spec = new PBEKeySpec(typedPassword.toCharArray(), salt, iterations, hash.length * 8);
         SecretKeyFactory skf = null;
         try {
-            skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            skf = getInstance("PBKDF2WithHmacSHA1");
         }
         catch (NoSuchAlgorithmException e) {
             ServiceLocator.getLogger().warning(e.getMessage());
