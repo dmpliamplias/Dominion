@@ -6,21 +6,21 @@
 }
 
 .scroll-pane {
-    -fx-border-color: red;
-    -fx-border-insets: 5;
+    -fx-border-color: aquamarine;
+    -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
 }
 
 .list-view .list-cell:even {
-    -fx-border-color: red;
-    -fx-border-insets: 5;
+    -fx-border-color: gold;
+    -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
 }
 .list-view .list-cell:odd {
-    -fx-border-color: red;
-    -fx-border-insets: 5;
+    -fx-border-color: gold;
+    -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-border-style: dashed;
 }

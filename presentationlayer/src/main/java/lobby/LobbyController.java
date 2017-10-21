@@ -13,6 +13,9 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
+import login.LoginController;
+import login.LoginModel;
+import login.LoginView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +61,30 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             sendMessage();
         } );
 
+        view.btnLogout.setOnAction( event -> {
+            logout();
+        } );
+
         loadData();
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    private void logout(){
+
+        //TODO Manuel User auf Null setzen
+
+        LoginModel model = new LoginModel();
+        LoginView view = new LoginView( this.view.getStage(), model );
+        LoginController loginController = new LoginController( view, model );
+
+        this.view.stop();
+        view.start();
+
+
+
     }
 
     private void loadData(){

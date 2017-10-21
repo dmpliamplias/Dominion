@@ -29,6 +29,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField textFieldChat;
     protected Button btnChatSend;
     protected VBox chatContent;
+    protected Button btnLogout;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -57,7 +58,7 @@ public class LobbyView extends View<LobbyModel> {
 
         // root Layout
         root.setBottom(addGridPane());
-        root.setCenter(addVBox());
+        root.setCenter(addHBoxCenter());
         root.setRight(addClientList());
         root.setTop(addMenu());
         root.setLeft(addGameSettings());
@@ -101,14 +102,17 @@ public class LobbyView extends View<LobbyModel> {
     }
 
 
-    public VBox addVBox(){
+    public HBox addHBoxCenter(){
 
-        VBox vbox = new VBox(  );
-        vbox.setAlignment( Pos.CENTER );
-        btnStart = new Button("Start Game");
-        vbox.getChildren().addAll( btnStart );
+        HBox hbox = new HBox(  );
+        hbox.setAlignment( Pos.CENTER );
+        hbox.setPadding( new Insets( 20, 20, 20, 20 ) );
+        hbox.setSpacing(30);
+        btnStart = new Button();
+        btnLogout = new Button( );
+        hbox.getChildren().addAll( btnStart, btnLogout );
 
-        return  vbox;
+        return  hbox;
     }
 
     public GridPane addGridPane() {
@@ -155,6 +159,8 @@ public class LobbyView extends View<LobbyModel> {
 
         this.stage.setTitle( getText( "lobbyview.title" ) );
         this.btnChatSend.setText( getText( "chat.send" ) );
+        this.btnStart.setText( getText("lobbyview.startgame" ));
+        this.btnLogout.setText( getText( "lobbyview.logout" ) );
     }
 
     private String getText(String key){
