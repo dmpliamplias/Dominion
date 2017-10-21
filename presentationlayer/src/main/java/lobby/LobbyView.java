@@ -6,11 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -33,6 +29,9 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnLogout;
     protected TextField lblPlayer;
     protected TextField txtChat;
+    protected TextField textFieldGameSettings;
+    protected TextField textFieldRound;
+    protected ChoiceBox choiceBox;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -61,9 +60,9 @@ public class LobbyView extends View<LobbyModel> {
 
         // root Layout
         root.setBottom(addGridPane());
-        root.setCenter(addVBoxCenter());
+        root.setCenter(addMenu());
         root.setRight(addClientList());
-        root.setTop(addMenu());
+        root.setTop( addVBoxGameSettings());
         root.setLeft(addGameSettings());
 
         // For multi language
@@ -83,6 +82,7 @@ public class LobbyView extends View<LobbyModel> {
     public HBox addMenu(){
 
         HBox hBox = new HBox(  );
+        hBox.setAlignment( Pos.CENTER );
         // Test button
         btnGameView = new Button("GameView");
 
@@ -109,22 +109,50 @@ public class LobbyView extends View<LobbyModel> {
     }
 
 
-    public VBox addVBoxCenter(){
+    public VBox addVBoxGameSettings(){
 
         VBox vBox = new VBox(  );
         HBox hBox = new HBox(  );
 
+        vBox.setSpacing( 50 );
+
+        // GamesRules
+
+        this.textFieldGameSettings = new TextField(  );
+        this.textFieldGameSettings.setEditable( false );
+        this.textFieldGameSettings.setMaxWidth( 300 );
+
+        HBox hboxRounds = new HBox(  );
+        hboxRounds.setSpacing( 50 );
+        hboxRounds.setAlignment( Pos.CENTER_LEFT );
 
 
+        this.textFieldRound = new TextField(  );
+        this.textFieldRound.setEditable( false );
+        this.textFieldRound.setMaxWidth( 300 );
 
-        hBox.setAlignment( Pos.BOTTOM_CENTER );
+        this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
+            10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30
+        ) );
+        this.choiceBox.setMaxWidth( 300 );
+
+        hboxRounds.getChildren().addAll( textFieldRound,choiceBox );
+
+
+        vBox.getChildren().addAll( textFieldGameSettings, hboxRounds);
+
+
+        // Buttons for GameLobby
+
+        hBox.setAlignment( Pos.CENTER_LEFT );
         hBox.setSpacing(100);
         btnStart = new Button();
+        btnStart.setTooltip(new Tooltip("You can only start the game, if your are the server :)"));
         btnLogout = new Button( );
         hBox.getChildren().addAll( btnStart, btnLogout );
 
         vBox.getChildren().addAll( hBox );
-        vBox.setAlignment( Pos.BOTTOM_CENTER );
+        vBox.setAlignment( Pos.CENTER_LEFT );
 
         return  vBox;
     }
@@ -183,6 +211,8 @@ public class LobbyView extends View<LobbyModel> {
         this.btnStart.setText( getText("lobbyview.startgame" ));
         this.btnLogout.setText( getText( "lobbyview.logout" ) );
         this.lblPlayer.setText( getText( "lobbyview.lblPlayer" ) );
+        this.textFieldGameSettings.setText( getText( "lobbyview.GameSettings" ) );
+        this.textFieldRound.setText( getText( "lobbyview.rounds" ) );
     }
 
     public void start() {
