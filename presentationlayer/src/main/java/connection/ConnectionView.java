@@ -117,12 +117,6 @@ public class ConnectionView extends View<ConnectionModel> {
 	public Stage create_Dialog(){
 		stageCreateDialog = new Stage();
 
-		this.stageCreateDialog.setOnCloseRequest(evt -> {
-			// prevent window from closing
-			evt.consume();
-
-		});
-
 		stageCreateDialog.initOwner(stage);
 		stageCreateDialog.initModality(Modality.WINDOW_MODAL);
 		
@@ -179,12 +173,12 @@ public class ConnectionView extends View<ConnectionModel> {
 	// stage where it shows port and IP
     public Stage createConnectedDialog(){
 		stageConnectedDialog = new Stage();
-
 		this.stageConnectedDialog.setOnCloseRequest(evt -> {
 			// prevent window from closing
 			evt.consume();
 
 		});
+
 		stageConnectedDialog.initOwner(stage);
 		stageConnectedDialog.initModality(Modality.WINDOW_MODAL);
 		
@@ -272,12 +266,6 @@ public class ConnectionView extends View<ConnectionModel> {
 	// stage where the user has to enter port and IP
 	public Stage createJoinDialog(){
 		stageJoinDialog = new Stage();
-
-		this.stageJoinDialog.setOnCloseRequest(evt -> {
-			// prevent window from closing
-			evt.consume();
-
-		});
 
 		stageJoinDialog.initOwner(stage);
 		stageJoinDialog.initModality(Modality.WINDOW_MODAL);

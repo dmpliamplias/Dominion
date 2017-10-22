@@ -156,11 +156,6 @@ public class RegisterView extends View<RegisterModel>{
 
     public void start() {
         this.stage.show();
-        this.stage.setOnCloseRequest(evt -> {
-            // prevent window from closing
-            evt.consume();
-
-        });
     }
 
 
