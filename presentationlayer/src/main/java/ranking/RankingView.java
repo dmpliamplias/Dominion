@@ -70,11 +70,9 @@ public class RankingView extends View<RankingModel> {
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
             vbox.setPadding(new Insets(8, 0, 0, 8));
-            vbox.getChildren().addAll(lblRanking, vbox);
+            vbox.getChildren().addAll(lblRanking, table);
 
             Scene scene = new Scene(vbox);
-
-            scene.getRoot().getChildrenUnmodifiable().addAll(vbox);
 
             this.stage.setScene(scene);
             this.stage.show();
