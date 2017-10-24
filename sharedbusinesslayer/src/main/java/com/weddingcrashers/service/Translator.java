@@ -2,6 +2,8 @@ package com.weddingcrashers.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -76,9 +78,10 @@ public class Translator {
             default:
                 break;
         }
+
         final InputStream in = getClass().getResourceAsStream(PATH + "_" + languageAbbrev + SUFFIX);
         try {
-            translations.load(in);
+            translations.load(new InputStreamReader(in, Charset.forName("UTF-8")));
         } catch (IOException e) {
             logger.warning("Could not load translation for" + language.name().toLowerCase());
         }
