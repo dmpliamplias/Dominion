@@ -17,6 +17,9 @@ import javafx.scene.input.KeyCode;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
+import ranking.RankingController;
+import ranking.RankingModel;
+import ranking.RankingView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,6 +77,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         view.btnLogout.setOnAction( event -> {
             logout();
         } );
+
+        //author Murat Kelleci am 24.10.2017
+        view.btnRanking.setOnAction(event -> {
+            goToRankingView();
+        });
 
         loadData();
     }
@@ -180,6 +188,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
 
+
+
     /**
      * author Manuel Wirz
      */
@@ -206,5 +216,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                 view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
             } );
 
+    }
+
+    //@author Murat Kelleci am 24.10.2017
+
+    private void goToRankingView() {
+        RankingModel model = new RankingModel();
+        RankingView view = new RankingView(this.view.getStage(), model);
+        RankingController rankingController = new RankingController(model, view);
+        this.view.stop();
+        view.start();
     }
 }
