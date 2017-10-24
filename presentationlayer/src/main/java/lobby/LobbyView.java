@@ -38,6 +38,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField txtOption1;
     protected TextField txtOption2;
     protected TextField txtOption2Statement;
+    protected Button btnRanking;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -178,13 +179,15 @@ public class LobbyView extends View<LobbyModel> {
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setAlignment( Pos.CENTER );
         hBoxButtons.setSpacing(100);
+        btnRanking = new Button(  );
+        btnRanking.setMaxWidth( 400 );
         btnStart = new Button();
         btnStart.setMaxWidth( 400 );
         this.tp = new Tooltip(  );
         btnStart.setTooltip(tp);
         btnLogout = new Button( );
         btnLogout.setMaxWidth( 400 );
-        hBoxButtons.getChildren().addAll( btnStart, btnLogout );
+        hBoxButtons.getChildren().addAll( btnStart, btnLogout, btnRanking );
 
         vBoxGameSettings.getChildren().addAll( textFieldGameSettings, boxOptions, hBoxButtons );
 
@@ -251,6 +254,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption1.setText( getText( "lobbyview.txtOption1" ) );
         this.txtOption2.setText( getText( "lobbyview.txtOption2" ) );
         this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
+        this.btnRanking.setText( getText( "lobby.ranking" ) );
 
     }
 
