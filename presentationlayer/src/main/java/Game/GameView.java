@@ -67,6 +67,7 @@ public class GameView extends View<GameModel> {
     public GridPane addChatGridPane(){
 
         chatPane = new GridPane();
+        chatPane.setPrefSize( 100, 350 );
         chatContent = new VBox();
 
         //GridPane Layout
@@ -81,26 +82,27 @@ public class GameView extends View<GameModel> {
 
 
         this.btnChatSend  = new Button();
-        this.btnChatSend.setPrefSize(150, 50);
+        this.btnChatSend.setPrefSize(300, 50);
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
-        this.textFieldChat.setPrefSize( 350,50 );
+        this.textFieldChat.setPrefSize( 450,50 );
 
 
         this.btnSendText = new Button();
-        this.btnSendText.setPrefSize(150, 50);
+        this.btnSendText.setPrefSize(300, 50);
 
 
         // Create HBox +
         hbChat = new HBox(10);
+        hbChat.setMaxSize( 700,200 );
         hbChat.setAlignment(Pos.CENTER);
         hbChat.getChildren().add(textFieldChat);
         hbChat.getChildren().add(btnChatSend);
         hbChat.getChildren().add(btnSendText);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 600, 200);
+        scroll.setMaxSize( 800, 200);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
         chatPane.add(scroll,1,0);
@@ -119,10 +121,6 @@ public class GameView extends View<GameModel> {
 
     public void start() {
         stage.show();
-        stage.setOnCloseRequest(evt -> {
-            // prevent window from closing
-            evt.consume();
-        });
     }
 
     public void stop(){
