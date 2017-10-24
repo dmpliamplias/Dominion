@@ -108,6 +108,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 		stage.setScene(scene);
+		scene.getStylesheets().addAll(this.getClass().getResource("/connection/ConnectionView.css").toExternalForm());
 
 		setTexts();
         return scene;

@@ -47,6 +47,8 @@ public class LoginView extends View<LoginModel> {
         grPa.setVgap(10);
         grPa.setPadding(new Insets(25, 25, 25, 25));
 
+        scene.getStylesheets().addAll(this.getClass().getResource("/login/LoginView.css").toExternalForm());
+
         stage.setScene(scene);
 
         //Creation of all needed Buttons and Fields
