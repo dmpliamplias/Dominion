@@ -68,6 +68,7 @@ public class Translator {
             case SWISS_GERMAN:
                 currentLanguage = SWISS_GERMAN;
                 languageAbbrev = "de_CH";
+                break;
             case ENGLISH:
                 currentLanguage = ENGLISH;
                 languageAbbrev = "en";
