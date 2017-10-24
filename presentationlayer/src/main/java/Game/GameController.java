@@ -7,6 +7,7 @@ import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -38,6 +39,11 @@ public class GameController extends Controller<GameModel, GameView> {
         view.btnSendText.setOnAction( event -> {
             sendButtonText();
         } );
+
+        view.textFieldChat.setOnKeyPressed(event -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                sendMessage();
+            }  });
 
 
     }

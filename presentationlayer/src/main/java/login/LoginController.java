@@ -40,6 +40,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             view.refreshModel();
             this.login();
 
+
         }); //** @author Murat Kelleci
 
         view.btnSignUp.setOnAction((event) -> this.goToRegisterView());

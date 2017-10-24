@@ -22,6 +22,7 @@ public class GameView extends View<GameModel> {
      protected GridPane chatPane;
      protected HBox hbChat;
      protected VBox chatContent;
+     protected TextField txtNameChat;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
@@ -88,6 +89,10 @@ public class GameView extends View<GameModel> {
         this.textFieldChat.setPromptText( "Enter Text" );
         this.textFieldChat.setPrefSize( 450,50 );
 
+        this.txtNameChat = new TextField(  );
+        this.txtNameChat.setEditable( false );
+        this.txtNameChat.setMaxWidth( 900 );
+
 
         this.btnSendText = new Button();
         this.btnSendText.setPrefSize(300, 50);
@@ -105,8 +110,9 @@ public class GameView extends View<GameModel> {
         scroll.setMaxSize( 800, 200);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
-        chatPane.add(scroll,1,0);
-        chatPane.add(hbChat, 1, 3);
+        chatPane.add( txtNameChat,0,0 );
+        chatPane.add(scroll,0,1);
+        chatPane.add(hbChat, 0, 2);
 
 
         return chatPane;
@@ -115,8 +121,9 @@ public class GameView extends View<GameModel> {
 
     protected void setTexts() {
 
-        this.btnChatSend.setText( translator.getString( "chat.send" ) );
-        this.btnSendText.setText( translator.getString( "chat.nice!" ) );
+        this.btnChatSend.setText( getText( "chat.send" ) );
+        this.btnSendText.setText( getText( "chat.nice!" ) );
+        this.txtNameChat.setText( getText( "chat.chat" ) );
     }
 
     public void start() {

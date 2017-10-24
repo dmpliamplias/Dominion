@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.input.KeyCode;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
@@ -52,6 +53,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         view.btnStart.setOnAction( (event) -> {
             startGame();
         } );
+
+        view.textFieldChat.setOnKeyPressed(event -> {
+                    if (event.getCode().equals( KeyCode.ENTER)){
+                       sendMessage();
+        }  });
 
         view.btnGameView.setOnAction( (event) -> {
             goToGameView();
