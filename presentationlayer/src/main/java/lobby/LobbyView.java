@@ -55,7 +55,7 @@ public class LobbyView extends View<LobbyModel> {
 
         // root settings
         BorderPane root = new BorderPane();
-        stage.setMaximized( true );
+        //stage.setMaximized( true );
 
 
 

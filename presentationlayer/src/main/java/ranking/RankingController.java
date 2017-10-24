@@ -41,7 +41,6 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     //
     public void handleServerAnswer(List<Highscore> highscoreList){
         // TODO: 02.10.2017 Murat => Display Highscores.
-
         model.setHighscores(highscoreList);
         view.bindModeltoView();
     }

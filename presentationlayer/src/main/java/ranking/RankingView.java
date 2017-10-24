@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.geometry.Insets;
 import javafx.collections.FXCollections;
+import org.h2.table.Table;
+
 import java.util.ArrayList;
 import java.lang.*;
 
@@ -22,7 +24,8 @@ import java.lang.*;
 //
 public class RankingView extends View<RankingModel> {
 
-    private TableView<RankingViewModel> table = new TableView();
+
+    TableView<RankingViewModel> table = new TableView();
 
     ObservableList<RankingViewModel> dataModel;
 
@@ -44,6 +47,7 @@ public class RankingView extends View<RankingModel> {
             this.stage.setWidth(300);
             this.stage.setHeight(500);
 
+            table = new TableView();
             table.setEditable(false);
 
             lblRanking = new Label();
@@ -66,9 +70,9 @@ public class RankingView extends View<RankingModel> {
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
             vbox.setPadding(new Insets(8, 0, 0, 8));
-            vbox.getChildren().addAll(lblRanking, table);
+            vbox.getChildren().addAll(lblRanking, vbox);
 
-            Scene scene = new Scene(table);
+            Scene scene = new Scene(vbox);
 
             scene.getRoot().getChildrenUnmodifiable().addAll(vbox);
 
