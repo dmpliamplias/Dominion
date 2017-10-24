@@ -54,6 +54,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             startGame();
         } );
 
+        /**
+         *  author Manuel Wirz
+         *  */
+
         view.textFieldChat.setOnKeyPressed(event -> {
                     if (event.getCode().equals( KeyCode.ENTER)){
                        sendMessage();

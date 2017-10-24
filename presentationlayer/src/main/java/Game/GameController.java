@@ -32,6 +32,10 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
+        /**
+         *  author Manuel Wirz
+         *  */
+        
         view.btnChatSend.setOnAction( event -> {
             sendMessage();
         } );
