@@ -60,7 +60,7 @@ public class LobbyView extends View<LobbyModel> {
 
 
         //Scene and stage settings
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 1500, 1000);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
 

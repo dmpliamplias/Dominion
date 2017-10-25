@@ -6,6 +6,7 @@ import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.Methods;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
@@ -115,7 +116,8 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
     private void goToLobbyView() {
         LobbyModel model = new LobbyModel();
-        LobbyView view = new LobbyView(this.view.getStage(), model);
+        Stage s = new Stage(  );
+        LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
 
         this.view.stop();
