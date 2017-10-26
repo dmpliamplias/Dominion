@@ -2,21 +2,19 @@ package ranking;
 
 import base.View;
 import com.weddingcrashers.model.Highscore;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.geometry.Insets;
-import javafx.collections.FXCollections;
-import org.h2.table.Table;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.lang.*;
 
 
 
@@ -25,6 +23,7 @@ import java.lang.*;
 public class RankingView extends View<RankingModel> {
 
 
+    // TODO: 26.10.17 murat: Das ish keis javafx elemnt du muesch listview nä
     TableView<RankingViewModel> table = new TableView();
 
     ObservableList<RankingViewModel> dataModel;
