@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -22,6 +19,8 @@ import java.util.ArrayList;
 //** @author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
 //
 public class RankingView extends View<RankingModel> {
+
+
 
 
     // TODO: 26.10.17 murat: Das ish keis javafx elemnt du muesch listview nä
@@ -37,6 +36,8 @@ public class RankingView extends View<RankingModel> {
     protected TableColumn userNameColumn;
     protected TableColumn userHighScore;
     protected TableColumn rankingPosition;
+    protected Button btnLobby;
+
 
     @Override
     protected Scene create_GUI() {
@@ -47,11 +48,15 @@ public class RankingView extends View<RankingModel> {
             this.stage.setWidth(300);
             this.stage.setHeight(500);
 
+
             list = new ListView();
             list.setEditable(false);
 
             lblRanking = new Label();
             lblRanking.setFont(new Font("Helvetica", 16));
+
+            btnLobby=new Button("loginview.btnGoToLobbyView");
+
 
 
             userNameColumn = new TableColumn();
@@ -70,9 +75,10 @@ public class RankingView extends View<RankingModel> {
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
             vbox.setPadding(new Insets(8, 0, 0, 8));
-            vbox.getChildren().addAll(lblRanking, list);
+            vbox.getChildren().addAll(lblRanking, list, btnLobby);
 
             Scene scene = new Scene(vbox);
+
 
             this.stage.setScene(scene);
             this.stage.show();
@@ -110,4 +116,5 @@ public class RankingView extends View<RankingModel> {
             }
             dataModel = FXCollections.observableList(vmList);
     }
+
 }

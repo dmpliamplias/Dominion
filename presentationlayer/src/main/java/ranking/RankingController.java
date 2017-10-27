@@ -9,6 +9,12 @@ import com.weddingcrashers.servermodels.ViewStatus;
 
 import base.Controller;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
+
+
 
 
 public class RankingController extends Controller<RankingModel, RankingView> {
@@ -16,11 +22,13 @@ public class RankingController extends Controller<RankingModel, RankingView> {
 
     //** @author Michel Schlatter
 
-    public RankingController(RankingModel model, RankingView view){
-        super(model,view);
+
+    public RankingController(RankingModel model, RankingView view) {
+        super(model, view);
         serverConnectionService.setRankingController(this);
         initialize();
     }
+
 
     public void initialize() {
         try {
@@ -43,6 +51,13 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         // TODO: 02.10.2017 Murat => Display Highscores.
         model.setHighscores(highscoreList);
         view.bindModeltoView();
+    }
+
+    private void goToLobbyView() {
+        LobbyModel model = new LobbyModel();
+        Stage s = new Stage();
+        LobbyView view = new LobbyView(s, model);
+        new LobbyController(view, model);
     }
 
 
