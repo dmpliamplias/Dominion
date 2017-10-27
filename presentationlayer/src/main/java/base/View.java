@@ -28,7 +28,7 @@ public abstract class View<M extends Model> {
     /** The translator. */
     protected Translator translator;
     /** Image Icon */
-    Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
+    protected Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
 
 
     // ---- Constructor

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 public class ConnectionView extends View<ConnectionModel> {
 	
     Button btnStartS;
@@ -35,6 +36,7 @@ public class ConnectionView extends View<ConnectionModel> {
     ImageView imgViewDeFlag;
     ImageView imgViewEngFlag;
     ImageView imgViewChFlag;
+	Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
 
 
     public ConnectionView(Stage stage, ConnectionModel model){
@@ -111,6 +113,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		scene.getStylesheets().addAll(this.getClass().getResource("/connection/ConnectionView.css").toExternalForm());
 
 		setTexts();
+
         return scene;
     }
 
@@ -167,6 +170,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		stageCreateDialog.setScene(scene2);
 		setTexts();
+		stageCreateDialog.getIcons().add(imgIcon);
         return stageCreateDialog;
     }
 
@@ -260,6 +264,8 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		if(stageCreateDialog != null) stageCreateDialog.close();
 		setTexts();
+
+		stageConnectedDialog.getIcons().add(imgIcon);
         return stageConnectedDialog;
     }
 
@@ -329,6 +335,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		if(stageCreateDialog != null) stageCreateDialog.close();
 		setTexts();
+		stageJoinDialog.getIcons().add(imgIcon);
 		return stageJoinDialog;
 	}
 
