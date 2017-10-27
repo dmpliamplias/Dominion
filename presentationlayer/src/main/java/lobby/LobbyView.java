@@ -64,6 +64,7 @@ public class LobbyView extends View<LobbyModel> {
         Scene scene = new Scene(root, 1200, 900);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
+        stage.setResizable( false );
 
 
         // root Layout
@@ -115,7 +116,7 @@ public class LobbyView extends View<LobbyModel> {
         this.lblPlayer.setEditable( false );
         this.lblPlayer.setMaxWidth( 250 );
         lvPlayers = new ListView<String>(observablePlayerList);
-        lvPlayers.setMaxSize( 250,230);
+        lvPlayers.setMaxSize( 250,180);
         vbox.setAlignment( Pos.CENTER );
 
         vbox.getChildren().addAll( lblPlayer,lvPlayers );
