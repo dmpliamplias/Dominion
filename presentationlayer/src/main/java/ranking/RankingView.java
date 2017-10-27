@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,7 +25,7 @@ public class RankingView extends View<RankingModel> {
 
 
     // TODO: 26.10.17 murat: Das ish keis javafx elemnt du muesch listview nä
-    TableView<RankingViewModel> table = new TableView();
+    ListView<RankingViewModel> list = new ListView();
 
     ObservableList<RankingViewModel> dataModel;
 
@@ -46,8 +47,8 @@ public class RankingView extends View<RankingModel> {
             this.stage.setWidth(300);
             this.stage.setHeight(500);
 
-            table = new TableView();
-            table.setEditable(false);
+            list = new ListView();
+            list.setEditable(false);
 
             lblRanking = new Label();
             lblRanking.setFont(new Font("Helvetica", 16));
@@ -63,13 +64,13 @@ public class RankingView extends View<RankingModel> {
 
             rankingPosition = new TableColumn();
 
-            this.table.setItems(dataModel);
-            this.table.getColumns().addAll(rankingPosition,userNameColumn, userHighScore);
+            this.list.setItems(dataModel);
+            this.list.getItems().addAll();
 
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
             vbox.setPadding(new Insets(8, 0, 0, 8));
-            vbox.getChildren().addAll(lblRanking, table);
+            vbox.getChildren().addAll(lblRanking, list);
 
             Scene scene = new Scene(vbox);
 
