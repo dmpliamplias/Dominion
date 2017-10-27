@@ -5,6 +5,7 @@ import com.weddingcrashers.service.Translator;
 import com.weddingcrashers.service.Translator.Language;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +27,9 @@ public abstract class View<M extends Model> {
     protected ServiceLocator serviceLocator;
     /** The translator. */
     protected Translator translator;
+    /** Image Icon */
+    Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
+
 
     // ---- Constructor
 
@@ -43,6 +47,7 @@ public abstract class View<M extends Model> {
         translator = serviceLocator.getTranslator();
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
+        stage.getIcons().add(imgIcon);
     }
 
 
