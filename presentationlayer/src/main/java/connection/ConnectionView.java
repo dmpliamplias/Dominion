@@ -374,7 +374,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		if (stageJoinDialog!=null){
 			lblPort.setText(getText("connectionview.lblPort"));
 			lblInfo.setText(getText("connectionview.enterInfo"));
-			lblIP.setText(getText("connectionview.lblPort"));
+			lblIP.setText(getText("connectionview.lblIp"));
 			btnOK.setText(getText("connectionview.btnConnect"));
 			stageJoinDialog.setTitle(getText("connectionview.joinDialog.title"));
 		}
