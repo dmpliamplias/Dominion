@@ -41,6 +41,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField txtOption2Statement;
     protected Button btnRanking;
     protected CheckBox cb;
+    protected Button btnHelp;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -182,7 +183,7 @@ public class LobbyView extends View<LobbyModel> {
 
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setAlignment( Pos.CENTER_LEFT );
-        hBoxButtons.setSpacing(120);
+        hBoxButtons.setSpacing(60);
         btnRanking = new Button(  );
         btnRanking.setMaxWidth( 300 );
         btnStart = new Button();
@@ -191,7 +192,9 @@ public class LobbyView extends View<LobbyModel> {
         btnStart.setTooltip(tp);
         btnLogout = new Button( );
         btnLogout.setMaxWidth( 300 );
-        hBoxButtons.getChildren().addAll( btnStart, btnLogout, btnRanking );
+        btnHelp = new Button(  );
+        btnHelp.setMaxWidth( 300 );
+        hBoxButtons.getChildren().addAll( btnStart, btnLogout, btnRanking, btnHelp );
 
         vBoxGameSettings.getChildren().addAll(hBoxOption1,hBoxOption2, hBoxButtons );
 
@@ -262,6 +265,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
         this.btnRanking.setText( getText( "lobby.ranking" ) );
         this.tpOption2.setText( getText( "lobby.tpOption2" ) );
+        this.btnHelp.setText( getText( "lobby.btnHelp" ) );
 
     }
 

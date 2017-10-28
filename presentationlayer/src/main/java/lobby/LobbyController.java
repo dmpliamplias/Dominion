@@ -78,7 +78,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             logout();
         } );
 
-
+        view.btnHelp.setOnAction( event -> {
+            help();
+        } );
 
         //author Murat Kelleci am 24.10.2017
         //TODO fix bug murat
@@ -92,6 +94,13 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     /**
      *  author Manuel Wirz
      *  */
+
+    private void help(){
+
+        //TODO@Manuel help key anpassen
+        view.alert( translator.getString( "lobby.help" ), Alert.AlertType.INFORMATION );
+
+    }
 
     private void logout(){
 
@@ -167,7 +176,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
      */
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
-        
+
         if (view.cb.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
             view.alert( translator.getString( "lobby.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
