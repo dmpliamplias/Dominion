@@ -78,6 +78,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             logout();
         } );
 
+
+
         //author Murat Kelleci am 24.10.2017
         //TODO fix bug murat
         view.btnRanking.setOnAction(event -> {
@@ -161,12 +163,20 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
     /**
-     * @author Michel Schlatter
+     * @author Michel Schlatter + Manuel Wirz
      */
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
-        if (names.size() < 2) {
-            // TODO: 02.10.2017 vanessa: text erstellen => Nicht genügend Spieler selektiert um zu spielen.
+        
+        if (view.cb.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
+            view.alert( translator.getString( "lobby.falseStatement" ), Alert.AlertType.WARNING );
+            view.choiceBox.getSelectionModel().clearSelection();
+            view.cb.setSelected( false );
+        }
+        if (!view.cb.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
+            view.alert (translator.getString( "lobby.falseStatement" ), Alert.AlertType.WARNING);
+        }
+        else if (names.size() < 2) {
             view.alert( translator.getString( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
             ArrayList<Integer> clientIds = new ArrayList<Integer>();
