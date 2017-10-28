@@ -6,12 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 
@@ -19,8 +20,6 @@ import java.util.ArrayList;
 //** @author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
 //
 public class RankingView extends View<RankingModel> {
-
-
 
 
     // TODO: 26.10.17 murat: Das ish keis javafx elemnt du muesch listview nä
@@ -69,6 +68,8 @@ public class RankingView extends View<RankingModel> {
 
             rankingPosition = new TableColumn();
 
+            bindModeltoView();
+
             this.list.setItems(dataModel);
             this.list.getItems().addAll();
 
@@ -84,6 +85,7 @@ public class RankingView extends View<RankingModel> {
             this.stage.show();
 
             setTexts();
+
             return scene;
         }
 
