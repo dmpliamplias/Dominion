@@ -21,8 +21,6 @@ import java.util.ArrayList;
 //
 public class RankingView extends View<RankingModel> {
 
-
-    // TODO: 26.10.17 murat: Das ish keis javafx elemnt du muesch listview nä
     ListView<RankingViewModel> list = new ListView();
 
     ObservableList<RankingViewModel> dataModel;
@@ -91,7 +89,6 @@ public class RankingView extends View<RankingModel> {
 
     }
 
-    //TODO Murat anpassen
     protected void setTexts() {
         this.stage.setTitle(getText("rankingview.rankingPage"));
         this.lblRanking.setText(getText("rankingview.highscoreAlltime"));

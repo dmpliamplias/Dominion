@@ -106,7 +106,6 @@ public class RegisterView extends View<RegisterModel>{
         return scene;
     }
 
-    //TODO Murat anpassen
 
     protected void setTexts() {
 

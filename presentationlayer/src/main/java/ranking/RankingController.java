@@ -48,11 +48,12 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     ///** @author Murat Kelleci
     //
     public void handleServerAnswer(List<Highscore> highscoreList){
-        // TODO: 02.10.2017 Murat => Display Highscores.
         model.setHighscores(highscoreList);
         view.bindModeltoView();
     }
 
+    ///** @author Murat Kelleci
+    //
     private void goToLobbyView() {
         LobbyModel model = new LobbyModel();
         Stage s = new Stage();

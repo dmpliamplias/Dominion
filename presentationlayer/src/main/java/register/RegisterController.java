@@ -28,7 +28,6 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public RegisterController(RegisterView view, RegisterModel model){
-        // TODO: 30.09.2017 murat => super(model,view);
         super(model,view);
         serverConnectionService.setRegisterController(this);
 
@@ -44,8 +43,6 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        //TODO for Murat ActionEvent click on Cancel delete all fields
-
         this.view.btnRegister.setOnAction((event) -> {
             this.register();
         });
@@ -55,8 +52,6 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
         });
     }
-
-
 
     private void register() {
         view.refreshModel();
@@ -110,10 +105,6 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         });
     }
 
-
-    //TODO for Murat a Methode which verifies Email Username and PW1 with PW2
-
-    //TODO for Murat Methode goToLoginView sauber fertig implementieren
     //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class
     private void goToLoginView(){
         LoginModel model =new LoginModel();

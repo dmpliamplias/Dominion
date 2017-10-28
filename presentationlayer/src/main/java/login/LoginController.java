@@ -33,7 +33,6 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         initialize();
     }
 
-    //TODO for Murat create an ActionEvent when clicking on Register button
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
@@ -42,8 +41,8 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             this.login();
 
 
-        }); //** @author Murat Kelleci
-
+        });
+        //** @author Murat Kelleci
         view.btnSignUp.setOnAction((event) -> this.goToRegisterView());
 
     }
@@ -125,11 +124,10 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     }
 
     //** @author Murat Kelleci - on 8.10.17
-    //TODO for Murat Methode sauber fertig implementieren.
     private void goToRegisterView() {
         RegisterModel model = new RegisterModel();
         RegisterView view = new RegisterView(this.view.getStage(), model);
-        // TODO: 10.10.2017 Murat...hier hast du den RegisterController vergessen zu instanzieren
+
         RegisterController registerController = new RegisterController(view, model);
         this.view.stop();
         view.start();
