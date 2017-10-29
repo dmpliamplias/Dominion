@@ -14,9 +14,9 @@ public class CardImageView extends ImageView {
 
     public CardImageView(Card card) {
         this.card = card;
-        this.setOnMouseDragged(e -> {
-            this.setLayoutX(e.getSceneX());
-            this.setLayoutY(e.getSceneY());
+        this.setOnMouseClicked(e -> {
+            //this.setLayoutX(e.getSceneX());
+            //this.setLayoutY(e.getSceneY());
                 runAction();
             });
         this.setCardImageViewDesign();
