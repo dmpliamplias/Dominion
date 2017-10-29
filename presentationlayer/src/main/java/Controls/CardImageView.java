@@ -8,18 +8,18 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class CardButton extends ImageView {
+public class CardImageView extends ImageView {
 
     private Card card;
 
-    public CardButton(Card card) {
+    public CardImageView(Card card) {
         this.card = card;
         this.setOnMouseDragged(e -> {
             this.setLayoutX(e.getSceneX());
             this.setLayoutY(e.getSceneY());
                 runAction();
             });
-        this.setButtonDesign();
+        this.setCardImageViewDesign();
 
     }
 
@@ -36,15 +36,13 @@ public class CardButton extends ImageView {
         }
     }
 
-    private void setButtonDesign(){
+    private void setCardImageViewDesign(){
 
         try {
             Image playC=new Image(card.getFilePath());
-            ImageView iv= new ImageView(playC);
-            iv.setFitHeight(130);
-            iv.setFitWidth(60);
-            //InputStream buttonIcon = new BufferedInputStream(new FileInputStream(card.getFilePath()));
-            //this.setPrefSize(130,60);
+            this.setFitHeight(130);
+            this.setFitWidth(60);
+            this.setPreserveRatio(true);
 
         } catch (Exception e) {
             e.printStackTrace();
