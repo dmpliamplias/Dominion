@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class CardButton extends Button {
+public class CardButton extends ImageView {
 
     private Card card;
 
