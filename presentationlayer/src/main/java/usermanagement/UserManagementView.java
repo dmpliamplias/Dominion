@@ -59,9 +59,6 @@ public class UserManagementView extends View<UserManagementModel> {
 
     @Override
     protected Scene create_GUI() {
-        stage.setHeight(700);
-        stage.setWidth(1000);
-
         // layout
         final VBox root = new VBox();
         root.setSpacing(15);
@@ -69,7 +66,8 @@ public class UserManagementView extends View<UserManagementModel> {
 
         root.getChildren().addAll(addTitle(), addListView(), addHBox());
 
-        final Scene scene = new Scene(root, 700, 1000);
+        // TODO: 31.10.17 why the fuck that shit with the size dont work
+        final Scene scene = new Scene(root, 1200, 1300);
         stage.setScene(scene);
 
         return scene;

@@ -49,7 +49,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
     public void login() {
         view.refreshModel();
-        if (model.getEmail().equals("ga")) goToRegisterView();
+        if (model.getEmail().equals("ga")) goToUserManagementView();
         if (model.getEmail().equals("go")) {
             User u = new User();
             u.setUserEmail("anonymous@dom.ch");
