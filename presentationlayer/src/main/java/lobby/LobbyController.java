@@ -98,7 +98,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private void help(){
 
         //TODO@Manuel help key anpassen
-        view.alert( translator.getString( "lobby.help" ), Alert.AlertType.INFORMATION );
+        view.alert( translator.getString( "lobbyview.help" ), Alert.AlertType.INFORMATION );
 
     }
 
@@ -178,12 +178,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
 
         if (view.cb.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
-            view.alert( translator.getString( "lobby.falseStatement" ), Alert.AlertType.WARNING );
+            view.alert( translator.getString( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cb.setSelected( false );
         }
         if (!view.cb.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
-            view.alert (translator.getString( "lobby.falseStatement" ), Alert.AlertType.WARNING);
+            view.alert (translator.getString( "lobbyview.falseStatement" ), Alert.AlertType.WARNING);
         }
         else if (names.size() < 2) {
             view.alert( translator.getString( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );

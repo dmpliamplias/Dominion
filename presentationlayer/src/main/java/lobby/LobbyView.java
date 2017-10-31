@@ -263,9 +263,9 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption1.setText( getText( "lobbyview.txtOption1" ) );
         this.txtOption2.setText( getText( "lobbyview.txtOption2" ) );
         this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
-        this.btnRanking.setText( getText( "lobby.ranking" ) );
-        this.tpOption2.setText( getText( "lobby.tpOption2" ) );
-        this.btnHelp.setText( getText( "lobby.btnHelp" ) );
+        this.btnRanking.setText( getText( "lobbyview.ranking" ) );
+        this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
+        this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
 
     }
 
