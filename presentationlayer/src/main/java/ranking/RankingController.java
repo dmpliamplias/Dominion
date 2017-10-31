@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
+import javafx.event.ActionEvent;
 
 
 
@@ -27,7 +28,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         initialize();
     }
 
-   
+
+
 
 
     public void initialize() {
@@ -44,7 +46,13 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         } catch (IOException e) {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
+
+        this.view.btnLobby.setOnAction((event) -> {
+            this.goToLobbyView();
+        });
     }
+
+
     ///** @author Murat Kelleci
     //
     public void handleServerAnswer(List<Highscore> highscoreList){
@@ -60,6 +68,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         Stage s = new Stage();
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
+        this.view.stop();
+        view.start();
     }
 
 
