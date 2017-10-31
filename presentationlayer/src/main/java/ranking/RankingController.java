@@ -2,13 +2,11 @@ package ranking;
 
 import java.io.IOException;
 import java.util.List;
-
+import javafx.scene.control.Alert;
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
-
 import base.Controller;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
@@ -28,6 +26,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         serverConnectionService.setRankingController(this);
         initialize();
     }
+
+   
 
 
     public void initialize() {
@@ -51,6 +51,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         model.setHighscores(highscoreList);
         view.bindModeltoView();
     }
+
 
     ///** @author Murat Kelleci
     //

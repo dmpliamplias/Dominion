@@ -54,7 +54,8 @@ public class RankingView extends View<RankingModel> {
             lblRanking = new Label();
             lblRanking.setFont(new Font("Helvetica", 16));
 
-            btnLobby=new Button("loginview.btnGoToLobbyView");
+            btnLobby=new Button();
+
 
 
 
@@ -68,10 +69,9 @@ public class RankingView extends View<RankingModel> {
 
             rankingPosition = new TableColumn();
 
-            bindModeltoView();
 
             this.list.setItems(dataModel);
-            this.list.getItems().addAll();
+            //this.list.getItems().addAll();
 
             final VBox vbox = new VBox();
             vbox.setSpacing(4);
@@ -97,6 +97,7 @@ public class RankingView extends View<RankingModel> {
         this.userNameColumn.setText(getText("registerview.username"));
         this.userHighScore.setText(getText("rangkingview.highscorePoints"));
         this.rankingPosition.setText(getText("rankingview.rankingPosition"));
+        this.btnLobby.setText(getText("loginview.btnGoToLobbyView"));
 
 
 

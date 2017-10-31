@@ -13,6 +13,8 @@ public class RankingContainer extends  Container implements Serializable {
         super(Methods.Rankings);
     }
 
+
+
     public List<Highscore> getHighScores() {
         return highScores;
     }
