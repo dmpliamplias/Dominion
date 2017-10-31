@@ -1,11 +1,9 @@
 package Game;
 
-import app.PLServiceLocator;
+import util.PLServiceLocator;
 import app.SeverConnectionServiceTest;
 import com.weddingcrashers.server.Server;
-import com.weddingcrashers.servermodels.ChatContainer;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

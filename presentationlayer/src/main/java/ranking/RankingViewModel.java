@@ -16,8 +16,6 @@ public class RankingViewModel {
     protected RankingViewModel(){
         this.name= new SimpleStringProperty();
         this.points=new SimpleIntegerProperty();
-
-
     }
 
     public String getName() {

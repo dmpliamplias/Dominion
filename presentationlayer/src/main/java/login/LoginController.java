@@ -19,7 +19,7 @@ import usermanagement.UserManagementView;
 
 import java.io.IOException;
 
-import static app.PLServiceLocator.getPLServiceLocator;
+import static util.PLServiceLocator.getPLServiceLocator;
 import static javafx.scene.control.Alert.AlertType.WARNING;
 
 /**
@@ -49,6 +49,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
     public void login() {
         view.refreshModel();
+        if (model.getEmail().equals("ga")) goToRegisterView();
         if (model.getEmail().equals("go")) {
             User u = new User();
             u.setUserEmail("anonymous@dom.ch");

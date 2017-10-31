@@ -1,7 +1,7 @@
 package connection;
 
-import app.PLServiceLocator;
-import app.ServerConnectionService;
+import util.PLServiceLocator;
+import util.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.server.Server;
 import com.weddingcrashers.service.ServiceLocator;

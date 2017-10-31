@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import splashscreen.SplashScreenController;
 import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
+import util.PLServiceLocator;
+import util.ServerConnectionService;
 
 import static com.weddingcrashers.service.ServiceLocator.getLogger;
 

@@ -1,7 +1,7 @@
 package base;
 
-import app.PLServiceLocator;
-import app.ServerConnectionService;
+import util.PLServiceLocator;
+import util.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 

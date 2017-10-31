@@ -1,4 +1,4 @@
-package app;
+package util;
 
 import com.weddingcrashers.model.User;
 

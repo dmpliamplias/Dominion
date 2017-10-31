@@ -3,7 +3,7 @@ package lobby;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
-import app.ViewUtils;
+import util.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
