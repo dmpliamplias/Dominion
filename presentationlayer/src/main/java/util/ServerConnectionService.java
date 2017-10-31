@@ -124,7 +124,6 @@ public class ServerConnectionService extends Thread{
         }
     }
 
-    // TODO: 30.09.2017 Michel displays correctly?
     private void displayError(String msg){
         Platform.runLater(()->{
             Alert alert = new Alert(Alert.AlertType.ERROR, msg);

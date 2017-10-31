@@ -14,8 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.tools.Tool;
-
 /**
  *  author Michel Schlatter
  *  */
@@ -40,7 +38,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField txtOption2;
     protected TextField txtOption2Statement;
     protected Button btnRanking;
-    protected CheckBox cb;
+    protected CheckBox cbFinishPointCards;
     protected Button btnHelp;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
@@ -172,10 +170,10 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption2Statement.setMaxWidth( 200 );
         this.txtOption2Statement.setTooltip( tpOption2 );
 
-        this.cb = new CheckBox(  );
+        this.cbFinishPointCards = new CheckBox(  );
 
 
-        hBoxOption2.getChildren().addAll( txtOption2, txtOption2Statement, cb );
+        hBoxOption2.getChildren().addAll( txtOption2, txtOption2Statement, cbFinishPointCards);
 
 
 

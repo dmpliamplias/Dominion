@@ -2,6 +2,7 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.servermodels.GameSettings;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;
 
@@ -13,7 +14,11 @@ import java.util.List;
 public class GameManager extends Manager {
     private static final String PATH = "/translation/trans";
     private static List<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
-    
+    private static List<Client> players;
+    private static boolean gameRunning;
+
+    private static GameSettings gameSettings;
+
     public GameManager(Client client){
         super(client);
     }
@@ -257,6 +262,30 @@ public class GameManager extends Manager {
         }
 
        return 0;
+    }
+
+    public static List<Client> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(List<Client> players) {
+        GameManager.players = players;
+    }
+
+    public static boolean isGameRunning() {
+        return gameRunning;
+    }
+
+    public static void setGameRunning(boolean gameRunning) {
+        GameManager.gameRunning = gameRunning;
+    }
+
+    public static GameSettings getGameSettings() {
+        return gameSettings;
+    }
+
+    public static void setGameSettings(GameSettings gameSettings) {
+        GameManager.gameSettings = gameSettings;
     }
 
     private enum CardType{

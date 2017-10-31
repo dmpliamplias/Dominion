@@ -44,7 +44,6 @@ public class Client extends Thread {
     @Override
     public void run() {
         try {
-            // TODO: 06.10.2017 migi check if while is needed => else the run methode is after one run finished ?! 
             while(_clientSocket != null && ! _clientSocket.isClosed()) {
                 ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
                 Container container = (Container) objectInputStream.readObject();
@@ -84,7 +83,7 @@ public class Client extends Thread {
             _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
         }else if(c.getMethod() == Methods.StartGame){
             LobbyContainer lc = (LobbyContainer)c;
-            _lobbyManager.startGame(lc.getClientIds_startGame());
+            _lobbyManager.startGame(lc);
         }
         else if(c.getMethod() == Methods.Lobby_Players){
             LobbyContainer lc = (LobbyContainer)c;

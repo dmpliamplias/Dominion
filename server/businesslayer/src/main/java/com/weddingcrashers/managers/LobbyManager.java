@@ -3,6 +3,7 @@ package com.weddingcrashers.managers;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.Server;
+import com.weddingcrashers.servermodels.GameSettings;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.LobbyContainer;
 import com.weddingcrashers.servermodels.Methods;
@@ -32,19 +33,29 @@ public class LobbyManager extends Manager{
         }
     }
 
-    public void startGame(ArrayList<Integer> clientIds){
+    public void startGame(LobbyContainer lcReceived){
         LobbyContainer lc = new LobbyContainer(Methods.StartGame);
+        ArrayList<Integer> clientIds = lcReceived.getClientIds_startGame();
+        GameSettings gs = lcReceived.getGameSettings();
+
         int lowestClientId = Collections.min(clientIds);
 
+        ArrayList<Client> players = new ArrayList<>();
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
                 if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
                     c.setActive(c.getClientId() == lowestClientId); // first registered can start first.
                     lc.setYourTurn(c.isActive());
+                    players.add(c);
+                    // TODO: 31.10.2017  Migi eventuell jedem client noch die anderen spieler schicken? 
                     ServerUtils.sendObject(c, lc);
                 }
             }
         }
+        
+        GameManager.setGameSettings(lc.getGameSettings());
+        GameManager.setPlayers(players);
+        GameManager.setGameRunning(true);
     }
 
     public static LobbyContainer getUsers(Client c){

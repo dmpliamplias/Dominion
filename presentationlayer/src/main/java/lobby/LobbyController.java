@@ -105,6 +105,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private void logout(){
 
         //TODO Migi User auf Null setzen
+        plServiceLocator.setUser(null);
 
         LoginModel model = new LoginModel();
         LoginView view = new LoginView( this.view.getStage(), model );
@@ -177,12 +178,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
 
-        if (view.cb.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
+        if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
             view.alert( translator.getString( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
-            view.cb.setSelected( false );
+            view.cbFinishPointCards.setSelected( false );
         }
-        if (!view.cb.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
+        if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
             view.alert (translator.getString( "lobbyview.falseStatement" ), Alert.AlertType.WARNING);
         }
         else if (names.size() < 2) {
@@ -196,8 +197,13 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                 clientIds.add( clientId );
             }
 
+            Integer rounds = (Integer)view.choiceBox.getSelectionModel().getSelectedItem();
             LobbyContainer lc = new LobbyContainer( Methods.StartGame );
             lc.setClientIds_startGame( clientIds );
+            GameSettings gs = new GameSettings();
+            gs.setPointCards(view.cbFinishPointCards.isSelected());
+            gs.setFinishAfterRounds(rounds);
+            lc.setGameSettings(gs);
 
             try {
                 serverConnectionService.sendObject( lc );
