@@ -15,17 +15,35 @@ import javafx.stage.StageStyle;
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
  * All rights reserved. This code 5 is licensed under the terms of the BSD 3-clause license
  * For more details please see the file "license.txt").
- *  @author Brad Richards, small changes from Michel Schlatter
+ *
+ * @author Brad Richards
  */
-
 public class SplashScreenView extends View<SplashScreenModel> {
+
+    // ---- Members
+
+    /** The progess bar. */
     ProgressBar progress;
+    /** The status label. */
     private Label lblStatus;
 
+
+    // ---- Constructor
+
+    /**
+     * Constructor
+     *
+     * @param stage the stage.
+     * @param model the model.
+     */
     public SplashScreenView(Stage stage, SplashScreenModel model) {
         super(stage, model);
-        stage.initStyle(StageStyle.TRANSPARENT); // also undecorated
+
+        stage.initStyle(StageStyle.TRANSPARENT);
     }
+
+
+    // ---- Methods
 
     @Override
     protected Scene create_GUI() {
@@ -41,16 +59,17 @@ public class SplashScreenView extends View<SplashScreenModel> {
         bottomBox.getChildren().add(progress);
         root.setBottom(bottomBox);
 
-        Scene scene = new Scene(root, 300, 300, Color.TRANSPARENT);
+        Scene scene = new Scene(root, 500, 500, Color.TRANSPARENT);
         scene.getStylesheets().addAll(this.getClass().getResource("/splashscreen/splash.css").toExternalForm());
 
         return scene;
     }
 
-    //TODO anpassen bei Bedarf?
+    @Override
     protected void setTexts() {
-
+        // nop
     }
+
 }
 
 

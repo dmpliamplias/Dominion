@@ -2,7 +2,7 @@
     -fx-background-image: url("./splash_background.png");
     -fx-background-color: transparent;
     -fx-background-repeat: stretch;
-    -fx-background-size: 300 300;
+    -fx-background-size: 400 400;
     -fx-background-position: center center;
 }
 

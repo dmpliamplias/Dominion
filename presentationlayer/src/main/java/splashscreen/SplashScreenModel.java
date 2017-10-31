@@ -4,43 +4,55 @@ import base.Model;
 import com.weddingcrashers.service.ServiceLocator;
 import javafx.concurrent.Task;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Framework for professional applications:
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
  * All rights reserved. This code 5 is licensed under the terms of the BSD 3-clause license
  * For more details please see the file "license.txt").
- *  @author Brad Richards, small changes from Michel Schlatter
+ * 
+ * @author Brad Richards
  */
 public class SplashScreenModel extends Model {
-    ServiceLocator serviceLocator;
 
+    // ---- Members
+    
+    /** The service locator. */
+    private ServiceLocator serviceLocator;
+
+    
+    // ---- Constructor
+
+    /**
+     * Constructor.
+     */
     public SplashScreenModel() {
         super();
+        
+        this.serviceLocator = ServiceLocator.getServiceLocator();
     }
 
-    // A task is a JavaFX class that implements Runnable. Tasks are designed to
-    // have attached listeners, which we can use to monitor their progress.
     final Task<Void> initializer = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+            // initial progress update
+            updateProgress(1, 3);
 
-            // Create the service locator to hold our resources
-            serviceLocator = ServiceLocator.getServiceLocator();
+            // db start progress update
+            serviceLocator.startDatabase();
+            updateProgress(2, 3);
 
-            //this.updateProgress(1,  6);
-            //String language = serviceLocator.getConfiguration().getOption("Language");
-            //serviceLocator.setTranslator(new Translator(language));
-
-
-            // delete this and add real code!
-            Integer i = 0;
-            for(; i < 10000; i++) {
-                    this.updateProgress(i, 10000);
-            }
+            // pseudo 1.5 second
+            sleep(1500);
+            updateProgress(3, 3);
 
             return null;
         }
     };
+
+
+    // ---- Methods
 
     public void initialize() {
         new Thread(initializer).start();
