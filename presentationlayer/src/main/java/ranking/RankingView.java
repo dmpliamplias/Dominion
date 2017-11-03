@@ -44,8 +44,8 @@ public class RankingView extends View<RankingModel> {
             //todo murat du löli ich korrigiers der und du machsch es wiedeer kaputt
 
 
-            this.stage.setWidth(300);
-            this.stage.setHeight(500);
+            this.stage.setWidth(1000);
+            this.stage.setHeight(600);
 
 
             list = new ListView();

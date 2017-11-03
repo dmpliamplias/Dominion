@@ -3,6 +3,7 @@ package lobby;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
+import javafx.stage.Stage;
 import util.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.model.User;
@@ -243,8 +244,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     //@author Murat Kelleci am 24.10.2017
 
     private void goToRankingView() {
+        Stage s = new Stage(  );
         RankingModel model = new RankingModel();
-        RankingView view = new RankingView(this.view.getStage(), model);
+        RankingView view = new RankingView(s, model);
         RankingController rankingController = new RankingController(model, view);
         this.view.stop();
         view.start();
