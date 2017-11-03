@@ -22,7 +22,6 @@ public class LobbyView extends View<LobbyModel> {
 
     protected ListView<String> lvPlayers;
     protected Button btnStart;
-    protected Button btnGameView;
     protected TextField textFieldChat;
     protected Button btnChatSend;
     protected VBox chatContent;
@@ -60,7 +59,7 @@ public class LobbyView extends View<LobbyModel> {
 
 
         //Scene and stage settings
-        Scene scene = new Scene(root, 1200, 900);
+        Scene scene = new Scene(root, 1150, 850);
         scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable( false );
@@ -83,11 +82,6 @@ public class LobbyView extends View<LobbyModel> {
     public VBox addGameSettings(){
 
         VBox vBox = new VBox();
-        // Test button
-        btnGameView = new Button("GameView");
-
-        vBox.getChildren().addAll( btnGameView );
-
         return vBox;
     }
 
@@ -98,7 +92,7 @@ public class LobbyView extends View<LobbyModel> {
 
         this.textFieldGameSettings = new TextField(  );
         this.textFieldGameSettings.setEditable( false );
-        this.textFieldGameSettings.setMaxWidth( 850 );
+        this.textFieldGameSettings.setMaxWidth( 860 );
         this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
 
         vBox.getChildren().addAll( textFieldGameSettings );
@@ -134,21 +128,23 @@ public class LobbyView extends View<LobbyModel> {
         // Option 1
 
         HBox hBoxOption1 = new HBox(  );
+        hBoxOption1.setPrefWidth( 500 );
         hBoxOption1.setSpacing( 70 );
-        hBoxOption1.setAlignment( Pos.CENTER_LEFT );
+        hBoxOption1.setAlignment( Pos.CENTER );
 
 
         this.txtOption1 = new TextField(  );
         this.txtOption1.setEditable( false );
-        this.txtOption1.setMaxWidth( 200 );
+        this.txtOption1.setPrefWidth( 216 );
 
 
         this.textFieldRound = new TextField(  );
         this.textFieldRound.setEditable( false );
-        this.textFieldRound.setMaxWidth( 200 );
+        this.textFieldRound.setPrefWidth( 216 );
 
         this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
-            10,11,12,13,14,15,16,17,18,19,20) );
+            "",10,11,12,13,14,15,16,17,18,19,20) );
+        this.choiceBox.setPrefSize( 20,20 );
 
 
         hBoxOption1.getChildren().addAll( txtOption1,textFieldRound,choiceBox );
@@ -156,21 +152,23 @@ public class LobbyView extends View<LobbyModel> {
         // Option 2
 
         HBox hBoxOption2 = new HBox(  );
+        hBoxOption2.setPrefWidth( 500 );
         hBoxOption2.setSpacing( 70 );
-        hBoxOption2.setAlignment( Pos.CENTER_LEFT );
+        hBoxOption2.setAlignment( Pos.CENTER );
 
         this.txtOption2 = new TextField(  );
         this.txtOption2.setEditable( false );
-        this.txtOption2.setMaxWidth( 200 );
+        this.txtOption2.setPrefWidth( 216 );
 
         this.tpOption2 = new Tooltip(  );
 
         this.txtOption2Statement = new TextField(  );
         this.txtOption2Statement.setEditable( false );
-        this.txtOption2Statement.setMaxWidth( 200 );
+        this.txtOption2Statement.setPrefWidth( 216 );
         this.txtOption2Statement.setTooltip( tpOption2 );
 
         this.cbFinishPointCards = new CheckBox(  );
+        this.cbFinishPointCards.setPrefSize( 50,50 );
 
 
         hBoxOption2.getChildren().addAll( txtOption2, txtOption2Statement, cbFinishPointCards);
@@ -180,19 +178,20 @@ public class LobbyView extends View<LobbyModel> {
         // Buttons for GameLobby
 
         HBox hBoxButtons = new HBox(  );
-        hBoxButtons.setAlignment( Pos.CENTER_LEFT );
-        hBoxButtons.setSpacing(60);
+        hBoxButtons.setPrefWidth( 500 );
+        hBoxButtons.setAlignment( Pos.CENTER );
+        hBoxButtons.setSpacing(20);
         btnRanking = new Button(  );
-        btnRanking.setMaxWidth( 300 );
+        btnRanking.setPrefWidth( 140 );
         btnStart = new Button();
-        btnStart.setMaxWidth( 300 );
+        btnStart.setPrefWidth( 140 );
         this.tp = new Tooltip(  );
         btnStart.setTooltip(tp);
         btnLogout = new Button( );
-        btnLogout.setMaxWidth( 300 );
+        btnLogout.setPrefWidth( 140 );
         btnHelp = new Button(  );
-        btnHelp.setMaxWidth( 300 );
-        hBoxButtons.getChildren().addAll( btnStart, btnLogout, btnRanking, btnHelp );
+        btnHelp.setPrefWidth( 140 );
+        hBoxButtons.getChildren().addAll( btnStart, btnHelp, btnLogout, btnRanking  );
 
         vBoxGameSettings.getChildren().addAll(hBoxOption1,hBoxOption2, hBoxButtons );
 
@@ -220,7 +219,7 @@ public class LobbyView extends View<LobbyModel> {
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
-        this.textFieldChat.setPrefSize( 450,50 );
+        this.textFieldChat.setPrefSize( 600,50 );
 
         this.txtChat = new TextField(  );
         this.txtChat.setEditable( false );
@@ -232,11 +231,13 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 900, 210 );
+        scroll.setPrefSize( 860,200 );
         scroll.setFitToHeight(true);
         scroll.setFitToWidth(true);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
+        scroll.setFitToHeight( true );
+        scroll.setFitToWidth( true );
         gridPane.add(scroll, 0, 1);
         gridPane.add( hBox, 0,2 );
         gridPane.add( txtChat, 0,0 );

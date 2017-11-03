@@ -66,10 +66,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                        sendMessage();
         }  });
 
-        view.btnGameView.setOnAction( (event) -> {
-            goToGameView();
-        } );
-
         view.btnChatSend.setOnAction( event -> {
             sendMessage();
         } );
