@@ -40,14 +40,23 @@ public class LobbyManager extends Manager{
 
         int lowestClientId = Collections.min(clientIds);
 
+        HashMap<Integer, User> users = new HashMap<Integer, User>();
+        for(Integer clientId : clientIds) {
+            for (Client c : client.getAllClients()) {
+                if (clientId.equals(c.getClientId()) && c.getViewStatus() == ViewStatus.Lobby) {
+                   users.put(c.getClientId(), c.getUser());
+                }
+            }
+        }
+
         ArrayList<Client> players = new ArrayList<>();
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
                 if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
                     c.setActive(c.getClientId() == lowestClientId); // first registered can start first.
                     lc.setYourTurn(c.isActive());
+                    lc.setUserNames(users);
                     players.add(c);
-                    // TODO: 31.10.2017  Migi eventuell jedem client noch die anderen spieler schicken? 
                     ServerUtils.sendObject(c, lc);
                 }
             }

@@ -28,6 +28,22 @@ public class GameManager extends Manager {
         // TODO: 03.10.2017 add card set here and delete cards from the list, when user pulls it. 
     }
 
+    private void pullInitalCardSetForEachClient(){
+     for(Client player : players){
+         DominionSet set = new DominionSet();
+         ArrayList<Card> pullStack = new ArrayList<Card>();
+
+         for(int i = 0; i < 7; i++){
+             pullStack.add(this.getCardByMoneyType(MoneyType.Copper));
+         }
+         for(int i = 0; i < 3; i++){
+             pullStack.add(this.getCardByPointCardType(PointCardType.Estate));
+         }
+         set.setPullStack(pullStack);
+         set.pullHandStack();
+         player.setDominionSet(set);
+     }
+    }
 
     private void afterGameTurn(GameContainer container){
       int nxtId = getNextTurnClientId();
@@ -168,7 +184,7 @@ public class GameManager extends Manager {
             kc3.setCost(4);
             kc3.setValue(3);
             kc3.setSpecialAction(SpecialAction.RemoveCopperGet3Coins);
-            kc3.setFilePath("Geldverleiher.jpg");
+            kc3.setFilePath("Geldverleiher_{0}.jpg");
             kc3.setName("Geldverleiher");
             kc3.setKingCardType(KingCardType.Special);
 
@@ -234,6 +250,56 @@ public class GameManager extends Manager {
 
     }
 
+    public Card getCardByName(String name){
+        Card result = null;
+        for(Card c : unusedCards){
+            if(c.getName().equals(name)){
+                result = c;
+                unusedCards.remove(c);
+            }
+        }
+        return result;
+    }
+
+
+    public <T extends Card> T getCardByClass(Class<T> cls){
+        T result = null;
+        for(Card c : unusedCards){
+            if(cls.isInstance(c)){
+                result = (T)c;
+                unusedCards.remove(c);
+            }
+        }
+        return result;
+    }
+
+    public PointCard getCardByPointCardType(PointCardType type){
+        PointCard result = null;
+        for(Card c : unusedCards){
+            if(c instanceof  PointCard){
+                PointCard card = (PointCard)c;
+                if(card.getPointCardType() == type) {
+                    unusedCards.remove(c);
+                    result = card;
+                }
+            }
+        }
+        return result;
+    }
+
+    public MoneyCard getCardByMoneyType(MoneyType type){
+        MoneyCard result = null;
+        for(Card c : unusedCards){
+            if(c instanceof  MoneyCard){
+                MoneyCard card = (MoneyCard)c;
+                if(card.getMoneyType() == type) {
+                    unusedCards.remove(c);
+                    result = card;
+                }
+            }
+        }
+        return result;
+    }
 
 
     private static int getNumberOfCards(int players, CardType cardType){

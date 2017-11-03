@@ -2,6 +2,7 @@ package com.weddingcrashers.businessmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author  Michel Schlatter
@@ -9,32 +10,35 @@ import java.util.ArrayList;
 public class DominionSet implements Serializable {
     ArrayList<Card> trayStack; // Ablagestappel
     ArrayList<Card> pullStack; // Ziehstappel
+    ArrayList<Card> handStack; // Ziehstappel
+
     int clientId;
 
-    public ArrayList<Card> getTrayStack() {
-        return trayStack;
+    // ziehen bis keine Karten mehr auf Ziehstapel, dann ablagestappel zurück und mischeln
+    public void pullHandStack(){
+        int toCount = handStack.size() - 5;
+
+        for(int i = toCount; i < 0; i++){
+            if(pullStack.size() > 0){
+                Card c = pullStack.get(0);
+                handStack.add(c);
+                pullStack.remove(c);
+            }else{
+              fillPullStack();
+              i--;
+            }
+        }
+
+
     }
 
-    public void setTrayStack(ArrayList<Card> trayStack) {
-        this.trayStack = trayStack;
+    private void fillPullStack(){
+        for(Card c : trayStack){
+            pullStack.add(c);
+            trayStack.remove(c);
+        }
+        Collections.shuffle(pullStack);
     }
-
-    public ArrayList<Card> getPullStack() {
-        return pullStack;
-    }
-
-    public void setPullStack(ArrayList<Card> pullStack) {
-        this.pullStack = pullStack;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
-
 
     public static ArrayList<MoneyCard> filterMoneyCards(ArrayList<Card> cards){
         ArrayList<MoneyCard> list = new ArrayList<MoneyCard>();
@@ -66,4 +70,35 @@ public class DominionSet implements Serializable {
         return list;
     }
 
+    public ArrayList<Card> getTrayStack() {
+        return trayStack;
+    }
+
+    public void setTrayStack(ArrayList<Card> trayStack) {
+        this.trayStack = trayStack;
+    }
+
+    public ArrayList<Card> getPullStack() {
+        return pullStack;
+    }
+
+    public void setPullStack(ArrayList<Card> pullStack) {
+        this.pullStack = pullStack;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public ArrayList<Card> getHandStack() {
+        return handStack;
+    }
+
+    public void setHandStack(ArrayList<Card> handStack) {
+        this.handStack = handStack;
+    }
 }

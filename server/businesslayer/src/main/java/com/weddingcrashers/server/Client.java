@@ -1,5 +1,6 @@
 package com.weddingcrashers.server;
 
+import com.weddingcrashers.businessmodels.DominionSet;
 import com.weddingcrashers.managers.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
@@ -20,6 +21,7 @@ public class Client extends Thread {
     private int _clientId;
     private boolean isActive; // his turn;
     private User user;
+    private DominionSet dominionSet;
 
     private ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
     private ArrayList<Client> otherClients;
@@ -139,5 +141,13 @@ public class Client extends Thread {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public DominionSet getDominionSet() {
+        return dominionSet;
+    }
+
+    public void setDominionSet(DominionSet dominionSet) {
+        this.dominionSet = dominionSet;
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LobbyContainer extends Container implements Serializable {
-    HashMap<Integer, User> users;
+    HashMap<Integer, User> users; // clientId, User
     ArrayList<Integer> clientIds_startGame;
     boolean yourTurn;
     GameSettings gameSettings;
