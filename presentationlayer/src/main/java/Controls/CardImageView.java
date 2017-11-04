@@ -4,7 +4,8 @@ import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.PointCard;
-import javafx.scene.control.Button;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -31,7 +32,7 @@ public class CardImageView extends ImageView {
             MoneyCard mc= (MoneyCard)card;
 
         }else if(this.card instanceof PointCard){
-            PointCard mc= (PointCard)card;
+            PointCard pc= (PointCard)card;
 
         }
     }
@@ -39,7 +40,14 @@ public class CardImageView extends ImageView {
     private void setCardImageViewDesign(){
 
         try {
-            Image playC=new Image(card.getFilePath());
+            String path = card.getFilePath();
+            Translator.Language lng = ServiceLocator.getServiceLocator().getTranslator().getCurrentLanguage();
+            String code = ServiceLocator.getServiceLocator().getTranslator().getLanguageCode(lng);
+
+            code = code.replace("de_","");
+            path = path.replace("{0}", code.toUpperCase());
+            // de_CH =>
+            Image playC=new Image(this.getClass().getResourceAsStream("/Game/mini"));
             this.setFitHeight(130);
             this.setFitWidth(60);
             this.setPreserveRatio(true);

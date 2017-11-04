@@ -39,6 +39,11 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnRanking;
     protected CheckBox cbFinishPointCards;
     protected Button btnHelp;
+    protected HBox hBoxOption2;
+    protected HBox hBoxOption1;
+    protected VBox vBoxGameSettings;
+    protected TextField txtWait;
+    protected VBox vBoxAddMenu;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -87,18 +92,18 @@ public class LobbyView extends View<LobbyModel> {
 
     public VBox addMenu(){
 
-        VBox vBox = new VBox(  );
-        vBox.setAlignment( Pos.TOP_CENTER );
+        this.vBoxAddMenu = new VBox(  );
+        vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
         this.textFieldGameSettings = new TextField(  );
         this.textFieldGameSettings.setEditable( false );
         this.textFieldGameSettings.setMaxWidth( 860 );
         this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
 
-        vBox.getChildren().addAll( textFieldGameSettings );
+        vBoxAddMenu.getChildren().addAll( textFieldGameSettings );
 
 
-        return vBox;
+        return vBoxAddMenu;
     }
 
     public VBox addClientList(){
@@ -120,14 +125,14 @@ public class LobbyView extends View<LobbyModel> {
 
     public VBox addVBoxGameSettings(){
 
-        VBox vBoxGameSettings = new VBox(  );
+       this.vBoxGameSettings = new VBox(  );
         vBoxGameSettings.setSpacing( 100 );
         vBoxGameSettings.setAlignment( Pos.CENTER );
 
 
         // Option 1
 
-        HBox hBoxOption1 = new HBox(  );
+        this.hBoxOption1 = new HBox(  );
         hBoxOption1.setPrefWidth( 500 );
         hBoxOption1.setSpacing( 70 );
         hBoxOption1.setAlignment( Pos.CENTER );
@@ -151,7 +156,7 @@ public class LobbyView extends View<LobbyModel> {
 
         // Option 2
 
-        HBox hBoxOption2 = new HBox(  );
+        this.hBoxOption2 = new HBox(  );
         hBoxOption2.setPrefWidth( 500 );
         hBoxOption2.setSpacing( 70 );
         hBoxOption2.setAlignment( Pos.CENTER );
@@ -182,16 +187,16 @@ public class LobbyView extends View<LobbyModel> {
         hBoxButtons.setAlignment( Pos.CENTER );
         hBoxButtons.setSpacing(20);
         btnRanking = new Button(  );
-        btnRanking.setPrefWidth( 140 );
+        btnRanking.setPrefWidth( 190 );
         btnStart = new Button();
-        btnStart.setPrefWidth( 140 );
+        btnStart.setPrefWidth( 190 );
         this.tp = new Tooltip(  );
         btnStart.setTooltip(tp);
         btnLogout = new Button( );
-        btnLogout.setPrefWidth( 140 );
+        btnLogout.setPrefWidth( 190 );
         btnHelp = new Button(  );
-        btnHelp.setPrefWidth( 140 );
-        hBoxButtons.getChildren().addAll( btnStart, btnHelp, btnLogout, btnRanking  );
+        btnHelp.setPrefWidth( 190 );
+        hBoxButtons.getChildren().addAll( btnStart/*, btnHelp*/, btnRanking, btnLogout  );
 
         vBoxGameSettings.getChildren().addAll(hBoxOption1,hBoxOption2, hBoxButtons );
 
@@ -288,5 +293,32 @@ public class LobbyView extends View<LobbyModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
+    public void setWaitText(){
+
+        //TODO Manuel Methode schöner machen
+
+        this.txtWait = new TextField( "test" );
+        this.txtWait.setPrefSize(100,200);
+        this.txtWait.setStyle( "-fx-border-color: crimson" );
+        this.txtWait.setStyle( "-fx-font-size: 30px" );
+        getvBoxAddMenu().getChildren().add( txtWait );
+
+    }
+
+    public HBox gethBoxOption2() {
+        return hBoxOption2;
+    }
+
+    public HBox gethBoxOption1() {
+        return hBoxOption1;
+    }
+
+    public VBox getvBoxGameSettings() {
+        return vBoxGameSettings;
+    }
+
+    public VBox getvBoxAddMenu() {
+        return vBoxAddMenu;
+    }
 }
 
