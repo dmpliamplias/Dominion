@@ -61,23 +61,7 @@ public class Translator {
     Translator(Language language) {
         translations = new Properties();
 
-        String languageAbbrev = null;
-        switch (language) {
-            case GERMAN:
-                currentLanguage = GERMAN;
-                languageAbbrev = "de";
-                break;
-            case SWISS_GERMAN:
-                currentLanguage = SWISS_GERMAN;
-                languageAbbrev = "de_CH";
-                break;
-            case ENGLISH:
-                currentLanguage = ENGLISH;
-                languageAbbrev = "en";
-                break;
-            default:
-                break;
-        }
+        String languageAbbrev = getLanguageCode(language);
 
         final InputStream in = getClass().getResourceAsStream(PATH + "_" + languageAbbrev + SUFFIX);
         try {
@@ -86,6 +70,33 @@ public class Translator {
             logger.warning("Could not load translation for" + language.name().toLowerCase());
         }
         logger.info("Loaded resources for " + language.name().toLowerCase());
+    }
+
+    public String getLanguageCode(Language language){
+        String res= null;
+        switch (language) {
+            case GERMAN:
+                currentLanguage = GERMAN;
+                res = "de";
+                break;
+            case SWISS_GERMAN:
+                currentLanguage = SWISS_GERMAN;
+                res = "de_CH";
+                break;
+            case ENGLISH:
+                currentLanguage = ENGLISH;
+                res = "en";
+                break;
+            default:
+                res = "de";
+                break;
+        }
+        return res;
+
+    }
+
+    public Language getCurrentLanguage() {
+        return currentLanguage;
     }
 
     /**

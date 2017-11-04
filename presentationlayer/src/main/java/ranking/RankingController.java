@@ -29,6 +29,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         super(model, view);
         serverConnectionService.setRankingController(this);
         initialize();
+        getMockPersons();
     }
 
 
