@@ -12,6 +12,10 @@ import javafx.scene.image.ImageView;
 import java.io.Serializable;
 
 
+   //**
+   //@author Murat Kelleci*/ 20.10.17-04.11.2017
+
+
 public class CardImageView extends ImageView {
 
     private Card card;
