@@ -85,6 +85,9 @@ public class GameManager extends Manager {
         Collections.shuffle(cardDeck);
     }
 
+    /**
+     * @author Michel Schlatter
+     */
 
     // jeder spieler bekommt 7 kupfer und 3 anwesen (Pointcards), Estate
 
