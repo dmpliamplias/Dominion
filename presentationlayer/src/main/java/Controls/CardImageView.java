@@ -48,9 +48,9 @@ public class CardImageView extends ImageView {
 
         try {
             String path = card.getFilePath();
-            Translator tl = ServiceLocator.getServiceLocator().getTranslator();
-            Translator.Language lang =  tl.getCurrentLanguage();
-            String code = tl.getLanguageCode(lang);
+            Translator tr = ServiceLocator.getServiceLocator().getTranslator();
+            Translator.Language lang =  tr.getCurrentLanguage();
+            String code = tr.getLanguageCode(lang);
 
             code = code.replace("de_", "");
             path = path.replace("{0}", code.toUpperCase());
