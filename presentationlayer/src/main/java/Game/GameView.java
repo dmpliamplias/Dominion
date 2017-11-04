@@ -11,6 +11,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import java.io.File;
+
+
 
 
 public class GameView extends View<GameModel> {
@@ -29,21 +39,136 @@ public class GameView extends View<GameModel> {
     }
 
     /**
-     *  author Manuel Wirz
+     *  author Vanessa Cajochen
      *  */
 
     public Scene create_GUI(){
-
-
-        // root settings
-
         BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 1500, 1500);
+        Scene scene = new Scene(root, 1000, 600);
         scene.getStylesheets().addAll(this.getClass().getResource("/Game/GameView.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setFullScreen( false );
-        stage.setTitle( "Dominion" );
+        GridPane gp = new GridPane();
+        root.setCenter(gp);
 
+
+        ColumnConstraints column = new ColumnConstraints(115);
+        ColumnConstraints column1 = new ColumnConstraints(115);
+        ColumnConstraints column2 = new ColumnConstraints(70);
+        ColumnConstraints column3 = new ColumnConstraints(100);
+        ColumnConstraints column4 = new ColumnConstraints(100);
+        ColumnConstraints column5 = new ColumnConstraints(100);
+        ColumnConstraints column6 = new ColumnConstraints(100);
+        ColumnConstraints column7 = new ColumnConstraints(70);
+        ColumnConstraints column8 = new ColumnConstraints(115);
+        ColumnConstraints column9 = new ColumnConstraints(115);
+        gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6, column7, column8, column9);
+
+
+
+        // Creating 30 rows
+        for (int i = 0; i<20;i++){
+            RowConstraints row = new RowConstraints(30);
+            gp.getRowConstraints().add(row);
+        }
+
+        Image kupfer = new Image(getClass().getResourceAsStream("\\mini\\kupfer_DE.png"));
+        ImageView imgVkupfer = new ImageView(kupfer);
+        imgVkupfer.setFitHeight(60);
+        imgVkupfer.setFitWidth(70);
+        gp.setConstraints(imgVkupfer, 2, 2);
+        gp.setRowSpan(imgVkupfer, 2);
+
+        Image silber  = new Image(getClass().getResourceAsStream("\\mini\\silber_DE.png"));
+        ImageView imgVsilber = new ImageView(silber);
+        imgVsilber.setFitHeight(60);
+        imgVsilber.setFitWidth(70);
+        gp.setConstraints(imgVsilber, 2, 4);
+        gp.setRowSpan(imgVsilber, 2);
+
+        Image gold = new Image(getClass().getResourceAsStream("\\mini\\gold_DE.png"));
+        ImageView imgVgold = new ImageView(gold);
+        imgVgold.setFitHeight(60);
+        imgVgold.setFitWidth(70);
+        gp.setConstraints(imgVgold, 2, 6);
+        gp.setRowSpan(imgVgold, 2);
+
+        Image schmiede = new Image(getClass().getResourceAsStream("\\mini\\schmiede_DE.png"));
+        ImageView imgVschmiede = new ImageView(schmiede);
+        imgVschmiede.setFitHeight(90);
+        imgVschmiede.setFitWidth(100);
+        gp.setConstraints(imgVschmiede, 3, 2);
+        gp.setRowSpan(imgVschmiede, 3);
+
+        Image laboratorium = new Image(getClass().getResourceAsStream("\\mini\\laboratorium_DE.png"));
+        ImageView imgVlaboratorium = new ImageView(laboratorium);
+        imgVlaboratorium.setFitHeight(90);
+        imgVlaboratorium.setFitWidth(100);
+        gp.setConstraints(imgVlaboratorium, 4, 2);
+        gp.setRowSpan(imgVlaboratorium, 3);
+
+        Image jahrmarkt = new Image(getClass().getResourceAsStream("\\mini\\jahrmarkt_DE.png"));
+        ImageView imgVjahrmarkt = new ImageView(jahrmarkt);
+        imgVjahrmarkt.setFitHeight(90);
+        imgVjahrmarkt.setFitWidth(100);
+        gp.setConstraints(imgVjahrmarkt, 5, 2);
+        gp.setRowSpan(imgVjahrmarkt, 3);
+
+        Image markt = new Image(getClass().getResourceAsStream("\\mini\\markt_DE.png"));
+        ImageView imgVmarkt = new ImageView(markt);
+        imgVmarkt.setFitHeight(90);
+        imgVmarkt.setFitWidth(100);
+        gp.setConstraints(imgVmarkt, 6, 2);
+        gp.setRowSpan(imgVmarkt, 3);
+
+        Image dorf = new Image(getClass().getResourceAsStream("\\mini\\dorf_DE.png"));
+        ImageView imgVdorf = new ImageView(dorf);
+        imgVdorf.setFitHeight(90);
+        imgVdorf.setFitWidth(100);
+        gp.setConstraints(imgVdorf, 3, 5);
+        gp.setRowSpan(imgVdorf, 3);
+
+        Image holzfaeller = new Image(getClass().getResourceAsStream("\\mini\\holzfaeller_DE.png"));
+        ImageView imgVholzfaeller = new ImageView(holzfaeller);
+        imgVholzfaeller.setFitHeight(90);
+        imgVholzfaeller.setFitWidth(100);
+        gp.setConstraints(imgVholzfaeller, 4, 5);
+        gp.setRowSpan(imgVholzfaeller, 3);
+
+        Image gaerten = new Image(getClass().getResourceAsStream("\\mini\\gaerten_DE.png"));
+        ImageView imgVgaerten = new ImageView(gaerten);
+        imgVgaerten.setFitHeight(90);
+        imgVgaerten.setFitWidth(100);
+        gp.setConstraints(imgVgaerten, 5, 5);
+        gp.setRowSpan(imgVgaerten, 3);
+
+        Image geldverleiher = new Image(getClass().getResourceAsStream("\\mini\\geldverleiher_DE.png"));
+        ImageView imgVgeldverleiher = new ImageView(geldverleiher);
+        imgVgeldverleiher.setFitHeight(90);
+        imgVgeldverleiher.setFitWidth(100);
+        gp.setConstraints(imgVgeldverleiher, 6, 5);
+        gp.setRowSpan(imgVgeldverleiher, 3);
+
+        Image anwesen = new Image(getClass().getResourceAsStream("\\mini\\anwesen_DE.png"));
+        ImageView imgVanwesen = new ImageView(anwesen);
+        imgVanwesen.setFitHeight(60);
+        imgVanwesen.setFitWidth(70);
+        gp.setConstraints(imgVanwesen, 7, 2);
+        gp.setRowSpan(imgVanwesen, 2);
+
+        Image herzogtum = new Image(getClass().getResourceAsStream("\\mini\\herzogtum_DE.png"));
+        ImageView imgVherzogtum = new ImageView(herzogtum);
+        imgVherzogtum.setFitHeight(60);
+        imgVherzogtum.setFitWidth(70);
+        gp.setConstraints(imgVherzogtum, 7, 4);
+        gp.setRowSpan(imgVherzogtum, 2);
+
+        Image provinz = new Image(getClass().getResourceAsStream("\\mini\\provinz_DE.png"));
+        ImageView imgVprovinz = new ImageView(provinz);
+        imgVprovinz.setFitHeight(60);
+        imgVprovinz.setFitWidth(70);
+        gp.setConstraints(imgVprovinz, 7, 6);
+        gp.setRowSpan(imgVprovinz, 2);
+
+        gp.getChildren().addAll(imgVkupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
 
 
         // root Layout
@@ -54,6 +179,9 @@ public class GameView extends View<GameModel> {
        // root.setTop();
        // root.setLeft();
 
+        stage.setScene(scene);
+        stage.setFullScreen( false );
+        stage.setTitle( "Dominion" );
 
         setTexts();
         return scene;
@@ -113,6 +241,7 @@ public class GameView extends View<GameModel> {
         chatPane.add( txtNameChat,0,0 );
         chatPane.add(scroll,0,1);
         chatPane.add(hbChat, 0, 2);
+
 
 
         return chatPane;
