@@ -47,6 +47,11 @@
 
 }
 
+.clientText{
+
+    -fx-text-fill: red;
+    -fx-font-size: 25px;
+}
 
 .button{
 
@@ -74,5 +79,4 @@
 
     -fx-background-image: url("bild.jpg");
     -fx-background-size: cover;
-
 }

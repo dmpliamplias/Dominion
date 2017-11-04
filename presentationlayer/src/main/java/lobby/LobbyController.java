@@ -55,14 +55,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         if (!serverConnectionService.isHoster()){
 
-            view.btnStart.setVisible( false );
+            view.getBtnStart().setVisible( false );
             view.gethBoxOption1().setVisible( false );
             view.gethBoxOption2().setVisible( false );
-            view.setWaitText();
+            view.root.setCenter(view.setWaitText());
+
 
         }
 
-        view.btnStart.setOnAction( (event) -> {
+        view.getBtnStart().setOnAction( (event) -> {
             startGame();
         } );
 
@@ -70,24 +71,24 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
          *  author Manuel Wirz
          *  */
 
-        view.textFieldChat.setOnKeyPressed(event -> {
+        view.getTextFieldChat().setOnKeyPressed(event -> {
                     if (event.getCode().equals( KeyCode.ENTER)){
                        sendMessage();
         }  });
 
-        view.btnTestGameView.setOnAction( event -> {
+        view.getBtnTestGameView().setOnAction( event -> {
             goToGameView();
         } );
 
-        view.btnChatSend.setOnAction( event -> {
+        view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
         } );
 
-        view.btnLogout.setOnAction( event -> {
+        view.getBtnLogout().setOnAction( event -> {
             logout();
         } );
 
-        view.btnHelp.setOnAction( event -> {
+        view.getBtnHelp().setOnAction( event -> {
             help();
         } );
 
@@ -139,7 +140,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private void goToGameView() {
         GameModel model = new GameModel();
-        GameView view = new GameView( this.view.getStage(), model );
+        Stage s = new Stage(  );
+        GameView view = new GameView( s, model );
         GameController gameController = new GameController( model, view, serverConnectionService.isHoster() );
 
         this.view.stop();

@@ -45,6 +45,8 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField txtWait;
     protected VBox vBoxAddMenu;
     protected Button btnTestGameView;
+    protected HBox hBoxOptionClient;
+    protected BorderPane root;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -60,7 +62,7 @@ public class LobbyView extends View<LobbyModel> {
     public Scene create_GUI(){
 
         // root settings
-        BorderPane root = new BorderPane();
+        this.root = new BorderPane();
 
 
 
@@ -129,6 +131,8 @@ public class LobbyView extends View<LobbyModel> {
 
        this.vBoxGameSettings = new VBox(  );
         vBoxGameSettings.setSpacing( 100 );
+        Insets insets = new Insets( 20 ) ;
+        vBoxGameSettings.setPadding( insets );
         vBoxGameSettings.setAlignment( Pos.CENTER );
 
 
@@ -178,6 +182,7 @@ public class LobbyView extends View<LobbyModel> {
         this.cbFinishPointCards.setPrefSize( 50,50 );
 
 
+
         hBoxOption2.getChildren().addAll( txtOption2, txtOption2Statement, cbFinishPointCards);
 
 
@@ -199,6 +204,7 @@ public class LobbyView extends View<LobbyModel> {
         btnHelp = new Button(  );
         btnHelp.setPrefWidth( 190 );
         hBoxButtons.getChildren().addAll( btnStart/*, btnHelp*/, btnRanking, btnLogout  );
+
 
         vBoxGameSettings.getChildren().addAll(hBoxOption1,hBoxOption2, hBoxButtons );
 
@@ -295,16 +301,24 @@ public class LobbyView extends View<LobbyModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
-    public void setWaitText(){
+    public HBox setWaitText(){
 
-        //TODO Manuel Methode schöner machen
+        //TODO Manuel Settext anpassen
 
+        this.hBoxOptionClient = new HBox(  );
+        this.gethBoxOptionClient().setSpacing( 200 );
+        this.hBoxOptionClient.setAlignment( Pos.CENTER );
+        this.hBoxOptionClient.setPrefWidth( 600 );
         this.txtWait = new TextField( "test" );
-        this.txtWait.setPrefSize(100,200);
-        this.txtWait.setStyle( "-fx-border-color: crimson" );
-        this.txtWait.setStyle( "-fx-font-size: 30px" );
-        getvBoxAddMenu().getChildren().add( txtWait );
+        this.txtWait.setPrefSize(600,350);
+        this.txtWait.getStyleClass().add( "clientText" );
+        this.hBoxOptionClient.getChildren().add( txtWait );
 
+        return  hBoxOptionClient;
+    }
+
+    public HBox gethBoxOptionClient() {
+        return hBoxOptionClient;
     }
 
     public HBox gethBoxOption2() {
@@ -321,6 +335,98 @@ public class LobbyView extends View<LobbyModel> {
 
     public VBox getvBoxAddMenu() {
         return vBoxAddMenu;
+    }
+
+    public ListView<String> getLvPlayers() {
+        return lvPlayers;
+    }
+
+    public Button getBtnStart() {
+        return btnStart;
+    }
+
+    public TextField getTextFieldChat() {
+        return textFieldChat;
+    }
+
+    public Button getBtnChatSend() {
+        return btnChatSend;
+    }
+
+    public VBox getChatContent() {
+        return chatContent;
+    }
+
+    public Button getBtnLogout() {
+        return btnLogout;
+    }
+
+    public TextField getLblPlayer() {
+        return lblPlayer;
+    }
+
+    public TextField getTxtChat() {
+        return txtChat;
+    }
+
+    public TextField getTextFieldGameSettings() {
+        return textFieldGameSettings;
+    }
+
+    public TextField getTextFieldRound() {
+        return textFieldRound;
+    }
+
+    public ChoiceBox getChoiceBox() {
+        return choiceBox;
+    }
+
+    public Tooltip getTp() {
+        return tp;
+    }
+
+    public Tooltip getTpOption2() {
+        return tpOption2;
+    }
+
+    public TextField getTxtOption1() {
+        return txtOption1;
+    }
+
+    public TextField getTxtOption2() {
+        return txtOption2;
+    }
+
+    public TextField getTxtOption2Statement() {
+        return txtOption2Statement;
+    }
+
+    public Button getBtnRanking() {
+        return btnRanking;
+    }
+
+    public CheckBox getCbFinishPointCards() {
+        return cbFinishPointCards;
+    }
+
+    public Button getBtnHelp() {
+        return btnHelp;
+    }
+
+    public TextField getTxtWait() {
+        return txtWait;
+    }
+
+    public Button getBtnTestGameView() {
+        return btnTestGameView;
+    }
+
+    public ObservableList<String> getObservablePlayerList() {
+        return observablePlayerList;
+    }
+
+    public BorderPane getRoot() {
+        return root;
     }
 }
 
