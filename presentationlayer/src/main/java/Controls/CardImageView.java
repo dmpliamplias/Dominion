@@ -9,6 +9,7 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.Serializable;
 
 
 public class CardImageView extends ImageView {
@@ -47,22 +48,25 @@ public class CardImageView extends ImageView {
 
         try {
             String path = card.getFilePath();
-            Translator.Language lang = ServiceLocator.getServiceLocator().getTranslator().getCurrentLanguage();
-            String code = ServiceLocator.getServiceLocator().getTranslator().getLanguageCode(lang);
+            Translator tl = ServiceLocator.getServiceLocator().getTranslator();
+            Translator.Language lang =  tl.getCurrentLanguage();
+            String code = tl.getLanguageCode(lang);
 
             code = code.replace("de_", "");
             path = path.replace("{0}", code.toUpperCase());
 
             if (cardSize.equals(cardSize.miniSize)){
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/mini/"+card.getFilePath()));
+                Image playC = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(90);
                 this.setFitWidth(45);
                 this.setPreserveRatio(true);
+                this.setImage(playC);
             } else if (cardSize.equals(cardSize.bigSize)) {
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/big/"+card.getFilePath()));
+                Image playC = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
                 this.setFitHeight(130);
                 this.setFitWidth(60);
                 this.setPreserveRatio(true);
+                this.setImage(playC);
             }
 
 
