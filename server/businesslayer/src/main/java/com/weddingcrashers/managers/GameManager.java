@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/*
+@author Michel Schlatter
+*/
 public class GameManager extends Manager {
     private static final String PATH = "/translation/trans";
     private static List<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
