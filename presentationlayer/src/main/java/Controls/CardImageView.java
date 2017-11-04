@@ -9,6 +9,7 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.image.BufferedImage;
 
 
 public class CardImageView extends ImageView {
@@ -22,12 +23,16 @@ public class CardImageView extends ImageView {
     public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
         this.cardSize = cardSize;
+
         this.setOnMouseClicked(e -> {
             //this.setLayoutX(e.getSceneX());
             //this.setLayoutY(e.getSceneY());
             runAction();
+
         });
+
         this.setCardImageViewDesign();
+
     }
 
     private void runAction(){
@@ -54,15 +59,17 @@ public class CardImageView extends ImageView {
             path = path.replace("{0}", code.toUpperCase());
 
             if (cardSize.equals(cardSize.miniSize)){
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/mini/"+card.getFilePath()));
+                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(90);
                 this.setFitWidth(45);
                 this.setPreserveRatio(true);
+                this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/big/"+card.getFilePath()));
+                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
                 this.setFitHeight(130);
                 this.setFitWidth(60);
                 this.setPreserveRatio(true);
+                this.setImage(playCB);
             }
 
 

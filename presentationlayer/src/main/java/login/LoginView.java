@@ -82,7 +82,6 @@ public class LoginView extends View<LoginModel> {
 
 
 
-
         lblEmail = new Label();
         grPa.add(lblEmail, 0, 1);
         user = new TextField();
