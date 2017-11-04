@@ -247,13 +247,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		
 		// Asign buttons, label, textfield to column, row
 		gp.setConstraints(lblInfo, 2, 1);
-	   	gp.setConstraints(lblPort, 1, 2);
-		gp.setConstraints(fldPort, 2, 2);
-		gp.setConstraints(lblIP, 1, 3);
-		gp.setConstraints(fldIP, 2, 3);
+	   	gp.setConstraints(lblPort, 1, 3);
+		gp.setConstraints(fldPort, 2, 3);
+		gp.setConstraints(lblIP, 1, 2);
+		gp.setConstraints(fldIP, 2, 2);
 		gp.setConstraints(btnOK, 5, 4);
-		gp.setConstraints(btnCopyPort, 3, 2);
-		gp.setConstraints(btnCopyIP, 3, 3);
+		gp.setConstraints(btnCopyPort, 3, 3);
+		gp.setConstraints(btnCopyIP, 3, 2);
 		gp.setColumnSpan(lblInfo, 5);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
 
@@ -320,10 +320,10 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		// Asign buttons, label, textfield to column, row
 		gp.setConstraints(lblInfo, 2, 1);
-		gp.setConstraints(lblPort, 1, 2);
-		gp.setConstraints(fldPort, 2, 2);
-		gp.setConstraints(lblIP, 1, 3);
-		gp.setConstraints(fldIP, 2, 3);
+		gp.setConstraints(lblPort, 1, 3);
+		gp.setConstraints(fldPort, 2, 3);
+		gp.setConstraints(lblIP, 1, 2);
+		gp.setConstraints(fldIP, 2, 2);
 		gp.setConstraints(btnOK, 5, 4);
 		gp.setColumnSpan(lblInfo, 5);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
