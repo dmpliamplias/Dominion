@@ -50,6 +50,8 @@
 
 }
 .root{
-
+    -fx-background-image: url("background.jpg");
+    -fx-background-size: cover;
+    -fx-opacity: 0.5;
 
 }
