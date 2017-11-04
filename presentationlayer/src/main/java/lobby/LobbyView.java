@@ -44,6 +44,7 @@ public class LobbyView extends View<LobbyModel> {
     protected VBox vBoxGameSettings;
     protected TextField txtWait;
     protected VBox vBoxAddMenu;
+    protected Button btnTestGameView;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -93,6 +94,7 @@ public class LobbyView extends View<LobbyModel> {
     public VBox addMenu(){
 
         this.vBoxAddMenu = new VBox(  );
+        this.btnTestGameView = new Button( "TestGameView" );
         vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
         this.textFieldGameSettings = new TextField(  );
@@ -100,7 +102,7 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldGameSettings.setMaxWidth( 860 );
         this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
 
-        vBoxAddMenu.getChildren().addAll( textFieldGameSettings );
+        vBoxAddMenu.getChildren().addAll( btnTestGameView, textFieldGameSettings );
 
 
         return vBoxAddMenu;
