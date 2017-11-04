@@ -66,7 +66,7 @@ public class UserManagementView extends View<UserManagementModel> {
         root.setSpacing(15);
         root.setPadding(new Insets(20));
 
-        root.getChildren().addAll(addTitle(), addListView(), addHBox());
+        root.getChildren().addAll(createTitle(), createListView(), createHBox());
 
         final Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -74,7 +74,12 @@ public class UserManagementView extends View<UserManagementModel> {
         return scene;
     }
 
-    private ListView<User> addListView() {
+    /**
+     * Creates the list view.
+     *
+     * @return the list view.
+     */
+    private ListView<User> createListView() {
         listView = new ListView<>(users);
         listView.setCellFactory(param -> new ListCell<User>() {
             @Override
@@ -91,39 +96,69 @@ public class UserManagementView extends View<UserManagementModel> {
         return listView;
     }
 
-    private Label addTitle() {
+    /**
+     * Creates the title.
+     *
+     * @return the title.
+     */
+    private Label createTitle() {
         final Label title = new Label();
         title.setText("User Management Dominion");
         title.setFont(Font.font("Arial", NORMAL, 35));
         return title;
     }
 
-    private HBox addHBox() {
+    /**
+     * Creates the HBox.
+     *
+     * @return The HBox.
+     */
+    private HBox createHBox() {
         final HBox hBox = new HBox();
         hBox.setSpacing(150);
-        hBox.getChildren().addAll(addEditButton(), addCreateButton(), addDeleteButton(), addGoToLoginButton());
+        hBox.getChildren().addAll(createEditButton(), createCreateButton(), createDeleteButton(), createGoToLoginButton());
         return hBox;
     }
 
-    private Button addGoToLoginButton() {
+    /**
+     * Creates the go to login button.
+     *
+     * @return the go to login button
+     */
+    private Button createGoToLoginButton() {
         goToLoginButton = new Button();
         goToLoginButton.setText("Go back to Login");
         return goToLoginButton;
     }
 
-    private Button addEditButton() {
+    /**
+     * Creates the edit button.
+     *
+     * @return the edit button.
+     */
+    private Button createEditButton() {
         editButton = new Button();
         editButton.setText("Edit User");
         return editButton;
     }
 
-    private Button addDeleteButton() {
+    /**
+     * Creates the delete button.
+     *
+     * @return the delete button.
+     */
+    private Button createDeleteButton() {
         deleteButton = new Button();
         deleteButton.setText("Delete user");
         return deleteButton;
     }
 
-    private Button addCreateButton() {
+    /**
+     * Creates the create button.
+     *
+     * @return the create button.
+     */
+    private Button createCreateButton() {
         createButton = new Button();
         createButton.setText("Create user");
         return createButton;
