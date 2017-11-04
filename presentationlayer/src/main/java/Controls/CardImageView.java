@@ -16,22 +16,18 @@ public class CardImageView extends ImageView {
     private Card card;
     private final CardSize cardSize;
     public enum CardSize{
-        miniSize,normalSize
+        miniSize,bigSize
     }
-
-
-
 
     public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
-        this.cardSize=cardSize;
+        this.cardSize = cardSize;
         this.setOnMouseClicked(e -> {
             //this.setLayoutX(e.getSceneX());
             //this.setLayoutY(e.getSceneY());
-                runAction();
-            });
+            runAction();
+        });
         this.setCardImageViewDesign();
-
     }
 
     private void runAction(){
@@ -54,15 +50,25 @@ public class CardImageView extends ImageView {
             Translator.Language lang = ServiceLocator.getServiceLocator().getTranslator().getCurrentLanguage();
             String code = ServiceLocator.getServiceLocator().getTranslator().getLanguageCode(lang);
 
-            code = code.replace("de_","");
+            code = code.replace("de_", "");
             path = path.replace("{0}", code.toUpperCase());
-            Image playC=new Image(this.getClass().getResourceAsStream("/Game/mini"));
-            this.setFitHeight(130);
-            this.setFitWidth(60);
-            this.setPreserveRatio(true);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (cardSize.equals(cardSize.miniSize)){
+                Image playC = new Image(this.getClass().getResourceAsStream("/Game/mini/" +card.getFilePath()));
+                this.setFitHeight(90);
+                this.setFitWidth(45);
+                this.setPreserveRatio(true);
+            } else if (cardSize.equals(cardSize.bigSize)) {
+                Image playC = new Image(this.getClass().getResourceAsStream("/Game/big/" + card.getFilePath()));
+                this.setFitHeight(130);
+                this.setFitWidth(60);
+                this.setPreserveRatio(true);
+            }
+
+
+        } catch (Exception e){
+                e.printStackTrace();
+
         }
 
     }
