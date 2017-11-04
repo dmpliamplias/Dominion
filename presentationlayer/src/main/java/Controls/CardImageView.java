@@ -9,12 +9,22 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
+
 public class CardImageView extends ImageView {
 
     private Card card;
+    private final CardSize cardSize;
+    public enum CardSize{
+        miniSize,normalSize
+    }
 
-    public CardImageView(Card card) {
+
+
+
+    public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
+        this.cardSize=cardSize;
         this.setOnMouseClicked(e -> {
             //this.setLayoutX(e.getSceneX());
             //this.setLayoutY(e.getSceneY());
@@ -41,12 +51,11 @@ public class CardImageView extends ImageView {
 
         try {
             String path = card.getFilePath();
-            Translator.Language lng = ServiceLocator.getServiceLocator().getTranslator().getCurrentLanguage();
-            String code = ServiceLocator.getServiceLocator().getTranslator().getLanguageCode(lng);
+            Translator.Language lang = ServiceLocator.getServiceLocator().getTranslator().getCurrentLanguage();
+            String code = ServiceLocator.getServiceLocator().getTranslator().getLanguageCode(lang);
 
             code = code.replace("de_","");
             path = path.replace("{0}", code.toUpperCase());
-            // de_CH =>
             Image playC=new Image(this.getClass().getResourceAsStream("/Game/mini"));
             this.setFitHeight(130);
             this.setFitWidth(60);
