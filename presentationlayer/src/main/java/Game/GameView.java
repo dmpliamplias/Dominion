@@ -276,5 +276,31 @@ public class GameView extends View<GameModel> {
     }
 
 
+    public TextField getTextFieldChat() {
+        return textFieldChat;
+    }
 
+    public Button getBtnChatSend() {
+        return btnChatSend;
+    }
+
+    public Button getBtnSendText() {
+        return btnSendText;
+    }
+
+    public GridPane getChatPane() {
+        return chatPane;
+    }
+
+    public HBox getHbChat() {
+        return hbChat;
+    }
+
+    public VBox getChatContent() {
+        return chatContent;
+    }
+
+    public TextField getTxtNameChat() {
+        return txtNameChat;
+    }
 }
