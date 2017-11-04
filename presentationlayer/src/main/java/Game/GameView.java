@@ -1,6 +1,10 @@
 package Game;
 
+import Controls.CardImageView;
 import base.View;
+import com.weddingcrashers.businessmodels.Card;
+import com.weddingcrashers.businessmodels.MoneyCard;
+import com.weddingcrashers.businessmodels.MoneyType;
 import javafx.geometry.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -70,12 +74,23 @@ public class GameView extends View<GameModel> {
             gp.getRowConstraints().add(row);
         }
 
-        Image kupfer = new Image(getClass().getResourceAsStream("\\mini\\kupfer_DE.png"));
+        MoneyCard mc1 = new MoneyCard();
+        mc1.setMoneyType(MoneyType.Copper);
+        mc1.setValue(1);
+        mc1.setCost(0);
+        mc1.setName("Kupfer");
+        mc1.setFilePath("kupfer_{0}.png");
+
+
+        CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgKupfer, 2, 2);
+        gp.setRowSpan(imgKupfer, 2);
+        /**Image kupfer = new Image(getClass().getResourceAsStream("\\mini\\kupfer_DE.png"));
         ImageView imgVkupfer = new ImageView(kupfer);
         imgVkupfer.setFitHeight(60);
         imgVkupfer.setFitWidth(70);
         gp.setConstraints(imgVkupfer, 2, 2);
-        gp.setRowSpan(imgVkupfer, 2);
+        gp.setRowSpan(imgVkupfer, 2);**/
 
         Image silber  = new Image(getClass().getResourceAsStream("\\mini\\silber_DE.png"));
         ImageView imgVsilber = new ImageView(silber);
@@ -168,7 +183,7 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(imgVprovinz, 7, 6);
         gp.setRowSpan(imgVprovinz, 2);
 
-        gp.getChildren().addAll(imgVkupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
+        gp.getChildren().addAll(imgKupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
 
 
         // root Layout
