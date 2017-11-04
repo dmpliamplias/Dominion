@@ -56,17 +56,17 @@ public class CardImageView extends ImageView {
             path = path.replace("{0}", code.toUpperCase());
 
             if (cardSize.equals(cardSize.miniSize)){
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
+                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(90);
                 this.setFitWidth(45);
                 this.setPreserveRatio(true);
-                this.setImage(playC);
+                this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
-                Image playC = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
+                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
                 this.setFitHeight(130);
                 this.setFitWidth(60);
                 this.setPreserveRatio(true);
-                this.setImage(playC);
+                this.setImage(playCB);
             }
 
 
