@@ -35,15 +35,15 @@ public class GameController extends Controller<GameModel, GameView> {
          *  author Manuel Wirz
          *  */
         
-        view.btnChatSend.setOnAction( event -> {
+        view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
         } );
 
-        view.btnSendText.setOnAction( event -> {
+        view.getBtnSendText().setOnAction( event -> {
             sendButtonText();
         } );
 
-        view.textFieldChat.setOnKeyPressed(event -> {
+        view.getTextFieldChat().setOnKeyPressed(event -> {
             if (event.getCode().equals( KeyCode.ENTER)){
                 sendMessage();
             }  });
@@ -60,11 +60,11 @@ public class GameController extends Controller<GameModel, GameView> {
     public void sendMessage() {
 
 
-        String message = plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
+        String message = plServiceLocator.getUser().getUserName() + ": " + view.getTextFieldChat().getText();
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( message);
-        view.textFieldChat.clear();
+        view.getTextFieldChat().clear();
         view.setChatMessage(message, ViewUtils.getColorByClientId(cc.getClientId()));
 
         try {
@@ -75,13 +75,11 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    //TODO SendButton doesnt work twice
-
     // Button to send predefined text to the server and display the message on the own screen
 
     public void sendButtonText() {
 
-        String message = plServiceLocator.getUser().getUserName() + ": " + view.btnSendText.getText();
+        String message = plServiceLocator.getUser().getUserName() + ": " + view.getBtnSendText().getText();
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( message );
