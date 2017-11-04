@@ -53,7 +53,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
-        view.btnStart.setDisable( !serverConnectionService.isHoster() ); // only hoster can start game.
+        if (!serverConnectionService.isHoster()){
+
+            view.btnStart.setVisible( false );
+            view.gethBoxOption1().setVisible( false );
+            view.gethBoxOption2().setVisible( false );
+            view.setWaitText();
+
+        }
+
         view.btnStart.setOnAction( (event) -> {
             startGame();
         } );
