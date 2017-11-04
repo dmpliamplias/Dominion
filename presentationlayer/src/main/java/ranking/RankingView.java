@@ -42,7 +42,6 @@ public class RankingView extends View<RankingModel> {
         {
 
 
-
             this.stage.setWidth(1000);
             this.stage.setHeight(600);
 

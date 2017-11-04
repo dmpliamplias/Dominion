@@ -1,6 +1,9 @@
 package login;
 
+import Controls.CardImageView;
 import base.View;
+import com.weddingcrashers.businessmodels.MoneyCard;
+import com.weddingcrashers.businessmodels.MoneyType;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -58,11 +61,27 @@ public class LoginView extends View<LoginModel> {
         btnSignUp = new Button();
         btnSignUp.setPrefSize(130,40);
 
+
+        MoneyCard mc1 = new MoneyCard();
+        mc1.setMoneyType(MoneyType.Copper);
+        mc1.setValue(1);
+        mc1.setCost(0);
+        mc1.setName("Kupfer");
+        mc1.setFilePath("kupfer_{0}.png");
+
+
+        CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
+        //grPa.setConstraints(imgKupfer, 2, 2);
+        //grPa.setRowSpan(imgKupfer, 2);
+
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnLogin);
         hbBtn.getChildren().add(btnSignUp);
         grPa.add(hbBtn, 1, 4);
+
+
+
 
         lblEmail = new Label();
         grPa.add(lblEmail, 0, 1);

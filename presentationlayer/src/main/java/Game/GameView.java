@@ -81,7 +81,6 @@ public class GameView extends View<GameModel> {
         mc1.setName("Kupfer");
         mc1.setFilePath("kupfer_{0}.png");
 
-
         CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
@@ -90,7 +89,7 @@ public class GameView extends View<GameModel> {
         imgVkupfer.setFitHeight(60);
         imgVkupfer.setFitWidth(70);
         gp.setConstraints(imgVkupfer, 2, 2);
-        gp.setRowSpan(imgVkupfer, 2);**/
+        gp.setRowSpan(imgVkupfer, 2);*/
 
         Image silber  = new Image(getClass().getResourceAsStream("\\mini\\silber_DE.png"));
         ImageView imgVsilber = new ImageView(silber);
