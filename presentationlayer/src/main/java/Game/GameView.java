@@ -84,6 +84,11 @@ public class GameView extends View<GameModel> {
         CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
+        imgKupfer.setOnMouseClicked(event -> {
+
+
+        });
+
         /**Image kupfer = new Image(getClass().getResourceAsStream("\\mini\\kupfer_DE.png"));
         ImageView imgVkupfer = new ImageView(kupfer);
         imgVkupfer.setFitHeight(60);
