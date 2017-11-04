@@ -1,15 +1,17 @@
 package com.weddingcrashers.servermodels;
 
-public class GameSettings {
+import java.io.Serializable;
 
-    int finishAfterRounds;
+public class GameSettings implements Serializable {
+
+    Integer finishAfterRounds;
     boolean pointCards;
 
-    public int getFinishAfterRounds() {
+    public Integer getFinishAfterRounds() {
         return finishAfterRounds;
     }
 
-    public void setFinishAfterRounds(int finishAfterRounds) {
+    public void setFinishAfterRounds(Integer finishAfterRounds) {
         this.finishAfterRounds = finishAfterRounds;
     }
 
