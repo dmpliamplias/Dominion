@@ -58,7 +58,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.getBtnStart().setVisible( false );
             view.gethBoxOption1().setVisible( false );
             view.gethBoxOption2().setVisible( false );
-            view.root.setCenter(view.setWaitText());
+            view.setWaitText();
+            view.setTexts();
 
 
         }

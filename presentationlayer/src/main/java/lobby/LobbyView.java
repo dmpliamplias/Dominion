@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -45,7 +47,7 @@ public class LobbyView extends View<LobbyModel> {
     protected TextField txtWait;
     protected VBox vBoxAddMenu;
     protected Button btnTestGameView;
-    protected HBox hBoxOptionClient;
+    protected VBox hBoxOptionClient;
     protected BorderPane root;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
@@ -84,6 +86,9 @@ public class LobbyView extends View<LobbyModel> {
         // For multi language
         setTexts();
 
+
+
+
         return scene;
     }
 
@@ -100,6 +105,8 @@ public class LobbyView extends View<LobbyModel> {
         vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
         this.textFieldGameSettings = new TextField(  );
+        this.textFieldGameSettings.getStyleClass().add( "title" );
+
         this.textFieldGameSettings.setEditable( false );
         this.textFieldGameSettings.setMaxWidth( 860 );
         this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
@@ -118,7 +125,7 @@ public class LobbyView extends View<LobbyModel> {
         this.lblPlayer.setEditable( false );
         this.lblPlayer.setMaxWidth( 250 );
         lvPlayers = new ListView<String>(observablePlayerList);
-        lvPlayers.setMaxSize( 250,180);
+        lvPlayers.setMaxSize( 250,155);
         vbox.setAlignment( Pos.CENTER );
 
         vbox.getChildren().addAll( lblPlayer,lvPlayers );
@@ -203,7 +210,7 @@ public class LobbyView extends View<LobbyModel> {
         btnLogout.setPrefWidth( 190 );
         btnHelp = new Button(  );
         btnHelp.setPrefWidth( 190 );
-        hBoxButtons.getChildren().addAll( btnStart/*, btnHelp*/, btnRanking, btnLogout  );
+        hBoxButtons.getChildren().addAll( btnStart, btnRanking, btnHelp /*btnLogout */ );
 
 
         vBoxGameSettings.getChildren().addAll(hBoxOption1,hBoxOption2, hBoxButtons );
@@ -278,6 +285,7 @@ public class LobbyView extends View<LobbyModel> {
         this.btnRanking.setText( getText( "lobbyview.ranking" ) );
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
+        //this.txtWait.setText( getText( "lobbyview.txtWait" ) );
 
     }
 
@@ -301,23 +309,42 @@ public class LobbyView extends View<LobbyModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
-    public HBox setWaitText(){
+    public void  setWaitText(){
 
-        //TODO Manuel Settext anpassen
-
-        this.hBoxOptionClient = new HBox(  );
-        this.gethBoxOptionClient().setSpacing( 200 );
+        this.hBoxOptionClient = new VBox(  );
+        Insets insets = new Insets( 15 );
+        this.hBoxOptionClient.setPadding(insets );
         this.hBoxOptionClient.setAlignment( Pos.CENTER );
         this.hBoxOptionClient.setPrefWidth( 600 );
-        this.txtWait = new TextField( "test" );
-        this.txtWait.setPrefSize(600,350);
+        this.hBoxOptionClient.setPrefHeight( 350 );
+        Image wait = new Image(getClass().getResourceAsStream("\\wait.png"));
+        ImageView imgWait = new ImageView(wait);
+        HBox hBoxButtons = new HBox(  );
+        hBoxButtons.setPadding( insets );
+        hBoxButtons.setPrefWidth( 500 );
+        hBoxButtons.setAlignment( Pos.CENTER );
+        hBoxButtons.setSpacing(20);
+        btnRanking = new Button(  );
+        btnRanking.setPrefWidth( 190 );
+        btnHelp = new Button(  );
+        btnHelp.setPrefWidth( 190 );
+
+
+        hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
+
+        this.hBoxOptionClient.getChildren().addAll( imgWait, hBoxButtons );
+      
+        /*
+        this.txtWait = new TextField("Bitte warten bis der Hoster startet:) /n please wait till the hoster starts the game/n ");
+        this.txtWait.setEditable( false );
+        this.txtWait.setPrefSize(650,350);
         this.txtWait.getStyleClass().add( "clientText" );
         this.hBoxOptionClient.getChildren().add( txtWait );
-
-        return  hBoxOptionClient;
+        */
+        this.root.setCenter(hBoxOptionClient);
     }
 
-    public HBox gethBoxOptionClient() {
+    public VBox gethBoxOptionClient() {
         return hBoxOptionClient;
     }
 
