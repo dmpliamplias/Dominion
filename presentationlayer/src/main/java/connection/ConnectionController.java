@@ -48,16 +48,16 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
-                    this.view.alert(translator.getString("connectionview.portEmpty"), Alert.AlertType.WARNING);
+                    this.view.alert(getText("connectionview.portEmpty"), Alert.AlertType.WARNING);
                     return;
                 }
                 int port = Integer.parseInt(portStr);
                 // port must be between 1024-49151 and not 9092
                 if (port < 1024 || port > 49151 || port == 9092) {
                     final Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle(translator.getString("connectionview.portDialog.title"));
-                    alert.setHeaderText(translator.getString("connectionview.portDialog.headerText"));
-                    alert.setContentText(translator.getString("connectionview.portDialog.contentText"));
+                    alert.setTitle(getText("connectionview.portDialog.title"));
+                    alert.setHeaderText(getText("connectionview.portDialog.headerText"));
+                    alert.setContentText(getText("connectionview.portDialog.contentText"));
                     alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
                     alert.showAndWait();
                     return;

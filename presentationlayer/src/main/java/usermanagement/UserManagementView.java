@@ -29,6 +29,8 @@ public class UserManagementView extends View<UserManagementModel> {
     /** The list view. */
     protected ListView<User> listView;
 
+    /** The title label. */
+    protected Label title;
     /** The edit button. */
     protected Button editButton;
     /** The create button. */
@@ -85,6 +87,7 @@ public class UserManagementView extends View<UserManagementModel> {
             @Override
             protected void updateItem(final User item, final boolean empty) {
                 super.updateItem(item, empty);
+
                 if (empty || item == null) {
                     setText(null);
                 }
@@ -102,8 +105,7 @@ public class UserManagementView extends View<UserManagementModel> {
      * @return the title.
      */
     private Label createTitle() {
-        final Label title = new Label();
-        title.setText("User Management Dominion");
+        title = new Label();
         title.setFont(Font.font("Arial", NORMAL, 35));
         return title;
     }
@@ -116,57 +118,25 @@ public class UserManagementView extends View<UserManagementModel> {
     private HBox createHBox() {
         final HBox hBox = new HBox();
         hBox.setSpacing(150);
-        hBox.getChildren().addAll(createEditButton(), createCreateButton(), createDeleteButton(), createGoToLoginButton());
-        return hBox;
-    }
 
-    /**
-     * Creates the go to login button.
-     *
-     * @return the go to login button
-     */
-    private Button createGoToLoginButton() {
-        goToLoginButton = new Button();
-        goToLoginButton.setText("Go back to Login");
-        return goToLoginButton;
-    }
-
-    /**
-     * Creates the edit button.
-     *
-     * @return the edit button.
-     */
-    private Button createEditButton() {
+        // initialize buttons
         editButton = new Button();
-        editButton.setText("Edit User");
-        return editButton;
-    }
-
-    /**
-     * Creates the delete button.
-     *
-     * @return the delete button.
-     */
-    private Button createDeleteButton() {
-        deleteButton = new Button();
-        deleteButton.setText("Delete user");
-        return deleteButton;
-    }
-
-    /**
-     * Creates the create button.
-     *
-     * @return the create button.
-     */
-    private Button createCreateButton() {
         createButton = new Button();
-        createButton.setText("Create user");
-        return createButton;
+        deleteButton = new Button();
+        goToLoginButton = new Button();
+
+        // add all
+        hBox.getChildren().addAll(editButton, createButton, deleteButton, goToLoginButton);
+        return hBox;
     }
 
     @Override
     protected void setTexts() {
-        // nop
+        title.setText(getText("usermanagementview.title"));
+        goToLoginButton.setText(getText("usermanagementview.gotologin"));
+        editButton.setText(getText("usermanagementview.edit"));
+        deleteButton.setText(getText("usermanagementview.delete"));
+        createButton.setText(getText("usermanagementview.create"));
     }
 
 }

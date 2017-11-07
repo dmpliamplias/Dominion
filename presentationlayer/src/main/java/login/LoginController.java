@@ -101,7 +101,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                 }
             } else {
                 //unsuccessfull login, show error
-                view.alert(translator.getString("loginview.loginError"), WARNING);
+                view.alert(getText("loginview.loginError"), WARNING);
             }
         });
     }

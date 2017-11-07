@@ -48,4 +48,14 @@ public abstract class Controller<M extends Model, V extends View<M>> {
         }
     }
 
+    /**
+     * Returns the text for the given key.
+     *
+     * @param key the key to get the text for.
+     * @return the text for the given key.
+     */
+    protected String getText(String key) {
+        return translator.getString(key);
+    }
+
 }
