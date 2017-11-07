@@ -48,7 +48,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
-                    this.view.alert(translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
+                    this.view.alert(translator.getString("connectionview.portEmpty"), Alert.AlertType.WARNING);
                     return;
                 }
                 int port = Integer.parseInt(portStr);
