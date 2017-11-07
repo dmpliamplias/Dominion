@@ -4,12 +4,11 @@ import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.PointCard;
+import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.io.Serializable;
 
 
    //**
@@ -53,8 +52,8 @@ public class CardImageView extends ImageView {
         try {
             String path = card.getFilePath();
             Translator tr = ServiceLocator.getServiceLocator().getTranslator();
-            Translator.Language lang =  tr.getCurrentLanguage();
-            String code = tr.getLanguageCode(lang);
+            final Language currentLanguage = tr.getCurrentLanguage();
+            String code = currentLanguage.getCode();
 
             code = code.replace("de_", "");
             path = path.replace("{0}", code.toUpperCase());

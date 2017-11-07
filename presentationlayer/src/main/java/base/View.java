@@ -1,8 +1,8 @@
 package base;
 
+import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
-import com.weddingcrashers.service.Translator.Language;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
@@ -65,22 +65,15 @@ public abstract class View<M extends Model> {
      */
     protected abstract void setTexts();
 
+    /**
+     * Gets the text from the translation file.
+     *
+     * @param key the key to get the value for.
+     * @return the value for the key.
+     */
     protected String getText(String key) {
         return translator.getString(key);
     }
-
-//    protected abstract HashMap<Labeled, String> labeledToKeyMap();
-
-//    protected void setText() {
-//        final HashMap<Labeled, String> map = labeledToKeyMap();
-//        final Set<Labeled> labeleds = map.keySet();
-//        final Iterator<Labeled> iterator = labeleds.iterator();
-//        final Collection<String> values = map.values();
-//        final Iterator<String> iterator1 = values.iterator();
-//        while (iterator.hasNext()) {
-//            iterator.next().setText(iterator1.next());
-//        }
-//    }
 
     /**
      * Display the view.

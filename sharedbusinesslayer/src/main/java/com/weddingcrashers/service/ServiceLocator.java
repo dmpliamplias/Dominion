@@ -1,11 +1,11 @@
 package com.weddingcrashers.service;
 
 import com.weddingcrashers.db.H2Database;
-import com.weddingcrashers.service.Translator.Language;
 
 import java.util.logging.Logger;
 
-import static com.weddingcrashers.service.Translator.Language.GERMAN;
+import static com.weddingcrashers.service.Language.GERMAN;
+
 
 /**
  * Service locator.

@@ -1,17 +1,15 @@
 package connection;
 
-import util.PLServiceLocator;
-import util.ServerConnectionService;
 import base.Controller;
 import com.weddingcrashers.server.Server;
-import com.weddingcrashers.service.ServiceLocator;
-import com.weddingcrashers.service.Translator;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
+import util.PLServiceLocator;
+import util.ServerConnectionService;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -21,9 +19,10 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-import static com.weddingcrashers.service.Translator.Language.ENGLISH;
-import static com.weddingcrashers.service.Translator.Language.GERMAN;
-import static com.weddingcrashers.service.Translator.Language.SWISS_GERMAN;
+import static com.weddingcrashers.service.Language.ENGLISH;
+import static com.weddingcrashers.service.Language.GERMAN;
+import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+
 
 /**
  * @author Michel Schlatter
@@ -31,14 +30,10 @@ import static com.weddingcrashers.service.Translator.Language.SWISS_GERMAN;
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
-    Translator _translator;
-
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
         initialize();
-        _translator = ServiceLocator.getServiceLocator().getTranslator();
     }
-
 
     private  void initialize(){
 
@@ -52,10 +47,17 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
                 if(portStr == null || portStr.equals("")){
-                    this.view.alert(_translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
+                    this.view.alert(translator.getString("ConnectionView_Error_PortEmpty"), Alert.AlertType.WARNING);
                     return;
                 }
                 int port = Integer.parseInt(portStr);
+                // port must be between 1024-49151 and not 9092
+                if (port < 1024 || port > 49151 || port == 9092) {
+                    final Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle(translator.getString("connectionview.portDialog.title"));
+                    alert.setHeaderText(translator.getString("connectionview.portDialog.headerText"));
+                    alert.setContentText(translator.getString("connectionview.portDialog.contentText"));
+                }
                 InetSocketAddress socketAddress = createServer(port);
                 view.btnConnect.setDisable(true);
                 view.btnJoinS.setDisable(true);
