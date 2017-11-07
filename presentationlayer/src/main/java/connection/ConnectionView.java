@@ -5,15 +5,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
+import static javafx.stage.Modality.WINDOW_MODAL;
+import static util.StyleSheetPath.CONNECTION;
 
 
 public class ConnectionView extends View<ConnectionModel> {
@@ -36,7 +38,7 @@ public class ConnectionView extends View<ConnectionModel> {
     ImageView imgViewDeFlag;
     ImageView imgViewEngFlag;
     ImageView imgViewChFlag;
-	Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
+	Image imgIcon = new Image(getClass().getResourceAsStream("/base/castle.png"));
 
 
     public ConnectionView(Stage stage, ConnectionModel model){
@@ -66,19 +68,19 @@ public class ConnectionView extends View<ConnectionModel> {
         gp.setVgap(20);
 
 		// Create Language Icons
-		Image imgDeFlag = new Image(getClass().getResourceAsStream("GermanFlag.png"));
+		Image imgDeFlag = new Image(getClass().getResourceAsStream("germanFlag.png"));
 		imgViewDeFlag = new ImageView();
 		imgViewDeFlag.setImage(imgDeFlag);
 		imgViewDeFlag.setFitHeight(40);
 		imgViewDeFlag.setFitWidth(40);
 
-		Image imgChFlag = new Image(getClass().getResourceAsStream("SwissFlag.png"));
+		Image imgChFlag = new Image(getClass().getResourceAsStream("swissFlag.png"));
 		imgViewChFlag = new ImageView();
 		imgViewChFlag.setImage(imgChFlag);
 		imgViewChFlag.setFitHeight(40);
 		imgViewChFlag.setFitWidth(40);
 
-		Image imgEngFlag = new Image(getClass().getResourceAsStream("EnglishFlag.png"));
+		Image imgEngFlag = new Image(getClass().getResourceAsStream("englishFlag.png"));
 		imgViewEngFlag = new ImageView();
 		imgViewEngFlag.setImage(imgEngFlag);
 		imgViewEngFlag.setFitHeight(40);
@@ -110,7 +112,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 		stage.setScene(scene);
-		scene.getStylesheets().addAll(this.getClass().getResource("/connection/ConnectionView.css").toExternalForm());
+		setStylesheet(scene, CONNECTION);
 
 		setTexts();
 
@@ -122,7 +124,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		stageCreateDialog = new Stage();
 
 		stageCreateDialog.initOwner(stage);
-		stageCreateDialog.initModality(Modality.WINDOW_MODAL);
+		stageCreateDialog.initModality(WINDOW_MODAL);
 		
 		BorderPane root = new BorderPane();
 		Scene scene2 = new Scene(root,400,220);
@@ -185,7 +187,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		});
 
 		stageConnectedDialog.initOwner(stage);
-		stageConnectedDialog.initModality(Modality.WINDOW_MODAL);
+		stageConnectedDialog.initModality(WINDOW_MODAL);
 		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,400,220);
@@ -215,7 +217,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnOK.setPrefSize(60, 30);
 
 		// Create Image 'Copy to ClipBoard'
-		Image imgClipBoard = new Image(getClass().getResourceAsStream("CopyToClipboard.png"));
+		Image imgClipBoard = new Image(getClass().getResourceAsStream("copyToClipboard.png"));
 		ImageView imgViewPort = new ImageView();
 		ImageView imgViewIP = new ImageView();
 		imgViewPort.setImage(imgClipBoard);
@@ -275,7 +277,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		stageJoinDialog = new Stage();
 
 		stageJoinDialog.initOwner(stage);
-		stageJoinDialog.initModality(Modality.WINDOW_MODAL);
+		stageJoinDialog.initModality(WINDOW_MODAL);
 
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,400,220);

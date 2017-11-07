@@ -52,7 +52,8 @@ public class Dominion extends Application {
     public void init() {
         if (mainProgram == null) {
             mainProgram = this;
-        } else {
+        }
+        else {
             Platform.exit();
         }
     }
@@ -75,6 +76,7 @@ public class Dominion extends Application {
     public void start(Stage primaryStage) {
         // initialize resources
         serviceLocator = ServiceLocator.getServiceLocator();
+
         // Create and display the splash screen and model
         SplashScreenModel splashModel = new SplashScreenModel(serviceLocator);
         splashView = new SplashScreenView(primaryStage, splashModel);
@@ -131,7 +133,6 @@ public class Dominion extends Application {
             // Make the view invisible
             view.stop();
         }
-
         Server.dispose();
         ServerConnectionService serverConnectionService = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         if (serverConnectionService != null) {
@@ -142,8 +143,4 @@ public class Dominion extends Application {
         getLogger().info("Application terminated");
     }
 
-    // Static getter for a reference to the main program object
-    protected static Dominion getMainProgram() {
-        return mainProgram;
-    }
 }

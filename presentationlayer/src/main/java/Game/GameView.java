@@ -2,29 +2,27 @@ package Game;
 
 import Controls.CardImageView;
 import base.View;
-import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.MoneyType;
-import javafx.geometry.*;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import java.io.File;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-
+import static util.StyleSheetPath.GAME;
 
 
 public class GameView extends View<GameModel> {
@@ -49,7 +47,7 @@ public class GameView extends View<GameModel> {
     public Scene create_GUI(){
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 1000, 600);
-        scene.getStylesheets().addAll(this.getClass().getResource("/Game/GameView.css").toExternalForm());
+        setStylesheet(scene, GAME);
         GridPane gp = new GridPane();
         root.setCenter(gp);
 
@@ -92,7 +90,8 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(imgVkupfer, 2, 2);
         gp.setRowSpan(imgVkupfer, 2);*/
 
-        Image silber  = new Image(getClass().getResourceAsStream("\\mini\\silber_DE.png"));
+        // TODO: 07.11.17 vanessa do it like mine line below
+        final Image silber = new Image(getClass().getResourceAsStream("/game/mini/silber_DE.png"));
         ImageView imgVsilber = new ImageView(silber);
         imgVsilber.setFitHeight(60);
         imgVsilber.setFitWidth(70);

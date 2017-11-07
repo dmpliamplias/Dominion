@@ -30,7 +30,7 @@ public abstract class View<M extends Model> {
     /** The translator. */
     protected Translator translator;
     /** Image Icon */
-    protected Image imgIcon = new Image(getClass().getResourceAsStream("/base/Castle.png"));
+    protected Image imgIcon = new Image(getClass().getResourceAsStream("/base/castle.png"));
 
 
     // ---- Constructor
@@ -75,6 +75,16 @@ public abstract class View<M extends Model> {
      */
     protected String getText(String key) {
         return translator.getString(key);
+    }
+
+    /**
+     * Sets the style sheet to the given scene.
+     *
+     * @param scene the scene to set the style.
+     * @param pathToCss the path to the style sheet.
+     */
+    protected void setStylesheet(Scene scene, String pathToCss) {
+        scene.getStylesheets().addAll(this.getClass().getResource(pathToCss).toExternalForm());
     }
 
     /**

@@ -6,7 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +22,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import static util.StyleSheetPath.LOBBY;
 
 /**
  *  author Michel Schlatter
@@ -70,7 +79,7 @@ public class LobbyView extends View<LobbyModel> {
 
         //Scene and stage settings
         Scene scene = new Scene(root, 1150, 850);
-        scene.getStylesheets().addAll(this.getClass().getResource("/lobby/LobbyView.css").toExternalForm());
+        setStylesheet(scene, LOBBY);
         stage.setScene(scene);
         stage.setResizable( false );
 

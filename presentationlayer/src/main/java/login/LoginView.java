@@ -1,9 +1,8 @@
 package login;
 
-import Controls.CardImageView;
 import base.View;
-import com.weddingcrashers.businessmodels.MoneyCard;
-import com.weddingcrashers.businessmodels.MoneyType;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,8 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
-import javafx.geometry.Insets;
+
+import static util.StyleSheetPath.LOGIN;
+
 /**
  *  @author updated by Murat Kelleci 8.10.17 -
  *  Some changes - Credits: http://docs.oracle.com/javafx/2/get_started/form.htm#BABHGHFI
@@ -50,7 +50,7 @@ public class LoginView extends View<LoginModel> {
         grPa.setVgap(10);
         grPa.setPadding(new Insets(25, 25, 25, 25));
 
-        scene.getStylesheets().addAll(this.getClass().getResource("/login/LoginView.css").toExternalForm());
+        setStylesheet(scene, LOGIN);
 
         stage.setScene(scene);
 

@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import static util.StyleSheetPath.SPLASH_SCREEN;
+
 /**
  * Framework for professional applications:
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
@@ -60,7 +62,7 @@ public class SplashScreenView extends View<SplashScreenModel> {
         root.setBottom(bottomBox);
 
         Scene scene = new Scene(root, 500, 500, Color.TRANSPARENT);
-        scene.getStylesheets().addAll(this.getClass().getResource("/splashscreen/splash.css").toExternalForm());
+        setStylesheet(scene, SPLASH_SCREEN);
 
         return scene;
     }
