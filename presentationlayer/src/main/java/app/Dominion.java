@@ -73,8 +73,10 @@ public class Dominion extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        // initialize resources
+        serviceLocator = ServiceLocator.getServiceLocator();
         // Create and display the splash screen and model
-        SplashScreenModel splashModel = new SplashScreenModel();
+        SplashScreenModel splashModel = new SplashScreenModel(serviceLocator);
         splashView = new SplashScreenView(primaryStage, splashModel);
         new SplashScreenController(this, splashModel, splashView);
         splashView.start();
@@ -104,10 +106,6 @@ public class Dominion extends Application {
         ConnectionModel model = new ConnectionModel();
         view = new ConnectionView(appStage, model);
         new ConnectionController(model, view);
-
-        // Resources are now initialized
-        serviceLocator = ServiceLocator.getServiceLocator();
-        serviceLocator.startDatabase();
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected

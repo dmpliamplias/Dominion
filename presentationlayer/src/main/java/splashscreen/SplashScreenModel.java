@@ -27,10 +27,10 @@ public class SplashScreenModel extends Model {
     /**
      * Constructor.
      */
-    public SplashScreenModel() {
+    public SplashScreenModel(ServiceLocator serviceLocator) {
         super();
         
-        this.serviceLocator = ServiceLocator.getServiceLocator();
+        this.serviceLocator = serviceLocator;
     }
 
     final Task<Void> initializer = new Task<Void>() {

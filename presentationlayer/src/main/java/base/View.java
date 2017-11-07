@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import static javafx.scene.layout.Region.USE_PREF_SIZE;
+
 /**
  * View base model.
  *
@@ -96,8 +98,15 @@ public abstract class View<M extends Model> {
         return stage;
     }
 
+    /**
+     * Creates an alert for the given alert type and message.
+     *
+     * @param msg the message.
+     * @param alertType the alert type.
+     */
     public void alert(String msg, Alert.AlertType alertType){
         Alert alert = new Alert(alertType, msg);
+        alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
         alert.showAndWait();
     }
 
@@ -111,7 +120,5 @@ public abstract class View<M extends Model> {
         this.translator = serviceLocator.getTranslator();
         setTexts();
     }
-
-
 
 }

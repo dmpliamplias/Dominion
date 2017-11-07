@@ -22,6 +22,7 @@ import java.net.UnknownHostException;
 import static com.weddingcrashers.service.Language.ENGLISH;
 import static com.weddingcrashers.service.Language.GERMAN;
 import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 
 /**
@@ -57,6 +58,9 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                     alert.setTitle(translator.getString("connectionview.portDialog.title"));
                     alert.setHeaderText(translator.getString("connectionview.portDialog.headerText"));
                     alert.setContentText(translator.getString("connectionview.portDialog.contentText"));
+                    alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
+                    alert.showAndWait();
+                    return;
                 }
                 InetSocketAddress socketAddress = createServer(port);
                 view.btnConnect.setDisable(true);
