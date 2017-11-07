@@ -53,6 +53,12 @@
     -fx-font-size: 25px;
 }
 
+.title{
+
+    -fx-font-weight: bold;
+
+}
+
 .button{
 
     -fx-background-color:
