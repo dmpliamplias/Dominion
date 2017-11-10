@@ -200,9 +200,7 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(lbltest, 2, 4);
         gp.getChildren().add(lbltest);
         lbltest.getStyleClass().add("labelNumber");
-        lbltest.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10; fx-text-alignment: center;");
         lbltest.setPrefSize(15, 12);
-
 
 
 
