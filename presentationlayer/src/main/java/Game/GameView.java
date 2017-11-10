@@ -20,7 +20,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.geometry.HPos;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
 
 import static util.StyleSheetPath.GAME;
 
@@ -49,7 +54,9 @@ public class GameView extends View<GameModel> {
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
         GridPane gp = new GridPane();
+        VBox vb = new VBox();
         root.setCenter(gp);
+        gp.add(vb, 2, 14);
 
 
         ColumnConstraints column = new ColumnConstraints(115);
@@ -80,6 +87,8 @@ public class GameView extends View<GameModel> {
         mc1.setFilePath("kupfer_{0}.png");
 
         CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
+        imgKupfer.setFitHeight(60);
+        imgKupfer.setFitWidth(70);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
 
@@ -97,6 +106,8 @@ public class GameView extends View<GameModel> {
         imgVsilber.setFitWidth(70);
         gp.setConstraints(imgVsilber, 2, 4);
         gp.setRowSpan(imgVsilber, 2);
+
+
 
         Image gold = new Image(getClass().getResourceAsStream("\\mini\\gold_DE.png"));
         ImageView imgVgold = new ImageView(gold);
@@ -183,6 +194,28 @@ public class GameView extends View<GameModel> {
         gp.setRowSpan(imgVprovinz, 2);
 
         gp.getChildren().addAll(imgKupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
+
+        Label lbltest = new Label();
+        lbltest.setText("10");
+        gp.setConstraints(lbltest, 2, 4);
+        gp.getChildren().add(lbltest);
+        lbltest.getStyleClass().add("labelNumber");
+        lbltest.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10; fx-text-alignment: center;");
+        lbltest.setPrefSize(15, 12);
+
+
+
+
+
+        Image back = new Image(getClass().getResourceAsStream("back.jpg"));
+        ImageView imgVback = new ImageView(back);
+        imgVback.setFitHeight(150);
+        imgVback.setFitWidth(100);
+        gp.setConstraints(imgVback, 1, 14);
+        gp.setRowSpan(imgVback, 5);
+
+        gp.getChildren().add(imgVback);
+
 
 
         // root Layout
