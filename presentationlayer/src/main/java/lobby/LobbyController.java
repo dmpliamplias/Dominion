@@ -191,60 +191,69 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
      */
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
-        ObservableList<String> names1 = view.lvPlayers.getItems();
-        Boolean validPlayer = new Boolean( false );
+        ObservableList<String> players = view.lvPlayers.getItems();
 
-        if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
-            view.alert(getText("lobbyview.falseStatement" ), Alert.AlertType.WARNING );
+        if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
+            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
         }
-        if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
-            view.alert (getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING);
-        }
+        if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
+            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
 
-        if (names1.size()>= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().isEmpty() ){
+        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().isEmpty()) {
             view.startStage().show();
 
             view.btnDialogNo.setOnAction( event -> {
                 view.stageDialog.close();
             } );
-        }
 
-        else if (names.size() < 2) {
-            view.alert(getText("lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
+            view.btnDialogYes.setOnAction( event -> {
+                start();
+            } );
+        } else if (names.size() < 2) {
+            view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
-            ArrayList<Integer> clientIds = new ArrayList<Integer>();
 
-            for (String name : names) {
-                String[] array = name.split( ":" );
-                int clientId = Integer.parseInt( array[0] );
-                clientIds.add( clientId );
-            }
-
-            Integer rounds = (Integer)view.choiceBox.getSelectionModel().getSelectedItem();
-            LobbyContainer lc = new LobbyContainer( Methods.StartGame );
-            lc.setClientIds_startGame( clientIds );
-            GameSettings gs = new GameSettings();
-            gs.setPointCards(view.cbFinishPointCards.isSelected());
-            gs.setFinishAfterRounds(rounds);
-            lc.setGameSettings(gs);
-
-            try {
-                serverConnectionService.sendObject( lc );
-            } catch (IOException e) {
-                view.alert( e.getMessage(), Alert.AlertType.ERROR );
-            }
+            start();
         }
     }
 
 
+    public void start(){
 
+        ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
+
+        ArrayList<Integer> clientIds = new ArrayList<Integer>();
+
+        for (String name : names) {
+            String[] array = name.split( ":" );
+            int clientId = Integer.parseInt( array[0] );
+            clientIds.add( clientId );
+        }
+
+        Integer rounds = (Integer)view.choiceBox.getSelectionModel().getSelectedItem();
+        LobbyContainer lc = new LobbyContainer( Methods.StartGame );
+        lc.setClientIds_startGame( clientIds );
+        GameSettings gs = new GameSettings();
+        gs.setPointCards(view.cbFinishPointCards.isSelected());
+        gs.setFinishAfterRounds(rounds);
+        lc.setGameSettings(gs);
+
+        try {
+            serverConnectionService.sendObject( lc );
+        } catch (IOException e) {
+            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+        }
+    }
 
     /**
      * author Manuel Wirz
      */
     // ChatController same Logic as in the GameController -> Look there for the comments for each method
+
+
+
 
     public void sendMessage() {
 
