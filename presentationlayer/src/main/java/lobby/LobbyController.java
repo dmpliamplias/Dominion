@@ -99,6 +99,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             goToRankingView();
         });
 
+
+
         loadData();
     }
 
@@ -189,6 +191,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
      */
     private void startGame() {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
+        ObservableList<String> names1 = view.lvPlayers.getItems();
+        Boolean validPlayer = new Boolean( false );
 
         if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()){
             view.alert(getText("lobbyview.falseStatement" ), Alert.AlertType.WARNING );
@@ -198,6 +202,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()){
             view.alert (getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING);
         }
+
+        if (names1.size()>= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().isEmpty() ){
+            view.startStage().show();
+
+            view.btnDialogNo.setOnAction( event -> {
+                view.stageDialog.close();
+            } );
+        }
+
         else if (names.size() < 2) {
             view.alert(getText("lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {

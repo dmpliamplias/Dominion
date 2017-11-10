@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -16,10 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -58,6 +56,12 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnTestGameView;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
+    protected Stage stageDialog;
+    protected TextField txtDialog;
+    protected Button btnDialogYes;
+    protected Button btnDialogNo;
+    protected VBox vBoxDialog;
+    protected HBox hBoxDialog;
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -353,6 +357,73 @@ public class LobbyView extends View<LobbyModel> {
         this.root.setCenter(hBoxOptionClient);
     }
 
+    public Stage startStage() {
+
+
+        BorderPane root = new BorderPane(  );
+        this.stageDialog = new Stage(  );
+        Scene scene = new Scene(root,400,300);
+        setStylesheet(scene, LOBBY);
+        this.stageDialog.setScene( scene );
+        root.setCenter( dialog() );
+
+        return stageDialog;
+    }
+
+
+    private VBox dialog() {
+
+        this.btnDialogNo = new Button( "Nein" );
+        this.btnDialogYes = new Button("Ja"  );
+        this.txtDialog = new TextField("test"  );
+
+        // Size for elements
+
+        this.btnDialogYes.setPrefSize( 100, 50 );
+        this.btnDialogNo.setPrefSize( 100, 50 );
+        this.txtDialog.setPrefSize( 200, 50 );
+
+        this.hBoxDialog = new HBox( );
+        this.hBoxDialog.setAlignment( Pos.CENTER );
+        this.hBoxDialog.setPadding( new Insets( 10 ) );
+        this.vBoxDialog = new VBox(  );
+        this.vBoxDialog.setPadding( new Insets( 10 ) );
+        this.vBoxDialog.setAlignment( Pos.CENTER );
+
+        hBoxDialog.getChildren().addAll( btnDialogYes, btnDialogNo );
+
+        vBoxDialog.getChildren().addAll( txtDialog, hBoxDialog );
+
+        return vBoxDialog;
+
+    }
+
+
+    public Stage getStageDialog() {
+        return stageDialog;
+    }
+
+    public VBox getvBoxDialog() {
+        return vBoxDialog;
+    }
+
+    public HBox gethBoxDialog() {
+        return hBoxDialog;
+    }
+
+    public TextField getTxtDialog() {
+        return txtDialog;
+    }
+
+    public Button getBtnDialogYes() {
+        return btnDialogYes;
+    }
+
+    public Button getBtnDialogNo() {
+        return btnDialogNo;
+    }
+
+
     public VBox gethBoxOptionClient() {
         return hBoxOptionClient;
     }
@@ -464,5 +535,7 @@ public class LobbyView extends View<LobbyModel> {
     public BorderPane getRoot() {
         return root;
     }
+
+
 }
 
