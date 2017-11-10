@@ -210,6 +210,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
             view.btnDialogYes.setOnAction( event -> {
                 start();
+                view.stageDialog.close();
             } );
         } else if (names.size() < 2) {
             view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
@@ -222,7 +223,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void start(){
 
-        ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
+        ObservableList<String> names = view.lvPlayers.getItems();
 
         ArrayList<Integer> clientIds = new ArrayList<Integer>();
 

@@ -59,6 +59,7 @@ public class GameView extends View<GameModel> {
         gp = new GridPane();
         VBox vb = new VBox();
         root.setCenter(gp);
+        root.setBottom( addChatGridPane() );
         gp.add(vb, 2, 14);
 
 
