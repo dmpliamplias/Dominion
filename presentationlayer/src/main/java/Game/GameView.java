@@ -56,6 +56,7 @@ public class GameView extends View<GameModel> {
         GridPane gp = new GridPane();
         VBox vb = new VBox();
         root.setCenter(gp);
+        root.setBottom( addChatGridPane() );
         gp.add(vb, 2, 14);
 
 
@@ -216,13 +217,6 @@ public class GameView extends View<GameModel> {
 
 
 
-        // root Layout
-        root.setBottom(addChatGridPane());
-        //TODO Venessa u can use for your GUI
-       // root.setCenter();
-       // root.setRight();
-       // root.setTop();
-       // root.setLeft();
 
         stage.setScene(scene);
         stage.setFullScreen( false );

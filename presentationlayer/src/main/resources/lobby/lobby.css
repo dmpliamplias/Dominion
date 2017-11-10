@@ -83,6 +83,6 @@
 }
 .root{
 
-    -fx-background-image: url("bild.jpg");
+    -fx-background-image: url("background2.jpg");
     -fx-background-size: cover;
 }
