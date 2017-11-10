@@ -26,6 +26,8 @@ import javafx.geometry.HPos;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.control.Tooltip;
 
 import static util.StyleSheetPath.GAME;
 
@@ -40,6 +42,7 @@ public class GameView extends View<GameModel> {
      protected HBox hbChat;
      protected VBox chatContent;
      protected TextField txtNameChat;
+     protected GridPane gp;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
@@ -53,7 +56,7 @@ public class GameView extends View<GameModel> {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
-        GridPane gp = new GridPane();
+        gp = new GridPane();
         VBox vb = new VBox();
         root.setCenter(gp);
         gp.add(vb, 2, 14);
@@ -195,17 +198,6 @@ public class GameView extends View<GameModel> {
 
         gp.getChildren().addAll(imgKupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
 
-        Label lbltest = new Label();
-        lbltest.setText("10");
-        gp.setConstraints(lbltest, 2, 4);
-        gp.getChildren().add(lbltest);
-        lbltest.getStyleClass().add("labelNumber");
-        lbltest.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10; fx-text-alignment: center;");
-        lbltest.setPrefSize(15, 12);
-
-
-
-
 
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVback = new ImageView(back);
@@ -215,6 +207,114 @@ public class GameView extends View<GameModel> {
         gp.setRowSpan(imgVback, 5);
 
         gp.getChildren().add(imgVback);
+
+
+
+
+        // Create Tooltip
+        // ---------------------------------------------------------
+
+        Image kupferB = new Image(getClass().getResourceAsStream("/game/big/kupfer_DE.png"));
+        ImageView imgVkupferB = new ImageView(kupferB);
+        imgVkupferB.setFitHeight(300);
+        imgVkupferB.setFitWidth(200);
+        Tooltip ttKupfer = new Tooltip();
+        ttKupfer.setGraphic(imgVkupferB);
+        Tooltip.install(imgKupfer, ttKupfer);
+
+        Image silberB = new Image(getClass().getResourceAsStream("/game/big/silber_DE.png"));
+        ImageView imgVsilberB = new ImageView(silberB);
+        imgVsilberB.setFitHeight(300);
+        imgVsilberB.setFitWidth(200);
+        Tooltip ttSilber = new Tooltip();
+        ttSilber.setGraphic(imgVsilberB);
+        Tooltip.install(imgVsilber, ttSilber);
+
+
+        Tooltip ttGold = new Tooltip();
+        Tooltip ttAnwesen = new Tooltip();
+        Tooltip ttHerzogtum = new Tooltip();
+        Tooltip ttProvinz = new Tooltip();
+        Tooltip ttDorf = new Tooltip();
+        Tooltip ttGaerten = new Tooltip();
+        Tooltip ttGeldverleiher = new Tooltip();
+        Tooltip ttHolzfaeller = new Tooltip();
+        Tooltip ttJahrmarkt = new Tooltip();
+        Tooltip ttLaboratorium = new Tooltip();
+        Tooltip ttMarkt = new Tooltip();
+        Tooltip ttSchmiede = new Tooltip();
+
+
+        // ---------------------------------------------------------
+
+
+        // Label Number of available cards to buy
+        // ---------------------------------------------------------
+        Label lblKupfer = new Label();
+        gp.setConstraints(lblKupfer, 2, 2);
+        setLabelFormat(lblKupfer);
+
+        Label lblSilber = new Label();
+        gp.setConstraints(lblSilber, 2, 4);
+        setLabelFormat(lblSilber);
+
+        Label lblGold = new Label();
+        gp.setConstraints(lblGold, 2, 6);
+        setLabelFormat(lblGold);
+
+        Label lblAnwesen = new Label();
+        gp.setConstraints(lblAnwesen, 7, 2);
+        setLabelFormat(lblAnwesen);
+
+        Label lblDorf = new Label();
+        gp.setConstraints(lblDorf, 3, 5);
+        setLabelFormat(lblDorf);
+
+        Label lblGaerten = new Label();
+        gp.setConstraints(lblGaerten, 5, 5);
+        setLabelFormat(lblGaerten);
+
+        Label lblGeldverleiher = new Label();
+        gp.setConstraints(lblGeldverleiher, 6, 5);
+        setLabelFormat(lblGeldverleiher);
+
+        Label lblHerzogtum = new Label();
+        gp.setConstraints(lblHerzogtum, 7, 4);
+        setLabelFormat(lblHerzogtum);
+
+        Label lblHolzfaeller = new Label();
+        gp.setConstraints(lblHolzfaeller, 4, 5);
+        setLabelFormat(lblHolzfaeller);
+
+        Label lblJahrmarkt = new Label();
+        gp.setConstraints(lblJahrmarkt, 5, 2);
+        setLabelFormat(lblJahrmarkt);
+
+        Label lblMarkt = new Label();
+        gp.setConstraints(lblMarkt, 6, 2);
+        setLabelFormat(lblMarkt);
+
+        Label lblLaboratorium = new Label();
+        gp.setConstraints(lblLaboratorium, 4, 2);
+        setLabelFormat(lblLaboratorium);
+
+        Label lblProvinz = new Label();
+        gp.setConstraints(lblProvinz, 7, 6);
+        setLabelFormat(lblProvinz);
+
+        Label lblSchmiede = new Label();
+        gp.setConstraints(lblSchmiede, 3, 2);
+        setLabelFormat(lblSchmiede);
+
+        Label lblNachziehstapel = new Label();
+        gp.setConstraints(lblNachziehstapel, 1, 14);
+        setLabelFormat(lblNachziehstapel);
+
+
+
+        // ---------------------------------------------------------
+
+
 
 
 
@@ -233,6 +333,16 @@ public class GameView extends View<GameModel> {
         setTexts();
         return scene;
     }
+
+    private void setLabelFormat(Label lbl){
+        gp.getChildren().add(lbl);
+        lbl.getStyleClass().add("labelNumber");
+        lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        lbl.setPrefSize(16, 15);
+        lbl.setAlignment(Pos.CENTER);
+        lbl.setText("10");
+    }
+
 
 
 

@@ -59,11 +59,10 @@
 
 .labelNumber{
     -fx-background-color: #dd1a1a;
-    -fx-text-alignment: center
     -fx-text-fill: white;
-    -fx-padding: 0px, 0px, 0px, 0px;
     -fx-border-insets: 0px;
     -fx-background-insets: 0px;
+    -fx-padding: 0;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 
