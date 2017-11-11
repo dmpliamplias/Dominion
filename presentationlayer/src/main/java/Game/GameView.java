@@ -90,9 +90,7 @@ public class GameView extends View<GameModel> {
         mc1.setName("Kupfer");
         mc1.setFilePath("kupfer_{0}.png");
 
-        CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniSize);
-        imgKupfer.setFitHeight(60);
-        imgKupfer.setFitWidth(70);
+        CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniMini);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
 
@@ -251,6 +249,7 @@ public class GameView extends View<GameModel> {
 
         // Label Number of available cards to buy
         // ---------------------------------------------------------
+
         Label lblKupfer = new Label();
         gp.setConstraints(lblKupfer, 2, 2);
         setLabelFormat(lblKupfer);

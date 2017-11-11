@@ -20,7 +20,7 @@ public class CardImageView extends ImageView {
     private Card card;
     private final CardSize cardSize;
     public enum CardSize{
-        miniSize,bigSize, tooltip
+        miniSize,bigSize, tooltip, miniMini
     }
 
     public CardImageView(Card card, CardSize cardSize) {
@@ -61,7 +61,7 @@ public class CardImageView extends ImageView {
             if (cardSize.equals(cardSize.miniSize)){
                 Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(90);
-                this.setFitWidth(45);
+                this.setFitWidth(100);
                 this.setPreserveRatio(true);
                 this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
@@ -71,11 +71,18 @@ public class CardImageView extends ImageView {
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
             } else if (cardSize.equals(cardSize.tooltip)) {
-                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
+                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/" + path));
                 this.setFitHeight(300);
                 this.setFitWidth(200);
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
+            } else if (cardSize.equals(cardSize.miniMini)){
+                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
+                this.setFitHeight(60);
+                this.setFitWidth(70);
+                this.setPreserveRatio(true);
+                this.setImage(playCM);
+
             }
 
 

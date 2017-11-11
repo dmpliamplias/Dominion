@@ -2,9 +2,7 @@ package connection;
 
 import base.View;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -131,6 +129,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		GridPane gp = new GridPane();
 		gp.setVgap(10);
 
+		root.setTop(getMenuBar());
 		
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button();
