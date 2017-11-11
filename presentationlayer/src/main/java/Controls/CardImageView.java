@@ -20,7 +20,7 @@ public class CardImageView extends ImageView {
     private Card card;
     private final CardSize cardSize;
     public enum CardSize{
-        miniSize,bigSize
+        miniSize,bigSize, tooltip
     }
 
     public CardImageView(Card card, CardSize cardSize) {
@@ -68,6 +68,12 @@ public class CardImageView extends ImageView {
                 Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
                 this.setFitHeight(130);
                 this.setFitWidth(60);
+                this.setPreserveRatio(true);
+                this.setImage(playCB);
+            } else if (cardSize.equals(cardSize.tooltip)) {
+                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
+                this.setFitHeight(300);
+                this.setFitWidth(200);
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
             }
