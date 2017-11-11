@@ -2,7 +2,9 @@ package com.weddingcrashers.managers;
 
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.server.Server;
 import com.weddingcrashers.servermodels.GameSettings;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.GameContainer;
 
@@ -15,7 +17,7 @@ import java.util.List;
 */
 public class GameManager extends Manager {
     private static final String PATH = "/translation/trans";
-    private static List<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
+    private static ArrayList<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
     private static List<Client> players;
     private static boolean gameRunning;
 
@@ -25,14 +27,17 @@ public class GameManager extends Manager {
         super(client);
     }
     
-    public static  void initialize(){
+    public static  void initialize(int playerCount){
         unusedCards = new ArrayList<Card>();
-        // TODO: 03.10.2017 add card set here and delete cards from the list, when user pulls it. 
+        createDominionSet(playerCount);
     }
 
-    private void pullInitalCardSetForEachClient(){
-     for(Client player : players){
-         DominionSet set = new DominionSet();
+    /*Methods Client can Call directly*/
+
+
+
+    public void sendInitalCardSet(){
+         PlayerSet set = new PlayerSet((int) client.getUser().getId());
          ArrayList<Card> pullStack = new ArrayList<Card>();
 
          for(int i = 0; i < 7; i++){
@@ -43,19 +48,46 @@ public class GameManager extends Manager {
          }
          set.setPullStack(pullStack);
          set.pullHandStack();
-         player.setDominionSet(set);
-     }
+
+         this.client.setDominionSet(set);
+
+         GameContainer gc = new GameContainer(Methods.SpreadCards);
+         gc.setDominionSet(set);
+        for(Client c : this.client.getAllClients()){
+            if(c.getUser().getId() == this.client.getUser().getId()){
+                gc.setUnusedCards(unusedCards); // send cards only one time
+            }
+            ServerUtils.sendObject(c, gc);
+        }
     }
 
+
+    /**
+     * @author Murat Kelleci
+     */
+    public static void shuffle(List<Card> cardDeck){
+        Collections.shuffle(cardDeck);
+    }
+
+    /**
+     * @author Michel Schlatter
+     */
+
     private void afterGameTurn(GameContainer container){
-      int nxtId = getNextTurnClientId();
+        int nxtId = getNextTurnClientId();
 
-      container.getDominionSet().setClientId(client.getClientId());
+        container.getDominionSet().setUserId(client.getClientId());
 
-      for(Client c : client.getAllClients()){ // send container to all clients
-          container.setYourTurn(c.getClientId() == nxtId); // the user can see if the next turn is his turn
-          ServerUtils.sendObject(c, container);
-      }
+        for(Client c : client.getAllClients()){ // send container to all clients
+            if(c.getUser().getId() == nxtId) {
+                container.setYourTurn(true); // the user can see if the next turn is his turn
+                c.setActive(true);
+            }else{
+                container.setYourTurn(false);
+                c.setActive(false);
+            }
+            ServerUtils.sendObject(c, container);
+        }
     }
 
     private int getNextTurnClientId(){
@@ -80,16 +112,6 @@ public class GameManager extends Manager {
         return nxtIdActive;
     }
 
-    /**
-     * @author Murat Kelleci
-     */
-    public static void shuffle(List<Card> cardDeck){
-        Collections.shuffle(cardDeck);
-    }
-
-    /**
-     * @author Michel Schlatter
-     */
 
     // jeder spieler bekommt 7 kupfer und 3 anwesen (Pointcards), Estate
 
@@ -333,6 +355,12 @@ public class GameManager extends Manager {
         }
 
        return 0;
+    }
+
+    private void broadCast(GameContainer gc){
+        for(Client c : this.client.getAllClients()){
+            ServerUtils.sendObject(c, gc);
+        }
     }
 
     public static List<Client> getPlayers() {

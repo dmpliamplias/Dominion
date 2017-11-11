@@ -117,7 +117,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private void logout(){
 
-        //TODO Migi User auf Null setzen
         plServiceLocator.setUser(null);
 
         LoginModel model = new LoginModel();
@@ -126,9 +125,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         this.view.stop();
         view.start();
-
-
-
     }
 
     private void loadData(){
@@ -142,14 +138,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
 
     private void goToGameView() {
-        GameModel model = new GameModel();
-        Stage s = new Stage(  );
-        GameView view = new GameView( s, model );
-        GameController gameController = new GameController( model, view, serverConnectionService.isHoster() );
-
-        this.view.stop();
-        view.start();
-
+       sendStartRequest();
     }
 
     /**
@@ -175,11 +164,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     /**
      * @author Michel Schlatter
      */
-    public void handleServerAnswer_startGame(boolean myTurn) {
+    public void handleServerAnswer_startGame(LobbyContainer lc) {
         Platform.runLater(() -> {
             GameModel gameModel = new GameModel();
             GameView gameView = new GameView( this.view.getStage(), gameModel );
-            GameController gameController = new GameController( gameModel, gameView, myTurn );
+            GameController gameController = new GameController(gameModel,gameView, lc.getPlayers(), lc.getGameSettings(), lc.isYourTurn());
 
             this.view.stop();
             gameView.start();
@@ -209,19 +198,19 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             } );
 
             view.btnDialogYes.setOnAction( event -> {
-                start();
+                sendStartRequest();
                 view.stageDialog.close();
             } );
         } else if (names.size() < 2) {
             view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
 
-            start();
+            sendStartRequest();
         }
     }
 
 
-    public void start(){
+    public void sendStartRequest(){
 
         ObservableList<String> names = view.lvPlayers.getItems();
 

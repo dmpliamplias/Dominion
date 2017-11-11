@@ -17,5 +17,6 @@ public enum Methods implements Serializable {
     Register,
     Connect,
     StartGame,
+    SpreadCards,
     Client_Server_Error,
 }

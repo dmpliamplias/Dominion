@@ -13,8 +13,6 @@ public class PlayerSet implements Serializable {
     ArrayList<Card> pullStack; // Ziehstappel
     ArrayList<Card> handStack; // Ziehstappel
 
-    ArrayList<Card> unusedCards; // Karten die noch kaufbar sind => wenn nichts geändert hat => null!
-
     int userId;
 
     public PlayerSet(int userId){
@@ -22,7 +20,6 @@ public class PlayerSet implements Serializable {
         this.trayStack = new ArrayList<Card>();
         this.pullStack =  new ArrayList<Card>();
         this.handStack = new ArrayList<Card>();
-        this.unusedCards = new ArrayList<Card>();
     }
 
     // ziehen bis keine Karten mehr auf Ziehstapel, dann ablagestappel zurück und mischeln
@@ -111,11 +108,4 @@ public class PlayerSet implements Serializable {
         this.handStack = handStack;
     }
 
-    public ArrayList<Card> getUnusedCards() {
-        return unusedCards;
-    }
-
-    public void setUnusedCards(ArrayList<Card> unusedCards) {
-        this.unusedCards = unusedCards;
-    }
 }

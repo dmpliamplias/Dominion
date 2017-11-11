@@ -1,6 +1,6 @@
 package com.weddingcrashers.server;
 
-import com.weddingcrashers.businessmodels.DominionSet;
+import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.managers.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
@@ -21,7 +21,7 @@ public class Client extends Thread {
     private int _clientId;
     private boolean isActive; // his turn;
     private User user;
-    private DominionSet dominionSet;
+    private PlayerSet dominionSet;
 
     private ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
     private ArrayList<Client> otherClients;
@@ -76,6 +76,9 @@ public class Client extends Thread {
 
             if(this.viewStatus == ViewStatus.Lobby) {
                 LobbyManager.broadCastPlayersToAllClients(this);
+            }
+            if(this.viewStatus == ViewStatus.Game){
+                this._gameManager.sendInitalCardSet();
             }
         }else if(c.getMethod() == Methods.Register){
             RegisterContainer rc = (RegisterContainer)c;
@@ -143,11 +146,11 @@ public class Client extends Thread {
         isActive = active;
     }
 
-    public DominionSet getDominionSet() {
+    public PlayerSet getDominionSet() {
         return dominionSet;
     }
 
-    public void setDominionSet(DominionSet dominionSet) {
+    public void setDominionSet(PlayerSet dominionSet) {
         this.dominionSet = dominionSet;
     }
 }
