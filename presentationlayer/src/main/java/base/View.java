@@ -4,8 +4,9 @@ import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
@@ -31,6 +32,18 @@ public abstract class View<M extends Model> {
     protected Translator translator;
     /** Image Icon */
     protected Image imgIcon = new Image(getClass().getResourceAsStream("/base/castle.png"));
+
+    /** Menu */
+    protected MenuBar menuBar;
+    protected Menu menuSettings;
+    protected Menu menuItemLanguage;
+    protected MenuItem menuItemDE;
+    protected MenuItem menuItemENG;
+    protected MenuItem menuItemCH;
+
+    protected ImageView imgViewEngFlag;
+    protected ImageView imgViewChFlag;
+    protected ImageView imgViewDeFlag;
 
 
     // ---- Constructor
@@ -129,6 +142,54 @@ public abstract class View<M extends Model> {
         serviceLocator.setTranslator(language);
         this.translator = serviceLocator.getTranslator();
         setTexts();
+        setMenuTexts();
+
+    }
+
+    /**
+     *  @author Vanessa Cajochen
+     *  */
+
+    public MenuBar getMenuBar() {
+
+        menuBar = new MenuBar();
+        menuSettings = new Menu();
+        menuItemLanguage = new Menu();
+        menuItemDE = new MenuItem();
+        menuItemENG = new MenuItem();
+        menuItemCH = new MenuItem();
+
+        menuBar.getMenus().add(menuSettings);
+        menuSettings.getItems().addAll(menuItemLanguage);
+        menuItemLanguage.getItems().addAll(menuItemCH, menuItemDE, menuItemENG);
+
+        // Create Language Icons
+        imgViewDeFlag = new ImageView(new Image(getClass().getResourceAsStream("/connection/germanFlag.png")));
+        imgViewDeFlag.setFitHeight(20);
+        imgViewDeFlag.setFitWidth(20);
+
+        imgViewChFlag = new ImageView(new Image(getClass().getResourceAsStream("/connection/swissFlag.png")));
+        imgViewChFlag.setFitHeight(20);
+        imgViewChFlag.setFitWidth(20);
+
+        imgViewEngFlag = new ImageView (new Image(getClass().getResourceAsStream("/connection/englishFlag.png")));
+        imgViewEngFlag.setFitHeight(20);
+        imgViewEngFlag.setFitWidth(20);
+
+        setMenuTexts();
+
+        return menuBar;
+    }
+
+    protected void setMenuTexts() {
+        menuSettings.setText(getText("menu.menuSetting"));
+        menuItemLanguage.setText(getText("menu.menuLanguage"));
+        menuItemDE.setText(getText("menu.languageDe"));
+        menuItemDE.setGraphic(imgViewDeFlag);
+        menuItemENG.setText(getText("menu.languageEng"));
+        menuItemENG.setGraphic(imgViewEngFlag);
+        menuItemCH.setText(getText("menu.languageCh"));
+        menuItemCH.setGraphic(imgViewChFlag);
     }
 
 }
