@@ -38,7 +38,7 @@ public class LobbyManager extends Manager{
         ArrayList<Integer> clientIds = lcReceived.getClientIds_startGame();
         GameSettings gs = lcReceived.getGameSettings();
 
-        int lowestClientId = Collections.min(clientIds);
+
 
         HashMap<Integer, User> users = new HashMap<Integer, User>();
         for(Integer clientId : clientIds) {
@@ -49,6 +49,8 @@ public class LobbyManager extends Manager{
             }
         }
 
+        int lowestClientId = Collections.min(clientIds);
+
         ArrayList<Client> players = new ArrayList<>();
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
@@ -56,6 +58,7 @@ public class LobbyManager extends Manager{
                     c.setActive(c.getClientId() == lowestClientId); // first registered can start first.
                     lc.setYourTurn(c.isActive());
                     lc.setUserNames(users);
+                    lc.setGameSettings(lcReceived.getGameSettings());
                     players.add(c);
                     ServerUtils.sendObject(c, lc);
                 }
@@ -65,6 +68,7 @@ public class LobbyManager extends Manager{
         GameManager.setGameSettings(lc.getGameSettings());
         GameManager.setPlayers(players);
         GameManager.setGameRunning(true);
+        GameManager.initialize(users.size());
     }
 
     public static LobbyContainer getUsers(Client c){

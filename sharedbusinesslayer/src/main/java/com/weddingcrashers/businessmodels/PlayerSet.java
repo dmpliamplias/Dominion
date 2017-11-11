@@ -1,18 +1,26 @@
 package com.weddingcrashers.businessmodels;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * @author  Michel Schlatter
  */
-public class DominionSet implements Serializable {
+public class PlayerSet implements Serializable {
     ArrayList<Card> trayStack; // Ablagestappel
     ArrayList<Card> pullStack; // Ziehstappel
     ArrayList<Card> handStack; // Ziehstappel
 
-    int clientId;
+    int userId;
+
+    public PlayerSet(int userId){
+        this.userId = userId;
+        this.trayStack = new ArrayList<Card>();
+        this.pullStack =  new ArrayList<Card>();
+        this.handStack = new ArrayList<Card>();
+    }
 
     // ziehen bis keine Karten mehr auf Ziehstapel, dann ablagestappel zurück und mischeln
     public void pullHandStack(){
@@ -28,8 +36,6 @@ public class DominionSet implements Serializable {
               i--;
             }
         }
-
-
     }
 
     private void fillPullStack(){
@@ -86,12 +92,12 @@ public class DominionSet implements Serializable {
         this.pullStack = pullStack;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public ArrayList<Card> getHandStack() {
@@ -101,4 +107,5 @@ public class DominionSet implements Serializable {
     public void setHandStack(ArrayList<Card> handStack) {
         this.handStack = handStack;
     }
+
 }

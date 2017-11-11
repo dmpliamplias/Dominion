@@ -1,17 +1,7 @@
 package util;
 
 import Game.GameController;
-import com.weddingcrashers.servermodels.ChatContainer;
-import com.weddingcrashers.servermodels.ConnectionContainer;
-import com.weddingcrashers.servermodels.Container;
-import com.weddingcrashers.servermodels.ErrorContainer;
-import com.weddingcrashers.servermodels.LobbyContainer;
-import com.weddingcrashers.servermodels.LoginContainer;
-import com.weddingcrashers.servermodels.Methods;
-import com.weddingcrashers.servermodels.RankingContainer;
-import com.weddingcrashers.servermodels.RegisterContainer;
-import com.weddingcrashers.servermodels.ViewStatus;
-import com.weddingcrashers.servermodels.ViewStatusUpdateContainer;
+import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -109,7 +99,7 @@ public class ServerConnectionService extends Thread{
         }else if(c.getMethod() == Methods.Chat && gameController != null){
             gameController.receiveMessage((ChatContainer) c);
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
-            lobbyController.handleServerAnswer_startGame(((LobbyContainer)c).isYourTurn());
+            lobbyController.handleServerAnswer_startGame((LobbyContainer)c);
         }else if(c.getMethod() == Methods.Rankings) {
             RankingContainer rc = (RankingContainer) c;
             rankingController.handleServerAnswer( rc.getHighScores() );
@@ -117,6 +107,10 @@ public class ServerConnectionService extends Thread{
             lobbyController.receiveMessage( (ChatContainer)c );
         }else if(c.getMethod() == Methods.Lobby_Players && lobbyController != null){
             lobbyController.handleServerAnswer_newPlayer((LobbyContainer) c);
+        }
+        else if(c.getMethod() == Methods.SpreadCards && gameController != null){
+            GameContainer gc = (GameContainer)c;
+           gameController.receivePlayerSet(gc.getDominionSet(), gc.getUnusedCards());
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
