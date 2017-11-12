@@ -4,11 +4,10 @@ package Game;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.servermodels.GameSettings;
+import com.weddingcrashers.servermodels.*;
+import org.h2.mvstore.DataUtils;
 import util.ViewUtils;
 import base.Controller;
-import com.weddingcrashers.servermodels.ChatContainer;
-import com.weddingcrashers.servermodels.ViewStatus;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
@@ -16,6 +15,8 @@ import javafx.scene.input.KeyCode;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *  author Michel Schlatter
@@ -26,24 +27,34 @@ public class GameController extends Controller<GameModel, GameView> {
     private  PlayerSet myCardSet;
     ArrayList<Card> unusedCards;
     HashMap<Integer, User> usersAndClientIds; // Key = ClientId
+    HashMap<Integer, User> users; // Key = UserId
     HashMap<Integer, PlayerSet> enemyCards; // Key = UserID
     GameSettings gameSettings;
     User myUser;
+    int activeUserId;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
-                          GameSettings gameSettings,
-                          boolean myTurn) {
+                          GameSettings gameSettings) {
         super( model, view );
         serverConnectionService.setGameController( this );
         this.usersAndClientIds = usersAndClientIds;
         this.gameSettings = gameSettings;
-        initialize(myTurn);
+        initialize();
 
         myUser = usersAndClientIds.get(serverConnectionService.getClientId());
+        users = new HashMap<Integer, User>();
+
+        Iterator iter = usersAndClientIds.entrySet().iterator();
+        while(iter.hasNext()){
+          Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
+          int key = (int)pair.getValue().getId();
+          User user = pair.getValue();
+          users.put(key, user);
+        }
     }
 
 
-    public void initialize(boolean myTurn) {
+    public void initialize() {
         try {
             serverConnectionService.updateViewStatus( ViewStatus.Game ); // set ViewStatus for Server
 
@@ -51,6 +62,8 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
+        // TODO: 12.11.2017 Vane => show GameSettings 
+        
         /**
          *  author Manuel Wirz
          *  */
@@ -71,13 +84,55 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
-    public void receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards){
+    // after initalizing the gameview and after each complete turn the player makes, this methods gets called
+    public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn){
       if(set.getUserId() == myUser.getId()){
           this.myCardSet = set;
-          this.unusedCards = unusedCards;
       }else{
           this.enemyCards.put(set.getUserId(), set);
       }
+      if(unusedCards != null && unusedCards.size() > 0){
+          this.unusedCards = unusedCards;
+      }
+
+      activeUserId = userIdHasTurn;
+
+        Platform.runLater(() ->{
+            if(userIdHasTurn == serverConnectionService.getClientId()){
+                // TODO: 12.11.2017  this is your turn... enable btns etc.
+            }else{
+                // TODO: 12.11.2017 this is not your turn.... disable btns etc.
+            }
+            // highlight the user who has the turn....
+
+        });
+    }
+
+    public void handleServerAnswer_updateRound(int round){
+        Platform.runLater(() ->{
+            // TODO: 12.11.2017 Vane update round here (show in view)
+        });
+    }
+    
+    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo){
+        Platform.runLater(() ->{
+            User user = users.get(cardPlayedInfo.getUserId());
+            Card card = cardPlayedInfo.getCard();
+            // TODO: 12.11.2017 Vane log here the user and which card he played
+        });
+    }
+
+    public void cardPlayed(Card c){
+        GameContainer gc = new GameContainer(Methods.CardPlayed);
+        CardPlayedInfo info = new CardPlayedInfo();
+        info.setUserId((int)myUser.getId());
+        info.setCard(c);
+
+        try {
+            serverConnectionService.sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     /**
@@ -120,7 +175,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // Method for to receive the chatContainer from the server and set new text in the chat
-    public void receiveMessage(ChatContainer chatContainer) {
+    public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
         Platform.runLater( () -> {
             view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
         } );

@@ -168,7 +168,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         Platform.runLater(() -> {
             GameModel gameModel = new GameModel();
             GameView gameView = new GameView( this.view.getStage(), gameModel );
-            GameController gameController = new GameController(gameModel,gameView, lc.getPlayers(), lc.getGameSettings(), lc.isYourTurn());
+            GameController gameController = new GameController(gameModel,gameView, lc.getPlayers(), lc.getGameSettings());
 
             this.view.stop();
             gameView.start();
@@ -261,7 +261,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         }
     }
 
-    public void receiveMessage(ChatContainer chatContainer) {
+    public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
             Platform.runLater( () -> {
                 view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
             } );

@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class LobbyContainer extends Container implements Serializable {
     HashMap<Integer, User> users; // clientId, User
     ArrayList<Integer> clientIds_startGame;
-    boolean yourTurn;
     GameSettings gameSettings;
 
     public GameSettings getGameSettings() {
@@ -40,12 +39,5 @@ public class LobbyContainer extends Container implements Serializable {
         this.users = users;
     }
 
-    public boolean isYourTurn() {
-        return yourTurn;
-    }
-
-    public void setYourTurn(boolean yourTurn) {
-        this.yourTurn = yourTurn;
-    }
 
 }

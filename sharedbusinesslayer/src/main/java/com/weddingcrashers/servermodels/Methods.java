@@ -18,5 +18,8 @@ public enum Methods implements Serializable {
     Connect,
     StartGame,
     SpreadCards,
+    CardPlayed,
+    UpdateRound,
+    TurnFinished,
     Client_Server_Error,
 }

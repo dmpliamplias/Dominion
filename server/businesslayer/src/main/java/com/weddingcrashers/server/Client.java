@@ -98,6 +98,9 @@ public class Client extends Thread {
             LoginContainer lc = (LoginContainer)c;
             this.setUser(lc.getUser());
             ServerUtils.sendObject(this,lc);
+        }else if(c.getMethod() == Methods.CardPlayed){
+            GameContainer gc = (GameContainer)c;
+            _gameManager.cardPlayed(gc.getCardPlayedInfo());
         }
         else if(c.getMethod() == Methods.Rankings){
             _rankingsManager.sendRanking();

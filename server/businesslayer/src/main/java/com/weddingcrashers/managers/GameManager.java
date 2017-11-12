@@ -1,8 +1,9 @@
 package com.weddingcrashers.managers;
 
 import com.weddingcrashers.businessmodels.*;
+import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.Server;
+import com.weddingcrashers.servermodels.CardPlayedInfo;
 import com.weddingcrashers.servermodels.GameSettings;
 import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
@@ -10,6 +11,7 @@ import com.weddingcrashers.servermodels.GameContainer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -19,7 +21,10 @@ public class GameManager extends Manager {
     private static final String PATH = "/translation/trans";
     private static ArrayList<Card> unusedCards; // this field is static 'cause it's for every gamemanager instance the same cards
     private static List<Client> players;
+    private static HashMap<Integer, User> users; // Key = ClientId
     private static boolean gameRunning;
+    private static int round = 1;
+    private static ArrayList<Integer> usersRoundPlayed = new ArrayList<Integer>();
 
     private static GameSettings gameSettings;
 
@@ -34,7 +39,37 @@ public class GameManager extends Manager {
 
     /*Methods Client can Call directly*/
 
+    public void moveFinished(GameContainer gcReceived){
+        if(client.isActive()) {
+            PlayerSet set = gcReceived.getDominionSet();
+            client.setDominionSet(set);
 
+            GameContainer gc = new GameContainer(Methods.TurnFinished);
+            gc.setDominionSet(set);
+
+            if (usersRoundPlayed.size() < (players.size()-1)) {
+                usersRoundPlayed.add((int)client.getUser().getId());
+            } else {
+                usersRoundPlayed = new ArrayList<Integer>();
+                round++;
+                updateRound();
+            }
+            gameTurnFinishedCompletely(gc);
+        }else{
+            ServerUtils.sendError(client, new Exception("This is not your turn!"));
+        }
+    }
+
+
+    public void cardPlayed(CardPlayedInfo cardPlayedInfo){
+        if(client.isActive()) {
+            GameContainer gc = new GameContainer(Methods.CardPlayed);
+            gc.setCardPlayedInfo(cardPlayedInfo);
+            broadCast(gc, false);
+        }else{
+            ServerUtils.sendError(client, new Exception("This is not your turn!"));
+        }
+    }
 
     public void sendInitalCardSet(){
          PlayerSet set = new PlayerSet((int) client.getUser().getId());
@@ -52,45 +87,43 @@ public class GameManager extends Manager {
          this.client.setDominionSet(set);
 
          GameContainer gc = new GameContainer(Methods.SpreadCards);
+
+         int lowestClientId = getNextTurnClientId(true);
+         gc.setUserIdHasTurn((int)users.get(lowestClientId).getId());
          gc.setDominionSet(set);
+
         for(Client c : this.client.getAllClients()){
             if(c.getUser().getId() == this.client.getUser().getId()){
                 gc.setUnusedCards(unusedCards); // send cards only one time
+            }else{
+                gc.setUnusedCards(null);
             }
             ServerUtils.sendObject(c, gc);
         }
     }
 
+    // privates
 
-    /**
-     * @author Murat Kelleci
-     */
-    public static void shuffle(List<Card> cardDeck){
-        Collections.shuffle(cardDeck);
+    private void updateRound(){
+        GameContainer gc = new GameContainer(Methods.UpdateRound);
+        gc.setRound(round);
+        broadCast(gc,false);
     }
 
-    /**
-     * @author Michel Schlatter
-     */
+    private void gameTurnFinishedCompletely(GameContainer container){
+        int nxtId = getNextTurnClientId(false);
 
-    private void afterGameTurn(GameContainer container){
-        int nxtId = getNextTurnClientId();
-
-        container.getDominionSet().setUserId(client.getClientId());
+        container.getDominionSet().setUserId((int)client.getUser().getId());
+        container.setUnusedCards(unusedCards);
+        container.setUserIdHasTurn((int)users.get(nxtId).getId());
 
         for(Client c : client.getAllClients()){ // send container to all clients
-            if(c.getUser().getId() == nxtId) {
-                container.setYourTurn(true); // the user can see if the next turn is his turn
-                c.setActive(true);
-            }else{
-                container.setYourTurn(false);
-                c.setActive(false);
-            }
+            c.setActive(c.getClientId() == nxtId);
             ServerUtils.sendObject(c, container);
         }
     }
 
-    private int getNextTurnClientId(){
+    private int getNextTurnClientId(boolean isInitalizing){
         int currentIdActive = client.getClientId();
         List<Integer> ids = new ArrayList<Integer>();
 
@@ -100,6 +133,10 @@ public class GameManager extends Manager {
         Collections.sort(ids);
         int min = ids.get(0);
         int max = ids.get(ids.size()-1);
+
+        if(isInitalizing){
+            return min;
+        }
 
         int currentIdx = ids.indexOf(currentIdActive);
         int nxtIdx = ++currentIdx;
@@ -112,10 +149,7 @@ public class GameManager extends Manager {
         return nxtIdActive;
     }
 
-
-    // jeder spieler bekommt 7 kupfer und 3 anwesen (Pointcards), Estate
-
-    public static void createDominionSet(int players){
+    private static void createDominionSet(int players){
 
         // PointCards
         for(int i = 0; i < getNumberOfCards(players, CardType.Anwesen); i++) {
@@ -357,8 +391,8 @@ public class GameManager extends Manager {
        return 0;
     }
 
-    private void broadCast(GameContainer gc){
-        for(Client c : this.client.getAllClients()){
+    private void broadCast(GameContainer gc, boolean exceptMyself){
+        for(Client c : exceptMyself ? this.client.getOtherClients() : this.client.getAllClients()){
             ServerUtils.sendObject(c, gc);
         }
     }
@@ -387,6 +421,14 @@ public class GameManager extends Manager {
         GameManager.gameSettings = gameSettings;
     }
 
+    public static HashMap<Integer, User> getUsers() {
+        return users;
+    }
+
+    public static void setUsers(HashMap<Integer, User> users) {
+        GameManager.users = users;
+    }
+
     private enum CardType{
         Anwesen,
         Herzogtum,
@@ -395,4 +437,13 @@ public class GameManager extends Manager {
         Silber,
         Kupfer,
     }
+
+    /**
+     * @author Murat Kelleci
+     */
+    public static void shuffle(List<Card> cardDeck){
+        Collections.shuffle(cardDeck);
+    }
+
+
 }

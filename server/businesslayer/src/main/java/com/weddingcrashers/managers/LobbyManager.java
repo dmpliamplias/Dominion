@@ -3,11 +3,8 @@ package com.weddingcrashers.managers;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.Server;
-import com.weddingcrashers.servermodels.GameSettings;
+import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
-import com.weddingcrashers.servermodels.LobbyContainer;
-import com.weddingcrashers.servermodels.Methods;
-import com.weddingcrashers.servermodels.ViewStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,14 +46,12 @@ public class LobbyManager extends Manager{
             }
         }
 
-        int lowestClientId = Collections.min(clientIds);
+
 
         ArrayList<Client> players = new ArrayList<>();
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
                 if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
-                    c.setActive(c.getClientId() == lowestClientId); // first registered can start first.
-                    lc.setYourTurn(c.isActive());
                     lc.setUserNames(users);
                     lc.setGameSettings(lcReceived.getGameSettings());
                     players.add(c);
@@ -67,6 +62,7 @@ public class LobbyManager extends Manager{
         
         GameManager.setGameSettings(lc.getGameSettings());
         GameManager.setPlayers(players);
+        GameManager.setUsers(users);
         GameManager.setGameRunning(true);
         GameManager.initialize(users.size());
     }
