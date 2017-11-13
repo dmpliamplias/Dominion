@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
+import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.LOBBY;
 
 /**
@@ -118,6 +119,7 @@ public class LobbyView extends View<LobbyModel> {
         this.btnTestGameView = new Button( "TestGameView" );
         vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
+
         this.textFieldGameSettings = new TextField(  );
         this.textFieldGameSettings.getStyleClass().add( "title" );
 
@@ -125,7 +127,7 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldGameSettings.setMaxWidth( 860 );
         this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
 
-        vBoxAddMenu.getChildren().addAll( btnTestGameView, textFieldGameSettings );
+        vBoxAddMenu.getChildren().addAll( super.getMenuBar(), btnTestGameView, textFieldGameSettings );
 
 
         return vBoxAddMenu;
@@ -280,6 +282,13 @@ public class LobbyView extends View<LobbyModel> {
 }
 
 
+    protected void setTextDialog(){
+
+        this.btnDialogYes.setText( getText( "lobbyview.DialogYes" ) );
+        this.btnDialogNo.setText( getText( "lobbyview.DialogNo" ) );
+        this.txtDialog.setText( getText( "lobbyview.txtDialog" ) );
+
+    }
 
 
     protected void setTexts() {
@@ -363,10 +372,13 @@ public class LobbyView extends View<LobbyModel> {
 
         BorderPane root = new BorderPane(  );
         this.stageDialog = new Stage(  );
+        stageDialog.initOwner(stage);
+        stageDialog.initModality(WINDOW_MODAL);
         Scene scene = new Scene(root,400,300);
         setStylesheet(scene, LOBBY);
         this.stageDialog.setScene( scene );
         root.setCenter( dialog() );
+        setTextDialog();
 
         return stageDialog;
     }
@@ -374,9 +386,9 @@ public class LobbyView extends View<LobbyModel> {
 
     private VBox dialog() {
 
-        this.btnDialogNo = new Button( "Nein" );
-        this.btnDialogYes = new Button("Ja"  );
-        this.txtDialog = new TextField("test"  );
+        this.btnDialogNo = new Button( );
+        this.btnDialogYes = new Button(  );
+        this.txtDialog = new TextField(  );
 
         // Size for elements
 

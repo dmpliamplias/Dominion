@@ -110,7 +110,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private void help(){
 
-        //TODO@Manuel help key anpassen
         view.alert(getText("lobbyview.help"), Alert.AlertType.INFORMATION );
 
     }
@@ -213,6 +212,17 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     public void sendStartRequest(){
 
         ObservableList<String> names = view.lvPlayers.getItems();
+
+        
+        //TODO Manuel control method
+       /* if(view.lvPlayers.getSelectionModel().getSelectedItems().size() < 2 ){
+            names = view.lvPlayers.getSelectionModel().getSelectedItems();
+        } else{
+
+            names = view.lvPlayers.getItems();
+        }
+
+        */
 
         ArrayList<Integer> clientIds = new ArrayList<Integer>();
 
