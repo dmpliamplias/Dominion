@@ -316,8 +316,10 @@ public class GameManager extends Manager {
         for(Card c : unusedCards){
             if(c.getName().equals(name)){
                 result = c;
-                unusedCards.remove(c);
             }
+        }
+        if(result != null) {
+            unusedCards.remove(result);
         }
         return result;
     }
@@ -328,8 +330,10 @@ public class GameManager extends Manager {
         for(Card c : unusedCards){
             if(cls.isInstance(c)){
                 result = (T)c;
-                unusedCards.remove(c);
             }
+        }
+        if(result != null) {
+            unusedCards.remove(result);
         }
         return result;
     }
@@ -340,10 +344,12 @@ public class GameManager extends Manager {
             if(c instanceof  PointCard){
                 PointCard card = (PointCard)c;
                 if(card.getPointCardType() == type) {
-                    unusedCards.remove(c);
                     result = card;
                 }
             }
+        }
+        if(result != null) {
+            unusedCards.remove(result);
         }
         return result;
     }
@@ -354,10 +360,12 @@ public class GameManager extends Manager {
             if(c instanceof  MoneyCard){
                 MoneyCard card = (MoneyCard)c;
                 if(card.getMoneyType() == type) {
-                    unusedCards.remove(c);
                     result = card;
                 }
             }
+        }
+        if(result != null) {
+            unusedCards.remove(result);
         }
         return result;
     }
