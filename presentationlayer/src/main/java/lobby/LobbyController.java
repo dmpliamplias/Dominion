@@ -211,18 +211,15 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void sendStartRequest(){
 
-        ObservableList<String> names = view.lvPlayers.getItems();
+        ObservableList<String> names;
 
-        
-        //TODO Manuel control method
-       /* if(view.lvPlayers.getSelectionModel().getSelectedItems().size() < 2 ){
+       if(view.lvPlayers.getSelectionModel().getSelectedItems().size() < 2 ){
             names = view.lvPlayers.getSelectionModel().getSelectedItems();
         } else{
 
             names = view.lvPlayers.getItems();
         }
 
-        */
 
         ArrayList<Integer> clientIds = new ArrayList<Integer>();
 

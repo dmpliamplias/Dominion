@@ -389,6 +389,7 @@ public class LobbyView extends View<LobbyModel> {
         this.btnDialogNo = new Button( );
         this.btnDialogYes = new Button(  );
         this.txtDialog = new TextField(  );
+        this.txtDialog.setAlignment( Pos.TOP_CENTER );
 
         // Size for elements
 
@@ -399,6 +400,7 @@ public class LobbyView extends View<LobbyModel> {
         this.hBoxDialog = new HBox( );
         this.hBoxDialog.setAlignment( Pos.CENTER );
         this.hBoxDialog.setPadding( new Insets( 10 ) );
+        this.hBoxDialog.setSpacing( 50 );
         this.vBoxDialog = new VBox(  );
         this.vBoxDialog.setPadding( new Insets( 10 ) );
         this.vBoxDialog.setAlignment( Pos.CENTER );
