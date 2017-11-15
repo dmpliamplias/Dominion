@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.WindowEvent;
 import javafx.event.EventHandler;
 
+import static util.StyleSheetPath.REGISTER;
+
 /**
  * @author Murat Kelleci - Update of View - Several changes
  */
@@ -55,6 +57,8 @@ public class RegisterView extends View<RegisterModel>{
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+
+        setStylesheet(scene, REGISTER);
 
         stage.setScene(scene);
 

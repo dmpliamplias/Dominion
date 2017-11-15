@@ -17,5 +17,7 @@ public final class StyleSheetPath {
     public static final String SPLASH_SCREEN = "/splashscreen/splash.css";
     /** Login view css path. */
     public static final String LOGIN = "/login/login.css";
+    /** Register view css path. */
+    public static final String REGISTER = "/register/register.css";
 
 }
