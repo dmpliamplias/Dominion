@@ -61,7 +61,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     //
     public void handleServerAnswer(List<Highscore> highscoreList){
         model.setHighscores(highscoreList);
-        view.bindModeltoView();
+        view.bindModelToView();
     }
 
 
@@ -119,4 +119,4 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     }
 
 
-    }
+}

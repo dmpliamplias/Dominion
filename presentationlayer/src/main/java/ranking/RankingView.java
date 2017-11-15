@@ -2,6 +2,7 @@ package ranking;
 
 import base.View;
 import com.weddingcrashers.model.Highscore;
+import com.weddingcrashers.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 //** @author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
@@ -52,9 +53,7 @@ public class RankingView extends View<RankingModel> {
             lblRanking = new Label();
             lblRanking.setFont(new Font("Helvetica", 16));
 
-            btnLobby=new Button();
-
-
+            btnLobby = new Button();
 
 
             userNameColumn = new TableColumn();
@@ -98,23 +97,22 @@ public class RankingView extends View<RankingModel> {
         this.btnLobby.setText(getText("loginview.btnGoToLobbyView"));
 
 
-
     }
 
-    public void bindModeltoView () {
+    public void bindModelToView() {
 
-            ArrayList<RankingViewModel> vmList = new ArrayList<RankingViewModel>();
+        ArrayList<RankingViewModel> vmList = new ArrayList<RankingViewModel>();
 
 
-            // For Loop from Script Kaspar Riesen Programming 1
-            for (Highscore hs : model.getHighscores()) {
-                RankingViewModel vm = new RankingViewModel();
-                vm.setName(hs.getUser().getUserName());
-                vm.setPoints(hs.getPoints());
-                vmList.add(vm);
+        //For Loop from Script Kaspar Riesen Programming 1
+        for (Highscore hs : model.getHighscores()) {
+            RankingViewModel vm = new RankingViewModel();
+            vm.setName(hs.getUser().getUserName());
+            vm.setPoints(hs.getPoints());
+            vmList.add(vm);
 
-            }
-            dataModel = FXCollections.observableList(vmList);
+        }
+        dataModel = FXCollections.observableList(vmList);
     }
 
 }
