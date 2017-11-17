@@ -7,6 +7,10 @@ import util.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 
+import static com.weddingcrashers.service.Language.ENGLISH;
+import static com.weddingcrashers.service.Language.GERMAN;
+import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+
 /**
  * Controller base class.
  *
@@ -48,7 +52,9 @@ public abstract class Controller<M extends Model, V extends View<M>> {
         if( plServiceLocator != null) {
             serverConnectionService = plServiceLocator.getServerConnectionService();
         }
+
     }
+
 
     /**
      * Returns the text for the given key.
@@ -56,6 +62,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
      * @param key the key to get the text for.
      * @return the text for the given key.
      */
+
     protected String getText(String key) {
         return translator.getString(key);
     }

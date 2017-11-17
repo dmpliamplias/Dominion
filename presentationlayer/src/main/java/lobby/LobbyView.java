@@ -120,6 +120,7 @@ public class LobbyView extends View<LobbyModel> {
         vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
 
+
         this.textFieldGameSettings = new TextField(  );
         this.textFieldGameSettings.getStyleClass().add( "title" );
 
@@ -411,6 +412,10 @@ public class LobbyView extends View<LobbyModel> {
 
         return vBoxDialog;
 
+    }
+
+    public ImageView getImgViewDeFlag() {
+        return imgViewDeFlag;
     }
 
 

@@ -17,10 +17,15 @@
     -fx-padding: 15 25 15 25;
 }
 
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
 .scroll-pane {
+    -fx-background-color: transparent;
     -fx-border-color: gold;
-    -fx-border-insets: 1;
-    -fx-border-width: 1;
+    -fx-border-insets: 3;
+    -fx-border-width: 3;
     -fx-font-size: 16;
 
 

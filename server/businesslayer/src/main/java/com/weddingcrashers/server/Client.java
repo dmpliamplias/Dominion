@@ -88,7 +88,7 @@ public class Client extends Thread {
             _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
         }else if(c.getMethod() == Methods.StartGame){
             LobbyContainer lc = (LobbyContainer)c;
-            _lobbyManager.startGame(lc);
+            _lobbyManager.startGame (lc);
         }
         else if(c.getMethod() == Methods.Lobby_Players){
             LobbyContainer lc = (LobbyContainer)c;
