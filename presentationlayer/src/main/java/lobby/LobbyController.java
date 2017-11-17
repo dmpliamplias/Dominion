@@ -58,6 +58,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
+        /**
+         *  author Manuel Wirz
+         *  */
+
         if (!serverConnectionService.isHoster()){
 
             view.getBtnStart().setVisible( false );
@@ -105,18 +109,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             goToRankingView();
         });
 
-
-
-        view.getImgViewDeFlag().setOnMouseClicked( e ->
-                view.switchTranslator( GERMAN ) );
-
-        /*view.getImgViewEngFlag().setOnMouseClicked( e ->
-                view.switchTranslator( SWISS_GERMAN ) );
-
-        view.getImgViewEngFlag().setOnMouseClicked( e ->
-                view.switchTranslator( ENGLISH ) );
-
-                */
 
         loadData();
     }

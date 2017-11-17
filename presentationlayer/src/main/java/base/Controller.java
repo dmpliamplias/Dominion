@@ -56,7 +56,6 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     }
 
 
-
     /**
      * Returns the text for the given key.
      *

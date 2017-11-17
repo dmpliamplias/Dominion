@@ -192,15 +192,4 @@ public abstract class View<M extends Model> {
         menuItemCH.setGraphic(imgViewChFlag);
     }
 
-    public ImageView getImgViewEngFlag() {
-        return imgViewEngFlag;
-    }
-
-    public ImageView getImgViewChFlag() {
-        return imgViewChFlag;
-    }
-
-    public ImageView getImgViewDeFlag() {
-        return imgViewDeFlag;
-    }
 }
