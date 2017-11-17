@@ -27,8 +27,6 @@ public class CardImageView extends ImageView {
         this.card = card;
         this.cardSize = cardSize;
         this.setOnMouseClicked(e -> {
-            //this.setLayoutX(e.getSceneX());
-            //this.setLayoutY(e.getSceneY());
             runAction();
         });
         this.setCardImageViewDesign();
@@ -71,17 +69,17 @@ public class CardImageView extends ImageView {
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
             } else if (cardSize.equals(cardSize.tooltip)) {
-                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/" + path));
+                Image playCT = new Image(this.getClass().getResourceAsStream("/Game/big/" + path));
                 this.setFitHeight(300);
                 this.setFitWidth(200);
                 this.setPreserveRatio(true);
-                this.setImage(playCB);
+                this.setImage(playCT);
             } else if (cardSize.equals(cardSize.miniMini)){
-                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
+                Image playCM2 = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(60);
                 this.setFitWidth(70);
                 this.setPreserveRatio(true);
-                this.setImage(playCM);
+                this.setImage(playCM2);
 
             }
 
