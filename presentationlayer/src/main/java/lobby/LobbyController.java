@@ -28,6 +28,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import static com.weddingcrashers.service.Language.ENGLISH;
+import static com.weddingcrashers.service.Language.GERMAN;
+import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+
 /**
  *  author Michel Schlatter
  *  */
@@ -43,6 +47,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         _user = plServiceLocator.getUser(); // I think you need id here for set ranking when game is over...
         serverConnectionService.setLobbyController( this );
         translator = ServiceLocator.getServiceLocator().getTranslator();
+
         initialize();
     }
 
@@ -63,6 +68,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
 
         }
+
 
         view.getBtnStart().setOnAction( (event) -> {
             startGame();
@@ -100,6 +106,17 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         });
 
 
+
+        view.getImgViewDeFlag().setOnMouseClicked( e ->
+                view.switchTranslator( GERMAN ) );
+
+        /*view.getImgViewEngFlag().setOnMouseClicked( e ->
+                view.switchTranslator( SWISS_GERMAN ) );
+
+        view.getImgViewEngFlag().setOnMouseClicked( e ->
+                view.switchTranslator( ENGLISH ) );
+
+                */
 
         loadData();
     }

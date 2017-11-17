@@ -413,6 +413,10 @@ public class LobbyView extends View<LobbyModel> {
 
     }
 
+    public ImageView getImgViewDeFlag() {
+        return imgViewDeFlag;
+    }
+
 
     public Stage getStageDialog() {
         return stageDialog;
