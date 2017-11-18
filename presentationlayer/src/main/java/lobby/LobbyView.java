@@ -154,7 +154,7 @@ public class LobbyView extends View<LobbyModel> {
     public VBox addVBoxGameSettings(){
 
        this.vBoxGameSettings = new VBox(  );
-        vBoxGameSettings.setSpacing( 100 );
+        vBoxGameSettings.setSpacing( 50 );
         Insets insets = new Insets( 20 ) ;
         vBoxGameSettings.setPadding( insets );
         vBoxGameSettings.setAlignment( Pos.CENTER );
@@ -170,19 +170,20 @@ public class LobbyView extends View<LobbyModel> {
 
         this.txtOption1 = new TextField(  );
         this.txtOption1.setEditable( false );
-        this.txtOption1.setPrefWidth( 216 );
+        this.txtOption1.setPrefWidth( 500 );
+        this.txtOption1.setPrefHeight( 50 );
 
 
-        this.textFieldRound = new TextField(  );
-        this.textFieldRound.setEditable( false );
-        this.textFieldRound.setPrefWidth( 216 );
+        //this.textFieldRound = new TextField(  );
+        //this.textFieldRound.setEditable( false );
+        //this.textFieldRound.setPrefWidth( 216 );
 
         this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
             "",10,11,12,13,14,15,16,17,18,19,20) );
         this.choiceBox.setPrefSize( 20,20 );
 
 
-        hBoxOption1.getChildren().addAll( txtOption1,textFieldRound,choiceBox );
+        hBoxOption1.getChildren().addAll( txtOption1,/*textFieldRound,*/choiceBox );
 
         // Option 2
 
@@ -193,21 +194,22 @@ public class LobbyView extends View<LobbyModel> {
 
         this.txtOption2 = new TextField(  );
         this.txtOption2.setEditable( false );
-        this.txtOption2.setPrefWidth( 216 );
+        this.txtOption2.setPrefWidth( 500 );
+        this.txtOption2.setPrefHeight( 50 );
 
         this.tpOption2 = new Tooltip(  );
 
-        this.txtOption2Statement = new TextField(  );
-        this.txtOption2Statement.setEditable( false );
-        this.txtOption2Statement.setPrefWidth( 216 );
-        this.txtOption2Statement.setTooltip( tpOption2 );
+        //this.txtOption2Statement = new TextField(  );
+        //this.txtOption2Statement.setEditable( false );
+        //this.txtOption2Statement.setPrefWidth( 216 );
+        //this.txtOption2Statement.setTooltip( tpOption2 );
 
         this.cbFinishPointCards = new CheckBox(  );
         this.cbFinishPointCards.setPrefSize( 50,50 );
 
 
 
-        hBoxOption2.getChildren().addAll( txtOption2, txtOption2Statement, cbFinishPointCards);
+        hBoxOption2.getChildren().addAll( txtOption2/*, txtOption2Statement*/, cbFinishPointCards);
 
 
 
@@ -268,7 +270,7 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setPrefSize( 860,200 );
+        scroll.setPrefSize( 860,230 );
         scroll.setFitToHeight(true);
         scroll.setFitToWidth(true);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
@@ -301,11 +303,11 @@ public class LobbyView extends View<LobbyModel> {
         this.btnLogout.setText( getText( "lobbyview.logout" ) );
         this.lblPlayer.setText( getText( "lobbyview.lblPlayer" ) );
         this.textFieldGameSettings.setText( getText( "lobbyview.GameSettings" ) );
-        this.textFieldRound.setText( getText( "lobbyview.rounds" ) );
+        //this.textFieldRound.setText( getText( "lobbyview.rounds" ) );
         this.tp.setText( getText( "lobbyview.tooltip" ) );
         this.txtOption1.setText( getText( "lobbyview.txtOption1" ) );
         this.txtOption2.setText( getText( "lobbyview.txtOption2" ) );
-        this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
+        //this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
         this.btnRanking.setText( getText( "lobbyview.ranking" ) );
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
@@ -345,7 +347,7 @@ public class LobbyView extends View<LobbyModel> {
         ImageView imgWait = new ImageView(wait);
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPadding( insets );
-        hBoxButtons.setPrefWidth( 500 );
+        hBoxButtons.setPrefWidth( 450 );
         hBoxButtons.setAlignment( Pos.CENTER );
         hBoxButtons.setSpacing(20);
         btnRanking = new Button(  );

@@ -18,12 +18,13 @@
 }
 
 .scroll-pane > .viewport {
-    -fx-background-color: transparent;
+    -fx-background-color: #FAAC58;
 }
 
 .scroll-pane {
-    -fx-background-color: transparent;
-    -fx-border-color: gold;
+
+    -fx-background-color: #FAAC58;
+    -fx-border-color: azure;
     -fx-border-insets: 3;
     -fx-border-width: 3;
     -fx-font-size: 16;
@@ -36,7 +37,9 @@
 }
 
 .list-view .list-cell:even {
-    -fx-border-color: gold;
+
+    -fx-background-color: #FAAC58;
+    -fx-border-color: azure;
     -fx-border-insets: 1;
     -fx-border-width: 1;
     -fx-font-size: 16;
@@ -44,11 +47,20 @@
 
 }
 .list-view .list-cell:odd {
-    -fx-border-color: gold;
+
+
+    -fx-border-color: azure;
     -fx-border-insets: 1;
     -fx-border-width: 1;
     -fx-font-size: 16;
 
+
+}
+
+.list-view:focused .list-cell:filled:selected {
+    -fx-background-color: green;
+    -fx-focus-color: green;
+    -fx-selection-bar: green;
 
 }
 
@@ -80,7 +92,18 @@
     -fx-font-size: 15px;
     -fx-padding: 15 25 15 25;
 
-    -fx-border-color: #FAAC58;
+    -fx-border-color: azure;
+    -fx-border-insets: 1;
+    -fx-border-width: 1;
+
+}
+
+.button:hover{
+
+    -fx-background-color: white;
+    -fx-text-fill: black;
+
+    -fx-border-color: black;
     -fx-border-insets: 1;
     -fx-border-width: 1;
 
@@ -90,4 +113,5 @@
 
     -fx-background-image: url("background2.jpg");
     -fx-background-size: cover;
+    -fx-selection-bar-text: red;
 }
