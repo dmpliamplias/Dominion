@@ -53,6 +53,41 @@ public abstract class Controller<M extends Model, V extends View<M>> {
             serverConnectionService = plServiceLocator.getServerConnectionService();
         }
 
+        /**
+         *  author Manuel Wirz
+         *  */
+
+        if(view.menuBarUsed){
+
+            setonActionEvent();
+        }
+
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    private void setonActionEvent() {
+
+        view.menuItemCH.setOnAction( event -> {
+
+            view.switchTranslator(SWISS_GERMAN);
+
+        } );
+
+        view.menuItemDE.setOnAction( event -> {
+
+            view.switchTranslator( GERMAN );
+
+        } );
+
+        view.menuItemENG.setOnAction( event -> {
+
+            view.switchTranslator( ENGLISH );
+
+        } );
+
     }
 
 

@@ -44,6 +44,7 @@ public abstract class View<M extends Model> {
     protected ImageView imgViewEngFlag;
     protected ImageView imgViewChFlag;
     protected ImageView imgViewDeFlag;
+    protected Boolean menuBarUsed;
 
 
     // ---- Constructor
@@ -57,12 +58,14 @@ public abstract class View<M extends Model> {
     protected View(Stage stage, M model) {
         this.stage = stage;
         this.model = model;
+        this.menuBarUsed = new Boolean( false );
 
         serviceLocator = ServiceLocator.getServiceLocator();
         translator = serviceLocator.getTranslator();
         scene = create_GUI(); // Create all controls within "root"
         stage.setScene(scene);
         stage.getIcons().add(imgIcon);
+
     }
 
 
@@ -177,6 +180,8 @@ public abstract class View<M extends Model> {
         imgViewEngFlag.setFitWidth(20);
 
         setMenuTexts();
+
+        menuBarUsed = true;
 
         return menuBar;
     }
