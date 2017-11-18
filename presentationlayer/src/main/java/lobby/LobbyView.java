@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -39,7 +40,7 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnLogout;
     protected TextField lblPlayer;
     protected TextField txtChat;
-    protected TextField textFieldGameSettings;
+    protected Text textFieldGameSettings;
     protected TextField textFieldRound;
     protected ChoiceBox choiceBox;
     protected Tooltip tp;
@@ -121,12 +122,9 @@ public class LobbyView extends View<LobbyModel> {
 
 
 
-        this.textFieldGameSettings = new TextField(  );
+        this.textFieldGameSettings = new Text(  );
         this.textFieldGameSettings.getStyleClass().add( "title" );
 
-        this.textFieldGameSettings.setEditable( false );
-        this.textFieldGameSettings.setMaxWidth( 860 );
-        this.textFieldGameSettings.setAlignment( Pos.TOP_CENTER );
 
         vBoxAddMenu.getChildren().addAll( super.getMenuBar(), btnTestGameView, textFieldGameSettings );
 
@@ -172,12 +170,6 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption1.setEditable( false );
         this.txtOption1.setPrefWidth( 500 );
         this.txtOption1.setPrefHeight( 50 );
-
-
-        //this.textFieldRound = new TextField(  );
-        //this.textFieldRound.setEditable( false );
-        //this.textFieldRound.setPrefWidth( 216 );
-
         this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
             "",10,11,12,13,14,15,16,17,18,19,20) );
         this.choiceBox.setPrefSize( 20,20 );
@@ -196,14 +188,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption2.setEditable( false );
         this.txtOption2.setPrefWidth( 500 );
         this.txtOption2.setPrefHeight( 50 );
-
         this.tpOption2 = new Tooltip(  );
-
-        //this.txtOption2Statement = new TextField(  );
-        //this.txtOption2Statement.setEditable( false );
-        //this.txtOption2Statement.setPrefWidth( 216 );
-        //this.txtOption2Statement.setTooltip( tpOption2 );
-
         this.cbFinishPointCards = new CheckBox(  );
         this.cbFinishPointCards.setPrefSize( 50,50 );
 
@@ -303,15 +288,12 @@ public class LobbyView extends View<LobbyModel> {
         this.btnLogout.setText( getText( "lobbyview.logout" ) );
         this.lblPlayer.setText( getText( "lobbyview.lblPlayer" ) );
         this.textFieldGameSettings.setText( getText( "lobbyview.GameSettings" ) );
-        //this.textFieldRound.setText( getText( "lobbyview.rounds" ) );
         this.tp.setText( getText( "lobbyview.tooltip" ) );
-        this.txtOption1.setText( getText( "lobbyview.txtOption1" ) );
-        this.txtOption2.setText( getText( "lobbyview.txtOption2" ) );
-        //this.txtOption2Statement.setText( getText( "lobbyview.statement" ) );
+        this.txtOption1.setText( getText( "lobbyview.txtOption2" ) );
+        this.txtOption2.setText( getText( "lobbyview.txtOption1" ) );
         this.btnRanking.setText( getText( "lobbyview.ranking" ) );
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
-        //this.txtWait.setText( getText( "lobbyview.txtWait" ) );
 
     }
 
@@ -359,14 +341,6 @@ public class LobbyView extends View<LobbyModel> {
         hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
 
         this.hBoxOptionClient.getChildren().addAll( imgWait, hBoxButtons );
-      
-        /*
-        this.txtWait = new TextField("Bitte warten bis der Hoster startet:) /n please wait till the hoster starts the game/n ");
-        this.txtWait.setEditable( false );
-        this.txtWait.setPrefSize(650,350);
-        this.txtWait.getStyleClass().add( "clientText" );
-        this.hBoxOptionClient.getChildren().add( txtWait );
-        */
         this.root.setCenter(hBoxOptionClient);
     }
 
@@ -498,7 +472,7 @@ public class LobbyView extends View<LobbyModel> {
         return txtChat;
     }
 
-    public TextField getTextFieldGameSettings() {
+    public Text getTextFieldGameSettings() {
         return textFieldGameSettings;
     }
 
