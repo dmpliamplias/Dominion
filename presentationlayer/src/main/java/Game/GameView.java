@@ -13,12 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -53,13 +48,13 @@ public class GameView extends View<GameModel> {
      *  */
 
     public Scene create_GUI(){
-        BorderPane root = new BorderPane();
+        FlowPane root = new FlowPane();
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
         gp = new GridPane();
         VBox vb = new VBox();
-        root.setCenter(gp);
-        root.setBottom( addChatGridPane() );
+        root.getChildren().add(gp);
+        root.getChildren().add( addChatGridPane() );
         gp.add(vb, 2, 14);
 
 
@@ -319,7 +314,7 @@ public class GameView extends View<GameModel> {
 
 
         // root Layout
-        root.setBottom(addChatGridPane());
+        root.getChildren().add(addChatGridPane());
         //TODO Venessa u can use for your GUI
        // root.setCenter();
        // root.setRight();
@@ -331,6 +326,7 @@ public class GameView extends View<GameModel> {
         stage.setTitle( "Dominion" );
 
         setTexts();
+        this.stage.setResizable(true);
         return scene;
     }
 

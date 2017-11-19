@@ -376,7 +376,7 @@ public class GameManager extends Manager {
        if(cardType == CardType.Anwesen
                || cardType == CardType.Herzogtum
                || cardType == CardType.Provinz){
-           if(players == 2) return 8;
+           if(players <= 2) return 8;
            if(players == 3) return 12;
            if(players == 4) return 12;
        }
@@ -391,9 +391,10 @@ public class GameManager extends Manager {
         }
 
         if(cardType == CardType.Kupfer){
-            if(players == 2) return 146;
+            return 40; // auf Wunsch von Vanessa und Dozent Lukas Frey
+           /* if(players <= 2) return 146;
             if(players == 3) return 139;
-            if(players == 4) return 132;
+            if(players == 4) return 132;*/
         }
 
        return 0;
