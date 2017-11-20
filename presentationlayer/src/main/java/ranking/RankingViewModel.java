@@ -12,10 +12,17 @@ public class RankingViewModel {
     private SimpleStringProperty name;
     private SimpleIntegerProperty points;
 
+    public int getPosition() {
+        return position.get();
+    }
+
+    private SimpleIntegerProperty position;
+
 
     protected RankingViewModel(){
         this.name= new SimpleStringProperty();
         this.points=new SimpleIntegerProperty();
+        this.position = new SimpleIntegerProperty();
     }
 
     public String getName() {
@@ -41,4 +48,13 @@ public class RankingViewModel {
     public void setPoints(int points) {
         this.points.set(points);
     }
+
+    public SimpleIntegerProperty positionProperty() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position.set(position);
+    }
+
 }

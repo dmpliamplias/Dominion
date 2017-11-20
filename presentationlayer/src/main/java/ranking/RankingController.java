@@ -30,11 +30,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         serverConnectionService.setRankingController(this);
         initialize();
 
+
     }
-
-
-
-
 
     public void initialize() {
         try {
@@ -63,7 +60,6 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         model.setHighscores(highscoreList);
         view.bindModelToView();
     }
-
 
     ///** @author Murat Kelleci
     //
