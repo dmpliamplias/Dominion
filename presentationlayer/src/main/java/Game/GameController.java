@@ -57,7 +57,6 @@ public class GameController extends Controller<GameModel, GameView> {
     public void initialize() {
         try {
             serverConnectionService.updateViewStatus( ViewStatus.Game ); // set ViewStatus for Server
-
         } catch (IOException e) {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
@@ -108,9 +107,11 @@ public class GameController extends Controller<GameModel, GameView> {
             }else{
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
-            // highlight the user who has the turn....
-
+            // highlight the user who has the turn...
+            view.updateUnusedCards(this.unusedCards);
         });
+
+
     }
 
     public void handleServerAnswer_updateRound(int round){

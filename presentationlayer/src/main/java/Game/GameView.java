@@ -46,10 +46,10 @@ public class GameView extends View<GameModel> {
      Label lblGold;
      Label lblAnwesen;
      Label lblDorf;
-     Label lblGaerten;
+     Label lblGarten;
      Label lblGeldverleiher;
      Label lblHerzogtum;
-     Label lblHolzfaeller;
+     Label lblHolzfäller;
      Label lblJahrmarkt;
      Label lblMarkt;
      Label lblLaboratorium;
@@ -60,10 +60,10 @@ public class GameView extends View<GameModel> {
      CardImageView imgGold;
      CardImageView imgAnwesen;
      CardImageView imgDorf;
-     CardImageView imgGaerten;
+     CardImageView imgGarten;
      CardImageView imgGeldverleiher;
      CardImageView imgHerzogtum;
-     CardImageView imgHolzfaeller;
+     CardImageView imgHolzfäller;
      CardImageView imgJahrmarkt;
      CardImageView imgMarkt;
      CardImageView imgLaboratorium;
@@ -101,7 +101,6 @@ public class GameView extends View<GameModel> {
         gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6, column7, column8, column9);
 
 
-
         // Creating 30 rows
         for (int i = 0; i<20;i++){
             RowConstraints row = new RowConstraints(30);
@@ -109,92 +108,6 @@ public class GameView extends View<GameModel> {
         }
 
 
-
-        Image gold = new Image(getClass().getResourceAsStream("/game/mini/gold_DE.png"));
-        ImageView imgVgold = new ImageView(gold);
-        imgVgold.setFitHeight(60);
-        imgVgold.setFitWidth(70);
-        gp.setConstraints(imgVgold, 2, 6);
-        gp.setRowSpan(imgVgold, 2);
-
-        Image schmiede = new Image(getClass().getResourceAsStream("/game/mini/schmiede_DE.png"));
-        ImageView imgVschmiede = new ImageView(schmiede);
-        imgVschmiede.setFitHeight(90);
-        imgVschmiede.setFitWidth(100);
-        gp.setConstraints(imgVschmiede, 3, 2);
-        gp.setRowSpan(imgVschmiede, 3);
-
-        Image laboratorium = new Image(getClass().getResourceAsStream("/game/mini/laboratorium_DE.png"));
-        ImageView imgVlaboratorium = new ImageView(laboratorium);
-        imgVlaboratorium.setFitHeight(90);
-        imgVlaboratorium.setFitWidth(100);
-        gp.setConstraints(imgVlaboratorium, 4, 2);
-        gp.setRowSpan(imgVlaboratorium, 3);
-
-        Image jahrmarkt = new Image(getClass().getResourceAsStream("/game/mini/jahrmarkt_DE.png"));
-        ImageView imgVjahrmarkt = new ImageView(jahrmarkt);
-        imgVjahrmarkt.setFitHeight(90);
-        imgVjahrmarkt.setFitWidth(100);
-        gp.setConstraints(imgVjahrmarkt, 5, 2);
-        gp.setRowSpan(imgVjahrmarkt, 3);
-
-        Image markt = new Image(getClass().getResourceAsStream("/game/mini/markt_DE.png"));
-        ImageView imgVmarkt = new ImageView(markt);
-        imgVmarkt.setFitHeight(90);
-        imgVmarkt.setFitWidth(100);
-        gp.setConstraints(imgVmarkt, 6, 2);
-        gp.setRowSpan(imgVmarkt, 3);
-
-        Image dorf = new Image(getClass().getResourceAsStream("/game/mini/dorf_DE.png"));
-        ImageView imgVdorf = new ImageView(dorf);
-        imgVdorf.setFitHeight(90);
-        imgVdorf.setFitWidth(100);
-        gp.setConstraints(imgVdorf, 3, 5);
-        gp.setRowSpan(imgVdorf, 3);
-
-        Image holzfaeller = new Image(getClass().getResourceAsStream("/game/mini/holzfaeller_DE.png"));
-        ImageView imgVholzfaeller = new ImageView(holzfaeller);
-        imgVholzfaeller.setFitHeight(90);
-        imgVholzfaeller.setFitWidth(100);
-        gp.setConstraints(imgVholzfaeller, 4, 5);
-        gp.setRowSpan(imgVholzfaeller, 3);
-
-        Image gaerten = new Image(getClass().getResourceAsStream("/game/mini/gaerten_DE.png"));
-        ImageView imgVgaerten = new ImageView(gaerten);
-        imgVgaerten.setFitHeight(90);
-        imgVgaerten.setFitWidth(100);
-        gp.setConstraints(imgVgaerten, 5, 5);
-        gp.setRowSpan(imgVgaerten, 3);
-
-        Image geldverleiher = new Image(getClass().getResourceAsStream("/game/mini/geldverleiher_DE.png"));
-        ImageView imgVgeldverleiher = new ImageView(geldverleiher);
-        imgVgeldverleiher.setFitHeight(90);
-        imgVgeldverleiher.setFitWidth(100);
-        gp.setConstraints(imgVgeldverleiher, 6, 5);
-        gp.setRowSpan(imgVgeldverleiher, 3);
-
-        Image anwesen = new Image(getClass().getResourceAsStream("/game/mini/anwesen_DE.png"));
-        ImageView imgVanwesen = new ImageView(anwesen);
-        imgVanwesen.setFitHeight(60);
-        imgVanwesen.setFitWidth(70);
-        gp.setConstraints(imgVanwesen, 7, 2);
-        gp.setRowSpan(imgVanwesen, 2);
-
-        Image herzogtum = new Image(getClass().getResourceAsStream("/game/mini/herzogtum_DE.png"));
-        ImageView imgVherzogtum = new ImageView(herzogtum);
-        imgVherzogtum.setFitHeight(60);
-        imgVherzogtum.setFitWidth(70);
-        gp.setConstraints(imgVherzogtum, 7, 4);
-        gp.setRowSpan(imgVherzogtum, 2);
-
-        Image provinz = new Image(getClass().getResourceAsStream("/game/mini/provinz_DE.png"));
-        ImageView imgVprovinz = new ImageView(provinz);
-        imgVprovinz.setFitHeight(60);
-        imgVprovinz.setFitWidth(70);
-        gp.setConstraints(imgVprovinz, 7, 6);
-        gp.setRowSpan(imgVprovinz, 2);
-
-        gp.getChildren().addAll(imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
 
 
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
@@ -207,113 +120,9 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(imgVback);
 
 
-
-
-        // Create Tooltip
-        // ---------------------------------------------------------
-
-        /**
-        Image kupferB = new Image(getClass().getResourceAsStream("/game/big/kupfer_DE.png"));
-        ImageView imgVkupferB = new ImageView(kupferB);
-        imgVkupferB.setFitHeight(300);
-        imgVkupferB.setFitWidth(200);
-        Tooltip ttKupfer = new Tooltip();
-        ttKupfer.setGraphic(imgVkupferB);
-        Tooltip.install(imgKupfer, ttKupfer);
-
-
-        Image silberB = new Image(getClass().getResourceAsStream("/game/big/silber_DE.png"));
-        ImageView imgVsilberB = new ImageView(silberB);
-        imgVsilberB.setFitHeight(300);
-        imgVsilberB.setFitWidth(200);
-        Tooltip ttSilber = new Tooltip();
-        ttSilber.setGraphic(imgVsilberB);
-        Tooltip.install(imgVsilber, ttSilber);
-    */
-
-        Tooltip ttGold = new Tooltip();
-        Tooltip ttAnwesen = new Tooltip();
-        Tooltip ttHerzogtum = new Tooltip();
-        Tooltip ttProvinz = new Tooltip();
-        Tooltip ttDorf = new Tooltip();
-        Tooltip ttGaerten = new Tooltip();
-        Tooltip ttGeldverleiher = new Tooltip();
-        Tooltip ttHolzfaeller = new Tooltip();
-        Tooltip ttJahrmarkt = new Tooltip();
-        Tooltip ttLaboratorium = new Tooltip();
-        Tooltip ttMarkt = new Tooltip();
-        Tooltip ttSchmiede = new Tooltip();
-
-
-        // ---------------------------------------------------------
-
-
-        // Label Number of available cards to buy
-        // ---------------------------------------------------------
-
-        lblKupfer = new Label();
-        gp.setConstraints(lblKupfer, 2, 2);
-        setLabelFormat(lblKupfer);
-
-        lblSilber = new Label();
-        gp.setConstraints(lblSilber, 2, 4);
-        setLabelFormat(lblSilber);
-
-        lblGold = new Label();
-        gp.setConstraints(lblGold, 2, 6);
-        setLabelFormat(lblGold);
-
-        lblAnwesen = new Label();
-        gp.setConstraints(lblAnwesen, 7, 2);
-        setLabelFormat(lblAnwesen);
-
-        lblDorf = new Label();
-        gp.setConstraints(lblDorf, 3, 5);
-        setLabelFormat(lblDorf);
-
-        lblGaerten = new Label();
-        gp.setConstraints(lblGaerten, 5, 5);
-        setLabelFormat(lblGaerten);
-
-        lblGeldverleiher = new Label();
-        gp.setConstraints(lblGeldverleiher, 6, 5);
-        setLabelFormat(lblGeldverleiher);
-
-        lblHerzogtum = new Label();
-        gp.setConstraints(lblHerzogtum, 7, 4);
-        setLabelFormat(lblHerzogtum);
-
-        lblHolzfaeller = new Label();
-        gp.setConstraints(lblHolzfaeller, 4, 5);
-        setLabelFormat(lblHolzfaeller);
-
-        lblJahrmarkt = new Label();
-        gp.setConstraints(lblJahrmarkt, 5, 2);
-        setLabelFormat(lblJahrmarkt);
-
-        lblMarkt = new Label();
-        gp.setConstraints(lblMarkt, 6, 2);
-        setLabelFormat(lblMarkt);
-
-        lblLaboratorium = new Label();
-        gp.setConstraints(lblLaboratorium, 4, 2);
-        setLabelFormat(lblLaboratorium);
-
-        lblProvinz = new Label();
-        gp.setConstraints(lblProvinz, 7, 6);
-        setLabelFormat(lblProvinz);
-
-        lblSchmiede = new Label();
-        gp.setConstraints(lblSchmiede, 3, 2);
-        setLabelFormat(lblSchmiede);
-
         Label lblNachziehstapel = new Label();
         gp.setConstraints(lblNachziehstapel, 1, 14);
         setLabelFormat(lblNachziehstapel);
-
-
-
-        // ---------------------------------------------------------
 
 
 
@@ -463,91 +272,238 @@ public class GameView extends View<GameModel> {
         return txtNameChat;
     }
 
+    /**
+     * Author Vanessa Cajochen
+     */
+
+
     public void updateUnusedCards(ArrayList<Card> list)
     {
-        /*
+
         imgKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.miniMini);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
         gp.getChildren().add(imgKupfer);
+
+        Tooltip ttKupfer = new Tooltip();
+        CardImageView imgttKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.tooltip);
+        ttKupfer.setGraphic(imgttKupfer);
+        Tooltip.install(imgKupfer, ttKupfer);
 
         lblKupfer = new Label();
         gp.setConstraints(lblKupfer, 2, 2);
         setLabelFormat(lblKupfer);
         lblKupfer.setText(Integer.toString(countCards(list, "Kupfer")));
 
-        */
 
         imgSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.miniMini);
         gp.setConstraints(imgSilber, 2, 4);
         gp.setRowSpan(imgSilber, 2);
         gp.getChildren().add(imgSilber);
 
+        Tooltip ttSilber = new Tooltip();
+        CardImageView imgttSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.tooltip);
+        ttSilber.setGraphic(imgttSilber);
+        Tooltip.install(imgSilber, ttSilber);
+
+        lblSilber = new Label();
+        gp.setConstraints(lblSilber, 2, 4);
+        setLabelFormat(lblSilber);
         lblSilber.setText(Integer.toString(countCards(list, "Silber")));
 
-                /*
 
         imgGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.miniMini);
         gp.setConstraints(imgGold, 2, 6);
         gp.setRowSpan(imgGold, 2);
         gp.getChildren().add(imgGold);
 
+        Tooltip ttGold = new Tooltip();
+        CardImageView imgttGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.tooltip);
+        ttGold.setGraphic(imgttGold);
+        Tooltip.install(imgGold, ttGold);
+
+        lblGold = new Label();
+        gp.setConstraints(lblGold, 2, 6);
+        setLabelFormat(lblGold);
         lblGold.setText(Integer.toString(countCards(list, "Gold")));
 
-        imgAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.miniSize);
+
+        imgAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.miniMini);
         gp.setConstraints(imgAnwesen, 7, 2);
         gp.setRowSpan(imgAnwesen, 2);
         gp.getChildren().add(imgAnwesen);
 
+        Tooltip ttAnwesen = new Tooltip();
+        CardImageView imgttAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.tooltip);
+        ttAnwesen.setGraphic(imgttAnwesen);
+        Tooltip.install(imgAnwesen, ttAnwesen);
+
+        lblAnwesen = new Label();
+        gp.setConstraints(lblAnwesen, 7, 2);
+        setLabelFormat(lblAnwesen);
         lblAnwesen.setText(Integer.toString(countCards(list, "Anwesen")));
 
 
-        lblDorf = new Label();
-        gp.setConstraints(lblDorf, 3, 5);
-        setLabelFormat(lblDorf);
+        imgProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.miniMini);
+        gp.setConstraints(imgProvinz, 7, 6);
+        gp.setRowSpan(imgProvinz, 2);
+        gp.getChildren().add(imgProvinz);
 
-        lblGaerten = new Label();
-        gp.setConstraints(lblGaerten, 5, 5);
-        setLabelFormat(lblGaerten);
-
-        lblGeldverleiher = new Label();
-        gp.setConstraints(lblGeldverleiher, 6, 5);
-        setLabelFormat(lblGeldverleiher);
-
-        lblHerzogtum = new Label();
-        gp.setConstraints(lblHerzogtum, 7, 4);
-        setLabelFormat(lblHerzogtum);
-
-        lblHolzfaeller = new Label();
-        gp.setConstraints(lblHolzfaeller, 4, 5);
-        setLabelFormat(lblHolzfaeller);
-
-        lblJahrmarkt = new Label();
-        gp.setConstraints(lblJahrmarkt, 5, 2);
-        setLabelFormat(lblJahrmarkt);
-
-        lblMarkt = new Label();
-        gp.setConstraints(lblMarkt, 6, 2);
-        setLabelFormat(lblMarkt);
-
-        lblLaboratorium = new Label();
-        gp.setConstraints(lblLaboratorium, 4, 2);
-        setLabelFormat(lblLaboratorium);
+        Tooltip ttProvinz = new Tooltip();
+        CardImageView imgttProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.tooltip);
+        ttProvinz.setGraphic(imgttProvinz);
+        Tooltip.install(imgProvinz, ttProvinz);
 
         lblProvinz = new Label();
         gp.setConstraints(lblProvinz, 7, 6);
         setLabelFormat(lblProvinz);
+        lblProvinz.setText(Integer.toString(countCards(list, "Provinz")));
+
+
+        imgHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.miniMini);
+        gp.setConstraints(imgHerzogtum, 7, 4);
+        gp.setRowSpan(imgHerzogtum, 2);
+        gp.getChildren().add(imgHerzogtum);
+
+        Tooltip ttHerzogtum = new Tooltip();
+        CardImageView imgttHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.tooltip);
+        ttHerzogtum.setGraphic(imgttHerzogtum);
+        Tooltip.install(imgHerzogtum, ttHerzogtum);
+
+        lblHerzogtum = new Label();
+        gp.setConstraints(lblHerzogtum, 7, 4);
+        setLabelFormat(lblHerzogtum);
+        lblHerzogtum.setText(Integer.toString(countCards(list, "Herzogtum")));
+
+
+        imgDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgDorf, 3, 5);
+        gp.setRowSpan(imgDorf, 3);
+        gp.getChildren().add(imgDorf);
+
+        Tooltip ttDorf = new Tooltip();
+        CardImageView imgttDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.tooltip);
+        ttDorf.setGraphic(imgttDorf);
+        Tooltip.install(imgDorf, ttDorf);
+
+        lblDorf = new Label();
+        gp.setConstraints(lblDorf, 3, 5);
+        setLabelFormat(lblDorf);
+        lblDorf.setText(Integer.toString(countCards(list, "Dorf")));
+
+
+        imgGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgGarten, 5, 5);
+        gp.setRowSpan(imgGarten, 3);
+        gp.getChildren().add(imgGarten);
+
+        Tooltip ttGarten = new Tooltip();
+        CardImageView imgttGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.tooltip);
+        ttGarten.setGraphic(imgttGarten);
+        Tooltip.install(imgGarten, ttGarten);
+
+        lblGarten = new Label();
+        gp.setConstraints(lblGarten, 5, 5);
+        setLabelFormat(lblGarten);
+        lblGarten.setText(Integer.toString(countCards(list, "Garten")));
+
+
+        imgGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgGeldverleiher, 6, 5);
+        gp.setRowSpan(imgGeldverleiher, 3);
+        gp.getChildren().add(imgGeldverleiher);
+
+        Tooltip ttGeldverleiher = new Tooltip();
+        CardImageView imgttGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.tooltip);
+        ttGeldverleiher.setGraphic(imgttGeldverleiher);
+        Tooltip.install(imgGeldverleiher, ttGeldverleiher);
+
+        lblGeldverleiher = new Label();
+        gp.setConstraints(lblGeldverleiher, 6, 5);
+        setLabelFormat(lblGeldverleiher);
+        lblGeldverleiher.setText(Integer.toString(countCards(list, "Geldverleiher")));
+
+
+        imgHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgHolzfäller, 4, 5);
+        gp.setRowSpan(imgHolzfäller, 3);
+        gp.getChildren().add(imgHolzfäller);
+
+        Tooltip ttHolzfäller = new Tooltip();
+        CardImageView imgttHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.tooltip);
+        ttHolzfäller.setGraphic(imgttHolzfäller);
+        Tooltip.install(imgHolzfäller, ttHolzfäller);
+
+        lblHolzfäller = new Label();
+        gp.setConstraints(lblHolzfäller, 4, 5);
+        setLabelFormat(lblHolzfäller);
+        lblHolzfäller.setText(Integer.toString(countCards(list, "Holzfäller")));
+
+
+        imgJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgJahrmarkt, 5, 2);
+        gp.setRowSpan(imgJahrmarkt, 3);
+        gp.getChildren().add(imgJahrmarkt);
+
+        Tooltip ttJahrmarkt = new Tooltip();
+        CardImageView imgttJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.tooltip);
+        ttJahrmarkt.setGraphic(imgttJahrmarkt);
+        Tooltip.install(imgJahrmarkt, ttJahrmarkt);
+
+        lblJahrmarkt = new Label();
+        gp.setConstraints(lblJahrmarkt, 5, 2);
+        setLabelFormat(lblJahrmarkt);
+        lblJahrmarkt.setText(Integer.toString(countCards(list, "Jahrmarkt")));
+
+
+        imgLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgLaboratorium, 4, 2);
+        gp.setRowSpan(imgLaboratorium, 3);
+        gp.getChildren().add(imgLaboratorium);
+
+        Tooltip ttLaboratorium = new Tooltip();
+        CardImageView imgttLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.tooltip);
+        ttLaboratorium.setGraphic(imgttLaboratorium);
+        Tooltip.install(imgLaboratorium, ttLaboratorium);
+
+        lblLaboratorium = new Label();
+        gp.setConstraints(lblLaboratorium, 4, 2);
+        setLabelFormat(lblLaboratorium);
+        lblLaboratorium.setText(Integer.toString(countCards(list, "Laboratorium")));
+
+
+        imgSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgSchmiede, 3, 2);
+        gp.setRowSpan(imgSchmiede, 3);
+        gp.getChildren().add(imgSchmiede);
+
+        Tooltip ttSchmiede = new Tooltip();
+        CardImageView imgttSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.tooltip);
+        ttSchmiede.setGraphic(imgttSchmiede);
+        Tooltip.install(imgSchmiede, ttSchmiede);
 
         lblSchmiede = new Label();
         gp.setConstraints(lblSchmiede, 3, 2);
         setLabelFormat(lblSchmiede);
- */
+        lblSchmiede.setText(Integer.toString(countCards(list, "Schmiede")));
+
+
+        imgMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgMarkt, 6, 2);
+        gp.setRowSpan(imgMarkt, 3);
+        gp.getChildren().add(imgMarkt);
+
+        Tooltip ttMarkt = new Tooltip();
+        CardImageView imgttMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.tooltip);
+        ttMarkt.setGraphic(imgttMarkt);
+        Tooltip.install(imgMarkt, ttMarkt);
+
+        lblMarkt = new Label();
+        gp.setConstraints(lblMarkt, 6, 2);
+        setLabelFormat(lblMarkt);
+        lblMarkt.setText(Integer.toString(countCards(list, "Markt")));
 
     }
-
-
-
-
 
 
     public int countCards(ArrayList<Card> list, String s) {
@@ -567,9 +523,7 @@ public class GameView extends View<GameModel> {
                 index = i;
             }
         }
-        System.out.println(index);
             return list.get(index);
-
     }
 
 
