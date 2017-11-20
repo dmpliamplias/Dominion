@@ -1,19 +1,28 @@
 package Controls;
 
+import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.PointCard;
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.servermodels.CardPlayedInfo;
+import com.weddingcrashers.servermodels.GameContainer;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import com.weddingcrashers.util.businesslayer.ServerUtils;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import util.PLServiceLocator;
+import util.ServerConnectionService;
+
+import java.io.IOException;
 
 
-   //**
+//**
    //@author Murat Kelleci*/ 20.10.17-04.11.2017
 
 public class CardImageView extends ImageView {
@@ -24,13 +33,16 @@ public class CardImageView extends ImageView {
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private final CardSize cardSize;
+    private final View view;
+
     public enum CardSize{
         miniSize,bigSize, tooltip, miniMini
     }
 
-    public CardImageView(Card card, CardSize cardSize) {
+    public CardImageView(Card card, CardSize cardSize, View v) {
         this.card = card;
         this.cardSize = cardSize;
+        this.view=v;
         this.setOnMouseClicked(e -> {
             runAction();
         });
@@ -64,7 +76,16 @@ public class CardImageView extends ImageView {
     }
 
     private void buyCards(){
+        GameContainer gc = new GameContainer(Methods.BuyCard);
+        CardPlayedInfo buyInfo = new CardPlayedInfo();
+        buyInfo.setUserId((int)getUser().getId());
+        buyInfo.setCard(card);
 
+        try {
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     private User getUser(){
