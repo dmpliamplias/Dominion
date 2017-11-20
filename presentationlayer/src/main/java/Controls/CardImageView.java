@@ -4,11 +4,13 @@ import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.PointCard;
+import com.weddingcrashers.model.User;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import util.PLServiceLocator;
 
 
    //**
@@ -65,6 +67,9 @@ public class CardImageView extends ImageView {
 
     }
 
+    private User getUser(){
+       return PLServiceLocator.getPLServiceLocator().getUser();
+    }
 
     private void setCardImageViewDesign() {
 
@@ -77,16 +82,17 @@ public class CardImageView extends ImageView {
             code = code.replace("de_", "");
             path = path.replace("{0}", code.toUpperCase());
 
-            if (cardSize.equals(cardSize.miniSize)) {
-                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/" + path));
+            if (cardSize.equals(cardSize.miniSize)){
+                Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
 
                 //ToDo setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
+                //ToDo umschreiben MagicNumbers
                 this.setFitHeight(miniSizeHeight);
                 //this.setFitWidth(100);
                 this.setPreserveRatio(true);
                 this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
-                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/" + path));
+                Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
                 this.setFitHeight(bigSizeHeight);
                 //this.setFitWidth(60);
                 this.setPreserveRatio(true);
@@ -97,19 +103,20 @@ public class CardImageView extends ImageView {
                 //this.setFitWidth(200);
                 this.setPreserveRatio(true);
                 this.setImage(playCT);
-            } else if (cardSize.equals(cardSize.miniMini)) {
-                Image playCM2 = new Image(this.getClass().getResourceAsStream("/Game/mini/" + path));
+            } else if (cardSize.equals(cardSize.miniMini)){
+                Image playCM2 = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
                 this.setFitHeight(miniMiniHeight);
-                // this.setFitWidth(70);
+               // this.setFitWidth(70);
                 this.setPreserveRatio(true);
                 this.setImage(playCM2);
 
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e){
+                e.printStackTrace();
 
         }
+
     }
 
 }

@@ -118,6 +118,20 @@ public class GameController extends Controller<GameModel, GameView> {
             // TODO: 12.11.2017 Vane update round here (show in view)
         });
     }
+
+    public void handleServerAnswer_cardBuyed(GameContainer gc){
+        Platform.runLater(() ->{
+            CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
+            if(buyedInfo.getUserId() == myUser.getId()){
+                myCardSet.getTrayStack().add(buyedInfo.getCard());
+                // TODO: 20.11.2017  update View ....
+            }else{
+                // TODO: 20.11.2017  another Player has one Card more... maybe update smth in view... 
+            }
+            unusedCards = gc.getUnusedCards();
+            // TODO: 20.11.2017  Vanessa: update unusedCards in View 
+        });
+    }
     
     public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo){
         Platform.runLater(() ->{
