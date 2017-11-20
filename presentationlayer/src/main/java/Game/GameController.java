@@ -93,6 +93,11 @@ public class GameController extends Controller<GameModel, GameView> {
       }
       if(unusedCards != null && unusedCards.size() > 0){
           this.unusedCards = unusedCards;
+          for(Card uc : unusedCards){
+             if(uc.getName().equals("Anwesen")){
+                 boolean found = true;
+             }
+          }
       }
 
       activeUserId = userIdHasTurn;

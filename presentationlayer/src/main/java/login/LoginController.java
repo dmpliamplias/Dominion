@@ -65,6 +65,8 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                 view.alert(e.getMessage(), Alert.AlertType.ERROR);
             }
         } else {
+
+           // @author Murat Kelleci
             String pw = model.getPassword();
             String email = model.getEmail();
 
