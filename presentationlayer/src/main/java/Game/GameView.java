@@ -125,6 +125,15 @@ public class GameView extends View<GameModel> {
         setLabelFormat(lblNachziehstapel);
 
 
+        /*
+        FlowPane fp = new FlowPane();
+        gp.setConstraints(fp, 3, 14);
+        gp.setRowSpan(fp, 5);
+        gp.setColumnSpan(fp, 5);
+
+        gp.getChildren().add(fp);
+        */
+
 
 
 
@@ -280,13 +289,13 @@ public class GameView extends View<GameModel> {
     public void updateUnusedCards(ArrayList<Card> list)
     {
 
-        imgKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.miniMini);
+        imgKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgKupfer, 2, 2);
         gp.setRowSpan(imgKupfer, 2);
         gp.getChildren().add(imgKupfer);
 
         Tooltip ttKupfer = new Tooltip();
-        CardImageView imgttKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.tooltip);
+        CardImageView imgttKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.tooltip, this);
         ttKupfer.setGraphic(imgttKupfer);
         Tooltip.install(imgKupfer, ttKupfer);
 
@@ -302,7 +311,7 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(imgSilber);
 
         Tooltip ttSilber = new Tooltip();
-        CardImageView imgttSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.tooltip);
+        CardImageView imgttSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.tooltip, this);
         ttSilber.setGraphic(imgttSilber);
         Tooltip.install(imgSilber, ttSilber);
 
@@ -312,13 +321,13 @@ public class GameView extends View<GameModel> {
         lblSilber.setText(Integer.toString(countCards(list, "Silber")));
 
 
-        imgGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.miniMini);
+        imgGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgGold, 2, 6);
         gp.setRowSpan(imgGold, 2);
         gp.getChildren().add(imgGold);
 
         Tooltip ttGold = new Tooltip();
-        CardImageView imgttGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.tooltip);
+        CardImageView imgttGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.tooltip, this);
         ttGold.setGraphic(imgttGold);
         Tooltip.install(imgGold, ttGold);
 
@@ -328,13 +337,13 @@ public class GameView extends View<GameModel> {
         lblGold.setText(Integer.toString(countCards(list, "Gold")));
 
 
-        imgAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.miniMini);
+        imgAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgAnwesen, 7, 2);
         gp.setRowSpan(imgAnwesen, 2);
         gp.getChildren().add(imgAnwesen);
 
         Tooltip ttAnwesen = new Tooltip();
-        CardImageView imgttAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.tooltip);
+        CardImageView imgttAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.tooltip, this);
         ttAnwesen.setGraphic(imgttAnwesen);
         Tooltip.install(imgAnwesen, ttAnwesen);
 
@@ -344,13 +353,13 @@ public class GameView extends View<GameModel> {
         lblAnwesen.setText(Integer.toString(countCards(list, "Anwesen")));
 
 
-        imgProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.miniMini);
+        imgProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgProvinz, 7, 6);
         gp.setRowSpan(imgProvinz, 2);
         gp.getChildren().add(imgProvinz);
 
         Tooltip ttProvinz = new Tooltip();
-        CardImageView imgttProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.tooltip);
+        CardImageView imgttProvinz = new CardImageView((getCard(list,"Provinz")), CardImageView.CardSize.tooltip, this);
         ttProvinz.setGraphic(imgttProvinz);
         Tooltip.install(imgProvinz, ttProvinz);
 
@@ -360,13 +369,13 @@ public class GameView extends View<GameModel> {
         lblProvinz.setText(Integer.toString(countCards(list, "Provinz")));
 
 
-        imgHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.miniMini);
+        imgHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgHerzogtum, 7, 4);
         gp.setRowSpan(imgHerzogtum, 2);
         gp.getChildren().add(imgHerzogtum);
 
         Tooltip ttHerzogtum = new Tooltip();
-        CardImageView imgttHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.tooltip);
+        CardImageView imgttHerzogtum = new CardImageView((getCard(list,"Herzogtum")), CardImageView.CardSize.tooltip, this);
         ttHerzogtum.setGraphic(imgttHerzogtum);
         Tooltip.install(imgHerzogtum, ttHerzogtum);
 
@@ -376,13 +385,13 @@ public class GameView extends View<GameModel> {
         lblHerzogtum.setText(Integer.toString(countCards(list, "Herzogtum")));
 
 
-        imgDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.miniSize);
+        imgDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgDorf, 3, 5);
         gp.setRowSpan(imgDorf, 3);
         gp.getChildren().add(imgDorf);
 
         Tooltip ttDorf = new Tooltip();
-        CardImageView imgttDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.tooltip);
+        CardImageView imgttDorf = new CardImageView((getCard(list,"Dorf")), CardImageView.CardSize.tooltip, this);
         ttDorf.setGraphic(imgttDorf);
         Tooltip.install(imgDorf, ttDorf);
 
@@ -392,13 +401,13 @@ public class GameView extends View<GameModel> {
         lblDorf.setText(Integer.toString(countCards(list, "Dorf")));
 
 
-        imgGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.miniSize);
+        imgGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgGarten, 5, 5);
         gp.setRowSpan(imgGarten, 3);
         gp.getChildren().add(imgGarten);
 
         Tooltip ttGarten = new Tooltip();
-        CardImageView imgttGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.tooltip);
+        CardImageView imgttGarten = new CardImageView((getCard(list,"Garten")), CardImageView.CardSize.tooltip, this);
         ttGarten.setGraphic(imgttGarten);
         Tooltip.install(imgGarten, ttGarten);
 
@@ -408,13 +417,13 @@ public class GameView extends View<GameModel> {
         lblGarten.setText(Integer.toString(countCards(list, "Garten")));
 
 
-        imgGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.miniSize);
+        imgGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgGeldverleiher, 6, 5);
         gp.setRowSpan(imgGeldverleiher, 3);
         gp.getChildren().add(imgGeldverleiher);
 
         Tooltip ttGeldverleiher = new Tooltip();
-        CardImageView imgttGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.tooltip);
+        CardImageView imgttGeldverleiher = new CardImageView((getCard(list,"Geldverleiher")), CardImageView.CardSize.tooltip, this);
         ttGeldverleiher.setGraphic(imgttGeldverleiher);
         Tooltip.install(imgGeldverleiher, ttGeldverleiher);
 
@@ -424,13 +433,13 @@ public class GameView extends View<GameModel> {
         lblGeldverleiher.setText(Integer.toString(countCards(list, "Geldverleiher")));
 
 
-        imgHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.miniSize);
+        imgHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgHolzfäller, 4, 5);
         gp.setRowSpan(imgHolzfäller, 3);
         gp.getChildren().add(imgHolzfäller);
 
         Tooltip ttHolzfäller = new Tooltip();
-        CardImageView imgttHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.tooltip);
+        CardImageView imgttHolzfäller = new CardImageView((getCard(list,"Holzfäller")), CardImageView.CardSize.tooltip, this);
         ttHolzfäller.setGraphic(imgttHolzfäller);
         Tooltip.install(imgHolzfäller, ttHolzfäller);
 
@@ -440,13 +449,13 @@ public class GameView extends View<GameModel> {
         lblHolzfäller.setText(Integer.toString(countCards(list, "Holzfäller")));
 
 
-        imgJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.miniSize);
+        imgJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgJahrmarkt, 5, 2);
         gp.setRowSpan(imgJahrmarkt, 3);
         gp.getChildren().add(imgJahrmarkt);
 
         Tooltip ttJahrmarkt = new Tooltip();
-        CardImageView imgttJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.tooltip);
+        CardImageView imgttJahrmarkt = new CardImageView((getCard(list,"Jahrmarkt")), CardImageView.CardSize.tooltip, this);
         ttJahrmarkt.setGraphic(imgttJahrmarkt);
         Tooltip.install(imgJahrmarkt, ttJahrmarkt);
 
@@ -456,13 +465,13 @@ public class GameView extends View<GameModel> {
         lblJahrmarkt.setText(Integer.toString(countCards(list, "Jahrmarkt")));
 
 
-        imgLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.miniSize);
+        imgLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgLaboratorium, 4, 2);
         gp.setRowSpan(imgLaboratorium, 3);
         gp.getChildren().add(imgLaboratorium);
 
         Tooltip ttLaboratorium = new Tooltip();
-        CardImageView imgttLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.tooltip);
+        CardImageView imgttLaboratorium = new CardImageView((getCard(list,"Laboratorium")), CardImageView.CardSize.tooltip, this);
         ttLaboratorium.setGraphic(imgttLaboratorium);
         Tooltip.install(imgLaboratorium, ttLaboratorium);
 
@@ -472,13 +481,13 @@ public class GameView extends View<GameModel> {
         lblLaboratorium.setText(Integer.toString(countCards(list, "Laboratorium")));
 
 
-        imgSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.miniSize);
+        imgSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgSchmiede, 3, 2);
         gp.setRowSpan(imgSchmiede, 3);
         gp.getChildren().add(imgSchmiede);
 
         Tooltip ttSchmiede = new Tooltip();
-        CardImageView imgttSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.tooltip);
+        CardImageView imgttSchmiede = new CardImageView((getCard(list,"Schmiede")), CardImageView.CardSize.tooltip, this);
         ttSchmiede.setGraphic(imgttSchmiede);
         Tooltip.install(imgSchmiede, ttSchmiede);
 
@@ -488,13 +497,13 @@ public class GameView extends View<GameModel> {
         lblSchmiede.setText(Integer.toString(countCards(list, "Schmiede")));
 
 
-        imgMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.miniSize);
+        imgMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.miniSize, this);
         gp.setConstraints(imgMarkt, 6, 2);
         gp.setRowSpan(imgMarkt, 3);
         gp.getChildren().add(imgMarkt);
 
         Tooltip ttMarkt = new Tooltip();
-        CardImageView imgttMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.tooltip);
+        CardImageView imgttMarkt = new CardImageView((getCard(list,"Markt")), CardImageView.CardSize.tooltip, this);
         ttMarkt.setGraphic(imgttMarkt);
         Tooltip.install(imgMarkt, ttMarkt);
 
