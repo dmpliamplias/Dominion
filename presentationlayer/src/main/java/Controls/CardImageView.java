@@ -39,10 +39,10 @@ public class CardImageView extends ImageView {
         miniSize,bigSize, tooltip, miniMini
     }
 
-    public CardImageView(Card card, CardSize cardSize, View v) {
+    public CardImageView(Card card, CardSize cardSize, View viu) {
         this.card = card;
         this.cardSize = cardSize;
-        this.view=v;
+        this.view=viu;
         this.setOnMouseClicked(e -> {
             runAction();
         });
