@@ -22,7 +22,7 @@ import util.ServerConnectionService;
 import java.io.IOException;
 
 
-//**
+   //**
    //@author Murat Kelleci*/ 20.10.17-04.11.2017
 
 public class CardImageView extends ImageView {
@@ -39,10 +39,10 @@ public class CardImageView extends ImageView {
         miniSize,bigSize, tooltip, miniMini
     }
 
-    public CardImageView(Card card, CardSize cardSize, View viu) {
+    public CardImageView(Card card, CardSize cardSize, View v) {
         this.card = card;
         this.cardSize = cardSize;
-        this.view=viu;
+        this.view=v;
         this.setOnMouseClicked(e -> {
             runAction();
         });
