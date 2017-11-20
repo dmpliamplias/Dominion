@@ -18,6 +18,10 @@ import javafx.scene.image.ImageView;
 public class CardImageView extends ImageView {
 
     private Card card;
+    private final int miniSizeHeight=90;
+    private final int bigSizeHeight=130;
+    private final int toolTipSizeHeight=300;
+    private final int miniMiniHeight=60;
     private final CardSize cardSize;
     public enum CardSize{
         miniSize,bigSize, tooltip, miniMini
@@ -61,26 +65,26 @@ public class CardImageView extends ImageView {
 
                 //setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
                 //umschreiben MagicNumbers
-                this.setFitHeight(90);
-                this.setFitWidth(100);
+                this.setFitHeight(miniSizeHeight);
+                //this.setFitWidth(100);
                 this.setPreserveRatio(true);
                 this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
                 Image playCB = new Image(this.getClass().getResourceAsStream("/Game/big/"+ path));
-                this.setFitHeight(130);
-                this.setFitWidth(60);
+                this.setFitHeight(bigSizeHeight);
+                //this.setFitWidth(60);
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
             } else if (cardSize.equals(cardSize.tooltip)) {
                 Image playCT = new Image(this.getClass().getResourceAsStream("/Game/big/" + path));
-                this.setFitHeight(300);
-                this.setFitWidth(200);
+                this.setFitHeight(toolTipSizeHeight);
+                //this.setFitWidth(200);
                 this.setPreserveRatio(true);
                 this.setImage(playCT);
             } else if (cardSize.equals(cardSize.miniMini)){
                 Image playCM2 = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
-                this.setFitHeight(60);
-                this.setFitWidth(70);
+                this.setFitHeight(miniMiniHeight);
+               // this.setFitWidth(70);
                 this.setPreserveRatio(true);
                 this.setImage(playCM2);
 

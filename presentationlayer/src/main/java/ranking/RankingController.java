@@ -55,14 +55,14 @@ public class RankingController extends Controller<RankingModel, RankingView> {
 
 
     ///** @author Murat Kelleci
-    //
+
     public void handleServerAnswer(List<Highscore> highscoreList){
         model.setHighscores(highscoreList);
         view.bindModelToView();
     }
 
     ///** @author Murat Kelleci
-    //
+
     private void goToLobbyView() {
         LobbyModel model = new LobbyModel();
         Stage s = new Stage();
