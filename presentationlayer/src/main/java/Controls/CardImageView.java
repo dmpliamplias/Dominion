@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
    //**
    //@author Murat Kelleci*/ 20.10.17-04.11.2017
 
-
 public class CardImageView extends ImageView {
 
     private Card card;
@@ -63,8 +62,8 @@ public class CardImageView extends ImageView {
             if (cardSize.equals(cardSize.miniSize)){
                 Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
 
-                //setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
-                //umschreiben MagicNumbers
+                //ToDo setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
+                //ToDo umschreiben MagicNumbers
                 this.setFitHeight(miniSizeHeight);
                 //this.setFitWidth(100);
                 this.setPreserveRatio(true);

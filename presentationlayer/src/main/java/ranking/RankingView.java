@@ -58,7 +58,6 @@ public class RankingView extends View<RankingModel> {
             setTexts();
             return scene;
 
-
     }
 
     protected void setTexts() {
@@ -75,18 +74,13 @@ public class RankingView extends View<RankingModel> {
         this.userNameColumn.setText(getText("registerview.username"));
         this.btnLobby.setText(getText("loginview.btnGoToLobbyView"));
 
-
     }
 
     public void bindModelToView() {
 
-        final ObservableList<RankingViewModel> vmList = FXCollections.observableArrayList();
-       // RankingViewModel vm2 = new RankingViewModel();
-      // vm2.setName("Murat Kelleci");vm2.setPoints(1);
-       //vm2.setPosition(2);
-       //vmList.add(vm2);
-
         //For Loop from Script Kaspar Riesen Programming 1
+
+        final ObservableList<RankingViewModel> vmList = FXCollections.observableArrayList();
         for (Highscore hs : model.getHighscores()) {
             RankingViewModel vm = new RankingViewModel();
             vm.setName(hs.getUser().getUserName());
@@ -98,13 +92,9 @@ public class RankingView extends View<RankingModel> {
         table.setItems(vmList);
 
        this.userNameColumn.setCellValueFactory(new PropertyValueFactory<RankingViewModel, String>("name"));
-        this.userHighScoreColumn.setCellValueFactory(new PropertyValueFactory<RankingViewModel, String>("points"));
-        this.rankingPositionColumn.setCellValueFactory(new PropertyValueFactory<RankingViewModel, String>("position"));
+       this.userHighScoreColumn.setCellValueFactory(new PropertyValueFactory<RankingViewModel, String>("points"));
+       this.rankingPositionColumn.setCellValueFactory(new PropertyValueFactory<RankingViewModel, String>("position"));
 
     }
-
-
-
-
 
 }
