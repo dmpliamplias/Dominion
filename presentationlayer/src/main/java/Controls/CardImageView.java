@@ -58,6 +58,9 @@ public class CardImageView extends ImageView {
 
             if (cardSize.equals(cardSize.miniSize)){
                 Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
+
+                //setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
+                //umschreiben MagicNumbers
                 this.setFitHeight(90);
                 this.setFitWidth(100);
                 this.setPreserveRatio(true);
@@ -82,7 +85,6 @@ public class CardImageView extends ImageView {
                 this.setImage(playCM2);
 
             }
-
 
         } catch (Exception e){
                 e.printStackTrace();
