@@ -101,6 +101,8 @@ public class Client extends Thread {
         }else if(c.getMethod() == Methods.CardPlayed){
             GameContainer gc = (GameContainer)c;
             _gameManager.cardPlayed(gc.getCardPlayedInfo());
+        }else if(c.getMethod() == Methods.BuyCard){
+            _gameManager.buyCard((GameContainer)c);
         }
         else if(c.getMethod() == Methods.Rankings){
             _rankingsManager.sendRanking();

@@ -296,7 +296,7 @@ public class GameView extends View<GameModel> {
         lblKupfer.setText(Integer.toString(countCards(list, "Kupfer")));
 
 
-        imgSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.miniMini);
+        imgSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.miniMini, this);
         gp.setConstraints(imgSilber, 2, 4);
         gp.setRowSpan(imgSilber, 2);
         gp.getChildren().add(imgSilber);

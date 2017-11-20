@@ -104,7 +104,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         } );
 
         //author Murat Kelleci am 24.10.2017
-        //TODO fix bug murat
         view.btnRanking.setOnAction(event -> {
             goToRankingView();
         });

@@ -71,6 +71,21 @@ public class GameManager extends Manager {
         }
     }
 
+    public void buyCard(GameContainer gc){
+      CardPlayedInfo info =  gc.getCardPlayedInfo();
+      Card buyCard = info.getCard();
+
+      Card card = getCardByName(buyCard.getName());
+
+      GameContainer bGc = new GameContainer(Methods.BuyCard);
+      CardPlayedInfo buyInfo = new CardPlayedInfo();
+      buyInfo.setCard(card);
+      buyInfo.setUserId((int)users.get(client.getClientId()).getId());
+      bGc.setUnusedCards(unusedCards);
+      this.client.getDominionSet().getTrayStack().add(card);
+      broadCast(bGc, false);
+    }
+
     public void sendInitalCardSet(){
          PlayerSet set = new PlayerSet((int) client.getUser().getId());
          ArrayList<Card> pullStack = new ArrayList<Card>();

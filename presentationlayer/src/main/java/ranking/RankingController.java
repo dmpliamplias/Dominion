@@ -53,7 +53,6 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         });
     }
 
-
     ///** @author Murat Kelleci
 
     public void handleServerAnswer(List<Highscore> highscoreList){
