@@ -2,6 +2,7 @@ package Game;
 
 import Controls.CardImageView;
 import base.View;
+import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.MoneyType;
 import javafx.geometry.Insets;
@@ -24,6 +25,8 @@ import javafx.scene.text.TextBoundsType;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Tooltip;
 
+import java.util.ArrayList;
+
 import static util.StyleSheetPath.GAME;
 
 
@@ -38,7 +41,34 @@ public class GameView extends View<GameModel> {
      protected VBox chatContent;
      protected TextField txtNameChat;
      protected GridPane gp;
-
+     Label lblKupfer;
+     Label lblSilber;
+     Label lblGold;
+     Label lblAnwesen;
+     Label lblDorf;
+     Label lblGaerten;
+     Label lblGeldverleiher;
+     Label lblHerzogtum;
+     Label lblHolzfaeller;
+     Label lblJahrmarkt;
+     Label lblMarkt;
+     Label lblLaboratorium;
+     Label lblProvinz;
+     Label lblSchmiede;
+     CardImageView imgKupfer;
+     CardImageView imgSilber;
+     CardImageView imgGold;
+     CardImageView imgAnwesen;
+     CardImageView imgDorf;
+     CardImageView imgGaerten;
+     CardImageView imgGeldverleiher;
+     CardImageView imgHerzogtum;
+     CardImageView imgHolzfaeller;
+     CardImageView imgJahrmarkt;
+     CardImageView imgMarkt;
+     CardImageView imgLaboratorium;
+     CardImageView imgProvinz;
+     CardImageView imgSchmiede;
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
@@ -77,32 +107,6 @@ public class GameView extends View<GameModel> {
             RowConstraints row = new RowConstraints(30);
             gp.getRowConstraints().add(row);
         }
-
-        MoneyCard mc1 = new MoneyCard();
-        mc1.setMoneyType(MoneyType.Copper);
-        mc1.setValue(1);
-        mc1.setCost(0);
-        mc1.setName("Kupfer");
-        mc1.setFilePath("kupfer_{0}.png");
-
-        CardImageView imgKupfer=new CardImageView(mc1, CardImageView.CardSize.miniMini);
-        gp.setConstraints(imgKupfer, 2, 2);
-        gp.setRowSpan(imgKupfer, 2);
-
-        /**Image kupfer = new Image(getClass().getResourceAsStream("/mini/kupfer_DE.png"));
-        ImageView imgVkupfer = new ImageView(kupfer);
-        imgVkupfer.setFitHeight(60);
-        imgVkupfer.setFitWidth(70);
-        gp.setConstraints(imgVkupfer, 2, 2);
-        gp.setRowSpan(imgVkupfer, 2);*/
-
-        // TODO: 07.11.17 vanessa do it like mine line below
-        final Image silber = new Image(getClass().getResourceAsStream("/game/mini/silber_DE.png"));
-        ImageView imgVsilber = new ImageView(silber);
-        imgVsilber.setFitHeight(60);
-        imgVsilber.setFitWidth(70);
-        gp.setConstraints(imgVsilber, 2, 4);
-        gp.setRowSpan(imgVsilber, 2);
 
 
 
@@ -190,7 +194,7 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(imgVprovinz, 7, 6);
         gp.setRowSpan(imgVprovinz, 2);
 
-        gp.getChildren().addAll(imgKupfer, imgVsilber, imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
+        gp.getChildren().addAll(imgVgold, imgVdorf, imgVschmiede, imgVlaboratorium, imgVjahrmarkt, imgVmarkt, imgVgeldverleiher, imgVgaerten, imgVholzfaeller, imgVanwesen, imgVherzogtum, imgVprovinz);
 
 
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
@@ -208,6 +212,7 @@ public class GameView extends View<GameModel> {
         // Create Tooltip
         // ---------------------------------------------------------
 
+        /**
         Image kupferB = new Image(getClass().getResourceAsStream("/game/big/kupfer_DE.png"));
         ImageView imgVkupferB = new ImageView(kupferB);
         imgVkupferB.setFitHeight(300);
@@ -216,6 +221,7 @@ public class GameView extends View<GameModel> {
         ttKupfer.setGraphic(imgVkupferB);
         Tooltip.install(imgKupfer, ttKupfer);
 
+
         Image silberB = new Image(getClass().getResourceAsStream("/game/big/silber_DE.png"));
         ImageView imgVsilberB = new ImageView(silberB);
         imgVsilberB.setFitHeight(300);
@@ -223,7 +229,7 @@ public class GameView extends View<GameModel> {
         Tooltip ttSilber = new Tooltip();
         ttSilber.setGraphic(imgVsilberB);
         Tooltip.install(imgVsilber, ttSilber);
-
+    */
 
         Tooltip ttGold = new Tooltip();
         Tooltip ttAnwesen = new Tooltip();
@@ -245,59 +251,59 @@ public class GameView extends View<GameModel> {
         // Label Number of available cards to buy
         // ---------------------------------------------------------
 
-        Label lblKupfer = new Label();
+        lblKupfer = new Label();
         gp.setConstraints(lblKupfer, 2, 2);
         setLabelFormat(lblKupfer);
 
-        Label lblSilber = new Label();
+        lblSilber = new Label();
         gp.setConstraints(lblSilber, 2, 4);
         setLabelFormat(lblSilber);
 
-        Label lblGold = new Label();
+        lblGold = new Label();
         gp.setConstraints(lblGold, 2, 6);
         setLabelFormat(lblGold);
 
-        Label lblAnwesen = new Label();
+        lblAnwesen = new Label();
         gp.setConstraints(lblAnwesen, 7, 2);
         setLabelFormat(lblAnwesen);
 
-        Label lblDorf = new Label();
+        lblDorf = new Label();
         gp.setConstraints(lblDorf, 3, 5);
         setLabelFormat(lblDorf);
 
-        Label lblGaerten = new Label();
+        lblGaerten = new Label();
         gp.setConstraints(lblGaerten, 5, 5);
         setLabelFormat(lblGaerten);
 
-        Label lblGeldverleiher = new Label();
+        lblGeldverleiher = new Label();
         gp.setConstraints(lblGeldverleiher, 6, 5);
         setLabelFormat(lblGeldverleiher);
 
-        Label lblHerzogtum = new Label();
+        lblHerzogtum = new Label();
         gp.setConstraints(lblHerzogtum, 7, 4);
         setLabelFormat(lblHerzogtum);
 
-        Label lblHolzfaeller = new Label();
+        lblHolzfaeller = new Label();
         gp.setConstraints(lblHolzfaeller, 4, 5);
         setLabelFormat(lblHolzfaeller);
 
-        Label lblJahrmarkt = new Label();
+        lblJahrmarkt = new Label();
         gp.setConstraints(lblJahrmarkt, 5, 2);
         setLabelFormat(lblJahrmarkt);
 
-        Label lblMarkt = new Label();
+        lblMarkt = new Label();
         gp.setConstraints(lblMarkt, 6, 2);
         setLabelFormat(lblMarkt);
 
-        Label lblLaboratorium = new Label();
+        lblLaboratorium = new Label();
         gp.setConstraints(lblLaboratorium, 4, 2);
         setLabelFormat(lblLaboratorium);
 
-        Label lblProvinz = new Label();
+        lblProvinz = new Label();
         gp.setConstraints(lblProvinz, 7, 6);
         setLabelFormat(lblProvinz);
 
-        Label lblSchmiede = new Label();
+        lblSchmiede = new Label();
         gp.setConstraints(lblSchmiede, 3, 2);
         setLabelFormat(lblSchmiede);
 
@@ -336,7 +342,7 @@ public class GameView extends View<GameModel> {
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
         lbl.setAlignment(Pos.CENTER);
-        lbl.setText("10");
+
     }
 
 
@@ -456,4 +462,116 @@ public class GameView extends View<GameModel> {
     public TextField getTxtNameChat() {
         return txtNameChat;
     }
+
+    public void updateUnusedCards(ArrayList<Card> list)
+    {
+        /*
+        imgKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.miniMini);
+        gp.setConstraints(imgKupfer, 2, 2);
+        gp.setRowSpan(imgKupfer, 2);
+        gp.getChildren().add(imgKupfer);
+
+        lblKupfer = new Label();
+        gp.setConstraints(lblKupfer, 2, 2);
+        setLabelFormat(lblKupfer);
+        lblKupfer.setText(Integer.toString(countCards(list, "Kupfer")));
+
+        */
+
+        imgSilber = new CardImageView((getCard(list,"Silber")), CardImageView.CardSize.miniMini);
+        gp.setConstraints(imgSilber, 2, 4);
+        gp.setRowSpan(imgSilber, 2);
+        gp.getChildren().add(imgSilber);
+
+        lblSilber.setText(Integer.toString(countCards(list, "Silber")));
+
+                /*
+
+        imgGold = new CardImageView((getCard(list,"Gold")), CardImageView.CardSize.miniMini);
+        gp.setConstraints(imgGold, 2, 6);
+        gp.setRowSpan(imgGold, 2);
+        gp.getChildren().add(imgGold);
+
+        lblGold.setText(Integer.toString(countCards(list, "Gold")));
+
+        imgAnwesen = new CardImageView((getCard(list,"Anwesen")), CardImageView.CardSize.miniSize);
+        gp.setConstraints(imgAnwesen, 7, 2);
+        gp.setRowSpan(imgAnwesen, 2);
+        gp.getChildren().add(imgAnwesen);
+
+        lblAnwesen.setText(Integer.toString(countCards(list, "Anwesen")));
+
+
+        lblDorf = new Label();
+        gp.setConstraints(lblDorf, 3, 5);
+        setLabelFormat(lblDorf);
+
+        lblGaerten = new Label();
+        gp.setConstraints(lblGaerten, 5, 5);
+        setLabelFormat(lblGaerten);
+
+        lblGeldverleiher = new Label();
+        gp.setConstraints(lblGeldverleiher, 6, 5);
+        setLabelFormat(lblGeldverleiher);
+
+        lblHerzogtum = new Label();
+        gp.setConstraints(lblHerzogtum, 7, 4);
+        setLabelFormat(lblHerzogtum);
+
+        lblHolzfaeller = new Label();
+        gp.setConstraints(lblHolzfaeller, 4, 5);
+        setLabelFormat(lblHolzfaeller);
+
+        lblJahrmarkt = new Label();
+        gp.setConstraints(lblJahrmarkt, 5, 2);
+        setLabelFormat(lblJahrmarkt);
+
+        lblMarkt = new Label();
+        gp.setConstraints(lblMarkt, 6, 2);
+        setLabelFormat(lblMarkt);
+
+        lblLaboratorium = new Label();
+        gp.setConstraints(lblLaboratorium, 4, 2);
+        setLabelFormat(lblLaboratorium);
+
+        lblProvinz = new Label();
+        gp.setConstraints(lblProvinz, 7, 6);
+        setLabelFormat(lblProvinz);
+
+        lblSchmiede = new Label();
+        gp.setConstraints(lblSchmiede, 3, 2);
+        setLabelFormat(lblSchmiede);
+ */
+
+    }
+
+
+
+
+
+
+    public int countCards(ArrayList<Card> list, String s) {
+        int count = 0;
+        for (int i = 0; i < (list.size()-1);i++ ){
+            if (list.get(i).getName().equals(s)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Card getCard(ArrayList<Card> list, String s) {
+        int index = -1;
+        for (int i = 0; i < (list.size()-1);i++ ) {
+            if (list.get(i).getName().equals(s)) {
+                index = i;
+            }
+        }
+        System.out.println(index);
+            return list.get(index);
+
+    }
+
+
+
 }
