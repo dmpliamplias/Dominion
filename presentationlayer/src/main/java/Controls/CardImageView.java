@@ -35,7 +35,13 @@ public class CardImageView extends ImageView {
         this.setCardImageViewDesign();
     }
 
+    // ToDo je nach Resolution verschiedene Grösse für die einzelnen Karten
+    // ToDo Zwei Methoden Karten kaufen und Karten spielen.
     private void runAction(){
+         // ToDo If Card miniSize oder miniMini dann kaufen
+        // ToDo für Kaufen Kauf nur Action
+        // ToDo für Kaufen Kaufen und Geld
+
         if(this.card instanceof KingCard){
             KingCard kc = (KingCard)card;
 
@@ -63,7 +69,6 @@ public class CardImageView extends ImageView {
                 Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
 
                 //ToDo setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
-                //ToDo umschreiben MagicNumbers
                 this.setFitHeight(miniSizeHeight);
                 //this.setFitWidth(100);
                 this.setPreserveRatio(true);
