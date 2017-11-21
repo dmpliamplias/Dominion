@@ -18,7 +18,7 @@ public class RankingManager extends Manager {
     }
 
     public void sendRanking(){
-        List<Highscore> highscores = ServiceLocator.getServiceLocator().getHighscoreService().getHighscores();
+        List<Highscore> highscores = ServiceLocator.getServiceLocator().getHighscoreService().getAllHighscores();
 
         RankingContainer rc = new RankingContainer();
         rc.setHighScores(highscores);

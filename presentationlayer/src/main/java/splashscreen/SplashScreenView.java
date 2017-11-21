@@ -2,7 +2,6 @@ package splashscreen;
 
 import base.View;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -26,8 +25,6 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     /** The progess bar. */
     ProgressBar progress;
-    /** The status label. */
-    private Label lblStatus;
 
 
     // ---- Constructor
@@ -51,9 +48,6 @@ public class SplashScreenView extends View<SplashScreenModel> {
     protected Scene create_GUI() {
         BorderPane root = new BorderPane();
         root.setId("splash");
-
-        lblStatus = new Label("Woof");
-        root.setCenter(lblStatus);
 
         progress = new ProgressBar();
         HBox bottomBox = new HBox();

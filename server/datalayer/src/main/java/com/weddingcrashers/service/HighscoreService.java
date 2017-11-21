@@ -19,10 +19,18 @@ public interface HighscoreService {
     Highscore saveHighscore(Highscore highscore);
 
     /**
-     * Gets the 10 highest scores.
+     * Gets all highscores.
      *
-     * @return the 10 highest scores.
+     * @return all highscores.
      */
-    List<Highscore> getHighscores();
+    List<Highscore> getAllHighscores();
+
+    /**
+     * Gets the highscore for the given amount.
+     *
+     * @param results the amount of the results to query.
+     * @return the limited highscores.
+     */
+    List<Highscore> getHighscores(int results);
 
 }
