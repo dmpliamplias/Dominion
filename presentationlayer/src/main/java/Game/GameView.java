@@ -69,6 +69,7 @@ public class GameView extends View<GameModel> {
      CardImageView imgLaboratorium;
      CardImageView imgProvinz;
      CardImageView imgSchmiede;
+     FlowPane fp;
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
@@ -123,17 +124,6 @@ public class GameView extends View<GameModel> {
         Label lblNachziehstapel = new Label();
         gp.setConstraints(lblNachziehstapel, 1, 14);
         setLabelFormat(lblNachziehstapel);
-
-
-        /*
-        FlowPane fp = new FlowPane();
-        gp.setConstraints(fp, 3, 14);
-        gp.setRowSpan(fp, 5);
-        gp.setColumnSpan(fp, 5);
-
-        gp.getChildren().add(fp);
-        */
-
 
 
 
@@ -512,12 +502,15 @@ public class GameView extends View<GameModel> {
         setLabelFormat(lblMarkt);
         lblMarkt.setText(Integer.toString(countCards(list, "Markt")));
 
+
+
+
     }
 
 
     public int countCards(ArrayList<Card> list, String s) {
         int count = 0;
-        for (int i = 0; i < (list.size()-1);i++ ){
+        for (int i = 0; i < (list.size());i++ ){
             if (list.get(i).getName().equals(s)){
                 count++;
             }
@@ -527,7 +520,7 @@ public class GameView extends View<GameModel> {
 
     public Card getCard(ArrayList<Card> list, String s) {
         int index = -1;
-        for (int i = 0; i < (list.size()-1);i++ ) {
+        for (int i = 0; i < (list.size());i++ ) {
             if (list.get(i).getName().equals(s)) {
                 index = i;
             }
