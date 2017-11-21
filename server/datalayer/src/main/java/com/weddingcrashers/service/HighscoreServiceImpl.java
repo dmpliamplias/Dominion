@@ -3,6 +3,7 @@ package com.weddingcrashers.service;
 import com.weddingcrashers.model.Highscore;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 import static com.weddingcrashers.db.EntityManagerFactory.getEntityManager;
@@ -32,10 +33,18 @@ public class HighscoreServiceImpl extends BaseService implements HighscoreServic
     }
 
     @Override
-    public List<Highscore> getHighscores() {
-        // TODO: 30.09.2017 top 10
-        final List<Highscore> highscores = objectUpdateService.list(Highscore.class);
-        return highscores;
+    public List<Highscore> getAllHighscores() {
+        return objectUpdateService.list(Highscore.class);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Highscore> getHighscores(int results) {
+        final EntityManager em = getEntityManager();
+        final Query query = em.createQuery("from " + Highscore.class.getSimpleName());
+
+        query.setMaxResults(results);
+        return query.getResultList();
     }
 
     @Override
