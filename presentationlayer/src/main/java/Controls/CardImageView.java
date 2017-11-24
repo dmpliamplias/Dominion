@@ -23,74 +23,31 @@ import java.io.IOException;
 
 
    //**
-   //@author Murat Kelleci*/ 20.10.17-04.11.2017
+   //@author Murat Kelleci*/ 20.10.17-21.11.2017
 
 public class CardImageView extends ImageView {
 
-    private Card card;
+
     private final int miniSizeHeight=90;
     private final int bigSizeHeight=130;
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private final CardSize cardSize;
-    private final View view;
+    private Card card;
 
     public enum CardSize{
         miniSize,bigSize, tooltip, miniMini
     }
 
-    public CardImageView(Card card, CardSize cardSize, View v) {
+    public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
         this.cardSize = cardSize;
-        this.view=v;
-        this.setOnMouseClicked(e -> {
-            runAction();
-        });
         this.setCardImageViewDesign();
     }
 
     // ToDo je nach Resolution verschiedene Grösse für die einzelnen Karten
     // ToDo Zwei Methoden Karten kaufen und Karten spielen.
-    private void runAction(){
 
-        if (cardSize == CardSize.miniSize | cardSize == CardSize.miniMini){
-            buyCards();
-        }else
-            return;
-
-
-         // ToDo If Card miniSize oder miniMini dann kaufen
-        // ToDo für Kaufen Kauf nur Action
-        // ToDo für Kaufen Kaufen und Geld
-
-        if(this.card instanceof KingCard){
-            KingCard kc = (KingCard)card;
-
-        }else if(this.card instanceof MoneyCard){
-            MoneyCard mc= (MoneyCard)card;
-
-        }else if(this.card instanceof PointCard){
-            PointCard pc= (PointCard)card;
-
-        }
-    }
-
-    private void buyCards(){
-        GameContainer gc = new GameContainer(Methods.BuyCard);
-        CardPlayedInfo buyInfo = new CardPlayedInfo();
-        buyInfo.setUserId((int)getUser().getId());
-        buyInfo.setCard(card);
-
-        try {
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
-        } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
-
-    private User getUser(){
-       return PLServiceLocator.getPLServiceLocator().getUser();
-    }
 
     private void setCardImageViewDesign() {
 
@@ -141,6 +98,14 @@ public class CardImageView extends ImageView {
 
         }
 
+    }
+
+    public CardSize getCardSize() {
+        return cardSize;
+    }
+
+    public Card getCard() {
+        return card;
     }
 
 }

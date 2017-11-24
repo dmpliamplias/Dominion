@@ -81,14 +81,11 @@ public class LoginView extends View<LoginModel> {
 
         root.setCenter(grPa);
 
-
-        //scene.getStylesheets().add(getClass().getResource("GameStart.css").toExternalForm());
         this.stage.setScene(scene);
 
         setTexts();
         return scene;
     }
-
 
     protected void setTexts(){
         this.stage.setTitle(getText("loginview.title"));
@@ -106,8 +103,6 @@ public class LoginView extends View<LoginModel> {
     public Stage getStage(){
         return this.stage;
     }
-
-
 
 }
 
