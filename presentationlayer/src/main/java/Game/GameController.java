@@ -213,13 +213,15 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
-    // Author Murat Kelleci
+    // Author Murat Kelleci 24.11.17
 
     private void setCardImageViewAction(CardImageView imgv){
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
         });
     }
+
+    // Author Murat Kelleci 24.11.17
 
     private void runAction(CardImageView imgv){
         Card c = imgv.getCard();
@@ -228,10 +230,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }else {
             return;
         }
-
-        // ToDo If Card miniSize oder miniMini dann kaufen
-        // ToDo für Kaufen Kauf nur Action
-        // ToDo für Kaufen Kaufen und Geld
 
         if(c instanceof KingCard){
             KingCard kc = (KingCard)c;
@@ -244,6 +242,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
         }
     }
+
+    // Author Murat Kelleci 20.11.17 -
 
     private void buyCards(Card card){
         GameContainer gc = new GameContainer(Methods.BuyCard);
@@ -258,6 +258,8 @@ public class GameController extends Controller<GameModel, GameView> {
             view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+    // Author Murat Kelleci 20.11.17 - 
 
     private User getUser(){
         return PLServiceLocator.getPLServiceLocator().getUser();
