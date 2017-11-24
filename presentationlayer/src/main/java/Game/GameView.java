@@ -518,14 +518,15 @@ public class GameView extends View<GameModel> {
         return count;
     }
 
-    public Card getCard(ArrayList<Card> list, String s) {
-        int index = -1;
+    public Card getCard(ArrayList<Card> list, String name) {
+        Card c = null;
         for (int i = 0; i < (list.size());i++ ) {
-            if (list.get(i).getName().equals(s)) {
-                index = i;
+            if (list.get(i).getName().equals(name)) {
+               c = list.get(i);
+               break;
             }
         }
-            return list.get(index);
+        return c;
     }
 
 
