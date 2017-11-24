@@ -241,7 +241,7 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Author Murat Kelleci 20.11.17 Supported/Explained by Michel Schlatter
+    // Author Murat Kelleci 20.11.17 - Explained by Michel Schlatter
 
     private void buyCards(Card card){
         GameContainer gc = new GameContainer(Methods.BuyCard);
