@@ -5,11 +5,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.Region;
 
 public class HandStackLayout extends Region {
+/*
 public ObservableList<Node> getChildren(){
     return super.getChildren();
     }
 
-    protected void layoutChildren(){
+    public void layoutChildren(){
     super.layoutChildren();
     ObservableList<Node> children = getChildren();
     int i = 0;
@@ -17,6 +18,5 @@ public ObservableList<Node> getChildren(){
         child.relocate(i, 0);
         i+=10;
     }
-
-    }
+    }*/
 }
