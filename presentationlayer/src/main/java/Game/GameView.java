@@ -5,6 +5,8 @@ import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.MoneyType;
+import com.weddingcrashers.businessmodels.PlayerSet;
+import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,6 +28,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Tooltip;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 import static util.StyleSheetPath.GAME;
 
@@ -503,6 +507,12 @@ public class GameView extends View<GameModel> {
         lblMarkt.setText(Integer.toString(countCards(list, "Markt")));
 
 
+        Label lblenemy1 = new Label();
+        gp.setConstraints(lblenemy1, 0, 4);
+        lblenemy1.setText("Michel Schlatter \nVP: 3");
+        lblenemy1.setStyle("-fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.getChildren().add(lblenemy1);
+
 
 
     }
@@ -529,6 +539,21 @@ public class GameView extends View<GameModel> {
         return c;
     }
 
+/*
+    public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){
+        int countEnemys = users.size()-1;
+        String userName = users.get(set.getUserId()).getUserName();
+        ArrayList<User> list = new ArrayList<User>(users.values());
+        Collections.sort(list);
+        int row = 4 + list.get()
+            Label lblenemy1 = new Label();
+            gp.setConstraints(lblenemy1, 1, 4);
+            lblenemy1.setText(userName);
+            gp.getChildren().add(lblenemy1);
+
+
+    }
+    */
 
 
 }
