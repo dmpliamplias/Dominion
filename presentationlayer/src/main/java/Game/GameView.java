@@ -1,6 +1,7 @@
 package Game;
 
 import Controls.CardImageView;
+import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.MoneyCard;
@@ -74,6 +75,7 @@ public class GameView extends View<GameModel> {
      CardImageView imgProvinz;
      CardImageView imgSchmiede;
      FlowPane fp;
+    HandStackLayout hs;
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
@@ -115,14 +117,23 @@ public class GameView extends View<GameModel> {
 
 
 
+
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVback = new ImageView(back);
         imgVback.setFitHeight(150);
         imgVback.setFitWidth(100);
         gp.setConstraints(imgVback, 1, 14);
-        gp.setRowSpan(imgVback, 5);
+        gp.setRowSpan(imgVback, 4);
 
         gp.getChildren().add(imgVback);
+
+
+
+        hs = new HandStackLayout();
+        gp.getChildren().add(hs);
+        gp.setConstraints(hs, 3, 14);
+        gp.setRowSpan(hs, 5);
+
 
 
         Label lblNachziehstapel = new Label();
@@ -219,6 +230,8 @@ public class GameView extends View<GameModel> {
     }
 
 
+
+
     protected void setTexts() {
 
         this.btnChatSend.setText( getText( "chat.send" ) );
@@ -299,6 +312,13 @@ public class GameView extends View<GameModel> {
      return imgView;
  }
 
+
+    public void setHandStackView(ArrayList<CardImageView> handStack){
+
+        for (int i = 0; i<5;i++){
+            hs.getChildren().add(handStack.get(i));
+        }
+    }
 
 /*
     public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){

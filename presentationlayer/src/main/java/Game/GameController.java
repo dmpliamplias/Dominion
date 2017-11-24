@@ -118,6 +118,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
             // highlight the user who has the turn...
             updateUnusedCards(unusedCards);
+            updateHandStack();
         });
 
 
@@ -140,6 +141,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
             unusedCards = gc.getUnusedCards();
             updateUnusedCards(unusedCards);
+
         });
     }
     
@@ -262,6 +264,9 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
+    /**
+     *  author Vanessa Cajochen
+     *  */
 
 
     public void updateUnusedCards(ArrayList<Card> unusedCards)
@@ -349,4 +354,14 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
 
-}
+
+    public void updateHandStack() {
+        ArrayList<CardImageView> handStack = new ArrayList<CardImageView>();
+        for (int i = 0; i < 5; i++) {
+            CardImageView imgView = new CardImageView(myCardSet.getHandStack().get(i), CardImageView.CardSize.bigSize);
+            handStack.add(imgView);
+        }
+        view.setHandStackView(handStack);
+    }
+
+    }
