@@ -33,28 +33,9 @@ public class CardImageView extends ImageView {
     public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
         this.cardSize = cardSize;
-        this.setOnMouseClicked(e -> {
-            runAction();
-        });
+
+
         this.setCardImageViewDesign();
-    }
-
-    private void runAction(){
-        if(this.card instanceof KingCard){
-            KingCard kc = (KingCard)card;
-
-        }else if(this.card instanceof MoneyCard){
-            MoneyCard mc= (MoneyCard)card;
-
-        }else if(this.card instanceof PointCard){
-            PointCard pc= (PointCard)card;
-
-        }
-    }
-
-
-    private User getUser(){
-       return PLServiceLocator.getPLServiceLocator().getUser();
     }
 
     private void setCardImageViewDesign(){
