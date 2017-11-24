@@ -241,7 +241,7 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Author Murat Kelleci 20.11.17 - Explained by Michel Schlatter
+    // Author Murat Kelleci 20.11.17 -
 
     private void buyCards(Card card){
         GameContainer gc = new GameContainer(Methods.BuyCard);
@@ -256,6 +256,8 @@ public class GameController extends Controller<GameModel, GameView> {
             view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+    // Author Murat Kelleci 20.11.17 - 
 
     private User getUser(){
         return PLServiceLocator.getPLServiceLocator().getUser();
