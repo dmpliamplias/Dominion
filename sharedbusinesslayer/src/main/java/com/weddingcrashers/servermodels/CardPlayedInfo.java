@@ -2,7 +2,9 @@ package com.weddingcrashers.servermodels;
 
 import com.weddingcrashers.businessmodels.Card;
 
-public class CardPlayedInfo {
+import java.io.Serializable;
+
+public class CardPlayedInfo implements Serializable {
     int userId;
     Card card;
 

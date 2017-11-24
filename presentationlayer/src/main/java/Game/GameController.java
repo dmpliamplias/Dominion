@@ -139,7 +139,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 // TODO: 20.11.2017  another Player has one Card more... maybe update smth in view... 
             }
             unusedCards = gc.getUnusedCards();
-            // TODO: 20.11.2017  Vanessa: update unusedCards in View 
+            updateUnusedCards(unusedCards);
         });
     }
     
@@ -248,6 +248,7 @@ public class GameController extends Controller<GameModel, GameView> {
         CardPlayedInfo buyInfo = new CardPlayedInfo();
         buyInfo.setUserId((int)getUser().getId());
         buyInfo.setCard(card);
+        gc.setCardPlayedInfo(buyInfo);
 
         try {
             PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
