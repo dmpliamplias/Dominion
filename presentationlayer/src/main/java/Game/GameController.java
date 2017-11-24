@@ -1,16 +1,25 @@
 package Game;
 
 
-import com.weddingcrashers.businessmodels.Card;
-import com.weddingcrashers.businessmodels.PlayerSet;
+import Controls.CardImageView;
+import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.service.Language;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
+import javafx.scene.image.Image;
 import org.h2.mvstore.DataUtils;
+import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
+import com.weddingcrashers.businessmodels.Card;
+import com.weddingcrashers.businessmodels.KingCard;
+import com.weddingcrashers.businessmodels.MoneyCard;
+import com.weddingcrashers.businessmodels.PointCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -194,12 +203,72 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Method for to receive the chatContainer from the server and set new text in the chat
+    // Methode for to receive the chatContainer from the server and set new text in the chat
     public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
         Platform.runLater( () -> {
             view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
         } );
 
     }
+
+    // Author Murat Kelleci
+
+    private void setCardImageViewAction(CardImageView imgv){
+        imgv.setOnMouseClicked(e -> {
+            runAction();
+        });
+
+    }
+
+    private void runAction(){
+
+        if (cardSize == CardImageView.CardSize.miniSize | cardSize == CardImageView.CardSize.miniMini){
+            buyCards();
+        }else
+            return;
+
+
+        // ToDo If Card miniSize oder miniMini dann kaufen
+        // ToDo für Kaufen Kauf nur Action
+        // ToDo für Kaufen Kaufen und Geld
+
+        if(this.card instanceof KingCard){
+            KingCard kc = (KingCard)card;
+
+        }else if(this.card instanceof MoneyCard){
+            MoneyCard mc= (MoneyCard)card;
+
+        }else if(this.card instanceof PointCard){
+            PointCard pc= (PointCard)card;
+
+        }
+    }
+
+
+
+    public enum CardSize{
+        miniSize,bigSize, tooltip, miniMini
+    }
+
+    private void buyCards(){
+        GameContainer gc = new GameContainer(Methods.BuyCard);
+        CardPlayedInfo buyInfo = new CardPlayedInfo();
+        buyInfo.setUserId((int)getUser().getId());
+        buyInfo.setCard(card);
+
+        try {
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private User getUser(){
+        return PLServiceLocator.getPLServiceLocator().getUser();
+    }
+
+
+
+
 
 }
