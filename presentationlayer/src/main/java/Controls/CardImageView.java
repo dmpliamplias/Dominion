@@ -27,25 +27,21 @@ import java.io.IOException;
 
 public class CardImageView extends ImageView {
 
-    private Card card;
+
     private final int miniSizeHeight=90;
     private final int bigSizeHeight=130;
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private final CardSize cardSize;
-    private final View view;
+    private Card card;
 
     public enum CardSize{
         miniSize,bigSize, tooltip, miniMini
     }
 
-    public CardImageView(Card card, CardSize cardSize, View v) {
+    public CardImageView(Card card, CardSize cardSize) {
         this.card = card;
         this.cardSize = cardSize;
-        this.view=v;
-        //this.setOnMouseClicked(e -> {
-           // runAction();
-       // });
         this.setCardImageViewDesign();
     }
 
@@ -102,6 +98,14 @@ public class CardImageView extends ImageView {
 
         }
 
+    }
+
+    public CardSize getCardSize() {
+        return cardSize;
+    }
+
+    public Card getCard() {
+        return card;
     }
 
 }

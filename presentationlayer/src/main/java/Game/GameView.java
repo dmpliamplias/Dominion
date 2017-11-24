@@ -274,15 +274,28 @@ public class GameView extends View<GameModel> {
     /**
      * Author Vanessa Cajochen
      */
+ public void setCardImageView(CardImageView cv, int colIdx, int rowIdx){
+     int val = 5;
+     if(cv.getCardSize() == CardImageView.CardSize.miniMini){
+         val = 2;
+     }else if(cv.getCardSize() == CardImageView.CardSize.miniSize){
+         val = 3;
+     }
+     gp.setConstraints(cv, colIdx, rowIdx);
+     gp.setRowSpan(cv, val);
+     gp.getChildren().add(imgKupfer);
 
+     Tooltip ttKupfer = new Tooltip();
+     CardImageView imgttKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.tooltip, this);
+     ttKupfer.setGraphic(imgttKupfer);
+     Tooltip.install(imgKupfer, ttKupfer);
+ }
 
     public void updateUnusedCards(ArrayList<Card> list)
     {
 
         imgKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.miniMini, this);
-        gp.setConstraints(imgKupfer, 2, 2);
-        gp.setRowSpan(imgKupfer, 2);
-        gp.getChildren().add(imgKupfer);
+
 
         Tooltip ttKupfer = new Tooltip();
         CardImageView imgttKupfer = new CardImageView((getCard(list,"Kupfer")), CardImageView.CardSize.tooltip, this);

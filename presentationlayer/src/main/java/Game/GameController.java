@@ -215,42 +215,35 @@ public class GameController extends Controller<GameModel, GameView> {
 
     private void setCardImageViewAction(CardImageView imgv){
         imgv.setOnMouseClicked(e -> {
-            runAction();
+            runAction(imgv);
         });
-
     }
 
-    private void runAction(){
-
-        if (cardSize == CardImageView.CardSize.miniSize | cardSize == CardImageView.CardSize.miniMini){
-            buyCards();
-        }else
+    private void runAction(CardImageView imgv){
+        Card c = imgv.getCard();
+        if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini){
+            buyCards(c);
+        }else {
             return;
-
+        }
 
         // ToDo If Card miniSize oder miniMini dann kaufen
         // ToDo für Kaufen Kauf nur Action
         // ToDo für Kaufen Kaufen und Geld
 
-        if(this.card instanceof KingCard){
-            KingCard kc = (KingCard)card;
+        if(c instanceof KingCard){
+            KingCard kc = (KingCard)c;
 
-        }else if(this.card instanceof MoneyCard){
-            MoneyCard mc= (MoneyCard)card;
+        }else if(c instanceof MoneyCard){
+            MoneyCard mc= (MoneyCard)c;
 
-        }else if(this.card instanceof PointCard){
-            PointCard pc= (PointCard)card;
+        }else if(c instanceof PointCard){
+            PointCard pc= (PointCard)c;
 
         }
     }
 
-
-
-    public enum CardSize{
-        miniSize,bigSize, tooltip, miniMini
-    }
-
-    private void buyCards(){
+    private void buyCards(Card card){
         GameContainer gc = new GameContainer(Methods.BuyCard);
         CardPlayedInfo buyInfo = new CardPlayedInfo();
         buyInfo.setUserId((int)getUser().getId());
