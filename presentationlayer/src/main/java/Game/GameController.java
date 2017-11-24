@@ -117,7 +117,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
             // highlight the user who has the turn...
-            view.updateUnusedCards(this.unusedCards);
+            updateUnusedCards(unusedCards);
         });
 
 
@@ -261,6 +261,90 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
+
+
+    public void updateUnusedCards(ArrayList<Card> unusedCards)
+    {
+        ArrayList<String> cardNames = new ArrayList<String>();
+        cardNames.add("Kupfer");
+        cardNames.add("Silber");
+        cardNames.add("Gold");
+        cardNames.add("Anwesen");
+        cardNames.add("Provinz");
+        cardNames.add("Herzogtum");
+        cardNames.add("Dorf");
+        cardNames.add("Garten");
+        cardNames.add("Geldverleiher");
+        cardNames.add("Holzfäller");
+        cardNames.add("Jahrmarkt");
+        cardNames.add("Laboratorium");
+        cardNames.add("Schmiede");
+        cardNames.add("Markt");
+
+
+        ArrayList<int[]> indexes = new ArrayList<int[]>();
+        indexes.add(new int[]{2,2,2});
+        indexes.add(new int[]{2,4,2});
+        indexes.add(new int[]{2,6,2});
+        indexes.add(new int[]{7,2,2});
+        indexes.add(new int[]{7,6,2});
+        indexes.add(new int[]{7,4,2});
+        indexes.add(new int[]{3,5,3});
+        indexes.add(new int[]{5,5,3});
+        indexes.add(new int[]{6,5,3});
+        indexes.add(new int[]{4,5,3});
+        indexes.add(new int[]{5,2,3});
+        indexes.add(new int[]{4,2,3});
+        indexes.add(new int[]{3,2,3});
+        indexes.add(new int[]{6,2,3});
+
+        ArrayList<CardImageView.CardSize> sizes = new ArrayList<CardImageView.CardSize>();
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniMini);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+        sizes.add(CardImageView.CardSize.miniSize);
+
+
+        for(int idx =0; idx < cardNames.size(); idx++){
+            String cardName = cardNames.get(idx);
+            int[] pos = indexes.get(idx);
+            CardImageView imgView = view.setCardImageView(getCard(unusedCards, cardName), sizes.get(idx), pos[0], pos[1], pos[2],
+                   countCards(unusedCards, cardName));
+            setCardImageViewAction(imgView);
+        }
+    }
+
+
+    public int countCards(ArrayList<Card> list, String s) {
+        int count = 0;
+        for (int i = 0; i < (list.size());i++ ){
+            if (list.get(i).getName().equals(s)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Card getCard(ArrayList<Card> list, String name) {
+        Card c = null;
+        for (int i = 0; i < (list.size());i++ ) {
+            if (list.get(i).getName().equals(name)) {
+                c = list.get(i);
+                break;
+            }
+        }
+        return c;
+    }
 
 
 

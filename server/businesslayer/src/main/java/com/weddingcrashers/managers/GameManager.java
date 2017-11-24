@@ -75,7 +75,7 @@ public class GameManager extends Manager {
       CardPlayedInfo info =  gc.getCardPlayedInfo();
       Card buyCard = info.getCard();
 
-      Card card = getCardByName(buyCard.getName(), true);
+      Card card = getCardByName(buyCard.getName());
 
       GameContainer bGc = new GameContainer(Methods.BuyCard);
       CardPlayedInfo buyInfo = new CardPlayedInfo();
@@ -91,10 +91,10 @@ public class GameManager extends Manager {
          ArrayList<Card> pullStack = new ArrayList<Card>();
 
          for(int i = 0; i < 7; i++){
-             pullStack.add(this.getCardByMoneyType(MoneyType.Copper, false));
+             pullStack.add(this.getCardByMoneyType(MoneyType.Copper));
          }
          for(int i = 0; i < 3; i++){
-             pullStack.add(this.getCardByPointCardType(PointCardType.Estate, false));
+             pullStack.add(this.getCardByPointCardType(PointCardType.Estate));
          }
          set.setPullStack(pullStack);
          set.pullHandStack();
@@ -326,34 +326,34 @@ public class GameManager extends Manager {
 
     }
 
-    public Card getCardByName(String name, boolean remove){
+    public Card getCardByName(String name){
         Card result = null;
         for(Card c : unusedCards){
             if(c.getName().equals(name)){
                 result = c;
             }
         }
-        if(result != null && remove) {
+        if(result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
 
-    public <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
+    public <T extends Card> T getCardByClass(Class<T> cls){
         T result = null;
         for(Card c : unusedCards){
             if(cls.isInstance(c)){
                 result = (T)c;
             }
         }
-        if(result != null && remove) {
+        if(result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
-    public PointCard getCardByPointCardType(PointCardType type, boolean remove){
+    public PointCard getCardByPointCardType(PointCardType type){
         PointCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  PointCard){
@@ -363,13 +363,13 @@ public class GameManager extends Manager {
                 }
             }
         }
-        if(result != null && remove) {
+        if(result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
-    public MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
+    public MoneyCard getCardByMoneyType(MoneyType type){
         MoneyCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  MoneyCard){
@@ -379,7 +379,7 @@ public class GameManager extends Manager {
                 }
             }
         }
-        if(result != null && remove) {
+        if(result != null) {
             unusedCards.remove(result);
         }
         return result;
