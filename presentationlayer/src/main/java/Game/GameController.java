@@ -92,6 +92,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+    /* ------------------------- receiving smth from Server ----------------------*/
+
     // after initalizing the gameview and after each complete turn the player makes, this methods gets called
     public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn){
       if(set.getUserId() == myUser.getId()){
@@ -126,9 +128,27 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+    // a player finished his turn...
     public void handleServerAnswer_gameTurnFinished(GameContainer gc){
         Platform.runLater(()-> {
+            if(gc.getWinningInformations() != null & gc.getWinningInformations().size() > 0){
+                // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
+                // hier hast du die Informationen über den Rang der Spieler usw:
+                for(WinningInformation wi : gc.getWinningInformations()){
+                   int rang = wi.getPosition();
+                   User user = users.get(wi.getUserId());
+                   int points = wi.getPoints();
 
+                    // TODO: 25.11.2017 Vane: Display the data to each user
+                }
+            }else{
+               activeUserId =  gc.getUserIdHasTurn();
+               if(myUser.getId() == activeUserId){
+                   // TODO: 25.11.2017 Vane enable this user, it's his turn now... 
+               }else{
+                   // TODO: 25.11.2017 Vane disable this user, it's not his turn now...
+               }
+            }
         });
     }
 
@@ -161,12 +181,51 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    // Methode for to receive the chatContainer from the server and set new text in the chat
+    public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
+        Platform.runLater( () -> {
+            view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
+        } );
+
+    }
+
+
+
+
+
+    /*----------------Send to smth. to Server ------------- */
+
     public void cardPlayed(Card c){
         GameContainer gc = new GameContainer(Methods.CardPlayed);
         CardPlayedInfo info = new CardPlayedInfo();
         info.setUserId((int)myUser.getId());
         info.setCard(c);
 
+        try {
+            serverConnectionService.sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    // Author Murat Kelleci 20.11.17 -
+    private void buyCards(Card card){
+        GameContainer gc = new GameContainer(Methods.BuyCard);
+        CardPlayedInfo buyInfo = new CardPlayedInfo();
+        buyInfo.setUserId((int)getUser().getId());
+        buyInfo.setCard(card);
+        gc.setCardPlayedInfo(buyInfo);
+
+        try {
+            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    public void moveFinished(){
+        // TODO: 25.11.2017 Vane: call this method when a user completed his turn...
+        GameContainer gc = new GameContainer(Methods.TurnFinished);
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
@@ -213,13 +272,7 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Methode for to receive the chatContainer from the server and set new text in the chat
-    public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
-        Platform.runLater( () -> {
-            view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
-        } );
 
-    }
 
     // Author Murat Kelleci 24.11.17
 
@@ -248,22 +301,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }else if(c instanceof PointCard){
             PointCard pc= (PointCard)c;
 
-        }
-    }
-
-    // Author Murat Kelleci 20.11.17 -
-
-    private void buyCards(Card card){
-        GameContainer gc = new GameContainer(Methods.BuyCard);
-        CardPlayedInfo buyInfo = new CardPlayedInfo();
-        buyInfo.setUserId((int)getUser().getId());
-        buyInfo.setCard(card);
-        gc.setCardPlayedInfo(buyInfo);
-
-        try {
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
-        } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

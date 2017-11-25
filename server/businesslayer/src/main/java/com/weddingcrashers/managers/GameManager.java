@@ -1,12 +1,15 @@
 package com.weddingcrashers.managers;
 
 import com.weddingcrashers.businessmodels.*;
+import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.service.HighscoreService;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,11 +42,11 @@ public class GameManager extends Manager {
 
     public void moveFinished(GameContainer gcReceived){
         if(client.isActive()) {
-            PlayerSet set = gcReceived.getDominionSet();
-            client.setDominionSet(set);
+            //PlayerSet set = gcReceived.getDominionSet(); // everything which gets buyed is logged, so no need for this code...
+            //client.setDominionSet(set);
 
             GameContainer gc = new GameContainer(Methods.TurnFinished);
-            gc.setDominionSet(set);
+            //gc.setDominionSet(set); // think we don't need this...
 
             if (usersRoundPlayed.size() < (players.size()-1)) {
                 usersRoundPlayed.add((int)client.getUser().getId());
@@ -52,7 +55,7 @@ public class GameManager extends Manager {
                 round++;
                 updateRound();
             }
-            gameTurnFinishedCompletely(gc);
+            gameTurnFinishedCompletely(gc, checkGameAbortCondition());
         }else{
             ServerUtils.sendError(client, new Exception("This is not your turn!"));
         }
@@ -70,19 +73,23 @@ public class GameManager extends Manager {
     }
 
     public void buyCard(GameContainer gc){
-      CardPlayedInfo info =  gc.getCardPlayedInfo();
-      Card buyCard = info.getCard();
+        if(client.isActive()) {
+            CardPlayedInfo info = gc.getCardPlayedInfo();
+            Card buyCard = info.getCard();
 
-      Card card = getCardByName(buyCard.getName(), true);
+            Card card = getCardByName(buyCard.getName(), true);
 
-      GameContainer bGc = new GameContainer(Methods.BuyCard);
-      CardPlayedInfo buyInfo = new CardPlayedInfo();
-      buyInfo.setCard(card);
-      buyInfo.setUserId((int)users.get(client.getClientId()).getId());
-      bGc.setCardPlayedInfo(buyInfo);
-      bGc.setUnusedCards(unusedCards);
-      this.client.getDominionSet().getTrayStack().add(card);
-      broadCast(bGc, false);
+            GameContainer bGc = new GameContainer(Methods.BuyCard);
+            CardPlayedInfo buyInfo = new CardPlayedInfo();
+            buyInfo.setCard(card);
+            buyInfo.setUserId((int) users.get(client.getClientId()).getId());
+            bGc.setCardPlayedInfo(buyInfo);
+            bGc.setUnusedCards(unusedCards);
+            this.client.getDominionSet().getTrayStack().add(card);
+            broadCast(bGc, false);
+        }else{
+            ServerUtils.sendError(client, new Exception("This is not your turn!"));
+        }
     }
 
     public void sendInitalCardSet(){
@@ -125,8 +132,8 @@ public class GameManager extends Manager {
 
     private void gameTurnFinishedCompletely(GameContainer container, boolean abortGame){
         if(abortGame){
-
            ArrayList<WinningInformation> winningInfos = new ArrayList<WinningInformation>();
+            HighscoreService hs = serviceLocator.getHighscoreService();
             for(Client c : players){
                int points = c.getDominionSet().calculatePoints();
                winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), points));
@@ -134,20 +141,27 @@ public class GameManager extends Manager {
             Collections.sort(winningInfos);
             for(WinningInformation info : winningInfos){
                 info.setPosition(winningInfos.indexOf(info) + 1);
+
+                Highscore highscore = new Highscore();
+                LocalDateTime endTime = LocalDateTime.now();
+                highscore.setDateOfHighscore(endTime);
+                highscore.setUser(users.get(info.getClientId()));
+                highscore.setPoints(info.getPoints());
+                highscore.setDurationForHighscore(0);
+                hs.saveHighscore(highscore);
             }
+            container.setWinningInformation(winningInfos);
 
         }else {
             int nxtId = getNextTurnClientId(false);
 
-            container.getDominionSet().setUserId((int) client.getUser().getId());
+            //container.getDominionSet().setUserId((int) client.getUser().getId());
             container.setUserIdHasTurn((int) users.get(nxtId).getId());
             for(Client c : client.getAllClients()) { // send container to all clients
                 c.setActive(c.getClientId() == nxtId);
             }
         }
-        for(Client c : client.getAllClients()){ // send container to all clients
-            ServerUtils.sendObject(c, container);
-        }
+        broadCast(container, false);
     }
 
     private int getNextTurnClientId(boolean isInitalizing){
@@ -509,6 +523,7 @@ public class GameManager extends Manager {
     public static void setUsers(HashMap<Integer, User> users) {
         GameManager.users = users;
     }
+
 
     private enum CardType{
         Anwesen,
