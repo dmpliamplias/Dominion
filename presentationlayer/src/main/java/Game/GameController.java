@@ -118,7 +118,9 @@ public class GameController extends Controller<GameModel, GameView> {
             }
             // highlight the user who has the turn...
             updateUnusedCards(unusedCards);
-            updateHandStack();
+            System.out.println(myCardSet.getHandStack());
+            drawHandCards(5);
+            drawHandCards(2);
         });
 
 
@@ -357,13 +359,13 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
 
-    public void updateHandStack() {
+    public void drawHandCards(int numberOfDrawnCards) {
         ArrayList<CardImageView> handStack = new ArrayList<CardImageView>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfDrawnCards; i++) {
             CardImageView imgView = new CardImageView(myCardSet.getHandStack().get(i), CardImageView.CardSize.bigSize);
             handStack.add(imgView);
         }
-        view.setHandStackView(handStack);
+        view.setHandStackView(handStack, numberOfDrawnCards);
     }
 
     }

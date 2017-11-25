@@ -76,6 +76,7 @@ public class GameView extends View<GameModel> {
      CardImageView imgSchmiede;
      FlowPane fp;
     HandStackLayout hs;
+    ArrayList<CardImageView> handStack = new ArrayList<CardImageView>();
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
@@ -313,10 +314,14 @@ public class GameView extends View<GameModel> {
  }
 
 
-    public void setHandStackView(ArrayList<CardImageView> handStack){
+    public void setHandStackView(ArrayList<CardImageView> newHandStack, int numberOfDrawnCards){
 
-        for (int i = 0; i<5;i++){
-            hs.getChildren().add(handStack.get(i));
+        for (int i = 0; i<numberOfDrawnCards;i++){
+            this.handStack.add(newHandStack.get(i));
+            if (this.handStack.size() >5){
+                hs.setCardInterval((500 / this.handStack.size()));
+            }
+            hs.getChildren().add(newHandStack.get(i));
         }
     }
 
