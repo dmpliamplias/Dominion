@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "USER")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Comparable {
 
     // ---- Members
 
@@ -56,6 +56,10 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public int compareTo(Object o){
+        User other = (User)o;
+        return ((Long)this.getId()).compareTo(other.getId());
+    }
 
     // ---- Methods
 

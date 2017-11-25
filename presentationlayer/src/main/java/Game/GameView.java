@@ -10,6 +10,7 @@ import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -76,7 +77,13 @@ public class GameView extends View<GameModel> {
      CardImageView imgSchmiede;
      FlowPane fp;
     HandStackLayout hs;
-    ArrayList<CardImageView> handStack = new ArrayList<CardImageView>();
+    HandStackLayout cardPlayingArea;
+    ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
+    ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+    int handStackSize = 0;
+    int cardPlayingAreaSize = 0;
+    Button btnPlayMoneyCards;
+
     public GameView(Stage stage, GameModel model){
         super(stage,model);
     }
@@ -94,6 +101,8 @@ public class GameView extends View<GameModel> {
         root.getChildren().add(gp);
         root.getChildren().add( addChatGridPane() );
         gp.add(vb, 2, 14);
+
+        gp.setGridLinesVisible(true);
 
 
         ColumnConstraints column = new ColumnConstraints(115);
@@ -121,25 +130,67 @@ public class GameView extends View<GameModel> {
 
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVback = new ImageView(back);
-        imgVback.setFitHeight(150);
-        imgVback.setFitWidth(100);
-        gp.setConstraints(imgVback, 1, 14);
+        imgVback.setFitHeight(120);
+        imgVback.setFitWidth(80);
         gp.setRowSpan(imgVback, 4);
+        gp.setConstraints(imgVback, 1, 14);
 
         gp.getChildren().add(imgVback);
 
+        Label lblNachziehstapel = new Label();
+        setLabelFormat(lblNachziehstapel);
+        gp.setConstraints(lblNachziehstapel, 1, 14);
+        lblNachziehstapel.setText("10");
 
 
+
+
+        // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
         gp.getChildren().add(hs);
-        gp.setConstraints(hs, 3, 14);
-        gp.setRowSpan(hs, 5);
+        gp.setConstraints(hs, 2, 14);
+        gp.setRowSpan(hs, 4);
+
+        cardPlayingArea = new HandStackLayout();
+        gp.getChildren().add(cardPlayingArea);
+        gp.setConstraints(cardPlayingArea, 2, 9);
+        gp.setRowSpan(cardPlayingArea, 4);
 
 
 
-        Label lblNachziehstapel = new Label();
-        gp.setConstraints(lblNachziehstapel, 1, 14);
-        setLabelFormat(lblNachziehstapel);
+        // -------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------
+
+        // TEST
+        ArrayList<CardImageView> testList = new ArrayList<CardImageView>();
+
+        Button btnPlayMoneyCards = new Button("Play All Cards");
+        btnTest.setPrefSize(100, 30);
+        gp.setRowSpan(btnTest, 1);
+        gp.setValignment(btnTest, VPos.TOP);
+        btnTest.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnTest, 1, 11);
+        gp.getChildren().add(btnTest);
+
+        btnTest.setOnAction((event) ->{
+
+            for (int i = 0; i < handStackList.size();i++) {
+                System.out.println(handStackList.size());
+                if (handStackList.get(i).getCard().getName().equals("Kupfer")) {
+                    testList.add(handStackList.get(i));
+                }
+            }
+                for (int i = 0; i < testList.size();i++) {
+                    setCardPlayingAreaView(testList.get(i));
+                }
+
+        });
+
+
+        // -------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -162,6 +213,7 @@ public class GameView extends View<GameModel> {
 
     private void setLabelFormat(Label lbl){
         gp.getChildren().add(lbl);
+        gp.setValignment(lbl, VPos.TOP);
         lbl.getStyleClass().add("labelNumber");
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
@@ -313,16 +365,38 @@ public class GameView extends View<GameModel> {
      return imgView;
  }
 
-
-    public void setHandStackView(ArrayList<CardImageView> newHandStack, int numberOfDrawnCards){
-
-        for (int i = 0; i<numberOfDrawnCards;i++){
-            this.handStack.add(newHandStack.get(i));
-            if (this.handStack.size() >5){
-                hs.setCardInterval((500 / this.handStack.size()));
+    // Adds the card to the HandStackPane. If there are more than 5 cards, the gap between the Cards will get smaller
+    public void addCardToHandStackPane(Card card){
+            CardImageView cardImg = new CardImageView(card, CardImageView.CardSize.bigSize);
+            handStackList.add(cardImg);
+            handStackSize++;
+            if (handStackSize > 5) {
+                hs.setCardInterval((550 / handStackSize));
             }
-            hs.getChildren().add(newHandStack.get(i));
+            hs.getChildren().add(cardImg);
+    }
+
+    // Moves card from the HandStackPane to the cardPlayingArea. If there are more than 5 cards in the PlayingArea the gap will get smaller
+    public void moveCardToPlayingArea (CardImageView cardImg) {
+        handStackSize--;
+        handStackList.remove(cardImg);
+        hs.getChildren().remove(cardImg);
+        cardPlayingAreaSize++;
+        if (cardPlayingAreaSize > 5) {
+            cardPlayingArea.setCardInterval((550 / cardPlayingAreaSize));
         }
+            cardPlayingArea.getChildren().add(cardImg);
+    }
+
+    public void moveMoneyCardsToPlayArea(){
+        for(int i = 0; i < handStackList.size(); i++){
+            if (handStackList.get(i).getCard().getName().equals("Kupfer") || handStackList.get(i).getCard().getName().equals("Silber") || handStackList.get(i).getCard().getName().equals("Gold")){
+                moveCardToPlayingArea(handStackList.get(i));
+            }
+        }
+
+
+
     }
 
 /*

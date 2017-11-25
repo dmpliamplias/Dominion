@@ -75,6 +75,9 @@ public class GameController extends Controller<GameModel, GameView> {
         /**
          *  author Manuel Wirz
          *  */
+        view.btnPlayMoneyCards.setOnAction( event -> {
+            view.moveMoneyCardsToPlayArea();
+        } );
         
         view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
@@ -366,12 +369,12 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     public void drawHandCards(int numberOfDrawnCards) {
-        ArrayList<CardImageView> handStack = new ArrayList<CardImageView>();
         for (int i = 0; i < numberOfDrawnCards; i++) {
-            CardImageView imgView = new CardImageView(myCardSet.getHandStack().get(i), CardImageView.CardSize.bigSize);
-            handStack.add(imgView);
+
+            myCardSet.getHandStack().add(myCardSet.getPullStack().get(0));
+            view.addCardToHandStackPane(myCardSet.getPullStack().get(0));
+            myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
         }
-        view.setHandStackView(handStack, numberOfDrawnCards);
     }
 
     }
