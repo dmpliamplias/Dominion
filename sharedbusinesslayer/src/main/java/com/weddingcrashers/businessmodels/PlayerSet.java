@@ -132,4 +132,35 @@ public class PlayerSet implements Serializable {
         this.handStack = handStack;
     }
 
+
+
+    /**
+     * @author  Vanessa Cajochen
+     */
+
+    public void addCardToHandStack (Card card){
+        handStack.add(card);
+    }
+
+    public void removeCardFromHandStack (Card card){
+        handStack.remove(card);
+    }
+
+    public void addCardToPullStack (Card card){
+        pullStack.add(card);
+    }
+
+    public void removeCardFromPullStack (Card card){
+        pullStack.remove(card);
+    }
+
+    public void addCardToTrayStack (Card card){
+        trayStack.add(card);
+    }
+
+    public void removeCardFromTrayStack (Card card){
+        trayStack.remove(card);
+    }
+
+
 }
