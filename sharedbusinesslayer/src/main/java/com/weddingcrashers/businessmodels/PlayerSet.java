@@ -46,6 +46,30 @@ public class PlayerSet implements Serializable {
         Collections.shuffle(pullStack);
     }
 
+    public ArrayList<Card> getAllCardsFromSet(){
+        ArrayList<Card> cards = new ArrayList<Card>();
+        for(Card c : pullStack){
+            cards.add(c);
+        }
+        for(Card c : handStack){
+            cards.add(c);
+        }
+        for(Card c : trayStack){
+            cards.add(c);
+        }
+        return cards;
+    }
+
+    public int calculatePoints(){
+        ArrayList<Card> cards = getAllCardsFromSet();
+        ArrayList<PointCard> pointCards = filterPointCards(cards);
+        int points = 0;
+        for(PointCard pc : pointCards){
+            points += pc.getValue();
+        }
+        return points;
+    }
+
     public static ArrayList<MoneyCard> filterMoneyCards(ArrayList<Card> cards){
         ArrayList<MoneyCard> list = new ArrayList<MoneyCard>();
         for(Card card : cards){

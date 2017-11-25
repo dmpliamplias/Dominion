@@ -126,6 +126,12 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+    public void handleServerAnswer_gameTurnFinished(GameContainer gc){
+        Platform.runLater(()-> {
+
+        });
+    }
+
     public void handleServerAnswer_updateRound(int round){
         Platform.runLater(() ->{
             // TODO: 12.11.2017 Vane update round here (show in view)

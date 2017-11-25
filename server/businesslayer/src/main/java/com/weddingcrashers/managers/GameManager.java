@@ -3,12 +3,10 @@ package com.weddingcrashers.managers;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.servermodels.CardPlayedInfo;
-import com.weddingcrashers.servermodels.GameSettings;
-import com.weddingcrashers.servermodels.Methods;
+import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
-import com.weddingcrashers.servermodels.GameContainer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -75,7 +73,7 @@ public class GameManager extends Manager {
       CardPlayedInfo info =  gc.getCardPlayedInfo();
       Card buyCard = info.getCard();
 
-      Card card = getCardByName(buyCard.getName());
+      Card card = getCardByName(buyCard.getName(), true);
 
       GameContainer bGc = new GameContainer(Methods.BuyCard);
       CardPlayedInfo buyInfo = new CardPlayedInfo();
@@ -92,13 +90,12 @@ public class GameManager extends Manager {
          ArrayList<Card> pullStack = new ArrayList<Card>();
 
          for(int i = 0; i < 7; i++){
-             pullStack.add(this.getCardByMoneyType(MoneyType.Copper));
+             pullStack.add(this.getCardByMoneyType(MoneyType.Copper, false));
          }
          for(int i = 0; i < 3; i++){
-             pullStack.add(this.getCardByPointCardType(PointCardType.Estate));
+             pullStack.add(this.getCardByPointCardType(PointCardType.Estate, false));
          }
          set.setPullStack(pullStack);
-         set.pullHandStack();
 
          this.client.setDominionSet(set);
 
@@ -126,15 +123,29 @@ public class GameManager extends Manager {
         broadCast(gc,false);
     }
 
-    private void gameTurnFinishedCompletely(GameContainer container){
-        int nxtId = getNextTurnClientId(false);
+    private void gameTurnFinishedCompletely(GameContainer container, boolean abortGame){
+        if(abortGame){
 
-        container.getDominionSet().setUserId((int)client.getUser().getId());
-        container.setUnusedCards(unusedCards);
-        container.setUserIdHasTurn((int)users.get(nxtId).getId());
+           ArrayList<WinningInformation> winningInfos = new ArrayList<WinningInformation>();
+            for(Client c : players){
+               int points = c.getDominionSet().calculatePoints();
+               winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), points));
+            }
+            Collections.sort(winningInfos);
+            for(WinningInformation info : winningInfos){
+                info.setPosition(winningInfos.indexOf(info) + 1);
+            }
 
+        }else {
+            int nxtId = getNextTurnClientId(false);
+
+            container.getDominionSet().setUserId((int) client.getUser().getId());
+            container.setUserIdHasTurn((int) users.get(nxtId).getId());
+            for(Client c : client.getAllClients()) { // send container to all clients
+                c.setActive(c.getClientId() == nxtId);
+            }
+        }
         for(Client c : client.getAllClients()){ // send container to all clients
-            c.setActive(c.getClientId() == nxtId);
             ServerUtils.sendObject(c, container);
         }
     }
@@ -163,6 +174,40 @@ public class GameManager extends Manager {
 
         int nxtIdActive = ids.get(nxtIdx);
         return nxtIdActive;
+    }
+
+    public boolean checkGameAbortCondition(){
+        boolean abort = false;
+       if(gameSettings.getFinishAfterRounds() >= 1){
+           abort = round > gameSettings.getFinishAfterRounds();
+       }else if(gameSettings.isPointCards()){
+            int provinzCounter = 0;
+            for(Card c : unusedCards){
+                if(c.getName().equals("Provinz")){
+                    provinzCounter++;
+                    break;
+                }
+            }
+           ArrayList<String> actionCards = new ArrayList<String>();
+           actionCards.add("Dorf");
+           actionCards.add("Garten");
+           actionCards.add("Geldverleiher");
+           actionCards.add("Holzfäller");
+           actionCards.add("Jahrmarkt");
+           actionCards.add("Laboratorium");
+           actionCards.add("Markt");
+           actionCards.add("Schmiede");
+
+           int emptyActionStacksCounter = 0;
+           for(String cardName : actionCards){
+              Card c = getCardByName(cardName, false);
+              if(c != null){
+                  emptyActionStacksCounter++;
+              }
+           }
+           abort = provinzCounter < 1 || emptyActionStacksCounter >= 3;
+       }
+        return abort;
     }
 
     private static void createDominionSet(int players){
@@ -327,65 +372,76 @@ public class GameManager extends Manager {
 
     }
 
-    public Card getCardByName(String name){
+    public Card getCardByName(String name, boolean remove){
         Card result = null;
         for(Card c : unusedCards){
             if(c.getName().equals(name)){
                 result = c;
+                break;
             }
         }
-        if(result != null) {
+        if(remove && result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
 
-    public <T extends Card> T getCardByClass(Class<T> cls){
+    public <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
         T result = null;
         for(Card c : unusedCards){
             if(cls.isInstance(c)){
                 result = (T)c;
+                break;
             }
         }
-        if(result != null) {
+        if(remove && result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
-    public PointCard getCardByPointCardType(PointCardType type){
+    public PointCard getCardByPointCardType(PointCardType type, boolean remove){
         PointCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  PointCard){
                 PointCard card = (PointCard)c;
                 if(card.getPointCardType() == type) {
                     result = card;
+                    break;
                 }
             }
         }
-        if(result != null) {
+        if(remove && result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
-    public MoneyCard getCardByMoneyType(MoneyType type){
+    public MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
         MoneyCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  MoneyCard){
                 MoneyCard card = (MoneyCard)c;
                 if(card.getMoneyType() == type) {
                     result = card;
+                    break;
                 }
             }
         }
-        if(result != null) {
+        if(remove && result != null) {
             unusedCards.remove(result);
         }
         return result;
     }
 
+    public static void dispose(){
+        gameSettings = null;
+        players = null;
+        users = null;
+        gameRunning = false;
+        unusedCards = null;
+    }
 
     private static int getNumberOfCards(int players, CardType cardType){
         // PointCards

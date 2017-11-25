@@ -122,6 +122,8 @@ public class ServerConnectionService extends Thread{
             gameController.handleServerAnswer_updateRound(gc.getRound());
         }else if(c.getMethod() == Methods.BuyCard && gameController != null){
             gameController.handleServerAnswer_cardBuyed((GameContainer)c);
+        }else if(c.getMethod() == Methods.TurnFinished && gameController != null){
+            gameController.handleServerAnswer_gameTurnFinished((GameContainer)c);
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
