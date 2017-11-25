@@ -63,9 +63,16 @@ public class PlayerSet implements Serializable {
     public int calculatePoints(){
         ArrayList<Card> cards = getAllCardsFromSet();
         ArrayList<PointCard> pointCards = filterPointCards(cards);
+        ArrayList<KingCard> kingCards = filterKingKards(cards);
         int points = 0;
         for(PointCard pc : pointCards){
             points += pc.getValue();
+        }
+
+        for(KingCard card : kingCards){
+            if(card.getName().equals("Garten")){
+                points += Math.floor(cards.size() / 10.0);
+            }
         }
         return points;
     }
