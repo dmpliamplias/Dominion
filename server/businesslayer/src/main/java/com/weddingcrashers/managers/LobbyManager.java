@@ -47,11 +47,16 @@ public class LobbyManager extends Manager{
         }
 
 
-
+        Collections.sort(clientIds);
         ArrayList<Client> players = new ArrayList<>();
         for(Integer clientId : clientIds){
             for(Client c : client.getAllClients()){
                 if(clientId.equals(c.getClientId())&& c.getViewStatus() == ViewStatus.Lobby) {
+                    if(clientIds.indexOf(clientId) == 0){
+                        c.setActive(true);
+                    }else{
+                        c.setActive(false);
+                    }
                     lc.setUserNames(users);
                     lc.setGameSettings(lcReceived.getGameSettings());
                     players.add(c);
