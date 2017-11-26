@@ -19,5 +19,7 @@ public final class StyleSheetPath {
     public static final String LOGIN = "/login/login.css";
     /** Register view css path. */
     public static final String REGISTER = "/register/register.css";
+    /** CardImageView css path. */
+    public static final String CARDIMAGEVIEW = "controls/cardImageView.css";
 
 }

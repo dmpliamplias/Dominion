@@ -24,6 +24,7 @@ public class CardImageView extends ImageView {
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private Card card;
+    private boolean disabled;
 
     private final CardSize cardSize;
     public enum CardSize{
@@ -85,6 +86,7 @@ public class CardImageView extends ImageView {
         }
 
     }
+
 
     public Card getCard() {
         return card;
