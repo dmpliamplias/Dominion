@@ -41,6 +41,9 @@ public class GameController extends Controller<GameModel, GameView> {
     GameSettings gameSettings;
     User myUser;
     int activeUserId;
+    int numberOfActions;
+    int numberOfBuys;
+    int numberOfMoney;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -70,13 +73,32 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
-        // TODO: 12.11.2017 Vane => show GameSettings 
-        
+
+        // TODO: 12.11.2017 Vane => show GameSettings
+
+        resetActionBuyMoney();
+        updateActionBuyMoney();
+
+        view.btnPlayMoneyCards.setOnAction( event -> {
+            for(int i = 0; i < view.handStackList.size(); i++){
+                if (view.handStackList.get(i).getCard().getName().equals("Kupfer")){
+                    numberOfMoney++;}
+                if (view.handStackList.get(i).getCard().getName().equals("Silber")){
+                    numberOfMoney = numberOfMoney + 2;}
+                if (view.handStackList.get(i).getCard().getName().equals("Gold")){
+                    numberOfMoney = numberOfMoney + 3;}
+             }
+            updateActionBuyMoney();
+            view.moveMoneyCardsToPlayArea();
+        } );
+
+
         /**
          *  author Manuel Wirz
          *  */
 
-        
+
+
         view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
         } );
@@ -212,17 +234,24 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // Author Murat Kelleci 20.11.17 -
-    private void buyCards(Card card){
-        GameContainer gc = new GameContainer(Methods.BuyCard);
-        CardPlayedInfo buyInfo = new CardPlayedInfo();
-        buyInfo.setUserId((int)getUser().getId());
-        buyInfo.setCard(card);
-        gc.setCardPlayedInfo(buyInfo);
+    private void buyCards(Card card) {
+        if (numberOfBuys > 0 && card.getCost() <= numberOfMoney) {
+            GameContainer gc = new GameContainer(Methods.BuyCard);
+            CardPlayedInfo buyInfo = new CardPlayedInfo();
+            buyInfo.setUserId((int) getUser().getId());
+            buyInfo.setCard(card);
+            gc.setCardPlayedInfo(buyInfo);
 
-        try {
-            PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
-        } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            myCardSet.getTrayStack().add(card);
+            numberOfBuys--;
+            numberOfMoney = numberOfMoney-card.getCost();
+            updateActionBuyMoney();
+
+            try {
+                PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
+            } catch (IOException e) {
+                view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            }
         }
     }
 
@@ -413,5 +442,19 @@ public class GameController extends Controller<GameModel, GameView> {
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
         }
     }
+
+    public void resetActionBuyMoney(){
+        numberOfActions = 1;
+        numberOfBuys = 1;
+        numberOfMoney = 0;
+    }
+
+
+    public void updateActionBuyMoney(){
+        view.updatelblInfo(numberOfActions, numberOfBuys, numberOfMoney);
+    }
+
+
+
 
     }

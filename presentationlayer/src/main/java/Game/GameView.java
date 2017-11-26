@@ -52,7 +52,8 @@ public class GameView extends View<GameModel> {
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    Button btnPlayMoneyCards;
+    protected Button btnPlayMoneyCards;
+    Label lblInfo;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
@@ -135,7 +136,7 @@ public class GameView extends View<GameModel> {
         // TEST
 
 
-        Button btnPlayMoneyCards = new Button("Play All Cards");
+        btnPlayMoneyCards = new Button("Play All Cards");
         btnPlayMoneyCards.setPrefSize(100, 30);
         gp.setValignment(btnPlayMoneyCards, VPos.TOP);
         btnPlayMoneyCards.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
@@ -154,7 +155,7 @@ public class GameView extends View<GameModel> {
         btnEndTurn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
 
 
-        Label lblInfo = new Label("1 Aktion, 1 Kauf, 0 Geld");
+        lblInfo = new Label();
         lblInfo.setPrefHeight(30);
         gp.setColumnSpan(lblInfo, 2);
         gp.setValignment(lblInfo, VPos.TOP);
@@ -163,24 +164,9 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(lblInfo);
 
 
-
-
-
         gp.getChildren().addAll(btnPlayMoneyCards,btnEndActionPhase);
 
 
-        // -------------------------------------------------------------------------------------------
-        // -------------------------------------------------------------------------------------------
-        // TODO: Migi ich weiss ned wo ich de SetonActon chan in Controller tue :-S
-
-        btnPlayMoneyCards.setOnAction( event -> {
-            moveMoneyCardsToPlayArea();
-        } );
-
-
-
-        // -------------------------------------------------------------------------------------------
-        // -------------------------------------------------------------------------------------------
 
 
 
@@ -401,6 +387,13 @@ public class GameView extends View<GameModel> {
          }
 
 
+         public void updatelblInfo(int action, int buys, int money){
+            String sAction = getText("gameview.action");
+             String sBuy = getText("gameview.buy");
+             String sMoney = getText("gameview.money");
+
+            lblInfo.setText(sAction + " " + action + ", " + sBuy + " " + buys + ", " + sMoney + " " + money);
+         }
 
 
 

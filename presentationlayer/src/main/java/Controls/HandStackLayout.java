@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Region;
 
 public class HandStackLayout extends Region {
-    double cardInterval = 100;
+    double cardInterval = 110;
 
     public void setCardInterval(double value){
         cardInterval = value;

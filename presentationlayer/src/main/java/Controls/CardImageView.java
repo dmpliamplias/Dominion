@@ -20,7 +20,7 @@ public class CardImageView extends ImageView {
 
 
     private final int miniSizeHeight=90;
-    private final int bigSizeHeight=130;
+    private final int bigSizeHeight=120;
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private Card card;
