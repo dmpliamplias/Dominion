@@ -47,41 +47,11 @@ public class GameView extends View<GameModel> {
      protected VBox chatContent;
      protected TextField txtNameChat;
      protected GridPane gp;
-     Label lblKupfer;
-     Label lblSilber;
-     Label lblGold;
-     Label lblAnwesen;
-     Label lblDorf;
-     Label lblGarten;
-     Label lblGeldverleiher;
-     Label lblHerzogtum;
-     Label lblHolzfäller;
-     Label lblJahrmarkt;
-     Label lblMarkt;
-     Label lblLaboratorium;
-     Label lblProvinz;
-     Label lblSchmiede;
-     CardImageView imgKupfer;
-     CardImageView imgSilber;
-     CardImageView imgGold;
-     CardImageView imgAnwesen;
-     CardImageView imgDorf;
-     CardImageView imgGarten;
-     CardImageView imgGeldverleiher;
-     CardImageView imgHerzogtum;
-     CardImageView imgHolzfäller;
-     CardImageView imgJahrmarkt;
-     CardImageView imgMarkt;
-     CardImageView imgLaboratorium;
-     CardImageView imgProvinz;
-     CardImageView imgSchmiede;
      FlowPane fp;
     HandStackLayout hs;
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    int handStackSize = 0;
-    int cardPlayingAreaSize = 0;
     Button btnPlayMoneyCards;
 
     public GameView(Stage stage, GameModel model){
@@ -102,7 +72,7 @@ public class GameView extends View<GameModel> {
         root.getChildren().add( addChatGridPane() );
         gp.add(vb, 2, 14);
 
-        gp.setGridLinesVisible(true);
+        gp.setGridLinesVisible(false);
 
 
         ColumnConstraints column = new ColumnConstraints(115);
@@ -131,16 +101,17 @@ public class GameView extends View<GameModel> {
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVback = new ImageView(back);
         imgVback.setFitHeight(120);
-        imgVback.setFitWidth(80);
+        imgVback.setFitWidth(75);
         gp.setRowSpan(imgVback, 4);
-        gp.setConstraints(imgVback, 1, 14);
+        gp.setConstraints(imgVback, 1, 15);
 
         gp.getChildren().add(imgVback);
 
         Label lblNachziehstapel = new Label();
         setLabelFormat(lblNachziehstapel);
-        gp.setConstraints(lblNachziehstapel, 1, 14);
+        gp.setConstraints(lblNachziehstapel, 1, 15);
         lblNachziehstapel.setText("10");
+
 
 
 
@@ -148,12 +119,12 @@ public class GameView extends View<GameModel> {
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
         gp.getChildren().add(hs);
-        gp.setConstraints(hs, 2, 14);
+        gp.setConstraints(hs, 2, 15);
         gp.setRowSpan(hs, 4);
 
         cardPlayingArea = new HandStackLayout();
         gp.getChildren().add(cardPlayingArea);
-        gp.setConstraints(cardPlayingArea, 2, 9);
+        gp.setConstraints(cardPlayingArea, 2, 8);
         gp.setRowSpan(cardPlayingArea, 4);
 
 
@@ -162,29 +133,50 @@ public class GameView extends View<GameModel> {
         // -------------------------------------------------------------------------------------------
 
         // TEST
-        ArrayList<CardImageView> testList = new ArrayList<CardImageView>();
+
 
         Button btnPlayMoneyCards = new Button("Play All Cards");
-        btnTest.setPrefSize(100, 30);
-        gp.setRowSpan(btnTest, 1);
-        gp.setValignment(btnTest, VPos.TOP);
-        btnTest.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-        gp.setConstraints(btnTest, 1, 11);
-        gp.getChildren().add(btnTest);
+        btnPlayMoneyCards.setPrefSize(100, 30);
+        gp.setValignment(btnPlayMoneyCards, VPos.TOP);
+        btnPlayMoneyCards.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnPlayMoneyCards, 1, 11);
 
-        btnTest.setOnAction((event) ->{
+        Button btnEndActionPhase = new Button("Aktionsrunde beenden");
+        btnEndActionPhase.setPrefHeight(30);
+        gp.setValignment(btnEndActionPhase, VPos.TOP);
+        gp.setColumnSpan(btnEndActionPhase, 2);
+        btnEndActionPhase.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnEndActionPhase, 5, 13);
 
-            for (int i = 0; i < handStackList.size();i++) {
-                System.out.println(handStackList.size());
-                if (handStackList.get(i).getCard().getName().equals("Kupfer")) {
-                    testList.add(handStackList.get(i));
-                }
-            }
-                for (int i = 0; i < testList.size();i++) {
-                    setCardPlayingAreaView(testList.get(i));
-                }
+        Button btnEndTurn = new Button("Spielzug beenden");
+        btnEndTurn.setPrefSize(100, 30);
+        gp.setValignment(btnEndTurn, VPos.TOP);
+        btnEndTurn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
 
-        });
+
+        Label lblInfo = new Label("1 Aktion, 1 Kauf, 0 Geld");
+        lblInfo.setPrefHeight(30);
+        gp.setColumnSpan(lblInfo, 2);
+        gp.setValignment(lblInfo, VPos.TOP);
+        lblInfo.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 14; -fx-background-color: #d3d1d1");
+        gp.setConstraints(lblInfo, 2, 13);
+        gp.getChildren().add(lblInfo);
+
+
+
+
+
+        gp.getChildren().addAll(btnPlayMoneyCards,btnEndActionPhase);
+
+
+        // -------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------
+        // TODO: Migi ich weiss ned wo ich de SetonActon chan in Controller tue :-S
+
+        btnPlayMoneyCards.setOnAction( event -> {
+            moveMoneyCardsToPlayArea();
+        } );
+
 
 
         // -------------------------------------------------------------------------------------------
@@ -365,39 +357,52 @@ public class GameView extends View<GameModel> {
      return imgView;
  }
 
-    // Adds the card to the HandStackPane. If there are more than 5 cards, the gap between the Cards will get smaller
+    // Adds the card to the HandStackPane.
     public void addCardToHandStackPane(Card card){
-            CardImageView cardImg = new CardImageView(card, CardImageView.CardSize.bigSize);
-            handStackList.add(cardImg);
-            handStackSize++;
-            if (handStackSize > 5) {
-                hs.setCardInterval((550 / handStackSize));
-            }
-            hs.getChildren().add(cardImg);
+        CardImageView cardImg = new CardImageView(card, CardImageView.CardSize.bigSize);
+        handStackList.add(cardImg);
+        System.out.println(handStackList.size());
+        updateStackLayout();
+        hs.getChildren().add(cardImg);
     }
 
-    // Moves card from the HandStackPane to the cardPlayingArea. If there are more than 5 cards in the PlayingArea the gap will get smaller
+    // Moves card from the HandStackPane to the cardPlayingArea.
     public void moveCardToPlayingArea (CardImageView cardImg) {
-        handStackSize--;
         handStackList.remove(cardImg);
         hs.getChildren().remove(cardImg);
-        cardPlayingAreaSize++;
-        if (cardPlayingAreaSize > 5) {
-            cardPlayingArea.setCardInterval((550 / cardPlayingAreaSize));
-        }
-            cardPlayingArea.getChildren().add(cardImg);
+        cardPlayingAreaList.add(cardImg);
+        updateStackLayout();
+        cardPlayingArea.getChildren().add(cardImg);
     }
 
+
+    // Moves all MoneyCards with one click to the button
     public void moveMoneyCardsToPlayArea(){
+        ArrayList<CardImageView> moveList = new ArrayList<CardImageView>();
         for(int i = 0; i < handStackList.size(); i++){
             if (handStackList.get(i).getCard().getName().equals("Kupfer") || handStackList.get(i).getCard().getName().equals("Silber") || handStackList.get(i).getCard().getName().equals("Gold")){
-                moveCardToPlayingArea(handStackList.get(i));
+                moveList.add(handStackList.get(i));
             }
         }
-
-
+        for(int i = 0; i < moveList.size(); i++) {
+            moveCardToPlayingArea(moveList.get(i));
+        }
 
     }
+
+        // If there are more than 5 cards in the PlayingArea / HandCardArea the gap will between the cards gets smaller
+        // 1 card has has a width of 75. 540 ist the maximum length of the Pane. 540 - 75 = 465.
+        public void updateStackLayout(){
+            if (handStackList.size() > 5) {hs.setCardInterval(465 / (handStackList.size()-1));
+            } else { hs.setCardInterval(116.25);}
+
+            if (cardPlayingAreaList.size() > 5) {cardPlayingArea.setCardInterval(465 / (cardPlayingAreaList.size()-1));
+            } else {cardPlayingArea.setCardInterval(116.25);}
+         }
+
+
+
+
 
 /*
     public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){

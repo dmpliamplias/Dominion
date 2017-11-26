@@ -75,9 +75,7 @@ public class GameController extends Controller<GameModel, GameView> {
         /**
          *  author Manuel Wirz
          *  */
-        view.btnPlayMoneyCards.setOnAction( event -> {
-            view.moveMoneyCardsToPlayArea();
-        } );
+
         
         view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
@@ -125,7 +123,9 @@ public class GameController extends Controller<GameModel, GameView> {
             updateUnusedCards(unusedCards);
             System.out.println(myCardSet.getHandStack());
             drawHandCards(5);
-            drawHandCards(2);
+            drawHandCards(5);
+
+
         });
 
 
@@ -339,20 +339,20 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         ArrayList<int[]> indexes = new ArrayList<int[]>();
-        indexes.add(new int[]{2,2,2});
-        indexes.add(new int[]{2,4,2});
-        indexes.add(new int[]{2,6,2});
-        indexes.add(new int[]{7,2,2});
-        indexes.add(new int[]{7,6,2});
-        indexes.add(new int[]{7,4,2});
-        indexes.add(new int[]{3,5,3});
-        indexes.add(new int[]{5,5,3});
-        indexes.add(new int[]{6,5,3});
-        indexes.add(new int[]{4,5,3});
-        indexes.add(new int[]{5,2,3});
-        indexes.add(new int[]{4,2,3});
-        indexes.add(new int[]{3,2,3});
-        indexes.add(new int[]{6,2,3});
+        indexes.add(new int[]{2,1,2});
+        indexes.add(new int[]{2,3,2});
+        indexes.add(new int[]{2,5,2});
+        indexes.add(new int[]{7,1,2});
+        indexes.add(new int[]{7,5,2});
+        indexes.add(new int[]{7,3,2});
+        indexes.add(new int[]{3,4,3});
+        indexes.add(new int[]{5,4,3});
+        indexes.add(new int[]{6,4,3});
+        indexes.add(new int[]{4,4,3});
+        indexes.add(new int[]{5,1,3});
+        indexes.add(new int[]{4,1,3});
+        indexes.add(new int[]{3,1,3});
+        indexes.add(new int[]{6,1,3});
 
         ArrayList<CardImageView.CardSize> sizes = new ArrayList<CardImageView.CardSize>();
         sizes.add(CardImageView.CardSize.miniMini);
