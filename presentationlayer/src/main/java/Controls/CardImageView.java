@@ -52,8 +52,8 @@ public class CardImageView extends ImageView {
             if (cardSize.equals(cardSize.miniSize)){
                 Image playCM = new Image(this.getClass().getResourceAsStream("/Game/mini/"+ path));
 
-                //ToDo setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
-                //ToDo umschreiben MagicNumbers
+                //ToDo Murat setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
+                //ToDo Murat umschreiben MagicNumbers
                 this.setFitHeight(miniSizeHeight);
                 //this.setFitWidth(100);
                 this.setPreserveRatio(true);

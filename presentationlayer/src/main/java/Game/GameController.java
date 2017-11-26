@@ -157,7 +157,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void handleServerAnswer_updateRound(int round){
         Platform.runLater(() ->{
-            // TODO: 12.11.2017 Vane update round here (show in view)
+            // TODO: Murat 12.11.2017 update round here (show in view)
         });
     }
 
@@ -180,7 +180,7 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() ->{
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            // TODO: 12.11.2017 Vane log here the user and which card he played
+            // TODO: Murat 12.11.2017 log here the user and which card he played
         });
     }
 
