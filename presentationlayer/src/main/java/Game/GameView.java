@@ -54,6 +54,8 @@ public class GameView extends View<GameModel> {
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
     protected Button btnPlayMoneyCards;
     Label lblInfo;
+    Label lblPullStack;
+    Button btnEndTurn;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
@@ -106,12 +108,25 @@ public class GameView extends View<GameModel> {
         gp.setRowSpan(imgVback, 4);
         gp.setConstraints(imgVback, 1, 15);
 
+
+        Image trayStack = new Image(getClass().getResourceAsStream("back.jpg"));
+        ImageView imgVtrayStack = new ImageView(back);
+        imgVtrayStack.setFitHeight(120);
+        imgVtrayStack.setFitWidth(75);
+        gp.setRowSpan(imgVtrayStack, 4);
+        gp.setHalignment(imgVtrayStack, HPos.RIGHT);
+        gp.setConstraints(imgVtrayStack, 8, 15);
+        gp.getChildren().add(imgVtrayStack);
+
+
+
         gp.getChildren().add(imgVback);
 
-        Label lblNachziehstapel = new Label();
-        setLabelFormat(lblNachziehstapel);
-        gp.setConstraints(lblNachziehstapel, 1, 15);
-        lblNachziehstapel.setText("10");
+        lblPullStack = new Label();
+        setLabelFormat(lblPullStack);
+        gp.setConstraints(lblPullStack, 1, 15);
+
+
 
 
 
@@ -149,11 +164,12 @@ public class GameView extends View<GameModel> {
         btnEndActionPhase.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         gp.setConstraints(btnEndActionPhase, 5, 13);
 
-        Button btnEndTurn = new Button("Spielzug beenden");
-        btnEndTurn.setPrefSize(100, 30);
+        btnEndTurn = new Button("Spielzug beenden");
+        btnEndTurn.setPrefHeight(30);
         gp.setValignment(btnEndTurn, VPos.TOP);
+        gp.setColumnSpan(btnEndTurn, 2);
         btnEndTurn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-
+        gp.setConstraints(btnEndTurn, 5, 13);
 
         lblInfo = new Label();
         lblInfo.setPrefHeight(30);
@@ -164,7 +180,7 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(lblInfo);
 
 
-        gp.getChildren().addAll(btnPlayMoneyCards,btnEndActionPhase);
+        gp.getChildren().addAll(btnPlayMoneyCards,btnEndTurn);
 
 
 
@@ -389,10 +405,23 @@ public class GameView extends View<GameModel> {
 
          public void updatelblInfo(int action, int buys, int money){
             String sAction = getText("gameview.action");
-             String sBuy = getText("gameview.buy");
-             String sMoney = getText("gameview.money");
+            String sBuy = getText("gameview.buy");
+            String sMoney = getText("gameview.money");
 
             lblInfo.setText(sAction + " " + action + ", " + sBuy + " " + buys + ", " + sMoney + " " + money);
+         }
+
+
+         // Clear HandStack and CardPlayingArea
+         public void endOfTurn(){
+             hs.getChildren().clear();
+             cardPlayingArea.getChildren().clear();
+             handStackList.clear();
+             cardPlayingAreaList.clear();
+         }
+
+         public void updateLblPullStack(int numberOfPullStack){
+             lblPullStack.setText(""+numberOfPullStack);
          }
 
 

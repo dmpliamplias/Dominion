@@ -93,6 +93,12 @@ public class GameController extends Controller<GameModel, GameView> {
         } );
 
 
+        view.btnEndTurn.setOnAction( event2 -> {
+            endOfTurn();
+        } );
+
+
+
         /**
          *  author Manuel Wirz
          *  */
@@ -145,7 +151,7 @@ public class GameController extends Controller<GameModel, GameView> {
             updateUnusedCards(unusedCards);
             System.out.println(myCardSet.getHandStack());
             drawHandCards(5);
-            drawHandCards(5);
+            drawHandCards(3);
 
 
         });
@@ -244,8 +250,12 @@ public class GameController extends Controller<GameModel, GameView> {
 
             myCardSet.getTrayStack().add(card);
             numberOfBuys--;
-            numberOfMoney = numberOfMoney-card.getCost();
+            numberOfMoney = numberOfMoney - card.getCost();
             updateActionBuyMoney();
+
+            if (numberOfBuys == 0) {
+                endOfTurn();
+            }
 
             try {
                 PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
@@ -320,19 +330,26 @@ public class GameController extends Controller<GameModel, GameView> {
         Card c = imgv.getCard();
         if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini){
             buyCards(c);
-        }else {
-            return;
         }
 
-        if(c instanceof KingCard){
-            KingCard kc = (KingCard)c;
 
-        }else if(c instanceof MoneyCard){
-            MoneyCard mc= (MoneyCard)c;
+        if(c instanceof KingCard) {
+            if (view.handStackList.contains(imgv)) {
+                if (c.getName().equals("Garten") || c.getName().equals("Geldverleiher")) {
+                    // TODO: Vanessa add Method for Geldverleiher
 
-        }else if(c instanceof PointCard){
-            PointCard pc= (PointCard)c;
+                } else {
+                    numberOfActions += ((KingCard) c).getActions();
+                    numberOfBuys += ((KingCard) c).getBuys();
+                    numberOfMoney += c.getValue();
 
+                    if (((KingCard) c).getCards() > 0) {
+                        drawHandCards(((KingCard) c).getCards());
+                    }
+                    view.moveCardToPlayingArea(imgv);
+                    updateActionBuyMoney();
+                }
+            }
         }
     }
 
@@ -440,19 +457,40 @@ public class GameController extends Controller<GameModel, GameView> {
             myCardSet.getHandStack().add(myCardSet.getPullStack().get(0));
             view.addCardToHandStackPane(myCardSet.getPullStack().get(0));
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
+            updateLblPullStack();
         }
     }
+
 
     public void resetActionBuyMoney(){
         numberOfActions = 1;
         numberOfBuys = 1;
         numberOfMoney = 0;
+        updateActionBuyMoney();
     }
 
 
     public void updateActionBuyMoney(){
         view.updatelblInfo(numberOfActions, numberOfBuys, numberOfMoney);
     }
+
+
+    // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack.
+    public void endOfTurn(){
+        for (int i = (myCardSet.getHandStack().size()-1); i >= 0; i--) {
+            myCardSet.getTrayStack().add(myCardSet.getHandStack().get(i));
+            myCardSet.getHandStack().remove(i);
+        }
+            view.endOfTurn();
+            resetActionBuyMoney();
+            moveFinished();
+    }
+
+
+    public void updateLblPullStack(){
+        view.updateLblPullStack(myCardSet.getPullStack().size());
+    }
+
 
 
 
