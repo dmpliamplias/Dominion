@@ -67,6 +67,7 @@ public class GameController extends Controller<GameModel, GameView> {
         }
 
 
+        //TODO MANUEL Gamesettings anzeigen
        // if(gameSettings.getFinishAfterRounds() > 1){
         //    view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
        // } else{
