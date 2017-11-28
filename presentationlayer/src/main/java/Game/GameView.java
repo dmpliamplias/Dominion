@@ -11,6 +11,7 @@ import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,15 +48,20 @@ public class GameView extends View<GameModel> {
      protected VBox chatContent;
      protected TextField txtNameChat;
      protected GridPane gp;
+     protected BorderPane root;
+     protected VBox VBoxLogger;
+     protected ScrollPane scrollPaneLogger;
+     protected VBox VBoxPointsandPlayer;
+     protected VBox loggerContent;
      FlowPane fp;
-    HandStackLayout hs;
-    HandStackLayout cardPlayingArea;
-    ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
-    ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    protected Button btnPlayMoneyCards;
-    Label lblInfo;
-    Label lblPullStack;
-    Button btnEndTurn;
+     HandStackLayout hs;
+     HandStackLayout cardPlayingArea;
+     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
+     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+     protected Button btnPlayMoneyCards;
+     Label lblInfo;
+     Label lblPullStack;
+     Button btnEndTurn;
 
     public GameView(Stage stage, GameModel model){
         super(stage,model);
@@ -66,13 +72,14 @@ public class GameView extends View<GameModel> {
      *  */
 
     public Scene create_GUI(){
-        FlowPane root = new FlowPane();
+
+        root = new BorderPane(  );
+        FlowPane fpCenter = new FlowPane();
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
         gp = new GridPane();
         VBox vb = new VBox();
-        root.getChildren().add(gp);
-        root.getChildren().add( addChatGridPane() );
+        fpCenter.getChildren().add(gp);
         gp.add(vb, 2, 14);
 
         gp.setGridLinesVisible(false);
@@ -185,16 +192,13 @@ public class GameView extends View<GameModel> {
 
 
 
-
-
-
         // root Layout
-        root.getChildren().add(addChatGridPane());
-        //TODO Venessa u can use for your GUI
-       // root.setCenter();
-       // root.setRight();
-       // root.setTop();
-       // root.setLeft();
+
+        //root.setBottom.
+        root.setCenter(fpCenter);
+        root.setRight(loggerAndChat());
+        root.setTop(getMenuBar());
+        root.setLeft(showPointsandPlayer());
 
         stage.setScene(scene);
         stage.setFullScreen( false );
@@ -203,6 +207,58 @@ public class GameView extends View<GameModel> {
         setTexts();
         this.stage.setResizable(true);
         return scene;
+    }
+
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    public VBox showPointsandPlayer() {
+
+        this.VBoxPointsandPlayer = new VBox(  );
+
+
+        return VBoxPointsandPlayer;
+
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    public VBox loggerAndChat() {
+
+        this.VBoxLogger = new VBox(  );
+        this.VBoxLogger.setPrefSize( 550, 200 );
+        this.VBoxLogger.setAlignment( Pos.CENTER_LEFT );
+
+        this.loggerContent = new VBox(  );
+
+
+        this.scrollPaneLogger = new ScrollPane(  );
+        this.scrollPaneLogger.setPrefSize( 550, 300 );
+        this.scrollPaneLogger.setContent( loggerContent );
+        this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
+        this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
+
+        VBoxLogger.getChildren().addAll( scrollPaneLogger, addChatGridPane() );
+
+        return VBoxLogger;
+
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    protected void setLoggerContent(String msg, Color color){
+
+        Label lbl = new Label(  );
+        lbl.setText( msg );
+        lbl.setTextFill( color );
+        this.loggerContent.getChildren().add( lbl );
+
     }
 
     private void setLabelFormat(Label lbl){
@@ -293,6 +349,8 @@ public class GameView extends View<GameModel> {
     public void stop(){
         stage.hide();
     }
+
+
 
     /**
      * Author Michel Schlatter
@@ -442,5 +500,63 @@ public class GameView extends View<GameModel> {
     }
     */
 
+    public GridPane getGp() {
+        return gp;
+    }
 
+    public BorderPane getRoot() {
+        return root;
+    }
+
+    public VBox getVBoxLogger() {
+        return VBoxLogger;
+    }
+
+    public ScrollPane getScrollPaneLogger() {
+        return scrollPaneLogger;
+    }
+
+    public VBox getVBoxPointsandPlayer() {
+        return VBoxPointsandPlayer;
+    }
+
+    public VBox getLoggerContent() {
+        return loggerContent;
+    }
+
+    public FlowPane getFp() {
+        return fp;
+    }
+
+    public HandStackLayout getHs() {
+        return hs;
+    }
+
+    public HandStackLayout getCardPlayingArea() {
+        return cardPlayingArea;
+    }
+
+    public ArrayList<CardImageView> getHandStackList() {
+        return handStackList;
+    }
+
+    public ArrayList<CardImageView> getCardPlayingAreaList() {
+        return cardPlayingAreaList;
+    }
+
+    public Button getBtnPlayMoneyCards() {
+        return btnPlayMoneyCards;
+    }
+
+    public Label getLblInfo() {
+        return lblInfo;
+    }
+
+    public Label getLblPullStack() {
+        return lblPullStack;
+    }
+
+    public Button getBtnEndTurn() {
+        return btnEndTurn;
+    }
 }

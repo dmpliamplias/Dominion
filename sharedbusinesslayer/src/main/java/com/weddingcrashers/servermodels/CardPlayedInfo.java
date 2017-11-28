@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class CardPlayedInfo implements Serializable {
     int userId;
     Card card;
+    int clientId;
 
     public int getUserId() {
         return userId;
@@ -22,6 +23,10 @@ public class CardPlayedInfo implements Serializable {
 
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 
 

@@ -15,7 +15,6 @@ public class ChatManager extends Manager {
      * @param msg
      */
     public  void broadCastChatMessageToAllClients(String msg){
-        // TODO: 02.10.2017 Manuel => broadcast you can use...
         ChatContainer cc = new ChatContainer();
         cc.setMsg(msg);
         cc.setClientId(this.client.getClientId());

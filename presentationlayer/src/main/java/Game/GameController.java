@@ -2,6 +2,7 @@ package Game;
 
 
 import Controls.CardImageView;
+import base.View;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
@@ -204,13 +205,7 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
     
-    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo){
-        Platform.runLater(() ->{
-            User user = users.get(cardPlayedInfo.getUserId());
-            Card card = cardPlayedInfo.getCard();
-            // TODO: Murat 12.11.2017 log here the user and which card he played
-        });
-    }
+
 
     // Methode for to receive the chatContainer from the server and set new text in the chat
     public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
@@ -219,6 +214,7 @@ public class GameController extends Controller<GameModel, GameView> {
         } );
 
     }
+
 
 
 
@@ -278,6 +274,36 @@ public class GameController extends Controller<GameModel, GameView> {
     /**
      * author Manuel Wirz
      */
+
+    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo){
+        Platform.runLater(() ->{
+            User user = users.get(cardPlayedInfo.getUserId());
+            Card card = cardPlayedInfo.getCard();
+            String logger = new String( user + "/n " + card );
+            view.setLoggerContent(logger, ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
+        });
+    }
+
+    //Method to send LogFiles to the server and display the message in the own screen
+
+    public void sendLogger(){
+
+        CardPlayedInfo cardPlayedInfo = new CardPlayedInfo();
+        cardPlayedInfo.setUserId( plServiceLocator.getServerConnectionService().getClientId() );
+        User user = users.get(cardPlayedInfo.getUserId());
+        Card card = cardPlayedInfo.getCard();
+        String msg = user + ": " + card;
+        view.setLoggerContent( msg, ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
+
+        /*
+        try{
+            serverConnectionService.sendObject( cardPlayedInfo );
+        }catch (IOException e)  {
+            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+        }
+
+        */
+    }
     // Method to send the ChatContainer to the server and display the message in the own screen
 
     public void sendMessage() {
@@ -484,6 +510,7 @@ public class GameController extends Controller<GameModel, GameView> {
             view.endOfTurn();
             resetActionBuyMoney();
             moveFinished();
+
     }
 
 

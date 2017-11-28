@@ -54,6 +54,35 @@
 
 
 }
+
+.button:hover{
+
+    -fx-background-color: white;
+    -fx-text-fill: black;
+
+    -fx-border-color: black;
+    -fx-border-insets: 1;
+    -fx-border-width: 1;
+
+
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: khaki;
+}
+
+.scroll-pane {
+
+    -fx-background-color: khaki;
+    -fx-border-color: azure;
+    -fx-border-insets: 3;
+    -fx-border-width: 3;
+    -fx-font-size: 16;
+
+
+}
+
+
 .root{
     -fx-background-image: url("background2.jpg");
     -fx-background-size: cover;
