@@ -70,6 +70,7 @@ public class GameView extends View<GameModel> {
 
         root = new BorderPane(  );
         FlowPane fpCenter = new FlowPane();
+        fpCenter.setAlignment( Pos.CENTER );
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
         gp = new GridPane();

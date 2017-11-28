@@ -67,16 +67,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
 
 
-        // TODO: 12.11.2017 Vane => show GameSettings
-
-
-
-        if(gameSettings.isPointCards() == true){
-            view.endOption.setText( view.endOptionPoints.getText() );
-        }
-
         if(gameSettings.getFinishAfterRounds() > 1){
             view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
+       // } else{
+         //   view.endOption.setText( view.endOptionPoints.getText() );
         }
 
 
