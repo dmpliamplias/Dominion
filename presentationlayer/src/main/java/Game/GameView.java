@@ -29,11 +29,13 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Tooltip;
+import util.PLServiceLocator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import static com.weddingcrashers.model.Settings_.user;
 import static util.StyleSheetPath.GAME;
 
 
@@ -217,6 +219,11 @@ public class GameView extends View<GameModel> {
     public VBox showPointsandPlayer() {
 
         this.VBoxPointsandPlayer = new VBox(  );
+
+        Label lblName = new Label();
+        lblName.setText(PLServiceLocator.getPLServiceLocator().getUser().getUserName());
+
+        this.VBoxPointsandPlayer.getChildren().add(lblName);
 
 
         return VBoxPointsandPlayer;
