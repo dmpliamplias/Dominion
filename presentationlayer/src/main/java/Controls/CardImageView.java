@@ -1,17 +1,11 @@
 package Controls;
 
 import com.weddingcrashers.businessmodels.Card;
-import com.weddingcrashers.businessmodels.KingCard;
-import com.weddingcrashers.businessmodels.MoneyCard;
-import com.weddingcrashers.businessmodels.PointCard;
-import com.weddingcrashers.model.User;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import util.PLServiceLocator;
-
 
 //**
    //@author Murat Kelleci*/ 20.10.17-04.11.2017
@@ -24,7 +18,7 @@ public class CardImageView extends ImageView {
     private final int toolTipSizeHeight=300;
     private final int miniMiniHeight=60;
     private Card card;
-    private boolean disabled;
+
 
     private final CardSize cardSize;
     public enum CardSize{
@@ -95,6 +89,8 @@ public class CardImageView extends ImageView {
     public CardSize getCardSize() {
         return cardSize;
     }
+
+
 
 
 }
