@@ -233,6 +233,9 @@ public class GameView extends View<GameModel> {
      *  author Manuel Wirz
      *  */
 
+
+
+    //Author Murat Kelleci 28.11.2017
     public VBox showPointsandPlayer() {
 
         this.VBoxPointsandPlayer = new VBox(  );
