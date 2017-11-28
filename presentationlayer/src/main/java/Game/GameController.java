@@ -67,11 +67,11 @@ public class GameController extends Controller<GameModel, GameView> {
         }
 
 
-        if(gameSettings.getFinishAfterRounds() > 1){
-            view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
+       // if(gameSettings.getFinishAfterRounds() > 1){
+        //    view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
        // } else{
          //   view.endOption.setText( view.endOptionPoints.getText() );
-        }
+        //}
 
 
         resetActionBuyMoney();
