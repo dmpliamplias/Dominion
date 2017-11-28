@@ -2,15 +2,9 @@ package Game;
 
 
 import Controls.CardImageView;
-import base.View;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
-import com.weddingcrashers.service.Language;
-import com.weddingcrashers.service.ServiceLocator;
-import com.weddingcrashers.service.Translator;
-import javafx.scene.image.Image;
-import org.h2.mvstore.DataUtils;
 import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
@@ -19,8 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
-import com.weddingcrashers.businessmodels.MoneyCard;
-import com.weddingcrashers.businessmodels.PointCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,6 +68,17 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         // TODO: 12.11.2017 Vane => show GameSettings
+
+
+
+        if(gameSettings.isPointCards() == true){
+            view.endOption.setText( view.endOptionPoints.getText() );
+        }
+
+        if(gameSettings.getFinishAfterRounds() > 1){
+            view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
+        }
+
 
         resetActionBuyMoney();
         updateActionBuyMoney();
@@ -142,9 +145,14 @@ public class GameController extends Controller<GameModel, GameView> {
 
       activeUserId = userIdHasTurn;
 
+      /**
+       *  author Manuel Wirz
+       *  */
+
         Platform.runLater(() ->{
             if(userIdHasTurn == serverConnectionService.getClientId()){
                 // TODO: 12.11.2017  this is your turn... enable btns etc.
+
             }else{
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
@@ -284,26 +292,7 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    //Method to send LogFiles to the server and display the message in the own screen
 
-    public void sendLogger(){
-
-        CardPlayedInfo cardPlayedInfo = new CardPlayedInfo();
-        cardPlayedInfo.setUserId( plServiceLocator.getServerConnectionService().getClientId() );
-        User user = users.get(cardPlayedInfo.getUserId());
-        Card card = cardPlayedInfo.getCard();
-        String msg = user + ": " + card;
-        view.setLoggerContent( msg, ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
-
-        /*
-        try{
-            serverConnectionService.sendObject( cardPlayedInfo );
-        }catch (IOException e)  {
-            view.alert( e.getMessage(), Alert.AlertType.ERROR );
-        }
-
-        */
-    }
     // Method to send the ChatContainer to the server and display the message in the own screen
 
     public void sendMessage() {

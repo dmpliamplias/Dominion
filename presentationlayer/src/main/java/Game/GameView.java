@@ -4,14 +4,9 @@ import Controls.CardImageView;
 import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
-import com.weddingcrashers.businessmodels.MoneyCard;
-import com.weddingcrashers.businessmodels.MoneyType;
-import com.weddingcrashers.businessmodels.PlayerSet;
-import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,18 +16,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.geometry.HPos;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Tooltip;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 import static util.StyleSheetPath.GAME;
 
@@ -53,7 +43,10 @@ public class GameView extends View<GameModel> {
      protected ScrollPane scrollPaneLogger;
      protected VBox VBoxPointsandPlayer;
      protected VBox loggerContent;
-     FlowPane fp;
+     protected VBox setTop;
+     protected Text endOptionRounds;
+     protected Text endOptionPoints;
+     protected Text endOption;
      HandStackLayout hs;
      HandStackLayout cardPlayingArea;
      ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
@@ -197,7 +190,7 @@ public class GameView extends View<GameModel> {
         //root.setBottom.
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
-        root.setTop(getMenuBar());
+        root.setTop(setTop());
         root.setLeft(showPointsandPlayer());
 
         stage.setScene(scene);
@@ -207,6 +200,29 @@ public class GameView extends View<GameModel> {
         setTexts();
         this.stage.setResizable(true);
         return scene;
+
+
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    private VBox setTop() {
+
+        this.setTop = new VBox(  );
+        this.setTop.setAlignment( Pos.CENTER );
+        this.endOption = new Text(  );
+        this.endOption.setTextAlignment( TextAlignment.CENTER );
+        this.endOptionRounds = new Text(  );
+        this.endOptionPoints = new Text(  );
+
+
+
+        this.setTop.getChildren().addAll( getMenuBar(),  endOption);
+
+        return setTop;
+
     }
 
 
@@ -340,6 +356,8 @@ public class GameView extends View<GameModel> {
         this.btnChatSend.setText( getText( "chat.send" ) );
         this.btnSendText.setText( getText( "chat.nice!" ) );
         this.txtNameChat.setText( getText( "chat.chat" ) );
+        this.endOptionRounds.setText( getText( "gameview.endOptionRound" ) );
+        this.endOptionPoints.setText( getText( "gameview.endOptionPoint" ) );
     }
 
     public void start() {
@@ -524,10 +542,6 @@ public class GameView extends View<GameModel> {
         return loggerContent;
     }
 
-    public FlowPane getFp() {
-        return fp;
-    }
-
     public HandStackLayout getHs() {
         return hs;
     }
@@ -559,4 +573,21 @@ public class GameView extends View<GameModel> {
     public Button getBtnEndTurn() {
         return btnEndTurn;
     }
+
+    public VBox getSetTop() {
+        return setTop;
+    }
+
+    public Text getEndOption() {
+        return endOptionRounds;
+    }
+
+    public Text getEndOptionRounds() {
+        return endOptionRounds;
+    }
+
+    public Text getEndOptionPoints() {
+        return endOptionPoints;
+    }
+
 }
