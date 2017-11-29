@@ -49,6 +49,7 @@ public class GameView extends View<GameModel> {
      protected Text endOptionRounds;
      protected Text endOptionPoints;
      protected Text endOption;
+     protected Label labelShowStats;
      HandStackLayout hs;
      HandStackLayout cardPlayingArea;
      ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
@@ -197,7 +198,7 @@ public class GameView extends View<GameModel> {
         root.setLeft(showPointsandPlayer());
 
         stage.setScene(scene);
-        stage.setFullScreen( false );
+        stage.setFullScreen( true );
         stage.setTitle( "Dominion" );
 
         setTexts();
@@ -216,13 +217,16 @@ public class GameView extends View<GameModel> {
         this.setTop = new VBox(  );
         this.setTop.setAlignment( Pos.CENTER );
         this.endOption = new Text(  );
+        Text title = new Text( "Dominion" );
+        title.getStyleClass().add( "title" );
+
         this.endOption.setTextAlignment( TextAlignment.CENTER );
         this.endOptionRounds = new Text(  );
         this.endOptionPoints = new Text(  );
 
 
 
-        this.setTop.getChildren().addAll( getMenuBar(),  endOption);
+        this.setTop.getChildren().addAll( title,  endOption);
 
         return setTop;
 
@@ -234,16 +238,21 @@ public class GameView extends View<GameModel> {
      *  */
 
 
-
-    //Author Murat Kelleci 28.11.2017
     public VBox showPointsandPlayer() {
 
         this.VBoxPointsandPlayer = new VBox(  );
+        this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
 
-        Label lblName = new Label();
-        lblName.setText(PLServiceLocator.getPLServiceLocator().getUser().getUserName());
 
-        this.VBoxPointsandPlayer.getChildren().add(lblName);
+        //TODO Manuel ergänzen
+
+        this.labelShowStats = new Label( "Test" );
+        this. labelShowStats.getStyleClass().add( "labelShowStats" );
+
+
+
+
+        this.VBoxPointsandPlayer.getChildren().add(labelShowStats);
 
 
         return VBoxPointsandPlayer;
@@ -257,14 +266,15 @@ public class GameView extends View<GameModel> {
     public VBox loggerAndChat() {
 
         this.VBoxLogger = new VBox(  );
-        this.VBoxLogger.setPrefSize( 550, 200 );
+        this.VBoxLogger.setPrefSize( 500, 150 );
         this.VBoxLogger.setAlignment( Pos.CENTER_LEFT );
+        this.VBoxLogger.setPadding( new Insets( 0, 80, 0 , 0 ));
 
         this.loggerContent = new VBox(  );
 
 
         this.scrollPaneLogger = new ScrollPane(  );
-        this.scrollPaneLogger.setPrefSize( 550, 300 );
+        this.scrollPaneLogger.setPrefSize( 400, 200 );
         this.scrollPaneLogger.setContent( loggerContent );
         this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
@@ -308,7 +318,7 @@ public class GameView extends View<GameModel> {
     public GridPane addChatGridPane(){
 
         chatPane = new GridPane();
-        chatPane.setPrefSize( 100, 350 );
+        chatPane.setPrefSize( 800, 350 );
         chatContent = new VBox();
 
         //GridPane Layout
@@ -316,18 +326,18 @@ public class GameView extends View<GameModel> {
         chatPane.setAlignment(Pos.BOTTOM_RIGHT);
         chatPane.setHgap(10);
         chatPane.setVgap(10);
-        chatPane.setPadding(new Insets(25, 25, 25, 25));
+        chatPane.setPadding(new Insets(0, 0, 0, 0));
 
 
         // ----- Chatview -------
 
 
         this.btnChatSend  = new Button();
-        this.btnChatSend.setPrefSize(300, 50);
+        this.btnChatSend.setPrefSize(330, 50);
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
-        this.textFieldChat.setPrefSize( 450,50 );
+        this.textFieldChat.setPrefSize( 330,50 );
 
         this.txtNameChat = new TextField(  );
         this.txtNameChat.setEditable( false );
@@ -335,7 +345,7 @@ public class GameView extends View<GameModel> {
 
 
         this.btnSendText = new Button();
-        this.btnSendText.setPrefSize(300, 50);
+        this.btnSendText.setPrefSize(330, 50);
 
 
         // Create HBox +
@@ -347,7 +357,7 @@ public class GameView extends View<GameModel> {
         hbChat.getChildren().add(btnSendText);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setMaxSize( 800, 200);
+        scroll.setPrefSize( 800, 150);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
         chatPane.add( txtNameChat,0,0 );

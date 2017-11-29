@@ -85,7 +85,7 @@ public class LobbyView extends View<LobbyModel> {
 
 
         //Scene and stage settings
-        Scene scene = new Scene(root, 1150, 850);
+        Scene scene = new Scene(root, 1150, 800);
         setStylesheet(scene, LOBBY);
         stage.setScene(scene);
         stage.setResizable( false );
@@ -225,7 +225,7 @@ public class LobbyView extends View<LobbyModel> {
     public GridPane addGridPane() {
 
         GridPane gridPane = new GridPane();
-        gridPane.setPrefSize( 100, 350 );
+        gridPane.setPrefSize( 100, 300 );
         chatContent = new VBox();
 
 

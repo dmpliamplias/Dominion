@@ -67,14 +67,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
 
 
-        //TODO MANUEL Gamesettings anzeigen
-       // if(gameSettings.getFinishAfterRounds() > 1){
-        //    view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
-       // } else{
-         //   view.endOption.setText( view.endOptionPoints.getText() );
-        //}
-
-
         resetActionBuyMoney();
         updateActionBuyMoney();
 
@@ -102,6 +94,11 @@ public class GameController extends Controller<GameModel, GameView> {
          *  author Manuel Wirz
          *  */
 
+        if(gameSettings.isPointCards()== true){
+            view.endOption.setText( view.endOptionPoints.getText() );
+        } else{
+            view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
+        }
 
 
         view.getBtnChatSend().setOnAction( event -> {
