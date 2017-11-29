@@ -239,15 +239,13 @@ public class GameView extends View<GameModel> {
 
     // Author Murat Kelleci
 
-    public VBox showPointsAndPlayer(PlayerSet set) {
+    public VBox showPointsAndPlayer() {
 
         this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
 
-        int stringPunkte =set.calculatePoints();
-        String value=String.valueOf(stringPunkte);
-        String userName= PLServiceLocator.getPLServiceLocator().getUser().getUserName();
-        this.labelShowStats = new Label(value+" "+ userName);
+
+        this.labelShowStats = new Label("test");
         this. labelShowStats.getStyleClass().add("labelShowStats");
 
         this.labelShowRound = new Label("Rounds");

@@ -145,6 +145,7 @@ public class GameController extends Controller<GameModel, GameView> {
             if(userIdHasTurn == serverConnectionService.getClientId()){
                 // TODO: 12.11.2017  this is your turn... enable btns etc.
 
+
             }else{
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
@@ -477,6 +478,17 @@ public class GameController extends Controller<GameModel, GameView> {
         numberOfBuys = 1;
         numberOfMoney = 0;
         updateActionBuyMoney();
+    }
+
+
+    // ToDo Murat sauber ausimplementieren
+    public void showPointsAndName(PlayerSet set) {
+
+        endOfTurn();
+        int p = set.calculatePoints();
+        String pointsAsStr = Integer.toString(p);
+        String name = PLServiceLocator.getPLServiceLocator().getUser().getUserName();
+
     }
 
 
