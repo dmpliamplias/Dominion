@@ -22,9 +22,7 @@ import java.io.IOException;
 import static util.PLServiceLocator.getPLServiceLocator;
 import static javafx.scene.control.Alert.AlertType.WARNING;
 
-/**
- * @author Michel Schlatter
- */
+  // @author Murat Kelleci
 public class LoginController extends Controller<LoginModel, LoginView> {
 
     public LoginController(LoginView view, LoginModel model) {
