@@ -4,6 +4,7 @@ import Controls.CardImageView;
 import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
+import com.weddingcrashers.businessmodels.PlayerSet;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -196,7 +197,8 @@ public class GameView extends View<GameModel> {
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
         root.setTop(setTop());
-        root.setLeft(showPointsandPlayer());
+        //ToDO Murat ausklammer wieder rausnehmen sobald gelöst.
+        //root.setLeft(showPointsAndPlayer();
 
         stage.setScene(scene);
         stage.setFullScreen( true );
@@ -234,30 +236,25 @@ public class GameView extends View<GameModel> {
     }
 
 
-    /**
-     *  author Manuel Wirz
-     *  */
 
+    // Author Murat Kelleci
 
-    public VBox showPointsandPlayer() {
+    public VBox showPointsAndPlayer(PlayerSet set) {
 
-        this.VBoxPointsandPlayer = new VBox(  );
+        this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
 
+        int stringPunkte =set.calculatePoints();
+        String value=String.valueOf(stringPunkte);
+        String userName= PLServiceLocator.getPLServiceLocator().getUser().getUserName();
+        this.labelShowStats = new Label(value+" "+ userName);
+        this. labelShowStats.getStyleClass().add("labelShowStats");
 
-        //TODO Manuel ergänzen
-
-        this.labelShowStats = new Label( "Stats" );
-        this. labelShowStats.getStyleClass().add( "labelShowStats" );
-
-        this.labelShowRound = new Label( "Rounds" );
-        this.labelShowRound.getStyleClass().add( "labelShowStats" );
-
-
+        this.labelShowRound = new Label("Rounds");
+        this.labelShowRound.getStyleClass().add("labelShowStats");
 
 
         this.VBoxPointsandPlayer.getChildren().addAll(labelShowStats, labelShowRound);
-
 
         return VBoxPointsandPlayer;
 
