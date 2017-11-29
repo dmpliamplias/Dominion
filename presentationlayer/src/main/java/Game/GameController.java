@@ -186,6 +186,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void handleServerAnswer_updateRound(int round){
         Platform.runLater(() ->{
+
+            view.labelShowRound.setText( String.valueOf( round ) );
+
             // TODO: Murat 12.11.2017 update round here (show in view)
         });
     }

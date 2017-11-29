@@ -50,6 +50,7 @@ public class GameView extends View<GameModel> {
      protected Text endOptionPoints;
      protected Text endOption;
      protected Label labelShowStats;
+     protected Label labelShowRound;
      HandStackLayout hs;
      HandStackLayout cardPlayingArea;
      ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
@@ -246,13 +247,16 @@ public class GameView extends View<GameModel> {
 
         //TODO Manuel ergänzen
 
-        this.labelShowStats = new Label( "Test" );
+        this.labelShowStats = new Label( "Stats" );
         this. labelShowStats.getStyleClass().add( "labelShowStats" );
 
+        this.labelShowRound = new Label( "Rounds" );
+        this.labelShowRound.getStyleClass().add( "labelShowStats" );
 
 
 
-        this.VBoxPointsandPlayer.getChildren().add(labelShowStats);
+
+        this.VBoxPointsandPlayer.getChildren().addAll(labelShowStats, labelShowRound);
 
 
         return VBoxPointsandPlayer;
