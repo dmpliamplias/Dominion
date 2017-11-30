@@ -187,6 +187,7 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    //Author Murat Kelleci
     public void handleServerAnswer_updateRound(int round){
         Platform.runLater(() ->{
 
@@ -333,7 +334,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     // Author Murat Kelleci 24.11.17
-
     private void setCardImageViewAction(CardImageView imgv){
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
@@ -341,7 +341,6 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // Author Murat Kelleci 24.11.17
-
     private void runAction(CardImageView imgv){
         Card c = imgv.getCard();
         if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini){
@@ -375,7 +374,6 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // Author Murat Kelleci 20.11.17 - 
-
     private User getUser(){
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
@@ -494,7 +492,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-
+    //Author Murat Kelleci
     public void setPointsToView(GameContainer gc){
 
         PlayerSet playerSet = gc.getDominionSet();
@@ -503,8 +501,7 @@ public class GameController extends Controller<GameModel, GameView> {
         String userName = users.get(userId).getUserName();
 
         this.view.setUserPoints(userId, userName, playerSet);
-
-
+        
     }
 
 
