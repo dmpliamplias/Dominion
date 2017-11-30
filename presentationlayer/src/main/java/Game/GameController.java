@@ -501,7 +501,7 @@ public class GameController extends Controller<GameModel, GameView> {
         String userName = users.get(userId).getUserName();
 
         this.view.setUserPoints(userId, userName, playerSet);
-        
+
     }
 
 
