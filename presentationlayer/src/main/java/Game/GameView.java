@@ -54,6 +54,7 @@ public class GameView extends View<GameModel> {
     protected Text endOption;
     protected Label labelShowStats;
     protected Label labelShowRound;
+    Button btnEndActionPhase;
     HandStackLayout hs;
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
@@ -191,7 +192,7 @@ public class GameView extends View<GameModel> {
 
 
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false); // TODO: 30.11.2017 MANU CHANGE TO TRUE BUT FOR DEBUGGING ITS SHIT 
         stage.setTitle("Dominion");
 
         setTexts();
@@ -238,7 +239,7 @@ public class GameView extends View<GameModel> {
     public void setUserPoints(int userId, String userName, PlayerSet set) {
 
 
-        String elementId = "UserPoints " + userId;
+        String elementId = "UserPoints_" + userId;
 
         Node elm = scene.lookup("#" + elementId);
 
@@ -246,7 +247,7 @@ public class GameView extends View<GameModel> {
             // element does not exist yet
             Label lblUserName = new Label();
             lblUserName.getStyleClass().add("labelShowStats");
-            lblUserName.setPrefSize(50,20 );
+            lblUserName.setPrefSize(150,20 );
             Label lblUserPoints = new Label();
             lblUserPoints.getStyleClass().add("labelShowStats");
             lblUserPoints.setPrefSize(50,20 );
