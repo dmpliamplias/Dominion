@@ -221,7 +221,6 @@ public class GameView extends View<GameModel> {
 
 
     // Author Murat Kelleci
-
     public void setUserPoints(int userId, String userName, PlayerSet set) {
 
         String elementId = "UserPoints " + userId;
