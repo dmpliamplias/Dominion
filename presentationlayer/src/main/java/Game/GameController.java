@@ -484,10 +484,10 @@ public class GameController extends Controller<GameModel, GameView> {
     // ToDo Murat sauber ausimplementieren
     public void showPointsAndName(PlayerSet set) {
 
-        endOfTurn();
+        String name= users.get(set.getUserId()).getUserName();
         int p = set.calculatePoints();
         String pointsAsStr = Integer.toString(p);
-        String name = PLServiceLocator.getPLServiceLocator().getUser().getUserName();
+
 
     }
 

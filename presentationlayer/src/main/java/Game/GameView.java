@@ -5,6 +5,7 @@ import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
+import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -239,13 +240,14 @@ public class GameView extends View<GameModel> {
 
     // Author Murat Kelleci
 
-    public VBox showPointsAndPlayer() {
+    public VBox showPointsAndPlayer(String name, String pointsAsStr, String id) {
+
 
         this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
 
 
-        this.labelShowStats = new Label("test");
+        this.labelShowStats = new Label();
         this. labelShowStats.getStyleClass().add("labelShowStats");
 
         this.labelShowRound = new Label("Rounds");
@@ -257,6 +259,11 @@ public class GameView extends View<GameModel> {
         return VBoxPointsandPlayer;
 
     }
+
+
+
+
+
 
     /**
      *  author Manuel Wirz
