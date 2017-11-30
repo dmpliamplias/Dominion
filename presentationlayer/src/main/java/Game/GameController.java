@@ -5,6 +5,7 @@ import Controls.CardImageView;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import javafx.scene.control.Tooltip;
 import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
@@ -509,10 +510,17 @@ public class GameController extends Controller<GameModel, GameView> {
             }
             myCardSet.getHandStack().add(myCardSet.getPullStack().get(0));
             CardImageView cardImg = new CardImageView(myCardSet.getPullStack().get(0), CardImageView.CardSize.bigSize);
+            Tooltip tooltip = new Tooltip();
+            CardImageView imgForToolTip = new CardImageView(myCardSet.getPullStack().get(0), CardImageView.CardSize.tooltip);
+            tooltip.setGraphic(imgForToolTip);
+            Tooltip.install(cardImg, tooltip);
+            
             setCardImageViewAction(cardImg);
             view.addCardToHandStackPane(cardImg);
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
             updateLblPullStack();
+
+
         }
     }
 
