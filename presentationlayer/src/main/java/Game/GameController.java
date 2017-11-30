@@ -34,6 +34,7 @@ public class GameController extends Controller<GameModel, GameView> {
     int numberOfActions;
     int numberOfBuys;
     int numberOfMoney;
+    boolean actionPhaseOver = false;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -78,11 +79,20 @@ public class GameController extends Controller<GameModel, GameView> {
              }
             updateActionBuyMoney();
             view.moveMoneyCardsToPlayArea();
+            view.gp.getChildren().remove(view.btnPlayMoneyCards);
+            view.gp.getChildren().add(view.btnEndTurn);
         } );
 
 
         view.btnEndTurn.setOnAction( event2 -> {
             endOfTurn();
+        } );
+
+        view.btnEndActionPhase.setOnAction( event3 -> {
+            view.gp.getChildren().remove(view.btnEndActionPhase);
+            view.gp.getChildren().add(view.btnPlayMoneyCards);
+            actionPhaseOver = true;
+
         } );
 
 
@@ -257,9 +267,6 @@ public class GameController extends Controller<GameModel, GameView> {
             numberOfMoney = numberOfMoney - card.getCost();
             updateActionBuyMoney();
 
-            if (numberOfBuys == 0) {
-                endOfTurn();
-            }
 
             try {
                 PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
@@ -349,7 +356,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         if(c instanceof KingCard) {
-            if (view.handStackList.contains(imgv)) {
+            if (actionPhaseOver = false && view.handStackList.contains(imgv)) {
                 if (c.getName().equals("Garten")) {
 
                 } else if (c.getName().equals("Geldverleiher")) {
@@ -508,6 +515,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+    /*
+    Author Vanessa Cajochen
+     */
 
     public void updateActionBuyMoney(){
         view.updatelblInfo(numberOfActions, numberOfBuys, numberOfMoney);
@@ -524,6 +534,9 @@ public class GameController extends Controller<GameModel, GameView> {
             view.endOfTurn();
             resetActionBuyMoney();
             moveFinished();
+            view.gp.getChildren().remove(view.btnEndTurn);
+            view.gp.getChildren().add(view.btnEndActionPhase);
+            actionPhaseOver = false;
 
     }
 
