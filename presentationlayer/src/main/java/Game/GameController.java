@@ -493,6 +493,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     //Author Murat Kelleci
+
     public void setPointsToView(GameContainer gc){
 
         PlayerSet playerSet = gc.getDominionSet();

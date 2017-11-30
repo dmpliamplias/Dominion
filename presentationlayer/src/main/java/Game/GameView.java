@@ -28,6 +28,7 @@ import util.PLServiceLocator;
 import java.util.ArrayList;
 
 import static com.weddingcrashers.model.Settings_.user;
+import static com.weddingcrashers.model.User_.userName;
 import static util.StyleSheetPath.GAME;
 
 
@@ -183,6 +184,7 @@ public class GameView extends View<GameModel> {
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
         root.setTop(setTop());
+        root.setLeft( setLeft());
 
 
         stage.setScene(scene);
@@ -220,8 +222,19 @@ public class GameView extends View<GameModel> {
     }
 
 
+    public VBox setLeft(){
+
+        this.VBoxPointsandPlayer = new VBox(  );
+        this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
+
+
+        return VBoxPointsandPlayer;
+    }
+
     // Author Murat Kelleci
+
     public void setUserPoints(int userId, String userName, PlayerSet set) {
+
 
         String elementId = "UserPoints " + userId;
 
@@ -230,42 +243,31 @@ public class GameView extends View<GameModel> {
         if (elm == null) {
             // element does not exist yet
             Label lblUserName = new Label();
+            lblUserName.getStyleClass().add( "labelShowStats" );
+            lblUserName.setPrefSize( 50,20 );
             Label lblUserPoints = new Label();
+            lblUserPoints.getStyleClass().add( "labelShowStats" );
+            lblUserPoints.setPrefSize( 50, 20 );
 
             lblUserName.setText(userName);
             lblUserPoints.setId(elementId);
             lblUserPoints.setText(Integer.toString(set.calculatePoints()));
 
-            // add to your parentelement and add it to scene....
+
+            VBoxPointsandPlayer.getChildren().addAll( lblUserName, lblUserPoints );
+
         } else {
-            // element already exists...
+
+            // element already exist
 
             Label lblUserPoints = (Label) elm;
             lblUserPoints.setText(Integer.toString(set.calculatePoints()));
 
+
         }
 
-    }
-
-            /*
-        this.VBoxPointsandPlayer = new VBox();
-        this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
-
-
-        this.labelShowStats = new Label();
-        this. labelShowStats.getStyleClass().add("labelShowStats");
-
-        this.labelShowRound = new Label("Rounds");
-        this.labelShowRound.getStyleClass().add("labelShowStats");
-
-
-        this.VBoxPointsandPlayer.getChildren().addAll(labelShowStats, labelShowRound);
-
-        return VBoxPointsandPlayer;
 
     }
-/*
-
 
 
 
