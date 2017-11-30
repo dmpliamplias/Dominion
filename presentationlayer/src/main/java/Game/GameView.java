@@ -232,7 +232,6 @@ public class GameView extends View<GameModel> {
     }
 
     // Author Murat Kelleci
-
     public void setUserPoints(int userId, String userName, PlayerSet set) {
 
 
@@ -243,30 +242,26 @@ public class GameView extends View<GameModel> {
         if (elm == null) {
             // element does not exist yet
             Label lblUserName = new Label();
-            lblUserName.getStyleClass().add( "labelShowStats" );
-            lblUserName.setPrefSize( 50,20 );
+            lblUserName.getStyleClass().add("labelShowStats");
+            lblUserName.setPrefSize(50,20 );
             Label lblUserPoints = new Label();
-            lblUserPoints.getStyleClass().add( "labelShowStats" );
-            lblUserPoints.setPrefSize( 50, 20 );
+            lblUserPoints.getStyleClass().add("labelShowStats");
+            lblUserPoints.setPrefSize(50,20 );
 
             lblUserName.setText(userName);
             lblUserPoints.setId(elementId);
             lblUserPoints.setText(Integer.toString(set.calculatePoints()));
-
 
             VBoxPointsandPlayer.getChildren().addAll( lblUserName, lblUserPoints );
 
         } else {
 
             // element already exist
-
             Label lblUserPoints = (Label) elm;
             lblUserPoints.setText(Integer.toString(set.calculatePoints()));
 
-
         }
-
-
+        
     }
 
 
