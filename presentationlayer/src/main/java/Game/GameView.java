@@ -6,6 +6,9 @@ import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.Language;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -58,6 +61,7 @@ public class GameView extends View<GameModel> {
     Label lblInfo;
     Label lblPullStack;
     Button btnEndTurn;
+    ImageView imgVtrayStack;
 
     public GameView(Stage stage, GameModel model) {
         super(stage, model);
@@ -72,7 +76,7 @@ public class GameView extends View<GameModel> {
         root = new BorderPane();
         FlowPane fpCenter = new FlowPane();
         fpCenter.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root, 800, 600);
         setStylesheet(scene, GAME);
         gp = new GridPane();
         VBox vb = new VBox();
@@ -82,7 +86,7 @@ public class GameView extends View<GameModel> {
         gp.setGridLinesVisible(false);
 
 
-        ColumnConstraints column = new ColumnConstraints(115);
+        ColumnConstraints column = new ColumnConstraints(15);
         ColumnConstraints column1 = new ColumnConstraints(115);
         ColumnConstraints column2 = new ColumnConstraints(70);
         ColumnConstraints column3 = new ColumnConstraints(100);
@@ -91,7 +95,7 @@ public class GameView extends View<GameModel> {
         ColumnConstraints column6 = new ColumnConstraints(100);
         ColumnConstraints column7 = new ColumnConstraints(70);
         ColumnConstraints column8 = new ColumnConstraints(115);
-        ColumnConstraints column9 = new ColumnConstraints(115);
+        ColumnConstraints column9 = new ColumnConstraints(15);
         gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6, column7, column8, column9);
 
 
@@ -102,25 +106,21 @@ public class GameView extends View<GameModel> {
         }
 
 
-        Image back = new Image(getClass().getResourceAsStream("back.jpg"));
-        ImageView imgVback = new ImageView(back);
-        imgVback.setFitHeight(120);
-        imgVback.setFitWidth(75);
-        gp.setRowSpan(imgVback, 4);
-        gp.setConstraints(imgVback, 1, 15);
+        Image pullStack = new Image(getClass().getResourceAsStream("back.jpg"));
+        ImageView imgVpullStack = new ImageView(pullStack);
+        imgVpullStack.setFitHeight(120);
+        imgVpullStack.setFitWidth(75);
+        gp.setRowSpan(imgVpullStack, 4);
+        gp.setConstraints(imgVpullStack, 1, 15);
+
+        // Set backside of trashStack
+        setBackCardOfTrashStack();
 
 
-        Image trayStack = new Image(getClass().getResourceAsStream("back.jpg"));
-        ImageView imgVtrayStack = new ImageView(back);
-        imgVtrayStack.setFitHeight(120);
-        imgVtrayStack.setFitWidth(75);
-        gp.setRowSpan(imgVtrayStack, 4);
-        gp.setHalignment(imgVtrayStack, HPos.RIGHT);
-        gp.setConstraints(imgVtrayStack, 8, 15);
-        gp.getChildren().add(imgVtrayStack);
 
 
-        gp.getChildren().add(imgVback);
+        gp.getChildren().addAll(imgVpullStack);
+
 
         lblPullStack = new Label();
         setLabelFormat(lblPullStack);
@@ -533,6 +533,7 @@ public class GameView extends View<GameModel> {
          }
 
 
+         // When card "Geldverleiher" is played, a Copper from the handStack is trashed.
          public void trashCopper(){
              boolean found = false;
              int i = 0;
@@ -545,6 +546,30 @@ public class GameView extends View<GameModel> {
                  i++;
             }
          }
+
+
+         // The last played card from the handStack lies on the trashStack
+         public void setBackCardOfTrashStack(Card card){
+             imgVtrayStack = new CardImageView(card, CardImageView.CardSize.bigSize);
+             imgVtrayStack.setFitHeight(120);
+             imgVtrayStack.setFitWidth(75);
+             gp.setRowSpan(imgVtrayStack, 4);
+             gp.setHalignment(imgVtrayStack, HPos.RIGHT);
+             gp.setConstraints(imgVtrayStack, 8, 15);
+             gp.getChildren().add(imgVtrayStack);
+         }
+
+
+         // If the trashStack is empty, the trashStack shows the back of the card.
+        public void setBackCardOfTrashStack(){
+            imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream("back.jpg")));
+            imgVtrayStack.setFitHeight(120);
+            imgVtrayStack.setFitWidth(75);
+            gp.setRowSpan(imgVtrayStack, 4);
+            gp.setHalignment(imgVtrayStack, HPos.RIGHT);
+            gp.setConstraints(imgVtrayStack, 8, 15);
+            gp.getChildren().add(imgVtrayStack);
+        }
 
 /*
     public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){

@@ -15,10 +15,7 @@ import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  *  author Michel Schlatter
@@ -144,13 +141,17 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() ->{
             if(userIdHasTurn == serverConnectionService.getClientId()){
                 // TODO: 12.11.2017  this is your turn... enable btns etc.
+                // TODO: drawHAndCards ist just for testing
                 updateUnusedCards(unusedCards);
-                System.out.println(myCardSet.getHandStack());
                 drawHandCards(5);
                 drawHandCards(3);
 
 
             }else{
+                // TODO: drawHAndCards ist just for testing
+                updateUnusedCards(unusedCards);
+                drawHandCards(5);
+                drawHandCards(3);
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
             // highlight the user who has the turn...
@@ -475,7 +476,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void drawHandCards(int numberOfDrawnCards) {
         for (int i = 0; i < numberOfDrawnCards; i++) {
-
+            if (myCardSet.getPullStack().size() == 0){
+                movesCardsFromTrayStackToPullStack();
+            }
             myCardSet.getHandStack().add(myCardSet.getPullStack().get(0));
             view.addCardToHandStackPane(myCardSet.getPullStack().get(0));
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
@@ -513,6 +516,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack.
     public void endOfTurn(){
+        view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size()-1)));
         for (int i = (myCardSet.getHandStack().size()-1); i >= 0; i--) {
             myCardSet.getTrayStack().add(myCardSet.getHandStack().get(i));
             myCardSet.getHandStack().remove(i);
@@ -521,6 +525,18 @@ public class GameController extends Controller<GameModel, GameView> {
             resetActionBuyMoney();
             moveFinished();
 
+    }
+
+    // All cards from TrayStack move to PullStack and PullStack shuffles
+    public void movesCardsFromTrayStackToPullStack(){
+        view.setBackCardOfTrashStack();
+
+        for (int i = (myCardSet.getTrayStack().size()-1); i >= 0; i--) {
+            myCardSet.getPullStack().add(myCardSet.getTrayStack().get(i));
+            myCardSet.getTrayStack().remove(i);
+        }
+
+        Collections.shuffle(myCardSet.getPullStack());
     }
 
 
