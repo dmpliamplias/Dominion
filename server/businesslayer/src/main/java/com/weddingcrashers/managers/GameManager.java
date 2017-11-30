@@ -88,8 +88,8 @@ public class GameManager extends Manager {
             this.client.getDominionSet().getTrayStack().add(card);
             broadCast(bGc, false);
         }else{
-            ServerUtils.sendError(client, new Exception("This is not your turn!"));
-        }
+           ServerUtils.sendError(client, new Exception("This is not your turn!"));
+         }
     }
 
     public void sendInitalCardSet(){
@@ -103,6 +103,7 @@ public class GameManager extends Manager {
              pullStack.add(this.getCardByPointCardType(PointCardType.Estate, false));
          }
          set.setPullStack(pullStack);
+        Collections.shuffle(pullStack);
 
          this.client.setDominionSet(set);
 
@@ -532,13 +533,6 @@ public class GameManager extends Manager {
         Gold,
         Silber,
         Kupfer,
-    }
-
-    /**
-     * @author Murat Kelleci
-     */
-    public static void shuffle(List<Card> cardDeck){
-        Collections.shuffle(cardDeck);
     }
 
 
