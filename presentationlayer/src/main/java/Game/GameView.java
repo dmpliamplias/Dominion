@@ -528,6 +528,18 @@ public class GameView extends View<GameModel> {
          }
 
 
+         public void trashCopper(){
+             boolean found = false;
+             int i = 0;
+             while (!found){
+                 if (handStackList.get(i).getCard().getName().equals("Kupfer")){
+                     hs.getChildren().remove(handStackList.get(i));
+                     handStackList.remove(i);
+                     found = true;
+                 }
+                 i++;
+            }
+         }
 
 /*
     public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){

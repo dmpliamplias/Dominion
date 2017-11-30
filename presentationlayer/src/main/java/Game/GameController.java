@@ -144,16 +144,17 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() ->{
             if(userIdHasTurn == serverConnectionService.getClientId()){
                 // TODO: 12.11.2017  this is your turn... enable btns etc.
+                updateUnusedCards(unusedCards);
+                System.out.println(myCardSet.getHandStack());
+                drawHandCards(5);
+                drawHandCards(3);
 
 
             }else{
                 // TODO: 12.11.2017 this is not your turn.... disable btns etc.
             }
             // highlight the user who has the turn...
-            updateUnusedCards(unusedCards);
-            System.out.println(myCardSet.getHandStack());
-            drawHandCards(5);
-            drawHandCards(3);
+
 
 
         });
@@ -200,6 +201,8 @@ public class GameController extends Controller<GameModel, GameView> {
             if(buyedInfo.getUserId() == myUser.getId()){
                 myCardSet.getTrayStack().add(buyedInfo.getCard());
                 // TODO: 20.11.2017  update View ....
+                // Unused
+                updateUnusedCards(unusedCards);
             }else{
                 // TODO: 20.11.2017  another Player has one Card more... maybe update smth in view... 
             }
@@ -265,8 +268,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
+    // Method gets called when Buy = 0 or User clicks on Button "End Buy"
     public void moveFinished(){
         // TODO: 25.11.2017 Vane: call this method when a user completed his turn...
+
         GameContainer gc = new GameContainer(Methods.TurnFinished);
         try {
             serverConnectionService.sendObject(gc);
@@ -346,8 +351,13 @@ public class GameController extends Controller<GameModel, GameView> {
 
         if(c instanceof KingCard) {
             if (view.handStackList.contains(imgv)) {
-                if (c.getName().equals("Garten") || c.getName().equals("Geldverleiher")) {
-                    // TODO: Vanessa add Method for Geldverleiher
+                if (c.getName().equals("Garten")) {
+
+                } else if (c.getName().equals("Geldverleiher")) {
+                    if (myCardSet.getHandStack().contains(c)){
+                        myCardSet.getHandStack().remove(c);
+                        view.trashCopper();
+                    }
 
                 } else {
                     numberOfActions += ((KingCard) c).getActions();
@@ -369,6 +379,7 @@ public class GameController extends Controller<GameModel, GameView> {
     private User getUser(){
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
+
 
 
     /**
