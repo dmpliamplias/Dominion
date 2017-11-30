@@ -201,7 +201,6 @@ public class GameController extends Controller<GameModel, GameView> {
             CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
             if(buyedInfo.getUserId() == myUser.getId()){
                 myCardSet.getTrayStack().add(buyedInfo.getCard());
-                // TODO: 20.11.2017  update View ....
                 // Unused
                 updateUnusedCards(unusedCards);
             }else{
@@ -496,7 +495,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
 
-    public void handleServerAnswer_PointsandUser(GameContainer gc){
+    public void setPointsToView(GameContainer gc){
 
         PlayerSet playerSet = gc.getDominionSet();
 
