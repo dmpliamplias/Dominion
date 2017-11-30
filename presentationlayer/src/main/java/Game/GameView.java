@@ -9,11 +9,9 @@ import com.weddingcrashers.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -22,7 +20,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
-import javafx.scene.control.Tooltip;
 import util.PLServiceLocator;
 
 import java.util.ArrayList;
@@ -34,47 +31,47 @@ import static util.StyleSheetPath.GAME;
 public class GameView extends View<GameModel> {
 
 
-     protected TextField textFieldChat;
-     protected Button btnChatSend;
-     protected Button btnSendText;
-     protected GridPane chatPane;
-     protected HBox hbChat;
-     protected VBox chatContent;
-     protected TextField txtNameChat;
-     protected GridPane gp;
-     protected BorderPane root;
-     protected VBox VBoxLogger;
-     protected ScrollPane scrollPaneLogger;
-     protected VBox VBoxPointsandPlayer;
-     protected VBox loggerContent;
-     protected VBox setTop;
-     protected Text endOptionRounds;
-     protected Text endOptionPoints;
-     protected Text endOption;
-     protected Label labelShowStats;
-     protected Label labelShowRound;
-     HandStackLayout hs;
-     HandStackLayout cardPlayingArea;
-     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
-     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-     protected Button btnPlayMoneyCards;
-     Label lblInfo;
-     Label lblPullStack;
-     Button btnEndTurn;
+    protected TextField textFieldChat;
+    protected Button btnChatSend;
+    protected Button btnSendText;
+    protected GridPane chatPane;
+    protected HBox hbChat;
+    protected VBox chatContent;
+    protected TextField txtNameChat;
+    protected GridPane gp;
+    protected BorderPane root;
+    protected VBox VBoxLogger;
+    protected ScrollPane scrollPaneLogger;
+    protected VBox VBoxPointsandPlayer;
+    protected VBox loggerContent;
+    protected VBox setTop;
+    protected Text endOptionRounds;
+    protected Text endOptionPoints;
+    protected Text endOption;
+    protected Label labelShowStats;
+    protected Label labelShowRound;
+    HandStackLayout hs;
+    HandStackLayout cardPlayingArea;
+    ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
+    ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+    protected Button btnPlayMoneyCards;
+    Label lblInfo;
+    Label lblPullStack;
+    Button btnEndTurn;
 
-    public GameView(Stage stage, GameModel model){
-        super(stage,model);
+    public GameView(Stage stage, GameModel model) {
+        super(stage, model);
     }
 
     /**
-     *  author Vanessa Cajochen
-     *  */
+     * author Vanessa Cajochen
+     */
 
-    public Scene create_GUI(){
+    public Scene create_GUI() {
 
-        root = new BorderPane(  );
+        root = new BorderPane();
         FlowPane fpCenter = new FlowPane();
-        fpCenter.setAlignment( Pos.CENTER );
+        fpCenter.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root, 1000, 600);
         setStylesheet(scene, GAME);
         gp = new GridPane();
@@ -99,13 +96,10 @@ public class GameView extends View<GameModel> {
 
 
         // Creating 30 rows
-        for (int i = 0; i<20;i++){
+        for (int i = 0; i < 20; i++) {
             RowConstraints row = new RowConstraints(30);
             gp.getRowConstraints().add(row);
         }
-
-
-
 
 
         Image back = new Image(getClass().getResourceAsStream("back.jpg"));
@@ -126,17 +120,11 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(imgVtrayStack);
 
 
-
         gp.getChildren().add(imgVback);
 
         lblPullStack = new Label();
         setLabelFormat(lblPullStack);
         gp.setConstraints(lblPullStack, 1, 15);
-
-
-
-
-
 
 
         // PaneLayout for Hand and PlayingArea
@@ -149,7 +137,6 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(cardPlayingArea);
         gp.setConstraints(cardPlayingArea, 2, 8);
         gp.setRowSpan(cardPlayingArea, 4);
-
 
 
         // -------------------------------------------------------------------------------------------
@@ -187,9 +174,7 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(lblInfo);
 
 
-        gp.getChildren().addAll(btnPlayMoneyCards,btnEndTurn);
-
-
+        gp.getChildren().addAll(btnPlayMoneyCards, btnEndTurn);
 
 
         // root Layout
@@ -198,12 +183,11 @@ public class GameView extends View<GameModel> {
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
         root.setTop(setTop());
-        //ToDO Murat ausklammer wieder rausnehmen sobald gelöst.
-        //root.setLeft(showPointsAndPlayer();
+
 
         stage.setScene(scene);
-        stage.setFullScreen( true );
-        stage.setTitle( "Dominion" );
+        stage.setFullScreen(true);
+        stage.setTitle("Dominion");
 
         setTexts();
         this.stage.setResizable(true);
@@ -213,36 +197,58 @@ public class GameView extends View<GameModel> {
     }
 
     /**
-     *  author Manuel Wirz
-     *  */
+     * author Manuel Wirz
+     */
 
     private VBox setTop() {
 
-        this.setTop = new VBox(  );
-        this.setTop.setAlignment( Pos.CENTER );
-        this.endOption = new Text(  );
-        Text title = new Text( "Dominion" );
-        title.getStyleClass().add( "title" );
+        this.setTop = new VBox();
+        this.setTop.setAlignment(Pos.CENTER);
+        this.endOption = new Text();
+        Text title = new Text("Dominion");
+        title.getStyleClass().add("title");
 
-        this.endOption.setTextAlignment( TextAlignment.CENTER );
-        this.endOptionRounds = new Text(  );
-        this.endOptionPoints = new Text(  );
+        this.endOption.setTextAlignment(TextAlignment.CENTER);
+        this.endOptionRounds = new Text();
+        this.endOptionPoints = new Text();
 
 
-
-        this.setTop.getChildren().addAll( title,  endOption);
+        this.setTop.getChildren().addAll(title, endOption);
 
         return setTop;
 
     }
 
 
-
     // Author Murat Kelleci
 
-    public VBox showPointsAndPlayer(String name, String pointsAsStr, String id) {
+    public void setUserPoints(int userId, String userName, PlayerSet set) {
 
+        String elementId = "UserPoints " + userId;
 
+        Node elm = scene.lookup("#" + elementId);
+
+        if (elm == null) {
+            // element does not exist yet
+            Label lblUserName = new Label();
+            Label lblUserPoints = new Label();
+
+            lblUserName.setText(userName);
+            lblUserPoints.setId(elementId);
+            lblUserPoints.setText(Integer.toString(set.calculatePoints()));
+
+            // add to your parentelement and add it to scene....
+        } else {
+            // element already exists...
+
+            Label lblUserPoints = (Label) elm;
+            lblUserPoints.setText(Integer.toString(set.calculatePoints()));
+
+        }
+
+    }
+
+            /*
         this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
 
@@ -259,8 +265,7 @@ public class GameView extends View<GameModel> {
         return VBoxPointsandPlayer;
 
     }
-
-
+/*
 
 
 
