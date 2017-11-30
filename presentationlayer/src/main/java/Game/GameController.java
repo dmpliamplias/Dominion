@@ -42,7 +42,6 @@ public class GameController extends Controller<GameModel, GameView> {
         serverConnectionService.setGameController(this);
         this.usersAndClientIds = usersAndClientIds;
         this.gameSettings = gameSettings;
-        initialize();
 
         myUser = usersAndClientIds.get(serverConnectionService.getClientId());
         users = new HashMap<Integer, User>();
@@ -54,6 +53,8 @@ public class GameController extends Controller<GameModel, GameView> {
             User user = pair.getValue();
             users.put(key, user);
         }
+
+        initialize();
     }
 
 
@@ -124,7 +125,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         });
 
-
+        view.labelShowRound.setText(Integer.toString(1));
     }
 
     /* ------------------------- receiving smth from Server ----------------------*/
@@ -169,6 +170,11 @@ public class GameController extends Controller<GameModel, GameView> {
             }
             // highlight the user who has the turn...
 
+            for(PlayerSet playerSet : getAllSets()){
+                if(playerSet != null) {
+                    setPointsToView(playerSet);
+                }
+            }
 
         });
 
@@ -200,28 +206,29 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     //Author Murat Kelleci
-    public void handleServerAnswer_updateRound(int round) {
-        Platform.runLater(() -> {
-
-            view.labelShowRound.setText(String.valueOf(round));
-
-            // TODO: Murat 12.11.2017 update round here (show in view)
+    public void handleServerAnswer_updateRound(int round){
+        Platform.runLater(() ->{
+            view.labelShowRound.setText( String.valueOf( round ) );
         });
     }
 
     public void handleServerAnswer_cardBuyed(GameContainer gc) {
         Platform.runLater(() -> {
             CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
-            if (buyedInfo.getUserId() == myUser.getId()) {
+            PlayerSet updatedSet;
+            if(buyedInfo.getUserId() == myUser.getId()){
                 myCardSet.getTrayStack().add(buyedInfo.getCard());
-                // Unused
-                updateUnusedCards(unusedCards);
-            } else {
-                // TODO: 20.11.2017  another Player has one Card more... maybe update smth in view... 
+                updatedSet = myCardSet;
+            }else{
+                enemyCards.get(buyedInfo.getUserId()).getTrayStack().add(buyedInfo.getCard());
+                updatedSet = enemyCards.get(buyedInfo.getUserId());
             }
             unusedCards = gc.getUnusedCards();
-            updateUnusedCards(unusedCards);
-
+            updateUnusedCards(unusedCards); // TODO: 30.11.2017 MICHEL: WHY SO SLOW???
+            setPointsToView(updatedSet);
+            // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
+            view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName() + ": "
+                    + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId( buyedInfo.getClientId()));
         });
     }
 
@@ -297,8 +304,9 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String(user + "/n " + card);
-            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+            String logger = new String( user + "/n " + card );
+            // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
+            view.setLoggerContent(card.getName(), ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
         });
     }
 
@@ -391,7 +399,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
 
-    // Author Murat Kelleci 20.11.17 - 
+    // Author Murat Kelleci 20.11.17 -
     private User getUser(){
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
@@ -405,6 +413,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void updateUnusedCards(ArrayList<Card> unusedCards)
     {
+        long tStart = System.currentTimeMillis();
         ArrayList<String> cardNames = new ArrayList<String>();
         cardNames.add("Kupfer");
         cardNames.add("Silber");
@@ -462,6 +471,10 @@ public class GameController extends Controller<GameModel, GameView> {
                    countCards(unusedCards, cardName));
             setCardImageViewAction(imgView);
         }
+        long tEnd = System.currentTimeMillis();
+        long tDelta = tEnd - tStart;
+        double elapsedSeconds = tDelta / 1000.0;
+        System.out.println(elapsedSeconds);
     }
 
 
@@ -514,9 +527,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     //Author Murat Kelleci
 
-    public void setPointsToView(GameContainer gc){
-
-        PlayerSet playerSet = gc.getDominionSet();
+    public void setPointsToView(PlayerSet playerSet){
 
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
@@ -568,6 +579,19 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
+    protected  ArrayList<PlayerSet> getAllSets(){
+        ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
+        sets.add(myCardSet);
+        Iterator iter = users.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
+            User user = pair.getValue();
+            if(user.getId() != myUser.getId()){
+                sets.add(enemyCards.get((user.getId())));
+            }
+        }
+        return sets;
+    }
 
 
 

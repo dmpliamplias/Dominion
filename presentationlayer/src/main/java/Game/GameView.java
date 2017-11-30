@@ -58,12 +58,10 @@ public class GameView extends View<GameModel> {
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+    protected Button btnPlayMoneyCards;
     Label lblInfo;
     Label lblPullStack;
-    protected Button btnPlayMoneyCards;
-    protected Button btnEndTurn;
-    protected Button btnEndActionPhase;
-
+    Button btnEndTurn;
     ImageView imgVtrayStack;
 
     public GameView(Stage stage, GameModel model) {
@@ -88,7 +86,9 @@ public class GameView extends View<GameModel> {
 
         gp.setGridLinesVisible(false);
 
-
+        // TODO: 30.11.2017 MURAT ADD TO VIEW!! 
+        labelShowRound = new Label();
+        
         // Creating 9 columns with different width
         ColumnConstraints column = new ColumnConstraints(15);
         ColumnConstraints column1 = new ColumnConstraints(115);
@@ -110,20 +110,26 @@ public class GameView extends View<GameModel> {
         }
 
 
-        // create backside card and label for pullStack
         Image pullStack = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVpullStack = new ImageView(pullStack);
         imgVpullStack.setFitHeight(120);
         imgVpullStack.setFitWidth(75);
         gp.setRowSpan(imgVpullStack, 4);
         gp.setConstraints(imgVpullStack, 1, 15);
-        gp.getChildren().add(imgVpullStack);
+
+        // Set backside of trashStack
+        setBackCardOfTrashStack();
+
+
+
+
+        gp.getChildren().addAll(imgVpullStack);
+
+
         lblPullStack = new Label();
         setLabelFormat(lblPullStack);
         gp.setConstraints(lblPullStack, 1, 15);
 
-        // Set backside of trashStack
-        setBackCardOfTrashStack();
 
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
@@ -143,20 +149,25 @@ public class GameView extends View<GameModel> {
         // TEST
 
 
+        btnPlayMoneyCards = new Button("Play All Cards");
+        btnPlayMoneyCards.setPrefSize(100, 30);
+        gp.setValignment(btnPlayMoneyCards, VPos.TOP);
+        btnPlayMoneyCards.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnPlayMoneyCards, 1, 11);
 
-
-        btnEndActionPhase = new Button("Aktionsrunde beenden");
-        setStyleOfButtons(btnEndActionPhase);
-
-        btnPlayMoneyCards = new Button("Geldkarten spielen");
-        setStyleOfButtons(btnPlayMoneyCards);
+        Button btnEndActionPhase = new Button("Aktionsrunde beenden");
+        btnEndActionPhase.setPrefHeight(30);
+        gp.setValignment(btnEndActionPhase, VPos.TOP);
+        gp.setColumnSpan(btnEndActionPhase, 2);
+        btnEndActionPhase.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnEndActionPhase, 5, 13);
 
         btnEndTurn = new Button("Spielzug beenden");
-        setStyleOfButtons(btnEndTurn);
-
-        gp.getChildren().add(btnEndActionPhase);
-
-
+        btnEndTurn.setPrefHeight(30);
+        gp.setValignment(btnEndTurn, VPos.TOP);
+        gp.setColumnSpan(btnEndTurn, 2);
+        btnEndTurn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btnEndTurn, 5, 13);
 
         lblInfo = new Label();
         lblInfo.setPrefHeight(30);
@@ -167,7 +178,7 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(lblInfo);
 
 
-
+        gp.getChildren().addAll(btnPlayMoneyCards, btnEndTurn);
 
 
         // root Layout
@@ -304,17 +315,9 @@ public class GameView extends View<GameModel> {
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
         lbl.setAlignment(Pos.CENTER);
-    }
-
-
-    private void setStyleOfButtons(Button btn){
-        btn.setPrefSize(100, 30);
-        gp.setValignment(btn, VPos.TOP);
-        gp.setColumnSpan(btn, 2);
-        btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-        gp.setConstraints(btn, 5, 13);
 
     }
+
 
 
 
