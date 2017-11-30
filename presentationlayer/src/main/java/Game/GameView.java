@@ -54,15 +54,16 @@ public class GameView extends View<GameModel> {
     protected Text endOption;
     protected Label labelShowStats;
     protected Label labelShowRound;
-    Button btnEndActionPhase;
     HandStackLayout hs;
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    protected Button btnPlayMoneyCards;
     Label lblInfo;
     Label lblPullStack;
-    Button btnEndTurn;
+    protected Button btnPlayMoneyCards;
+    protected Button btnEndTurn;
+    protected Button btnEndActionPhase;
+
     ImageView imgVtrayStack;
 
     public GameView(Stage stage, GameModel model) {
@@ -87,9 +88,7 @@ public class GameView extends View<GameModel> {
 
         gp.setGridLinesVisible(false);
 
-        // TODO: 30.11.2017 MURAT ADD TO VIEW!! 
-        labelShowRound = new Label();
-        
+
         // Creating 9 columns with different width
         ColumnConstraints column = new ColumnConstraints(15);
         ColumnConstraints column1 = new ColumnConstraints(115);
@@ -111,26 +110,20 @@ public class GameView extends View<GameModel> {
         }
 
 
+        // create backside card and label for pullStack
         Image pullStack = new Image(getClass().getResourceAsStream("back.jpg"));
         ImageView imgVpullStack = new ImageView(pullStack);
         imgVpullStack.setFitHeight(120);
         imgVpullStack.setFitWidth(75);
         gp.setRowSpan(imgVpullStack, 4);
         gp.setConstraints(imgVpullStack, 1, 15);
-
-        // Set backside of trashStack
-        setBackCardOfTrashStack();
-
-
-
-
-        gp.getChildren().addAll(imgVpullStack);
-
-
+        gp.getChildren().add(imgVpullStack);
         lblPullStack = new Label();
         setLabelFormat(lblPullStack);
         gp.setConstraints(lblPullStack, 1, 15);
 
+        // Set backside of trashStack
+        setBackCardOfTrashStack();
 
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
@@ -150,25 +143,20 @@ public class GameView extends View<GameModel> {
         // TEST
 
 
-        btnPlayMoneyCards = new Button("Play All Cards");
-        btnPlayMoneyCards.setPrefSize(100, 30);
-        gp.setValignment(btnPlayMoneyCards, VPos.TOP);
-        btnPlayMoneyCards.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-        gp.setConstraints(btnPlayMoneyCards, 1, 11);
 
-        Button btnEndActionPhase = new Button("Aktionsrunde beenden");
-        btnEndActionPhase.setPrefHeight(30);
-        gp.setValignment(btnEndActionPhase, VPos.TOP);
-        gp.setColumnSpan(btnEndActionPhase, 2);
-        btnEndActionPhase.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-        gp.setConstraints(btnEndActionPhase, 5, 13);
+
+        btnEndActionPhase = new Button("Aktionsrunde beenden");
+        setStyleOfButtons(btnEndActionPhase);
+
+        btnPlayMoneyCards = new Button("Geldkarten spielen");
+        setStyleOfButtons(btnPlayMoneyCards);
 
         btnEndTurn = new Button("Spielzug beenden");
-        btnEndTurn.setPrefHeight(30);
-        gp.setValignment(btnEndTurn, VPos.TOP);
-        gp.setColumnSpan(btnEndTurn, 2);
-        btnEndTurn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
-        gp.setConstraints(btnEndTurn, 5, 13);
+        setStyleOfButtons(btnEndTurn);
+
+        gp.getChildren().add(btnEndActionPhase);
+
+
 
         lblInfo = new Label();
         lblInfo.setPrefHeight(30);
@@ -179,7 +167,7 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(lblInfo);
 
 
-        gp.getChildren().addAll(btnPlayMoneyCards, btnEndTurn);
+
 
 
         // root Layout
@@ -192,7 +180,7 @@ public class GameView extends View<GameModel> {
 
 
         stage.setScene(scene);
-        stage.setFullScreen(false); // TODO: 30.11.2017 MANU CHANGE TO TRUE BUT FOR DEBUGGING ITS SHIT 
+        stage.setFullScreen(true);
         stage.setTitle("Dominion");
 
         setTexts();
@@ -239,7 +227,7 @@ public class GameView extends View<GameModel> {
     public void setUserPoints(int userId, String userName, PlayerSet set) {
 
 
-        String elementId = "UserPoints_" + userId;
+        String elementId = "UserPoints " + userId;
 
         Node elm = scene.lookup("#" + elementId);
 
@@ -247,7 +235,7 @@ public class GameView extends View<GameModel> {
             // element does not exist yet
             Label lblUserName = new Label();
             lblUserName.getStyleClass().add("labelShowStats");
-            lblUserName.setPrefSize(150,20 );
+            lblUserName.setPrefSize(50,20 );
             Label lblUserPoints = new Label();
             lblUserPoints.getStyleClass().add("labelShowStats");
             lblUserPoints.setPrefSize(50,20 );
@@ -316,9 +304,17 @@ public class GameView extends View<GameModel> {
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
         lbl.setAlignment(Pos.CENTER);
-
     }
 
+
+    private void setStyleOfButtons(Button btn){
+        btn.setPrefSize(100, 30);
+        gp.setValignment(btn, VPos.TOP);
+        gp.setColumnSpan(btn, 2);
+        btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        gp.setConstraints(btn, 5, 13);
+
+    }
 
 
 
