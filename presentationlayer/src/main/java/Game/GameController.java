@@ -23,7 +23,7 @@ import java.util.*;
 
 public class GameController extends Controller<GameModel, GameView> {
 
-    private  PlayerSet myCardSet;
+    private PlayerSet myCardSet;
     ArrayList<Card> unusedCards;
     HashMap<Integer, User> usersAndClientIds; // Key = ClientId
     HashMap<Integer, User> users; // Key = UserId
@@ -38,8 +38,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
-        super( model, view );
-        serverConnectionService.setGameController( this );
+        super(model, view);
+        serverConnectionService.setGameController(this);
         this.usersAndClientIds = usersAndClientIds;
         this.gameSettings = gameSettings;
         initialize();
@@ -48,78 +48,81 @@ public class GameController extends Controller<GameModel, GameView> {
         users = new HashMap<Integer, User>();
 
         Iterator iter = usersAndClientIds.entrySet().iterator();
-        while(iter.hasNext()){
-          Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
-          int key = (int)pair.getValue().getId();
-          User user = pair.getValue();
-          users.put(key, user);
+        while (iter.hasNext()) {
+            Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
+            int key = (int) pair.getValue().getId();
+            User user = pair.getValue();
+            users.put(key, user);
         }
     }
 
 
     public void initialize() {
         try {
-            serverConnectionService.updateViewStatus( ViewStatus.Game ); // set ViewStatus for Server
+            serverConnectionService.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
 
         resetActionBuyMoney();
         updateActionBuyMoney();
 
-        view.btnPlayMoneyCards.setOnAction( event -> {
-            for(int i = 0; i < view.handStackList.size(); i++){
-                if (view.handStackList.get(i).getCard().getName().equals("Kupfer")){
-                    numberOfMoney++;}
-                if (view.handStackList.get(i).getCard().getName().equals("Silber")){
-                    numberOfMoney = numberOfMoney + 2;}
-                if (view.handStackList.get(i).getCard().getName().equals("Gold")){
-                    numberOfMoney = numberOfMoney + 3;}
-             }
+        view.btnPlayMoneyCards.setOnAction(event -> {
+            for (int i = 0; i < view.handStackList.size(); i++) {
+                if (view.handStackList.get(i).getCard().getName().equals("Kupfer")) {
+                    numberOfMoney++;
+                }
+                if (view.handStackList.get(i).getCard().getName().equals("Silber")) {
+                    numberOfMoney = numberOfMoney + 2;
+                }
+                if (view.handStackList.get(i).getCard().getName().equals("Gold")) {
+                    numberOfMoney = numberOfMoney + 3;
+                }
+            }
             updateActionBuyMoney();
             view.moveMoneyCardsToPlayArea();
             view.gp.getChildren().remove(view.btnPlayMoneyCards);
             view.gp.getChildren().add(view.btnEndTurn);
-        } );
+        });
 
 
-        view.btnEndTurn.setOnAction( event2 -> {
+        view.btnEndTurn.setOnAction(event2 -> {
             endOfTurn();
-        } );
+        });
 
-        view.btnEndActionPhase.setOnAction( event3 -> {
+        view.btnEndActionPhase.setOnAction(event3 -> {
             view.gp.getChildren().remove(view.btnEndActionPhase);
             view.gp.getChildren().add(view.btnPlayMoneyCards);
             actionPhaseOver = true;
 
-        } );
-
+        });
 
 
         /**
          *  author Manuel Wirz
          *  */
 
-        if(gameSettings.isPointCards()== true){
-            view.endOption.setText( view.endOptionPoints.getText() );
-        } else{
-            view.endOption.setText( view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds() );
+        if (gameSettings.isPointCards() == true) {
+            view.endOption.setText(view.endOptionPoints.getText());
+        } else {
+            view.endOption.setText(view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds());
         }
 
 
-        view.getBtnChatSend().setOnAction( event -> {
+        view.getBtnChatSend().setOnAction(event -> {
             sendMessage();
-        } );
+        });
 
-        view.getBtnSendText().setOnAction( event -> {
+        view.getBtnSendText().setOnAction(event -> {
             sendButtonText();
-        } );
+        });
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
-            if (event.getCode().equals( KeyCode.ENTER)){
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 sendMessage();
-            }  });
+            }
+        });
 
 
     }
@@ -127,29 +130,29 @@ public class GameController extends Controller<GameModel, GameView> {
     /* ------------------------- receiving smth from Server ----------------------*/
 
     // after initalizing the gameview and after each complete turn the player makes, this methods gets called
-    public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn){
-      if(set.getUserId() == myUser.getId()){
-          this.myCardSet = set;
-      }else{
-          this.enemyCards.put(set.getUserId(), set);
-      }
-      if(unusedCards != null && unusedCards.size() > 0){
-          this.unusedCards = unusedCards;
-          for(Card uc : unusedCards){
-             if(uc.getName().equals("Anwesen")){
-                 boolean found = true;
-             }
-          }
-      }
+    public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn) {
+        if (set.getUserId() == myUser.getId()) {
+            this.myCardSet = set;
+        } else {
+            this.enemyCards.put(set.getUserId(), set);
+        }
+        if (unusedCards != null && unusedCards.size() > 0) {
+            this.unusedCards = unusedCards;
+            for (Card uc : unusedCards) {
+                if (uc.getName().equals("Anwesen")) {
+                    boolean found = true;
+                }
+            }
+        }
 
-      activeUserId = userIdHasTurn;
+        activeUserId = userIdHasTurn;
 
-      /**
-       *  author Manuel Wirz
-       *  */
+        /**
+         *  author Manuel Wirz
+         *  */
 
-        Platform.runLater(() ->{
-            if(userIdHasTurn == serverConnectionService.getClientId()){
+        Platform.runLater(() -> {
+            if (userIdHasTurn == serverConnectionService.getClientId()) {
                 // TODO: 12.11.2017  this is your turn... enable btns etc.
                 // TODO: drawHAndCards ist just for testing
                 updateUnusedCards(unusedCards);
@@ -157,7 +160,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 drawHandCards(3);
 
 
-            }else{
+            } else {
                 // TODO: drawHAndCards ist just for testing
                 updateUnusedCards(unusedCards);
                 drawHandCards(5);
@@ -167,54 +170,53 @@ public class GameController extends Controller<GameModel, GameView> {
             // highlight the user who has the turn...
 
 
-
         });
 
 
     }
 
     // a player finished his turn...
-    public void handleServerAnswer_gameTurnFinished(GameContainer gc){
-        Platform.runLater(()-> {
-            if(gc.getWinningInformations() != null & gc.getWinningInformations().size() > 0){
+    public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
+        Platform.runLater(() -> {
+            if (gc.getWinningInformations() != null & gc.getWinningInformations().size() > 0) {
                 // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
                 // hier hast du die Informationen über den Rang der Spieler usw:
-                for(WinningInformation wi : gc.getWinningInformations()){
-                   int rang = wi.getPosition();
-                   User user = users.get(wi.getUserId());
-                   int points = wi.getPoints();
+                for (WinningInformation wi : gc.getWinningInformations()) {
+                    int rang = wi.getPosition();
+                    User user = users.get(wi.getUserId());
+                    int points = wi.getPoints();
 
                     // TODO: 25.11.2017 Vane: Display the data to each user
                 }
-            }else{
-               activeUserId =  gc.getUserIdHasTurn();
-               if(myUser.getId() == activeUserId){
-                   // TODO: 25.11.2017 Vane enable this user, it's his turn now... 
-               }else{
-                   // TODO: 25.11.2017 Vane disable this user, it's not his turn now...
-               }
+            } else {
+                activeUserId = gc.getUserIdHasTurn();
+                if (myUser.getId() == activeUserId) {
+                    // TODO: 25.11.2017 Vane enable this user, it's his turn now...
+                } else {
+                    // TODO: 25.11.2017 Vane disable this user, it's not his turn now...
+                }
             }
         });
     }
 
     //Author Murat Kelleci
-    public void handleServerAnswer_updateRound(int round){
-        Platform.runLater(() ->{
+    public void handleServerAnswer_updateRound(int round) {
+        Platform.runLater(() -> {
 
-            view.labelShowRound.setText( String.valueOf( round ) );
+            view.labelShowRound.setText(String.valueOf(round));
 
             // TODO: Murat 12.11.2017 update round here (show in view)
         });
     }
 
-    public void handleServerAnswer_cardBuyed(GameContainer gc){
-        Platform.runLater(() ->{
+    public void handleServerAnswer_cardBuyed(GameContainer gc) {
+        Platform.runLater(() -> {
             CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
-            if(buyedInfo.getUserId() == myUser.getId()){
+            if (buyedInfo.getUserId() == myUser.getId()) {
                 myCardSet.getTrayStack().add(buyedInfo.getCard());
                 // Unused
                 updateUnusedCards(unusedCards);
-            }else{
+            } else {
                 // TODO: 20.11.2017  another Player has one Card more... maybe update smth in view... 
             }
             unusedCards = gc.getUnusedCards();
@@ -222,14 +224,13 @@ public class GameController extends Controller<GameModel, GameView> {
 
         });
     }
-    
 
 
     // Methode for to receive the chatContainer from the server and set new text in the chat
     public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
-        Platform.runLater( () -> {
+        Platform.runLater(() -> {
             view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
-        } );
+        });
 
     }
 
@@ -240,10 +241,10 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /*----------------Send to smth. to Server ------------- */
 
-    public void cardPlayed(Card c){
+    public void cardPlayed(Card c) {
         GameContainer gc = new GameContainer(Methods.CardPlayed);
         CardPlayedInfo info = new CardPlayedInfo();
-        info.setUserId((int)myUser.getId());
+        info.setUserId((int) myUser.getId());
         info.setCard(c);
 
         try {
@@ -277,7 +278,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // Method gets called when Buy = 0 or User clicks on Button "End Buy"
-    public void moveFinished(){
+    public void moveFinished() {
         // TODO: 25.11.2017 Vane: call this method when a user completed his turn...
 
         GameContainer gc = new GameContainer(Methods.TurnFinished);
@@ -292,12 +293,12 @@ public class GameController extends Controller<GameModel, GameView> {
      * author Manuel Wirz
      */
 
-    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo){
-        Platform.runLater(() ->{
+    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo) {
+        Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String( user + "/n " + card );
-            view.setLoggerContent(logger, ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
+            String logger = new String(user + "/n " + card);
+            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 
@@ -308,14 +309,14 @@ public class GameController extends Controller<GameModel, GameView> {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.getTextFieldChat().getText();
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
-        cc.setMsg( message);
+        cc.setMsg(message);
         view.getTextFieldChat().clear();
         view.setChatMessage(message, ViewUtils.getColorByClientId(cc.getClientId()));
 
         try {
-            serverConnectionService.sendObject( cc );
+            serverConnectionService.sendObject(cc);
         } catch (IOException e) {
-            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -327,45 +328,49 @@ public class GameController extends Controller<GameModel, GameView> {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.getBtnSendText().getText();
         ChatContainer cc = new ChatContainer();
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
-        cc.setMsg( message );
+        cc.setMsg(message);
 
         view.setChatMessage(message, ViewUtils.getColorByClientId(cc.getClientId()));
 
         try {
-            serverConnectionService.sendObject( cc );
+            serverConnectionService.sendObject(cc);
         } catch (IOException e) {
-            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
 
-
     // Author Murat Kelleci 24.11.17
-    private void setCardImageViewAction(CardImageView imgv){
+    private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
         });
     }
 
     // Author Murat Kelleci 24.11.17
-    private void runAction(CardImageView imgv){
+    private void runAction(CardImageView imgv) {
+
         Card c = imgv.getCard();
-        if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini){
+        if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini) {
             buyCards(c);
         }
 
 
-        if(c instanceof KingCard) {
-            if (actionPhaseOver = false && view.handStackList.contains(imgv)) {
+        if (c instanceof KingCard) {
+            if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
                 if (c.getName().equals("Garten")) {
 
                 } else if (c.getName().equals("Geldverleiher")) {
-                    if (myCardSet.getHandStack().contains(c)){
-                        myCardSet.getHandStack().remove(c);
-                        view.trashCopper();
-                        numberOfMoney = numberOfMoney + 3;
-                        view.moveCardToPlayingArea(imgv);
-                        updateActionBuyMoney();
+                    for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
+                        if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
+                            myCardSet.getHandStack().remove(i);
+                            view.trashCopper();
+                            numberOfMoney = numberOfMoney + 3;
+                            view.moveCardToPlayingArea(imgv);
+                            numberOfActions -= 1;
+                            updateActionBuyMoney();
+                            break;
+                        }
                     }
 
                 } else {
@@ -377,11 +382,14 @@ public class GameController extends Controller<GameModel, GameView> {
                         drawHandCards(((KingCard) c).getCards());
                     }
                     view.moveCardToPlayingArea(imgv);
+                    numberOfActions -= 1;
                     updateActionBuyMoney();
                 }
             }
         }
     }
+
+
 
     // Author Murat Kelleci 20.11.17 - 
     private User getUser(){
@@ -487,7 +495,9 @@ public class GameController extends Controller<GameModel, GameView> {
                 movesCardsFromTrayStackToPullStack();
             }
             myCardSet.getHandStack().add(myCardSet.getPullStack().get(0));
-            view.addCardToHandStackPane(myCardSet.getPullStack().get(0));
+            CardImageView cardImg = new CardImageView(myCardSet.getPullStack().get(0), CardImageView.CardSize.bigSize);
+            setCardImageViewAction(cardImg);
+            view.addCardToHandStackPane(cardImg);
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
             updateLblPullStack();
         }

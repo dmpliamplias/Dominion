@@ -464,10 +464,8 @@ public class GameView extends View<GameModel> {
  }
 
     // Adds the card to the HandStackPane.
-    public void addCardToHandStackPane(Card card){
-        CardImageView cardImg = new CardImageView(card, CardImageView.CardSize.bigSize);
+    public void addCardToHandStackPane(CardImageView cardImg){
         handStackList.add(cardImg);
-        System.out.println(handStackList.size());
         updateStackLayout();
         hs.getChildren().add(cardImg);
     }
