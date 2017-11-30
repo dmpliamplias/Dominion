@@ -356,6 +356,9 @@ public class GameController extends Controller<GameModel, GameView> {
                     if (myCardSet.getHandStack().contains(c)){
                         myCardSet.getHandStack().remove(c);
                         view.trashCopper();
+                        numberOfMoney = numberOfMoney + 3;
+                        view.moveCardToPlayingArea(imgv);
+                        updateActionBuyMoney();
                     }
 
                 } else {
