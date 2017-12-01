@@ -45,6 +45,7 @@ public class GameView extends View<GameModel> {
     protected GridPane gp;
     protected BorderPane root;
     protected VBox VBoxLogger;
+    protected VBox VBoxDisplayWinner;
     protected ScrollPane scrollPaneLogger;
     protected VBox VBoxPointsandPlayer;
     protected VBox loggerContent;
@@ -378,7 +379,18 @@ public class GameView extends View<GameModel> {
             lblUserNameAndPoints.setText(text);
 
         }
+
    }
+
+    public VBox displayWinner(){
+
+        this.VBoxDisplayWinner=new VBox();
+        Label lblWinnerDisplay=new Label();
+
+        VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay);
+
+        return VBoxDisplayWinner;
+    }
 
 
     /**
