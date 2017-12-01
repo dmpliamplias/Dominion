@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
 import util.PLServiceLocator;
+import login.*;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class GameView extends View<GameModel> {
     protected TextField textFieldChat;
     protected TextField textFieldNameLogger;
     protected Button btnChatSend;
+    protected Button btnLobby;
+    protected Button btnRanking;
     protected Button btnSendText;
     protected GridPane chatPane;
     protected HBox hbChat;
@@ -388,14 +391,24 @@ public class GameView extends View<GameModel> {
 
    }
 
-    public VBox displayWinner(){
+    public VBox displayWinner(int userId, String userName, PlayerSet set){
 
+        String elementId="UserPoints_ " + userId;
+
+        this.btnLobby = new Button();
+        this.btnLobby.setPrefSize(180, 80);
+        this.btnRanking= new Button();
+        this.btnRanking.setPrefSize(180, 80);
+        // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
         this.VBoxDisplayWinner=new VBox();
         Label lblWinnerDisplay=new Label();
+   
 
-        VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay);
+        VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay,btnLobby,btnRanking);
 
         return VBoxDisplayWinner;
+
+
     }
 
 
