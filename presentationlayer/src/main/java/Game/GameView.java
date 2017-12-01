@@ -125,8 +125,10 @@ public class GameView extends View<GameModel> {
         setLabelFormat(lblPullStack);
         gp.setConstraints(lblPullStack, 1, 15);
 
+
         // Set backside of trashStack
         setBackCardOfTrashStack();
+
 
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
@@ -138,7 +140,6 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(cardPlayingArea);
         gp.setConstraints(cardPlayingArea, 2, 8);
         gp.setRowSpan(cardPlayingArea, 4);
-
 
 
         // Creates 3 buttons. But only 1 will be shown at the same time
@@ -184,12 +185,8 @@ public class GameView extends View<GameModel> {
 
 
 
-
-
-
-
         lblInfo = new Label();
-        lblInfo.setPrefHeight(30);
+        lblInfo.setPrefSize(170, 30);
         gp.setColumnSpan(lblInfo, 2);
         gp.setValignment(lblInfo, VPos.TOP);
         lblInfo.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 14; -fx-background-color: #d3d1d1");
@@ -339,7 +336,7 @@ public class GameView extends View<GameModel> {
 
 
     private void setStyleOfButtons(Button btn){
-        btn.setPrefSize(100, 30);
+        btn.setPrefSize(150, 30);
         gp.setValignment(btn, VPos.TOP);
         gp.setColumnSpan(btn, 2);
         btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");

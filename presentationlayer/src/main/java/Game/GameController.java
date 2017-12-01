@@ -364,37 +364,65 @@ public class GameController extends Controller<GameModel, GameView> {
             buyCards(c);
         }
 
+        if (c instanceof MoneyCard) {
+            if (actionPhaseOver == true && view.handStackList.contains(imgv)) {
+                if (c.getName().equals("Kupfer")) {
+                    numberOfMoney++;
+                } else if (c.getName().equals("Silber")) {
+                    numberOfMoney = numberOfMoney + 2;
+                } else if (c.getName().equals("Gold")) {
+                    numberOfMoney = numberOfMoney + 3;
+                }
 
-        if (c instanceof KingCard) {
-            if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
-                if (c.getName().equals("Garten")) {
+                view.moveCardToPlayingArea(imgv);
+                updateActionBuyMoney();
 
-                } else if (c.getName().equals("Geldverleiher")) {
-                    for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
-                        if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
-                            myCardSet.getHandStack().remove(i);
-                            view.trashCopper();
-                            numberOfMoney = numberOfMoney + 3;
-                            view.moveCardToPlayingArea(imgv);
-                            numberOfActions -= 1;
-                            updateActionBuyMoney();
-                            break;
-                        }
+                // btn weg wenn alle MoneyCards gespielt sind
+                boolean containsMoneyCard = false;
+                for (int i = 0; i < view.handStackList.size() - 1; i++) {
+                    if (view.handStackList.get(i).getCard().getName().equals("Kupfer") || view.handStackList.get(i).getCard().getName().equals("Silber") || view.handStackList.get(i).getCard().getName().equals("Gold")) {
+                        containsMoneyCard = true;
+                        break;
                     }
-
-                } else {
-                    numberOfActions += ((KingCard) c).getActions();
-                    numberOfBuys += ((KingCard) c).getBuys();
-                    numberOfMoney += c.getValue();
-
-                    if (((KingCard) c).getCards() > 0) {
-                        drawHandCards(((KingCard) c).getCards());
-                    }
-                    view.moveCardToPlayingArea(imgv);
-                    numberOfActions -= 1;
-                    updateActionBuyMoney();
+                }
+                if (containsMoneyCard == false) {
+                    view.gp.getChildren().remove(view.btnPlayMoneyCards);
+                    view.gp.getChildren().add(view.btnEndTurn);
                 }
             }
+
+
+
+        }else if (c instanceof KingCard) {
+                if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
+                    if (c.getName().equals("Garten")) {
+
+                    } else if (c.getName().equals("Geldverleiher")) {
+                        for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
+                            if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
+                                myCardSet.getHandStack().remove(i);
+                                view.trashCopper();
+                                numberOfMoney = numberOfMoney + 3;
+                                view.moveCardToPlayingArea(imgv);
+                                numberOfActions -= 1;
+                                updateActionBuyMoney();
+                                break;
+                            }
+                        }
+
+                    } else {
+                        numberOfActions += ((KingCard) c).getActions();
+                        numberOfBuys += ((KingCard) c).getBuys();
+                        numberOfMoney += c.getValue();
+
+                        if (((KingCard) c).getCards() > 0) {
+                            drawHandCards(((KingCard) c).getCards());
+                        }
+                        view.moveCardToPlayingArea(imgv);
+                        numberOfActions -= 1;
+                        updateActionBuyMoney();
+                    }
+                }
         }
     }
 
