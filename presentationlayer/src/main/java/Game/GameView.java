@@ -170,19 +170,13 @@ public class GameView extends View<GameModel> {
 
         imgVGreyOutButton = new ImageView(imgGreyOut);
         imgVGreyOutButton.setFitHeight(30);
-        imgVGreyOutButton.setFitWidth(100);
+        imgVGreyOutButton.setFitWidth(150);
         gp.setColumnSpan(imgVGreyOutButton, 2);
         gp.setValignment(imgVGreyOutButton, VPos.TOP);
         imgVGreyOutButton.setOpacity(0.5);
 
         gp.setConstraints(imgVGreyOutHandStack, 2, 15);
         gp.setConstraints(imgVGreyOutButton, 5, 13);
-
-
-
-
-
-
 
 
         lblInfo = new Label();
@@ -192,9 +186,6 @@ public class GameView extends View<GameModel> {
         lblInfo.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 14; -fx-background-color: #d3d1d1");
         gp.setConstraints(lblInfo, 2, 13);
         gp.getChildren().add(lblInfo);
-
-
-
 
 
         // root Layout
@@ -207,23 +198,21 @@ public class GameView extends View<GameModel> {
 
 
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setTitle("Dominion");
 
 
         setTexts();
         this.stage.setResizable(true);
         return scene;
-
-
     }
+
 
     /**
      * author Manuel Wirz
      */
 
     private VBox setTop() {
-
         this.setTop = new VBox();
         this.setTop.setAlignment(Pos.CENTER);
         this.endOption = new Text();
@@ -234,54 +223,15 @@ public class GameView extends View<GameModel> {
         this.endOptionRounds = new Text();
         this.endOptionPoints = new Text();
 
-
         this.setTop.getChildren().addAll(title, endOption);
-
         return setTop;
-
     }
 
 
     public VBox setLeft(){
-
         this.VBoxPointsandPlayer = new VBox(  );
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
-
-
         return VBoxPointsandPlayer;
-    }
-
-    // Author Murat Kelleci
-    public void setUserPoints(int userId, String userName, PlayerSet set) {
-
-
-        String elementId = "UserPoints " + userId;
-
-        Node elm = scene.lookup("#" + elementId);
-
-        if (elm == null) {
-            // element does not exist yet
-            Label lblUserName = new Label();
-            lblUserName.getStyleClass().add("labelShowStats");
-            lblUserName.setPrefSize(50,20 );
-            Label lblUserPoints = new Label();
-            lblUserPoints.getStyleClass().add("labelShowStats");
-            lblUserPoints.setPrefSize(50,20 );
-
-            lblUserName.setText(userName);
-            lblUserPoints.setId(elementId);
-            lblUserPoints.setText(Integer.toString(set.calculatePoints()));
-
-            VBoxPointsandPlayer.getChildren().addAll( lblUserName, lblUserPoints );
-
-        } else {
-
-            // element already exist
-            Label lblUserPoints = (Label) elm;
-            lblUserPoints.setText(Integer.toString(set.calculatePoints()));
-
-        }
-        
     }
 
 
@@ -311,6 +261,7 @@ public class GameView extends View<GameModel> {
         return VBoxLogger;
 
     }
+
 
     /**
      *  author Manuel Wirz
@@ -343,7 +294,6 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(btn, 5, 13);
 
     }
-
 
 
     /**
@@ -399,12 +349,54 @@ public class GameView extends View<GameModel> {
         chatPane.add(scroll,0,1);
         chatPane.add(hbChat, 0, 2);
 
-
-
         return chatPane;
     }
 
 
+    // Author Murat Kelleci
+    public void setUserPoints(int userId, String userName, PlayerSet set) {
+
+        String elementId = "UserPoints_" + userId;
+        String text = userName +": "+ Integer.toString(set.calculatePoints());
+
+        Node elm = VBoxPointsandPlayer.lookup("#" + elementId);
+
+        if (elm == null) {
+            // element does not exist yet
+            Label lblUserNameAndPoints = new Label();
+            lblUserNameAndPoints.getStyleClass().add("labelShowStats");
+            lblUserNameAndPoints.setPrefSize(150,20 );
+            lblUserNameAndPoints.setText(text);
+            lblUserNameAndPoints.setId(elementId);
+
+            VBoxPointsandPlayer.getChildren().addAll( lblUserNameAndPoints );
+
+        } else {
+
+            // element already exist
+            Label lblUserNameAndPoints = (Label) elm;
+            lblUserNameAndPoints.setText(text);
+
+        }
+   }
+
+
+    /**
+     * Author Michel Schlatter
+     * @param msg
+     * @param color
+     */
+    protected  void setChatMessage(String msg, Color color){
+        Label lbl = new Label();
+        lbl.setText(msg);
+        lbl.setTextFill(color);
+        this.chatContent.getChildren().add(lbl);
+    }
+
+
+    /**
+     * Author Vanessa Cajochen
+     */
 
 
     protected void setTexts() {
@@ -424,48 +416,6 @@ public class GameView extends View<GameModel> {
         stage.hide();
     }
 
-
-
-    /**
-     * Author Michel Schlatter
-     * @param msg
-     * @param color
-     */
-    protected  void setChatMessage(String msg, Color color){
-        Label lbl = new Label();
-        lbl.setText(msg);
-        lbl.setTextFill(color);
-        this.chatContent.getChildren().add(lbl);
-    }
-
-
-    public TextField getTextFieldChat() {
-        return textFieldChat;
-    }
-
-    public Button getBtnChatSend() {
-        return btnChatSend;
-    }
-
-    public Button getBtnSendText() {
-        return btnSendText;
-    }
-
-    public GridPane getChatPane() {
-        return chatPane;
-    }
-
-    public HBox getHbChat() {
-        return hbChat;
-    }
-
-    public VBox getChatContent() {
-        return chatContent;
-    }
-
-    public TextField getTxtNameChat() {
-        return txtNameChat;
-    }
 
     /**
      * Author Vanessa Cajochen
@@ -569,7 +519,6 @@ public class GameView extends View<GameModel> {
             }
          }
 
-
          // The last played card from the handStack lies on the trashStack
          public void setBackCardOfTrashStack(Card card){
              imgVtrayStack = new CardImageView(card, CardImageView.CardSize.bigSize);
@@ -580,7 +529,6 @@ public class GameView extends View<GameModel> {
              gp.setConstraints(imgVtrayStack, 8, 15);
              gp.getChildren().add(imgVtrayStack);
          }
-
 
          // If the trashStack is empty, the trashStack shows the back of the card.
         public void setBackCardOfTrashStack(){
@@ -593,92 +541,39 @@ public class GameView extends View<GameModel> {
             gp.getChildren().add(imgVtrayStack);
         }
 
-/*
-    public void createOtherPlayerBox(PlayerSet set, HashMap<Integer, User> users){
-        int countEnemys = users.size()-1;
-        String userName = users.get(set.getUserId()).getUserName();
-        ArrayList<User> list = new ArrayList<User>(users.values());
-        Collections.sort(list);
-        int row = 4 + list.get()
-            Label lblenemy1 = new Label();
-            gp.setConstraints(lblenemy1, 1, 4);
-            lblenemy1.setText(userName);
-            gp.getChildren().add(lblenemy1);
-
-
-    }
-    */
-
-    public GridPane getGp() {
-        return gp;
-    }
 
     public BorderPane getRoot() {
         return root;
     }
 
-    public VBox getVBoxLogger() {
-        return VBoxLogger;
+
+    public TextField getTextFieldChat() {
+        return textFieldChat;
     }
 
-    public ScrollPane getScrollPaneLogger() {
-        return scrollPaneLogger;
+    public Button getBtnChatSend() {
+        return btnChatSend;
     }
 
-    public VBox getVBoxPointsandPlayer() {
-        return VBoxPointsandPlayer;
+    public Button getBtnSendText() {
+        return btnSendText;
     }
 
-    public VBox getLoggerContent() {
-        return loggerContent;
+    public GridPane getChatPane() {
+        return chatPane;
     }
 
-    public HandStackLayout getHs() {
-        return hs;
+    public HBox getHbChat() {
+        return hbChat;
     }
 
-    public HandStackLayout getCardPlayingArea() {
-        return cardPlayingArea;
+    public VBox getChatContent() {
+        return chatContent;
     }
 
-    public ArrayList<CardImageView> getHandStackList() {
-        return handStackList;
+    public TextField getTxtNameChat() {
+        return txtNameChat;
     }
 
-    public ArrayList<CardImageView> getCardPlayingAreaList() {
-        return cardPlayingAreaList;
-    }
-
-    public Button getBtnPlayMoneyCards() {
-        return btnPlayMoneyCards;
-    }
-
-    public Label getLblInfo() {
-        return lblInfo;
-    }
-
-    public Label getLblPullStack() {
-        return lblPullStack;
-    }
-
-    public Button getBtnEndTurn() {
-        return btnEndTurn;
-    }
-
-    public VBox getSetTop() {
-        return setTop;
-    }
-
-    public Text getEndOption() {
-        return endOptionRounds;
-    }
-
-    public Text getEndOptionRounds() {
-        return endOptionRounds;
-    }
-
-    public Text getEndOptionPoints() {
-        return endOptionPoints;
-    }
 
 }

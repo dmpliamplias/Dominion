@@ -133,6 +133,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     // after initalizing the gameview and after each complete turn the player makes, this methods gets called
     public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn) {
+        boolean firstCall = myCardSet == null;
+
         if (set.getUserId() == myUser.getId()) {
             this.myCardSet = set;
         } else {
@@ -143,9 +145,11 @@ public class GameController extends Controller<GameModel, GameView> {
             for (Card uc : unusedCards) {
                 if (uc.getName().equals("Anwesen")) {
                     boolean found = true;
+
                 }
             }
         }
+
 
         activeUserId = userIdHasTurn;
 
@@ -155,19 +159,19 @@ public class GameController extends Controller<GameModel, GameView> {
 
         Platform.runLater(() -> {
             if (userIdHasTurn == serverConnectionService.getClientId()) {
-                // TODO: 12.11.2017  this is your turn... enable btns etc.
+                // TODO: 01.12.2017: Migi gehört das hier hin?
+                // TODO: 01.12.2017: Migi: Es braucht eine Methode, welche allen Personen 5 Karten zuteilt, wenn das Spiel gestartet wird.
+                view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
+
                 // TODO: drawHAndCards ist just for testing
                 updateUnusedCards(unusedCards);
                 drawHandCards(5);
                 drawHandCards(3);
-
 
             } else {
-                // TODO: drawHAndCards ist just for testing
+                view.gp.getChildren().add(view.imgVGreyOutButton);
                 updateUnusedCards(unusedCards);
-                drawHandCards(5);
-                drawHandCards(3);
-                // TODO: 12.11.2017 this is not your turn.... disable btns etc.
+
             }
             // highlight the user who has the turn...
 
@@ -198,6 +202,7 @@ public class GameController extends Controller<GameModel, GameView> {
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 if (myUser.getId() == activeUserId) {
+                    // TODO: 01.12.2017: Migi überprüfen ob es hier sein muss.
                     view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
                 } else {
                     view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
@@ -225,7 +230,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 updatedSet = enemyCards.get(buyedInfo.getUserId());
             }
             unusedCards = gc.getUnusedCards();
-            updateUnusedCards(unusedCards); // TODO: 30.11.2017 MICHEL: WHY SO SLOW???
+            updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
             view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName() + ": "
@@ -271,7 +276,7 @@ public class GameController extends Controller<GameModel, GameView> {
             buyInfo.setCard(card);
             gc.setCardPlayedInfo(buyInfo);
 
-            myCardSet.getTrayStack().add(card);
+
             numberOfBuys--;
             numberOfMoney = numberOfMoney - card.getCost();
             updateActionBuyMoney();
@@ -567,6 +572,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
+        System.out.println(userId);
+        System.out.println(userName);
 
         this.view.setUserPoints(userId, userName, playerSet);
 
@@ -594,7 +601,8 @@ public class GameController extends Controller<GameModel, GameView> {
             view.gp.getChildren().remove(view.btnEndTurn);
             view.gp.getChildren().add(view.btnEndActionPhase);
             actionPhaseOver = false;
-
+            drawHandCards(5);
+            view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
     }
 
     // All cards from TrayStack move to PullStack and PullStack shuffles
