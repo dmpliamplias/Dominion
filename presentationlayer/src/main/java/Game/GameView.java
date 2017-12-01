@@ -411,9 +411,8 @@ public class GameView extends View<GameModel> {
 
     protected void setTextDialog(){
 
-        this.btnLobby.setText( getText("Lobby"));
-        this.btnRanking.setText( getText("Ranking"));
-
+        this.btnLobby.setText(getText("Lobby"));
+        this.btnRanking.setText(getText("Ranking"));
 
     }
 
@@ -637,6 +636,10 @@ public class GameView extends View<GameModel> {
 
     public Button getBtnLobby() {
         return btnLobby;
+    }
+
+    public Button getBtnRanking(){
+            return btnRanking;
     }
 
 

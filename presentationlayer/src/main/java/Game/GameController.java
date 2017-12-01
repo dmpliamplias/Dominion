@@ -18,6 +18,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
+import ranking.RankingController;
+import ranking.RankingModel;
+import ranking.RankingView;
 
 import java.io.IOException;
 import java.util.*;
@@ -61,6 +64,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
         initialize();
     }
+
+
 
 
     public void initialize() {
@@ -117,6 +122,14 @@ public class GameController extends Controller<GameModel, GameView> {
         } else {
             view.endOption.setText(view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds());
         }
+
+        view.getBtnLobby().setOnAction(event -> {
+            goToLobbyView();
+        });
+
+        view.getBtnRanking().setOnAction(event -> {
+            goToRankingView();
+        });
 
 
         view.getBtnChatSend().setOnAction(event -> {
@@ -641,6 +654,25 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         }
         return sets;
+    }
+
+    private void goToRankingView() {
+        Stage s = new Stage(  );
+        RankingModel model = new RankingModel();
+        RankingView view = new RankingView(s, model);
+        RankingController rankingController = new RankingController(model, view);
+        this.view.stop();
+        view.start();
+    }
+
+    private void goToLobbyView() {
+        LobbyModel model = new LobbyModel();
+        Stage s = new Stage(  );
+        LobbyView view = new LobbyView(s, model);
+        new LobbyController(view, model);
+
+        this.view.stop();
+        view.start();
     }
 
 
