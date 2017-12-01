@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import static com.weddingcrashers.service.Language.ENGLISH;
 import static com.weddingcrashers.service.Language.GERMAN;
@@ -47,52 +49,52 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
-                if(portStr == null || portStr.equals("")){
-                    this.view.alert(getText("connectionview.portEmpty"), Alert.AlertType.WARNING);
-                    return;
-                }
-                int port = Integer.parseInt(portStr);
-                // port must be between 1024-49151 and not 9092
-                if (port < 1024 || port > 49151 || port == 9092) {
-                    final Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle(getText("connectionview.portDialog.title"));
-                    alert.setHeaderText(getText("connectionview.portDialog.headerText"));
-                    alert.setContentText(getText("connectionview.portDialog.contentText"));
-                    alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
-                    alert.showAndWait();
-                    return;
-                }
-                InetSocketAddress socketAddress = createServer(port);
-                view.btnConnect.setDisable(true);
-                view.btnJoinS.setDisable(true);
-                view.btnStartS.setDisable(true);
+                    if (portStr == null || portStr.equals("")) {
+                        this.view.alert(getText("connectionview.portEmpty"), Alert.AlertType.WARNING);
+                        return;
+                    }
+                    //int port = Integer.parseInt(portStr);
+                    // port must be between 1024-49151 and not 9092
+                    if (!checkPortRange(portStr) || Integer.parseInt(portStr) == 9092 || Integer.parseInt(portStr) < 1024 || Integer.parseInt(portStr)> 49151) {
+                        final Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle(getText("connectionview.portDialog.title"));
+                        alert.setHeaderText(getText("connectionview.portDialog.headerText"));
+                        alert.setContentText(getText("connectionview.portDialog.contentText"));
+                        alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
+                        alert.showAndWait();
+                        return;
+                    }
+                    InetSocketAddress socketAddress = createServer(Integer.parseInt(portStr));
+                    view.btnConnect.setDisable(true);
+                    view.btnJoinS.setDisable(true);
+                    view.btnStartS.setDisable(true);
 
-                // TODO: 14.10.2017 mschlatter: When typing port out of range NPE and programm shuts down
-                String address = socketAddress.toString();
-                System.out.println("Socketadress: " + address);
+                    // TODO: 14.10.2017 mschlatter: When typing port out of range NPE and programm shuts down
+                    String address = socketAddress.toString();
+                    System.out.println("Socketadress: " + address);
 
-                try {
-                    model.setIP(InetAddress.getLocalHost().getHostAddress());
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                }
-                model.setPort(socketAddress.getPort());
+                    try {
+                        model.setIP(InetAddress.getLocalHost().getHostAddress());
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    }
+                    model.setPort(socketAddress.getPort());
 
-                view.createConnectedDialog().show();
-                view.refreshInfoDialog();
+                    view.createConnectedDialog().show();
+                    view.refreshInfoDialog();
 
-                view.btnCopyPort.setOnAction((event4)->{
-                    CopytoCbPort();
+                    view.btnCopyPort.setOnAction((event4) -> {
+                        CopytoCbPort();
+                    });
+
+                    view.btnCopyIP.setOnAction((event5) -> {
+                        CopytoCbIP();
+                    });
+
+                    view.btnOK.setOnAction((event3) -> {
+                        goToLoginView();
+                    });
                 });
-
-                view.btnCopyIP.setOnAction((event5)->{
-                    CopytoCbIP();
-                });
-
-                 view.btnOK.setOnAction((event3) -> {
-                    goToLoginView();
-                });
-            });
         });
 
 
@@ -161,12 +163,21 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         clipboard.setContents(stringS, stringS);
     }
 
-    public void CopytoCbIP (){
+    public void CopytoCbIP () {
         String str = model.getIP();
         StringSelection stringS = new StringSelection(str);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringS, stringS);
     }
+
+    private boolean checkPortRange(String port){
+        String regrex = "[1-9][0-9][0-9][0-9][0-9]?";
+        Pattern pattern = Pattern.compile(regrex);
+        Matcher matcher = pattern.matcher(port);
+
+        return (matcher.matches());
+    }
+
 
 
     
