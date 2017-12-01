@@ -8,6 +8,7 @@ public class CardPlayedInfo implements Serializable {
     int userId;
     Card card;
     int clientId;
+    int count;
 
     public int getUserId() {
         return userId;
@@ -29,5 +30,11 @@ public class CardPlayedInfo implements Serializable {
         return clientId;
     }
 
+    public int getCount() {
+        return count;
+    }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
