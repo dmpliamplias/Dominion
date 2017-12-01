@@ -22,29 +22,7 @@ public class PlayerSet implements Serializable {
         this.handStack = new ArrayList<Card>();
     }
 
-    // ziehen bis keine Karten mehr auf Ziehstapel, dann ablagestappel zurück und mischeln
-    public void pullHandStack(){
-        int toCount = handStack.size() - 5;
-
-        for(int i = toCount; i < 0; i++){
-            if(pullStack.size() > 0){
-                Card c = pullStack.get(0);
-                handStack.add(c);
-                pullStack.remove(c);
-            }else{
-              fillPullStack();
-              i--;
-            }
-        }
-    }
-
-    private void fillPullStack(){
-        for(Card c : trayStack){
-            pullStack.add(c);
-            trayStack.remove(c);
-        }
-        Collections.shuffle(pullStack);
-    }
+   
 
     public ArrayList<Card> getAllCardsFromSet(){
         ArrayList<Card> cards = new ArrayList<Card>();
