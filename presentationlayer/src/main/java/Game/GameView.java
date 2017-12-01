@@ -36,6 +36,7 @@ public class GameView extends View<GameModel> {
 
 
     protected TextField textFieldChat;
+    protected TextField textFieldNameLogger;
     protected Button btnChatSend;
     protected Button btnSendText;
     protected GridPane chatPane;
@@ -242,12 +243,14 @@ public class GameView extends View<GameModel> {
 
     public VBox loggerAndChat() {
 
-        this.VBoxLogger = new VBox(  );
+        this.VBoxLogger = new VBox(10);
         this.VBoxLogger.setPrefSize( 500, 150 );
         this.VBoxLogger.setAlignment( Pos.CENTER_LEFT );
         this.VBoxLogger.setPadding( new Insets( 0, 80, 0 , 0 ));
 
         this.loggerContent = new VBox(  );
+        this.textFieldNameLogger = new TextField(  );
+        this.textFieldNameLogger.setPrefWidth( 400 );
 
 
         this.scrollPaneLogger = new ScrollPane(  );
@@ -256,7 +259,7 @@ public class GameView extends View<GameModel> {
         this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
 
-        VBoxLogger.getChildren().addAll( scrollPaneLogger, addChatGridPane() );
+        VBoxLogger.getChildren().addAll( textFieldNameLogger, scrollPaneLogger, addChatGridPane() );
 
         return VBoxLogger;
 
@@ -319,6 +322,7 @@ public class GameView extends View<GameModel> {
 
         this.btnChatSend  = new Button();
         this.btnChatSend.setPrefSize(330, 50);
+        this.btnChatSend.getStyleClass().add("buttonChat");
 
         this.textFieldChat= new TextField();
         this.textFieldChat.setPromptText( "Enter Text" );
@@ -331,13 +335,13 @@ public class GameView extends View<GameModel> {
 
         this.btnSendText = new Button();
         this.btnSendText.setPrefSize(330, 50);
+        this.btnSendText.getStyleClass().add("buttonChat");
 
 
         // Create HBox +
         hbChat = new HBox(10);
         hbChat.setMaxSize( 700,200 );
         hbChat.setAlignment(Pos.CENTER);
-        hbChat.getChildren().add(textFieldChat);
         hbChat.getChildren().add(btnChatSend);
         hbChat.getChildren().add(btnSendText);
         ScrollPane scroll = new ScrollPane();
@@ -347,7 +351,8 @@ public class GameView extends View<GameModel> {
         scroll.vvalueProperty().bind( chatContent.heightProperty() );
         chatPane.add( txtNameChat,0,0 );
         chatPane.add(scroll,0,1);
-        chatPane.add(hbChat, 0, 2);
+        chatPane.add(hbChat, 0, 3);
+        chatPane.add( textFieldChat, 0, 2 );
 
         return chatPane;
     }
@@ -406,6 +411,7 @@ public class GameView extends View<GameModel> {
         this.txtNameChat.setText( getText( "chat.chat" ) );
         this.endOptionRounds.setText( getText( "gameview.endOptionRound" ) );
         this.endOptionPoints.setText( getText( "gameview.endOptionPoint" ) );
+        this.textFieldNameLogger.setText( getText( "gameview.logger" ) );
     }
 
     public void start() {

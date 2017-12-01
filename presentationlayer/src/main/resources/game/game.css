@@ -32,7 +32,7 @@
 }
 
 
-.button{
+.buttonChat{
 
     -fx-background-color:
             #090a0c,
@@ -55,7 +55,7 @@
 
 }
 
-.button:hover{
+.buttonChat:hover{
 
     -fx-background-color: white;
     -fx-text-fill: black;
