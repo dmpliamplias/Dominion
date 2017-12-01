@@ -198,9 +198,9 @@ public class GameController extends Controller<GameModel, GameView> {
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 if (myUser.getId() == activeUserId) {
-                    // TODO: 25.11.2017 Vane enable this user, it's his turn now...
+                    view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
                 } else {
-                    // TODO: 25.11.2017 Vane disable this user, it's not his turn now...
+                    view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
                 }
             }
         });
@@ -514,7 +514,7 @@ public class GameController extends Controller<GameModel, GameView> {
             CardImageView imgForToolTip = new CardImageView(myCardSet.getPullStack().get(0), CardImageView.CardSize.tooltip);
             tooltip.setGraphic(imgForToolTip);
             Tooltip.install(cardImg, tooltip);
-            
+
             setCardImageViewAction(cardImg);
             view.addCardToHandStackPane(cardImg);
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));

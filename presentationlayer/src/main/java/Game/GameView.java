@@ -63,6 +63,9 @@ public class GameView extends View<GameModel> {
     protected Button btnPlayMoneyCards;
     protected Button btnEndTurn;
     protected Button btnEndActionPhase;
+    ImageView imgVGreyOutButton;
+    ImageView imgVGreyOutHandStack;
+
 
     ImageView imgVtrayStack;
 
@@ -103,7 +106,7 @@ public class GameView extends View<GameModel> {
         gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6, column7, column8, column9);
 
 
-        // Creating 30 rows
+        // Creating 20 rows
         for (int i = 0; i < 20; i++) {
             RowConstraints row = new RowConstraints(30);
             gp.getRowConstraints().add(row);
@@ -137,14 +140,8 @@ public class GameView extends View<GameModel> {
         gp.setRowSpan(cardPlayingArea, 4);
 
 
-        // -------------------------------------------------------------------------------------------
-        // -------------------------------------------------------------------------------------------
 
-        // TEST
-
-
-
-
+        // Creates 3 buttons. But only 1 will be shown at the same time
         btnEndActionPhase = new Button("Aktionsrunde beenden");
         setStyleOfButtons(btnEndActionPhase);
 
@@ -155,6 +152,39 @@ public class GameView extends View<GameModel> {
         setStyleOfButtons(btnEndTurn);
 
         gp.getChildren().add(btnEndActionPhase);
+
+
+
+        // Images for greyOut. If it is not the users'turn, the handcards and button are grayed out.
+
+        Image imgGreyOut = new Image(getClass().getResourceAsStream("grey.png"));
+
+        imgVGreyOutHandStack = new ImageView(imgGreyOut);
+        imgVGreyOutHandStack.setFitHeight(120);
+        imgVGreyOutHandStack.setFitWidth(540);
+        gp.setRowSpan(imgVGreyOutHandStack, 6);
+        gp.setColumnSpan(imgVGreyOutHandStack, 4);
+        gp.setValignment(imgVGreyOutHandStack, VPos.TOP);
+        imgVGreyOutHandStack.setOpacity(0.5);
+
+        imgVGreyOutButton = new ImageView(imgGreyOut);
+        imgVGreyOutButton.setFitHeight(30);
+        imgVGreyOutButton.setFitWidth(100);
+        gp.setColumnSpan(imgVGreyOutButton, 2);
+        gp.setValignment(imgVGreyOutButton, VPos.TOP);
+        imgVGreyOutButton.setOpacity(0.5);
+
+        gp.setConstraints(imgVGreyOutHandStack, 2, 15);
+        gp.setConstraints(imgVGreyOutButton, 5, 13);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,6 +212,7 @@ public class GameView extends View<GameModel> {
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setTitle("Dominion");
+
 
         setTexts();
         this.stage.setResizable(true);
