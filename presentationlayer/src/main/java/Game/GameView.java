@@ -24,12 +24,14 @@ import javafx.stage.Stage;
 import javafx.geometry.HPos;
 import javafx.scene.text.Text;
 import util.PLServiceLocator;
+
 import login.*;
 
 import java.util.ArrayList;
 
 import static com.weddingcrashers.model.Settings_.user;
 import static com.weddingcrashers.model.User_.userName;
+import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.GAME;
 
 
@@ -46,6 +48,7 @@ public class GameView extends View<GameModel> {
     protected HBox hbChat;
     protected VBox chatContent;
     protected TextField txtNameChat;
+    protected Stage stageDialog;
     protected GridPane gp;
     protected BorderPane root;
     protected VBox VBoxLogger;
@@ -391,6 +394,29 @@ public class GameView extends View<GameModel> {
 
    }
 
+   public Stage startWinnerStage(){
+
+        BorderPane root = new BorderPane();
+        this.stageDialog = new Stage();
+        stageDialog.initOwner(stage);
+        stageDialog.initModality(WINDOW_MODAL);
+        Scene scene =new Scene(root,400,300);
+        this.stageDialog.setScene(scene);
+        root.setCenter(VBoxDisplayWinner);
+        setTextDialog();
+
+        return stageDialog;
+
+   }
+
+    protected void setTextDialog(){
+
+        this.btnLobby.setText( getText("Lobby"));
+        this.btnRanking.setText( getText("Ranking"));
+
+
+    }
+
     public VBox displayWinner(int userId, String userName, PlayerSet set){
 
         String elementId="UserPoints_ " + userId;
@@ -402,7 +428,7 @@ public class GameView extends View<GameModel> {
         // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
         this.VBoxDisplayWinner=new VBox();
         Label lblWinnerDisplay=new Label();
-   
+
 
         VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay,btnLobby,btnRanking);
 
@@ -591,6 +617,8 @@ public class GameView extends View<GameModel> {
         return btnSendText;
     }
 
+
+
     public GridPane getChatPane() {
         return chatPane;
     }
@@ -605,6 +633,10 @@ public class GameView extends View<GameModel> {
 
     public TextField getTxtNameChat() {
         return txtNameChat;
+    }
+
+    public Button getBtnLobby() {
+        return btnLobby;
     }
 
 

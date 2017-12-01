@@ -524,6 +524,7 @@ public class LobbyView extends View<LobbyModel> {
         return btnTestGameView;
     }
 
+
     public ObservableList<String> getObservablePlayerList() {
         return observablePlayerList;
     }

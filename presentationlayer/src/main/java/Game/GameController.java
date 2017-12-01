@@ -6,6 +6,10 @@ import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import javafx.scene.control.Tooltip;
+import javafx.stage.Stage;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
 import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
@@ -101,6 +105,9 @@ public class GameController extends Controller<GameModel, GameView> {
         });
 
 
+
+
+
         /**
          *  author Manuel Wirz
          *  */
@@ -115,6 +122,7 @@ public class GameController extends Controller<GameModel, GameView> {
         view.getBtnChatSend().setOnAction(event -> {
             sendMessage();
         });
+
 
         view.getBtnSendText().setOnAction(event -> {
             sendButtonText();
@@ -134,7 +142,7 @@ public class GameController extends Controller<GameModel, GameView> {
     public void handleServerAnswer_receiveInitalPlayerSet(ArrayList<PlayerSet> sets, ArrayList<Card> unusedCards, int userIdHasTurn) {
         boolean firstCall = myCardSet == null;
 
-        for(PlayerSet set : sets) {
+        for (PlayerSet set : sets) {
             if (set.getUserId() == myUser.getId()) {
                 this.myCardSet = set;
             } else {
@@ -164,9 +172,9 @@ public class GameController extends Controller<GameModel, GameView> {
             updateUnusedCards(unusedCards);
             enableOrDisableView();
 
-            for(PlayerSet playerSet : getAllSets()){
+            for (PlayerSet playerSet : getAllSets()) {
                 System.out.println("Drawing the calculated points on client: " + myUser.getUserName() + " playersetsize: " + getAllSets().size());
-                if(playerSet != null) {
+                if (playerSet != null) {
                     setPointsToView(playerSet);
                 }
             }
@@ -197,9 +205,9 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     //Author Murat Kelleci
-    public void handleServerAnswer_updateRound(int round){
-        Platform.runLater(() ->{
-            view.labelShowRound.setText( String.valueOf( round ) );
+    public void handleServerAnswer_updateRound(int round) {
+        Platform.runLater(() -> {
+            view.labelShowRound.setText(String.valueOf(round));
         });
     }
 
@@ -207,10 +215,10 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
             PlayerSet updatedSet;
-            if(buyedInfo.getUserId() == myUser.getId()){
+            if (buyedInfo.getUserId() == myUser.getId()) {
                 myCardSet.getTrayStack().add(buyedInfo.getCard());
                 updatedSet = myCardSet;
-            }else{
+            } else {
                 enemyCards.get(buyedInfo.getUserId()).getTrayStack().add(buyedInfo.getCard());
                 updatedSet = enemyCards.get(buyedInfo.getUserId());
             }
@@ -219,7 +227,7 @@ public class GameController extends Controller<GameModel, GameView> {
             setPointsToView(updatedSet);
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
             view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName() + ": "
-                    + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId( buyedInfo.getClientId()));
+                    + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId(buyedInfo.getClientId()));
         });
     }
 
@@ -291,9 +299,9 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String( user + "/n " + card );
+            String logger = new String(user + "/n " + card);
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
-            view.setLoggerContent(card.getName(), ViewUtils.getColorByClientId( cardPlayedInfo.getClientId() ) );
+            view.setLoggerContent(card.getName(), ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 
@@ -378,54 +386,51 @@ public class GameController extends Controller<GameModel, GameView> {
             }
 
 
+        } else if (c instanceof KingCard) {
+            if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
+                if (c.getName().equals("Garten")) {
 
-        }else if (c instanceof KingCard) {
-                if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
-                    if (c.getName().equals("Garten")) {
-
-                    } else if (c.getName().equals("Geldverleiher")) {
-                        for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
-                            if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
-                                myCardSet.getHandStack().remove(i);
-                                view.trashCopper();
-                                numberOfMoney = numberOfMoney + 3;
-                                view.moveCardToPlayingArea(imgv);
-                                numberOfActions -= 1;
-                                updateActionBuyMoney();
-                                break;
-                            }
+                } else if (c.getName().equals("Geldverleiher")) {
+                    for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
+                        if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
+                            myCardSet.getHandStack().remove(i);
+                            view.trashCopper();
+                            numberOfMoney = numberOfMoney + 3;
+                            view.moveCardToPlayingArea(imgv);
+                            numberOfActions -= 1;
+                            updateActionBuyMoney();
+                            break;
                         }
-
-                    } else {
-                        numberOfActions += ((KingCard) c).getActions();
-                        numberOfBuys += ((KingCard) c).getBuys();
-                        numberOfMoney += c.getValue();
-
-                        if (((KingCard) c).getCards() > 0) {
-                            drawHandCards(((KingCard) c).getCards());
-                        }
-                        view.moveCardToPlayingArea(imgv);
-                        numberOfActions -= 1;
-                        updateActionBuyMoney();
                     }
+
+                } else {
+                    numberOfActions += ((KingCard) c).getActions();
+                    numberOfBuys += ((KingCard) c).getBuys();
+                    numberOfMoney += c.getValue();
+
+                    if (((KingCard) c).getCards() > 0) {
+                        drawHandCards(((KingCard) c).getCards());
+                    }
+                    view.moveCardToPlayingArea(imgv);
+                    numberOfActions -= 1;
+                    updateActionBuyMoney();
                 }
+            }
         }
     }
 
 
-
     // Author Murat Kelleci 20.11.17 -
-    private User getUser(){
+    private User getUser() {
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
 
 
-
     /**
-     *  author Vanessa Cajochen
-     *  */
+     * author Vanessa Cajochen
+     */
 
-    private void enableOrDisableView(){
+    private void enableOrDisableView() {
         // TODO: 01.12.2017  Vanessa, das ganze muss in die view...du musst vom controller nur aufrufen können
         // view.disableView(), view.enableView()
         if (myUser.getId() == activeUserId) {
@@ -436,9 +441,8 @@ public class GameController extends Controller<GameModel, GameView> {
         // highlight user who has the turn, fuckers! log it or show on murats left pane...
     }
 
-    public void updateUnusedCards(ArrayList<Card> unusedCards)
-    {
-        if(unusedCards == null || unusedCards.size() == 0){
+    public void updateUnusedCards(ArrayList<Card> unusedCards) {
+        if (unusedCards == null || unusedCards.size() == 0) {
             return;
         }
 
@@ -461,20 +465,20 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         ArrayList<int[]> indexes = new ArrayList<int[]>();
-        indexes.add(new int[]{2,1,2});
-        indexes.add(new int[]{2,3,2});
-        indexes.add(new int[]{2,5,2});
-        indexes.add(new int[]{7,1,2});
-        indexes.add(new int[]{7,5,2});
-        indexes.add(new int[]{7,3,2});
-        indexes.add(new int[]{3,4,3});
-        indexes.add(new int[]{5,4,3});
-        indexes.add(new int[]{6,4,3});
-        indexes.add(new int[]{4,4,3});
-        indexes.add(new int[]{5,1,3});
-        indexes.add(new int[]{4,1,3});
-        indexes.add(new int[]{3,1,3});
-        indexes.add(new int[]{6,1,3});
+        indexes.add(new int[]{2, 1, 2});
+        indexes.add(new int[]{2, 3, 2});
+        indexes.add(new int[]{2, 5, 2});
+        indexes.add(new int[]{7, 1, 2});
+        indexes.add(new int[]{7, 5, 2});
+        indexes.add(new int[]{7, 3, 2});
+        indexes.add(new int[]{3, 4, 3});
+        indexes.add(new int[]{5, 4, 3});
+        indexes.add(new int[]{6, 4, 3});
+        indexes.add(new int[]{4, 4, 3});
+        indexes.add(new int[]{5, 1, 3});
+        indexes.add(new int[]{4, 1, 3});
+        indexes.add(new int[]{3, 1, 3});
+        indexes.add(new int[]{6, 1, 3});
 
         ArrayList<CardImageView.CardSize> sizes = new ArrayList<CardImageView.CardSize>();
         sizes.add(CardImageView.CardSize.miniMini);
@@ -493,11 +497,11 @@ public class GameController extends Controller<GameModel, GameView> {
         sizes.add(CardImageView.CardSize.miniSize);
 
 
-        for(int idx =0; idx < cardNames.size(); idx++){
+        for (int idx = 0; idx < cardNames.size(); idx++) {
             String cardName = cardNames.get(idx);
             int[] pos = indexes.get(idx);
             CardImageView imgView = view.setCardImageView(getCard(unusedCards, cardName), sizes.get(idx), pos[0], pos[1], pos[2],
-                   countCards(unusedCards, cardName));
+                    countCards(unusedCards, cardName));
             setCardImageViewAction(imgView);
         }
         long tEnd = System.currentTimeMillis();
@@ -509,8 +513,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public int countCards(ArrayList<Card> list, String s) {
         int count = 0;
-        for (int i = 0; i < (list.size());i++ ){
-            if (list.get(i).getName().equals(s)){
+        for (int i = 0; i < (list.size()); i++) {
+            if (list.get(i).getName().equals(s)) {
                 count++;
             }
         }
@@ -519,7 +523,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public Card getCard(ArrayList<Card> list, String name) {
         Card c = null;
-        for (int i = 0; i < (list.size());i++ ) {
+        for (int i = 0; i < (list.size()); i++) {
             if (list.get(i).getName().equals(name)) {
                 c = list.get(i);
                 break;
@@ -527,8 +531,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         return c;
     }
-
-
 
 
     public void drawHandCards(int numberOfDrawnCards) {
@@ -554,7 +556,9 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    public void resetActionBuyMoney(){
+
+
+    public void resetActionBuyMoney() {
         numberOfActions = 1;
         numberOfBuys = 1;
         numberOfMoney = 0;
@@ -564,7 +568,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     //Author Murat Kelleci
 
-    public void setPointsToView(PlayerSet playerSet){
+    public void setPointsToView(PlayerSet playerSet) {
 
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
@@ -575,36 +579,38 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
+
+
     /*
     Author Vanessa Cajochen
      */
 
-    public void updateActionBuyMoney(){
+    public void updateActionBuyMoney() {
         view.updatelblInfo(numberOfActions, numberOfBuys, numberOfMoney);
     }
 
 
     // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack.
-    public void endOfTurn(){
-        view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size()-1)));
-        for (int i = (myCardSet.getHandStack().size()-1); i >= 0; i--) {
+    public void endOfTurn() {
+        view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size() - 1)));
+        for (int i = (myCardSet.getHandStack().size() - 1); i >= 0; i--) {
             myCardSet.getTrayStack().add(myCardSet.getHandStack().get(i));
             myCardSet.getHandStack().remove(i);
         }
-            view.endOfTurn();
-            resetActionBuyMoney();
-            moveFinished();
-            view.gp.getChildren().remove(view.btnEndTurn);
-            view.gp.getChildren().add(view.btnEndActionPhase);
-            actionPhaseOver = false;
-            drawHandCards(5);
+        view.endOfTurn();
+        resetActionBuyMoney();
+        moveFinished();
+        view.gp.getChildren().remove(view.btnEndTurn);
+        view.gp.getChildren().add(view.btnEndActionPhase);
+        actionPhaseOver = false;
+        drawHandCards(5);
     }
 
     // All cards from TrayStack move to PullStack and PullStack shuffles
-    public void movesCardsFromTrayStackToPullStack(){
+    public void movesCardsFromTrayStackToPullStack() {
         view.setBackCardOfTrashStack();
 
-        for (int i = (myCardSet.getTrayStack().size()-1); i >= 0; i--) {
+        for (int i = (myCardSet.getTrayStack().size() - 1); i >= 0; i--) {
             myCardSet.getPullStack().add(myCardSet.getTrayStack().get(i));
             myCardSet.getTrayStack().remove(i);
         }
@@ -613,21 +619,23 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    public void updateLblPullStack(){
+    public void updateLblPullStack() {
         view.updateLblPullStack(myCardSet.getPullStack().size());
     }
 
 
-    protected  ArrayList<PlayerSet> getAllSets(){
+
+
+    protected ArrayList<PlayerSet> getAllSets() {
         ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
         sets.add(myCardSet);
         Iterator iter = users.entrySet().iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
             User user = pair.getValue();
-            if(user.getId() != myUser.getId()){
-                PlayerSet set = enemyCards.get((int)user.getId());
-                if(set !=null){
+            if (user.getId() != myUser.getId()) {
+                PlayerSet set = enemyCards.get((int) user.getId());
+                if (set != null) {
                     sets.add(set);
                 }
             }
@@ -636,5 +644,5 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
+}
 
-    }
