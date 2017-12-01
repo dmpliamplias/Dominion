@@ -108,10 +108,9 @@ public class ServerConnectionService extends Thread{
         }else if(c.getMethod() == Methods.Lobby_Players && lobbyController != null){
             lobbyController.handleServerAnswer_newPlayer((LobbyContainer) c);
         }
-        else if((c.getMethod() == Methods.SpreadCards || c.getMethod() == Methods.TurnFinished)
-                && gameController != null){
+        else if(c.getMethod() == Methods.SpreadCards && gameController != null){
             GameContainer gc = (GameContainer)c;
-           gameController.handleServerAnswer_receivePlayerSet(gc.getDominionSet(), gc.getUnusedCards(), gc.getUserIdHasTurn());
+           gameController.handleServerAnswer_receiveInitalPlayerSet(gc.getDominionSet(), gc.getUnusedCards(), gc.getUserIdHasTurn());
         }
         else if(c.getMethod() == Methods.CardPlayed && gameController != null){
             GameContainer gc = (GameContainer)c;

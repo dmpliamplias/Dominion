@@ -132,7 +132,7 @@ public class GameController extends Controller<GameModel, GameView> {
     /* ------------------------- receiving smth from Server ----------------------*/
 
     // after initalizing the gameview and after each complete turn the player makes, this methods gets called
-    public void handleServerAnswer_receivePlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn) {
+    public void handleServerAnswer_receiveInitalPlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn) {
         boolean firstCall = myCardSet == null;
 
         if (set.getUserId() == myUser.getId()) {
@@ -142,38 +142,23 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         if (unusedCards != null && unusedCards.size() > 0) {
             this.unusedCards = unusedCards;
-            for (Card uc : unusedCards) {
-                if (uc.getName().equals("Anwesen")) {
-                    boolean found = true;
-
-                }
-            }
         }
 
-
         activeUserId = userIdHasTurn;
+
 
         /**
          *  author Manuel Wirz
          *  */
 
         Platform.runLater(() -> {
-            if (userIdHasTurn == serverConnectionService.getClientId()) {
-                // TODO: 01.12.2017: Migi gehört das hier hin?
-                // TODO: 01.12.2017: Migi: Es braucht eine Methode, welche allen Personen 5 Karten zuteilt, wenn das Spiel gestartet wird.
-                view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
-
+            if (userIdHasTurn == myUser.getId()) {
                 // TODO: drawHAndCards ist just for testing
-                updateUnusedCards(unusedCards);
                 drawHandCards(5);
                 drawHandCards(3);
-
-            } else {
-                view.gp.getChildren().add(view.imgVGreyOutButton);
-                updateUnusedCards(unusedCards);
-
             }
-            // highlight the user who has the turn...
+            updateUnusedCards(unusedCards);
+            enableOrDisableView();
 
             for(PlayerSet playerSet : getAllSets()){
                 if(playerSet != null) {
@@ -189,7 +174,7 @@ public class GameController extends Controller<GameModel, GameView> {
     // a player finished his turn...
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
         Platform.runLater(() -> {
-            if (gc.getWinningInformations() != null & gc.getWinningInformations().size() > 0) {
+            if (gc.getWinningInformations() != null && gc.getWinningInformations().size() > 0) {
                 // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
                 // hier hast du die Informationen über den Rang der Spieler usw:
                 for (WinningInformation wi : gc.getWinningInformations()) {
@@ -201,12 +186,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 }
             } else {
                 activeUserId = gc.getUserIdHasTurn();
-                if (myUser.getId() == activeUserId) {
-                    // TODO: 01.12.2017: Migi überprüfen ob es hier sein muss.
-                    view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
-                } else {
-                    view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
-                }
+                enableOrDisableView();
             }
         });
     }
@@ -444,9 +424,23 @@ public class GameController extends Controller<GameModel, GameView> {
      *  author Vanessa Cajochen
      *  */
 
+    private void enableOrDisableView(){
+        // TODO: 01.12.2017  Vanessa, das ganze muss in die view...du musst vom controller nur aufrufen können
+        // view.disableView(), view.enableView()
+        if (myUser.getId() == activeUserId) {
+            view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
+        } else {
+            view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
+        }
+        // highlight user who has the turn, fuckers! log it or show on murats left pane...
+    }
 
     public void updateUnusedCards(ArrayList<Card> unusedCards)
     {
+        if(unusedCards == null || unusedCards.size() == 0){
+            return;
+        }
+
         long tStart = System.currentTimeMillis();
         ArrayList<String> cardNames = new ArrayList<String>();
         cardNames.add("Kupfer");
@@ -602,7 +596,6 @@ public class GameController extends Controller<GameModel, GameView> {
             view.gp.getChildren().add(view.btnEndActionPhase);
             actionPhaseOver = false;
             drawHandCards(5);
-            view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
     }
 
     // All cards from TrayStack move to PullStack and PullStack shuffles

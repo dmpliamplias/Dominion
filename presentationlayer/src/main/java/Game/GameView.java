@@ -92,6 +92,7 @@ public class GameView extends View<GameModel> {
 
         gp.setGridLinesVisible(false);
 
+        labelShowRound = new Label();
 
         // Creating 9 columns with different width
         ColumnConstraints column = new ColumnConstraints(15);
