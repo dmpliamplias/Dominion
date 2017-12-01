@@ -71,7 +71,8 @@ public class ServerConnectionService extends Thread{
 
     private <T extends  Container> T receiveObject() throws  IOException, ClassNotFoundException{
         ObjectInputStream objectInputStream = new ObjectInputStream(connection.getInputStream());
-        return (T)objectInputStream.readObject();
+        T obj = (T)objectInputStream.readObject();
+        return obj;
     }
 
     public void updateViewStatus(ViewStatus status) throws IOException{
@@ -110,7 +111,7 @@ public class ServerConnectionService extends Thread{
         }
         else if(c.getMethod() == Methods.SpreadCards && gameController != null){
             GameContainer gc = (GameContainer)c;
-           gameController.handleServerAnswer_receiveInitalPlayerSet(gc.getDominionSet(), gc.getUnusedCards(), gc.getUserIdHasTurn());
+           gameController.handleServerAnswer_receiveInitalPlayerSet(gc.getPlayerSets(), gc.getUnusedCards(), gc.getUserIdHasTurn());
         }
         else if(c.getMethod() == Methods.CardPlayed && gameController != null){
             GameContainer gc = (GameContainer)c;

@@ -94,6 +94,7 @@ public class GameManager extends Manager {
 
     public void sendInitalCardSet(){
          PlayerSet set = new PlayerSet((int) client.getUser().getId());
+         System.out.println("got an inital card set from" + client.getUser().getUserName());
          ArrayList<Card> pullStack = new ArrayList<Card>();
 
          for(int i = 0; i < 7; i++){
@@ -105,26 +106,39 @@ public class GameManager extends Manager {
          set.setPullStack(pullStack);
         Collections.shuffle(pullStack);
 
-         this.client.setDominionSet(set);
+        this.client.setDominionSet(set);
+        int lowestClientId = getNextTurnClientId(true);
+        ArrayList<PlayerSet> sets = getExistingPlayerSets();
+        sets.add(set);
+        System.out.println("got existings sets of size: " + sets.size());
 
-         GameContainer gc = new GameContainer(Methods.SpreadCards);
-
-         int lowestClientId = getNextTurnClientId(true);
-         gc.setUserIdHasTurn((int)users.get(lowestClientId).getId());
-         gc.setDominionSet(set);
 
         for(Client c : this.client.getAllClients()){
+            GameContainer gc = new GameContainer(Methods.SpreadCards);
+            gc.setUserIdHasTurn((int)users.get(lowestClientId).getId());
+            gc.setPlayerSets(sets);
+
             if(c.getUser().getId() == this.client.getUser().getId()){
                 gc.setUnusedCards(unusedCards); // send cards only one time
             }else{
                 gc.setUnusedCards(null);
             }
             ServerUtils.sendObject(c, gc);
+            System.out.println("I send the inital cardset from " + client.getUser().getUserName() + " to " + c.getUser().getUserName());
         }
     }
 
     // privates
 
+    private ArrayList<PlayerSet> getExistingPlayerSets(){
+        ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
+        for(Client c : client.getOtherClients()){
+            if(c.getDominionSet() != null) {
+                sets.add(c.getDominionSet());
+            }
+        }
+        return sets;
+    }
     private void updateRound(){
         GameContainer gc = new GameContainer(Methods.UpdateRound);
         gc.setRound(round);

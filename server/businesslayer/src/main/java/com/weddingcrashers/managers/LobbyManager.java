@@ -76,7 +76,9 @@ public class LobbyManager extends Manager{
         HashMap<Integer, User> users = new HashMap<Integer, User>();
 
         for(Client client : c.getAllClients()){
-            users.put(client.getClientId(), client.getUser());
+            if(client.getUser() != null) {
+                users.put(client.getClientId(), client.getUser());
+            }
         }
 
         LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);

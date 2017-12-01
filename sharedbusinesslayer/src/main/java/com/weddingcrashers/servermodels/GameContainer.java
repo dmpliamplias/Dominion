@@ -12,6 +12,7 @@ public class GameContainer extends Container implements Serializable {
     ArrayList<Card> unusedCards; // Karten die noch kaufbar sind => wenn nichts geändert hat => null!
     CardPlayedInfo cardPlayedInfo;
     ArrayList<WinningInformation> winningInformations;
+    ArrayList<PlayerSet> playerSets;
     int round;
 
     public PlayerSet getDominionSet() {
@@ -69,5 +70,13 @@ public class GameContainer extends Container implements Serializable {
 
     public void setWinningInformation(ArrayList<WinningInformation> winningInformations) {
         this.winningInformations = winningInformations;
+    }
+
+    public ArrayList<PlayerSet> getPlayerSets() {
+        return playerSets;
+    }
+
+    public void setPlayerSets(ArrayList<PlayerSet> playerSets) {
+        this.playerSets = playerSets;
     }
 }

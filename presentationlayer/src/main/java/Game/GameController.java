@@ -131,19 +131,23 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /* ------------------------- receiving smth from Server ----------------------*/
 
-    // after initalizing the gameview and after each complete turn the player makes, this methods gets called
-    public void handleServerAnswer_receiveInitalPlayerSet(PlayerSet set, ArrayList<Card> unusedCards, int userIdHasTurn) {
+    public void handleServerAnswer_receiveInitalPlayerSet(ArrayList<PlayerSet> sets, ArrayList<Card> unusedCards, int userIdHasTurn) {
         boolean firstCall = myCardSet == null;
 
-        if (set.getUserId() == myUser.getId()) {
-            this.myCardSet = set;
-        } else {
-            this.enemyCards.put(set.getUserId(), set);
+        for(PlayerSet set : sets) {
+            if (set.getUserId() == myUser.getId()) {
+                this.myCardSet = set;
+            } else {
+                if (enemyCards == null) {
+                    enemyCards = new HashMap<Integer, PlayerSet>();
+                }
+                this.enemyCards.put(set.getUserId(), set);
+                System.out.println("got an enemycard from => userid: " + users.get(set.getUserId()).getUserName());
+            }
+            if (unusedCards != null && unusedCards.size() > 0) {
+                this.unusedCards = unusedCards;
+            }
         }
-        if (unusedCards != null && unusedCards.size() > 0) {
-            this.unusedCards = unusedCards;
-        }
-
         activeUserId = userIdHasTurn;
 
 
@@ -161,6 +165,7 @@ public class GameController extends Controller<GameModel, GameView> {
             enableOrDisableView();
 
             for(PlayerSet playerSet : getAllSets()){
+                System.out.println("Drawing the calculated points on client: " + myUser.getUserName() + " playersetsize: " + getAllSets().size());
                 if(playerSet != null) {
                     setPointsToView(playerSet);
                 }
@@ -226,10 +231,6 @@ public class GameController extends Controller<GameModel, GameView> {
         });
 
     }
-
-
-
-
 
 
     /*----------------Send to smth. to Server ------------- */
@@ -531,7 +532,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     public void drawHandCards(int numberOfDrawnCards) {
-        for (int i = 0; i < numberOfDrawnCards; i++) {
+        // TODO: 01.12.2017 vane has an error
+       /* for (int i = 0; i < numberOfDrawnCards; i++) {
             if (myCardSet.getPullStack().size() == 0){
                 movesCardsFromTrayStackToPullStack();
             }
@@ -548,7 +550,7 @@ public class GameController extends Controller<GameModel, GameView> {
             updateLblPullStack();
 
 
-        }
+        }*/
     }
 
 
@@ -624,7 +626,10 @@ public class GameController extends Controller<GameModel, GameView> {
             Map.Entry<Integer, User> pair = (Map.Entry<Integer, User>) iter.next();
             User user = pair.getValue();
             if(user.getId() != myUser.getId()){
-                sets.add(enemyCards.get((user.getId())));
+                PlayerSet set = enemyCards.get((int)user.getId());
+                if(set !=null){
+                    sets.add(set);
+                }
             }
         }
         return sets;
