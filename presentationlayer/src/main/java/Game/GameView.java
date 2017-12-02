@@ -626,6 +626,16 @@ public class GameView extends View<GameModel> {
             gp.getChildren().add(imgVtrayStack);
         }
 
+        public void disableView(){
+            gp.getChildren().removeAll(imgVGreyOutHandStack, imgVGreyOutButton);
+        }
+
+        public void enableView(){
+            gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
+        }
+
+
+
 
     public BorderPane getRoot() {
         return root;

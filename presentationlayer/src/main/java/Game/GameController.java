@@ -441,15 +441,14 @@ public class GameController extends Controller<GameModel, GameView> {
      */
 
     private void enableOrDisableView() {
-        // TODO: 01.12.2017  Vanessa, das ganze muss in die view...du musst vom controller nur aufrufen können
-        // view.disableView(), view.enableView()
         if (myUser.getId() == activeUserId) {
-            view.gp.getChildren().removeAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
+            view.disableView();
         } else {
-            view.gp.getChildren().addAll(view.imgVGreyOutButton, view.imgVGreyOutHandStack);
+            view.enableView();
         }
-        // highlight user who has the turn, fuckers! log it or show on murats left pane...
+        // TODO: 02.12.2017 Vanessa highlight user who has the turn, fuckers! log it or show on murats left pane...
     }
+
 
     public void updateUnusedCards(ArrayList<Card> unusedCards) {
         if (unusedCards == null || unusedCards.size() == 0) {
