@@ -6,6 +6,7 @@ import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.servermodels.WinningInformation;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
@@ -28,6 +29,7 @@ import util.PLServiceLocator;
 import login.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.weddingcrashers.model.Settings_.user;
 import static com.weddingcrashers.model.User_.userName;
@@ -423,9 +425,17 @@ public class GameView extends View<GameModel> {
 
     }
 
-    public VBox displayWinner(int userId, String userName, PlayerSet set){
 
-        String elementId="UserPoints_ " + userId;
+    public VBox displayWinner(List WinningInformation, String users){
+
+        List <WinningInformation> list;
+
+        // for (WinningInformation wi : lists.getWinningInformations()) {
+        //    int position = wi.getPosition();
+        //     User user = users.get(wi.getUserId());
+        //    int points = wi.getPoints();
+        //  }
+
 
         this.btnLobby = new Button();
         this.btnLobby.setPrefSize(180, 80);
@@ -439,7 +449,6 @@ public class GameView extends View<GameModel> {
         VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay,btnLobby,btnRanking);
 
         return VBoxDisplayWinner;
-
 
     }
 
