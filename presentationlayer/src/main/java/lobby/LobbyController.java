@@ -69,6 +69,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.gethBoxOption2().setVisible( false );
             view.setWaitText();
             view.setTexts();
+            view.getLvPlayers().setMouseTransparent( true );
+            view.getLvPlayers().setFocusTraversable( false );
 
 
         }
@@ -189,15 +191,21 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         ObservableList<String> players = view.lvPlayers.getItems();
 
-        if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
+
+
+        if(!view.lvPlayers.getSelectionModel().isSelected( 0 )){
+            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
+        } else if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
+
         }
         if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
 
-        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().isEmpty()) {
+
+        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <= 1) {
             view.startStage().show();
 
             view.btnDialogNo.setOnAction( event -> {
@@ -217,11 +225,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
 
+
     public void sendStartRequest(){
 
         ObservableList<String> names;
 
-       if(view.lvPlayers.getSelectionModel().getSelectedItems().size() < 2 ){
+       if(view.lvPlayers.getSelectionModel().getSelectedItems().size() >= 2 ){
             names = view.lvPlayers.getSelectionModel().getSelectedItems();
         } else{
 
