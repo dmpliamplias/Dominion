@@ -10,6 +10,8 @@ import com.weddingcrashers.servermodels.WinningInformation;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -28,8 +30,11 @@ import util.PLServiceLocator;
 
 import login.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.weddingcrashers.model.Settings_.user;
 import static com.weddingcrashers.model.User_.userName;
@@ -403,19 +408,17 @@ public class GameView extends View<GameModel> {
 
    }
 
-   public Stage startWinnerStage(){
-
+   public void startWinnerStage(List<WinningInformation> winningInformations, Map<Integer, User> users){
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
         stageDialog.initOwner(stage);
         stageDialog.initModality(WINDOW_MODAL);
         Scene scene =new Scene(root,400,300);
         this.stageDialog.setScene(scene);
+        createVBox(winningInformations, users);
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
-
-        return stageDialog;
-
+        stageDialog.show();
    }
 
     protected void setTextDialog(){
@@ -426,16 +429,19 @@ public class GameView extends View<GameModel> {
     }
 
 
-    public VBox displayWinner(List WinningInformation, String users){
-
-        List <WinningInformation> list;
-
-        // for (WinningInformation wi : lists.getWinningInformations()) {
-        //    int position = wi.getPosition();
-        //     User user = users.get(wi.getUserId());
-        //    int points = wi.getPoints();
-        //  }
-
+    public VBox createVBox(List<WinningInformation> winningInformations, Map<Integer, User> users){
+        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
+        int counter = 0;
+        if (counter <= 4) {
+            for (WinningInformation wi : winningInformations) {
+                User user = users.get(wi.getUserId());
+                int points = wi.getPoints();
+                int position = wi.getPosition();
+                WinningUser winningUser = new WinningUser(user.getUserName(), points, position);
+                winningUsers.add(winningUser);
+                counter++;
+            }
+        }
 
         this.btnLobby = new Button();
         this.btnLobby.setPrefSize(180, 80);
@@ -443,10 +449,16 @@ public class GameView extends View<GameModel> {
         this.btnRanking.setPrefSize(180, 80);
         // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
         this.VBoxDisplayWinner=new VBox();
-        Label lblWinnerDisplay=new Label();
+        TableView<WinningUser> tableView = new TableView<>();
+        tableView.setItems(winningUsers);
 
+        TableColumn<WinningUser, String> name = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.name"));
+        TableColumn<WinningUser, String> points = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.points"));
+        TableColumn<WinningUser, String> position = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.position"));
 
-        VBoxDisplayWinner.getChildren().addAll(lblWinnerDisplay,btnLobby,btnRanking);
+        tableView.getColumns().addAll(name, points, position);
+
+        VBoxDisplayWinner.getChildren().addAll(tableView,btnLobby,btnRanking);
 
         return VBoxDisplayWinner;
 
@@ -656,6 +668,44 @@ public class GameView extends View<GameModel> {
 
     public Button getBtnRanking(){
             return btnRanking;
+    }
+
+
+    private class WinningUser {
+
+        private String userName;
+        private int points, position;
+
+        public WinningUser(String userName, int points, int position) {
+            this.userName = userName;
+            this.points = points;
+            this.position = position;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getPoints() {
+            return points;
+        }
+
+        public void setPoints(int points) {
+            this.points = points;
+        }
+
+        public int getPosition() {
+            return position;
+        }
+
+        public void setPosition(int position) {
+            this.position = position;
+        }
+
     }
 
 
