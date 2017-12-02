@@ -206,13 +206,7 @@ public class GameController extends Controller<GameModel, GameView> {
             if (gc.getWinningInformations() != null && gc.getWinningInformations().size() > 0) {
                 // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
                 // hier hast du die Informationen über den Rang der Spieler usw:
-                for (WinningInformation wi : gc.getWinningInformations()) {
-                    int rang = wi.getPosition();
-                    User user = users.get(wi.getUserId());
-                    int points = wi.getPoints();
-
-                    // TODO: 25.11.2017 Vane: Display the data to each user
-                }
+                view.startWinnerStage(gc.getWinningInformations(), users);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 enableOrDisableView();

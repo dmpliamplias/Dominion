@@ -1,5 +1,6 @@
 package base;
 
+import Game.GameView;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
@@ -56,6 +57,7 @@ public abstract class View<M extends Model> {
      * @param model the model.
      */
     protected View(Stage stage, M model) {
+
         this.stage = stage;
         this.model = model;
         this.menuBarUsed = new Boolean( false );
