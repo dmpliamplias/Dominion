@@ -203,6 +203,8 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(lblInfo, 2, 13);
         gp.getChildren().add(lblInfo);
 
+        this.btnLobby = new Button();
+        this.btnRanking= new Button();
 
         // root Layout
 
@@ -443,9 +445,8 @@ public class GameView extends View<GameModel> {
             }
         }
 
-        this.btnLobby = new Button();
+
         this.btnLobby.setPrefSize(180, 80);
-        this.btnRanking= new Button();
         this.btnRanking.setPrefSize(180, 80);
         // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
         this.VBoxDisplayWinner=new VBox();

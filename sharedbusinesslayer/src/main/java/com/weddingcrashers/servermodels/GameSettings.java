@@ -8,6 +8,7 @@ public class GameSettings implements Serializable {
     boolean pointCards;
 
     public Integer getFinishAfterRounds() {
+        if(finishAfterRounds == null) return -1;
         return finishAfterRounds;
     }
 

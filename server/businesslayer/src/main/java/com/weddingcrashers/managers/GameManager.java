@@ -230,7 +230,7 @@ public class GameManager extends Manager {
            int emptyActionStacksCounter = 0;
            for(String cardName : actionCards){
               Card c = getCardByName(cardName, false);
-              if(c != null){
+              if(c == null){
                   emptyActionStacksCounter++;
               }
            }

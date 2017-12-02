@@ -1,6 +1,8 @@
 package com.weddingcrashers.servermodels;
 
-public class WinningInformation implements Comparable<WinningInformation>{
+import java.io.Serializable;
+
+public class WinningInformation implements Comparable<WinningInformation>, Serializable{
     int clientId;
     int userId;
     int points;
