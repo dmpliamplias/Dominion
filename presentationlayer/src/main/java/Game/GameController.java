@@ -43,6 +43,7 @@ public class GameController extends Controller<GameModel, GameView> {
     int numberOfBuys;
     int numberOfMoney;
     boolean actionPhaseOver = false;
+    boolean firstPlayerSetReceived = false;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -75,6 +76,9 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
+        /**
+         *  author Vanessa Cajochen
+         *  */
 
         resetActionBuyMoney();
         updateActionBuyMoney();
@@ -109,10 +113,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
         });
 
-
-
-
-
         /**
          *  author Manuel Wirz
          *  */
@@ -122,6 +122,7 @@ public class GameController extends Controller<GameModel, GameView> {
         } else {
             view.endOption.setText(view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds());
         }
+
 
         view.getBtnLobby().setOnAction(event -> {
             goToLobbyView();
@@ -177,10 +178,12 @@ public class GameController extends Controller<GameModel, GameView> {
          *  */
 
         Platform.runLater(() -> {
-            if (userIdHasTurn == myUser.getId()) {
-                // TODO: drawHAndCards ist just for testing
+            if (firstPlayerSetReceived == false){
                 drawHandCards(5);
-                drawHandCards(3);
+                firstPlayerSetReceived = true;
+            }
+
+            if (userIdHasTurn == myUser.getId()) {
             }
             updateUnusedCards(unusedCards);
             enableOrDisableView();
@@ -294,8 +297,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
     // Method gets called when Buy = 0 or User clicks on Button "End Buy"
     public void moveFinished() {
-        // TODO: 25.11.2017 Vane: call this method when a user completed his turn...
-
         GameContainer gc = new GameContainer(Methods.TurnFinished);
         try {
             serverConnectionService.sendObject(gc);
@@ -547,8 +548,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     public void drawHandCards(int numberOfDrawnCards) {
-        // TODO: 01.12.2017 vane has an error
-       /* for (int i = 0; i < numberOfDrawnCards; i++) {
+        for (int i = 0; i < numberOfDrawnCards; i++) {
             if (myCardSet.getPullStack().size() == 0){
                 movesCardsFromTrayStackToPullStack();
             }
@@ -558,17 +558,13 @@ public class GameController extends Controller<GameModel, GameView> {
             CardImageView imgForToolTip = new CardImageView(myCardSet.getPullStack().get(0), CardImageView.CardSize.tooltip);
             tooltip.setGraphic(imgForToolTip);
             Tooltip.install(cardImg, tooltip);
-
             setCardImageViewAction(cardImg);
+
             view.addCardToHandStackPane(cardImg);
             myCardSet.getPullStack().remove(myCardSet.getPullStack().get(0));
             updateLblPullStack();
-
-
-        }*/
+        }
     }
-
-
 
 
     public void resetActionBuyMoney() {
@@ -591,7 +587,6 @@ public class GameController extends Controller<GameModel, GameView> {
         this.view.setUserPoints(userId, userName, playerSet);
 
     }
-
 
 
     /*

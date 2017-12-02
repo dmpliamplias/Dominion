@@ -287,6 +287,11 @@ public class GameView extends View<GameModel> {
 
     }
 
+    /**
+     *  author Vanessa Cajochen
+     *  */
+
+
     private void setLabelFormat(Label lbl){
         gp.getChildren().add(lbl);
         gp.setValignment(lbl, VPos.TOP);
@@ -301,7 +306,9 @@ public class GameView extends View<GameModel> {
         btn.setPrefSize(150, 30);
         gp.setValignment(btn, VPos.TOP);
         gp.setColumnSpan(btn, 2);
-        btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
+        //btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10; ");
+        btn.getStyleClass().add("buttonGameView");
+
         gp.setConstraints(btn, 5, 13);
 
     }
