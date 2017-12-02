@@ -44,6 +44,7 @@ public class GameController extends Controller<GameModel, GameView> {
     int numberOfMoney;
     boolean actionPhaseOver = false;
     boolean firstPlayerSetReceived = false;
+    ArrayList<String> cardNames;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -259,11 +260,12 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /*----------------Send to smth. to Server ------------- */
 
-    public void cardPlayed(Card c) {
+    public void cardPlayed(Card c, int count) {
         GameContainer gc = new GameContainer(Methods.CardPlayed);
         CardPlayedInfo info = new CardPlayedInfo();
         info.setUserId((int) myUser.getId());
         info.setCard(c);
+        info.setCount(count);
 
         try {
             serverConnectionService.sendObject(gc);
@@ -461,7 +463,7 @@ public class GameController extends Controller<GameModel, GameView> {
         }
 
         long tStart = System.currentTimeMillis();
-        ArrayList<String> cardNames = new ArrayList<String>();
+        cardNames = new ArrayList<String>();
         cardNames.add("Kupfer");
         cardNames.add("Silber");
         cardNames.add("Gold");
@@ -535,6 +537,18 @@ public class GameController extends Controller<GameModel, GameView> {
         return count;
     }
 
+    public int countCards(String name, ArrayList<CardImageView> list) {
+        int count = 0;
+        for (int i = 0; i < (list.size()); i++) {
+            if (list.get(i).getCard().getName().equals(name)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+
     public Card getCard(ArrayList<Card> list, String name) {
         Card c = null;
         for (int i = 0; i < (list.size()); i++) {
@@ -545,6 +559,18 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         return c;
     }
+
+    public Card getCard(String name, ArrayList<CardImageView> list) {
+        Card c = null;
+        for (int i = 0; i < (list.size()); i++) {
+            if (list.get(i).getCard().getName().equals(name)) {
+                c = list.get(i).getCard();
+                break;
+            }
+        }
+        return c;
+    }
+
 
 
     public void drawHandCards(int numberOfDrawnCards) {
@@ -598,13 +624,24 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack.
+    // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack. Server gets informed which Card has been played
     public void endOfTurn() {
         view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size() - 1)));
         for (int i = (myCardSet.getHandStack().size() - 1); i >= 0; i--) {
             myCardSet.getTrayStack().add(myCardSet.getHandStack().get(i));
             myCardSet.getHandStack().remove(i);
         }
+
+        if (view.cardPlayingAreaList.size() > 0){
+            for (int i = 0; i < cardNames.size()-1; i++){
+                Card c = new Card();
+                c = getCard(cardNames.get(i), view.cardPlayingAreaList);
+                if (c != null){
+                    int count = countCards(cardNames.get(i), view.cardPlayingAreaList);
+                    cardPlayed(c, count);
+                }
+            }
+       }
         view.endOfTurn();
         resetActionBuyMoney();
         moveFinished();
