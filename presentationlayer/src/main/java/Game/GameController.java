@@ -603,7 +603,7 @@ public class GameController extends Controller<GameModel, GameView> {
         System.out.println(userId);
         System.out.println(userName);
 
-        this.view.setUserPoints(userId, userName, playerSet);
+        this.view.setUserPoints(userId, userName, playerSet, activeUserId);
 
     }
 
@@ -619,7 +619,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
     // If Buys is 0, the turn is automatically finished. Handstack is moved to TrayStack. Server gets informed which Card has been played
     public void endOfTurn() {
-        view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size() - 1)));
+        if (myCardSet.getHandStack().size() > 0) {
+            view.setBackCardOfTrashStack(myCardSet.getHandStack().get((myCardSet.getHandStack().size() - 1)));
+        }
         for (int i = (myCardSet.getHandStack().size() - 1); i >= 0; i--) {
             myCardSet.getTrayStack().add(myCardSet.getHandStack().get(i));
             myCardSet.getHandStack().remove(i);
@@ -642,6 +644,13 @@ public class GameController extends Controller<GameModel, GameView> {
         view.gp.getChildren().add(view.btnEndActionPhase);
         actionPhaseOver = false;
         drawHandCards(5);
+
+        for (PlayerSet playerSet : getAllSets()) {
+            if (playerSet != null) {
+                setPointsToView(playerSet);
+            }
+        }
+
     }
 
     // All cards from TrayStack move to PullStack and PullStack shuffles

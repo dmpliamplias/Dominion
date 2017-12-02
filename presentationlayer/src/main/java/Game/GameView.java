@@ -382,33 +382,43 @@ public class GameView extends View<GameModel> {
     }
 
 
+
+
+
     // Author Murat Kelleci
-    public void setUserPoints(int userId, String userName, PlayerSet set) {
+    public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
+        // TODO: 02.12.2017: Migi, es updated ned wenn öbert de Zug beendet.
 
         String elementId = "UserPoints_" + userId;
-        String text = userName +": "+ Integer.toString(set.calculatePoints());
+        String text = userName + ": " + Integer.toString(set.calculatePoints());
+        String activeUser = "UserPoints_" + activeUserId;
 
         Node elm = VBoxPointsandPlayer.lookup("#" + elementId);
+        Label lblUserNameAndPoints;
 
         if (elm == null) {
             // element does not exist yet
-            Label lblUserNameAndPoints = new Label();
+            lblUserNameAndPoints = new Label();
             lblUserNameAndPoints.getStyleClass().add("labelShowStats");
-            lblUserNameAndPoints.setPrefSize(150,20 );
+            lblUserNameAndPoints.setPrefSize(150, 20);
             lblUserNameAndPoints.setText(text);
             lblUserNameAndPoints.setId(elementId);
-
-            VBoxPointsandPlayer.getChildren().addAll( lblUserNameAndPoints );
+            VBoxPointsandPlayer.getChildren().addAll(lblUserNameAndPoints);
 
         } else {
-
             // element already exist
-            Label lblUserNameAndPoints = (Label) elm;
+            lblUserNameAndPoints = (Label) elm;
             lblUserNameAndPoints.setText(text);
-
         }
 
-   }
+        if (activeUser.equals(lblUserNameAndPoints.getId())) {
+            lblUserNameAndPoints.setStyle("-fx-border-color: green; -fx-border-width: 3");
+        } else {
+            lblUserNameAndPoints.setStyle("-fx-border-color: black; -fx-border-width: 2");
+        }
+
+
+    }
 
    public void startWinnerStage(List<WinningInformation> winningInformations, Map<Integer, User> users){
         BorderPane root = new BorderPane();
@@ -627,10 +637,12 @@ public class GameView extends View<GameModel> {
             gp.getChildren().add(imgVtrayStack);
         }
 
+        // Grey img gets removed and Player sees that he can play now
         public void disableView(){
             gp.getChildren().removeAll(imgVGreyOutHandStack, imgVGreyOutButton);
         }
 
+        // HandCards and Button gets greyedout. Player can no longer play cards and click Button
         public void enableView(){
             gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
         }
