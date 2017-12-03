@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
+import sun.applet.Main;
 import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
@@ -22,6 +23,9 @@ import ranking.RankingController;
 import ranking.RankingModel;
 import ranking.RankingView;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.util.*;
 
@@ -150,6 +154,28 @@ public class GameController extends Controller<GameModel, GameView> {
         });
 
         view.labelShowRound.setText(Integer.toString(1));
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    // Method for sounds
+
+    // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+
+    public static synchronized void playSound(final String fileName) {
+        new Thread(() -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Main.class.getResourceAsStream("/sounds/" + fileName + ".wav"));
+                clip.open(inputStream);
+                clip.start();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }).start();
     }
 
     /* ------------------------- receiving smth from Server ----------------------*/

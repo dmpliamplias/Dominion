@@ -78,6 +78,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
+        // Method for backgorund music
+
+        // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+
         final Task task = new Task() {
 
             @Override
