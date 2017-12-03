@@ -5,6 +5,8 @@ import Controls.CardImageView;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 import lobby.LobbyController;
@@ -230,15 +232,31 @@ public class GameController extends Controller<GameModel, GameView> {
     // a player finished his turn...
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
         Platform.runLater(() -> {
-            if (gc.getWinningInformations() != null && gc.getWinningInformations().size() > 0) {
+            final List<WinningInformation> winningInformations = gc.getWinningInformations();
+            if (winningInformations != null && winningInformations.size() > 0) {
                 // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
                 // hier hast du die Informationen über den Rang der Spieler usw:
-                view.startWinnerStage(gc.getWinningInformations(), users);
+                final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
+                view.startWinnerStage(winningUsers);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 enableOrDisableView();
             }
         });
+    }
+
+    private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
+        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
+        for (int i = 0; i < 4; i++) {
+            for (WinningInformation wi : winningInformations) {
+                User user = users.get(wi.getUserId());
+                int points = wi.getPoints();
+                int position = wi.getPosition();
+                WinningUser winningUser = new WinningUser(user.getUserName(), points, position);
+                winningUsers.add(winningUser);
+            }
+        }
+        return winningUsers;
     }
 
     //Author Murat Kelleci

@@ -5,13 +5,8 @@ import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.servermodels.WinningInformation;
-import com.weddingcrashers.service.Language;
-import com.weddingcrashers.service.ServiceLocator;
-import com.weddingcrashers.service.Translator;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -22,22 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.geometry.HPos;
-import javafx.scene.text.Text;
-import util.PLServiceLocator;
 
-import login.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static com.weddingcrashers.model.Settings_.user;
-import static com.weddingcrashers.model.User_.userName;
 import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.GAME;
 
@@ -420,59 +405,45 @@ public class GameView extends View<GameModel> {
 
     }
 
-   public void startWinnerStage(List<WinningInformation> winningInformations, Map<Integer, User> users){
+   public void startWinnerStage(ObservableList<WinningUser> winningUsers){
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
         stageDialog.initOwner(stage);
         stageDialog.initModality(WINDOW_MODAL);
-        Scene scene =new Scene(root,400,300);
+        Scene scene = new Scene(root,400,300);
         this.stageDialog.setScene(scene);
-        createVBox(winningInformations, users);
+        createVBox(winningUsers);
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
         stageDialog.show();
    }
 
     protected void setTextDialog(){
-
         this.btnLobby.setText(getText("Lobby"));
         this.btnRanking.setText(getText("Ranking"));
-
     }
 
 
-    public VBox createVBox(List<WinningInformation> winningInformations, Map<Integer, User> users){
-        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
-        int counter = 0;
-        if (counter <= 4) {
-            for (WinningInformation wi : winningInformations) {
-                User user = users.get(wi.getUserId());
-                int points = wi.getPoints();
-                int position = wi.getPosition();
-                WinningUser winningUser = new WinningUser(user.getUserName(), points, position);
-                winningUsers.add(winningUser);
-                counter++;
-            }
-        }
-
-
+    public void createVBox(ObservableList<WinningUser> winningUsers) {
         this.btnLobby.setPrefSize(180, 80);
         this.btnRanking.setPrefSize(180, 80);
         // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
-        this.VBoxDisplayWinner=new VBox();
+        this.VBoxDisplayWinner = new VBox();
+        TableView<WinningUser> tableView = createWinningUserTableView(winningUsers);
+
+        VBoxDisplayWinner.getChildren().addAll(tableView, btnLobby, btnRanking);
+    }
+
+    private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {
         TableView<WinningUser> tableView = new TableView<>();
         tableView.setItems(winningUsers);
 
-        TableColumn<WinningUser, String> name = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.name"));
-        TableColumn<WinningUser, String> points = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.points"));
-        TableColumn<WinningUser, String> position = new TableColumn<>(serviceLocator.getTranslator().getString("gameview.winningUsers.position"));
+        TableColumn<WinningUser, String> name = new TableColumn<>(getText("gameview.winningUsers.name"));
+        TableColumn<WinningUser, String> points = new TableColumn<>(getText("gameview.winningUsers.points"));
+        TableColumn<WinningUser, String> position = new TableColumn<>(getText("gameview.winningUsers.position"));
 
         tableView.getColumns().addAll(name, points, position);
-
-        VBoxDisplayWinner.getChildren().addAll(tableView,btnLobby,btnRanking);
-
-        return VBoxDisplayWinner;
-
+        return tableView;
     }
 
 
@@ -692,44 +663,5 @@ public class GameView extends View<GameModel> {
     public Button getBtnRanking(){
             return btnRanking;
     }
-
-
-    private class WinningUser {
-
-        private String userName;
-        private int points, position;
-
-        public WinningUser(String userName, int points, int position) {
-            this.userName = userName;
-            this.points = points;
-            this.position = position;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public int getPoints() {
-            return points;
-        }
-
-        public void setPoints(int points) {
-            this.points = points;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
-        }
-
-    }
-
 
 }
