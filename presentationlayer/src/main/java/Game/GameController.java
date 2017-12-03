@@ -241,6 +241,12 @@ public class GameController extends Controller<GameModel, GameView> {
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 enableOrDisableView();
+
+                for (PlayerSet playerSet : getAllSets()) {
+                    if (playerSet != null) {
+                        setPointsToView(playerSet);
+                    }
+                }
             }
         });
     }
@@ -688,12 +694,6 @@ public class GameController extends Controller<GameModel, GameView> {
         view.gp.getChildren().add(view.btnEndActionPhase);
         actionPhaseOver = false;
         drawHandCards(5);
-
-        for (PlayerSet playerSet : getAllSets()) {
-            if (playerSet != null) {
-                setPointsToView(playerSet);
-            }
-        }
 
     }
 
