@@ -1,10 +1,8 @@
 package Game;
 
-/**
- * Winning user.
- *
- * @author Murat Kelleci
- */
+
+ //@author Murat Kelleci - 3.12.2017 -ausgelagert aus GameView
+
 public class WinningUser {
 
     private String userName;

@@ -370,7 +370,7 @@ public class GameView extends View<GameModel> {
 
 
 
-    // Author Murat Kelleci
+    // @Author Murat Kelleci
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         // TODO: 02.12.2017: Migi, es updated ned wenn öbert de Zug beendet.
 
@@ -427,7 +427,6 @@ public class GameView extends View<GameModel> {
     public void createVBox(ObservableList<WinningUser> winningUsers) {
         this.btnLobby.setPrefSize(180, 80);
         this.btnRanking.setPrefSize(180, 80);
-        // Zwei Buttons einmal zurück in die Lobby und einmal zurück in die Rangliste
         this.VBoxDisplayWinner = new VBox();
         TableView<WinningUser> tableView = createWinningUserTableView(winningUsers);
 
