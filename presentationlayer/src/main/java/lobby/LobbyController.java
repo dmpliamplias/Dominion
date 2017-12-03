@@ -3,6 +3,8 @@ package lobby;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
+import javafx.concurrent.Task;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import util.ViewUtils;
 import base.Controller;
@@ -31,6 +33,7 @@ import java.util.Map;
 import static com.weddingcrashers.service.Language.ENGLISH;
 import static com.weddingcrashers.service.Language.GERMAN;
 import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
  *  author Michel Schlatter
@@ -75,19 +78,31 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
+        final Task task = new Task() {
 
-        view.getBtnStart().setOnAction( (event) -> {
-            startGame();
-        } );
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                AudioClip audio = new AudioClip(getClass().getResource("/sounds/background.wav").toExternalForm());
+                audio.setVolume(0.07);
+                audio.setCycleCount(s);
+                audio.play();
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
 
-        /**
-         *  author Manuel Wirz
-         *  */
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
                     if (event.getCode().equals( KeyCode.ENTER)){
                        sendMessage();
         }  });
+
+        view.getBtnStart().setOnAction( (event) -> {
+            startGame();
+
+        } );
 
         view.getBtnTestGameView().setOnAction( event -> {
             goToGameView();
@@ -253,6 +268,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         gs.setPointCards(view.cbFinishPointCards.isSelected());
         gs.setFinishAfterRounds(rounds);
         lc.setGameSettings(gs);
+
 
         try {
             serverConnectionService.sendObject( lc );
