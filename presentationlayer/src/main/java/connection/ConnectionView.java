@@ -1,15 +1,15 @@
 package connection;
 
 import base.View;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
@@ -49,7 +49,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
     public Scene create_GUI(){
 		BorderPane root = new BorderPane();
-		Scene scene = new Scene(root,450,400);
+		Scene scene = new Scene(root,600,400);
 		GridPane gp = new GridPane();
 		FlowPane fp = new FlowPane();
 		
@@ -59,11 +59,11 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnHelp = new Button();
 		
 		// Set size for the buttons and FlowPane
-		btnStartS.setPrefSize(150, 35);
-		btnJoinS.setPrefSize(150, 35);
-		btnHelp.setPrefSize(150, 35);
-		fp.setPrefSize(450, 50);
-        gp.setVgap(20);
+		btnStartS.setPrefSize(140, 50);
+		btnJoinS.setPrefSize(140, 50);
+		btnHelp.setPrefSize(140, 50);
+		fp.setPrefSize(600, 50);
+
 
 		// Create Language Icons
 		Image imgDeFlag = new Image(getClass().getResourceAsStream("germanFlag.png"));
@@ -90,28 +90,33 @@ public class ConnectionView extends View<ConnectionModel> {
 		// Asign FlowPane and GridPane to BorderPane
 		root.setTop(fp);
 		root.setCenter(gp);
-		
-		// Creating 3 columns
-		for (int i = 0; i<3;i++){
-			ColumnConstraints column = new ColumnConstraints(150);
-			gp.getColumnConstraints().add(column);
-					}
-		
-		// Creating 8 rows
-		for (int i = 0; i<6;i++){
-			RowConstraints row = new RowConstraints(40);
-			gp.getRowConstraints().add(row);			
-		}
+
+		// Creating 2 columns
+		ColumnConstraints column1 = new ColumnConstraints(460);
+		ColumnConstraints column2 = new ColumnConstraints(140);
+		gp.getColumnConstraints().addAll(column1, column2);
+
+		// Creating 7 rows
+		RowConstraints row1 = new RowConstraints(110);
+		RowConstraints row2 = new RowConstraints(50);
+		RowConstraints row3 = new RowConstraints(25);
+		RowConstraints row4 = new RowConstraints(50);
+		RowConstraints row5 = new RowConstraints(25);
+		RowConstraints row6 = new RowConstraints(50);
+		RowConstraints row7 = new RowConstraints(90);
+		gp.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
+
 		
 		// Asign column and row to buttons
 		gp.setConstraints(btnStartS, 1, 1);
-		gp.setConstraints(btnJoinS, 1, 2);
-		gp.setConstraints(btnHelp, 1, 3);
-		
+		gp.setConstraints(btnJoinS, 1, 3);
+		gp.setConstraints(btnHelp, 1, 5);
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
-		stage.setScene(scene);
-		setStylesheet(scene, CONNECTION);
 
+		
+		stage.setScene(scene);
+		stage.setResizable(false);
+		setStylesheet(scene, CONNECTION);
 		setTexts();
 
         return scene;
