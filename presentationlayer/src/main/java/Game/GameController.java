@@ -289,7 +289,6 @@ public class GameController extends Controller<GameModel, GameView> {
             unusedCards = gc.getUnusedCards();
             updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
-            // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
 
             view.setLoggerContent(
                     users.get(updatedSet.getUserId()).getUserName()
