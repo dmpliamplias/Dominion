@@ -168,7 +168,7 @@ public class GameManager extends Manager {
                 hs.saveHighscore(highscore);
             }
             container.setWinningInformation(winningInfos);
-
+            GameManager.dispose();
         }else {
             int nxtId = getNextTurnClientId(false);
 
@@ -467,6 +467,10 @@ public class GameManager extends Manager {
     }
 
     public static void dispose(){
+        for(Client c : players){
+            c.setDominionSet(null);
+            c.setActive(false);
+        }
         gameSettings = null;
         players = null;
         users = null;

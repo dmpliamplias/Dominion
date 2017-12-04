@@ -1,7 +1,9 @@
 package util;
 
 import com.weddingcrashers.model.User;
-
+/***
+ * @Author Michel Schlatter
+ */
 public class PLServiceLocator {
     private static PLServiceLocator sl;
 

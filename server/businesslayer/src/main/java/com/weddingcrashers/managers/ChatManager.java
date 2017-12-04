@@ -5,15 +5,15 @@ import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 
+/***
+ * @Author Michel Schlatter
+ */
 public class ChatManager extends Manager {
 
     public ChatManager(Client c){
         super(c);
     }
-    /**
-     * @author Michel Schlatter
-     * @param msg
-     */
+
     public  void broadCastChatMessageToAllClients(String msg){
         ChatContainer cc = new ChatContainer();
         cc.setMsg(msg);

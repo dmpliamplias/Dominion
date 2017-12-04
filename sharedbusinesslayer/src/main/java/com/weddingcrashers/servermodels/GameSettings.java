@@ -1,7 +1,9 @@
 package com.weddingcrashers.servermodels;
 
 import java.io.Serializable;
-
+/***
+ * @Author Michel Schlatter
+ */
 public class GameSettings implements Serializable {
 
     Integer finishAfterRounds;

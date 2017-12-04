@@ -3,7 +3,9 @@ package com.weddingcrashers.servermodels;
 import com.weddingcrashers.model.User;
 
 import java.io.Serializable;
-
+/***
+ * @Author Michel Schlatter
+ */
 public class RegisterContainer extends Container implements Serializable {
     User user;
 

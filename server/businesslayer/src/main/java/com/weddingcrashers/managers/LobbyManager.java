@@ -40,7 +40,7 @@ public class LobbyManager extends Manager{
         HashMap<Integer, User> users = new HashMap<Integer, User>();
         for(Integer clientId : clientIds) {
             for (Client c : client.getAllClients()) {
-                if (clientId.equals(c.getClientId()) && c.getViewStatus() == ViewStatus.Lobby) {
+                if (clientId.equals(c.getClientId()) && c.getViewStatus() == ViewStatus.Lobby || c.getViewStatus() == ViewStatus.Ranking) {
                    users.put(c.getClientId(), c.getUser());
                 }
             }

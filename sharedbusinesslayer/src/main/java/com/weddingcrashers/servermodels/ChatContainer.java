@@ -2,8 +2,9 @@ package com.weddingcrashers.servermodels;
 
 import java.io.Serializable;
 
-
-
+/***
+ * @Author Michel Schlatter
+ */
 public class ChatContainer extends Container implements Serializable{
     String msg;
     int clientId;

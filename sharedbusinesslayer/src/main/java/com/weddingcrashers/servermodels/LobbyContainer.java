@@ -5,7 +5,9 @@ import com.weddingcrashers.model.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/***
+ * @Author Michel Schlatter
+ */
 public class LobbyContainer extends Container implements Serializable {
     HashMap<Integer, User> users; // clientId, User
     ArrayList<Integer> clientIds_startGame;
