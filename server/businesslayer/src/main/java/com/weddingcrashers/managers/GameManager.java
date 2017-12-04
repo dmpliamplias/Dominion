@@ -66,6 +66,7 @@ public class GameManager extends Manager {
         if(client.isActive()) {
             GameContainer gc = new GameContainer(Methods.CardPlayed);
             gc.setCardPlayedInfo(cardPlayedInfo);
+            cardPlayedInfo.setClientId(client.getClientId());
             broadCast(gc, false);
         }else{
             ServerUtils.sendError(client, new Exception("This is not your turn!"));
@@ -81,6 +82,7 @@ public class GameManager extends Manager {
 
             GameContainer bGc = new GameContainer(Methods.BuyCard);
             CardPlayedInfo buyInfo = new CardPlayedInfo();
+            buyInfo.setClientId(client.getClientId());
             buyInfo.setCard(card);
             buyInfo.setUserId((int) users.get(client.getClientId()).getId());
             bGc.setCardPlayedInfo(buyInfo);

@@ -30,6 +30,10 @@ public class CardPlayedInfo implements Serializable {
         return clientId;
     }
 
+    public void setClientId(int id){
+        this.clientId = id;
+    }
+
     public int getCount() {
         return count;
     }
