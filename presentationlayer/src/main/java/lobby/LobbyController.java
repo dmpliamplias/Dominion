@@ -65,6 +65,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
          *  author Manuel Wirz
          *  */
 
+        // Hoster or normal Client? -> sets the view
+
         if (!serverConnectionService.isHoster()){
 
             view.getBtnStart().setVisible( false );
@@ -98,27 +100,39 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         thread.start();
 
 
+        // Sends message with Enter
+
         view.getTextFieldChat().setOnKeyPressed(event -> {
                     if (event.getCode().equals( KeyCode.ENTER)){
                        sendMessage();
         }  });
+
+        // ActionHandler for start the game
 
         view.getBtnStart().setOnAction( (event) -> {
             startGame();
 
         } );
 
+        // ActionHandler for testing
+
         view.getBtnTestGameView().setOnAction( event -> {
             goToGameView();
         } );
+
+        // ActionHandler for sending msg by pressing the button
 
         view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
         } );
 
+        // ActionHandler for logout by pressing the button
+
         view.getBtnLogout().setOnAction( event -> {
             logout();
         } );
+
+        // ActionHandler for showing some help  by pressing the button
 
         view.getBtnHelp().setOnAction( event -> {
             help();
@@ -143,6 +157,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     }
 
+    // TODO Manuel Wirz löschen?!
+
     private void logout(){
 
         plServiceLocator.setUser(null);
@@ -164,6 +180,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         }
     }
 
+    //TODO Manuel Wirz löschen?
 
     private void goToGameView() {
        sendStartRequest();
@@ -210,7 +227,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
         ObservableList<String> players = view.lvPlayers.getItems();
 
-
+        // some checks for starting the correct end options
 
         if(!view.lvPlayers.getSelectionModel().isSelected( 0 )){
             view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
@@ -284,10 +301,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     /**
      * author Manuel Wirz
      */
+
     // ChatController same Logic as in the GameController -> Look there for the comments for each method
-
-
-
 
     public void sendMessage() {
 

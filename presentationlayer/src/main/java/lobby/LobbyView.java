@@ -27,7 +27,7 @@ import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.LOBBY;
 
 /**
- *  author Michel Schlatter
+ *  author Michel Schlatter + Manuel Wirz
  *  */
 
 public class LobbyView extends View<LobbyModel> {
@@ -114,6 +114,9 @@ public class LobbyView extends View<LobbyModel> {
         return vBox;
     }
 
+
+    // Method for title and menubar returns a VBox
+
     public VBox addMenu(){
 
         this.vBoxAddMenu = new VBox(  );
@@ -132,6 +135,8 @@ public class LobbyView extends View<LobbyModel> {
         return vBoxAddMenu;
     }
 
+    // Method for client list return a VBox
+
     public VBox addClientList(){
 
         VBox vbox = new VBox();
@@ -148,6 +153,8 @@ public class LobbyView extends View<LobbyModel> {
         return  vbox;
     }
 
+
+    // Method for game settings return a VBox
 
     public VBox addVBoxGameSettings(){
 
@@ -222,6 +229,8 @@ public class LobbyView extends View<LobbyModel> {
         return  vBoxGameSettings;
     }
 
+    // Method for Chat returns a GridPane
+
     public GridPane addGridPane() {
 
         GridPane gridPane = new GridPane();
@@ -230,6 +239,7 @@ public class LobbyView extends View<LobbyModel> {
 
 
          // Layout GridPane
+
         gridPane.setAlignment(Pos.BOTTOM_CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -269,6 +279,7 @@ public class LobbyView extends View<LobbyModel> {
         return gridPane;
 }
 
+    // Method for multilanguage
 
     protected void setTextDialog(){
 
@@ -278,6 +289,7 @@ public class LobbyView extends View<LobbyModel> {
 
     }
 
+    // Method for multilanguage
 
     protected void setTexts() {
 
@@ -317,6 +329,12 @@ public class LobbyView extends View<LobbyModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
+    /**
+     *  author Manuel Wirz
+     *  */
+
+    // Method for client view who is not hoster
+
     public void  setWaitText(){
 
         this.hBoxOptionClient = new VBox(  );
@@ -344,6 +362,8 @@ public class LobbyView extends View<LobbyModel> {
         this.root.setCenter(hBoxOptionClient);
     }
 
+    // Method for stageDialog
+
     public Stage startStage() {
 
 
@@ -360,6 +380,8 @@ public class LobbyView extends View<LobbyModel> {
         return stageDialog;
     }
 
+
+    // Method for creating Dialog returns a VBox
 
     private VBox dialog() {
 
@@ -389,6 +411,8 @@ public class LobbyView extends View<LobbyModel> {
         return vBoxDialog;
 
     }
+
+    // Getters and Setters for LobbyView
 
     public ImageView getImgViewDeFlag() {
         return imgViewDeFlag;

@@ -124,12 +124,13 @@ public class GameController extends Controller<GameModel, GameView> {
          *  author Manuel Wirz
          *  */
 
+        // Checks which game end option is selected
+
         if (gameSettings.isPointCards() == true) {
             view.endOption.setText(view.endOptionPoints.getText());
         } else {
             view.endOption.setText(view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds());
         }
-
 
         view.getBtnLobby().setOnAction(event -> {
             goToLobbyView();
@@ -139,15 +140,19 @@ public class GameController extends Controller<GameModel, GameView> {
             goToRankingView();
         });
 
+        // EventHandler for sending a msg by pressing the button
 
         view.getBtnChatSend().setOnAction(event -> {
             sendMessage();
         });
 
+        // EventHandler for sending a predefined msg by pressing the button
 
         view.getBtnSendText().setOnAction(event -> {
             sendButtonText();
         });
+
+        // EventHandler for sending a  msg by pressing enter
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
@@ -201,10 +206,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         activeUserId = userIdHasTurn;
 
-
-        /**
-         *  author Manuel Wirz
-         *  */
 
         Platform.runLater(() -> {
             if (firstPlayerSetReceived == false){
@@ -271,6 +272,10 @@ public class GameController extends Controller<GameModel, GameView> {
             view.labelShowRound.setText(String.valueOf(round));
         });
     }
+
+    /**
+     *  author Michel Schlatter +  Manuel Wirz
+     *  */
 
     public void handleServerAnswer_cardBuyed(GameContainer gc) {
         Platform.runLater(() -> {
@@ -359,9 +364,9 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String(user + "/n " + card);
+            String logger = new String(user.getUserName() + "/n " + card.getName());
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
-            view.setLoggerContent(card.getName(), ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 

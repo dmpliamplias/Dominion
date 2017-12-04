@@ -215,6 +215,8 @@ public class GameView extends View<GameModel> {
      * author Manuel Wirz
      */
 
+    // Method for title and showing game end option -> return a VBox
+
     private VBox setTop() {
         this.setTop = new VBox();
         this.setTop.setAlignment(Pos.CENTER);
@@ -242,6 +244,9 @@ public class GameView extends View<GameModel> {
     /**
      *  author Manuel Wirz
      *  */
+
+    // Method for creating logger
+
 
     public VBox loggerAndChat() {
 
@@ -271,6 +276,8 @@ public class GameView extends View<GameModel> {
     /**
      *  author Manuel Wirz
      *  */
+
+    // same logic as in LobbyView
 
     protected void setLoggerContent(String msg, Color color){
 
@@ -311,6 +318,8 @@ public class GameView extends View<GameModel> {
     /**
      *  author Manuel Wirz
      *  */
+
+    // GridPane for showing the chat and the buttons
 
     public GridPane addChatGridPane(){
 
