@@ -235,8 +235,6 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             final List<WinningInformation> winningInformations = gc.getWinningInformations();
             if (winningInformations != null && winningInformations.size() > 0) {
-                // TODO: 25.11.2017 Vane: eine Bedingung für das Ende des Spiels wurde erfüllt 
-                // hier hast du die Informationen über den Rang der Spieler usw:
                 final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
                 view.startWinnerStage(winningUsers);
             } else {
@@ -293,8 +291,11 @@ public class GameController extends Controller<GameModel, GameView> {
             setPointsToView(updatedSet);
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
 
-            view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName()
-                    + " " + view.getTxtLogger2().getText() + ": " + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId(buyedInfo.getClientId()));
+            view.setLoggerContent(
+                    users.get(updatedSet.getUserId()).getUserName()
+                    + " " + view.getTxtLogger2().getText() + ": "
+                    + buyedInfo.getCard().toString(serviceLocator.getTranslator()),
+                    ViewUtils.getColorByClientId(buyedInfo.getClientId()));
         });
     }
 
@@ -366,8 +367,10 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String(user.getUserName() + " " + view.getTxtLogger().getText() + ": " + card.getName());
-            // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
+            String logger = new String(
+                    user.getUserName() + " "
+                    + view.getTxtLogger().getText() + ": "
+                    + card.toString(serviceLocator.getTranslator()));
 
             // TODO: Migi oder Vane: Es wird au die Charte ahzeigt, wo ufgno werdet
            // view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));

@@ -1,5 +1,7 @@
 package com.weddingcrashers.businessmodels;
 
+import com.weddingcrashers.service.Translator;
+
 import java.io.Serializable;
 
 /**
@@ -42,6 +44,10 @@ public class Card implements Serializable {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public String toString(Translator t){
+        return t.getString(this.name);
     }
 
 }
