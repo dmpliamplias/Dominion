@@ -54,6 +54,7 @@ public class GameView extends View<GameModel> {
     protected Text endOption;
     protected Label labelShowStats;
     protected Label labelShowRound;
+    protected Text txtLogger;
     HandStackLayout hs;
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
@@ -191,7 +192,7 @@ public class GameView extends View<GameModel> {
         this.btnLobby = new Button();
         this.btnRanking= new Button();
 
-        // root Layout
+        this.txtLogger = new Text(  );
 
         //root.setBottom.
         root.setCenter(fpCenter);
@@ -481,6 +482,7 @@ public class GameView extends View<GameModel> {
         this.endOptionRounds.setText( getText( "gameview.endOptionRound" ) );
         this.endOptionPoints.setText( getText( "gameview.endOptionPoint" ) );
         this.textFieldNameLogger.setText( getText( "gameview.logger" ) );
+        this.txtLogger.setText( getText( "gameview.loggerText" ) );
     }
 
     public void start() {
@@ -672,4 +674,7 @@ public class GameView extends View<GameModel> {
             return btnRanking;
     }
 
+    public Text getTxtLogger() {
+        return txtLogger;
+    }
 }
