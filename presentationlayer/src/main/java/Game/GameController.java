@@ -250,6 +250,9 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    /* Author Murat Kelleci
+    */
+
     private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
         ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
         for (int i = 0; i < 4; i++) {
@@ -264,7 +267,8 @@ public class GameController extends Controller<GameModel, GameView> {
         return winningUsers;
     }
 
-    //Author Murat Kelleci
+    /*Author Murat Kelleci
+    */
     public void handleServerAnswer_updateRound(int round) {
         Platform.runLater(() -> {
             view.labelShowRound.setText(String.valueOf(round));
@@ -655,10 +659,9 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    //Author Murat Kelleci
-
+    /* Author Murat Kelleci
+    */
     public void setPointsToView(PlayerSet playerSet) {
-
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
         System.out.println(userId);
@@ -744,6 +747,10 @@ public class GameController extends Controller<GameModel, GameView> {
         return sets;
     }
 
+
+    /* author Murat Kelleci
+    
+     */
     private void goToRankingView() {
         Stage s = new Stage(  );
         RankingModel model = new RankingModel();
