@@ -368,7 +368,9 @@ public class GameController extends Controller<GameModel, GameView> {
             Card card = cardPlayedInfo.getCard();
             String logger = new String(user.getUserName() + " " + view.getTxtLogger().getText() + ": " + card.getName());
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
-            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+
+            // TODO: Migi oder Vane: Es wird au die Charte ahzeigt, wo ufgno werdet
+           // view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 
