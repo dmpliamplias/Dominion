@@ -315,6 +315,7 @@ public class GameController extends Controller<GameModel, GameView> {
         info.setUserId((int) myUser.getId());
         info.setCard(c);
         info.setCount(count);
+        gc.setCardPlayedInfo(info);
 
         try {
             serverConnectionService.sendObject(gc);
@@ -684,8 +685,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         if (view.cardPlayingAreaList.size() > 0){
             for (int i = 0; i < cardNames.size()-1; i++){
-                Card c = new Card();
-                c = getCard(cardNames.get(i), view.cardPlayingAreaList);
+                Card c = getCard(cardNames.get(i), view.cardPlayingAreaList);
                 if (c != null){
                     int count = countCards(cardNames.get(i), view.cardPlayingAreaList);
                     cardPlayed(c, count);

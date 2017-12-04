@@ -34,6 +34,7 @@ public class ServerUtils {
 
     public static void sendError(Client c, Exception ex)  {
         ErrorContainer errorContainer = new ErrorContainer(ex.getMessage());
+        ex.printStackTrace();
         ServerUtils.sendObject(c, errorContainer);
     }
 
