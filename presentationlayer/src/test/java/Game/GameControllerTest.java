@@ -31,7 +31,7 @@ public class GameControllerTest {
         }
         return null;
     }
-    // TODO@Migi: Es wird nur ein Client erzeugt?!
+
    // Method from ServerConnectionService + added 2 clients
     private void join(String url, int port, boolean isHoster) {
         try {

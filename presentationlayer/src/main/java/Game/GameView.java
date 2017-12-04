@@ -384,8 +384,6 @@ public class GameView extends View<GameModel> {
 
     // @Author Murat Kelleci
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
-        // TODO: 02.12.2017: Migi, es updated ned wenn öbert de Zug beendet.
-
         String elementId = "UserPoints_" + userId;
         String text = userName + ": " + Integer.toString(set.calculatePoints());
         String activeUser = "UserPoints_" + activeUserId;

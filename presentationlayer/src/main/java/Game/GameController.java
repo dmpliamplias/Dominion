@@ -508,7 +508,7 @@ public class GameController extends Controller<GameModel, GameView> {
         } else {
             view.enableView();
         }
-        // TODO: 02.12.2017 Vanessa highlight user who has the turn, fuckers! log it or show on murats left pane...
+        // TODO: MANUEL WIRZ: LOG THAT NOW USER TURN CHANGED...
     }
 
 
