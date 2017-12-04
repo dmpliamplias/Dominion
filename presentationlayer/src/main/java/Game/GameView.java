@@ -53,7 +53,8 @@ public class GameView extends View<GameModel> {
     protected Text endOptionPoints;
     protected Text endOption;
     protected Label labelShowStats;
-    protected Label labelShowRound;
+    protected TextField txtFieldShowRound;
+    protected Text txtShowRound;
     protected Label txtLogger;
     HandStackLayout hs;
     HandStackLayout cardPlayingArea;
@@ -93,7 +94,6 @@ public class GameView extends View<GameModel> {
 
         gp.setGridLinesVisible(false);
 
-        labelShowRound = new Label();
 
         // Creating 9 columns with different width
         ColumnConstraints column = new ColumnConstraints(15);
@@ -238,7 +238,12 @@ public class GameView extends View<GameModel> {
 
     public VBox setLeft(){
         this.VBoxPointsandPlayer = new VBox(  );
+        this.VBoxPointsandPlayer.setSpacing( 20 );
+        this.txtFieldShowRound = new TextField(  );
+        this.txtFieldShowRound.setPrefSize(150, 20);
+        this.txtShowRound = new Text(  );
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
+        this.VBoxPointsandPlayer.getChildren().add( txtFieldShowRound );
         return VBoxPointsandPlayer;
     }
 
@@ -487,6 +492,7 @@ public class GameView extends View<GameModel> {
         this.textFieldNameLogger.setText( getText( "gameview.logger" ) );
         this.txtLogger.setText( getText( "gameview.loggerText" ) );
         this.txtLogger2.setText( getText( "gameview.loggerText2" ) );
+        this.txtShowRound.setText( getText( "gameview.showRound" ) );
     }
 
     public void start() {
@@ -684,5 +690,13 @@ public class GameView extends View<GameModel> {
 
     public Label getTxtLogger2() {
         return txtLogger2;
+    }
+
+    public TextField getTxtFieldShowRound() {
+        return txtFieldShowRound;
+    }
+
+    public Text getTxtShowRound() {
+        return txtShowRound;
     }
 }

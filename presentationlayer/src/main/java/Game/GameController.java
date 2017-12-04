@@ -160,7 +160,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         });
 
-        view.labelShowRound.setText(Integer.toString(1));
+        view.getTxtFieldShowRound().setText(view.getTxtShowRound().getText() + ": " +Integer.toString(1));
     }
 
     /**
@@ -271,7 +271,7 @@ public class GameController extends Controller<GameModel, GameView> {
     */
     public void handleServerAnswer_updateRound(int round) {
         Platform.runLater(() -> {
-            view.labelShowRound.setText(String.valueOf(round));
+            view.getTxtFieldShowRound().setText(view.getTxtShowRound().getText() + ": "+String.valueOf(round));
         });
     }
 
