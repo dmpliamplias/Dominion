@@ -292,8 +292,9 @@ public class GameController extends Controller<GameModel, GameView> {
             updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
-            view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName() + ": "
-                    + " " + view.getTxtLogger() + " " + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId(buyedInfo.getClientId()));
+
+            view.setLoggerContent(users.get(updatedSet.getUserId()).getUserName()
+                    + " " + view.getTxtLogger2().getText() + ": " + buyedInfo.getCard().getName(), ViewUtils.getColorByClientId(buyedInfo.getClientId()));
         });
     }
 
@@ -365,7 +366,7 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            String logger = new String(user.getUserName() + ": " + view.getTxtLogger() + " " + card.getName());
+            String logger = new String(user.getUserName() + " " + view.getTxtLogger().getText() + ": " + card.getName());
             // TODO: 30.11.2017  MANUEL WIRZ: KARTEN NAMEN ÜBER TRANSLATOR HOLEN
             view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
