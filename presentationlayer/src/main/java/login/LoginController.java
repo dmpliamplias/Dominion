@@ -22,7 +22,9 @@ import java.io.IOException;
 import static util.PLServiceLocator.getPLServiceLocator;
 import static javafx.scene.control.Alert.AlertType.WARNING;
 
-  // @author Murat Kelleci
+/** @author Murat Kelleci
+ *
+ */
 public class LoginController extends Controller<LoginModel, LoginView> {
 
     public LoginController(LoginView view, LoginModel model) {
@@ -40,7 +42,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
 
         });
-        //** @author Murat Kelleci
+
         view.btnSignUp.setOnAction((event) -> this.goToRegisterView());
 
     }
@@ -64,7 +66,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             }
         } else {
 
-           // @author Murat Kelleci
+
             String pw = model.getPassword();
             String email = model.getEmail();
 
@@ -126,7 +128,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         view.start();
     }
 
-    //** @author Murat Kelleci - on 8.10.17
+
     private void goToRegisterView() {
         RegisterModel model = new RegisterModel();
         RegisterView view = new RegisterView(this.view.getStage(), model);

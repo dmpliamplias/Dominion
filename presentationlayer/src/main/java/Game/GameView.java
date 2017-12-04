@@ -379,10 +379,13 @@ public class GameView extends View<GameModel> {
     }
 
 
-
-
-
-    // @Author Murat Kelleci
+    /** @Author Murat Kelleci
+     *
+     * @param userId
+     * @param userName
+     * @param set
+     * @param activeUserId
+     */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
         String text = userName + ": " + Integer.toString(set.calculatePoints());

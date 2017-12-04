@@ -1,7 +1,8 @@
 package Game;
 
 
- //@author Murat Kelleci - 3.12.2017 -ausgelagert aus GameView
+ /*@author Murat Kelleci - 3.12.2017 -ausgelagert aus GameView
+ */
 
 public class WinningUser {
 

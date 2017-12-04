@@ -15,8 +15,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
-//** @author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
-//
+/**
+ *@author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
+*/
 public class RankingView extends View<RankingModel> {
 
     TableView<RankingViewModel> table;

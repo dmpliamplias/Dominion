@@ -7,8 +7,9 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-//**
-   //@author Murat Kelleci*/ 20.10.17-04.11.2017
+/**
+*@author Murat Kelleci 20.10.17-04.11.2017
+*/
 
 public class CardImageView extends ImageView {
 
