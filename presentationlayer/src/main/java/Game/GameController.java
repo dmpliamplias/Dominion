@@ -83,6 +83,23 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
+        cardNames = new ArrayList<String>();
+        cardNames.add("Kupfer");
+        cardNames.add("Silber");
+        cardNames.add("Gold");
+        cardNames.add("Anwesen");
+        cardNames.add("Provinz");
+        cardNames.add("Herzogtum");
+        cardNames.add("Dorf");
+        cardNames.add("Garten");
+        cardNames.add("Geldverleiher");
+        cardNames.add("Holzfäller");
+        cardNames.add("Jahrmarkt");
+        cardNames.add("Laboratorium");
+        cardNames.add("Schmiede");
+        cardNames.add("Markt");
+
+
         /**
          *  author Vanessa Cajochen
          *  */
@@ -530,27 +547,17 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
+    /**
+     * author Vanessa Cajochen
+     */
+
     public void updateUnusedCards(ArrayList<Card> unusedCards) {
         if (unusedCards == null || unusedCards.size() == 0) {
             return;
         }
 
         long tStart = System.currentTimeMillis();
-        cardNames = new ArrayList<String>();
-        cardNames.add("Kupfer");
-        cardNames.add("Silber");
-        cardNames.add("Gold");
-        cardNames.add("Anwesen");
-        cardNames.add("Provinz");
-        cardNames.add("Herzogtum");
-        cardNames.add("Dorf");
-        cardNames.add("Garten");
-        cardNames.add("Geldverleiher");
-        cardNames.add("Holzfäller");
-        cardNames.add("Jahrmarkt");
-        cardNames.add("Laboratorium");
-        cardNames.add("Schmiede");
-        cardNames.add("Markt");
+
 
 
         ArrayList<int[]> indexes = new ArrayList<int[]>();
