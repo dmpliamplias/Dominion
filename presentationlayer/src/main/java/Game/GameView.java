@@ -134,6 +134,27 @@ public class GameView extends View<GameModel> {
         // Set backside of trashStack
         setBackCardOfTrashStack();
 
+        // Creates Curly Brackets for PlayingArea
+        Image imgBracketLeft = new Image(getClass().getResourceAsStream("curlyBracketLeft.png"));
+        ImageView imgVBracketLeft = new ImageView(imgBracketLeft);
+        imgVBracketLeft.setFitHeight(120);
+        imgVBracketLeft.setPreserveRatio(true);
+        gp.setConstraints(imgVBracketLeft, 1, 8);
+        gp.setRowSpan(imgVBracketLeft, 4);
+        gp.setValignment(imgVBracketLeft, VPos.TOP);
+        gp.setHalignment(imgVBracketLeft, HPos.RIGHT);
+        gp.getChildren().add(imgVBracketLeft);
+
+        Image imgBracketRight = new Image(getClass().getResourceAsStream("curlyBracketRight.png"));
+        ImageView imgVBracketRight = new ImageView(imgBracketRight);
+        imgVBracketRight.setFitHeight(120);
+        imgVBracketRight.setPreserveRatio(true);
+        gp.setConstraints(imgVBracketRight, 8, 8);
+        gp.setRowSpan(imgVBracketRight, 4);
+        gp.setValignment(imgVBracketRight, VPos.TOP);
+        gp.setHalignment(imgVBracketRight, HPos.LEFT);
+        gp.getChildren().add(imgVBracketRight);
+
 
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
