@@ -358,6 +358,7 @@ public class GameController extends Controller<GameModel, GameView> {
     // Method gets called when Buy = 0 or User clicks on Button "End Buy"
     public void moveFinished() {
         GameContainer gc = new GameContainer(Methods.TurnFinished);
+
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
@@ -378,8 +379,7 @@ public class GameController extends Controller<GameModel, GameView> {
                     + view.getTxtLogger().getText() + ": "
                     + card.toString(serviceLocator.getTranslator()));
 
-            // TODO: Migi oder Vane: Es wird au die Charte ahzeigt, wo ufgno werdet
-           // view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+           view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 
@@ -508,7 +508,7 @@ public class GameController extends Controller<GameModel, GameView> {
      * author Vanessa Cajochen + Manuel Wirz
      */
 
-    //TODO Manuel ergänzen
+    //TODO Migi anschauen
 
     private void enableOrDisableView() {
 
@@ -516,17 +516,18 @@ public class GameController extends Controller<GameModel, GameView> {
         String loggerTurnIsOver = new String(myUser.getUserName() + " " + view.getTxtLoggerTurnIsOver().getText());
 
 
-        //view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
-        //view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
-
-
-
         if (myUser.getId() == activeUserId) {
             view.disableView();
 
+            // view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
+
         } else {
             view.enableView();
-                 }
+
+            // view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
+
+
+        }
     }
 
 
