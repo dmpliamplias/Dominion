@@ -53,6 +53,7 @@ public class GameController extends Controller<GameModel, GameView> {
     boolean actionPhaseOver = false;
     boolean firstPlayerSetReceived = false;
     ArrayList<String> cardNames;
+    boolean initalUserTurnLogged;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -224,9 +225,14 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         }
         activeUserId = userIdHasTurn;
-        logActiveUser();
+
 
         Platform.runLater(() -> {
+            if(!initalUserTurnLogged) {
+                logActiveUser();
+                initalUserTurnLogged = true;
+            }
+
             if (firstPlayerSetReceived == false){
                 drawHandCards(5);
                 firstPlayerSetReceived = true;
