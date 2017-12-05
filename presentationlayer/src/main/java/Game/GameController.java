@@ -378,11 +378,12 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
-            int count = cardPlayedInfo.getCount(); // TODO: 05.12.2017 hier hast du die anzahl der gespielten Karten 
+            int count = cardPlayedInfo.getCount();
             String logger = new String(
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
-                    + card.toString(serviceLocator.getTranslator()));
+                    + card.toString(serviceLocator.getTranslator()))
+                    + " " + count;
 
            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
@@ -510,15 +511,13 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     /**
-     * author Vanessa Cajochen + Manuel Wirz
+     * author Vanessa Cajochen
      */
 
-    //TODO Migi anschauen
 
     private void enableOrDisableView() {
 
-        String loggerIsYourTurn = new String( myUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText());
-        String loggerTurnIsOver = new String(myUser.getUserName() + " " + view.getTxtLoggerTurnIsOver().getText());
+
 
 
         if (myUser.getId() == activeUserId) {
@@ -537,8 +536,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     private void logActiveUser(){
         User activeUser = users.get(activeUserId);
-        // TODO: 05.12.2017 MANUEL WIRZ => TRANSLATE IT!!!
-        view.setLoggerContent("Der User " + activeUser.getUserName() + " ist nun am Zug!", Color.BLACK);
+        view.setLoggerContent(activeUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText(), Color.BLACK);
     }
 
     public void updateUnusedCards(ArrayList<Card> unusedCards) {
