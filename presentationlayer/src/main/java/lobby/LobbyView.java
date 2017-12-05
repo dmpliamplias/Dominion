@@ -179,7 +179,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption1.setPrefHeight( 50 );
         this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
             "",10,11,12,13,14,15,16,17,18,19,20) );
-        this.choiceBox.setPrefSize( 20,20 );
+        this.choiceBox.setPrefSize( 20,40 );
 
 
         hBoxOption1.getChildren().addAll( txtOption1,/*textFieldRound,*/choiceBox );
@@ -197,7 +197,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption2.setPrefHeight( 50 );
         this.tpOption2 = new Tooltip(  );
         this.cbFinishPointCards = new CheckBox(  );
-        this.cbFinishPointCards.setPrefSize( 50,50 );
+        this.cbFinishPointCards.setPrefSize( 50,70 );
 
 
 
