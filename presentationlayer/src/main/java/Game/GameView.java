@@ -68,6 +68,8 @@ public class GameView extends View<GameModel> {
     ImageView imgVGreyOutButton;
     ImageView imgVGreyOutHandStack;
     protected Label txtLogger2;
+    protected Text txtLoggerIsYourTurn;
+    protected Text txtLoggerTurnIsOver;
 
 
     ImageView imgVtrayStack;
@@ -195,6 +197,9 @@ public class GameView extends View<GameModel> {
 
         this.txtLogger = new Label(  );
         this.txtLogger2 = new Label(  );
+
+        this.txtLoggerIsYourTurn = new Text(  );
+        this.txtLoggerTurnIsOver = new Text(  );
 
         //root.setBottom.
         root.setCenter(fpCenter);
@@ -493,6 +498,8 @@ public class GameView extends View<GameModel> {
         this.txtLogger.setText( getText( "gameview.loggerText" ) );
         this.txtLogger2.setText( getText( "gameview.loggerText2" ) );
         this.txtShowRound.setText( getText( "gameview.showRound" ) );
+        this.txtLoggerTurnIsOver.setText( getText( "gameview.LoggerTurnIsOVer" ) );
+        this.txtLoggerIsYourTurn.setText( getText( "gameview.LoggerIsYourTurn" ) );
     }
 
     public void start() {
@@ -698,5 +705,13 @@ public class GameView extends View<GameModel> {
 
     public Text getTxtShowRound() {
         return txtShowRound;
+    }
+
+    public Text getTxtLoggerIsYourTurn() {
+        return txtLoggerIsYourTurn;
+    }
+
+    public Text getTxtLoggerTurnIsOver() {
+        return txtLoggerTurnIsOver;
     }
 }

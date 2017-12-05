@@ -502,16 +502,22 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     /**
-     * author Vanessa Cajochen
+     * author Vanessa Cajochen + Manuel Wirz
      */
 
+    //TODO Manuel ergänzen
+
     private void enableOrDisableView() {
+
+        String loggerIsYourTurn = new String( myUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText());
+        String loggerTurnIsOver = new String(myUser.getUserName() + " " + view.getTxtLoggerTurnIsOver().getText());
+
         if (myUser.getId() == activeUserId) {
             view.disableView();
+            view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
         } else {
             view.enableView();
-        }
-        // TODO: MANUEL WIRZ: LOG THAT NOW USER TURN CHANGED...
+            view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));        }
     }
 
 
