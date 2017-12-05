@@ -293,6 +293,7 @@ public class GameController extends Controller<GameModel, GameView> {
             unusedCards = gc.getUnusedCards();
             updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
+            System.out.println("Card buyed: " + updatedSet.calculatePoints());
 
             view.setLoggerContent(
                     users.get(updatedSet.getUserId()).getUserName()
