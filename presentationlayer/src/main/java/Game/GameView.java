@@ -98,15 +98,15 @@ public class GameView extends View<GameModel> {
 
 
         // Creating 9 columns with different width
-        ColumnConstraints column = new ColumnConstraints(15);
-        ColumnConstraints column1 = new ColumnConstraints(115);
+        ColumnConstraints column = new ColumnConstraints(85);
+        ColumnConstraints column1 = new ColumnConstraints(110);
         ColumnConstraints column2 = new ColumnConstraints(70);
         ColumnConstraints column3 = new ColumnConstraints(100);
         ColumnConstraints column4 = new ColumnConstraints(100);
         ColumnConstraints column5 = new ColumnConstraints(100);
         ColumnConstraints column6 = new ColumnConstraints(100);
         ColumnConstraints column7 = new ColumnConstraints(70);
-        ColumnConstraints column8 = new ColumnConstraints(115);
+        ColumnConstraints column8 = new ColumnConstraints(50);
         ColumnConstraints column9 = new ColumnConstraints(15);
         gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6, column7, column8, column9);
 
@@ -641,8 +641,8 @@ public class GameView extends View<GameModel> {
              imgVtrayStack.setFitHeight(120);
              imgVtrayStack.setFitWidth(75);
              gp.setRowSpan(imgVtrayStack, 4);
-             gp.setHalignment(imgVtrayStack, HPos.RIGHT);
-             gp.setConstraints(imgVtrayStack, 8, 15);
+             gp.setHalignment(imgVtrayStack, HPos.LEFT);
+             gp.setConstraints(imgVtrayStack, 0, 15);
              gp.getChildren().add(imgVtrayStack);
          }
 
@@ -652,8 +652,8 @@ public class GameView extends View<GameModel> {
             imgVtrayStack.setFitHeight(120);
             imgVtrayStack.setFitWidth(75);
             gp.setRowSpan(imgVtrayStack, 4);
-            gp.setHalignment(imgVtrayStack, HPos.RIGHT);
-            gp.setConstraints(imgVtrayStack, 8, 15);
+            gp.setHalignment(imgVtrayStack, HPos.LEFT);
+            gp.setConstraints(imgVtrayStack, 0, 15);
             gp.getChildren().add(imgVtrayStack);
         }
 
