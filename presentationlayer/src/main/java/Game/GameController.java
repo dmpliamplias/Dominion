@@ -332,22 +332,25 @@ public class GameController extends Controller<GameModel, GameView> {
     // Author Murat Kelleci 20.11.17 -
     private void buyCards(Card card) {
         if (numberOfBuys > 0 && card.getCost() <= numberOfMoney) {
-            GameContainer gc = new GameContainer(Methods.BuyCard);
-            CardPlayedInfo buyInfo = new CardPlayedInfo();
-            buyInfo.setUserId((int) getUser().getId());
-            buyInfo.setCard(card);
-            gc.setCardPlayedInfo(buyInfo);
+            if(getCard(unusedCards, card.getName()) != null) {
+
+                GameContainer gc = new GameContainer(Methods.BuyCard);
+                CardPlayedInfo buyInfo = new CardPlayedInfo();
+                buyInfo.setUserId((int) getUser().getId());
+                buyInfo.setCard(card);
+                gc.setCardPlayedInfo(buyInfo);
 
 
-            numberOfBuys--;
-            numberOfMoney = numberOfMoney - card.getCost();
-            updateActionBuyMoney();
+                numberOfBuys--;
+                numberOfMoney = numberOfMoney - card.getCost();
+                updateActionBuyMoney();
 
 
-            try {
-                PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
-            } catch (IOException e) {
-                view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                try {
+                    PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
+                } catch (IOException e) {
+                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                }
             }
         }
     }
@@ -425,7 +428,7 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    // Author Murat Kelleci 24.11.17
+    // Author Vanessa Cajochen
     private void runAction(CardImageView imgv) {
 
         Card c = imgv.getCard();
