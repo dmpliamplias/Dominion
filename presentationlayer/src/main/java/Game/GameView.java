@@ -715,4 +715,6 @@ public class GameView extends View<GameModel> {
     public Text getTxtLoggerTurnIsOver() {
         return txtLoggerTurnIsOver;
     }
+
+
 }

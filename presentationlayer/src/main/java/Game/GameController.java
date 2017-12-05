@@ -30,6 +30,7 @@ import ranking.RankingView;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.xml.ws.Action;
 import java.io.IOException;
 import java.util.*;
 
@@ -406,7 +407,8 @@ public class GameController extends Controller<GameModel, GameView> {
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
                     + card.toString(serviceLocator.getTranslator()))
-                    + " " + count;
+                    + " " + count +
+                    System.lineSeparator();
 
            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
@@ -540,26 +542,26 @@ public class GameController extends Controller<GameModel, GameView> {
 
     private void enableOrDisableView() {
 
-
-
-
         if (myUser.getId() == activeUserId) {
             view.disableView();
-
-            // view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
 
         } else {
             view.enableView();
 
-            // view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
-
-
         }
     }
 
+    /**
+     *  author Manuel Wirz + Michel Schlatter
+     *  */
+
     private void logActiveUser(){
         User activeUser = users.get(activeUserId);
-        view.setLoggerContent(activeUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText(), Color.BLACK);
+        view.setLoggerContent(
+                view.getTxtFieldShowRound().getText() + " - "+
+                activeUser.getUserName() + " " +
+                view.getTxtLoggerIsYourTurn().getText(),
+                Color.BLACK);
     }
 
     /**
