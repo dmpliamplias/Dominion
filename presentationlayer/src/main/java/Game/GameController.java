@@ -2,12 +2,14 @@ package Game;
 
 
 import Controls.CardImageView;
+import com.sun.xml.internal.bind.v2.TODO;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tooltip;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
@@ -205,7 +207,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         }
         activeUserId = userIdHasTurn;
-
+        logActiveUser();
 
         Platform.runLater(() -> {
             if (firstPlayerSetReceived == false){
@@ -239,6 +241,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 view.startWinnerStage(winningUsers);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
+                logActiveUser();
                 enableOrDisableView();
 
                 for (PlayerSet playerSet : getAllSets()) {
@@ -531,6 +534,11 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
+    private void logActiveUser(){
+        User activeUser = users.get(activeUserId);
+        // TODO: 05.12.2017 MANUEL WIRZ => TRANSLATE IT!!!
+        view.setLoggerContent("Der User " + activeUser.getUserName() + " ist nun am Zug!", Color.BLACK);
+    }
 
     public void updateUnusedCards(ArrayList<Card> unusedCards) {
         if (unusedCards == null || unusedCards.size() == 0) {
