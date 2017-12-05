@@ -2,12 +2,14 @@ package Game;
 
 
 import Controls.CardImageView;
+import com.sun.xml.internal.bind.v2.TODO;
 import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tooltip;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
@@ -222,7 +224,7 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         }
         activeUserId = userIdHasTurn;
-
+        logActiveUser();
 
         Platform.runLater(() -> {
             if (firstPlayerSetReceived == false){
@@ -256,6 +258,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 view.startWinnerStage(winningUsers);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
+                logActiveUser();
                 enableOrDisableView();
 
                 for (PlayerSet playerSet : getAllSets()) {
@@ -310,6 +313,7 @@ public class GameController extends Controller<GameModel, GameView> {
             unusedCards = gc.getUnusedCards();
             updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
+            System.out.println("Card buyed: " + updatedSet.calculatePoints());
 
             view.setLoggerContent(
                     users.get(updatedSet.getUserId()).getUserName()
@@ -375,6 +379,7 @@ public class GameController extends Controller<GameModel, GameView> {
     // Method gets called when Buy = 0 or User clicks on Button "End Buy"
     public void moveFinished() {
         GameContainer gc = new GameContainer(Methods.TurnFinished);
+
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
@@ -390,13 +395,14 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
+            int count = cardPlayedInfo.getCount();
             String logger = new String(
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
-                    + card.toString(serviceLocator.getTranslator()));
+                    + card.toString(serviceLocator.getTranslator()))
+                    + " " + count;
 
-            // TODO: Migi oder Vane: Es wird au die Charte ahzeigt, wo ufgno werdet
-           // view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+           view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
     }
 
@@ -522,30 +528,33 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     /**
-     * author Vanessa Cajochen + Manuel Wirz
+     * author Vanessa Cajochen
      */
 
-    //TODO Manuel ergänzen
 
     private void enableOrDisableView() {
 
-        String loggerIsYourTurn = new String( myUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText());
-        String loggerTurnIsOver = new String(myUser.getUserName() + " " + view.getTxtLoggerTurnIsOver().getText());
-
-
-        //view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
-        //view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
 
 
 
         if (myUser.getId() == activeUserId) {
             view.disableView();
 
+            // view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
+
         } else {
             view.enableView();
-                 }
+
+            // view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
+
+
+        }
     }
 
+    private void logActiveUser(){
+        User activeUser = users.get(activeUserId);
+        view.setLoggerContent(activeUser.getUserName() + " " + view.getTxtLoggerIsYourTurn().getText(), Color.BLACK);
+    }
 
     /**
      * author Vanessa Cajochen

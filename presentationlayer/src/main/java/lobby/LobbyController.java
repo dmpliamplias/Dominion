@@ -126,11 +126,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             sendMessage();
         } );
 
-        // ActionHandler for logout by pressing the button
-
-        view.getBtnLogout().setOnAction( event -> {
-            logout();
-        } );
 
         // ActionHandler for showing some help  by pressing the button
 
@@ -157,19 +152,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     }
 
-    // TODO Manuel Wirz löschen?!
-
-    private void logout(){
-
-        plServiceLocator.setUser(null);
-
-        LoginModel model = new LoginModel();
-        LoginView view = new LoginView( this.view.getStage(), model );
-        LoginController loginController = new LoginController( view, model );
-
-        this.view.stop();
-        view.start();
-    }
 
     private void loadData(){
         LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
@@ -180,7 +162,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         }
     }
 
-    //TODO Manuel Wirz löschen?
+    //TODO Manuel Wirz löschen
 
     private void goToGameView() {
        sendStartRequest();

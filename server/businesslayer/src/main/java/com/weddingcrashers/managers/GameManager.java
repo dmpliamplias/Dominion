@@ -476,6 +476,8 @@ public class GameManager extends Manager {
         users = null;
         gameRunning = false;
         unusedCards = null;
+        usersRoundPlayed = new ArrayList<Integer>();
+        round = 1;
     }
 
     private static int getNumberOfCards(int players, CardType cardType){
