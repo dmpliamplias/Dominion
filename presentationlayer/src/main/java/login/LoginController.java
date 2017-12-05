@@ -80,6 +80,8 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                 } catch (Exception e) {
                     view.alert(e.getMessage(), Alert.AlertType.ERROR);
                 }
+            } else {
+                view.alert(getText("loginview.erroruncompletedfields"), Alert.AlertType.WARNING);
             }
         }
     }
