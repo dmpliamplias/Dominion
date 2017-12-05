@@ -482,12 +482,15 @@ public class GameController extends Controller<GameModel, GameView> {
 
                 // btn weg wenn alle MoneyCards gespielt sind
                 boolean containsMoneyCard = false;
-                for (int i = 0; i < view.handStackList.size() - 1; i++) {
+                for (int i = 0; i < view.handStackList.size(); i++) {
+                    System.out.println("Size: " + view.handStackList.size());
+                    System.out.println(view.handStackList.get(i).getCard().getName());
                     if (view.handStackList.get(i).getCard().getName().equals("Kupfer") || view.handStackList.get(i).getCard().getName().equals("Silber") || view.handStackList.get(i).getCard().getName().equals("Gold")) {
                         containsMoneyCard = true;
                         break;
                     }
                 }
+                System.out.println("ContainsMoneyCard: " + containsMoneyCard);
                 if (containsMoneyCard == false) {
                     view.gp.getChildren().remove(view.btnPlayMoneyCards);
                     view.gp.getChildren().add(view.btnEndTurn);
@@ -500,7 +503,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 if (c.getName().equals("Garten")) {
 
                 } else if (c.getName().equals("Geldverleiher")) {
-                    for (int i = 0; i < myCardSet.getHandStack().size() - 1; i++) {
+                    for (int i = 0; i < myCardSet.getHandStack().size(); i++) {
                         if (myCardSet.getHandStack().get(i).getName().equals("Kupfer")) {
                             myCardSet.getHandStack().remove(i);
                             view.trashCopper();
