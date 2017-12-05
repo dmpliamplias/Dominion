@@ -245,6 +245,7 @@ public class GameView extends View<GameModel> {
         this.VBoxPointsandPlayer = new VBox(  );
         this.VBoxPointsandPlayer.setSpacing( 20 );
         this.txtFieldShowRound = new TextField(  );
+        this.txtFieldShowRound.setEditable( false );
         this.txtFieldShowRound.setPrefSize(150, 20);
         this.txtShowRound = new Text(  );
         this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
