@@ -378,6 +378,7 @@ public class GameController extends Controller<GameModel, GameView> {
         Platform.runLater(() -> {
             User user = users.get(cardPlayedInfo.getUserId());
             Card card = cardPlayedInfo.getCard();
+            int count = cardPlayedInfo.getCount(); // TODO: 05.12.2017 hier hast du die anzahl der gespielten Karten 
             String logger = new String(
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
