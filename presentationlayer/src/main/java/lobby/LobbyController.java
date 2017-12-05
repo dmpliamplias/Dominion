@@ -162,7 +162,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         }
     }
 
-    //TODO Manuel Wirz löschen
+    //TODO Manuel Wirz löschen -> only for testing
 
     private void goToGameView() {
        sendStartRequest();

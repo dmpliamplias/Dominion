@@ -407,8 +407,8 @@ public class GameController extends Controller<GameModel, GameView> {
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
                     + card.toString(serviceLocator.getTranslator()))
-                    + " " + count +
-                    System.lineSeparator();
+                    + " " + count;
+
 
            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
@@ -558,6 +558,7 @@ public class GameController extends Controller<GameModel, GameView> {
     private void logActiveUser(){
         User activeUser = users.get(activeUserId);
         view.setLoggerContent(
+                System.lineSeparator() +
                 view.getTxtFieldShowRound().getText() + " - "+
                 activeUser.getUserName() + " " +
                 view.getTxtLoggerIsYourTurn().getText(),
