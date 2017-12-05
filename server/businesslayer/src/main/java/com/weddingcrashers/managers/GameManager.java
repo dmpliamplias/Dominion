@@ -267,8 +267,8 @@ public class GameManager extends Manager {
         for(int i = 0; i < getNumberOfCards(players, CardType.Provinz); i++) {
             PointCard pc3 = new PointCard();
             pc3.setPointCardType(PointCardType.Province);
-            pc3.setCost(6);
-            pc3.setValue(8);
+            pc3.setCost(8);
+            pc3.setValue(6);
             pc3.setName("Provinz");
             pc3.setFilePath("provinz_{0}.png");
             unusedCards.add(pc3);
