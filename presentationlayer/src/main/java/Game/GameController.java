@@ -513,10 +513,10 @@ public class GameController extends Controller<GameModel, GameView> {
         String loggerTurnIsOver = new String(myUser.getUserName() + " " + view.getTxtLoggerTurnIsOver().getText());
 
 
-        view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
-        view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
+        //view.setLoggerContent(loggerIsYourTurn, ViewUtils.getColorByClientId(5));
+        //view.setLoggerContent(loggerTurnIsOver, ViewUtils.getColorByClientId(5));
 
-        
+
 
         if (myUser.getId() == activeUserId) {
             view.disableView();
