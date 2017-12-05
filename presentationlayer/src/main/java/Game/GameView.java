@@ -296,7 +296,7 @@ public class GameView extends View<GameModel> {
 
 
         this.scrollPaneLogger = new ScrollPane(  );
-        this.scrollPaneLogger.setPrefSize( 400, 200 );
+        this.scrollPaneLogger.setPrefSize( 350, 200 );
         this.scrollPaneLogger.setContent( loggerContent );
         this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
