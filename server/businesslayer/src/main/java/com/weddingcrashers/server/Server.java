@@ -2,9 +2,11 @@ package com.weddingcrashers.server;
 
 import com.weddingcrashers.managers.LobbyManager;
 import com.weddingcrashers.servermodels.ConnectionContainer;
+import com.weddingcrashers.servermodels.ErrorContainer;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -62,19 +64,29 @@ public class Server extends Thread {
         try {
             serverSocket = new ServerSocket(_port);
             out.println("Server started");
-            while(clients.size() < _maxPlayers && !serverSocket.isClosed()){
-                Socket socket = serverSocket.accept();
+            while(!serverSocket.isClosed()){
+                if(clients.size() < _maxPlayers) {
+                    Socket socket = serverSocket.accept();
 
-                Client clientThread = new Client(socket, ++idCounter);
-                clientThread.start();
-                clients.add(clientThread);
-                setOtherClientsForAllClients();
+                    Client clientThread = new Client(socket, ++idCounter);
+                    clientThread.start();
+                    clients.add(clientThread);
+                    setOtherClientsForAllClients();
 
-                out.println("Client accepted id:" + idCounter);
+                    out.println("Client accepted id:" + idCounter);
 
-                ConnectionContainer c = new ConnectionContainer();
-                c.setId(idCounter);
-                ServerUtils.sendObject(clientThread ,c);
+                    ConnectionContainer c = new ConnectionContainer();
+                    c.setId(idCounter);
+                    ServerUtils.sendObject(clientThread, c);
+                }else{
+                    Socket deniedClient = serverSocket.accept();
+                    ErrorContainer errorContainer = new ErrorContainer("LOBBY IS FULL. YOU CAN NOT CONNECT TO SERVER, SORRY.");
+                    errorContainer.setErrorCode(403);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(deniedClient.getOutputStream());
+                    objectOutputStream.writeObject(errorContainer);
+                    objectOutputStream.flush();
+                    System.out.println("Just denied a client...");
+                }
             }
         } catch (Exception ex){
             for(Client client : clients){

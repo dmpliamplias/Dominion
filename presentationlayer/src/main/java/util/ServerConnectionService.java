@@ -6,6 +6,7 @@ import connection.ConnectionController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import login.LoginController;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Optional;
 
 import static java.lang.System.out;
 
@@ -46,7 +48,7 @@ public class ServerConnectionService extends Thread{
                 connection.close();
             }
         } catch (IOException e) {
-            displayError(e.getMessage());
+            displayError(new ErrorContainer(e.getMessage()));
         }
     }
 
@@ -140,14 +142,23 @@ public class ServerConnectionService extends Thread{
         }
         else if(c.getMethod() == Methods.Client_Server_Error){
             ErrorContainer ec = (ErrorContainer)c;
-            displayError(ec.getError());
+            displayError(ec);
         }
     }
 
-    private void displayError(String msg){
+    private void displayError(ErrorContainer ec){
         Platform.runLater(()->{
-            Alert alert = new Alert(Alert.AlertType.ERROR, msg);
-            alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR, ec.getError());
+
+            if(ec.getErrorCode()==403) {
+                alert.setOnCloseRequest((event)->{
+                    Platform.exit();
+                });
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    Platform.exit();
+                }
+            }
         });
 
     }
