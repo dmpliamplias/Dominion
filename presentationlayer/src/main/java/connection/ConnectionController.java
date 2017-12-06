@@ -101,8 +101,12 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
           Stage stage =  view.createJoinDialog();
               view.btnOK.setOnAction((event2) ->{
                   view.refreshModelFromInfoDialog();
-                  this.join(model.getIP(), model.getPort(),false);
-                  goToLoginView();
+                  try {
+                      this.join(model.getIP(), model.getPort(), false);
+                      goToLoginView();
+                  } catch (IOException e) {
+                      this.view.alert("Keine Verbindung möglich. " + System.lineSeparator() +e.getMessage(), Alert.AlertType.ERROR);
+                  }
               });
               stage.show();
         });
@@ -120,7 +124,6 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             return ((InetSocketAddress)PLServiceLocator.getPLServiceLocator()
                     .getServerConnectionService().getConnection().getRemoteSocketAddress());
         } catch (Exception e) {
-            int i = 1;
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
         return null;
@@ -131,17 +134,13 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
      * @param url
      * @param port
      */
-    private void join(String url, int port, boolean isHoster){
-        try {
+    private void join(String url, int port, boolean isHoster) throws IOException {
             if(PLServiceLocator.getPLServiceLocator().getServerConnectionService() == null) {
                 ServerConnectionService serverConnectionService = new ServerConnectionService(url, port);
                 PLServiceLocator.getPLServiceLocator().setServerConnectionService(serverConnectionService);
                 PLServiceLocator.getPLServiceLocator().getServerConnectionService().setConnectionController(this);
                 PLServiceLocator.getPLServiceLocator().getServerConnectionService().setIsHoster(isHoster);
             }
-        } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
-        }
     }
 
 

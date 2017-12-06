@@ -4,7 +4,9 @@ import Game.GameController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import lobby.LobbyController;
 import login.LoginController;
 import ranking.RankingController;
@@ -55,6 +57,17 @@ public class ServerConnectionService extends Thread{
                 Container c = this.<Container>receiveObject();
                 runMethod(c);
             } catch (Exception ex) {
+                Platform.runLater(()->{
+                    try {
+                        connection.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
+                    alert.showAndWait();
+                });
                 ex.printStackTrace();
             }
         }
