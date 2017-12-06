@@ -286,9 +286,9 @@ public class GameView extends View<GameModel> {
     public VBox loggerAndChat() {
 
         this.VBoxLogger = new VBox(10);
-        this.VBoxLogger.setPrefSize( 500, 150 );
+        this.VBoxLogger.setPrefSize( 400, 150 );
         this.VBoxLogger.setAlignment( Pos.CENTER_LEFT );
-        this.VBoxLogger.setPadding( new Insets( 0, 80, 0 , 0 ));
+        this.VBoxLogger.setPadding( new Insets( 0, 30, 0 , 0 ));
 
         this.loggerContent = new VBox(  );
         this.textFieldNameLogger = new TextField(  );
@@ -296,7 +296,7 @@ public class GameView extends View<GameModel> {
 
 
         this.scrollPaneLogger = new ScrollPane(  );
-        this.scrollPaneLogger.setPrefSize( 350, 200 );
+        this.scrollPaneLogger.setPrefSize( 300, 200 );
         this.scrollPaneLogger.setContent( loggerContent );
         this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
         this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
