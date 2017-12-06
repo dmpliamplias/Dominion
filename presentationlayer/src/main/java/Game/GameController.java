@@ -112,6 +112,10 @@ public class GameController extends Controller<GameModel, GameView> {
         updateActionBuyMoney();
 
         view.btnPlayMoneyCards.setOnAction(event -> {
+
+            String coin = new String( "coin" );
+            playSound( coin );
+
             for (int i = 0; i < view.handStackList.size(); i++) {
                 if (view.handStackList.get(i).getCard().getName().equals("Kupfer")) {
                     numberOfMoney++;
@@ -454,14 +458,16 @@ public class GameController extends Controller<GameModel, GameView> {
     // Author Murat Kelleci 24.11.17
     private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
-            String card = new String( "card" );
             runAction(imgv);
-            playSound( card );
         });
     }
 
     // Author Vanessa Cajochen
     private void runAction(CardImageView imgv) {
+
+        String card = new String("card");
+        String coin = new String( "coin" );
+
 
         Card c = imgv.getCard();
         if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini) {
@@ -480,6 +486,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
                 view.moveCardToPlayingArea(imgv);
                 updateActionBuyMoney();
+                playSound( coin );
 
                 // btn weg wenn alle MoneyCards gespielt sind
                 boolean containsMoneyCard = false;
@@ -500,6 +507,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         } else if (c instanceof KingCard) {
+            playSound( card );
             if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
                 if (c.getName().equals("Garten")) {
 
