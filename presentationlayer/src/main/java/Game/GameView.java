@@ -491,7 +491,7 @@ public class GameView extends View<GameModel> {
         TableColumn<WinningUser, String> points = new TableColumn<>(getText("gameview.winningUsers.points"));
         TableColumn<WinningUser, String> position = new TableColumn<>(getText("gameview.winningUsers.position"));
 
-        tableView.getColumns().addAll(name, points, position);
+        tableView.getColumns().addAll(position,name, points);
 
         tableView.setItems(winningUsers);
 
