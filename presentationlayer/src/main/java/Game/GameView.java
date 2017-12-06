@@ -455,6 +455,10 @@ public class GameView extends View<GameModel> {
    public void startWinnerStage(ObservableList<WinningUser> winningUsers){
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
+        this.stageDialog.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
         stageDialog.initOwner(stage);
         stageDialog.initModality(WINDOW_MODAL);
         Scene scene = new Scene(root,400,300);
