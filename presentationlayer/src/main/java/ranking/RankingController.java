@@ -2,9 +2,11 @@ package ranking;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.weddingcrashers.model.User;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.servermodels.RankingContainer;
@@ -54,8 +56,11 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     ///** @author Murat Kelleci
 
     public void handleServerAnswer(List<Highscore> highscoreList){
-        model.setHighscores(highscoreList);
-        view.bindModelToView();
+        Platform.runLater(() ->{
+            Collections.sort(highscoreList);
+            model.setHighscores(highscoreList);
+            view.bindModelToView();
+        });
     }
 
     ///** @author Murat Kelleci

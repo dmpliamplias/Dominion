@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "HIGHSCORE")
-public class Highscore extends BaseEntity {
+public class Highscore extends BaseEntity implements Comparable<Highscore> {
 
     // ---- Members
 
@@ -84,4 +84,12 @@ public class Highscore extends BaseEntity {
         this.durationForHighscore = durationForHighscore;
     }
 
+    @Override
+    public int compareTo(Highscore o) {
+       if(this.getPoints() >= o.getPoints()){
+           return -1;
+       }else{
+           return 1;
+       }
+    }
 }

@@ -76,7 +76,9 @@ public class LobbyManager extends Manager{
         HashMap<Integer, User> users = new HashMap<Integer, User>();
 
         for(Client client : c.getAllClients()){
-            if(client.getUser() != null) {
+            if(client.getUser() != null
+                    && client.getViewStatus() == ViewStatus.Lobby
+                    || client.getViewStatus() == ViewStatus.Ranking) {
                 users.put(client.getClientId(), client.getUser());
             }
         }
