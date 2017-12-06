@@ -211,22 +211,16 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         // some checks for starting the correct end options
 
-        //TODO Migi join without hoster
-
-       // if(!view.lvPlayers.getSelectionModel().isSelected( 0 )){
-         //   view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
-        //} else
-            if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
+        if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
+            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
+        } else if(!view.lvPlayers.getSelectionModel().isSelected( 0 )) {
+            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
+        } else if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
-
-        }
-        if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
-            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
-
-
         } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <= 1) {
+
             view.startStage().show();
 
             view.btnDialogNo.setOnAction( event -> {
@@ -237,6 +231,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
                 sendStartRequest();
                 view.stageDialog.close();
             } );
+            
         } else if (names.size() < 2) {
             view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
         } else {
