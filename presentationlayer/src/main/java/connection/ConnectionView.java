@@ -279,6 +279,7 @@ public class ConnectionView extends View<ConnectionModel> {
 	public Stage createJoinDialog(){
 		stageJoinDialog = new Stage();
 
+
 		stageJoinDialog.initOwner(stage);
 		stageJoinDialog.initModality(WINDOW_MODAL);
 
@@ -334,6 +335,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
 
 		fldIP.setDisable(false);
+		fldIP.requestFocus();
 		fldPort.setDisable(false);
 
 		stageJoinDialog.setScene(scene);
