@@ -211,9 +211,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         // some checks for starting the correct end options
 
-        if(!view.lvPlayers.getSelectionModel().isSelected( 0 )){
-            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
-        } else if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
+        //TODO Migi join without hoster
+
+       // if(!view.lvPlayers.getSelectionModel().isSelected( 0 )){
+         //   view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
+        //} else
+            if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
