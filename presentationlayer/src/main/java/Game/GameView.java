@@ -13,6 +13,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import ranking.RankingViewModel;
 
 import java.util.ArrayList;
 
@@ -480,13 +482,19 @@ public class GameView extends View<GameModel> {
 
     private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {
         TableView<WinningUser> tableView = new TableView<>();
-        tableView.setItems(winningUsers);
 
         TableColumn<WinningUser, String> name = new TableColumn<>(getText("gameview.winningUsers.name"));
         TableColumn<WinningUser, String> points = new TableColumn<>(getText("gameview.winningUsers.points"));
         TableColumn<WinningUser, String> position = new TableColumn<>(getText("gameview.winningUsers.position"));
 
         tableView.getColumns().addAll(name, points, position);
+
+        tableView.setItems(winningUsers);
+
+        name.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("userName"));
+        points.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("points"));
+        position.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("position"));
+
         return tableView;
     }
 
