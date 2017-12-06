@@ -1,10 +1,15 @@
 package Game;
 
 
+
  /*@author Murat Kelleci - 3.12.2017 -ausgelagert aus GameView
  */
 
-public class WinningUser {
+import java.io.Serializable;
+
+import com.weddingcrashers.servermodels.WinningInformation;
+
+public class WinningUser implements Comparable<WinningUser>, Serializable{
 
     private String userName;
     private int points, position;
@@ -37,6 +42,11 @@ public class WinningUser {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public int compareTo(WinningUser o) {
+        return new Integer(this.points).compareTo(o.points);
     }
 
 }

@@ -14,6 +14,9 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
         this.clientId = clientId;
         this.userId = userId;
         this.points = points;
+
+
+
     }
 
 
@@ -53,6 +56,6 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
 
     @Override
     public int compareTo(WinningInformation o) {
-        return new Integer(this.points).compareTo(o.points);
+        return new Integer(this.position).compareTo(o.position);
     }
 }

@@ -282,6 +282,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
         ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
+            Collections.sort(winningUsers);
             for (WinningInformation wi : winningInformations) {
                 User user = users.get(wi.getUserId());
                 int points = wi.getPoints();

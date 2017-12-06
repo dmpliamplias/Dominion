@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import static util.StyleSheetPath.RANKING;
+
 
 /**
  *@author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
@@ -51,7 +53,11 @@ public class RankingView extends View<RankingModel> {
             vbox.setPadding(new Insets(8, 0, 0, 8));
             vbox.getChildren().addAll(lblRanking, table, btnLobby);
 
+
+
             Scene scene = new Scene(vbox);
+
+            //setStylesheet(scene, RANKING);
 
             this.stage.setScene(scene);
             this.stage.show();
