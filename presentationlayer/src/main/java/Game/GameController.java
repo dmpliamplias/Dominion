@@ -509,7 +509,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
         } else if (c instanceof KingCard) {
-            playSound( card );
+
             if (actionPhaseOver == false && view.handStackList.contains(imgv) && numberOfActions > 0) {
                 if (c.getName().equals("Garten")) {
 
@@ -522,6 +522,7 @@ public class GameController extends Controller<GameModel, GameView> {
                             view.moveCardToPlayingArea(imgv);
                             numberOfActions -= 1;
                             updateActionBuyMoney();
+                            playSound( card );
                             break;
                         }
                     }
@@ -537,6 +538,7 @@ public class GameController extends Controller<GameModel, GameView> {
                     view.moveCardToPlayingArea(imgv);
                     numberOfActions -= 1;
                     updateActionBuyMoney();
+                    playSound( card );
                 }
             }
         }
