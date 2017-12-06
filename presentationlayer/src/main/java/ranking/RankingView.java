@@ -39,7 +39,10 @@ public class RankingView extends View<RankingModel> {
     protected Scene create_GUI() {
             this.stage.setWidth(500);
             this.stage.setHeight(600);
-
+        this.stage.setOnCloseRequest(evt -> {
+            // prevent window from closing
+            evt.consume();
+        });
             table = new TableView<RankingViewModel>();
             table.setEditable(false);
 
