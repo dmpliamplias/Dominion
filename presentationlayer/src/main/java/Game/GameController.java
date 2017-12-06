@@ -453,7 +453,9 @@ public class GameController extends Controller<GameModel, GameView> {
     // Author Murat Kelleci 24.11.17
     private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
+            String card = new String( "card" );
             runAction(imgv);
+            playSound( card );
         });
     }
 
