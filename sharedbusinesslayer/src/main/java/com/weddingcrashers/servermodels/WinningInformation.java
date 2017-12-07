@@ -14,12 +14,7 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
         this.clientId = clientId;
         this.userId = userId;
         this.points = points;
-
-
-
     }
-
-
 
     public int getClientId() {
         return clientId;

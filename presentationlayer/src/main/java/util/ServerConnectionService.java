@@ -60,7 +60,7 @@ public class ServerConnectionService extends Thread{
                 runMethod(c);
             } catch (Exception ex) {
                 ex.printStackTrace();
-                /*Platform.runLater(()->{
+                Platform.runLater(()->{
                     try {
                         connection.close();
                     } catch (IOException e) {
@@ -70,7 +70,7 @@ public class ServerConnectionService extends Thread{
                     alert.setTitle("ERROR");
                     alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
                     alert.showAndWait();
-                });*/
+                });
                 ex.printStackTrace();
             }
         }
