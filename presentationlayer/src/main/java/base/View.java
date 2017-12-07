@@ -37,14 +37,18 @@ public abstract class View<M extends Model> {
     protected MenuBar menuBar;
     protected Menu menuSettings;
     protected Menu menuLanguage;
+    protected Menu menuMusic;
     protected Menu menuSound;
     protected MenuItem menuItemHelp;
     protected MenuItem menuItemDE;
     protected MenuItem menuItemENG;
     protected MenuItem menuItemCH;
+    protected ToggleGroup toggleGroupMusic;
     protected ToggleGroup toggleGroupSound;
-    protected RadioMenuItem menuItemMute;
-    protected RadioMenuItem menuItemUnmute;
+    protected RadioMenuItem menuItemMusicMute;
+    protected RadioMenuItem menuItemMusicUnmute;
+    protected RadioMenuItem menuItemSoundMute;
+    protected RadioMenuItem menuItemSoundUnmute;
 
     protected ImageView imgViewEngFlag;
     protected ImageView imgViewChFlag;
@@ -170,20 +174,33 @@ public abstract class View<M extends Model> {
         menuItemENG = new MenuItem();
         menuItemCH = new MenuItem();
 
+        // Music Menu
+        menuMusic = new Menu();
+        toggleGroupMusic = new ToggleGroup();
+        menuItemMusicMute = new RadioMenuItem();
+        menuItemMusicUnmute = new RadioMenuItem();
+        menuItemMusicMute.setToggleGroup(toggleGroupMusic);
+        menuItemMusicUnmute.setToggleGroup(toggleGroupMusic);
+        menuItemMusicUnmute.setSelected(true);
+
+        // Sound Menu
         menuSound = new Menu();
         toggleGroupSound = new ToggleGroup();
-        menuItemMute = new RadioMenuItem();
-        menuItemUnmute = new RadioMenuItem();
-        menuItemMute.setToggleGroup(toggleGroupSound);
-        menuItemUnmute.setToggleGroup(toggleGroupSound);
+        menuItemSoundMute = new RadioMenuItem();
+        menuItemSoundUnmute = new RadioMenuItem();
+        menuItemSoundMute.setToggleGroup(toggleGroupSound);
+        menuItemSoundUnmute.setToggleGroup(toggleGroupSound);
+        menuItemSoundUnmute.setSelected(true);
 
+        // Help Menu
         menuItemHelp = new MenuItem();
 
         menuBar.getMenus().add(menuSettings);
-        menuSettings.getItems().addAll(menuLanguage, menuSound, menuItemHelp);
+        menuSettings.getItems().addAll(menuLanguage, menuMusic, menuSound, menuItemHelp);
         menuLanguage.getItems().addAll(menuItemCH, menuItemDE, menuItemENG);
-        menuSound.getItems().addAll(menuItemUnmute, menuItemMute);
-        menuItemUnmute.setSelected(true);
+        menuMusic.getItems().addAll(menuItemMusicUnmute, menuItemMusicMute);
+        menuSound.getItems().addAll(menuItemSoundUnmute, menuItemSoundMute);
+
 
 
         // Create Language Icons
@@ -220,6 +237,7 @@ public abstract class View<M extends Model> {
     protected void setMenuTexts() {
         menuSettings.setText(getText("menu.menuSetting"));
         menuLanguage.setText(getText("menu.menuLanguage"));
+        menuMusic.setText(getText("menu.menuMusic"));
         menuSound.setText(getText("menu.menuSound"));
         menuItemHelp.setText(getText("connectionview.btnHelp"));
         menuItemDE.setText(getText("menu.languageDe"));
@@ -228,10 +246,16 @@ public abstract class View<M extends Model> {
         menuItemENG.setGraphic(imgViewEngFlag);
         menuItemCH.setText(getText("menu.languageCh"));
         menuItemCH.setGraphic(imgViewChFlag);
-        menuItemUnmute.setText(getText("menu.unMute"));
-        menuItemUnmute.setGraphic(imgViewUnmute);
-        menuItemMute.setText(getText("menu.mute"));
-        menuItemMute.setGraphic(imgViewMute);
+
+        menuItemMusicUnmute.setText(getText("menu.unMute"));
+        menuItemMusicUnmute.setGraphic(imgViewUnmute);
+        menuItemMusicMute.setText(getText("menu.mute"));
+        menuItemMusicMute.setGraphic(imgViewMute);
+
+        menuItemSoundUnmute.setText(getText("menu.unMute"));
+        menuItemSoundUnmute.setGraphic(imgViewUnmute);
+        menuItemSoundMute.setText(getText("menu.mute"));
+        menuItemSoundMute.setGraphic(imgViewMute);
     }
 
 }
