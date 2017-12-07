@@ -1,0 +1,33 @@
+.root{
+     -fx-background-image: url("backgroundPort.jpg");
+     -fx-background-size: cover;
+ }
+
+
+
+
+.button.Transparent{
+     -fx-border-color: transparent;
+     -fx-border-width: 0;
+     -fx-background-color: transparent;
+     -fx-text-fill: #604020;
+     -fx-font-weight: bold;
+     -fx-font-size: 12;
+ }
+
+ .button{
+      -fx-font-weight: bold;
+      -fx-font-size: 12;
+      -fx-background-color: rgba(255, 255, 255, .5);
+  }
+
+
+ .label{
+     -fx-font-size: 12px;
+     -fx-font-weight: bolder;
+     -fx-text-fill: #333333;
+     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+     -fx-border-radius: 3;
+     -fx-background-radius: 3;
+     -fx-background-color: rgba(255, 255, 255, .5);
+ }
