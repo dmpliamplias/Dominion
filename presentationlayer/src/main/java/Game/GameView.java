@@ -480,8 +480,12 @@ public class GameView extends View<GameModel> {
         this.btnRanking.setPrefSize(180, 80);
         this.VBoxDisplayWinner = new VBox();
         TableView<WinningUser> tableView = createWinningUserTableView(winningUsers);
+        HBox hbox =new HBox();
+        hbox.setPadding(new Insets(15, 12, 15, 12));
+        hbox.setSpacing(10);
+        hbox.getChildren().addAll(btnLobby,btnRanking);
 
-        VBoxDisplayWinner.getChildren().addAll(tableView, btnLobby, btnRanking);
+        VBoxDisplayWinner.getChildren().addAll(tableView,hbox);
     }
 
     private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {
