@@ -368,10 +368,13 @@ public class GameController extends Controller<GameModel, GameView> {
             if(getCard(unusedCards, card.getName()) != null) {
 
                 GameContainer gc = new GameContainer(Methods.BuyCard);
+                String cash = new String ("cash");
                 CardPlayedInfo buyInfo = new CardPlayedInfo();
                 buyInfo.setUserId((int) getUser().getId());
                 buyInfo.setCard(card);
                 gc.setCardPlayedInfo(buyInfo);
+                playSound( cash );
+
 
 
                 numberOfBuys--;
@@ -469,6 +472,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         String card = new String("card");
         String coin = new String( "coin" );
+
 
 
         Card c = imgv.getCard();
