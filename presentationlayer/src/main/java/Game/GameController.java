@@ -879,6 +879,7 @@ public class GameController extends Controller<GameModel, GameView> {
         Stage s = new Stage(  );
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
+        plServiceLocator.audioClip.stop();
 
         this.view.stop();
         view.start();
