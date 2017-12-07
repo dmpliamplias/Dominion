@@ -91,15 +91,14 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
-        plServiceLocator.task.cancel(true);
-        plServiceLocator.ThreadMusic.interrupt();
 
+            plServiceLocator.audioClip.setVolume( 0 );
 
         } );
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
 
-            startSound();
+            plServiceLocator.audioClip.setVolume( 0.07 );
 
 
         } );
@@ -156,20 +155,20 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void startSound(){
 
-        plServiceLocator.task = new Task() {
+        final Task task = new Task() {
 
             @Override
             protected Object call() throws Exception {
                 int s = INDEFINITE;
-                AudioClip audio = new AudioClip( getClass().getResource( "/sounds/background.wav" ).toExternalForm() );
-                audio.setVolume( 0.07 );
-                audio.setCycleCount( s );
-                audio.play();
+                plServiceLocator.audioClip = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
+                plServiceLocator.audioClip.setVolume(0.07);
+                plServiceLocator.audioClip.setCycleCount(s);
+                plServiceLocator.audioClip.play();
                 return null;
             }
         };
-        plServiceLocator.ThreadMusic = new Thread( plServiceLocator.task );
-        plServiceLocator.ThreadMusic.start();
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
 

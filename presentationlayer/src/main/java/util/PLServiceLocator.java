@@ -3,14 +3,15 @@ package util;
 import com.weddingcrashers.model.User;
 import javafx.concurrent.Task;
 
+import java.applet.AudioClip;
+
 /***
  * @Author Michel Schlatter
  */
 public class PLServiceLocator {
 
-    public Task task;
-    public Thread ThreadMusic;
 
+    public javafx.scene.media.AudioClip audioClip;
     private static PLServiceLocator sl;
 
     public  static PLServiceLocator getPLServiceLocator(){
@@ -40,11 +41,7 @@ public class PLServiceLocator {
         this.user = user;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public Thread getThreadMusic() {
-        return ThreadMusic;
+    public javafx.scene.media.AudioClip getAudioClip() {
+        return audioClip;
     }
 }
