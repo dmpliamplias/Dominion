@@ -99,7 +99,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
         view.btnJoinS.setOnAction((event) -> {
           Stage stage =  view.createJoinDialog();
-              view.btnOK.setOnAction((event2) ->{
+              view.btnJoinOK.setOnAction((event2) ->{
                   view.refreshModelFromInfoDialog();
                   try {
                       this.join(model.getIP(), model.getPort(), false);

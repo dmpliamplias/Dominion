@@ -25,6 +25,7 @@ public class ConnectionView extends View<ConnectionModel> {
 	Button btnOK;
 	Button btnCopyPort;
 	Button btnCopyIP;
+	Button btnJoinOK;
 	TextField fldPort;
 	TextField fldIP;
 	Label lblPort;
@@ -57,7 +58,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnStartS = new Button();
 		btnJoinS = new Button();
 		btnHelp = new Button();
-		
+
 		// Set size for the buttons and FlowPane
 		btnStartS.setPrefSize(140, 50);
 		btnJoinS.setPrefSize(140, 50);
@@ -113,7 +114,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(btnHelp, 1, 5);
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 
-		
+
 		stage.setScene(scene);
 		stage.setResizable(false);
 		setStylesheet(scene, CONNECTION);
@@ -125,7 +126,6 @@ public class ConnectionView extends View<ConnectionModel> {
 	// Stage where you enter your port number
 	public Stage create_Dialog(){
 		stageCreateDialog = new Stage();
-
 		stageCreateDialog.initOwner(stage);
 		stageCreateDialog.initModality(WINDOW_MODAL);
 		
@@ -134,16 +134,16 @@ public class ConnectionView extends View<ConnectionModel> {
 		GridPane gp = new GridPane();
 		gp.setVgap(10);
 
-		
+
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button();
 		lblPort = new Label();
 		fldPort = new TextField();
 		lblInfo = new Label();
+		btnConnect.getStyleClass().add("Transparent");
 	    	    			
 		// Set size for the button, label, textfield
 		btnConnect.setPrefSize(90, 30);
-		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
 
 		// Asign GridPane to BorderPane
@@ -153,11 +153,10 @@ public class ConnectionView extends View<ConnectionModel> {
 		ColumnConstraints column = new ColumnConstraints(50);
 		ColumnConstraints column1 = new ColumnConstraints(50);
 		ColumnConstraints column2 = new ColumnConstraints(150);
-		ColumnConstraints column3 = new ColumnConstraints(10);
-		ColumnConstraints column4 = new ColumnConstraints(10);
-		ColumnConstraints column5 = new ColumnConstraints(90);
-		ColumnConstraints column6 = new ColumnConstraints(40);
-		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
+		ColumnConstraints column3 = new ColumnConstraints(40);
+		ColumnConstraints column4 = new ColumnConstraints(90);
+		ColumnConstraints column5 = new ColumnConstraints(10);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5);
 							
 		// Creating 8 rows
 		for (int i = 0; i<8;i++){
@@ -169,12 +168,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(lblInfo, 2, 1);
 		gp.setConstraints(lblPort, 1, 2);
 		gp.setConstraints(fldPort, 2, 2);
-	 	gp.setConstraints(btnConnect, 5, 4);
-		gp.setColumnSpan(lblInfo, 5);
+	 	gp.setConstraints(btnConnect, 4, 4);
+		gp.setColumnSpan(lblInfo, 4);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
 
 		stageCreateDialog.setScene(scene2);
 		setTexts();
+        scene2.getStylesheets().add("connection/connectionport.css");
 		stageCreateDialog.getIcons().add(imgIcon);
         return stageCreateDialog;
     }
@@ -197,6 +197,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		GridPane gp = new GridPane();
 		gp.setVgap(10);
 
+
 		// Asign GridPane to BorderPane
 		root.setCenter(gp);
 		
@@ -209,15 +210,14 @@ public class ConnectionView extends View<ConnectionModel> {
 		btnOK = new Button();
 		btnCopyPort = new Button();
 		btnCopyIP = new Button();
+		btnOK.getStyleClass().add("Transparent");
 
-		// Set size for the buttons, labels, textfields
-		lblPort.setPrefSize(50, 30);
+		// Set size for the buttons and textfields
 		fldPort.setPrefSize(150, 30);
-		lblIP.setPrefSize(50, 30);
 		fldIP.setPrefSize(150, 30);
 		btnCopyPort.setPrefSize(30, 30);
 		btnCopyIP.setPrefSize(30, 30);
-		btnOK.setPrefSize(60, 30);
+		btnOK.setPrefSize(110, 30);
 
 		// Create Image 'Copy to ClipBoard'
 		Image imgClipBoard = new Image(getClass().getResourceAsStream("copyToClipboard.png"));
@@ -238,10 +238,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		ColumnConstraints column1 = new ColumnConstraints(50);
 		ColumnConstraints column2 = new ColumnConstraints(150);
 		ColumnConstraints column3 = new ColumnConstraints(30);
-		ColumnConstraints column4 = new ColumnConstraints(20);
-		ColumnConstraints column5 = new ColumnConstraints(60);
-		ColumnConstraints column6 = new ColumnConstraints(40);
-		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
+		ColumnConstraints column4 = new ColumnConstraints(110);
+		ColumnConstraints column5 = new ColumnConstraints(10);
+		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5);
 					
 		
 		// Creating 8 rows
@@ -256,7 +255,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(fldPort, 2, 3);
 		gp.setConstraints(lblIP, 1, 2);
 		gp.setConstraints(fldIP, 2, 2);
-		gp.setConstraints(btnOK, 5, 4);
+		gp.setConstraints(btnOK, 4, 4);
 		gp.setConstraints(btnCopyPort, 3, 3);
 		gp.setConstraints(btnCopyIP, 3, 2);
 		gp.setColumnSpan(lblInfo, 5);
@@ -270,6 +269,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		if(stageCreateDialog != null) stageCreateDialog.close();
 		setTexts();
 
+        scene.getStylesheets().add("connection/connectionport.css");
 		stageConnectedDialog.getIcons().add(imgIcon);
         return stageConnectedDialog;
     }
@@ -279,7 +279,6 @@ public class ConnectionView extends View<ConnectionModel> {
 	public Stage createJoinDialog(){
 		stageJoinDialog = new Stage();
 
-
 		stageJoinDialog.initOwner(stage);
 		stageJoinDialog.initModality(WINDOW_MODAL);
 
@@ -287,6 +286,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		Scene scene = new Scene(root,400,220);
 		GridPane gp = new GridPane();
 		gp.setVgap(10);
+
+
+		gp.setGridLinesVisible(false);
 
 		// Asign GridPane to BorderPane
 		root.setCenter(gp);
@@ -297,14 +299,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		fldPort = new TextField();
 		lblIP = new Label();
 		fldIP = new TextField();
-		btnOK = new Button();
+		btnJoinOK = new Button();
+		btnJoinOK.getStyleClass().add("Transparent");
 
 		// Set size for the buttons and FlowPane
-		lblPort.setPrefSize(50, 30);
 		fldPort.setPrefSize(150, 30);
-		lblIP.setPrefSize(50, 30);
 		fldIP.setPrefSize(150, 30);
-		btnOK.setPrefSize(90, 30);
+		btnJoinOK.setPrefSize(90, 30);
 
 
 		// Creating columns with different sizes
@@ -312,9 +313,9 @@ public class ConnectionView extends View<ConnectionModel> {
 		ColumnConstraints column1 = new ColumnConstraints(50);
 		ColumnConstraints column2 = new ColumnConstraints(150);
 		ColumnConstraints column3 = new ColumnConstraints(10);
-		ColumnConstraints column4 = new ColumnConstraints(10);
+		ColumnConstraints column4 = new ColumnConstraints(30);
 		ColumnConstraints column5 = new ColumnConstraints(90);
-		ColumnConstraints column6 = new ColumnConstraints(40);
+		ColumnConstraints column6 = new ColumnConstraints(20);
 		gp.getColumnConstraints().addAll(column, column1, column2, column3, column4, column5, column6);
 
 
@@ -330,14 +331,16 @@ public class ConnectionView extends View<ConnectionModel> {
 		gp.setConstraints(fldPort, 2, 3);
 		gp.setConstraints(lblIP, 1, 2);
 		gp.setConstraints(fldIP, 2, 2);
-		gp.setConstraints(btnOK, 5, 4);
+		gp.setConstraints(btnJoinOK, 5, 4);
 		gp.setColumnSpan(lblInfo, 5);
-		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP);
+		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnJoinOK, lblIP, fldIP);
 
 		fldIP.setDisable(false);
 		fldIP.requestFocus();
 		fldPort.setDisable(false);
 
+
+		scene.getStylesheets().add("connection/connectionport.css");
 		stageJoinDialog.setScene(scene);
 
 		if(stageCreateDialog != null) stageCreateDialog.close();
@@ -382,7 +385,7 @@ public class ConnectionView extends View<ConnectionModel> {
 			lblPort.setText(getText("connectionview.lblPort"));
 			lblInfo.setText(getText("connectionview.enterInfo"));
 			lblIP.setText(getText("connectionview.lblIp"));
-			btnOK.setText(getText("connectionview.btnConnect"));
+			btnJoinOK.setText(getText("connectionview.btnConnect"));
 			stageJoinDialog.setTitle(getText("connectionview.joinDialog.title"));
 		}
 
