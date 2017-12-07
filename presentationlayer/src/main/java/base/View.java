@@ -4,10 +4,7 @@ import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -39,14 +36,21 @@ public abstract class View<M extends Model> {
     /** Menu */
     protected MenuBar menuBar;
     protected Menu menuSettings;
-    protected Menu menuItemLanguage;
+    protected Menu menuLanguage;
+    protected Menu menuSound;
+    protected MenuItem menuItemHelp;
     protected MenuItem menuItemDE;
     protected MenuItem menuItemENG;
     protected MenuItem menuItemCH;
+    protected ToggleGroup toggleGroupSound;
+    protected RadioMenuItem menuItemMute;
+    protected RadioMenuItem menuItemUnmute;
 
     protected ImageView imgViewEngFlag;
     protected ImageView imgViewChFlag;
     protected ImageView imgViewDeFlag;
+    protected ImageView imgViewMute;
+    protected ImageView imgViewUnmute;
     protected Boolean menuBarUsed;
 
 
@@ -161,27 +165,45 @@ public abstract class View<M extends Model> {
 
         menuBar = new MenuBar();
         menuSettings = new Menu();
-        menuItemLanguage = new Menu();
+        menuLanguage = new Menu();
         menuItemDE = new MenuItem();
         menuItemENG = new MenuItem();
         menuItemCH = new MenuItem();
 
+        menuSound = new Menu();
+        toggleGroupSound = new ToggleGroup();
+        menuItemMute = new RadioMenuItem();
+        menuItemUnmute = new RadioMenuItem();
+        menuItemMute.setToggleGroup(toggleGroupSound);
+        menuItemUnmute.setToggleGroup(toggleGroupSound);
+
+        menuItemHelp = new MenuItem();
+
         menuBar.getMenus().add(menuSettings);
-        menuSettings.getItems().addAll(menuItemLanguage);
-        menuItemLanguage.getItems().addAll(menuItemCH, menuItemDE, menuItemENG);
+        menuSettings.getItems().addAll(menuLanguage, menuSound, menuItemHelp);
+        menuLanguage.getItems().addAll(menuItemCH, menuItemDE, menuItemENG);
+        menuSound.getItems().addAll(menuItemUnmute, menuItemMute);
+        menuItemUnmute.setSelected(true);
+
 
         // Create Language Icons
         imgViewDeFlag = new ImageView(new Image(getClass().getResourceAsStream("/connection/germanFlag.png")));
-        imgViewDeFlag.setFitHeight(20);
-        imgViewDeFlag.setFitWidth(20);
+        setIconSize(imgViewDeFlag);
 
         imgViewChFlag = new ImageView(new Image(getClass().getResourceAsStream("/connection/swissFlag.png")));
-        imgViewChFlag.setFitHeight(20);
-        imgViewChFlag.setFitWidth(20);
+        setIconSize(imgViewChFlag);
 
         imgViewEngFlag = new ImageView (new Image(getClass().getResourceAsStream("/connection/englishFlag.png")));
-        imgViewEngFlag.setFitHeight(20);
-        imgViewEngFlag.setFitWidth(20);
+        setIconSize(imgViewEngFlag);
+
+
+        // Create mute/unmute icons
+        imgViewMute = new ImageView(new Image(getClass().getResourceAsStream("/base/mute.png")));
+        setIconSize(imgViewMute);
+
+        imgViewUnmute = new ImageView(new Image(getClass().getResourceAsStream("/base/unmute.png")));
+        setIconSize(imgViewUnmute);
+
 
         setMenuTexts();
 
@@ -190,15 +212,26 @@ public abstract class View<M extends Model> {
         return menuBar;
     }
 
+    private void setIconSize(ImageView imgV){
+        imgV.setFitHeight(20);
+        imgV.setFitWidth(20);
+    }
+
     protected void setMenuTexts() {
         menuSettings.setText(getText("menu.menuSetting"));
-        menuItemLanguage.setText(getText("menu.menuLanguage"));
+        menuLanguage.setText(getText("menu.menuLanguage"));
+        menuSound.setText(getText("menu.menuSound"));
+        menuItemHelp.setText(getText("connectionview.btnHelp"));
         menuItemDE.setText(getText("menu.languageDe"));
         menuItemDE.setGraphic(imgViewDeFlag);
         menuItemENG.setText(getText("menu.languageEng"));
         menuItemENG.setGraphic(imgViewEngFlag);
         menuItemCH.setText(getText("menu.languageCh"));
         menuItemCH.setGraphic(imgViewChFlag);
+        menuItemUnmute.setText(getText("menu.unMute"));
+        menuItemUnmute.setGraphic(imgViewUnmute);
+        menuItemMute.setText(getText("menu.mute"));
+        menuItemMute.setGraphic(imgViewMute);
     }
 
 }
