@@ -1,10 +1,16 @@
 package util;
 
 import com.weddingcrashers.model.User;
+import javafx.concurrent.Task;
+
 /***
  * @Author Michel Schlatter
  */
 public class PLServiceLocator {
+
+    public Task task;
+    public Thread ThreadMusic;
+
     private static PLServiceLocator sl;
 
     public  static PLServiceLocator getPLServiceLocator(){
@@ -34,4 +40,11 @@ public class PLServiceLocator {
         this.user = user;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public Thread getThreadMusic() {
+        return ThreadMusic;
+    }
 }

@@ -6,6 +6,7 @@ import Game.GameView;
 import javafx.concurrent.Task;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import util.PLServiceLocator;
 import util.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.model.User;
@@ -80,25 +81,28 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
-        // Method for backgorund music
+        // Start sound default
 
-        // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+        startSound();
 
-        final Task task = new Task() {
+        // Start and end Task for music
+        
+        //TODO why isn't it working?^^
 
-            @Override
-            protected Object call() throws Exception {
-                int s = INDEFINITE;
-                AudioClip audio = new AudioClip(getClass().getResource("/sounds/background.wav").toExternalForm());
-                audio.setVolume(0.07);
-                audio.setCycleCount(s);
-                audio.play();
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.start();
+        super.view.getMenuItemMusicMute().setOnAction( event -> {
 
+        plServiceLocator.task.cancel(true);
+        plServiceLocator.ThreadMusic.interrupt();
+
+
+        } );
+
+        super.view.getMenuItemMusicUnmute().setOnAction( event -> {
+
+            startSound();
+
+
+        } );
 
         // Sends message with Enter
 
@@ -145,6 +149,29 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     /**
      *  author Manuel Wirz
      *  */
+
+    // Method for backgorund music
+
+    // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+
+    public void startSound(){
+
+        plServiceLocator.task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                AudioClip audio = new AudioClip( getClass().getResource( "/sounds/background.wav" ).toExternalForm() );
+                audio.setVolume( 0.07 );
+                audio.setCycleCount( s );
+                audio.play();
+                return null;
+            }
+        };
+        plServiceLocator.ThreadMusic = new Thread( plServiceLocator.task );
+        plServiceLocator.ThreadMusic.start();
+    }
+
 
     private void help(){
 

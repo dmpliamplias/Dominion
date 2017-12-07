@@ -258,4 +258,11 @@ public abstract class View<M extends Model> {
         menuItemSoundMute.setGraphic(imgViewMute);
     }
 
+    public RadioMenuItem getMenuItemMusicMute() {
+        return menuItemMusicMute;
+    }
+
+    public RadioMenuItem getMenuItemMusicUnmute() {
+        return menuItemMusicUnmute;
+    }
 }

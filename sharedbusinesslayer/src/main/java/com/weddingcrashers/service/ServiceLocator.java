@@ -102,5 +102,5 @@ public class ServiceLocator {
     public void setTranslator(Language language) {
         this.translator = new Translator(language);
     }
-    
+
 }
