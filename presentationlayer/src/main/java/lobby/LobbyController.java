@@ -87,7 +87,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         // Start and end Task for music
         
-        //TODO why isn't it working?^^
+        //TODO Migi oder Dyoni why isn't it working?^^
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
