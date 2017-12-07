@@ -265,4 +265,12 @@ public abstract class View<M extends Model> {
     public RadioMenuItem getMenuItemMusicUnmute() {
         return menuItemMusicUnmute;
     }
+
+    public RadioMenuItem getMenuItemSoundMute() {
+        return menuItemSoundMute;
+    }
+
+    public RadioMenuItem getMenuItemSoundUnmute() {
+        return menuItemSoundUnmute;
+    }
 }

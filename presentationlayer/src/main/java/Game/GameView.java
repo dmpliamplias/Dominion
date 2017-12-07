@@ -259,7 +259,11 @@ public class GameView extends View<GameModel> {
         this.endOptionRounds = new Text();
         this.endOptionPoints = new Text();
 
-        this.setTop.getChildren().addAll(title, endOption);
+        this.setTop.getChildren().addAll(getMenuBar(), title, endOption);
+
+        menuSettings.getItems().remove(menuLanguage);
+
+
         return setTop;
     }
 

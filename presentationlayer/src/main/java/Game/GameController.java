@@ -114,7 +114,9 @@ public class GameController extends Controller<GameModel, GameView> {
         view.btnPlayMoneyCards.setOnAction(event -> {
 
             String coin = new String( "coin" );
-            playSound( coin );
+            if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                playSound( coin );
+            }
 
             for (int i = 0; i < view.handStackList.size(); i++) {
                 if (view.handStackList.get(i).getCard().getName().equals("Kupfer")) {
@@ -373,8 +375,9 @@ public class GameController extends Controller<GameModel, GameView> {
                 buyInfo.setUserId((int) getUser().getId());
                 buyInfo.setCard(card);
                 gc.setCardPlayedInfo(buyInfo);
-                playSound( cash );
-
+                if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                    playSound( cash );
+                }
 
 
                 numberOfBuys--;
@@ -492,7 +495,10 @@ public class GameController extends Controller<GameModel, GameView> {
 
                 view.moveCardToPlayingArea(imgv);
                 updateActionBuyMoney();
-                playSound( coin );
+
+                if(super.view.getMenuItemSoundUnmute().isSelected()){
+                    playSound( coin );
+                }
 
                 // btn weg wenn alle MoneyCards gespielt sind
                 boolean containsMoneyCard = false;
@@ -526,7 +532,9 @@ public class GameController extends Controller<GameModel, GameView> {
                             view.moveCardToPlayingArea(imgv);
                             numberOfActions -= 1;
                             updateActionBuyMoney();
-                            playSound( card );
+                            if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                                playSound( card );
+                            }
                             break;
                         }
                     }
@@ -542,7 +550,9 @@ public class GameController extends Controller<GameModel, GameView> {
                     view.moveCardToPlayingArea(imgv);
                     numberOfActions -= 1;
                     updateActionBuyMoney();
-                    playSound( card );
+                    if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                        playSound( card );
+                    }
                 }
             }
         }
