@@ -86,10 +86,12 @@ public class Highscore extends BaseEntity implements Comparable<Highscore> {
 
     @Override
     public int compareTo(Highscore o) {
-       if(this.getPoints() >= o.getPoints()){
+       if(this.getPoints() > o.getPoints()){
            return -1;
-       }else{
+       }else if(this.getPoints() < o.getPoints()){
            return 1;
+       }else{
+           return 0;
        }
     }
 }
