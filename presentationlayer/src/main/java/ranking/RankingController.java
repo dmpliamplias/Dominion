@@ -57,7 +57,6 @@ public class RankingController extends Controller<RankingModel, RankingView> {
 
     public void handleServerAnswer(List<Highscore> highscoreList){
         Platform.runLater(() ->{
-            Collections.sort(highscoreList);
             model.setHighscores(highscoreList);
             view.bindModelToView();
         });
