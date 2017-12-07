@@ -684,7 +684,9 @@ public class GameView extends View<GameModel> {
 
         // HandCards and Button gets greyedout. Player can no longer play cards and click Button
         public void enableView(){
-            gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
+            if(!gp.getChildren().contains(imgVGreyOutHandStack)) {
+                gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
+            }
         }
 
 
