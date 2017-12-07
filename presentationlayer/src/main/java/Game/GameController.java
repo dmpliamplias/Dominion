@@ -8,7 +8,9 @@ import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.scene.control.Tooltip;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lobby.LobbyController;
@@ -33,6 +35,8 @@ import javax.sound.sampled.Clip;
 import javax.xml.ws.Action;
 import java.io.IOException;
 import java.util.*;
+
+import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
  *  author Michel Schlatter
@@ -179,6 +183,24 @@ public class GameController extends Controller<GameModel, GameView> {
             sendButtonText();
         });
 
+        // Start and end background music
+
+        //TODO Manuel startSound() abfangen, dass es zweimal lauft
+
+        super.view.getMenuItemMusicMute().setOnAction( event -> {
+
+
+            plServiceLocator.audioClip.stop();
+
+        } );
+
+        super.view.getMenuItemMusicUnmute().setOnAction( event -> {
+
+            startSound();
+
+
+        } );
+
         // EventHandler for sending a  msg by pressing enter
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
@@ -210,6 +232,28 @@ public class GameController extends Controller<GameModel, GameView> {
                 System.err.println(e.getMessage());
             }
         }).start();
+    }
+
+    // Method for backgorund music
+
+    // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+
+    public void startSound(){
+
+        final Task task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                plServiceLocator.audioClip = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
+                plServiceLocator.audioClip.setVolume(0.07);
+                plServiceLocator.audioClip.setCycleCount(s);
+                plServiceLocator.audioClip.play();
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
     /* ------------------------- receiving smth from Server ----------------------*/

@@ -85,20 +85,20 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         startSound();
 
-        // Start and end Task for music
+        // Start and end background music
         
-        //TODO Migi oder Dyoni why isn't it working?^^
+        //TODO Manuel startSound() abfangen, dass es zweimal lauft
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
 
-            plServiceLocator.audioClip.setVolume( 0 );
+            plServiceLocator.audioClip.stop();
 
         } );
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
 
-            plServiceLocator.audioClip.setVolume( 0.07 );
+           startSound();
 
 
         } );
