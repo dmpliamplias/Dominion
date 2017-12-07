@@ -346,8 +346,8 @@ public class LobbyView extends View<LobbyModel> {
         this.hBoxOptionClient.setAlignment( Pos.CENTER );
         this.hBoxOptionClient.setPrefWidth( 600 );
         this.hBoxOptionClient.setPrefHeight( 350 );
-        //Image wait = new Image(getClass().getResourceAsStream("\\wait.png"));
-        //ImageView imgWait = new ImageView(wait);
+        Image wait = new Image(getClass().getResourceAsStream("wait.png"));
+        ImageView imgWait = new ImageView(wait);
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPadding( insets );
         hBoxButtons.setPrefWidth( 450 );
@@ -361,7 +361,7 @@ public class LobbyView extends View<LobbyModel> {
 
         hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
 
-        this.hBoxOptionClient.getChildren().addAll( hBoxButtons );
+        this.hBoxOptionClient.getChildren().addAll( imgWait, hBoxButtons );
         this.root.setCenter(hBoxOptionClient);
     }
 
