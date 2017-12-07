@@ -8,6 +8,7 @@ import com.weddingcrashers.util.businesslayer.ServerUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -22,9 +23,10 @@ public class Client extends Thread {
     private boolean isActive; // his turn;
     private User user;
     private PlayerSet dominionSet;
-
+    private ObjectInputStream objectInputStream;
     private ViewStatus viewStatus = ViewStatus.Login; // after Connection he's redirected to Login
     private ArrayList<Client> otherClients;
+    private ObjectOutputStream objectOutputStream;
 
     private LoginManager _loginManager;
     private LobbyManager _lobbyManager;
@@ -34,6 +36,11 @@ public class Client extends Thread {
 
     public Client(Socket clientSocket, int id) {
         _clientSocket = clientSocket;
+        try {
+            objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         _clientId = id;
 
         _loginManager = new LoginManager(this);
@@ -46,9 +53,10 @@ public class Client extends Thread {
     @Override
     public void run() {
         try {
+            objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
             while(_clientSocket != null && ! _clientSocket.isClosed()) {
-                ObjectInputStream objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
                 Container container = (Container) objectInputStream.readObject();
+                //objectInputStream.reset();
                 runMethod(container);
             }
         } catch (Exception ex) {
@@ -160,5 +168,9 @@ public class Client extends Thread {
 
     public void setDominionSet(PlayerSet dominionSet) {
         this.dominionSet = dominionSet;
+    }
+
+    public ObjectOutputStream getObjectOutputStream(){
+        return this.objectOutputStream;
     }
 }

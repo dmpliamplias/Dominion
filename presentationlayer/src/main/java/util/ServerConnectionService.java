@@ -28,9 +28,19 @@ public class ServerConnectionService extends Thread{
     private  Socket connection;
     private int clientId;
     private  boolean isHoster;
+    private ObjectInputStream objectInputStream;
+    private  ObjectOutputStream objectOutputStream;
 
     public ServerConnectionService(String url, int port) throws IOException{
         connection = new Socket(url,port);
+        try {
+            objectInputStream = new ObjectInputStream(connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            showExceptionToUser(e);
+        }
+        objectOutputStream = new ObjectOutputStream(connection.getOutputStream());
+
         this.start();
     }
 
@@ -60,17 +70,7 @@ public class ServerConnectionService extends Thread{
                 runMethod(c);
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Platform.runLater(()->{
-                    try {
-                        connection.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERROR");
-                    alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
-                    alert.showAndWait();
-                });
+                showExceptionToUser(ex);
                 ex.printStackTrace();
             }
         }
@@ -78,7 +78,6 @@ public class ServerConnectionService extends Thread{
 
 
     public  <T extends Container> void  sendObject(T object) throws  IOException{
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(connection.getOutputStream());
         objectOutputStream.writeObject(object);
         objectOutputStream.flush();
 
@@ -86,7 +85,6 @@ public class ServerConnectionService extends Thread{
     }
 
     private <T extends  Container> T receiveObject() throws  IOException, ClassNotFoundException{
-        ObjectInputStream objectInputStream = new ObjectInputStream(connection.getInputStream());
         T obj = (T)objectInputStream.readObject();
         return obj;
     }
@@ -97,6 +95,19 @@ public class ServerConnectionService extends Thread{
         sendObject(vc);
     }
 
+    private void showExceptionToUser(Exception ex){
+        Platform.runLater(()->{
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
+            alert.showAndWait();
+        });
+    }
     //-------------------------- Controller Communications -----------------------------------------------
 
     private void runMethod(Container c){
