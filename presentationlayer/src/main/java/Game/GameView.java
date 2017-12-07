@@ -489,7 +489,7 @@ public class GameView extends View<GameModel> {
         hbox.setSpacing(10);
         hbox.getChildren().addAll(btnLobby,btnRanking);
 
-        VBoxDisplayWinner.getChildren().addAll(tableView,hbox);
+        VBoxDisplayWinner.getChildren().addAll(tableView, hbox);
     }
 
     private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {

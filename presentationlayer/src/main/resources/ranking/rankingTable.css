@@ -1,11 +1,12 @@
-.root{
+.root {
+    -fx-background-color: #835fff;
 
 }
 
-.table-row-cell:empty {
+.table-view-row-cell:empty {
     -fx-background-color: white;
 }
 
-.table-row-cell:empty .table-cell {
+.table-view-row-cell:empty .table-cell {
     -fx-border-width: 0 px;
 }
