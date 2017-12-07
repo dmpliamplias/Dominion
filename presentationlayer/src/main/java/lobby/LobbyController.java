@@ -90,17 +90,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         //TODO Manuel startSound() abfangen, dass es zweimal lauft
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
-
-
             plServiceLocator.audioClip.stop();
-
         } );
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
-
-           startSound();
-
-
+                startSound();
         } );
 
         // Sends message with Enter
