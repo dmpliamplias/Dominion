@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /***
  * @Author Michel Schlatter
  */
-public class GameContainer extends Container implements Serializable {
+public class GameContainer extends Container implements Serializable, Cloneable {
     PlayerSet dominionSet;
     int  userIdHasTurn;
     ArrayList<Card> unusedCards; // Karten die noch kaufbar sind => wenn nichts geändert hat => null!
@@ -81,4 +81,14 @@ public class GameContainer extends Container implements Serializable {
     public void setPlayerSets(ArrayList<PlayerSet> playerSets) {
         this.playerSets = playerSets;
     }
+
+    public GameContainer clone() {
+        try {
+            return (GameContainer) super.clone();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 }

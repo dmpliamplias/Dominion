@@ -260,7 +260,7 @@ public class GameController extends Controller<GameModel, GameView> {
     /* ------------------------- receiving smth from Server ----------------------*/
 
     public void handleServerAnswer_receiveInitalPlayerSet(ArrayList<PlayerSet> sets, ArrayList<Card> unusedCards, int userIdHasTurn) {
-        boolean firstCall = myCardSet == null;
+        boolean firstCall = myCardSet == null && (enemyCards == null || enemyCards.size() == 0);
 
         for (PlayerSet set : sets) {
             if (set.getUserId() == myUser.getId()) {
@@ -290,10 +290,13 @@ public class GameController extends Controller<GameModel, GameView> {
                 firstPlayerSetReceived = true;
             }
 
-            if (userIdHasTurn == myUser.getId()) {
+            if (userIdHasTurn == myUser.getId()) { // TODO: 07.12.2017 vanessa für was braucht es das? 
             }
-            updateUnusedCards(unusedCards);
-            enableOrDisableView();
+            
+            if(firstCall) { // TODO: 07.12.2017 vane testen... auch auf murats pc
+                updateUnusedCards(unusedCards);
+                enableOrDisableView();
+            }
 
             for (PlayerSet playerSet : getAllSets()) {
                 System.out.println("Drawing the calculated points on client: " + myUser.getUserName() + " playersetsize: " + getAllSets().size());
