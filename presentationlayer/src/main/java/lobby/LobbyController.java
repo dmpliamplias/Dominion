@@ -81,9 +81,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
-        // Start sound default
-
-        startSound();
+        // Start sound daudioClipefault
+        if(plServiceLocator.audioClip == null) {
+            startSound();
+        }
 
         // Start and end background music
         
