@@ -70,6 +70,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
         this.view.stop();
+        plServiceLocator.audioClip.stop();
         view.start();
     }
 
