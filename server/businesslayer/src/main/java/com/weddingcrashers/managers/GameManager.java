@@ -511,7 +511,8 @@ public class GameManager extends Manager {
 
     private void broadCast(GameContainer gc, boolean exceptMyself){
         for(Client c : exceptMyself ? this.client.getOtherClients() : this.client.getAllClients()){
-            ServerUtils.sendObject(c, gc);
+            GameContainer newGc = gc.clone();
+            ServerUtils.sendObject(c, newGc);
         }
     }
 
