@@ -56,7 +56,6 @@ public class Client extends Thread {
             objectInputStream = new ObjectInputStream(_clientSocket.getInputStream());
             while(_clientSocket != null && ! _clientSocket.isClosed()) {
                 Container container = (Container) objectInputStream.readObject();
-                //objectInputStream.reset();
                 runMethod(container);
             }
         } catch (Exception ex) {
@@ -73,50 +72,48 @@ public class Client extends Thread {
     }
 
     private void runMethod(Container c){
-        out.println("Server got message =>  Method: " + c.getMethod() + " ClientId: "+ _clientId);
+        if(c != null) {
+            out.println("Server got message =>  Method: " + c.getMethod() + " ClientId: " + _clientId);
 
-        if(c.getMethod() == Methods.Login){
-            LoginContainer lc = (LoginContainer)c;
-            _loginManager.login(lc.getEmail(), lc.getPassword());
-        }else if(c.getMethod() == Methods.SetViewStatus){
-            ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer)c;
-            this.viewStatus = vc.getViewStatus();
+            if (c.getMethod() == Methods.Login) {
+                LoginContainer lc = (LoginContainer) c;
+                _loginManager.login(lc.getEmail(), lc.getPassword());
+            } else if (c.getMethod() == Methods.SetViewStatus) {
+                ViewStatusUpdateContainer vc = (ViewStatusUpdateContainer) c;
+                this.viewStatus = vc.getViewStatus();
 
-            if(this.viewStatus == ViewStatus.Lobby) {
-                LobbyManager.broadCastPlayersToAllClients(this);
+                if (this.viewStatus == ViewStatus.Lobby) {
+                    LobbyManager.broadCastPlayersToAllClients(this);
+                }
+                if (this.viewStatus == ViewStatus.Game) {
+                    this._gameManager.sendInitalCardSet();
+                }
+            } else if (c.getMethod() == Methods.Register) {
+                RegisterContainer rc = (RegisterContainer) c;
+                _loginManager.createUser(rc.getUser());
+            } else if (c.getMethod() == Methods.Chat) {
+                ChatContainer cc = (ChatContainer) c;
+                _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
+            } else if (c.getMethod() == Methods.StartGame) {
+                LobbyContainer lc = (LobbyContainer) c;
+                _lobbyManager.startGame(lc);
+            } else if (c.getMethod() == Methods.Lobby_Players) {
+                LobbyContainer lc = (LobbyContainer) c;
+                LobbyManager.getUsers(this);
+            } else if (c.getMethod() == Methods.Login_SetUser_TestPurposesOnly) {
+                LoginContainer lc = (LoginContainer) c;
+                this.setUser(lc.getUser());
+                ServerUtils.sendObject(this, lc);
+            } else if (c.getMethod() == Methods.CardPlayed) {
+                GameContainer gc = (GameContainer) c;
+                _gameManager.cardPlayed(gc.getCardPlayedInfo());
+            } else if (c.getMethod() == Methods.BuyCard) {
+                _gameManager.buyCard((GameContainer) c);
+            } else if (c.getMethod() == Methods.TurnFinished) {
+                _gameManager.moveFinished((GameContainer) c);
+            } else if (c.getMethod() == Methods.Rankings) {
+                _rankingsManager.sendRanking();
             }
-            if(this.viewStatus == ViewStatus.Game){
-                this._gameManager.sendInitalCardSet();
-            }
-        }else if(c.getMethod() == Methods.Register){
-            RegisterContainer rc = (RegisterContainer)c;
-            _loginManager.createUser(rc.getUser());
-        } else if(c.getMethod() == Methods.Chat){
-            ChatContainer cc = (ChatContainer) c;
-            _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
-        }else if(c.getMethod() == Methods.StartGame){
-            LobbyContainer lc = (LobbyContainer)c;
-            _lobbyManager.startGame (lc);
-        }
-        else if(c.getMethod() == Methods.Lobby_Players){
-            LobbyContainer lc = (LobbyContainer)c;
-            LobbyManager.getUsers(this);
-        }
-        else if(c.getMethod() == Methods.Login_SetUser_TestPurposesOnly){
-            LoginContainer lc = (LoginContainer)c;
-            this.setUser(lc.getUser());
-            ServerUtils.sendObject(this,lc);
-        }else if(c.getMethod() == Methods.CardPlayed){
-            GameContainer gc = (GameContainer)c;
-            _gameManager.cardPlayed(gc.getCardPlayedInfo());
-        }else if(c.getMethod() == Methods.BuyCard){
-            _gameManager.buyCard((GameContainer)c);
-        }
-        else if(c.getMethod() == Methods.TurnFinished){
-            _gameManager.moveFinished((GameContainer)c);
-        }
-        else if(c.getMethod() == Methods.Rankings){
-            _rankingsManager.sendRanking();
         }
     }
 

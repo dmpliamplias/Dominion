@@ -18,8 +18,8 @@ public class ServerUtils {
         try {
             if(!c.get_clientSocket().isClosed() ) {
                 ObjectOutputStream objectOutputStream = c.getObjectOutputStream();
-                objectOutputStream.writeObject(object);
                 objectOutputStream.reset();
+                objectOutputStream.writeObject(object);
                 objectOutputStream.flush();
                 out.println("Server sent message: " + object.getMethod() + "  to Client: " + c.getClientId());
 

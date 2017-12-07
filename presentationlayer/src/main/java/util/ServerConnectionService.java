@@ -78,9 +78,9 @@ public class ServerConnectionService extends Thread{
 
 
     public  <T extends Container> void  sendObject(T object) throws  IOException{
+        objectOutputStream.reset();
         objectOutputStream.writeObject(object);
         objectOutputStream.flush();
-
         out.println("Client sent message: " + object.getMethod() + "  to Client: " + clientId);
     }
 
