@@ -285,7 +285,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 initalUserTurnLogged = true;
             }
 
-            if (firstPlayerSetReceived == false){
+            if (firstPlayerSetReceived == false && myCardSet != null){
                 drawHandCards(5);
                 firstPlayerSetReceived = true;
             }
