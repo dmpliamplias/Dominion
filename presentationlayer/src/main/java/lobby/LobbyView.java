@@ -131,6 +131,7 @@ public class LobbyView extends View<LobbyModel> {
 
         vBoxAddMenu.getChildren().addAll( super.getMenuBar(), btnTestGameView, textFieldGameSettings );
 
+        menuSettings.getItems().remove(menuSound);
 
         return vBoxAddMenu;
     }
