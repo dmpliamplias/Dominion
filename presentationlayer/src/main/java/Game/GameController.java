@@ -185,7 +185,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
         // Start and end background music
 
-        //TODO Manuel startSound() abfangen, dass es zweimal lauft
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
@@ -196,7 +195,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
 
-            startSound();
+            if(!plServiceLocator.audioClip.isPlaying()){
+                startSound();
+            }
 
 
         } );
