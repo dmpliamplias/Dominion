@@ -2,6 +2,7 @@ package ranking;
 
 import base.View;
 import com.weddingcrashers.model.Highscore;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -39,10 +40,10 @@ public class RankingView extends View<RankingModel> {
     protected Scene create_GUI() {
             this.stage.setWidth(500);
             this.stage.setHeight(600);
-        this.stage.setOnCloseRequest(evt -> {
+            this.stage.setOnCloseRequest(evt -> {
             // prevent window from closing
             evt.consume();
-        });
+            });
             table = new TableView<RankingViewModel>();
             table.setEditable(false);
 
@@ -62,7 +63,9 @@ public class RankingView extends View<RankingModel> {
 
             //setStylesheet(scene, RANKING);
 
+
             this.stage.setScene(scene);
+
             this.stage.show();
 
             setTexts();
