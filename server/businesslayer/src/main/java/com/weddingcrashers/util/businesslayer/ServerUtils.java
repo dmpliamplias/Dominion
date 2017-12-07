@@ -17,8 +17,9 @@ public class ServerUtils {
     public static <T extends Container> void sendObject(Client c, T object)  {
         try {
             if(!c.get_clientSocket().isClosed() ) {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(c.get_clientSocket().getOutputStream());
+                ObjectOutputStream objectOutputStream = c.getObjectOutputStream();
                 objectOutputStream.writeObject(object);
+                objectOutputStream.reset();
                 objectOutputStream.flush();
                 out.println("Server sent message: " + object.getMethod() + "  to Client: " + c.getClientId());
 

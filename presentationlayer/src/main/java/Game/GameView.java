@@ -489,7 +489,7 @@ public class GameView extends View<GameModel> {
         hbox.setSpacing(10);
         hbox.getChildren().addAll(btnLobby,btnRanking);
 
-        VBoxDisplayWinner.getChildren().addAll(tableView,hbox);
+        VBoxDisplayWinner.getChildren().addAll(tableView, hbox);
     }
 
     private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {
@@ -684,7 +684,9 @@ public class GameView extends View<GameModel> {
 
         // HandCards and Button gets greyedout. Player can no longer play cards and click Button
         public void enableView(){
-            gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
+            if(!gp.getChildren().contains(imgVGreyOutHandStack)) {
+                gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
+            }
         }
 
 

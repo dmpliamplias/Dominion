@@ -44,6 +44,8 @@ public class RankingView extends View<RankingModel> {
             // prevent window from closing
             evt.consume();
             });
+
+
             table = new TableView<RankingViewModel>();
             table.setEditable(false);
 
@@ -58,16 +60,14 @@ public class RankingView extends View<RankingModel> {
             vbox.getChildren().addAll(lblRanking, table, btnLobby);
 
 
-
             Scene scene = new Scene(vbox);
-
             //setStylesheet(scene, RANKING);
-
 
             this.stage.setScene(scene);
 
-            this.stage.show();
 
+
+            this.stage.show();
             setTexts();
             return scene;
 

@@ -57,6 +57,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
 
     public void handleServerAnswer(List<Highscore> highscoreList){
         Platform.runLater(() ->{
+            Collections.sort(highscoreList);
             model.setHighscores(highscoreList);
             view.bindModelToView();
         });
@@ -70,6 +71,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
         this.view.stop();
+        plServiceLocator.audioClip.stop();
         view.start();
     }
 

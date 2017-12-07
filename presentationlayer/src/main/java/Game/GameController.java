@@ -185,7 +185,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
         // Start and end background music
 
-        //TODO Manuel startSound() abfangen, dass es zweimal lauft
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
@@ -196,7 +195,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
 
-            startSound();
+            if(!plServiceLocator.audioClip.isPlaying()){
+                startSound();
+            }
 
 
         } );
@@ -879,6 +880,7 @@ public class GameController extends Controller<GameModel, GameView> {
         Stage s = new Stage(  );
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
+        plServiceLocator.audioClip.stop();
 
         this.view.stop();
         view.start();

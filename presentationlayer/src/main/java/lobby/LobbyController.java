@@ -81,26 +81,22 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
-        // Start sound default
-
-        startSound();
+        // Start sound daudioClipefault
+        if(plServiceLocator.audioClip == null) {
+            startSound();
+        }
 
         // Start and end background music
         
-        //TODO Manuel startSound() abfangen, dass es zweimal lauft
-
         super.view.getMenuItemMusicMute().setOnAction( event -> {
-
-
             plServiceLocator.audioClip.stop();
-
         } );
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {
 
-           startSound();
-
-
+            if(!plServiceLocator.audioClip.isPlaying()){
+                startSound();
+            }
         } );
 
         // Sends message with Enter
@@ -239,27 +235,28 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
-        } else if(!view.lvPlayers.getSelectionModel().isSelected( 0 )) {
-            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
+
         } else if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
         } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <= 1) {
 
-            view.startStage().show();
+        view.startStage().show();
 
-            view.btnDialogNo.setOnAction( event -> {
-                view.stageDialog.close();
-            } );
+        view.btnDialogNo.setOnAction( event -> {
+            view.stageDialog.close();
+        } );
 
-            view.btnDialogYes.setOnAction( event -> {
-                sendStartRequest();
-                view.stageDialog.close();
-            } );
-            
+        view.btnDialogYes.setOnAction( event -> {
+            sendStartRequest();
+            view.stageDialog.close();
+        } );
+
         } else if (names.size() < 2) {
             view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
+        } else if(!view.lvPlayers.getSelectionModel().isSelected( 0 )) {
+            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
         } else {
 
             sendStartRequest();
