@@ -197,6 +197,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
             if(!plServiceLocator.audioClip.isPlaying()){
                 startSound();
+                plServiceLocator.soundIsOn = true;
             }
 
 
@@ -884,7 +885,9 @@ public class GameController extends Controller<GameModel, GameView> {
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
         plServiceLocator.audioClip.stop();
-
+        if(super.view.getMenuItemMusicMute().isSelected()){
+            plServiceLocator.soundIsOn = false;
+        }
         this.view.stop();
         view.start();
     }
