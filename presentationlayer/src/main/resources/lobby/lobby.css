@@ -101,13 +101,6 @@
 
 }
 
-.list-view:focused .list-cell:filled:selected {
-    -fx-background-color: green;
-    -fx-focus-color: green;
-    -fx-selection-bar: green;
-
-}
-
 .clientText{
 
     -fx-text-fill: red;

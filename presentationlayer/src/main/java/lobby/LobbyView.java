@@ -59,12 +59,7 @@ public class LobbyView extends View<LobbyModel> {
     protected Button btnTestGameView;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
-    protected Stage stageDialog;
-    protected TextField txtDialog;
-    protected Button btnDialogYes;
-    protected Button btnDialogNo;
-    protected VBox vBoxDialog;
-    protected HBox hBoxDialog;
+
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
 
@@ -146,6 +141,8 @@ public class LobbyView extends View<LobbyModel> {
         this.lblPlayer.setEditable( false );
         this.lblPlayer.setMaxWidth( 250 );
         lvPlayers = new ListView<String>(observablePlayerList);
+        lvPlayers.setMouseTransparent( true );
+        lvPlayers.setFocusTraversable( false );
         lvPlayers.setMaxSize( 250,155);
         vbox.setAlignment( Pos.CENTER );
 
@@ -282,15 +279,6 @@ public class LobbyView extends View<LobbyModel> {
         return gridPane;
 }
 
-    // Method for multilanguage
-
-    protected void setTextDialog(){
-
-        this.btnDialogYes.setText( getText( "lobbyview.DialogYes" ) );
-        this.btnDialogNo.setText( getText( "lobbyview.DialogNo" ) );
-        this.txtDialog.setText( getText( "lobbyview.txtDialog" ) );
-
-    }
 
     // Method for multilanguage
 
@@ -367,85 +355,11 @@ public class LobbyView extends View<LobbyModel> {
 
     // Method for stageDialog
 
-    public Stage startStage() {
-
-
-        BorderPane root = new BorderPane(  );
-        this.stageDialog = new Stage(  );
-        stageDialog.initOwner(stage);
-        stageDialog.initModality(WINDOW_MODAL);
-        Scene scene = new Scene(root,400,300);
-        setStylesheet(scene, LOBBY);
-        this.stageDialog.setScene( scene );
-        root.setCenter( dialog() );
-        setTextDialog();
-
-        return stageDialog;
-    }
-
-
-    // Method for creating Dialog returns a VBox
-
-    private VBox dialog() {
-
-        this.btnDialogNo = new Button( );
-        this.btnDialogYes = new Button(  );
-        this.txtDialog = new TextField(  );
-        this.txtDialog.setAlignment( Pos.TOP_CENTER );
-
-        // Size for elements
-
-        this.btnDialogYes.setPrefSize( 100, 50 );
-        this.btnDialogNo.setPrefSize( 100, 50 );
-        this.txtDialog.setPrefSize( 200, 50 );
-
-        this.hBoxDialog = new HBox( );
-        this.hBoxDialog.setAlignment( Pos.CENTER );
-        this.hBoxDialog.setPadding( new Insets( 10 ) );
-        this.hBoxDialog.setSpacing( 50 );
-        this.vBoxDialog = new VBox(  );
-        this.vBoxDialog.setPadding( new Insets( 10 ) );
-        this.vBoxDialog.setAlignment( Pos.CENTER );
-
-        hBoxDialog.getChildren().addAll( btnDialogYes, btnDialogNo );
-
-        vBoxDialog.getChildren().addAll( txtDialog, hBoxDialog );
-
-        return vBoxDialog;
-
-    }
-
     // Getters and Setters for LobbyView
 
     public ImageView getImgViewDeFlag() {
         return imgViewDeFlag;
     }
-
-
-    public Stage getStageDialog() {
-        return stageDialog;
-    }
-
-    public VBox getvBoxDialog() {
-        return vBoxDialog;
-    }
-
-    public HBox gethBoxDialog() {
-        return hBoxDialog;
-    }
-
-    public TextField getTxtDialog() {
-        return txtDialog;
-    }
-
-    public Button getBtnDialogYes() {
-        return btnDialogYes;
-    }
-
-    public Button getBtnDialogNo() {
-        return btnDialogNo;
-    }
-
 
     public VBox gethBoxOptionClient() {
         return hBoxOptionClient;

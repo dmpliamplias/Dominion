@@ -235,7 +235,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
      * @author Michel Schlatter + Manuel Wirz
      */
     private void startGame() {
-        ObservableList<String> names = view.lvPlayers.getSelectionModel().getSelectedItems();
+
         ObservableList<String> players = view.lvPlayers.getItems();
 
         // some checks for starting the correct end options
@@ -247,25 +247,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
-        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <2) {
-
-        view.startStage().show();
-
-        view.btnDialogNo.setOnAction( event -> {
-            view.stageDialog.close();
-        } );
-
-        view.btnDialogYes.setOnAction( event -> {
-            sendStartRequest();
-            view.stageDialog.close();
-        } );
-
-        } else if (names.size() < 2) {
+        } else if (players.size() < 2) {
             view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
-        } else if(!view.lvPlayers.getSelectionModel().isSelected( 0 )) {
-            view.alert( getText( "lobbyview.serverIsNotSelected" ), Alert.AlertType.ERROR );
         } else {
-
             sendStartRequest();
         }
     }
@@ -274,15 +258,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void sendStartRequest(){
 
-        ObservableList<String> names;
-
-       if(view.lvPlayers.getSelectionModel().getSelectedItems().size() >= 2 ){
-            names = view.lvPlayers.getSelectionModel().getSelectedItems();
-        } else{
-
-            names = view.lvPlayers.getItems();
-        }
-
+        ObservableList<String> names = view.lvPlayers.getItems();
 
         ArrayList<Integer> clientIds = new ArrayList<Integer>();
 
