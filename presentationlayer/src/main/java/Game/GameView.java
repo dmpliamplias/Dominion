@@ -481,13 +481,13 @@ public class GameView extends View<GameModel> {
    private void displayWinnerDialog(boolean isWinner) {
         DominionAlert alert = alert("", Alert.AlertType.INFORMATION);
         if (isWinner) {
-            alert.contentText(getText("gameview.winnerdialog.contentText.winner"));
-            Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
+            alert.contentText("gameview.winner");
+            Image winnerPic = new Image(getClass().getResourceAsStream("winner.png"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
             alert.setGraphic(imgVwinnerPic);
         }
         else {
-            alert.contentText(getText("gameview.winnerdialog.contentText.loser"));
+            alert.contentText("gameview.loser");
             Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
             ImageView imgVloserPic = new ImageView(loserPic);
             alert.setGraphic(imgVloserPic);
@@ -499,6 +499,7 @@ public class GameView extends View<GameModel> {
     protected void setTextDialog(){
         this.btnLobby.setText(getText("btn.Lobby"));
         this.btnRanking.setText(getText("btn.Ranking"));
+
 
 
     }
