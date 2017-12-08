@@ -1,7 +1,4 @@
-.root {
-    -fx-background-color: #835fff;
 
-}
 
 .table-view-row-cell:empty {
     -fx-background-color: white;

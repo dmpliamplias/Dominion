@@ -99,10 +99,10 @@ public class Server extends Thread {
 
     }
 
-    private void setOtherClientsForAllClients(){
-        for(Client c : this.clients){
+    public static void setOtherClientsForAllClients(){
+        for(Client c : clients){
             ArrayList<Client> otherClients = new ArrayList<Client>();
-            for(Client c2 : this.clients){
+            for(Client c2 : clients){
                 if(c2.getClientId() != c.getClientId()){
                     otherClients.add(c2);
                 }

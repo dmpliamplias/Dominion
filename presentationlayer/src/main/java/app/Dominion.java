@@ -1,6 +1,8 @@
 package app;
 
 import com.weddingcrashers.server.Server;
+import com.weddingcrashers.servermodels.LobbyContainer;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.service.ServiceLocator;
 import connection.ConnectionController;
 import connection.ConnectionModel;
@@ -13,6 +15,8 @@ import splashscreen.SplashScreenModel;
 import splashscreen.SplashScreenView;
 import util.PLServiceLocator;
 import util.ServerConnectionService;
+
+import java.io.IOException;
 
 import static com.weddingcrashers.service.ServiceLocator.getLogger;
 
@@ -133,9 +137,16 @@ public class Dominion extends Application {
             // Make the view invisible
             view.stop();
         }
+
         Server.dispose();
         ServerConnectionService serverConnectionService = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
+        LobbyContainer lbContainer = new LobbyContainer(Methods.ImOut);
         if (serverConnectionService != null) {
+            try {
+                serverConnectionService.sendObject(lbContainer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             serverConnectionService.dispose();
         }
         serviceLocator.shutdownDatabase();

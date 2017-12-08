@@ -1,5 +1,6 @@
 package base;
 
+import alert.DominionAlert;
 import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
@@ -9,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import menu.DominionMenuBar;
 
-import static javafx.scene.layout.Region.USE_PREF_SIZE;
+import java.util.List;
 
 /**
  * View base model.
@@ -36,6 +37,7 @@ public abstract class View<M extends Model> {
     public DominionMenuBar menuBar;
     /** Menu bar used indicator. */
     protected boolean menuBarUsed = false;
+
 
 
     // ---- Constructor
@@ -123,10 +125,9 @@ public abstract class View<M extends Model> {
      * @param msg the message.
      * @param alertType the alert type.
      */
-    public void alert(String msg, Alert.AlertType alertType){
-        Alert alert = new Alert(alertType, msg);
-        alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
-        alert.showAndWait();
+    public DominionAlert alert(String msg, Alert.AlertType alertType){
+        final DominionAlert dominionAlert = new DominionAlert(msg, alertType, translator);
+        return dominionAlert;
     }
 
     /**
@@ -140,11 +141,6 @@ public abstract class View<M extends Model> {
 
         setTexts();
         menuBar.setMenuTexts();
-    }
-
-    protected DominionMenuBar getMenuBar() {
-        this.menuBarUsed = true;
-        return menuBar;
     }
 
     public void setMenuBarUsed(boolean menuBarUsed) {

@@ -1,5 +1,6 @@
 package connection;
 
+import alert.DominionAlert;
 import base.Controller;
 import com.weddingcrashers.server.Server;
 import javafx.event.ActionEvent;
@@ -18,13 +19,10 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import static com.weddingcrashers.service.Language.ENGLISH;
-import static com.weddingcrashers.service.Language.GERMAN;
-import static com.weddingcrashers.service.Language.SWISS_GERMAN;
-import static javafx.scene.layout.Region.USE_PREF_SIZE;
+import static com.weddingcrashers.service.Language.*;
 
 
 /**
@@ -50,18 +48,15 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
                     if (portStr == null || portStr.equals("")) {
-                        this.view.alert(getText("connectionview.portEmpty"), Alert.AlertType.WARNING);
+                        this.view.alert("connectionview.portEmpty", Alert.AlertType.WARNING);
                         return;
                     }
                     //int port = Integer.parseInt(portStr);
                     // port must be between 1024-49151 and not 9092
                     if (!checkPortRange(portStr) || Integer.parseInt(portStr) == 9092 || Integer.parseInt(portStr) < 1024 || Integer.parseInt(portStr)> 49151) {
-                        final Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle(getText("connectionview.portDialog.title"));
-                        alert.setHeaderText(getText("connectionview.portDialog.headerText"));
-                        alert.setContentText(getText("connectionview.portDialog.contentText"));
-                        alert.getDialogPane().setMinHeight(USE_PREF_SIZE);
-                        alert.showAndWait();
+                        final DominionAlert alert = view.alert("connectionview.portDialog.contentText", Alert.AlertType.WARNING);
+                        alert.setTitle("connectionview.portDialog.title");
+                        alert.setHeaderText("connectionview.portDialog.headerText");
                         return;
                     }
                     InetSocketAddress socketAddress = createServer(Integer.parseInt(portStr));

@@ -11,13 +11,19 @@ import com.weddingcrashers.servermodels.WinningInformation;
 
 public class WinningUser implements Comparable<WinningUser>, Serializable{
 
+    private long userId;
     private String userName;
     private int points, position;
 
-    public WinningUser(String userName, int points, int position) {
+    public WinningUser(long userId, String userName, int points, int position) {
+        this.userId = userId;
         this.userName = userName;
         this.points = points;
         this.position = position;
+    }
+
+    public long getUserId() {
+        return userId;
     }
 
     public String getUserName() {

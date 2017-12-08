@@ -167,7 +167,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     private void help(){
 
-        view.alert(getText("lobbyview.help"), Alert.AlertType.INFORMATION );
+        view.alert("lobbyview.help", Alert.AlertType.INFORMATION );
 
     }
 
@@ -231,14 +231,14 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         // some checks for starting the correct end options
 
         if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
-            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
+            view.alert("lobbyview.falseStatement", Alert.AlertType.WARNING );
 
         } else if (view.cbFinishPointCards.isSelected() && !view.choiceBox.getSelectionModel().isEmpty()) {
-            view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
+            view.alert("lobbyview.falseStatement", Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
         } else if (players.size() < 2) {
-            view.alert( getText( "lobbyview.notEnoughPlayers" ), Alert.AlertType.WARNING );
+            view.alert("lobbyview.notEnoughPlayers", Alert.AlertType.WARNING );
         } else {
             sendStartRequest();
         }

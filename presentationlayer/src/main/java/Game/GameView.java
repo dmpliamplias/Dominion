@@ -2,9 +2,12 @@ package Game;
 
 import Controls.CardImageView;
 import Controls.HandStackLayout;
+import alert.DominionAlert;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
+import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.ServiceLocator;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -21,8 +24,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import util.PLServiceLocator;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.GAME;
@@ -453,8 +459,10 @@ public class GameView extends View<GameModel> {
 
     }
 
-   public void startWinnerStage(ObservableList<WinningUser> winningUsers){
-        BorderPane root = new BorderPane();
+   public void startWinnerStage(ObservableList<WinningUser> winningUsers, boolean isWinner) {
+       displayWinnerDialog(isWinner);
+
+       BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
         this.stageDialog.setOnCloseRequest(evt -> {
             // prevent window from closing
@@ -470,9 +478,30 @@ public class GameView extends View<GameModel> {
         stageDialog.show();
    }
 
+   private void displayWinnerDialog(boolean isWinner) {
+        DominionAlert alert = alert("", Alert.AlertType.INFORMATION);
+        if (isWinner) {
+            alert.contentText("gameview.winner");
+            Image winnerPic = new Image(getClass().getResourceAsStream("winner.png"));
+            ImageView imgVwinnerPic = new ImageView(winnerPic);
+            alert.setGraphic(imgVwinnerPic);
+        }
+        else {
+            alert.contentText("gameview.loser");
+            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
+            ImageView imgVloserPic = new ImageView(loserPic);
+            alert.setGraphic(imgVloserPic);
+        }
+
+        alert.setTitle("Winner Dialog");
+   }
+
     protected void setTextDialog(){
         this.btnLobby.setText(getText("btn.Lobby"));
         this.btnRanking.setText(getText("btn.Ranking"));
+
+
+
     }
 
 
