@@ -1,5 +1,7 @@
 package com.weddingcrashers.managers;
 
+import com.weddingcrashers.businessmodels.Card;
+import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
 import com.weddingcrashers.server.Server;
@@ -69,7 +71,22 @@ public class LobbyManager extends Manager{
         GameManager.setPlayers(players);
         GameManager.setUsers(users);
         GameManager.setGameRunning(true);
-        GameManager.initialize(users.size());
+        GameManager.createDominionSet(players.size());
+
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for(Client c : players){
+            ids.add(c.getClientId());
+        }
+        Collections.sort(ids);
+        int min = ids.get(0);
+
+        for(Client player : players){
+            ArrayList<Card> pullStack = GameManager.createInitalCardSet();
+            PlayerSet set = new PlayerSet((int)player.getUser().getId());
+            set.setPullStack(pullStack);
+            player.setDominionSet(set);
+            player.setActive(player.getClientId() == min);
+        }
     }
 
     public static LobbyContainer getUsers(Client c){

@@ -4,11 +4,11 @@ import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.server.Server;
 import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.service.HighscoreService;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,13 +32,24 @@ public class GameManager extends Manager {
     public GameManager(Client client){
         super(client);
     }
-    
-    public static  void initialize(int playerCount){
-        unusedCards = new ArrayList<Card>();
-        createDominionSet(playerCount);
-    }
 
     /*Methods Client can Call directly*/
+
+    public void sendInitalCardSet(){
+        ArrayList<PlayerSet> playerSets = new ArrayList<PlayerSet>();
+        GameContainer gc = new GameContainer(Methods.InitialCardSets);
+
+        for(Client player : players){
+            playerSets.add(player.getDominionSet());
+            if(player.isActive()){
+                gc.setUserIdHasTurn((int)player.getUser().getId());
+            }
+        }
+
+        gc.setUnusedCards(unusedCards);
+        gc.setPlayerSets(playerSets);
+        ServerUtils.sendObject(client, gc);
+    }
 
     public void moveFinished(GameContainer gcReceived){
         if(client.isActive()) {
@@ -94,40 +105,17 @@ public class GameManager extends Manager {
          }
     }
 
-    public void sendInitalCardSet(){
-         PlayerSet set = new PlayerSet((int) client.getUser().getId());
-         System.out.println("got an inital card set from" + client.getUser().getUserName());
+    public static ArrayList<Card> createInitalCardSet(){
          ArrayList<Card> pullStack = new ArrayList<Card>();
 
          for(int i = 0; i < 7; i++){
-             pullStack.add(this.getCardByMoneyType(MoneyType.Copper, false));
+             pullStack.add(getCardByMoneyType(MoneyType.Copper, false));
          }
          for(int i = 0; i < 3; i++){
-             pullStack.add(this.getCardByPointCardType(PointCardType.Estate, false));
+             pullStack.add(getCardByPointCardType(PointCardType.Estate, false));
          }
-         set.setPullStack(pullStack);
         Collections.shuffle(pullStack);
-
-        this.client.setDominionSet(set);
-        int lowestClientId = getNextTurnClientId(true);
-        ArrayList<PlayerSet> sets = getExistingPlayerSets();
-        sets.add(set);
-        System.out.println("got existings sets of size: " + sets.size());
-
-
-        for(Client c : this.client.getAllClients()){
-            GameContainer gc = new GameContainer(Methods.SpreadCards);
-            gc.setUserIdHasTurn((int)users.get(lowestClientId).getId());
-            gc.setPlayerSets(sets);
-
-            if(c.getUser().getId() == this.client.getUser().getId()){
-                gc.setUnusedCards(unusedCards); // send cards only one time
-            }else{
-                gc.setUnusedCards(null);
-            }
-            ServerUtils.sendObject(c, gc);
-            System.out.println("I send the inital cardset from " + client.getUser().getUserName() + " to " + c.getUser().getUserName());
-        }
+        return pullStack;
     }
 
     // privates
@@ -241,8 +229,9 @@ public class GameManager extends Manager {
         return abort;
     }
 
-    private static void createDominionSet(int players){
+    public static void createDominionSet(int players){
 
+        unusedCards = new ArrayList<Card>();
         // PointCards
         for(int i = 0; i < getNumberOfCards(players, CardType.Anwesen); i++) {
             PointCard pc1 = new PointCard();
@@ -403,7 +392,7 @@ public class GameManager extends Manager {
 
     }
 
-    public Card getCardByName(String name, boolean remove){
+    public static Card getCardByName(String name, boolean remove){
         Card result = null;
         for(Card c : unusedCards){
             if(c.getName().equals(name)){
@@ -418,7 +407,7 @@ public class GameManager extends Manager {
     }
 
 
-    public <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
+    public static <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
         T result = null;
         for(Card c : unusedCards){
             if(cls.isInstance(c)){
@@ -432,7 +421,7 @@ public class GameManager extends Manager {
         return result;
     }
 
-    public PointCard getCardByPointCardType(PointCardType type, boolean remove){
+    public static PointCard getCardByPointCardType(PointCardType type, boolean remove){
         PointCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  PointCard){
@@ -449,7 +438,7 @@ public class GameManager extends Manager {
         return result;
     }
 
-    public MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
+    public  static MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
         MoneyCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  MoneyCard){

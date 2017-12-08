@@ -4,10 +4,8 @@ import Game.GameController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 import lobby.LobbyController;
 import login.LoginController;
 import ranking.RankingController;
@@ -78,9 +76,8 @@ public class ServerConnectionService extends Thread{
 
 
     public  <T extends Container> void  sendObject(T object) throws  IOException{
-        objectOutputStream.reset(); // TODO: 08.12.2017 nach write? 
         objectOutputStream.writeObject(object);
-        objectOutputStream.flush();
+        objectOutputStream.reset(); // TODO: 08.12.2017 nach write?
         out.println("Client sent message: " + object.getMethod() + "  to Client: " + clientId);
     }
 
@@ -136,9 +133,9 @@ public class ServerConnectionService extends Thread{
         }else if(c.getMethod() == Methods.Lobby_Players && lobbyController != null){
             lobbyController.handleServerAnswer_newPlayer((LobbyContainer) c);
         }
-        else if(c.getMethod() == Methods.SpreadCards && gameController != null){
+        else if(c.getMethod() == Methods.InitialCardSets && gameController != null){
             GameContainer gc = (GameContainer)c;
-           gameController.handleServerAnswer_receiveInitalPlayerSet(gc.getPlayerSets(), gc.getUnusedCards(), gc.getUserIdHasTurn());
+           gameController.handleServerAnswer_receiveInitalPlayerSet(gc);
         }
         else if(c.getMethod() == Methods.CardPlayed && gameController != null){
             GameContainer gc = (GameContainer)c;

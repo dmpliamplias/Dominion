@@ -8,7 +8,6 @@ import java.io.Serializable;
 public enum Methods implements Serializable {
     Login,
     Login_SetUser_TestPurposesOnly,
-    ShuffleCards,
     Rankings,
     SetViewStatus,
     Lobby_Players,
@@ -16,7 +15,7 @@ public enum Methods implements Serializable {
     Register,
     Connect,
     StartGame,
-    SpreadCards,
+    InitialCardSets,
     CardPlayed,
     UpdateRound,
     TurnFinished,

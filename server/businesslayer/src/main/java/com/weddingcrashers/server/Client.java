@@ -71,8 +71,8 @@ public class Client extends Thread {
         return _clientId;
     }
 
-    private void runMethod(Container c){
-        if(c != null) {
+    private void runMethod(Container c) {
+        if (c != null) {
             out.println("Server got message =>  Method: " + c.getMethod() + " ClientId: " + _clientId);
 
             if (c.getMethod() == Methods.Login) {
@@ -85,9 +85,7 @@ public class Client extends Thread {
                 if (this.viewStatus == ViewStatus.Lobby) {
                     LobbyManager.broadCastPlayersToAllClients(this);
                 }
-                if (this.viewStatus == ViewStatus.Game) {
-                    this._gameManager.sendInitalCardSet();
-                }
+
             } else if (c.getMethod() == Methods.Register) {
                 RegisterContainer rc = (RegisterContainer) c;
                 _loginManager.createUser(rc.getUser());
@@ -113,6 +111,8 @@ public class Client extends Thread {
                 _gameManager.moveFinished((GameContainer) c);
             } else if (c.getMethod() == Methods.Rankings) {
                 _rankingsManager.sendRanking();
+            } else if (c.getMethod() == Methods.InitialCardSets) {
+                _gameManager.sendInitalCardSet();
             }
         }
     }

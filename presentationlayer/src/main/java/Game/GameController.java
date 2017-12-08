@@ -91,6 +91,14 @@ public class GameController extends Controller<GameModel, GameView> {
             this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
+        GameContainer gc = new GameContainer(Methods.InitialCardSets);
+        try {
+            serverConnectionService.sendObject(gc);
+        } catch (IOException e) {
+            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+
         cardNames = new ArrayList<String>();
         cardNames.add("Kupfer");
         cardNames.add("Silber");
@@ -263,10 +271,9 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /* ------------------------- receiving smth from Server ----------------------*/
 
-    public void handleServerAnswer_receiveInitalPlayerSet(ArrayList<PlayerSet> sets, ArrayList<Card> unusedCards, int userIdHasTurn) {
-        boolean firstCall = myCardSet == null && (enemyCards == null || enemyCards.size() == 0);
+    public void handleServerAnswer_receiveInitalPlayerSet(GameContainer gc) {
 
-        for (PlayerSet set : sets) {
+        for (PlayerSet set : gc.getPlayerSets()) {
             if (set.getUserId() == myUser.getId()) {
                 this.myCardSet = set;
             } else {
@@ -276,42 +283,24 @@ public class GameController extends Controller<GameModel, GameView> {
                 this.enemyCards.put(set.getUserId(), set);
                 System.out.println("got an enemycard from => userid: " + users.get(set.getUserId()).getUserName());
             }
-            if (unusedCards != null && unusedCards.size() > 0) {
-                this.unusedCards = unusedCards;
-            }
         }
-        activeUserId = userIdHasTurn;
-
+        this.unusedCards = gc.getUnusedCards();
+        activeUserId = gc.getUserIdHasTurn();
 
         Platform.runLater(() -> {
-            if(!initalUserTurnLogged) {
-                logActiveUser();
-                initalUserTurnLogged = true;
-            }
+            logActiveUser();
+            drawHandCards(5);
 
-            if (firstPlayerSetReceived == false && myCardSet != null){
-                drawHandCards(5);
-                firstPlayerSetReceived = true;
-            }
+            updateUnusedCards(unusedCards);
+            enableOrDisableView();
 
-            if (userIdHasTurn == myUser.getId()) { // TODO: 07.12.2017 vanessa für was braucht es das? 
-            }
-            
-            if(firstCall) { // TODO: 07.12.2017 vane testen... auch auf murats pc
-                updateUnusedCards(unusedCards);
-                enableOrDisableView();
-            }
-
-            for (PlayerSet playerSet : getAllSets()) {
+            for (PlayerSet playerSet : gc.getPlayerSets()) {
                 System.out.println("Drawing the calculated points on client: " + myUser.getUserName() + " playersetsize: " + getAllSets().size());
                 if (playerSet != null) {
                     setPointsToView(playerSet);
                 }
             }
-
         });
-
-
     }
 
     // a player finished his turn...
@@ -623,13 +612,11 @@ public class GameController extends Controller<GameModel, GameView> {
 
 
     private void enableOrDisableView() {
-
         if (myUser.getId() == activeUserId) {
             view.disableView();
 
         } else {
             view.enableView();
-
         }
     }
 
@@ -790,7 +777,6 @@ public class GameController extends Controller<GameModel, GameView> {
         System.out.println(userName);
 
         this.view.setUserPoints(userId, userName, playerSet, activeUserId);
-
     }
 
 
