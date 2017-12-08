@@ -1,11 +1,28 @@
-.root{
-    /*-fx-background-image: url("history.jpg");
-    -fx-background-size: cover;
-    */
 
+    /**
+     * author Vanessa Cajochen
+     */
+
+.root{
+    -fx-background-image: url("backgroundLogin.jpg");
+    -fx-background-size: cover;
 
 }
 
 .label{
     -fx-text-fill: linear-gradient(white, #d0d0d0);
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-background-color: #5eb5e7;
+    -fx-background-insets: 0px;
+    -fx-border-color: black;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+
+
 }

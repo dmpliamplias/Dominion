@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -31,8 +32,7 @@ public class LoginView extends View<LoginModel> {
     protected PasswordField pw;
 
 
-    private Label lblPw;
-    private Label lblEmail;
+
 
     public LoginView(Stage stage, LoginModel model) {
         super(stage, model);
@@ -41,16 +41,13 @@ public class LoginView extends View<LoginModel> {
     public Scene create_GUI() {
 
         BorderPane root = new BorderPane();
-        Scene scene=new Scene(root,500,450);
+        Scene scene=new Scene(root,497,315);
         GridPane grPa = new GridPane();
-
-        this.stage.setHeight(500);
-        this.stage.setWidth(800);
 
         grPa.setAlignment(Pos.CENTER);
         grPa.setVgap(10);
         grPa.setHgap(10);
-        grPa.setPadding(new Insets(25, 25, 25, 25));
+        grPa.setPadding(new Insets(15, 25, 15, 25));
 
         setStylesheet(scene, LOGIN);
 
@@ -69,14 +66,12 @@ public class LoginView extends View<LoginModel> {
         hbBtn.getChildren().add(btnSignUp);
         grPa.add(hbBtn, 1, 4);
 
-
-        grPa.setGridLinesVisible(false);
-
         user = new TextField();
         grPa.add(user,1,1);
 
         pw = new PasswordField();
         grPa.add(pw,1,2);
+
 
         // Create Icons
         ImageView imgVUser = new ImageView(new Image(getClass().getResourceAsStream("/login/user.png")));
@@ -96,8 +91,19 @@ public class LoginView extends View<LoginModel> {
         grPa.add(lblLock, 0, 2);
 
 
-        root.setCenter(grPa);
+        // Create Title Login
+        Image imgLogin = new Image(getClass().getResourceAsStream("Login.png"));
+        ImageView imgVLogin = new ImageView(imgLogin);
+        imgVLogin.setPreserveRatio(true);
+        imgVLogin.setFitWidth(200);
 
+        root.setTop(imgVLogin);
+        root.setAlignment(imgVLogin, Pos.CENTER);
+        root.setMargin(imgVLogin, new Insets(30,0,-30,0));
+
+
+
+        root.setCenter(grPa);
         this.stage.setScene(scene);
 
         return scene;
