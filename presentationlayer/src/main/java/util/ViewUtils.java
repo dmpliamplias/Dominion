@@ -28,7 +28,6 @@ public class ViewUtils {
         if (id == 4) {
             color = Color.GREEN;
         }
-
         if (id == 5){
             color = Color.PINK;
         }
