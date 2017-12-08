@@ -42,7 +42,9 @@ public class CardImageView extends ImageView {
             final Language currentLanguage = tr.getCurrentLanguage();
             String code = currentLanguage.getCode();
 
+
             code = code.replace("de_", "");
+
             path = path.replace("{0}", code.toUpperCase());
 
             if (cardSize.equals(cardSize.miniSize)){
