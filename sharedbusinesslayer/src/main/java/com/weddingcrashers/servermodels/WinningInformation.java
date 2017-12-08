@@ -51,6 +51,6 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
 
     @Override
     public int compareTo(WinningInformation o) {
-        return new Integer(this.position).compareTo(o.position);
+        return (new Integer(this.getPoints()).compareTo(o.getPoints()) * -1);
     }
 }
