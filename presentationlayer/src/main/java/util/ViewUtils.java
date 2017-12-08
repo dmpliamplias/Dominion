@@ -30,8 +30,18 @@ public class ViewUtils {
         }
 
         if (id == 5){
-            color = Color.BLACK;
+            color = Color.PINK;
         }
+        if (id == 6){
+            color = Color.ORANGE;
+        }
+        if (id == 7){
+            color = Color.BROWN;
+        }
+        if (id == 8){
+            color = Color.DARKGREY;
+        }
+
         return color;
     }
 }
