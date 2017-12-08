@@ -100,7 +100,6 @@ public class LoginView extends View<LoginModel> {
 
         this.stage.setScene(scene);
 
-        setTexts();
         return scene;
     }
 

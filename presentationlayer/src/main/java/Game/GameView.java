@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import ranking.RankingViewModel;
 
 import java.util.ArrayList;
 
@@ -236,7 +235,6 @@ public class GameView extends View<GameModel> {
         stage.setTitle("Dominion");
 
 
-        setTexts();
         this.stage.setResizable(true);
         return scene;
     }
@@ -259,10 +257,9 @@ public class GameView extends View<GameModel> {
         this.endOptionRounds = new Text();
         this.endOptionPoints = new Text();
 
-        this.setTop.getChildren().addAll(getMenuBar(), title, endOption);
+        this.setTop.getChildren().addAll(menuBar, title, endOption);
 
-        menuSettings.getItems().remove(menuLanguage);
-
+        menuBar.getMenuSettings().getItems().remove(menuBar.getMenuLanguage());
 
         return setTop;
     }

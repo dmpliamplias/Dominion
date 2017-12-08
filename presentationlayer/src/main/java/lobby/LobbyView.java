@@ -5,25 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
-import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.LOBBY;
 
 /**
@@ -94,12 +87,6 @@ public class LobbyView extends View<LobbyModel> {
         root.setTop( addMenu());
         root.setLeft(addGameSettings());
 
-        // For multi language
-        setTexts();
-
-
-
-
         return scene;
     }
 
@@ -124,9 +111,9 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldGameSettings.getStyleClass().add( "title" );
 
 
-        vBoxAddMenu.getChildren().addAll( super.getMenuBar(), btnTestGameView, textFieldGameSettings );
+        vBoxAddMenu.getChildren().addAll(menuBar, btnTestGameView, textFieldGameSettings );
 
-        menuSettings.getItems().remove(menuSound);
+        menuBar.getMenuSettings().getItems().remove(menuBar.getMenuSound());
 
         return vBoxAddMenu;
     }
@@ -356,9 +343,8 @@ public class LobbyView extends View<LobbyModel> {
     // Method for stageDialog
 
     // Getters and Setters for LobbyView
-
     public ImageView getImgViewDeFlag() {
-        return imgViewDeFlag;
+        return menuBar.getImgViewDeFlag();
     }
 
     public VBox gethBoxOptionClient() {
@@ -465,7 +451,6 @@ public class LobbyView extends View<LobbyModel> {
         return btnTestGameView;
     }
 
-
     public ObservableList<String> getObservablePlayerList() {
         return observablePlayerList;
     }
@@ -473,7 +458,6 @@ public class LobbyView extends View<LobbyModel> {
     public BorderPane getRoot() {
         return root;
     }
-
 
 }
 

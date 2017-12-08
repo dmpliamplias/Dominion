@@ -12,9 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import javafx.stage.WindowEvent;
-import javafx.event.EventHandler;
 
 import static util.StyleSheetPath.REGISTER;
 
@@ -99,7 +96,6 @@ public class RegisterView extends View<RegisterModel>{
 
         this.stage.setScene(scene);
 
-        setTexts();
         return scene;
     }
 

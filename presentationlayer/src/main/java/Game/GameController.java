@@ -2,37 +2,36 @@ package Game;
 
 
 import Controls.CardImageView;
-import com.sun.xml.internal.bind.v2.TODO;
-import com.weddingcrashers.businessmodels.*;
+import base.Controller;
+import com.weddingcrashers.businessmodels.Card;
+import com.weddingcrashers.businessmodels.KingCard;
+import com.weddingcrashers.businessmodels.MoneyCard;
+import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
-import sun.applet.Main;
-import util.PLServiceLocator;
-import util.ViewUtils;
-import base.Controller;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.input.KeyCode;
-import com.weddingcrashers.businessmodels.Card;
-import com.weddingcrashers.businessmodels.KingCard;
 import ranking.RankingController;
 import ranking.RankingModel;
 import ranking.RankingView;
+import sun.applet.Main;
+import util.PLServiceLocator;
+import util.ViewUtils;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.xml.ws.Action;
 import java.io.IOException;
 import java.util.*;
 
@@ -126,7 +125,7 @@ public class GameController extends Controller<GameModel, GameView> {
         view.btnPlayMoneyCards.setOnAction(event -> {
 
             String coin = new String( "coin" );
-            if(super.view.getMenuItemSoundUnmute().isSelected()) {
+            if(super.view.menuBar.getMenuItemSoundUnmute().isSelected()) {
                 playSound( coin );
             }
 
@@ -194,17 +193,17 @@ public class GameController extends Controller<GameModel, GameView> {
         // Start and end background music
 
         if (plServiceLocator.soundIsOn == false){
-            super.view.getMenuItemMusicMute().setSelected( true );
+            super.view.menuBar.getMenuItemMusicMute().setSelected( true );
         }
 
-        super.view.getMenuItemMusicMute().setOnAction( event -> {
+        super.view.menuBar.getMenuItemMusicMute().setOnAction( event -> {
 
             plServiceLocator.audioClip.stop();
             plServiceLocator.soundIsOn = false;
 
         } );
 
-        super.view.getMenuItemMusicUnmute().setOnAction( event -> {
+        super.view.menuBar.getMenuItemMusicUnmute().setOnAction( event -> {
 
             if(!plServiceLocator.audioClip.isPlaying()){
                 startSound();
@@ -416,7 +415,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 buyInfo.setUserId((int) getUser().getId());
                 buyInfo.setCard(card);
                 gc.setCardPlayedInfo(buyInfo);
-                if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                if(super.view.menuBar.getMenuItemSoundUnmute().isSelected()) {
                     playSound( cash );
                 }
 
@@ -538,7 +537,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 view.moveCardToPlayingArea(imgv);
                 updateActionBuyMoney();
 
-                if(super.view.getMenuItemSoundUnmute().isSelected()){
+                if(super.view.menuBar.getMenuItemSoundUnmute().isSelected()){
                     playSound( coin );
                 }
 
@@ -574,7 +573,7 @@ public class GameController extends Controller<GameModel, GameView> {
                             view.moveCardToPlayingArea(imgv);
                             numberOfActions -= 1;
                             updateActionBuyMoney();
-                            if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                            if(super.view.menuBar.getMenuItemSoundUnmute().isSelected()) {
                                 playSound( card );
                             }
                             break;
@@ -592,7 +591,7 @@ public class GameController extends Controller<GameModel, GameView> {
                     view.moveCardToPlayingArea(imgv);
                     numberOfActions -= 1;
                     updateActionBuyMoney();
-                    if(super.view.getMenuItemSoundUnmute().isSelected()) {
+                    if(super.view.menuBar.getMenuItemSoundUnmute().isSelected()) {
                         playSound( card );
                     }
                 }
@@ -875,7 +874,7 @@ public class GameController extends Controller<GameModel, GameView> {
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
         plServiceLocator.audioClip.stop();
-        if(super.view.getMenuItemMusicMute().isSelected()){
+        if(super.view.menuBar.getMenuItemMusicMute().isSelected()){
             plServiceLocator.soundIsOn = false;
         }
         this.view.stop();

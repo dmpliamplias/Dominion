@@ -1,15 +1,13 @@
 package connection;
 
 import base.View;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
@@ -118,7 +116,6 @@ public class ConnectionView extends View<ConnectionModel> {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		setStylesheet(scene, CONNECTION);
-		setTexts();
 
         return scene;
     }

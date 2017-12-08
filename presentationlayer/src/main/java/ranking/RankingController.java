@@ -1,22 +1,19 @@
 package ranking;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.weddingcrashers.model.User;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
+import base.Controller;
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.servermodels.RankingContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
-import base.Controller;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
-import javafx.event.ActionEvent;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 
 
@@ -72,8 +69,8 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         new LobbyController(view, model);
         this.view.stop();
         plServiceLocator.audioClip.stop();
-        if(view != null && view.getMenuItemMusicMute() != null) {
-            if (view.getMenuItemMusicMute().isSelected()) {
+        if(view != null && view.menuBar.getMenuItemMusicMute() != null) {
+            if (view.menuBar.getMenuItemMusicMute().isSelected()) {
                 plServiceLocator.soundIsOn = false;
             }
         }

@@ -3,11 +3,6 @@ package lobby;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
-import javafx.concurrent.Task;
-import javafx.scene.media.AudioClip;
-import javafx.stage.Stage;
-import util.PLServiceLocator;
-import util.ViewUtils;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
@@ -15,15 +10,16 @@ import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
-import login.LoginController;
-import login.LoginModel;
-import login.LoginView;
+import javafx.scene.media.AudioClip;
+import javafx.stage.Stage;
 import ranking.RankingController;
 import ranking.RankingModel;
 import ranking.RankingView;
+import util.ViewUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,9 +27,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.weddingcrashers.service.Language.ENGLISH;
-import static com.weddingcrashers.service.Language.GERMAN;
-import static com.weddingcrashers.service.Language.SWISS_GERMAN;
 import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
@@ -69,7 +62,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         // Hoster or normal Client? -> sets the view
 
         if (!serverConnectionService.isHoster()){
-
             view.getBtnStart().setVisible( false );
             view.gethBoxOption1().setVisible( false );
             view.gethBoxOption2().setVisible( false );
@@ -77,13 +69,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.setTexts();
             view.getLvPlayers().setMouseTransparent( true );
             view.getLvPlayers().setFocusTraversable( false );
-
-
         }
 
 
         if (plServiceLocator.soundIsOn == false){
-            super.view.getMenuItemMusicMute().setSelected( true );
+            super.view.menuBar.getMenuItemMusicMute().setSelected( true );
         }
 
         // Start sound daudioClipefault
@@ -93,12 +83,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         // Start and end background music
         
-        super.view.getMenuItemMusicMute().setOnAction( event -> {
+        super.view.menuBar.getMenuItemMusicMute().setOnAction( event -> {
             plServiceLocator.audioClip.stop();
             plServiceLocator.soundIsOn = false;
         } );
 
-        super.view.getMenuItemMusicUnmute().setOnAction( event -> {
+        super.view.menuBar.getMenuItemMusicUnmute().setOnAction( event -> {
 
             if(!plServiceLocator.audioClip.isPlaying()){
                 startSound();

@@ -2,20 +2,18 @@ package ranking;
 
 import base.View;
 import com.weddingcrashers.model.Highscore;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.*;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import static util.StyleSheetPath.RANKING;
 
 
 /**
@@ -65,12 +63,8 @@ public class RankingView extends View<RankingModel> {
 
             this.stage.setScene(scene);
 
-
-
             this.stage.show();
-            setTexts();
             return scene;
-
     }
 
     protected void setTexts() {

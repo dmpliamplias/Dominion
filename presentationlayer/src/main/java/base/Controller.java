@@ -1,15 +1,11 @@
 package base;
 
-import com.weddingcrashers.service.Language;
-import javafx.event.ActionEvent;
-import util.PLServiceLocator;
-import util.ServerConnectionService;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import util.PLServiceLocator;
+import util.ServerConnectionService;
 
-import static com.weddingcrashers.service.Language.ENGLISH;
-import static com.weddingcrashers.service.Language.GERMAN;
-import static com.weddingcrashers.service.Language.SWISS_GERMAN;
+import static com.weddingcrashers.service.Language.*;
 
 /**
  * Controller base class.
@@ -70,19 +66,19 @@ public abstract class Controller<M extends Model, V extends View<M>> {
 
     private void setonActionEvent() {
 
-        view.menuItemCH.setOnAction( event -> {
+        view.menuBar.getMenuItemCH().setOnAction( event -> {
 
             view.switchTranslator(SWISS_GERMAN);
 
         } );
 
-        view.menuItemDE.setOnAction( event -> {
+        view.menuBar.getMenuItemDE().setOnAction( event -> {
 
             view.switchTranslator( GERMAN );
 
         } );
 
-        view.menuItemENG.setOnAction( event -> {
+        view.menuBar.getMenuItemENG().setOnAction( event -> {
 
             view.switchTranslator( ENGLISH );
 
