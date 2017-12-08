@@ -482,11 +482,15 @@ public class GameView extends View<GameModel> {
         DominionAlert alert = alert("", Alert.AlertType.INFORMATION);
         if (isWinner) {
             alert.contentText(getText("gameview.winnerdialog.contentText.winner"));
-            //alert.setGraphic(new ImageView());
+            Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
+            ImageView imgVwinnerPic = new ImageView(winnerPic);
+            alert.setGraphic(imgVwinnerPic);
         }
         else {
             alert.contentText(getText("gameview.winnerdialog.contentText.loser"));
-            //alert.setGraphic(new ImageView());
+            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
+            ImageView imgVloserPic = new ImageView(loserPic);
+            alert.setGraphic(imgVloserPic);
         }
 
         alert.setTitle("Winner Dialog");
@@ -495,6 +499,8 @@ public class GameView extends View<GameModel> {
     protected void setTextDialog(){
         this.btnLobby.setText(getText("btn.Lobby"));
         this.btnRanking.setText(getText("btn.Ranking"));
+
+
     }
 
 
