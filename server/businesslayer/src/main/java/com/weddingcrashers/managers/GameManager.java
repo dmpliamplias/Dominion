@@ -173,7 +173,7 @@ public class GameManager extends Manager {
         int currentIdActive = client.getClientId();
         List<Integer> ids = new ArrayList<Integer>();
 
-        for(Client c : client.getAllClients()){
+        for(Client c : players){
             ids.add(c.getClientId());
         }
         Collections.sort(ids);
