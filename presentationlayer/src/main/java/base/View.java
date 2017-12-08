@@ -203,6 +203,7 @@ public abstract class View<M extends Model> {
 
 
 
+
         // Create Language Icons
         imgViewDeFlag = new ImageView(new Image(getClass().getResourceAsStream("/connection/germanFlag.png")));
         setIconSize(imgViewDeFlag);
