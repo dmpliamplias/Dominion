@@ -81,6 +81,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         }
 
+
+        if (plServiceLocator.soundIsOn == false){
+            super.view.getMenuItemMusicMute().setSelected( true );
+        }
+
         // Start sound daudioClipefault
         if(plServiceLocator.soundIsOn) {
             startSound();
