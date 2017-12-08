@@ -458,8 +458,9 @@ public class GameController extends Controller<GameModel, GameView> {
             String logger = new String(
                     user.getUserName() + " "
                     + view.getTxtLogger().getText() + ": "
-                    + card.toString(serviceLocator.getTranslator()))
-                    + " " + count;
+                    + count + " "
+                    + card.toString(serviceLocator.getTranslator()));
+
 
 
            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
