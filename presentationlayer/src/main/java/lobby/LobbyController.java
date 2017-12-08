@@ -90,6 +90,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         
         super.view.getMenuItemMusicMute().setOnAction( event -> {
             plServiceLocator.audioClip.stop();
+            plServiceLocator.soundIsOn = false;
         } );
 
         super.view.getMenuItemMusicUnmute().setOnAction( event -> {

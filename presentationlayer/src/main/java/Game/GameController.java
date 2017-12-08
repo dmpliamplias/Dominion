@@ -185,11 +185,14 @@ public class GameController extends Controller<GameModel, GameView> {
 
         // Start and end background music
 
+        if (plServiceLocator.soundIsOn == false){
+            super.view.getMenuItemMusicMute().setSelected( true );
+        }
 
         super.view.getMenuItemMusicMute().setOnAction( event -> {
 
-
             plServiceLocator.audioClip.stop();
+            plServiceLocator.soundIsOn = false;
 
         } );
 
