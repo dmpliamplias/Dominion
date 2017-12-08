@@ -13,6 +13,7 @@ public class PLServiceLocator {
 
     public javafx.scene.media.AudioClip audioClip;
     private static PLServiceLocator sl;
+    public boolean soundIsOn = new Boolean( true );
 
     public  static PLServiceLocator getPLServiceLocator(){
         if(sl == null){
@@ -39,6 +40,10 @@ public class PLServiceLocator {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isSoundIsOn() {
+        return soundIsOn;
     }
 
     public javafx.scene.media.AudioClip getAudioClip() {

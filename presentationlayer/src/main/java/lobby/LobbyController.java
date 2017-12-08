@@ -82,7 +82,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         }
 
         // Start sound daudioClipefault
-        if(plServiceLocator.audioClip == null) {
+        if(plServiceLocator.soundIsOn) {
             startSound();
         }
 
@@ -96,6 +96,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
             if(!plServiceLocator.audioClip.isPlaying()){
                 startSound();
+                plServiceLocator.soundIsOn = true;
             }
         } );
 
@@ -240,7 +241,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.alert( getText( "lobbyview.falseStatement" ), Alert.AlertType.WARNING );
             view.choiceBox.getSelectionModel().clearSelection();
             view.cbFinishPointCards.setSelected( false );
-        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <= 1) {
+        } else if (players.size() >= 2 && view.lvPlayers.getSelectionModel().getSelectedItems().size() <2) {
 
         view.startStage().show();
 
