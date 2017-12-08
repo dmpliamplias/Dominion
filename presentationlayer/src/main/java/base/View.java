@@ -37,8 +37,6 @@ public abstract class View<M extends Model> {
     public DominionMenuBar menuBar;
     /** Menu bar used indicator. */
     protected boolean menuBarUsed = false;
-    /** The running dialogs. */
-    private List<DominionAlert> alerts;
 
 
 
@@ -129,7 +127,6 @@ public abstract class View<M extends Model> {
      */
     public DominionAlert alert(String msg, Alert.AlertType alertType){
         final DominionAlert dominionAlert = new DominionAlert(msg, alertType, translator);
-        alerts.add(dominionAlert);
         return dominionAlert;
     }
 

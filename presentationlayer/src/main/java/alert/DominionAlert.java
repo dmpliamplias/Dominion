@@ -33,17 +33,17 @@ public class DominionAlert extends BaseAlert {
         showAndWait();
     }
 
-    protected void title(String key) {
+    public void title(String key) {
         final String title = translator.getString(key);
         setTitle(title);
     }
 
-    protected void headerText(String key) {
+    public void headerText(String key) {
         final String headerText = translator.getString(key);
         setHeaderText(headerText);
     }
 
-    private void contentText(String key) {
+    public void contentText(String key) {
         final String contentText = translator.getString(key);
         setContentText(contentText);
     }

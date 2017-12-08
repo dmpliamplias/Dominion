@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import static util.StyleSheetPath.RANKING;
+
 
 /**
  *@author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
@@ -46,6 +48,7 @@ public class RankingView extends View<RankingModel> {
 
             table = new TableView<RankingViewModel>();
             table.setEditable(false);
+
 
             lblRanking = new Label();
             lblRanking.setFont(new Font("Helvetica", 16));

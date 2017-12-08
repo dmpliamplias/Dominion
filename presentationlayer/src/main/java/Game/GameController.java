@@ -308,7 +308,8 @@ public class GameController extends Controller<GameModel, GameView> {
             final List<WinningInformation> winningInformations = gc.getWinningInformations();
             if (winningInformations != null && winningInformations.size() > 0) {
                 final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
-                view.startWinnerStage(winningUsers);
+                boolean isWinner = determineWinner(winningUsers, myUser);
+                view.startWinnerStage(winningUsers, isWinner);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 logActiveUser();
@@ -323,21 +324,41 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
+        WinningUser winner = null;
+        for (WinningUser winningUser : winningUsers) {
+            if (winner == null) {
+                winner = winningUser;
+            }
+            int wiPoints = winningUser.getPoints();
+            int points = winner.getPoints();
+            if (wiPoints > points) {
+                winner = winningUser;
+            }
+        }
+        long userId = winner.getUserId();
+        long myUserId = myUser.getId();
+
+        boolean isWinner = false;
+        if (userId == myUserId) {
+            isWinner = true;
+        }
+        return isWinner;
+    }
+
     /* Author Murat Kelleci
     */
 
     private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
         ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
-
-
-            for (WinningInformation wi : winningInformations) {
+        for (WinningInformation wi : winningInformations) {
                 User user = users.get(wi.getUserId());
                 int points = wi.getPoints();
                 int position = wi.getPosition();
-                WinningUser winningUser = new WinningUser(user.getUserName(), points, position);
+                WinningUser winningUser = new WinningUser(user.getId(), user.getUserName(), points, position);
                 winningUsers.add(winningUser);
                 //Collections.sort(winningUsers);
-            }
+        }
         return winningUsers;
     }
 
