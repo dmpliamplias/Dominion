@@ -81,7 +81,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                     view.alert(e.getMessage(), Alert.AlertType.ERROR);
                 }
             } else {
-                view.alert(getText("loginview.erroruncompletedfields"), Alert.AlertType.WARNING);
+                view.alert("loginview.erroruncompletedfields", Alert.AlertType.WARNING);
             }
         }
     }
@@ -105,7 +105,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                 }
             } else {
                 //unsuccessfull login, show error
-                view.alert(getText("loginview.loginError"), WARNING);
+                view.alert("loginview.loginError", WARNING);
             }
         });
     }
