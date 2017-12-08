@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -46,8 +48,8 @@ public class LoginView extends View<LoginModel> {
         this.stage.setWidth(800);
 
         grPa.setAlignment(Pos.CENTER);
-        grPa.setHgap(10);
         grPa.setVgap(10);
+        grPa.setHgap(10);
         grPa.setPadding(new Insets(25, 25, 25, 25));
 
         setStylesheet(scene, LOGIN);
@@ -68,16 +70,31 @@ public class LoginView extends View<LoginModel> {
         grPa.add(hbBtn, 1, 4);
 
 
+        grPa.setGridLinesVisible(false);
 
-        lblEmail = new Label();
-        grPa.add(lblEmail, 0, 1);
         user = new TextField();
         grPa.add(user,1,1);
 
-        lblPw = new Label();
-        grPa.add(lblPw, 0, 2);
         pw = new PasswordField();
         grPa.add(pw,1,2);
+
+        // Create Icons
+        ImageView imgVUser = new ImageView(new Image(getClass().getResourceAsStream("/login/user.png")));
+        imgVUser.setFitHeight(20);
+        imgVUser.setFitWidth(20);
+
+        ImageView imgVLock = new ImageView(new Image(getClass().getResourceAsStream("/login/lock.png")));
+        imgVLock.setFitHeight(20);
+        imgVLock.setFitWidth(20);
+
+        Label lblUser = new Label();
+        lblUser.setGraphic(imgVUser);
+        grPa.add(lblUser, 0, 1);
+
+        Label lblLock = new Label();
+        lblLock.setGraphic(imgVLock);
+        grPa.add(lblLock, 0, 2);
+
 
         root.setCenter(grPa);
 
@@ -89,8 +106,8 @@ public class LoginView extends View<LoginModel> {
 
     protected void setTexts(){
         this.stage.setTitle(getText("loginview.title"));
-        lblPw.setText(getText("registerview.password"));
-        lblEmail.setText(getText("registerview.email"));
+        user.setPromptText(getText("registerview.email"));
+        pw.setPromptText(getText("registerview.password"));
         btnLogin.setText(getText("logginview.login"));
         btnSignUp.setText(getText("logginview.register"));
     }

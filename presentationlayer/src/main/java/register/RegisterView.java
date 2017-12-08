@@ -81,25 +81,18 @@ public class RegisterView extends View<RegisterModel>{
 
 
         // Creation of all needed TextFields
-        lblEmail= new Label();
-        grid.add(lblEmail,0,1);
         txtEmail = new TextField();
         grid.add(txtEmail,1,1);
 
-        lblPw=new Label();
-        grid.add(lblPw,0,2);
         txtPw = new PasswordField();
         grid.add(txtPw,1,2);
 
-        lblPwconfirm=new Label();
-        grid.add(lblPwconfirm,0,3);
         txtPw_confirm= new PasswordField();
         grid.add(txtPw_confirm,1,3);
 
-        lblUserName = new Label();
-        grid.add(lblUserName,0,4);
         txtUserName=new TextField();
         grid.add(txtUserName,1,4);
+
 
 
         root.setCenter(grid);
@@ -116,10 +109,12 @@ public class RegisterView extends View<RegisterModel>{
         this.stage.setTitle(getText("registerview.titel"));
         this.btnRegister.setText(getText("logginview.register"));
         this.btnCancel.setText(getText("btn.cancel"));
-        this.lblEmail.setText(getText("registerview.email"));
-        this.lblPw.setText(getText("registerview.password"));
-        this.lblPwconfirm.setText(getText("registerview.confirmation"));
-        this.lblUserName.setText(getText("registerview.username"));
+        txtEmail.setPromptText(getText("registerview.email"));
+        txtPw.setPromptText(getText("registerview.password"));
+        txtPw_confirm.setPromptText(getText("registerview.confirmation"));
+        txtUserName.setPromptText(getText("registerview.username"));
+
+
 
     }
 
