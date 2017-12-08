@@ -1,6 +1,9 @@
 package register;
 
 import base.View;
+import com.weddingcrashers.service.Language;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -41,19 +46,17 @@ public class RegisterView extends View<RegisterModel>{
     public Scene create_GUI(){
 
         BorderPane root = new BorderPane();
-        Scene scene = new Scene(root,600,500);
+        Scene scene = new Scene(root,416,372);
         GridPane grid = new GridPane();
 
 
-        this.stage.setWidth(800);
-        this.stage.setHeight(500);
 
         // Settings and positioning of m GridPane
 
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setPadding(new Insets(15, 25, 15, 25));
 
         setStylesheet(scene, REGISTER);
 
@@ -81,15 +84,46 @@ public class RegisterView extends View<RegisterModel>{
         txtEmail = new TextField();
         grid.add(txtEmail,1,1);
 
+        txtUserName=new TextField();
+        grid.add(txtUserName,1,2);
+
         txtPw = new PasswordField();
-        grid.add(txtPw,1,2);
+        grid.add(txtPw,1,3);
 
         txtPw_confirm= new PasswordField();
-        grid.add(txtPw_confirm,1,3);
+        grid.add(txtPw_confirm,1,4);
 
-        txtUserName=new TextField();
-        grid.add(txtUserName,1,4);
 
+        // Create Title Register
+        ImageView imgVRegisterEng = new ImageView(new Image(getClass().getResourceAsStream("Register_ENG.png")));
+        imgVRegisterEng.setPreserveRatio(true);
+        imgVRegisterEng.setFitHeight(100);
+
+        ImageView imgVRegisterDe = new ImageView(new Image(getClass().getResourceAsStream("Register_DE.png")));
+        imgVRegisterDe.setPreserveRatio(true);
+        imgVRegisterDe.setFitHeight(100);
+
+        ImageView imgVRegisterCh = new ImageView(new Image(getClass().getResourceAsStream("Register_CH.png")));
+        imgVRegisterCh.setPreserveRatio(true);
+        imgVRegisterCh.setFitHeight(100);
+
+        // Sets Title depending on Language
+        Translator tr = ServiceLocator.getServiceLocator().getTranslator();
+        final Language currentLanguage = tr.getCurrentLanguage();
+
+        if (currentLanguage == Language.SWISS_GERMAN){
+            root.setTop(imgVRegisterCh);
+            root.setAlignment(imgVRegisterCh, Pos.CENTER);
+            root.setMargin(imgVRegisterCh, new Insets(20,0,-40,0));
+        } else if (currentLanguage == Language.ENGLISH) {
+            root.setTop(imgVRegisterEng);
+            root.setAlignment(imgVRegisterEng, Pos.CENTER);
+            root.setMargin(imgVRegisterEng, new Insets(20,0,-40,0));
+        } else {
+            root.setTop(imgVRegisterDe);
+            root.setAlignment(imgVRegisterDe, Pos.CENTER);
+            root.setMargin(imgVRegisterDe, new Insets(20,0,-40,0));
+        }
 
 
         root.setCenter(grid);
