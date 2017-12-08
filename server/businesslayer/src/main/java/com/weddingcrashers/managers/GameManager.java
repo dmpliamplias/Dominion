@@ -147,7 +147,6 @@ public class GameManager extends Manager {
                 hs.saveHighscore(highscore);
             }
             container.setWinningInformation(winningInfos);
-            GameManager.dispose();
         }else {
             int nxtId = getNextTurnClientId(false);
 
@@ -158,6 +157,10 @@ public class GameManager extends Manager {
             }
         }
         broadCast(container);
+
+        if(abortGame){
+            GameManager.dispose();
+        }
     }
 
     private int getNextTurnClientId(boolean isInitalizing){
