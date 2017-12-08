@@ -20,5 +20,6 @@ public enum Methods implements Serializable {
     UpdateRound,
     TurnFinished,
     BuyCard,
+    ImOut,
     Client_Server_Error,
 }

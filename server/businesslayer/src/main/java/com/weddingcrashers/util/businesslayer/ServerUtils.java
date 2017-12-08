@@ -32,6 +32,7 @@ public class ServerUtils {
 
     public static void sendError(Client c, Exception ex)  {
         ErrorContainer errorContainer = new ErrorContainer(ex.getMessage());
+        System.out.println("SERVER ERROR: " + ex.getMessage());
         ex.printStackTrace();
         ServerUtils.sendObject(c, errorContainer);
     }

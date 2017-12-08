@@ -113,6 +113,13 @@ public class Client extends Thread {
                 _rankingsManager.sendRanking();
             } else if (c.getMethod() == Methods.InitialCardSets) {
                 _gameManager.sendInitalCardSet();
+            }else if(c.getMethod() == Methods.ImOut){
+                for(Client client : Server.clients){
+                    if(client.getClientId() == this.getClientId()){
+                        Server.clients.remove(client);
+                    }
+                }
+                Server.setOtherClientsForAllClients();
             }
         }
     }
