@@ -78,7 +78,7 @@ public class GameManager extends Manager {
             GameContainer gc = new GameContainer(Methods.CardPlayed);
             gc.setCardPlayedInfo(cardPlayedInfo);
             cardPlayedInfo.setClientId(client.getClientId());
-            broadCast(gc, false);
+            broadCast(gc);
         }else{
             ServerUtils.sendError(client, new Exception("This is not your turn!"));
         }
@@ -99,7 +99,7 @@ public class GameManager extends Manager {
             bGc.setCardPlayedInfo(buyInfo);
             bGc.setUnusedCards(unusedCards);
             this.client.getDominionSet().getTrayStack().add(card);
-            broadCast(bGc, false);
+            broadCast(bGc);
         }else{
            ServerUtils.sendError(client, new Exception("This is not your turn!"));
          }
@@ -120,19 +120,10 @@ public class GameManager extends Manager {
 
     // privates
 
-    private ArrayList<PlayerSet> getExistingPlayerSets(){
-        ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
-        for(Client c : client.getOtherClients()){
-            if(c.getDominionSet() != null) {
-                sets.add(c.getDominionSet());
-            }
-        }
-        return sets;
-    }
     private void updateRound(){
         GameContainer gc = new GameContainer(Methods.UpdateRound);
         gc.setRound(round);
-        broadCast(gc,false);
+        broadCast(gc);
     }
 
     private void gameTurnFinishedCompletely(GameContainer container, boolean abortGame){
@@ -162,11 +153,11 @@ public class GameManager extends Manager {
 
             //container.getDominionSet().setUserId((int) client.getUser().getId());
             container.setUserIdHasTurn((int) users.get(nxtId).getId());
-            for(Client c : client.getAllClients()) { // send container to all clients
+            for(Client c : players) {
                 c.setActive(c.getClientId() == nxtId);
             }
         }
-        broadCast(container, false);
+        broadCast(container);
     }
 
     private int getNextTurnClientId(boolean isInitalizing){
@@ -498,8 +489,8 @@ public class GameManager extends Manager {
        return 0;
     }
 
-    private void broadCast(GameContainer gc, boolean exceptMyself){
-        for(Client c : exceptMyself ? this.client.getOtherClients() : this.client.getAllClients()){
+    private void broadCast(GameContainer gc){
+        for(Client c : players){
             GameContainer newGc = gc.clone();
             ServerUtils.sendObject(c, newGc);
         }
