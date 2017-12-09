@@ -324,6 +324,8 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    // @author Murat Kelleci
+
     private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
         WinningUser winner = null;
         for (WinningUser winningUser : winningUsers) {
