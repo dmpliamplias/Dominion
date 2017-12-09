@@ -479,21 +479,36 @@ public class GameView extends View<GameModel> {
    }
 
    private void displayWinnerDialog(boolean isWinner) {
-        DominionAlert alert = alert("", Alert.AlertType.INFORMATION);
+
+       //TODO Murat add sounds in folger sounds -> winner.wav and loser.wav
+
         if (isWinner) {
-            alert.contentText("gameview.winner");
-            Image winnerPic = new Image(getClass().getResourceAsStream("winner.png"));
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "gameview.winner");
+            String winner = new String("winner");
+            Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
-            alert.setGraphic(imgVwinnerPic);
+            alert1.setGraphic(imgVwinnerPic);
+            alert1.setTitle("Winner Dialog");
+            alert1.showAndWait();
+            if(menuBar.getMenuItemSoundUnmute().isSelected()) {
+                GameController.playSound(winner);
+            }
+
         }
         else {
-            alert.contentText("gameview.loser");
-            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "gameview.loser");
+            String loser = new String("loser");
+            Image loserPic = new Image(getClass().getResourceAsStream("loser.png"));
             ImageView imgVloserPic = new ImageView(loserPic);
-            alert.setGraphic(imgVloserPic);
+            alert2.setGraphic(imgVloserPic);
+            alert2.setTitle("Looser Dialog");
+            alert2.showAndWait();
+            if(menuBar.getMenuItemSoundUnmute().isSelected()) {
+                GameController.playSound(loser);
+            }
         }
 
-        alert.setTitle("Winner Dialog");
+
    }
 
     protected void setTextDialog(){
