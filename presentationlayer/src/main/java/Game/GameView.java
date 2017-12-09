@@ -483,11 +483,12 @@ public class GameView extends View<GameModel> {
        //TODO Murat add sounds in folger sounds -> winner.wav and loser.wav
 
         if (isWinner) {
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "gameview.winner");
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             String winner = new String("winner");
             Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
             alert1.setGraphic(imgVwinnerPic);
+            alert1.setHeaderText("");
             alert1.setTitle("Winner Dialog");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(winner);
@@ -497,11 +498,12 @@ public class GameView extends View<GameModel> {
 
         }
         else {
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "gameview.loser");
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             String loser = new String("loser");
             Image loserPic = new Image(getClass().getResourceAsStream("loser.png"));
             ImageView imgVloserPic = new ImageView(loserPic);
             alert2.setGraphic(imgVloserPic);
+            alert2.setHeaderText("");
             alert2.setTitle("Looser Dialog");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(loser);
