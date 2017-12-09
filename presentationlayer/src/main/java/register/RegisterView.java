@@ -56,7 +56,7 @@ public class RegisterView extends View<RegisterModel>{
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(15, 25, 15, 25));
+        grid.setPadding(new Insets(15, 0, 15, 0));
 
         setStylesheet(scene, REGISTER);
 
@@ -64,15 +64,28 @@ public class RegisterView extends View<RegisterModel>{
 
         // Creation of all needed Buttons
         this.btnRegister =new Button();
-        this.btnRegister.setPrefSize(130,40);
-
+        this.btnRegister.setPrefSize(130,54);
 
         this.btnCancel = new Button();
-        this.btnCancel.setPrefSize(130,40);
+        this.btnCancel.setPrefSize(130,54);
 
+        // Creating of Button Images
+        ImageView imgVbtnRegister = new ImageView(new Image(getClass().getResourceAsStream("/login/buttonWood.png")));
+        imgVbtnRegister.setPreserveRatio(true);
+        imgVbtnRegister.setFitWidth(130);
+
+        ImageView imgVbtnCancel = new ImageView(new Image(getClass().getResourceAsStream("/login/buttonWood.png")));
+        imgVbtnCancel.setPreserveRatio(true);
+        imgVbtnCancel.setFitWidth(130);
 
 
         // Creation of HBox
+        HBox hbImg = new HBox(10);
+        hbImg.setAlignment(Pos.BOTTOM_CENTER);
+        hbImg.getChildren().addAll(imgVbtnRegister, imgVbtnCancel);
+        grid.add(hbImg, 1, 5);
+
+
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnRegister);

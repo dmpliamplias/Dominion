@@ -54,16 +54,30 @@ public class LoginView extends View<LoginModel> {
         stage.setScene(scene);
 
         //Creation of all needed Buttons and Fields
-
         btnLogin = new Button();
-        btnLogin.setPrefSize(130,40);
+        btnLogin.setPrefSize(130,54);
         btnSignUp = new Button();
-        btnSignUp.setPrefSize(130,40);
+        btnSignUp.setPrefSize(130,54);
+
+
+        // Creating of Button Images
+        ImageView imgVbtnLogin = new ImageView(new Image(getClass().getResourceAsStream("/login/buttonWood.png")));
+        imgVbtnLogin.setPreserveRatio(true);
+        imgVbtnLogin.setFitWidth(130);
+
+        ImageView imgVbtnRegister = new ImageView(new Image(getClass().getResourceAsStream("/login/buttonWood.png")));
+        imgVbtnRegister.setPreserveRatio(true);
+        imgVbtnRegister.setFitWidth(130);
+
+
+        HBox hbImg = new HBox(10);
+        hbImg.setAlignment(Pos.BOTTOM_CENTER);
+        hbImg.getChildren().addAll(imgVbtnLogin, imgVbtnRegister);
+        grPa.add(hbImg, 1, 4);
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
-        hbBtn.getChildren().add(btnLogin);
-        hbBtn.getChildren().add(btnSignUp);
+        hbBtn.getChildren().addAll(btnLogin, btnSignUp);
         grPa.add(hbBtn, 1, 4);
 
         user = new TextField();
