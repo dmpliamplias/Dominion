@@ -39,15 +39,15 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         view.btnLogin.setOnAction((event) -> {
             view.refreshModel();
             this.login();
-
-
         });
 
         view.btnSignUp.setOnAction((event) -> this.goToRegisterView());
-
     }
 
 
+    /**
+     * @author Michel Schlatter
+     */
     public void login() {
         view.refreshModel();
         if (model.getEmail().equals("ga")) goToUserManagementView();

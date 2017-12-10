@@ -47,9 +47,12 @@ public class LobbyManager extends Manager{
     public void startGame(LobbyContainer lcReceived){
         LobbyContainer lc = new LobbyContainer(Methods.StartGame);
         ArrayList<Integer> clientIds = lcReceived.getClientIds_startGame();
+        if(clientIds.size() <= 1){
+            ServerUtils.sendError(this.client, new Exception("Not possible to play with one or less players"));
+            return;
+        }
+
         GameSettings gs = lcReceived.getGameSettings();
-
-
 
         HashMap<Integer, User> users = new HashMap<Integer, User>();
         for(Integer clientId : clientIds) {
@@ -59,7 +62,6 @@ public class LobbyManager extends Manager{
                 }
             }
         }
-
 
         Collections.sort(clientIds);
         ArrayList<Client> players = new ArrayList<>();

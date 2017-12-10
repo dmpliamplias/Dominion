@@ -166,9 +166,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
 
     private void help(){
-
         view.alert("lobbyview.help", Alert.AlertType.INFORMATION );
-
     }
 
 
@@ -188,6 +186,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
     /**
+     * this method gets called when a new player comes to the lobby
+     * the player will bi added to the players list
      * @author Michel Schlatter
      */
     public void handleServerAnswer_newPlayer(LobbyContainer lc) {
@@ -209,6 +209,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     /**
      * @author Michel Schlatter
+     * gets called after the hoster send a valid gamestartrequest to the server.
      */
     public void handleServerAnswer_startGame(LobbyContainer lc) {
         Platform.runLater(() -> {
@@ -245,7 +246,10 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
 
-
+    /**
+     * @author Michel Schlatter
+     * send a gamestartrequest to the hoster
+     */
     public void sendStartRequest(){
 
         ObservableList<String> names = view.lvPlayers.getItems();

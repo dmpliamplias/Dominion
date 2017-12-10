@@ -167,6 +167,8 @@ public class ServerConnectionService extends Thread{
                 if (result.get() == ButtonType.OK) {
                     Platform.exit();
                 }
+            }else{
+                alert.showAndWait();
             }
         });
 
