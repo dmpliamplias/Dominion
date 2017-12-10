@@ -426,6 +426,8 @@ public class GameView extends View<GameModel> {
      * @param userName
      * @param set
      * @param activeUserId
+     *
+     * here you see the points in the view.
      */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
@@ -459,6 +461,13 @@ public class GameView extends View<GameModel> {
 
     }
 
+    /** @author Murat Kelleci
+     *
+     * @param winningUsers
+     * @param isWinner
+     * here you see the winner Stage sorted by positions depending on points
+     */
+
    public void startWinnerStage(ObservableList<WinningUser> winningUsers, boolean isWinner) {
        displayWinnerDialog(isWinner);
 
@@ -478,6 +487,12 @@ public class GameView extends View<GameModel> {
         stageDialog.show();
    }
 
+    /** @author Murat Kelleci
+     *
+     * @param isWinner
+     * here you get the displayed whether you are the winner or loser (draw).
+     */
+
    private void displayWinnerDialog(boolean isWinner) {
 
        //TODO Murat add sounds in folger sounds -> winner.wav and loser.wav
@@ -487,9 +502,12 @@ public class GameView extends View<GameModel> {
             String winner = new String("winner");
             Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
+
+
             alert1.setGraphic(imgVwinnerPic);
             alert1.setHeaderText("");
             alert1.setTitle("Winner Dialog");
+            //alert1.setHeaderText("You are the WINNER dude");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(winner);
             }
@@ -500,11 +518,14 @@ public class GameView extends View<GameModel> {
         else {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             String loser = new String("loser");
-            Image loserPic = new Image(getClass().getResourceAsStream("loser.png"));
+            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
             ImageView imgVloserPic = new ImageView(loserPic);
+
+
             alert2.setGraphic(imgVloserPic);
             alert2.setHeaderText("");
             alert2.setTitle("Looser Dialog");
+            //alert2.setHeaderText("What a loser....");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(loser);
             }
@@ -524,6 +545,11 @@ public class GameView extends View<GameModel> {
     }
 
 
+    /** @author Murat Kelleci
+     *
+     * @param winningUsers
+     * here is the Vbox and Tableview for WinningUser created.
+     */
     public void createVBox(ObservableList<WinningUser> winningUsers) {
         this.btnLobby.setPrefSize(180, 80);
         this.btnRanking.setPrefSize(180, 80);

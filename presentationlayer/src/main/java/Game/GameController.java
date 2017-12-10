@@ -356,7 +356,9 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    /*Author Murat Kelleci
+    /**
+    * @author Murat Kelleci
+    * this methods gets called to update the round from the server
     */
     public void handleServerAnswer_updateRound(int round) {
         Platform.runLater(() -> {
@@ -426,7 +428,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Author Murat Kelleci 20.11.17 - AND VANESSA CAJOCHEN....
+    /** @author Murat Kelleci and Vanessa Cajochen
+     *
+     * @param card
+     */
     private void buyCards(Card card) {
         if (numberOfBuys > 0 && card.getCost() <= numberOfMoney) {
             if(getCard(unusedCards, card.getName()) != null) {
@@ -466,7 +471,12 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // @author Murat Kelleci
+    /** @author Murat Kelleci
+     *
+     * @param winningUsers
+     * @param myUser
+     * here is the winner determined so that we know who gets the winner or loser display.
+     */
 
     private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
         WinningUser winner = null;
@@ -490,7 +500,8 @@ public class GameController extends Controller<GameModel, GameView> {
         return isWinner;
     }
 
-    /* Author Murat Kelleci
+    /** @author Murat Kelleci
+     * here is the player position listed depending on points
     */
 
     private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
@@ -543,7 +554,10 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    // Author Murat Kelleci 24.11.17
+    /** @author Murat Kelleci 24.11.17
+     *
+     * @param imgv
+     */
     private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
@@ -639,7 +653,10 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    // Author Murat Kelleci 20.11.17 -
+    /**  @author Murat Kelleci 20.11.17 -
+     *
+     *  this methods gets the user and is needed for the buycards methode.
+     */
     private User getUser() {
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
@@ -807,8 +824,11 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    /* Author Murat Kelleci
-    */
+    /** Author Murat Kelleci
+     *
+     * @param playerSet
+     * this methode sets the points and shows the actual player
+     */
     public void setPointsToView(PlayerSet playerSet) {
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
@@ -895,8 +915,8 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
 
-    /* author Murat Kelleci
-    
+    /** @author Murat Kelleci
+     * here you come to the ranking or to the lobby
      */
     private void goToRankingView() {
         Stage s = new Stage(  );
