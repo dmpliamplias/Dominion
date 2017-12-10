@@ -17,6 +17,9 @@ public class RankingManager extends Manager {
         super(c);
     }
 
+    /**
+     * Sends the Highscore to the Client
+     */
     public void sendRanking(){
         List<Highscore> highscores = ServiceLocator.getServiceLocator().getHighscoreService().getAllHighscores();
 

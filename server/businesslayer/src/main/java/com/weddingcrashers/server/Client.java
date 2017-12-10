@@ -97,7 +97,7 @@ public class Client extends Thread {
                 _lobbyManager.startGame(lc);
             } else if (c.getMethod() == Methods.Lobby_Players) {
                 LobbyContainer lc = (LobbyContainer) c;
-                LobbyManager.getUsers(this);
+                LobbyManager.getUsers(this, true);
             } else if (c.getMethod() == Methods.Login_SetUser_TestPurposesOnly) {
                 LoginContainer lc = (LoginContainer) c;
                 this.setUser(lc.getUser());
@@ -112,7 +112,7 @@ public class Client extends Thread {
             } else if (c.getMethod() == Methods.Rankings) {
                 _rankingsManager.sendRanking();
             } else if (c.getMethod() == Methods.InitialCardSets) {
-                _gameManager.sendInitalCardSet();
+                _gameManager.sendInitalCardSets();
             }else if(c.getMethod() == Methods.ImOut){
                 for(Client client : Server.clients){
                     if(client.getClientId() == this.getClientId()){

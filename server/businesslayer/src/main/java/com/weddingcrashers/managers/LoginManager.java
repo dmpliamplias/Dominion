@@ -22,6 +22,11 @@ public class LoginManager extends Manager {
         _userService = serviceLocator.getUserService();
     }
 
+    /**
+     * Gets called when the user tries to login
+     * @param email
+     * @param password
+     */
     public void login(String email, String password){
        User user = _userService.getUserByEmail(email);
        LoginContainer loginContainer = new LoginContainer(Methods.Login);
@@ -34,6 +39,10 @@ public class LoginManager extends Manager {
         ServerUtils.sendObject(client, loginContainer);
     }
 
+    /**
+     * Register a new User
+     * @param u => User informations
+     */
     public void createUser(User u){
         User user = _userService.create(u);
 

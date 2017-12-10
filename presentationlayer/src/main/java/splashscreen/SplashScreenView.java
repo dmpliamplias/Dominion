@@ -72,7 +72,7 @@ public class SplashScreenView extends View<SplashScreenModel> {
     public SplashScreenView(Stage stage, SplashScreenModel model) {
         super(stage, model);
 
-        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.initStyle(StageStyle.TRANSPARENT);
     }
 
 

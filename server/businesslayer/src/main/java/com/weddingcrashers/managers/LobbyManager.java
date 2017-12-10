@@ -21,8 +21,14 @@ public class LobbyManager extends Manager{
         super(c);
     }
 
+    /**
+     * Broadcasts each player in the lobby to all other players
+     * So they can see each other in a list or smth.
+     * This method gets called when a new User updates his ViewState to LoginView
+     * @param c
+     */
     public static void broadCastPlayersToAllClients(Client c){
-        LobbyContainer lc = getUsers(c);
+        LobbyContainer lc = getUsers(c, false);
 
         for(Client client : c.getAllClients()){
             if(client.getViewStatus() == ViewStatus.Lobby) {
@@ -32,6 +38,12 @@ public class LobbyManager extends Manager{
         }
     }
 
+    /**
+     * this method gets called, when the hoster requests to start the game
+     * the gamemanager gets the infos it has to know and each client gets an info to change to the gameview (changes automatically)
+     * the hoster could also choose the players he wants to play with. it is dynamic.
+     * @param lcReceived
+     */
     public void startGame(LobbyContainer lcReceived){
         LobbyContainer lc = new LobbyContainer(Methods.StartGame);
         ArrayList<Integer> clientIds = lcReceived.getClientIds_startGame();
@@ -89,7 +101,13 @@ public class LobbyManager extends Manager{
         }
     }
 
-    public static LobbyContainer getUsers(Client c){
+    /**
+     * pushes all clients with the viewstatus lobby or ranking to a hashmap (and sends this to the requested client)
+     * @param c
+     * @param sendToClient
+     * @return Lobbycontainer
+     */
+    public static LobbyContainer getUsers(Client c, boolean sendToClient){
         HashMap<Integer, User> users = new HashMap<Integer, User>();
 
         for(Client client : c.getAllClients()){
@@ -103,7 +121,9 @@ public class LobbyManager extends Manager{
         LobbyContainer lc = new LobbyContainer(Methods.Lobby_Players);
         lc.setUserNames(users);
 
-        ServerUtils.sendObject(c, lc);
+        if(sendToClient) {
+            ServerUtils.sendObject(c, lc);
+        }
         return lc;
     }
 }

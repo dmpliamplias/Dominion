@@ -33,9 +33,14 @@ public class GameManager extends Manager {
         super(client);
     }
 
-    /*Methods Client can Call directly*/
+    /*----------------------------------------
+     PUBLIC METHODS
+     */
 
-    public void sendInitalCardSet(){
+    /**
+     * sends all inital cardsets to the requested client
+     */
+    public void sendInitalCardSets(){
         ArrayList<PlayerSet> playerSets = new ArrayList<PlayerSet>();
         GameContainer gc = new GameContainer(Methods.InitialCardSets);
 
@@ -51,6 +56,10 @@ public class GameManager extends Manager {
         ServerUtils.sendObject(client, gc);
     }
 
+    /**
+     * this method gets called when a user made a completed turn.
+     * @param gcReceived
+     */
     public void moveFinished(GameContainer gcReceived){
         if(client.isActive()) {
             //PlayerSet set = gcReceived.getDominionSet(); // everything which gets buyed is logged, so no need for this code...
@@ -72,7 +81,11 @@ public class GameManager extends Manager {
         }
     }
 
-
+    /**
+     * this method gets called each time a player plays a card.
+     * the card which was played will be broadcasted to each player
+     * @param cardPlayedInfo
+     */
     public void cardPlayed(CardPlayedInfo cardPlayedInfo){
         if(client.isActive()) {
             GameContainer gc = new GameContainer(Methods.CardPlayed);
@@ -84,6 +97,11 @@ public class GameManager extends Manager {
         }
     }
 
+    /**
+     * this method gets called each time a player buys a card
+     * the card which was buyed will be broadcasted to each player
+     * @param gc
+     */
     public void buyCard(GameContainer gc){
         if(client.isActive()) {
             CardPlayedInfo info = gc.getCardPlayedInfo();
@@ -105,27 +123,69 @@ public class GameManager extends Manager {
          }
     }
 
-    public static ArrayList<Card> createInitalCardSet(){
-         ArrayList<Card> pullStack = new ArrayList<Card>();
-
-         for(int i = 0; i < 7; i++){
-             pullStack.add(getCardByMoneyType(MoneyType.Copper, false));
-         }
-         for(int i = 0; i < 3; i++){
-             pullStack.add(getCardByPointCardType(PointCardType.Estate, false));
-         }
-        Collections.shuffle(pullStack);
-        return pullStack;
+    /*--------------------------------
+    PRIVATE MATHODS
+     */
+    private void broadCast(GameContainer gc){
+        for(Client c : players){
+            GameContainer newGc = gc.clone();
+            ServerUtils.sendObject(c, newGc);
+        }
     }
 
-    // privates
+    /**
+     * checks if the abort condition is fullfilled or not
+     * @return if the abort condition is fullfilled or not.
+     */
+    private boolean checkGameAbortCondition(){
+        boolean abort = false;
+        if(gameSettings.getFinishAfterRounds() >= 1){
+            abort = round > gameSettings.getFinishAfterRounds();
+        }else if(gameSettings.isPointCards()){
+            int provinzCounter = 0;
+            for(Card c : unusedCards){
+                if(c.getName().equals("Provinz")){
+                    provinzCounter++;
+                    break;
+                }
+            }
+            ArrayList<String> actionCards = new ArrayList<String>();
+            actionCards.add("Dorf");
+            actionCards.add("Garten");
+            actionCards.add("Geldverleiher");
+            actionCards.add("Holzfäller");
+            actionCards.add("Jahrmarkt");
+            actionCards.add("Laboratorium");
+            actionCards.add("Markt");
+            actionCards.add("Schmiede");
 
+            int emptyActionStacksCounter = 0;
+            for(String cardName : actionCards){
+                Card c = getCardByName(cardName, false);
+                if(c == null){
+                    emptyActionStacksCounter++;
+                }
+            }
+            abort = provinzCounter < 1 || emptyActionStacksCounter >= 3;
+        }
+        return abort;
+    }
+
+    /**
+     * updates the round and broadcasts it to each player in the game
+     */
     private void updateRound(){
         GameContainer gc = new GameContainer(Methods.UpdateRound);
         gc.setRound(round);
         broadCast(gc);
     }
 
+    /**
+     * sends the winninginformation if the abortcondition is true
+     * or if not, changes the active user and broadcasts this info to each player
+     * @param container
+     * @param abortGame
+     */
     private void gameTurnFinishedCompletely(GameContainer container, boolean abortGame){
         if(abortGame){
            ArrayList<WinningInformation> winningInfos = new ArrayList<WinningInformation>();
@@ -148,7 +208,7 @@ public class GameManager extends Manager {
             }
             container.setWinningInformation(winningInfos);
         }else {
-            int nxtId = getNextTurnClientId(false);
+            int nxtId = getNextTurnClientId();
 
             //container.getDominionSet().setUserId((int) client.getUser().getId());
             container.setUserIdHasTurn((int) users.get(nxtId).getId());
@@ -163,7 +223,11 @@ public class GameManager extends Manager {
         }
     }
 
-    private int getNextTurnClientId(boolean isInitalizing){
+    /**
+     * gets the next active user
+     * @return the next active users clientid
+     */
+    private int getNextTurnClientId(){
         int currentIdActive = client.getClientId();
         List<Integer> ids = new ArrayList<Integer>();
 
@@ -171,12 +235,6 @@ public class GameManager extends Manager {
             ids.add(c.getClientId());
         }
         Collections.sort(ids);
-        int min = ids.get(0);
-        int max = ids.get(ids.size()-1);
-
-        if(isInitalizing){
-            return min;
-        }
 
         int currentIdx = ids.indexOf(currentIdActive);
         int nxtIdx = ++currentIdx;
@@ -189,40 +247,32 @@ public class GameManager extends Manager {
         return nxtIdActive;
     }
 
-    public boolean checkGameAbortCondition(){
-        boolean abort = false;
-       if(gameSettings.getFinishAfterRounds() >= 1){
-           abort = round > gameSettings.getFinishAfterRounds();
-       }else if(gameSettings.isPointCards()){
-            int provinzCounter = 0;
-            for(Card c : unusedCards){
-                if(c.getName().equals("Provinz")){
-                    provinzCounter++;
-                    break;
-                }
-            }
-           ArrayList<String> actionCards = new ArrayList<String>();
-           actionCards.add("Dorf");
-           actionCards.add("Garten");
-           actionCards.add("Geldverleiher");
-           actionCards.add("Holzfäller");
-           actionCards.add("Jahrmarkt");
-           actionCards.add("Laboratorium");
-           actionCards.add("Markt");
-           actionCards.add("Schmiede");
+    /*-------------------------------------------------
+    STATIC METHODS
+     */
 
-           int emptyActionStacksCounter = 0;
-           for(String cardName : actionCards){
-              Card c = getCardByName(cardName, false);
-              if(c == null){
-                  emptyActionStacksCounter++;
-              }
-           }
-           abort = provinzCounter < 1 || emptyActionStacksCounter >= 3;
-       }
-        return abort;
+    /**
+     * created the inital cardset
+     * @return inital cardset
+     */
+    public static ArrayList<Card> createInitalCardSet(){
+        ArrayList<Card> pullStack = new ArrayList<Card>();
+
+        for(int i = 0; i < 7; i++){
+            pullStack.add(getCardByMoneyType(MoneyType.Copper, false));
+        }
+        for(int i = 0; i < 3; i++){
+            pullStack.add(getCardByPointCardType(PointCardType.Estate, false));
+        }
+        Collections.shuffle(pullStack);
+        return pullStack;
     }
 
+
+    /**
+     * creates the whole dominionset with all cards specified
+     * @param players player count
+     */
     public static void createDominionSet(int players){
 
         unusedCards = new ArrayList<Card>();
@@ -386,7 +436,13 @@ public class GameManager extends Manager {
 
     }
 
-    public static Card getCardByName(String name, boolean remove){
+    /**
+     * gets a card by name from the unused cards
+     * @param name of the card
+     * @param remove - remove from unusedcardlist
+     * @return returns the first card found in the list
+     */
+    private static Card getCardByName(String name, boolean remove){
         Card result = null;
         for(Card c : unusedCards){
             if(c.getName().equals(name)){
@@ -400,8 +456,13 @@ public class GameManager extends Manager {
         return result;
     }
 
-
-    public static <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
+    /**
+     * gets a card by its class
+     * @param cls the class of the searched card
+     * @param remove - remove from unusedcardlist
+     * @return returns the first card found in the list
+     */
+    private static <T extends Card> T getCardByClass(Class<T> cls, boolean remove){
         T result = null;
         for(Card c : unusedCards){
             if(cls.isInstance(c)){
@@ -415,7 +476,7 @@ public class GameManager extends Manager {
         return result;
     }
 
-    public static PointCard getCardByPointCardType(PointCardType type, boolean remove){
+    private static PointCard getCardByPointCardType(PointCardType type, boolean remove){
         PointCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  PointCard){
@@ -432,7 +493,7 @@ public class GameManager extends Manager {
         return result;
     }
 
-    public  static MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
+    private  static MoneyCard getCardByMoneyType(MoneyType type, boolean remove){
         MoneyCard result = null;
         for(Card c : unusedCards){
             if(c instanceof  MoneyCard){
@@ -449,6 +510,9 @@ public class GameManager extends Manager {
         return result;
     }
 
+    /**
+     * resets the gamemanager so that a new game can be started
+     */
     public static void dispose(){
         for(Client c : players){
             c.setDominionSet(null);
@@ -490,13 +554,6 @@ public class GameManager extends Manager {
         }
 
        return 0;
-    }
-
-    private void broadCast(GameContainer gc){
-        for(Client c : players){
-            GameContainer newGc = gc.clone();
-            ServerUtils.sendObject(c, newGc);
-        }
     }
 
     public static List<Client> getPlayers() {

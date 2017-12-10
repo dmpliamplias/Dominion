@@ -270,6 +270,12 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /* ------------------------- receiving smth from Server ----------------------*/
 
+    /**
+     * Here we get all enemycards, our cards, unusedcards and the active user
+     * after that we initalize the gameview
+     * @author Michel Schlatter
+     * @param gc Gamecontainer recieved from server
+     */
     public void handleServerAnswer_receiveInitalPlayerSet(GameContainer gc) {
 
         for (PlayerSet set : gc.getPlayerSets()) {
@@ -302,7 +308,13 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    // a player finished his turn...
+    /**
+     * Here we receive the winninginformation if the game finished
+     * or the new active user
+     * after that, the view gets updated...
+     * @author Michel Schlatter
+     * @param gc
+     */
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
         Platform.runLater(() -> {
             final List<WinningInformation> winningInformations = gc.getWinningInformations();
@@ -324,44 +336,24 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    // @author Murat Kelleci
+    /**
+     * author Manuel Wirz
+     */
+    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo) {
+        Platform.runLater(() -> {
+            User user = users.get(cardPlayedInfo.getUserId());
+            Card card = cardPlayedInfo.getCard();
+            int count = cardPlayedInfo.getCount();
+            String logger = new String(
+                    user.getUserName() + " "
+                            + view.getTxtLogger().getText() + ": "
+                            + count + " "
+                            + card.toString(serviceLocator.getTranslator()));
 
-    private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
-        WinningUser winner = null;
-        for (WinningUser winningUser : winningUsers) {
-            if (winner == null) {
-                winner = winningUser;
-            }
-            int wiPoints = winningUser.getPoints();
-            int points = winner.getPoints();
-            if (wiPoints > points) {
-                winner = winningUser;
-            }
-        }
-        long userId = winner.getUserId();
-        long myUserId = myUser.getId();
 
-        boolean isWinner = false;
-        if (userId == myUserId) {
-            isWinner = true;
-        }
-        return isWinner;
-    }
 
-    /* Author Murat Kelleci
-    */
-
-    private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
-        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
-        for (WinningInformation wi : winningInformations) {
-                User user = users.get(wi.getUserId());
-                int points = wi.getPoints();
-                int position = wi.getPosition();
-                WinningUser winningUser = new WinningUser(user.getId(), user.getUserName(), points, position);
-                winningUsers.add(winningUser);
-                //Collections.sort(winningUsers);
-        }
-        return winningUsers;
+            view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
+        });
     }
 
     /*Author Murat Kelleci
@@ -373,9 +365,11 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /**
-     *  author Michel Schlatter +  Manuel Wirz
-     *  */
-
+     * after a player buyed a card, this method gets called (from server)
+     * we log the buyed card and add it to the player stack it belongs to
+     * @author Michel Schlatter & Manuel Wirz
+     * @param gc recieved gamecontainer
+     */
     public void handleServerAnswer_cardBuyed(GameContainer gc) {
         Platform.runLater(() -> {
             CardPlayedInfo buyedInfo = gc.getCardPlayedInfo();
@@ -409,9 +403,14 @@ public class GameController extends Controller<GameModel, GameView> {
 
     }
 
-
     /*----------------Send to smth. to Server ------------- */
 
+    /**
+     * this method must be called when a player plays a card
+     * @Author Michel Schlatter
+     * @param c the card played
+     * @param count - count of the card played. eg 7. copper
+     */
     public void cardPlayed(Card c, int count) {
         GameContainer gc = new GameContainer(Methods.CardPlayed);
         CardPlayedInfo info = new CardPlayedInfo();
@@ -427,11 +426,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Author Murat Kelleci 20.11.17 -
+    // Author Murat Kelleci 20.11.17 - AND VANESSA CAJOCHEN....
     private void buyCards(Card card) {
         if (numberOfBuys > 0 && card.getCost() <= numberOfMoney) {
             if(getCard(unusedCards, card.getName()) != null) {
-
                 GameContainer gc = new GameContainer(Methods.BuyCard);
                 String cash = new String ("cash");
                 CardPlayedInfo buyInfo = new CardPlayedInfo();
@@ -442,12 +440,9 @@ public class GameController extends Controller<GameModel, GameView> {
                     playSound( cash );
                 }
 
-
                 numberOfBuys--;
                 numberOfMoney = numberOfMoney - card.getCost();
                 updateActionBuyMoney();
-
-
                 try {
                     PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
                 } catch (IOException e) {
@@ -457,7 +452,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    // Method gets called when Buy = 0 or User clicks on Button "End Buy"
+    /**
+     * @autor Michel Schlatter
+     * this method must be called when a player completes his turn..
+     */
     public void moveFinished() {
         GameContainer gc = new GameContainer(Methods.TurnFinished);
 
@@ -468,27 +466,45 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-    /**
-     * author Manuel Wirz
-     */
+    // @author Murat Kelleci
 
-    public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo) {
-        Platform.runLater(() -> {
-            User user = users.get(cardPlayedInfo.getUserId());
-            Card card = cardPlayedInfo.getCard();
-            int count = cardPlayedInfo.getCount();
-            String logger = new String(
-                    user.getUserName() + " "
-                    + view.getTxtLogger().getText() + ": "
-                    + count + " "
-                    + card.toString(serviceLocator.getTranslator()));
+    private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
+        WinningUser winner = null;
+        for (WinningUser winningUser : winningUsers) {
+            if (winner == null) {
+                winner = winningUser;
+            }
+            int wiPoints = winningUser.getPoints();
+            int points = winner.getPoints();
+            if (wiPoints > points) {
+                winner = winningUser;
+            }
+        }
+        long userId = winner.getUserId();
+        long myUserId = myUser.getId();
 
-
-
-           view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
-        });
+        boolean isWinner = false;
+        if (userId == myUserId) {
+            isWinner = true;
+        }
+        return isWinner;
     }
 
+    /* Author Murat Kelleci
+    */
+
+    private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
+        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
+        for (WinningInformation wi : winningInformations) {
+            User user = users.get(wi.getUserId());
+            int points = wi.getPoints();
+            int position = wi.getPosition();
+            WinningUser winningUser = new WinningUser(user.getId(), user.getUserName(), points, position);
+            winningUsers.add(winningUser);
+            //Collections.sort(winningUsers);
+        }
+        return winningUsers;
+    }
 
     // Method to send the ChatContainer to the server and display the message in the own screen
 
