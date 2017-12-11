@@ -320,7 +320,7 @@ public class GameController extends Controller<GameModel, GameView> {
             final List<WinningInformation> winningInformations = gc.getWinningInformations();
             if (winningInformations != null && winningInformations.size() > 0) {
                 final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
-                boolean isWinner = determineWinner(winningUsers, myUser);
+                Boolean isWinner = determineWinner(winningUsers, myUser);
                 view.startWinnerStage(winningUsers, isWinner);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
@@ -484,7 +484,7 @@ public class GameController extends Controller<GameModel, GameView> {
      * here is the winner determined so that we know who gets the winner or loser display.
      */
 
-    private boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
+    private Boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
         WinningUser winner = null;
         for (WinningUser winningUser : winningUsers) {
             if (winner == null) {
@@ -494,6 +494,9 @@ public class GameController extends Controller<GameModel, GameView> {
             int points = winner.getPoints();
             if (wiPoints > points) {
                 winner = winningUser;
+            }
+            if (wiPoints == points) {
+                return null;
             }
         }
         long userId = winner.getUserId();
@@ -518,7 +521,6 @@ public class GameController extends Controller<GameModel, GameView> {
             int position = wi.getPosition();
             WinningUser winningUser = new WinningUser(user.getId(), user.getUserName(), points, position);
             winningUsers.add(winningUser);
-            //Collections.sort(winningUsers);
         }
         return winningUsers;
     }

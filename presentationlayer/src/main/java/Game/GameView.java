@@ -2,12 +2,9 @@ package Game;
 
 import Controls.CardImageView;
 import Controls.HandStackLayout;
-import alert.DominionAlert;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
-import com.weddingcrashers.model.User;
-import com.weddingcrashers.service.ServiceLocator;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -24,11 +21,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import util.PLServiceLocator;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.GAME;
@@ -493,47 +487,48 @@ public class GameView extends View<GameModel> {
      * here you get the displayed whether you are the winner or loser (draw).
      */
 
-   private void displayWinnerDialog(boolean isWinner) {
+   private void displayWinnerDialog(Boolean isWinner) {
 
        //TODO Murat add sounds in folger sounds -> winner.wav and loser.wav
 
         if (isWinner) {
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            String winner = new String("winner");
+            Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
+            String winner = "winner";
             Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
 
 
-            alert1.setGraphic(imgVwinnerPic);
-            alert1.setHeaderText("");
-            alert1.setTitle("Winner Dialog");
+            winnerAlert.setGraphic(imgVwinnerPic);
+            winnerAlert.setHeaderText("");
+            winnerAlert.setTitle("Winner Dialog");
             //alert1.setHeaderText("You are the WINNER dude");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(winner);
             }
-            alert1.showAndWait();
+            winnerAlert.showAndWait();
 
 
         }
+        else if (isWinner == null) {
+           // TODO murat her same for unentschieden
+        }
         else {
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            String loser = new String("loser");
-            Image loserPic = new Image(getClass().getResourceAsStream("winner.jpg")); // TODO: 11.12.2017  fixen mit looser 
+            Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
+            String loser = "loser";
+            Image loserPic = new Image(getClass().getResourceAsStream("winner.jpg")); // TODO: 11.12.2017  fixen mit looser
             ImageView imgVloserPic = new ImageView(loserPic);
 
 
-            alert2.setGraphic(imgVloserPic);
-            alert2.setHeaderText("");
-            alert2.setTitle("Looser Dialog");
+            loserAlert.setGraphic(imgVloserPic);
+            loserAlert.setHeaderText("");
+            loserAlert.setTitle("Looser Dialog");
             //alert2.setHeaderText("What a loser....");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(loser);
             }
-            alert2.showAndWait();
+            loserAlert.showAndWait();
 
         }
-
-
    }
 
     protected void setTextDialog(){
