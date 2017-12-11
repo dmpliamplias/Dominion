@@ -61,7 +61,6 @@ public class GameView extends View<GameModel> {
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    Label lblInfo;
     Label lblPullStack;
     protected Button btnPlayMoneyCards;
     protected Button btnEndTurn;
@@ -71,6 +70,12 @@ public class GameView extends View<GameModel> {
     protected Label txtLogger2;
     protected Text txtLoggerIsYourTurn;
     protected Text txtLoggerTurnIsOver;
+    protected Label lblAction;
+    protected Label lblBuy;
+    protected Label lblTreasure;
+    protected Text txtAction;
+    protected Text txtBuy;
+    protected Text txtTreasure;
 
 
     ImageView imgVtrayStack;
@@ -96,6 +101,7 @@ public class GameView extends View<GameModel> {
         gp.add(vb, 2, 14);
 
         gp.setGridLinesVisible(false);
+
 
 
         // Creating 9 columns with different width
@@ -182,6 +188,32 @@ public class GameView extends View<GameModel> {
         gp.getChildren().add(btnEndActionPhase);
 
 
+        // Creates 3 Labels and Text to show number of Actions, Buys and Treasure
+
+        lblAction = new Label();
+        setLabelStyle(lblAction);
+        gp.setConstraints(lblAction, 1, 8);
+
+        lblBuy = new Label();
+        setLabelStyle(lblBuy);
+        gp.setConstraints(lblBuy, 1, 10);
+
+        lblTreasure = new Label();
+        setLabelStyle(lblTreasure);
+        gp.setConstraints(lblTreasure, 1, 12);
+
+        txtAction = new Text();
+        setTextStyle(txtAction);
+        gp.setConstraints(txtAction, 1, 7);
+
+        txtBuy = new Text();
+        setTextStyle(txtBuy);
+        gp.setConstraints(txtBuy, 1, 9);
+
+        txtTreasure = new Text();
+        setTextStyle(txtTreasure);
+        gp.setConstraints(txtTreasure, 1, 11);
+
 
         // Images for greyOut. If it is not the users'turn, the handcards and button are grayed out.
 
@@ -206,13 +238,6 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(imgVGreyOutButton, 5, 13);
 
 
-        lblInfo = new Label();
-        lblInfo.setPrefSize(170, 30);
-        gp.setColumnSpan(lblInfo, 2);
-        gp.setValignment(lblInfo, VPos.TOP);
-        lblInfo.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 14; -fx-background-color: #d3d1d1");
-        gp.setConstraints(lblInfo, 2, 13);
-        gp.getChildren().add(lblInfo);
 
         this.btnLobby = new Button();
         this.btnRanking= new Button();
@@ -338,6 +363,20 @@ public class GameView extends View<GameModel> {
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
         lbl.setAlignment(Pos.CENTER);
+    }
+
+    private void setLabelStyle(Label lbl){
+        lbl.setPrefSize(30, 30);
+        lbl.getStyleClass().add("labelInfo");
+        lbl.setAlignment(Pos.CENTER);
+        gp.getChildren().addAll(lbl);
+        gp.setHalignment(lbl, HPos.CENTER);
+    }
+
+    private void setTextStyle(Text txt){
+        gp.getChildren().addAll(txt);
+        txt.getStyleClass().add("textInfo");
+        gp.setHalignment(txt, HPos.CENTER);
     }
 
 
@@ -621,6 +660,9 @@ public class GameView extends View<GameModel> {
         this.txtShowRound.setText( getText( "gameview.showRound" ) );
         this.txtLoggerTurnIsOver.setText( getText( "gameview.LoggerTurnIsOVer" ) );
         this.txtLoggerIsYourTurn.setText( getText( "gameview.LoggerIsYourTurn" ) );
+        this.txtAction.setText(getText("gameview.action"));
+        this.txtBuy.setText(getText("gameview.buy"));
+        this.txtTreasure.setText(getText("gameview.money"));
     }
 
     public void start() {
@@ -709,11 +751,9 @@ public class GameView extends View<GameModel> {
 
 
          public void updatelblInfo(int action, int buys, int money){
-            String sAction = getText("gameview.action");
-            String sBuy = getText("gameview.buy");
-            String sMoney = getText("gameview.money");
-
-            lblInfo.setText(sAction + " " + action + ", " + sBuy + " " + buys + ", " + sMoney + " " + money);
+            lblAction.setText("" + action);
+            lblBuy.setText("" + buys);
+            lblTreasure.setText("" + money);
          }
 
 
