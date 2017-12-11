@@ -321,6 +321,7 @@ public class GameController extends Controller<GameModel, GameView> {
             if (winningInformations != null && winningInformations.size() > 0) {
                 final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
                 Boolean isWinner = determineWinner(winningUsers, myUser);
+                // TODO: 11.12.2017 dyoni find solution if draw and the user before must than have draw and not winner
                 view.startWinnerStage(winningUsers, isWinner);
             } else {
                 activeUserId = gc.getUserIdHasTurn();

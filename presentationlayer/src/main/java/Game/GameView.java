@@ -462,7 +462,7 @@ public class GameView extends View<GameModel> {
      * here you see the winner Stage sorted by positions depending on points
      */
 
-   public void startWinnerStage(ObservableList<WinningUser> winningUsers, boolean isWinner) {
+   public void startWinnerStage(ObservableList<WinningUser> winningUsers, Boolean isWinner) {
        displayWinnerDialog(isWinner);
 
        BorderPane root = new BorderPane();
