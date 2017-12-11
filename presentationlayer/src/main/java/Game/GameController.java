@@ -383,7 +383,13 @@ public class GameController extends Controller<GameModel, GameView> {
                 enemyCards.get(buyedInfo.getUserId()).getTrayStack().add(buyedInfo.getCard());
                 updatedSet = enemyCards.get(buyedInfo.getUserId());
             }
-            unusedCards = gc.getUnusedCards();
+            //unusedCards = gc.getUnusedCards();
+            for(int i = 0; i < unusedCards.size(); i++){
+               if(unusedCards.get(i).getName().equals(buyedInfo.getCard().getName())){
+                   unusedCards.remove(i);
+                   break;
+                }
+            }
             updateUnusedCards(unusedCards);
             setPointsToView(updatedSet);
             System.out.println("Card buyed: " + updatedSet.calculatePoints());

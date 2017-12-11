@@ -115,7 +115,7 @@ public class GameManager extends Manager {
             buyInfo.setCard(card);
             buyInfo.setUserId((int) users.get(client.getClientId()).getId());
             bGc.setCardPlayedInfo(buyInfo);
-            bGc.setUnusedCards(unusedCards);
+            //bGc.setUnusedCards(unusedCards);
             this.client.getDominionSet().getTrayStack().add(card);
             broadCast(bGc);
         }else{

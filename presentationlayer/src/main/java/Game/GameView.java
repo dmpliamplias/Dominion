@@ -518,7 +518,7 @@ public class GameView extends View<GameModel> {
         else {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             String loser = new String("loser");
-            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
+            Image loserPic = new Image(getClass().getResourceAsStream("winner.jpg")); // TODO: 11.12.2017  fixen mit looser 
             ImageView imgVloserPic = new ImageView(loserPic);
 
 
