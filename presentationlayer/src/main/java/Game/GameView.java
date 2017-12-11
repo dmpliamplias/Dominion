@@ -487,9 +487,11 @@ public class GameView extends View<GameModel> {
      * here you get the displayed whether you are the winner or loser (draw).
      */
 
+    // Pictures are not final just placeholder for better pics. Same for draw wav file.
+
    private void displayWinnerDialog(Boolean isWinner) {
 
-       //TODO Murat add sounds in folger sounds -> winner.wav and loser.wav
+
 
         if (isWinner) {
             Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -501,7 +503,6 @@ public class GameView extends View<GameModel> {
             winnerAlert.setGraphic(imgVwinnerPic);
             winnerAlert.setHeaderText("");
             winnerAlert.setTitle("Winner Dialog");
-            //alert1.setHeaderText("You are the WINNER dude");
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(winner);
             }
@@ -510,19 +511,31 @@ public class GameView extends View<GameModel> {
 
         }
         else if (isWinner == null) {
-           // TODO murat her same for unentschieden
+            Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
+            String draw = "draw";
+            Image drawPic = new Image(getClass().getResourceAsStream("draw.jpg"));
+            ImageView imgVdrawPic = new ImageView(drawPic);
+
+
+            drawAlert.setGraphic(imgVdrawPic);
+            drawAlert.setHeaderText("");
+            drawAlert.setTitle("Draw Dialog");
+            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
+                GameController.playSound(draw);
+            }
+            drawAlert.showAndWait();
         }
+
         else {
             Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
             String loser = "loser";
-            Image loserPic = new Image(getClass().getResourceAsStream("winner.jpg")); // TODO: 11.12.2017  fixen mit looser
+            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
             ImageView imgVloserPic = new ImageView(loserPic);
-
 
             loserAlert.setGraphic(imgVloserPic);
             loserAlert.setHeaderText("");
             loserAlert.setTitle("Looser Dialog");
-            //alert2.setHeaderText("What a loser....");
+
             if(menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(loser);
             }
