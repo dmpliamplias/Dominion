@@ -635,25 +635,35 @@ public class GameView extends View<GameModel> {
     /**
      * Author Vanessa Cajochen
      */
- public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col,int row, int rowSpan, int cardCount){
+ public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col,int row, int rowSpan, int cardCount) {
 
-     CardImageView imgView = new CardImageView(card, size);
+     if (card == null) {
+         Label lbl = new Label();
+         gp.setConstraints(lbl, col, row);
+         setLabelFormat(lbl);
+         lbl.setText(Integer.toString(cardCount));
 
-     gp.setConstraints(imgView, col, row);
-     gp.setRowSpan(imgView, rowSpan);
-     gp.getChildren().add(imgView);
+         return null;
 
-     Tooltip tooltip = new Tooltip();
-     CardImageView imgForToolTip = new CardImageView(card, CardImageView.CardSize.tooltip);
-     tooltip.setGraphic(imgForToolTip);
-     Tooltip.install(imgView, tooltip);
+     } else {
+         CardImageView imgView = new CardImageView(card, size);
 
-     Label lbl = new Label();
-     gp.setConstraints(lbl, col, row);
-     setLabelFormat(lbl);
-     lbl.setText(Integer.toString(cardCount));
+         gp.setConstraints(imgView, col, row);
+         gp.setRowSpan(imgView, rowSpan);
+         gp.getChildren().add(imgView);
 
-     return imgView;
+         Tooltip tooltip = new Tooltip();
+         CardImageView imgForToolTip = new CardImageView(card, CardImageView.CardSize.tooltip);
+         tooltip.setGraphic(imgForToolTip);
+         Tooltip.install(imgView, tooltip);
+
+         Label lbl = new Label();
+         gp.setConstraints(lbl, col, row);
+         setLabelFormat(lbl);
+         lbl.setText(Integer.toString(cardCount));
+
+         return imgView;
+     }
  }
 
     // Adds the card to the HandStackPane.

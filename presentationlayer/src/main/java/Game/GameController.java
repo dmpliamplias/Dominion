@@ -748,9 +748,11 @@ public class GameController extends Controller<GameModel, GameView> {
         for (int idx = 0; idx < cardNames.size(); idx++) {
             String cardName = cardNames.get(idx);
             int[] pos = indexes.get(idx);
-            CardImageView imgView = view.setCardImageView(getCard(unusedCards, cardName), sizes.get(idx), pos[0], pos[1], pos[2],
-                    countCards(unusedCards, cardName));
-            setCardImageViewAction(imgView);
+                CardImageView imgView = view.setCardImageView(getCard(unusedCards, cardName), sizes.get(idx), pos[0], pos[1], pos[2],
+                        countCards(unusedCards, cardName));
+            if (getCard(unusedCards, cardName) != null) {
+                setCardImageViewAction(imgView);
+            }
         }
         long tEnd = System.currentTimeMillis();
         long tDelta = tEnd - tStart;
