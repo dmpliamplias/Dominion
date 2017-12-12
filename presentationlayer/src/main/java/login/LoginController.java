@@ -6,6 +6,7 @@ import com.weddingcrashers.servermodels.LoginContainer;
 import com.weddingcrashers.servermodels.Methods;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
@@ -36,12 +37,36 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     public void initialize() {
         // must not set ViewStatus on Server, Login is the first, so it's set on default.
 
+        /**
+         *  author Manuel Wirz
+         *  Events for KeyCode Enter
+         *  */
+
+        view.user.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                view.refreshModel();
+                login();
+            }  });
+
+
+        view.pw.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                view.refreshModel();
+                login();
+            }  });
+
+
+        /**
+         *  author Murat Kelleci
+         *  */
+
         view.btnLogin.setOnAction((event) -> {
             view.refreshModel();
             this.login();
         });
 
         view.btnSignUp.setOnAction((event) -> this.goToRegisterView());
+
     }
 
 

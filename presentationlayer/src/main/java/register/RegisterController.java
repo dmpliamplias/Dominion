@@ -7,6 +7,7 @@ import com.weddingcrashers.servermodels.RegisterContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
 import login.LoginController;
 import login.LoginModel;
 import login.LoginView;
@@ -51,6 +52,33 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
             this.cancel();
 
         });
+
+
+        /**
+         *  author Manuel Wirz
+         *  Events for KeyCode Enter
+         *  */
+
+        view.txtEmail.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+               register();
+            }  });
+
+        view.txtPw.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                register();
+            }  });
+
+        view.txtPw_confirm.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                register();
+            }  });
+
+        view.txtUserName.setOnKeyPressed((event) -> {
+            if (event.getCode().equals( KeyCode.ENTER)){
+                register();
+            }  });
+
     }
 
     private void register() {
