@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 
 import java.io.IOException;
 
+import static javafx.scene.control.Alert.AlertType.WARNING;
+
 /**
  * @author Murat Kelleci  , Co-Author Michel Schlatter has fixed some bug fixes
  */
@@ -115,7 +117,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
         }else{
 
-            view.alert("registerview.error.uncompletedFields", Alert.AlertType.WARNING);
+            view.alert("registerview.error.uncompletedFields", WARNING);
         }
 
     }
@@ -124,7 +126,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         Platform.runLater(() -> {
             User user = memberContainer.getUser();
 
-            if (user == null) {
+            if (user ==null) {
                 setUserExistsInfo();
             } else {
                 goToLoginView();
@@ -155,17 +157,13 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
     }
 
 
-    private void setError(){
-        this.view.alert("setError", Alert.AlertType.WARNING);
-    }
-
     private void setInfoMail(){
-        this.view.alert("errorMail", Alert.AlertType.INFORMATION);
+        this.view.alert("registerview.error.errorMail", Alert.AlertType.INFORMATION);
     }
 
     private void setUserExistsInfo(){
 
-        this.view.alert("This User exists already!", Alert.AlertType.INFORMATION);
+        this.view.alert("registerview.error.userexistsalready", Alert.AlertType.INFORMATION);
 
     }
 
