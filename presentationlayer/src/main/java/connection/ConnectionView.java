@@ -134,6 +134,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		// Creating and labeling button, label, textfield
 		btnConnect = new Button();
+		btnConnect.setDefaultButton( true );
 		lblPort = new Label();
 		fldPort = new TextField();
 		lblInfo = new Label();
@@ -205,6 +206,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		lblIP = new Label();
 		fldIP = new TextField();
 		btnOK = new Button();
+		btnOK.setDefaultButton( true );
 		btnCopyPort = new Button();
 		btnCopyIP = new Button();
 		btnOK.getStyleClass().add("Transparent");
@@ -297,6 +299,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		lblIP = new Label();
 		fldIP = new TextField();
 		btnJoinOK = new Button();
+		btnJoinOK.setDefaultButton( true );
 		btnJoinOK.getStyleClass().add("Transparent");
 
 		// Set size for the buttons and FlowPane
