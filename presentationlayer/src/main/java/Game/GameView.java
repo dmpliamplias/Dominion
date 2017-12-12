@@ -12,11 +12,24 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -102,7 +115,6 @@ public class GameView extends View<GameModel> {
         gp.add(vb, 2, 14);
 
         gp.setGridLinesVisible(false);
-
 
 
         // Creating 9 columns with different width
@@ -240,21 +252,20 @@ public class GameView extends View<GameModel> {
         gp.setConstraints(imgVGreyOutButton, 5, 13);
 
 
-
         this.btnLobby = new Button();
-        this.btnRanking= new Button();
+        this.btnRanking = new Button();
 
-        this.txtLogger = new Label(  );
-        this.txtLogger2 = new Label(  );
+        this.txtLogger = new Label();
+        this.txtLogger2 = new Label();
 
-        this.txtLoggerIsYourTurn = new Text(  );
-        this.txtLoggerTurnIsOver = new Text(  );
+        this.txtLoggerIsYourTurn = new Text();
+        this.txtLoggerTurnIsOver = new Text();
 
         //root.setBottom.
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
         root.setTop(setTop());
-        root.setLeft( setLeft());
+        root.setLeft(setLeft());
 
 
         stage.setScene(scene);
@@ -272,7 +283,6 @@ public class GameView extends View<GameModel> {
      */
 
     // Method for title and showing game end option -> return a VBox
-
     private VBox setTop() {
         this.setTop = new VBox();
         this.setTop.setAlignment(Pos.CENTER);
@@ -292,46 +302,43 @@ public class GameView extends View<GameModel> {
     }
 
 
-    public VBox setLeft(){
-        this.VBoxPointsandPlayer = new VBox(  );
-        this.VBoxPointsandPlayer.setSpacing( 20 );
-        this.txtFieldShowRound = new TextField(  );
-        this.txtFieldShowRound.setEditable( false );
+    public VBox setLeft() {
+        this.VBoxPointsandPlayer = new VBox();
+        this.VBoxPointsandPlayer.setSpacing(20);
+        this.txtFieldShowRound = new TextField();
+        this.txtFieldShowRound.setEditable(false);
         this.txtFieldShowRound.setPrefSize(150, 20);
-        this.txtShowRound = new Text(  );
-        this.VBoxPointsandPlayer.setAlignment( Pos.CENTER );
-        this.VBoxPointsandPlayer.getChildren().add( txtFieldShowRound );
+        this.txtShowRound = new Text();
+        this.VBoxPointsandPlayer.setAlignment(Pos.CENTER);
+        this.VBoxPointsandPlayer.getChildren().add(txtFieldShowRound);
         return VBoxPointsandPlayer;
     }
 
 
-
     /**
-     *  author Manuel Wirz
-     *  */
+     * author Manuel Wirz
+     */
 
     // Method for creating logger
-
-
     public VBox loggerAndChat() {
 
         this.VBoxLogger = new VBox(10);
-        this.VBoxLogger.setPrefSize( 300, 150 );
-        this.VBoxLogger.setAlignment( Pos.CENTER_LEFT );
-        this.VBoxLogger.setPadding( new Insets( 0, 10, 0 , 0 ));
+        this.VBoxLogger.setPrefSize(300, 150);
+        this.VBoxLogger.setAlignment(Pos.CENTER_LEFT);
+        this.VBoxLogger.setPadding(new Insets(0, 10, 0, 0));
 
-        this.loggerContent = new VBox(  );
-        this.textFieldNameLogger = new TextField(  );
-        this.textFieldNameLogger.setPrefWidth( 400 );
+        this.loggerContent = new VBox();
+        this.textFieldNameLogger = new TextField();
+        this.textFieldNameLogger.setPrefWidth(400);
 
 
-        this.scrollPaneLogger = new ScrollPane(  );
-        this.scrollPaneLogger.setPrefSize( 300, 200 );
-        this.scrollPaneLogger.setContent( loggerContent );
-        this.scrollPaneLogger.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
-        this.scrollPaneLogger.vvalueProperty().bind( loggerContent.heightProperty() );
+        this.scrollPaneLogger = new ScrollPane();
+        this.scrollPaneLogger.setPrefSize(300, 200);
+        this.scrollPaneLogger.setContent(loggerContent);
+        this.scrollPaneLogger.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.scrollPaneLogger.vvalueProperty().bind(loggerContent.heightProperty());
 
-        VBoxLogger.getChildren().addAll( textFieldNameLogger, scrollPaneLogger, addChatGridPane() );
+        VBoxLogger.getChildren().addAll(textFieldNameLogger, scrollPaneLogger, addChatGridPane());
 
         return VBoxLogger;
 
@@ -339,26 +346,25 @@ public class GameView extends View<GameModel> {
 
 
     /**
-     *  author Manuel Wirz
-     *  */
+     * author Manuel Wirz
+     */
 
     // same logic as in LobbyView
+    protected void setLoggerContent(String msg, Color color) {
 
-    protected void setLoggerContent(String msg, Color color){
-
-        Label lbl = new Label(  );
-        lbl.setText( msg );
-        lbl.setTextFill( color );
-        this.loggerContent.getChildren().add( lbl );
+        Label lbl = new Label();
+        lbl.setText(msg);
+        lbl.setTextFill(color);
+        this.loggerContent.getChildren().add(lbl);
 
     }
 
     /**
-     *  author Vanessa Cajochen
-     *  */
+     * author Vanessa Cajochen
+     */
 
 
-    private void setLabelFormat(Label lbl){
+    private void setLabelFormat(Label lbl) {
         gp.getChildren().add(lbl);
         gp.setValignment(lbl, VPos.TOP);
         lbl.getStyleClass().add("labelNumber");
@@ -367,7 +373,7 @@ public class GameView extends View<GameModel> {
         lbl.setAlignment(Pos.CENTER);
     }
 
-    private void setLabelStyle(Label lbl){
+    private void setLabelStyle(Label lbl) {
         lbl.setPrefSize(30, 30);
         lbl.getStyleClass().add("labelInfo");
         lbl.setAlignment(Pos.CENTER);
@@ -375,14 +381,14 @@ public class GameView extends View<GameModel> {
         gp.setHalignment(lbl, HPos.CENTER);
     }
 
-    private void setTextStyle(Text txt){
+    private void setTextStyle(Text txt) {
         gp.getChildren().addAll(txt);
         txt.getStyleClass().add("textInfo");
         gp.setHalignment(txt, HPos.CENTER);
     }
 
 
-    private void setStyleOfButtons(Button btn){
+    private void setStyleOfButtons(Button btn) {
         btn.setPrefSize(150, 30);
         gp.setValignment(btn, VPos.TOP);
         gp.setColumnSpan(btn, 2);
@@ -395,15 +401,14 @@ public class GameView extends View<GameModel> {
 
 
     /**
-     *  author Manuel Wirz
-     *  */
+     * author Manuel Wirz
+     */
 
     // GridPane for showing the chat and the buttons
-
-    public GridPane addChatGridPane(){
+    public GridPane addChatGridPane() {
 
         chatPane = new GridPane();
-        chatPane.setPrefSize( 800, 350 );
+        chatPane.setPrefSize(800, 350);
         chatContent = new VBox();
 
         //GridPane Layout
@@ -417,17 +422,17 @@ public class GameView extends View<GameModel> {
         // ----- Chatview -------
 
 
-        this.btnChatSend  = new Button();
+        this.btnChatSend = new Button();
         this.btnChatSend.setPrefSize(330, 50);
         this.btnChatSend.getStyleClass().add("buttonChat");
 
-        this.textFieldChat= new TextField();
-        this.textFieldChat.setPromptText( "Enter Text" );
-        this.textFieldChat.setPrefSize( 330,50 );
+        this.textFieldChat = new TextField();
+        this.textFieldChat.setPromptText("Enter Text");
+        this.textFieldChat.setPrefSize(330, 50);
 
-        this.txtNameChat = new TextField(  );
-        this.txtNameChat.setEditable( false );
-        this.txtNameChat.setMaxWidth( 900 );
+        this.txtNameChat = new TextField();
+        this.txtNameChat.setEditable(false);
+        this.txtNameChat.setMaxWidth(900);
 
 
         this.btnSendText = new Button();
@@ -437,32 +442,30 @@ public class GameView extends View<GameModel> {
 
         // Create HBox +
         hbChat = new HBox(10);
-        hbChat.setMaxSize( 700,200 );
+        hbChat.setMaxSize(700, 200);
         hbChat.setAlignment(Pos.CENTER);
         hbChat.getChildren().add(btnChatSend);
         hbChat.getChildren().add(btnSendText);
         ScrollPane scroll = new ScrollPane();
-        scroll.setContent( chatContent );
-        scroll.setPrefSize( 800, 150);
-        scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
-        scroll.vvalueProperty().bind( chatContent.heightProperty() );
-        chatPane.add( txtNameChat,0,0 );
-        chatPane.add(scroll,0,1);
+        scroll.setContent(chatContent);
+        scroll.setPrefSize(800, 150);
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.vvalueProperty().bind(chatContent.heightProperty());
+        chatPane.add(txtNameChat, 0, 0);
+        chatPane.add(scroll, 0, 1);
         chatPane.add(hbChat, 0, 3);
-        chatPane.add( textFieldChat, 0, 2 );
+        chatPane.add(textFieldChat, 0, 2);
 
         return chatPane;
     }
 
 
-    /** @Author Murat Kelleci
-     *
+    /**
      * @param userId
      * @param userName
      * @param set
-     * @param activeUserId
-     *
-     * here you see the points in the view.
+     * @param activeUserId here you see the points in the view.
+     * @Author Murat Kelleci
      */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
@@ -496,17 +499,16 @@ public class GameView extends View<GameModel> {
 
     }
 
-    /** @author Murat Kelleci
-     *
+    /**
      * @param winningUsers
-     * @param isWinner
-     * here you see the winner Stage sorted by positions depending on points
+     * @param isWinner     here you see the winner Stage sorted by positions depending on points
+     * @author Murat Kelleci
      */
 
-   public void startWinnerStage(ObservableList<WinningUser> winningUsers, Boolean isWinner) {
-       displayWinnerDialog(isWinner);
+    public void startWinnerStage(ObservableList<WinningUser> winningUsers, Boolean isWinner) {
+        displayWinnerDialog(isWinner);
 
-       BorderPane root = new BorderPane();
+        BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
         this.stageDialog.setOnCloseRequest(evt -> {
             // prevent window from closing
@@ -514,26 +516,25 @@ public class GameView extends View<GameModel> {
         });
         stageDialog.initOwner(stage);
         stageDialog.initModality(WINDOW_MODAL);
-        Scene scene = new Scene(root,400,300);
+        Scene scene = new Scene(root, 400, 300);
         this.stageDialog.setScene(scene);
         createVBox(winningUsers);
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
         stageDialog.show();
-   }
+    }
 
-    /** @author Murat Kelleci
-     *
-     * @param isWinner
-     * here you get the displayed whether you are the winner or loser (draw).
+    protected void setTextDialog() {
+        this.btnLobby.setText(getText("btn.Lobby"));
+        this.btnRanking.setText(getText("btn.Ranking"));
+    }
+
+    /**
+     * @param isWinner here you get the displayed whether you are the winner, loser or if its a draw match.
+     * @author Murat Kelleci
      */
-
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
-
-   private void displayWinnerDialog(Boolean isWinner) {
-
-
-
+    private void displayWinnerDialog(Boolean isWinner) {
         if (isWinner) {
             Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
             String winner = "winner";
@@ -544,14 +545,11 @@ public class GameView extends View<GameModel> {
             winnerAlert.setGraphic(imgVwinnerPic);
             winnerAlert.setHeaderText("");
             winnerAlert.setTitle("Winner Dialog");
-            if(menuBar.getMenuItemSoundUnmute().isSelected()) {
+            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(winner);
             }
             winnerAlert.showAndWait();
-
-
-        }
-        else if (isWinner == null) {
+        } else if (isWinner == null) {
             Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
             String draw = "draw";
             Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
@@ -565,9 +563,7 @@ public class GameView extends View<GameModel> {
                 GameController.playSound(draw);
             }
             drawAlert.showAndWait();
-        }
-
-        else {
+        } else {
             Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
             String loser = "loser";
             Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
@@ -577,34 +573,28 @@ public class GameView extends View<GameModel> {
             loserAlert.setHeaderText("");
             loserAlert.setTitle("Looser Dialog");
 
-            if(menuBar.getMenuItemSoundUnmute().isSelected()) {
+            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                 GameController.playSound(loser);
             }
             loserAlert.showAndWait();
 
         }
-   }
-
-    protected void setTextDialog(){
-        this.btnLobby.setText(getText("btn.Lobby"));
-        this.btnRanking.setText(getText("btn.Ranking"));
     }
 
 
-    /** @author Murat Kelleci
-     *
-     * @param winningUsers
-     * here is the Vbox and Tableview for WinningUser created.
+    /**
+     * @param winningUsers here is the Vbox and Tableview for WinningUser created.
+     * @author Murat Kelleci
      */
     public void createVBox(ObservableList<WinningUser> winningUsers) {
         this.btnLobby.setPrefSize(180, 80);
         this.btnRanking.setPrefSize(180, 80);
         this.VBoxDisplayWinner = new VBox();
         TableView<WinningUser> tableView = createWinningUserTableView(winningUsers);
-        HBox hbox =new HBox();
+        HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
-        hbox.getChildren().addAll(btnLobby,btnRanking);
+        hbox.getChildren().addAll(btnLobby, btnRanking);
 
         VBoxDisplayWinner.getChildren().addAll(tableView, hbox);
     }
@@ -616,7 +606,7 @@ public class GameView extends View<GameModel> {
         TableColumn<WinningUser, String> points = new TableColumn<>(getText("gameview.winningUsers.points"));
         TableColumn<WinningUser, String> position = new TableColumn<>(getText("gameview.winningUsers.position"));
 
-        tableView.getColumns().addAll(position,name, points);
+        tableView.getColumns().addAll(position, name, points);
 
         tableView.setItems(winningUsers);
 
@@ -630,10 +620,11 @@ public class GameView extends View<GameModel> {
 
     /**
      * Author Michel Schlatter
+     *
      * @param msg
      * @param color
      */
-    protected  void setChatMessage(String msg, Color color){
+    protected void setChatMessage(String msg, Color color) {
         Label lbl = new Label();
         lbl.setText(msg);
         lbl.setTextFill(color);
@@ -647,17 +638,17 @@ public class GameView extends View<GameModel> {
 
 
     protected void setTexts() {
-        this.btnChatSend.setText( getText( "chat.send" ) );
-        this.btnSendText.setText( getText( "chat.nice!" ) );
-        this.txtNameChat.setText( getText( "chat.chat" ) );
-        this.endOptionRounds.setText( getText( "gameview.endOptionRound" ) );
-        this.endOptionPoints.setText( getText( "gameview.endOptionPoint" ) );
-        this.textFieldNameLogger.setText( getText( "gameview.logger" ) );
-        this.txtLogger.setText( getText( "gameview.loggerText" ) );
-        this.txtLogger2.setText( getText( "gameview.loggerText2" ) );
-        this.txtShowRound.setText( getText( "gameview.showRound" ) );
-        this.txtLoggerTurnIsOver.setText( getText( "gameview.LoggerTurnIsOVer" ) );
-        this.txtLoggerIsYourTurn.setText( getText( "gameview.LoggerIsYourTurn" ) );
+        this.btnChatSend.setText(getText("chat.send"));
+        this.btnSendText.setText(getText("chat.nice!"));
+        this.txtNameChat.setText(getText("chat.chat"));
+        this.endOptionRounds.setText(getText("gameview.endOptionRound"));
+        this.endOptionPoints.setText(getText("gameview.endOptionPoint"));
+        this.textFieldNameLogger.setText(getText("gameview.logger"));
+        this.txtLogger.setText(getText("gameview.loggerText"));
+        this.txtLogger2.setText(getText("gameview.loggerText2"));
+        this.txtShowRound.setText(getText("gameview.showRound"));
+        this.txtLoggerTurnIsOver.setText(getText("gameview.LoggerTurnIsOVer"));
+        this.txtLoggerIsYourTurn.setText(getText("gameview.LoggerIsYourTurn"));
         this.txtAction.setText(getText("gameview.action"));
         this.txtBuy.setText(getText("gameview.buy"));
         this.txtTreasure.setText(getText("gameview.money"));
@@ -667,7 +658,7 @@ public class GameView extends View<GameModel> {
         stage.show();
     }
 
-    public void stop(){
+    public void stop() {
         stage.hide();
     }
 
@@ -675,46 +666,46 @@ public class GameView extends View<GameModel> {
     /**
      * Author Vanessa Cajochen
      */
- public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col,int row, int rowSpan, int cardCount) {
+    public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col, int row, int rowSpan, int cardCount) {
 
-     if (card == null) {
-         Label lbl = new Label();
-         gp.setConstraints(lbl, col, row);
-         setLabelFormat(lbl);
-         lbl.setText(Integer.toString(cardCount));
+        if (card == null) {
+            Label lbl = new Label();
+            gp.setConstraints(lbl, col, row);
+            setLabelFormat(lbl);
+            lbl.setText(Integer.toString(cardCount));
 
-         return null;
+            return null;
 
-     } else {
-         CardImageView imgView = new CardImageView(card, size);
+        } else {
+            CardImageView imgView = new CardImageView(card, size);
 
-         gp.setConstraints(imgView, col, row);
-         gp.setRowSpan(imgView, rowSpan);
-         gp.getChildren().add(imgView);
+            gp.setConstraints(imgView, col, row);
+            gp.setRowSpan(imgView, rowSpan);
+            gp.getChildren().add(imgView);
 
-         Tooltip tooltip = new Tooltip();
-         CardImageView imgForToolTip = new CardImageView(card, CardImageView.CardSize.tooltip);
-         tooltip.setGraphic(imgForToolTip);
-         Tooltip.install(imgView, tooltip);
+            Tooltip tooltip = new Tooltip();
+            CardImageView imgForToolTip = new CardImageView(card, CardImageView.CardSize.tooltip);
+            tooltip.setGraphic(imgForToolTip);
+            Tooltip.install(imgView, tooltip);
 
-         Label lbl = new Label();
-         gp.setConstraints(lbl, col, row);
-         setLabelFormat(lbl);
-         lbl.setText(Integer.toString(cardCount));
+            Label lbl = new Label();
+            gp.setConstraints(lbl, col, row);
+            setLabelFormat(lbl);
+            lbl.setText(Integer.toString(cardCount));
 
-         return imgView;
-     }
- }
+            return imgView;
+        }
+    }
 
     // Adds the card to the HandStackPane.
-    public void addCardToHandStackPane(CardImageView cardImg){
+    public void addCardToHandStackPane(CardImageView cardImg) {
         handStackList.add(cardImg);
         updateStackLayout();
         hs.getChildren().add(cardImg);
     }
 
     // Moves card from the HandStackPane to the cardPlayingArea.
-    public void moveCardToPlayingArea (CardImageView cardImg) {
+    public void moveCardToPlayingArea(CardImageView cardImg) {
         handStackList.remove(cardImg);
         hs.getChildren().remove(cardImg);
         cardPlayingAreaList.add(cardImg);
@@ -724,99 +715,103 @@ public class GameView extends View<GameModel> {
 
 
     // Moves all MoneyCards with one click to the button
-    public void moveMoneyCardsToPlayArea(){
+    public void moveMoneyCardsToPlayArea() {
         ArrayList<CardImageView> moveList = new ArrayList<CardImageView>();
-        for(int i = 0; i < handStackList.size(); i++){
-            if (handStackList.get(i).getCard().getName().equals("Kupfer") || handStackList.get(i).getCard().getName().equals("Silber") || handStackList.get(i).getCard().getName().equals("Gold")){
+        for (int i = 0; i < handStackList.size(); i++) {
+            if (handStackList.get(i).getCard().getName().equals("Kupfer") || handStackList.get(i).getCard().getName().equals("Silber") || handStackList.get(i).getCard().getName().equals("Gold")) {
                 moveList.add(handStackList.get(i));
             }
         }
-        for(int i = 0; i < moveList.size(); i++) {
+        for (int i = 0; i < moveList.size(); i++) {
             moveCardToPlayingArea(moveList.get(i));
         }
 
     }
 
-        // If there are more than 5 cards in the PlayingArea / HandCardArea the gap will between the cards gets smaller
-        // 1 card has has a width of 75. 540 ist the maximum length of the Pane. 540 - 75 = 465.
-        public void updateStackLayout(){
-            if (handStackList.size() > 5) {hs.setCardInterval(465 / (handStackList.size()-1));
-            } else { hs.setCardInterval(116.25);}
+    // If there are more than 5 cards in the PlayingArea / HandCardArea the gap will between the cards gets smaller
+    // 1 card has has a width of 75. 540 ist the maximum length of the Pane. 540 - 75 = 465.
+    public void updateStackLayout() {
+        if (handStackList.size() > 5) {
+            hs.setCardInterval(465 / (handStackList.size() - 1));
+        } else {
+            hs.setCardInterval(116.25);
+        }
 
-            if (cardPlayingAreaList.size() > 5) {cardPlayingArea.setCardInterval(465 / (cardPlayingAreaList.size()-1));
-            } else {cardPlayingArea.setCardInterval(116.25);}
-         }
-
-
-         public void updatelblInfo(int action, int buys, int money){
-            lblAction.setText("" + action);
-            lblBuy.setText("" + buys);
-            lblTreasure.setText("" + money);
-         }
-
-
-         // Clear HandStack and CardPlayingArea
-         public void endOfTurn(){
-             hs.getChildren().clear();
-             cardPlayingArea.getChildren().clear();
-             handStackList.clear();
-             cardPlayingAreaList.clear();
-         }
-
-         public void updateLblPullStack(int numberOfPullStack){
-             lblPullStack.setText(""+numberOfPullStack);
-         }
+        if (cardPlayingAreaList.size() > 5) {
+            cardPlayingArea.setCardInterval(465 / (cardPlayingAreaList.size() - 1));
+        } else {
+            cardPlayingArea.setCardInterval(116.25);
+        }
+    }
 
 
-         // When card "Geldverleiher" is played, a Copper from the handStack is trashed.
-         public void trashCopper(){
-             boolean found = false;
-             int i = 0;
-             while (!found){
-                 if (handStackList.get(i).getCard().getName().equals("Kupfer")){
-                     hs.getChildren().remove(handStackList.get(i));
-                     handStackList.remove(i);
-                     found = true;
-                 }
-                 i++;
+    public void updatelblInfo(int action, int buys, int money) {
+        lblAction.setText("" + action);
+        lblBuy.setText("" + buys);
+        lblTreasure.setText("" + money);
+    }
+
+
+    // Clear HandStack and CardPlayingArea
+    public void endOfTurn() {
+        hs.getChildren().clear();
+        cardPlayingArea.getChildren().clear();
+        handStackList.clear();
+        cardPlayingAreaList.clear();
+    }
+
+    public void updateLblPullStack(int numberOfPullStack) {
+        lblPullStack.setText("" + numberOfPullStack);
+    }
+
+
+    // When card "Geldverleiher" is played, a Copper from the handStack is trashed.
+    public void trashCopper() {
+        boolean found = false;
+        int i = 0;
+        while (!found) {
+            if (handStackList.get(i).getCard().getName().equals("Kupfer")) {
+                hs.getChildren().remove(handStackList.get(i));
+                handStackList.remove(i);
+                found = true;
             }
-         }
-
-         // The last played card from the handStack lies on the trashStack
-         public void setBackCardOfTrashStack(Card card){
-             imgVtrayStack = new CardImageView(card, CardImageView.CardSize.bigSize);
-             imgVtrayStack.setFitHeight(120);
-             imgVtrayStack.setFitWidth(75);
-             gp.setRowSpan(imgVtrayStack, 4);
-             gp.setHalignment(imgVtrayStack, HPos.LEFT);
-             gp.setConstraints(imgVtrayStack, 0, 15);
-             gp.getChildren().add(imgVtrayStack);
-         }
-
-         // If the trashStack is empty, the trashStack shows the back of the card.
-        public void setBackCardOfTrashStack(){
-            imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/back.jpg")));
-            imgVtrayStack.setFitHeight(120);
-            imgVtrayStack.setFitWidth(75);
-            gp.setRowSpan(imgVtrayStack, 4);
-            gp.setHalignment(imgVtrayStack, HPos.LEFT);
-            gp.setConstraints(imgVtrayStack, 0, 15);
-            gp.getChildren().add(imgVtrayStack);
+            i++;
         }
+    }
 
-        // Grey img gets removed and Player sees that he can play now
-        public void disableView(){
-            gp.getChildren().removeAll(imgVGreyOutHandStack, imgVGreyOutButton);
+    // The last played card from the handStack lies on the trashStack
+    public void setBackCardOfTrashStack(Card card) {
+        imgVtrayStack = new CardImageView(card, CardImageView.CardSize.bigSize);
+        imgVtrayStack.setFitHeight(120);
+        imgVtrayStack.setFitWidth(75);
+        gp.setRowSpan(imgVtrayStack, 4);
+        gp.setHalignment(imgVtrayStack, HPos.LEFT);
+        gp.setConstraints(imgVtrayStack, 0, 15);
+        gp.getChildren().add(imgVtrayStack);
+    }
+
+    // If the trashStack is empty, the trashStack shows the back of the card.
+    public void setBackCardOfTrashStack() {
+        imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/back.jpg")));
+        imgVtrayStack.setFitHeight(120);
+        imgVtrayStack.setFitWidth(75);
+        gp.setRowSpan(imgVtrayStack, 4);
+        gp.setHalignment(imgVtrayStack, HPos.LEFT);
+        gp.setConstraints(imgVtrayStack, 0, 15);
+        gp.getChildren().add(imgVtrayStack);
+    }
+
+    // Grey img gets removed and Player sees that he can play now
+    public void disableView() {
+        gp.getChildren().removeAll(imgVGreyOutHandStack, imgVGreyOutButton);
+    }
+
+    // HandCards and Button gets greyedout. Player can no longer play cards and click Button
+    public void enableView() {
+        if (!gp.getChildren().contains(imgVGreyOutHandStack)) {
+            gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
         }
-
-        // HandCards and Button gets greyedout. Player can no longer play cards and click Button
-        public void enableView(){
-            if(!gp.getChildren().contains(imgVGreyOutHandStack)) {
-                gp.getChildren().addAll(imgVGreyOutHandStack, imgVGreyOutButton);
-            }
-        }
-
-
+    }
 
 
     public BorderPane getRoot() {
@@ -835,7 +830,6 @@ public class GameView extends View<GameModel> {
     public Button getBtnSendText() {
         return btnSendText;
     }
-
 
 
     public GridPane getChatPane() {
@@ -858,8 +852,8 @@ public class GameView extends View<GameModel> {
         return btnLobby;
     }
 
-    public Button getBtnRanking(){
-            return btnRanking;
+    public Button getBtnRanking() {
+        return btnRanking;
     }
 
     public Label getTxtLogger() {
