@@ -60,4 +60,13 @@ public final class H2Database {
         LOG.info("Shutdown the tcp server listening on port: " + tcpServer.getPort());
     }
 
+    /**
+     * Returns {@code true} if h2 server is running, {@code false} otherwise.
+     *
+     * @return true if the h2 server is running, false otherwise.
+     */
+    public boolean isDbRunning() {
+        return tcpServer != null;
+    }
+
 }

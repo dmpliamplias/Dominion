@@ -60,6 +60,9 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                         return;
                     }
                     InetSocketAddress socketAddress = createServer(Integer.parseInt(portStr));
+                    if (socketAddress != null) {
+                        serviceLocator.startDatabase();
+                    }
                     view.btnConnect.setDisable(true);
                     view.btnJoinS.setDisable(true);
                     view.btnStartS.setDisable(true);

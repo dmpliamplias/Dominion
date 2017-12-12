@@ -149,7 +149,9 @@ public class Dominion extends Application {
             }
             serverConnectionService.dispose();
         }
-        serviceLocator.shutdownDatabase();
+        if (serviceLocator.isDbRunning()) {
+            serviceLocator.shutdownDatabase();
+        }
 
         getLogger().info("Application terminated");
     }

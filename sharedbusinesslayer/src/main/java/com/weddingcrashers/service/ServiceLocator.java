@@ -83,6 +83,10 @@ public class ServiceLocator {
         h2Database.shutdownDatabase();
     }
 
+    public boolean isDbRunning() {
+        return h2Database.isDbRunning();
+    }
+
     public UserService getUserService() {
         return userService;
     }
