@@ -30,6 +30,7 @@ import static util.StyleSheetPath.GAME;
 
 public class GameView extends View<GameModel> {
 
+    private static final String BASE_PATH = "/game";
 
     protected TextField textFieldChat;
     protected TextField textFieldNameLogger;
@@ -126,7 +127,7 @@ public class GameView extends View<GameModel> {
 
 
         // create backside card and label for pullStack
-        Image pullStack = new Image(getClass().getResourceAsStream("back.jpg"));
+        Image pullStack = new Image(getClass().getResourceAsStream(BASE_PATH + "/back.jpg"));
         ImageView imgVpullStack = new ImageView(pullStack);
         imgVpullStack.setFitHeight(120);
         imgVpullStack.setFitWidth(75);
@@ -142,7 +143,7 @@ public class GameView extends View<GameModel> {
         setBackCardOfTrashStack();
 
         // Creates Curly Brackets for PlayingArea
-        Image imgBracketLeft = new Image(getClass().getResourceAsStream("curlyBracketLeft.png"));
+        Image imgBracketLeft = new Image(getClass().getResourceAsStream(BASE_PATH + "/curlyBracketLeft.png"));
         ImageView imgVBracketLeft = new ImageView(imgBracketLeft);
         imgVBracketLeft.setFitHeight(120);
         imgVBracketLeft.setPreserveRatio(true);
@@ -152,7 +153,7 @@ public class GameView extends View<GameModel> {
         gp.setHalignment(imgVBracketLeft, HPos.RIGHT);
         gp.getChildren().add(imgVBracketLeft);
 
-        Image imgBracketRight = new Image(getClass().getResourceAsStream("curlyBracketRight.png"));
+        Image imgBracketRight = new Image(getClass().getResourceAsStream(BASE_PATH + "/curlyBracketRight.png"));
         ImageView imgVBracketRight = new ImageView(imgBracketRight);
         imgVBracketRight.setFitHeight(120);
         imgVBracketRight.setPreserveRatio(true);
@@ -176,6 +177,7 @@ public class GameView extends View<GameModel> {
 
 
         // Creates 3 buttons. But only 1 will be shown at the same time
+        // TODO: 12.12.17 vanessa consume text from properties file
         btnEndActionPhase = new Button("Aktionsrunde beenden");
         setStyleOfButtons(btnEndActionPhase);
 
@@ -217,7 +219,7 @@ public class GameView extends View<GameModel> {
 
         // Images for greyOut. If it is not the users'turn, the handcards and button are grayed out.
 
-        Image imgGreyOut = new Image(getClass().getResourceAsStream("grey.png"));
+        Image imgGreyOut = new Image(getClass().getResourceAsStream(BASE_PATH + "/grey.png"));
 
         imgVGreyOutHandStack = new ImageView(imgGreyOut);
         imgVGreyOutHandStack.setFitHeight(120);
@@ -535,7 +537,7 @@ public class GameView extends View<GameModel> {
         if (isWinner) {
             Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
             String winner = "winner";
-            Image winnerPic = new Image(getClass().getResourceAsStream("winner.jpg"));
+            Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
 
 
@@ -552,7 +554,7 @@ public class GameView extends View<GameModel> {
         else if (isWinner == null) {
             Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
             String draw = "draw";
-            Image drawPic = new Image(getClass().getResourceAsStream("draw.jpg"));
+            Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
             ImageView imgVdrawPic = new ImageView(drawPic);
 
 
@@ -568,7 +570,7 @@ public class GameView extends View<GameModel> {
         else {
             Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
             String loser = "loser";
-            Image loserPic = new Image(getClass().getResourceAsStream("loser.jpg"));
+            Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
             ImageView imgVloserPic = new ImageView(loserPic);
 
             loserAlert.setGraphic(imgVloserPic);
@@ -586,9 +588,6 @@ public class GameView extends View<GameModel> {
     protected void setTextDialog(){
         this.btnLobby.setText(getText("btn.Lobby"));
         this.btnRanking.setText(getText("btn.Ranking"));
-
-
-
     }
 
 
@@ -648,7 +647,6 @@ public class GameView extends View<GameModel> {
 
 
     protected void setTexts() {
-
         this.btnChatSend.setText( getText( "chat.send" ) );
         this.btnSendText.setText( getText( "chat.nice!" ) );
         this.txtNameChat.setText( getText( "chat.chat" ) );
@@ -797,7 +795,7 @@ public class GameView extends View<GameModel> {
 
          // If the trashStack is empty, the trashStack shows the back of the card.
         public void setBackCardOfTrashStack(){
-            imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream("back.jpg")));
+            imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/back.jpg")));
             imgVtrayStack.setFitHeight(120);
             imgVtrayStack.setFitWidth(75);
             gp.setRowSpan(imgVtrayStack, 4);

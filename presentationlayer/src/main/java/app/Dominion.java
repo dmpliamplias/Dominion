@@ -82,7 +82,7 @@ public class Dominion extends Application {
         serviceLocator = ServiceLocator.getServiceLocator();
 
         // Create and display the splash screen and model
-        SplashScreenModel splashModel = new SplashScreenModel(serviceLocator);
+        SplashScreenModel splashModel = new SplashScreenModel();
         splashView = new SplashScreenView(primaryStage, splashModel);
         new SplashScreenController(this, splashModel, splashView);
         splashView.start();

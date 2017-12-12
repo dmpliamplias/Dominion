@@ -15,23 +15,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import static javafx.stage.StageStyle.TRANSPARENT;
 import static util.StyleSheetPath.SPLASH_SCREEN;
 
-/**
- * Framework for professional applications:
- * Copyright 2015, FHNW, Prof. Dr. Brad Richards.
- * All rights reserved. This code 5 is licensed under the terms of the BSD 3-clause license
- * For more details please see the file "license.txt").
- *
- * @author Brad Richards
- */
 public class SplashScreenView extends View<SplashScreenModel> {
-    int delay = 0;
 
     // ---- Members
 
     /** The progess bar. */
     ProgressIndicator progress;
+
+    /** The delay. */
+    private int delay = 0;
 
 
     // ---- Constructor
@@ -44,8 +39,6 @@ public class SplashScreenView extends View<SplashScreenModel> {
      */
     public SplashScreenView(Stage stage, SplashScreenModel model) {
         super(stage, model);
-
-//        stage.initStyle(StageStyle.TRANSPARENT);
     }
 
 
@@ -53,7 +46,7 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     @Override
     protected Scene create_GUI() {
-        //TODO: 09.12.2017: Dyoni, bitte mal ahluege warum es min progressindicator ned updated....danke :-)
+        stage.initStyle(TRANSPARENT);
 
         BorderPane root = new BorderPane();
         root.setId("splash");
@@ -115,8 +108,7 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     }
 
-
-    public void createTransition(Text name){
+    private void createTransition(Text name){
         name.setTranslateX(500);
         name.setTranslateY(330);
         name.setTextOrigin(VPos.TOP);
