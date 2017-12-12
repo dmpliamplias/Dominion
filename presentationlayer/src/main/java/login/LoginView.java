@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -106,7 +105,7 @@ public class LoginView extends View<LoginModel> {
 
 
         // Create Title Login
-        Image imgLogin = new Image(getClass().getResourceAsStream("Login.png"));
+        Image imgLogin = new Image(getClass().getResourceAsStream("/login/login.png"));
         ImageView imgVLogin = new ImageView(imgLogin);
         imgVLogin.setPreserveRatio(true);
         imgVLogin.setFitWidth(200);

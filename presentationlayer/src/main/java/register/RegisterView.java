@@ -108,15 +108,15 @@ public class RegisterView extends View<RegisterModel>{
 
 
         // Create Title Register
-        ImageView imgVRegisterEng = new ImageView(new Image(getClass().getResourceAsStream("Register_ENG.png")));
+        ImageView imgVRegisterEng = new ImageView(new Image(getClass().getResourceAsStream("/register/register_EN.png")));
         imgVRegisterEng.setPreserveRatio(true);
         imgVRegisterEng.setFitHeight(100);
 
-        ImageView imgVRegisterDe = new ImageView(new Image(getClass().getResourceAsStream("Register_DE.png")));
+        ImageView imgVRegisterDe = new ImageView(new Image(getClass().getResourceAsStream("/register/register_DE.png")));
         imgVRegisterDe.setPreserveRatio(true);
         imgVRegisterDe.setFitHeight(100);
 
-        ImageView imgVRegisterCh = new ImageView(new Image(getClass().getResourceAsStream("Register_CH.png")));
+        ImageView imgVRegisterCh = new ImageView(new Image(getClass().getResourceAsStream("/register/register_CH.png")));
         imgVRegisterCh.setPreserveRatio(true);
         imgVRegisterCh.setFitHeight(100);
 
