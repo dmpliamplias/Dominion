@@ -60,6 +60,10 @@ public abstract class Controller<M extends Model, V extends View<M>> {
 
     }
 
+    protected Controller() {
+
+    }
+
     /**
      *  author Manuel Wirz
      *  */

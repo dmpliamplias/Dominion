@@ -80,7 +80,8 @@ public class GameController extends Controller<GameModel, GameView> {
         initialize();
     }
 
-
+    public GameController() {
+    }
 
 
     public void initialize() {
@@ -317,12 +318,12 @@ public class GameController extends Controller<GameModel, GameView> {
      */
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
         Platform.runLater(() -> {
-            final List<WinningInformation> winningInformations = gc.getWinningInformations();
-            if (winningInformations != null && winningInformations.size() > 0) {
-                final ObservableList<WinningUser> winningUsers = createWinningUsers(winningInformations);
-                Boolean isWinner = determineWinner(winningUsers, myUser);
+            final ArrayList<WinningInformation> wis = gc.getWinningInformations();
+            if (wis != null && wis.size() > 0) {
+                final ObservableList<WinningInformation> winningInformations = FXCollections.observableArrayList(wis);
+//                final Map<Integer, Boolean> integerBooleanMap = determineGameResult(winningInformations, myUser);
                 // TODO: 11.12.2017 dyoni find solution if draw and the user before must than have draw and not winner
-                view.startWinnerStage(winningUsers, isWinner);
+//                view.startWinnerStage(winningInformations, integerBooleanMap);
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 logActiveUser();
@@ -480,50 +481,51 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /** @author Murat Kelleci
      *
-     * @param winningUsers
-     * @param myUser
-     * here is the winner determined so that we know who gets the winner or loser display.
-     */
-
-    private Boolean determineWinner(ObservableList<WinningUser> winningUsers, User myUser) {
-        WinningUser winner = null;
-        for (WinningUser winningUser : winningUsers) {
-            if (winner == null) {
-                winner = winningUser;
+     * @param winningInformations
+     * @param myUser */
+    @SuppressWarnings("unchecked")
+    public HashMap<WinningInformation, Map<Integer, Boolean>> determineGameResult(List<WinningInformation> winningInformations, User myUser) {
+        // Previous winning informaiton and points
+        WinningInformation previousWinningInformation = null;
+        Integer previousPoints = null;
+        int counter = 1;
+        // Maps
+        final HashMap<WinningInformation, Map<Integer, Boolean>> winningInformationToIsWinnerMap = new HashMap<>();
+        // loop over winning infos
+        for (WinningInformation winningInformation : winningInformations) {
+            if (previousPoints != null) {
+                boolean drawStateOccured = false;
+                // draw previous points are equal to new points
+                if (previousPoints == winningInformation.getPoints()) {
+                    // put new winninginfo and null for draw
+                    winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter - 1, null));
+                    // remove previous as it has other state now
+                    winningInformationToIsWinnerMap.remove(previousWinningInformation);
+                    // put previous back as draw
+                    winningInformationToIsWinnerMap.put(previousWinningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter - 1, null));
+                    // indicator that draw occured
+                    drawStateOccured = true;
+                }
+                else {
+                    // loser case
+                    if (drawStateOccured) {
+                        winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter -1, false));
+                    }
+                    else {
+                        winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter, false));
+                    }
+                }
             }
-            int wiPoints = winningUser.getPoints();
-            int points = winner.getPoints();
-            if (wiPoints > points) {
-                winner = winningUser;
+            // case first loop time
+            if (previousPoints != null) {
+                winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter, true));
             }
-            if (wiPoints == points) {
-                return null;
-            }
+            // set previous values
+            previousWinningInformation = winningInformation;
+            previousPoints = winningInformation.getPoints();
+            counter++;
         }
-        long userId = winner.getUserId();
-        long myUserId = myUser.getId();
-
-        boolean isWinner = false;
-        if (userId == myUserId) {
-            isWinner = true;
-        }
-        return isWinner;
-    }
-
-    /** @author Murat Kelleci
-     * here is the player position listed depending on points
-    */
-
-    private ObservableList<WinningUser> createWinningUsers(List<WinningInformation> winningInformations) {
-        ObservableList<WinningUser> winningUsers = FXCollections.observableArrayList();
-        for (WinningInformation wi : winningInformations) {
-            User user = users.get(wi.getUserId());
-            int points = wi.getPoints();
-            int position = wi.getPosition();
-            WinningUser winningUser = new WinningUser(user.getId(), user.getUserName(), points, position);
-            winningUsers.add(winningUser);
-        }
-        return winningUsers;
+        return winningInformationToIsWinnerMap;
     }
 
     /**

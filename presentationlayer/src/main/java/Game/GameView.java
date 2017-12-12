@@ -5,6 +5,7 @@ import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
+import com.weddingcrashers.servermodels.WinningInformation;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -36,6 +37,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
 import static util.StyleSheetPath.GAME;
@@ -500,13 +502,13 @@ public class GameView extends View<GameModel> {
     }
 
     /**
-     * @param winningUsers
+     * @param winningInformations
      * @param isWinner     here you see the winner Stage sorted by positions depending on points
      * @author Murat Kelleci
      */
 
-    public void startWinnerStage(ObservableList<WinningUser> winningUsers, Boolean isWinner) {
-        displayWinnerDialog(isWinner);
+    public void startWinnerStage(ObservableList<WinningInformation> winningInformations, Map<Integer, Boolean> isWinner) {
+//        displayWinnerDialog(isWinner);
 
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
@@ -518,7 +520,7 @@ public class GameView extends View<GameModel> {
         stageDialog.initModality(WINDOW_MODAL);
         Scene scene = new Scene(root, 400, 300);
         this.stageDialog.setScene(scene);
-        createVBox(winningUsers);
+        createVBox(winningInformations);
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
         stageDialog.show();
@@ -583,14 +585,14 @@ public class GameView extends View<GameModel> {
 
 
     /**
-     * @param winningUsers here is the Vbox and Tableview for WinningUser created.
+     * @param winningInformations here is the Vbox and Tableview for WinningUser created.
      * @author Murat Kelleci
      */
-    public void createVBox(ObservableList<WinningUser> winningUsers) {
+    public void createVBox(ObservableList<WinningInformation> winningInformations) {
         this.btnLobby.setPrefSize(180, 80);
         this.btnRanking.setPrefSize(180, 80);
         this.VBoxDisplayWinner = new VBox();
-        TableView<WinningUser> tableView = createWinningUserTableView(winningUsers);
+        TableView<WinningInformation> tableView = createWinningUserTableView(winningInformations);
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
@@ -599,20 +601,20 @@ public class GameView extends View<GameModel> {
         VBoxDisplayWinner.getChildren().addAll(tableView, hbox);
     }
 
-    private TableView<WinningUser> createWinningUserTableView(final ObservableList<WinningUser> winningUsers) {
-        TableView<WinningUser> tableView = new TableView<>();
+    private TableView<WinningInformation> createWinningUserTableView(final ObservableList<WinningInformation> winningInformations) {
+        TableView<WinningInformation> tableView = new TableView<>();
 
-        TableColumn<WinningUser, String> name = new TableColumn<>(getText("gameview.winningUsers.name"));
-        TableColumn<WinningUser, String> points = new TableColumn<>(getText("gameview.winningUsers.points"));
-        TableColumn<WinningUser, String> position = new TableColumn<>(getText("gameview.winningUsers.position"));
+        TableColumn<WinningInformation, String> name = new TableColumn<>(getText("gameview.winningInformations.name"));
+        TableColumn<WinningInformation, String> points = new TableColumn<>(getText("gameview.winningInformations.points"));
+        TableColumn<WinningInformation, String> position = new TableColumn<>(getText("gameview.winningInformations.position"));
 
         tableView.getColumns().addAll(position, name, points);
 
-        tableView.setItems(winningUsers);
+        tableView.setItems(winningInformations);
 
-        name.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("userName"));
-        points.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("points"));
-        position.setCellValueFactory(new PropertyValueFactory<WinningUser, String>("position"));
+        name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        points.setCellValueFactory(new PropertyValueFactory<>("points"));
+        position.setCellValueFactory(new PropertyValueFactory<>("position"));
 
         return tableView;
     }
