@@ -23,6 +23,7 @@ public class SplashScreenModel extends Model {
             updateProgress(4, 5);
             sleep(1300);
             updateProgress(5, 5);
+            // 0.5 sec for done sequence
             sleep(500);
 
             return null;

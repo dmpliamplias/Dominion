@@ -43,7 +43,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             user.setSuperUser(false);
             return objectUpdateService.create(user);
         }
-        return userByEmail;
+        return null;
     }
 
     @Override
