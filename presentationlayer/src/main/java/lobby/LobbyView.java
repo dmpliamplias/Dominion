@@ -49,7 +49,6 @@ public class LobbyView extends View<LobbyModel> {
     protected VBox vBoxGameSettings;
     protected TextField txtWait;
     protected VBox vBoxAddMenu;
-    protected Button btnTestGameView;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
 
@@ -102,7 +101,6 @@ public class LobbyView extends View<LobbyModel> {
     public VBox addMenu(){
 
         this.vBoxAddMenu = new VBox(  );
-        this.btnTestGameView = new Button( "TestGameView" );
         vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
 
 
@@ -111,7 +109,7 @@ public class LobbyView extends View<LobbyModel> {
         this.textFieldGameSettings.getStyleClass().add( "title" );
 
 
-        vBoxAddMenu.getChildren().addAll(menuBar, btnTestGameView, textFieldGameSettings );
+        vBoxAddMenu.getChildren().addAll(menuBar, textFieldGameSettings );
 
         menuBar.getMenuSettings().getItems().remove(menuBar.getMenuSound());
 
@@ -445,10 +443,6 @@ public class LobbyView extends View<LobbyModel> {
 
     public TextField getTxtWait() {
         return txtWait;
-    }
-
-    public Button getBtnTestGameView() {
-        return btnTestGameView;
     }
 
     public ObservableList<String> getObservablePlayerList() {

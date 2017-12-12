@@ -41,7 +41,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public LobbyController(LobbyView view, LobbyModel model) {
         super( model, view );
-        _user = plServiceLocator.getUser(); // I think you need id here for set ranking when game is over...
+        _user = plServiceLocator.getUser();
         serverConnectionService.setLobbyController( this );
         translator = ServiceLocator.getServiceLocator().getTranslator();
 
@@ -110,12 +110,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         } );
 
-        // ActionHandler for testing
-
-        view.getBtnTestGameView().setOnAction( event -> {
-            goToGameView();
-        } );
-
         // ActionHandler for sending msg by pressing the button
 
         view.getBtnChatSend().setOnAction( event -> {
@@ -177,12 +171,6 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         } catch (IOException e) {
             view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
-    }
-
-    //TODO Manuel Wirz löschen -> only for testing
-
-    private void goToGameView() {
-       sendStartRequest();
     }
 
     /**
