@@ -94,6 +94,7 @@ public class GameView extends View<GameModel> {
     protected Text txtTreasure;
 
 
+
     ImageView imgVtrayStack;
 
     public GameView(Stage stage, GameModel model) {
@@ -191,14 +192,13 @@ public class GameView extends View<GameModel> {
 
 
         // Creates 3 buttons. But only 1 will be shown at the same time
-        // TODO: 12.12.17 vanessa consume text from properties file
-        btnEndActionPhase = new Button("Aktionsrunde beenden");
+        btnEndActionPhase = new Button();
         setStyleOfButtons(btnEndActionPhase);
 
-        btnPlayMoneyCards = new Button("Geldkarten spielen");
+        btnPlayMoneyCards = new Button();
         setStyleOfButtons(btnPlayMoneyCards);
 
-        btnEndTurn = new Button("Spielzug beenden");
+        btnEndTurn = new Button();
         setStyleOfButtons(btnEndTurn);
 
         gp.getChildren().add(btnEndActionPhase);
@@ -391,14 +391,11 @@ public class GameView extends View<GameModel> {
 
 
     private void setStyleOfButtons(Button btn) {
-        btn.setPrefSize(150, 30);
-        gp.setValignment(btn, VPos.TOP);
-        gp.setColumnSpan(btn, 2);
-        //btn.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10; ");
+        btn.setPrefSize(200, 30);
+        gp.setColumnSpan(btn, 3);
         btn.getStyleClass().add("buttonGameView");
-
-        gp.setConstraints(btn, 5, 13);
-
+        gp.setConstraints(btn, 4, 13);
+        gp.setHalignment(btn, HPos.LEFT);
     }
 
 
@@ -471,7 +468,7 @@ public class GameView extends View<GameModel> {
      */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
-        String text = userName + ": " + Integer.toString(set.calculatePoints());
+        String text = userName + ": " + Integer.toString(set.calculatePoints()) + " P";
         String activeUser = "UserPoints_" + activeUserId;
 
         Node elm = VBoxPointsandPlayer.lookup("#" + elementId);
@@ -495,7 +492,7 @@ public class GameView extends View<GameModel> {
         if (activeUser.equals(lblUserNameAndPoints.getId())) {
             lblUserNameAndPoints.setStyle("-fx-border-color: green; -fx-border-width: 3");
         } else {
-            lblUserNameAndPoints.setStyle("-fx-border-color: black; -fx-border-width: 2");
+            lblUserNameAndPoints.setStyle("-fx-border-color: black; -fx-border-width: 1");
         }
 
 
@@ -654,6 +651,12 @@ public class GameView extends View<GameModel> {
         this.txtAction.setText(getText("gameview.action"));
         this.txtBuy.setText(getText("gameview.buy"));
         this.txtTreasure.setText(getText("gameview.money"));
+
+        this.btnEndActionPhase.setText(getText("gameview.endActionPhase"));
+        this.btnPlayMoneyCards.setText(getText("gameview.playTreasure"));
+        this.btnEndTurn.setText(getText("gameview.endTurn"));
+
+
     }
 
     public void start() {
