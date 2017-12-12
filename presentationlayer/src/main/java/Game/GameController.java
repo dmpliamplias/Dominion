@@ -526,6 +526,10 @@ public class GameController extends Controller<GameModel, GameView> {
         return winningUsers;
     }
 
+    /**
+     *  author Manuel Wirz
+     *  */
+
     // Method to send the ChatContainer to the server and display the message in the own screen
 
     public void sendMessage() {
