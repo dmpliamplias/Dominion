@@ -5,7 +5,9 @@ import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
+import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.WinningInformation;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -35,6 +37,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import org.apache.commons.collections.map.LinkedMap;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -501,11 +504,12 @@ public class GameView extends View<GameModel> {
     /**
      * @param winningInformations
      * @param isWinner     here you see the winner Stage sorted by positions depending on points
+     * @param myUser
      * @author Murat Kelleci
      */
 
-    public void startWinnerStage(ObservableList<WinningInformation> winningInformations, Map<Integer, Boolean> isWinner) {
-//        displayWinnerDialog(isWinner);
+    public void startWinnerStage(LinkedMap gameResult) {
+        displayWinnerDialog(gameResult);
 
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
@@ -517,7 +521,7 @@ public class GameView extends View<GameModel> {
         stageDialog.initModality(WINDOW_MODAL);
         Scene scene = new Scene(root, 400, 300);
         this.stageDialog.setScene(scene);
-        createVBox(winningInformations);
+        createVBox(FXCollections.emptyObservableList());
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
         stageDialog.show();
@@ -533,8 +537,8 @@ public class GameView extends View<GameModel> {
      * @author Murat Kelleci
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
-    private void displayWinnerDialog(Boolean isWinner) {
-        if (isWinner) {
+    private void displayWinnerDialog(LinkedMap GameResult) {
+        if (true) {
             Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
             String winner = "winner";
             Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
@@ -548,7 +552,7 @@ public class GameView extends View<GameModel> {
                 GameController.playSound(winner);
             }
             winnerAlert.showAndWait();
-        } else if (isWinner == null) {
+        } else if (false) {
             Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
             String draw = "draw";
             Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
@@ -562,7 +566,8 @@ public class GameView extends View<GameModel> {
                 GameController.playSound(draw);
             }
             drawAlert.showAndWait();
-        } else {
+        }
+        if(false) {
             Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
             String loser = "loser";
             Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));

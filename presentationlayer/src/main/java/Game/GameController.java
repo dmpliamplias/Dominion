@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import lobby.LobbyController;
 import lobby.LobbyModel;
 import lobby.LobbyView;
+import org.apache.commons.collections.map.LinkedMap;
 import ranking.RankingController;
 import ranking.RankingModel;
 import ranking.RankingView;
@@ -35,6 +36,7 @@ import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.util.*;
 
+import static Game.GameResult.*;
 import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
@@ -314,6 +316,7 @@ public class GameController extends Controller<GameModel, GameView> {
      * or the new active user
      * after that, the view gets updated...
      * @author Michel Schlatter
+     * @author dmpliamplias
      * @param gc
      */
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
@@ -321,9 +324,15 @@ public class GameController extends Controller<GameModel, GameView> {
             final ArrayList<WinningInformation> wis = gc.getWinningInformations();
             if (wis != null && wis.size() > 0) {
                 final ObservableList<WinningInformation> winningInformations = FXCollections.observableArrayList(wis);
-//                final Map<Integer, Boolean> integerBooleanMap = determineGameResult(winningInformations, myUser);
-                // TODO: 11.12.2017 dyoni find solution if draw and the user before must than have draw and not winner
-//                view.startWinnerStage(winningInformations, integerBooleanMap);
+                final Map<WinningInformation, GameResult> gameResult = determineGameResult(winningInformations);
+                if (gameResult != null) {
+
+                    for (Map.Entry<WinningInformation, GameResult> entry : gameResult.entrySet()) {
+                        if (entry.getKey().getUserId() == myUser.getId()) {
+
+                        }
+                    }
+                }
             } else {
                 activeUserId = gc.getUserIdHasTurn();
                 logActiveUser();
@@ -336,6 +345,85 @@ public class GameController extends Controller<GameModel, GameView> {
                 }
             }
         });
+    }
+
+    private LinkedMap determineGameResult(List<WinningInformation> winningInformations) {
+        final LinkedMap gameResult = new LinkedMap();
+        // case two player
+        if  (winningInformations.size() == 2) {
+            return twoPlayer(gameResult, winningInformations);
+        }
+        // case three player
+        if (winningInformations.size() == 3) {
+            return threePlayer(gameResult, winningInformations);
+        }
+        // case four player
+        if (winningInformations.size() == 4) {
+            return fourPlayer(gameResult, winningInformations);
+        }
+        return null;
+    }
+
+    private LinkedMap twoPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
+        final WinningInformation first = winningInformations.get(0);
+        final WinningInformation second = winningInformations.get(1);
+        if (first.getPoints() == second.getPoints()) {
+            gameResult.put(first, DRAW);
+            second.setNewPosition(1);
+            gameResult.put(second, DRAW);
+            return gameResult;
+        }
+        gameResult.put(first, WIN);
+        gameResult.put(second, LOSE);
+        return gameResult;
+    }
+
+    private LinkedMap threePlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
+        final WinningInformation first = winningInformations.get(0);
+        final WinningInformation second = winningInformations.get(1);
+        final WinningInformation third = winningInformations.get(2);
+        if (first.getPoints() == second.getPoints()) {
+            gameResult.put(first, DRAW);
+            second.setNewPosition(1);
+            gameResult.put(second, DRAW);
+            if (second.getPoints() == third.getPoints()) {
+                third.setNewPosition(1);
+                gameResult.put(third, DRAW);
+            }
+            else {
+                third.setNewPosition(2);
+                gameResult.put(third, LOSE);
+            }
+            return gameResult;
+        }
+        gameResult.put(first, WIN);
+        if (second.getPoints() == third.getPoints()) {
+            gameResult.put(second, DRAW);
+            third.setNewPosition(2);
+            gameResult.put(third, DRAW);
+        }
+        gameResult.put(second, LOSE);
+        gameResult.put(third, LOSE);
+        return gameResult;
+    }
+
+    private LinkedMap fourPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
+        gameResult = threePlayer(gameResult, winningInformations);
+
+        final WinningInformation thirdGameResultInf = (WinningInformation) gameResult.lastKey();
+        final WinningInformation fourth = winningInformations.get(3);
+        if (thirdGameResultInf.getPoints() == fourth.getPoints()) {
+            if (gameResult.getValue(gameResult.indexOf(gameResult.lastKey())) == GameResult.DRAW) {
+                fourth.setNewPosition(2);
+                gameResult.put(fourth, GameResult.DRAW);
+                return gameResult;
+            }
+            fourth.setNewPosition(3);
+            gameResult.put(fourth, GameResult.DRAW);
+            return gameResult;
+        }
+        gameResult.put(fourth, LOSE);
+        return gameResult;
     }
 
     /**
@@ -477,55 +565,6 @@ public class GameController extends Controller<GameModel, GameView> {
         } catch (IOException e) {
             view.alert(e.getMessage(), Alert.AlertType.ERROR);
         }
-    }
-
-    /** @author Murat Kelleci
-     *
-     * @param winningInformations
-     * @param myUser */
-    @SuppressWarnings("unchecked")
-    public HashMap<WinningInformation, Map<Integer, Boolean>> determineGameResult(List<WinningInformation> winningInformations, User myUser) {
-        // Previous winning informaiton and points
-        WinningInformation previousWinningInformation = null;
-        Integer previousPoints = null;
-        int counter = 1;
-        // Maps
-        final HashMap<WinningInformation, Map<Integer, Boolean>> winningInformationToIsWinnerMap = new HashMap<>();
-        // loop over winning infos
-        for (WinningInformation winningInformation : winningInformations) {
-            if (previousPoints != null) {
-                boolean drawStateOccured = false;
-                // draw previous points are equal to new points
-                if (previousPoints == winningInformation.getPoints()) {
-                    // put new winninginfo and null for draw
-                    winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter - 1, null));
-                    // remove previous as it has other state now
-                    winningInformationToIsWinnerMap.remove(previousWinningInformation);
-                    // put previous back as draw
-                    winningInformationToIsWinnerMap.put(previousWinningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter - 1, null));
-                    // indicator that draw occured
-                    drawStateOccured = true;
-                }
-                else {
-                    // loser case
-                    if (drawStateOccured) {
-                        winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter -1, false));
-                    }
-                    else {
-                        winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter, false));
-                    }
-                }
-            }
-            // case first loop time
-            if (previousPoints != null) {
-                winningInformationToIsWinnerMap.put(winningInformation, (Map<Integer, Boolean>) new HashMap<>().put(counter, true));
-            }
-            // set previous values
-            previousWinningInformation = winningInformation;
-            previousPoints = winningInformation.getPoints();
-            counter++;
-        }
-        return winningInformationToIsWinnerMap;
     }
 
     /**

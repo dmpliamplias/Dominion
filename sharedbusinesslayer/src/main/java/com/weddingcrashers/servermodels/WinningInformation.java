@@ -9,6 +9,7 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
     int userId;
     int points;
     int position;
+    int newPosition;
 
     public WinningInformation(int clientId,int userId,int points){
         this.clientId = clientId;
@@ -48,6 +49,13 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
         this.position = position;
     }
 
+    public int getNewPosition() {
+        return newPosition;
+    }
+
+    public void setNewPosition(final int newPosition) {
+        this.newPosition = newPosition;
+    }
 
     @Override
     public int compareTo(WinningInformation o) {
