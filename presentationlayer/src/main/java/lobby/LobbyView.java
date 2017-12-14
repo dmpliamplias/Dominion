@@ -72,7 +72,7 @@ public class LobbyView extends View<LobbyModel> {
 
 
         //Scene and stage settings
-        Scene scene = new Scene(root, 1150, 800);
+        Scene scene = new Scene(root, 1150, 600);
         setStylesheet(scene, LOBBY);
         stage.setScene(scene);
         stage.setResizable( false );
@@ -142,8 +142,8 @@ public class LobbyView extends View<LobbyModel> {
     public VBox addVBoxGameSettings(){
 
        this.vBoxGameSettings = new VBox(  );
-        vBoxGameSettings.setSpacing( 50 );
-        Insets insets = new Insets( 20 ) ;
+        vBoxGameSettings.setSpacing( 30 );
+        Insets insets = new Insets( 10 ) ;
         vBoxGameSettings.setPadding( insets );
         vBoxGameSettings.setAlignment( Pos.CENTER );
 
@@ -250,7 +250,7 @@ public class LobbyView extends View<LobbyModel> {
         hBox.getChildren().add(btnChatSend);
         ScrollPane scroll = new ScrollPane();
         scroll.setContent( chatContent );
-        scroll.setPrefSize( 860,230 );
+        scroll.setPrefSize( 860,200 );
         scroll.setFitToHeight(true);
         scroll.setFitToWidth(true);
         scroll.setHbarPolicy( ScrollPane.ScrollBarPolicy.NEVER );
