@@ -34,10 +34,6 @@ public class RegisterView extends View<RegisterModel>{
     protected PasswordField txtPw_confirm;
     protected Label error;
 
-    private Label lblEmail;
-    private Label lblPw;
-    private Label lblPwconfirm;
-    private Label lblUserName;
 
     public RegisterView(Stage stage, RegisterModel model){
         super(stage, model);

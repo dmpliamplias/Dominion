@@ -502,14 +502,12 @@ public class GameView extends View<GameModel> {
     }
 
     /**
-     * @param winningInformations
-     * @param isWinner     here you see the winner Stage sorted by positions depending on points
-     * @param myUser
+     *
      * @author Murat Kelleci
      */
 
     public void startWinnerStage(LinkedMap gameResult) {
-        displayWinnerDialog(gameResult);
+        //displayWinnerDialog(gameResult);
 
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
@@ -533,18 +531,18 @@ public class GameView extends View<GameModel> {
     }
 
     /**
-     * @param isWinner here you get the displayed whether you are the winner, loser or if its a draw match.
+     *
      * @author Murat Kelleci
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
-    private void displayWinnerDialog(LinkedMap GameResult) {
-        if (true) {
+    /*private void displayWinnerDialog(LinkedMap GameResult) {
+        switch (GameResult) {
+
+            case WIN:
             Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
             String winner = "winner";
             Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
             ImageView imgVwinnerPic = new ImageView(winnerPic);
-
-
             winnerAlert.setGraphic(imgVwinnerPic);
             winnerAlert.setHeaderText("");
             winnerAlert.setTitle("Winner Dialog");
@@ -552,7 +550,8 @@ public class GameView extends View<GameModel> {
                 GameController.playSound(winner);
             }
             winnerAlert.showAndWait();
-        } else if (false) {
+            break;
+            case DRAW:
             Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
             String draw = "draw";
             Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
@@ -566,8 +565,9 @@ public class GameView extends View<GameModel> {
                 GameController.playSound(draw);
             }
             drawAlert.showAndWait();
-        }
-        if(false) {
+            break;
+
+            case LOSE:
             Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
             String loser = "loser";
             Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
@@ -583,7 +583,7 @@ public class GameView extends View<GameModel> {
             loserAlert.showAndWait();
 
         }
-    }
+    }*/
 
 
     /**
