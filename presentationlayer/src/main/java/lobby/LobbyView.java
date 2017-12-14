@@ -75,8 +75,7 @@ public class LobbyView extends View<LobbyModel> {
         Scene scene = new Scene(root, 1150, 600);
         setStylesheet(scene, LOBBY);
         stage.setScene(scene);
-        stage.setResizable( false );
-
+       
 
         // root Layout
 
