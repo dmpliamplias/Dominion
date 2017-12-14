@@ -1,6 +1,9 @@
 package lobby;
 
 import base.View;
+import com.weddingcrashers.service.Language;
+import com.weddingcrashers.service.ServiceLocator;
+import com.weddingcrashers.service.Translator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -51,6 +54,7 @@ public class LobbyView extends View<LobbyModel> {
     protected VBox vBoxAddMenu;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
+    protected ImageView imgWait;
 
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
@@ -282,6 +286,17 @@ public class LobbyView extends View<LobbyModel> {
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
 
+
+        if (translator.getCurrentLanguage() == Language.ENGLISH){
+            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_ENG.png")));
+        } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
+            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_CH.png")));
+        } else {
+            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_DE.png")));
+        }
+
+        setWaitText();
+
     }
 
     public void start() {
@@ -318,13 +333,22 @@ public class LobbyView extends View<LobbyModel> {
         this.hBoxOptionClient.setAlignment( Pos.CENTER );
         this.hBoxOptionClient.setPrefWidth( 600 );
         this.hBoxOptionClient.setPrefHeight( 350 );
-        Image wait = new Image(getClass().getResourceAsStream("wait.png"));
-        ImageView imgWait = new ImageView(wait);
+
+
+        ImageView imgHourglass = new ImageView(new Image(getClass().getResourceAsStream("/lobby/sanduhr.png")));
+        imgHourglass.setPreserveRatio(true);
+        imgHourglass.setFitHeight(80);
+
+        imgWait.setPreserveRatio(true);
+        imgWait.setFitHeight(50);
+
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPadding( insets );
         hBoxButtons.setPrefWidth( 450 );
         hBoxButtons.setAlignment( Pos.CENTER );
         hBoxButtons.setSpacing(20);
+
+
         btnRanking = new Button(  );
         btnRanking.setPrefWidth( 190 );
         btnHelp = new Button(  );
@@ -333,7 +357,7 @@ public class LobbyView extends View<LobbyModel> {
 
         hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
 
-        this.hBoxOptionClient.getChildren().addAll( imgWait, hBoxButtons );
+        this.hBoxOptionClient.getChildren().addAll(imgHourglass, imgWait, hBoxButtons );
         this.root.setCenter(hBoxOptionClient);
     }
 
