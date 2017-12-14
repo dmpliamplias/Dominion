@@ -80,6 +80,7 @@ public class GameView extends View<GameModel> {
     HandStackLayout cardPlayingArea;
     ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
     ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+    ArrayList<String> EmptyCard = new ArrayList<String>();
     Label lblPullStack;
     protected Button btnPlayMoneyCards;
     protected Button btnEndTurn;
@@ -95,6 +96,7 @@ public class GameView extends View<GameModel> {
     protected Text txtAction;
     protected Text txtBuy;
     protected Text txtTreasure;
+    protected Image imgGreyOut;
 
 
 
@@ -236,7 +238,7 @@ public class GameView extends View<GameModel> {
 
         // Images for greyOut. If it is not the users'turn, the handcards and button are grayed out.
 
-        Image imgGreyOut = new Image(getClass().getResourceAsStream(BASE_PATH + "/grey.png"));
+        imgGreyOut = new Image(getClass().getResourceAsStream(BASE_PATH + "/grey.png"));
 
         imgVGreyOutHandStack = new ImageView(imgGreyOut);
         imgVGreyOutHandStack.setFitHeight(120);
@@ -248,13 +250,13 @@ public class GameView extends View<GameModel> {
 
         imgVGreyOutButton = new ImageView(imgGreyOut);
         imgVGreyOutButton.setFitHeight(30);
-        imgVGreyOutButton.setFitWidth(150);
+        imgVGreyOutButton.setFitWidth(200);
         gp.setColumnSpan(imgVGreyOutButton, 2);
-        gp.setValignment(imgVGreyOutButton, VPos.TOP);
+        gp.setHalignment(imgVGreyOutButton, HPos.LEFT);
         imgVGreyOutButton.setOpacity(0.5);
 
         gp.setConstraints(imgVGreyOutHandStack, 2, 15);
-        gp.setConstraints(imgVGreyOutButton, 5, 13);
+        gp.setConstraints(imgVGreyOutButton, 4, 13);
 
 
         this.btnLobby = new Button();
@@ -274,7 +276,7 @@ public class GameView extends View<GameModel> {
 
 
         stage.setScene(scene);
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
         stage.setTitle("Dominion");
 
 
@@ -679,10 +681,28 @@ public class GameView extends View<GameModel> {
     public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col, int row, int rowSpan, int cardCount) {
 
         if (card == null) {
+            if (EmptyCard.isEmpty() || !EmptyCard.contains(""+col+row)){
+                EmptyCard.add("" + col + row);
+                ImageView imgVEmptyCard = new ImageView(imgGreyOut);
+                imgVEmptyCard.setOpacity(0.5);
+                gp.setConstraints(imgVEmptyCard, col, row);
+                gp.setRowSpan(imgVEmptyCard, rowSpan);
+                gp.getChildren().add(imgVEmptyCard);
+
+                if (size == CardImageView.CardSize.miniMini) {
+                    imgVEmptyCard.setFitWidth(60);
+                    imgVEmptyCard.setFitHeight(57.476);
+                } else if (size == CardImageView.CardSize.miniSize) {
+                    imgVEmptyCard.setFitWidth(90);
+                    imgVEmptyCard.setFitHeight(86.214);
+                }
+            }
+
             Label lbl = new Label();
             gp.setConstraints(lbl, col, row);
             setLabelFormat(lbl);
             lbl.setText(Integer.toString(cardCount));
+
 
             return null;
 
