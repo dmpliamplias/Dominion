@@ -294,9 +294,6 @@ public class LobbyView extends View<LobbyModel> {
         } else {
             imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_DE.png")));
         }
-
-        setWaitText();
-
     }
 
     public void start() {
