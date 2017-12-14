@@ -54,7 +54,10 @@ public class LobbyView extends View<LobbyModel> {
     protected VBox vBoxAddMenu;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
-    protected ImageView imgWait;
+    protected Image imgWaitCH;
+    protected Image imgWaitENG;
+    protected Image imgWaitDE;
+    protected ImageView clientImg;
 
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
@@ -73,6 +76,7 @@ public class LobbyView extends View<LobbyModel> {
         // root settings
         this.root = new BorderPane();
 
+        this.clientImg = new ImageView(  );
 
 
         //Scene and stage settings
@@ -286,20 +290,31 @@ public class LobbyView extends View<LobbyModel> {
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
 
+        loadImg();
+        setImg();
 
-        if (translator.getCurrentLanguage() == Language.ENGLISH){
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_ENG.png")));
-        } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_CH.png")));
-        } else {
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_DE.png")));
-        }
+    }
+
+    private void loadImg() {
+        imgWaitENG = new Image(getClass().getResourceAsStream( "/lobby/Wait_ENG.png" ) );
+        imgWaitCH = new Image(getClass().getResourceAsStream( "/lobby/Wait_CH.png" ));
+        imgWaitDE = new Image( getClass().getResourceAsStream( "/lobby/Wait_DE.png" ) );
     }
 
     public void start() {
         stage.show();
     }
 
+    public void setImg() {
+
+        if (translator.getCurrentLanguage() == Language.ENGLISH) {
+            clientImg.setImage(imgWaitENG);
+        } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN) {
+            clientImg.setImage(imgWaitCH);
+        } else {
+            clientImg.setImage(imgWaitDE);
+        }
+    }
     public void stop(){
         stage.hide();
     }
@@ -336,8 +351,10 @@ public class LobbyView extends View<LobbyModel> {
         imgHourglass.setPreserveRatio(true);
         imgHourglass.setFitHeight(80);
 
-        imgWait.setPreserveRatio(true);
-        imgWait.setFitHeight(50);
+
+        clientImg.setPreserveRatio(true);
+        clientImg.setFitHeight(50);
+
 
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPadding( insets );
@@ -354,7 +371,7 @@ public class LobbyView extends View<LobbyModel> {
 
         hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
 
-        this.hBoxOptionClient.getChildren().addAll(imgHourglass, imgWait, hBoxButtons );
+        this.hBoxOptionClient.getChildren().addAll(imgHourglass, clientImg, hBoxButtons );
         this.root.setCenter(hBoxOptionClient);
     }
 

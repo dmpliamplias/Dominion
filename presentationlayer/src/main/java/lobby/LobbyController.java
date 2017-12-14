@@ -6,6 +6,7 @@ import Game.GameView;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;

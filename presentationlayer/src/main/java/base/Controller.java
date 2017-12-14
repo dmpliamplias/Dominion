@@ -2,6 +2,7 @@ package base;
 
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import lobby.LobbyController;
 import util.PLServiceLocator;
 import util.ServerConnectionService;
 
