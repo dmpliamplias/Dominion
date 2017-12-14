@@ -316,7 +316,6 @@ public class GameController extends Controller<GameModel, GameView> {
      * or the new active user
      * after that, the view gets updated...
      * @author Michel Schlatter
-     * @author dmpliamplias
      * @param gc
      */
     public void handleServerAnswer_gameTurnFinished(GameContainer gc) {
@@ -368,13 +367,12 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
         if (first.getPoints() == second.getPoints()) {
-            gameResult.put(first, DRAW);
             second.setNewPosition(1);
-            gameResult.put(second, DRAW);
+            draw(gameResult, first, second);
             return gameResult;
         }
-        gameResult.put(first, WIN);
-        gameResult.put(second, LOSE);
+        win(gameResult, first);
+        lose(gameResult, second);
         return gameResult;
     }
 
@@ -383,47 +381,60 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation second = winningInformations.get(1);
         final WinningInformation third = winningInformations.get(2);
         if (first.getPoints() == second.getPoints()) {
-            gameResult.put(first, DRAW);
             second.setNewPosition(1);
-            gameResult.put(second, DRAW);
+            win(gameResult, first, second);
             if (second.getPoints() == third.getPoints()) {
+                //cleanup
+                gameResult.remove(first);
+                gameResult.remove(second);
+
                 third.setNewPosition(1);
-                gameResult.put(third, DRAW);
+                draw(gameResult, first, second, third);
             }
             else {
                 third.setNewPosition(2);
-                gameResult.put(third, LOSE);
+                lose(gameResult,third);
             }
             return gameResult;
         }
-        gameResult.put(first, WIN);
-        if (second.getPoints() == third.getPoints()) {
-            gameResult.put(second, DRAW);
-            third.setNewPosition(2);
-            gameResult.put(third, DRAW);
-        }
-        gameResult.put(second, LOSE);
-        gameResult.put(third, LOSE);
+        win(gameResult, first);
+        lose(gameResult, second, third);
         return gameResult;
     }
 
-    private LinkedMap fourPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
-        gameResult = threePlayer(gameResult, winningInformations);
+    private LinkedMap fourPlayer(LinkedMap gameResultMap, List<WinningInformation> winningInformations) {
+        gameResultMap = threePlayer(gameResultMap, winningInformations);
 
-        final WinningInformation thirdGameResultInf = (WinningInformation) gameResult.lastKey();
+        final WinningInformation third = (WinningInformation) gameResultMap.lastKey();
         final WinningInformation fourth = winningInformations.get(3);
-        if (thirdGameResultInf.getPoints() == fourth.getPoints()) {
-            if (gameResult.getValue(gameResult.indexOf(gameResult.lastKey())) == GameResult.DRAW) {
-                fourth.setNewPosition(2);
-                gameResult.put(fourth, GameResult.DRAW);
-                return gameResult;
+        if ((gameResultMap.getValue(gameResultMap.indexOf(gameResultMap.lastKey())) == DRAW)) {
+            if (third.getPoints() == winningInformations.get(3).getPoints()) {
+                fourth.setNewPosition(1);
+                draw(gameResultMap, fourth);
+                return gameResultMap;
             }
-            fourth.setNewPosition(3);
-            gameResult.put(fourth, GameResult.DRAW);
-            return gameResult;
         }
-        gameResult.put(fourth, LOSE);
-        return gameResult;
+        lose(gameResultMap, fourth);
+
+        return gameResultMap;
+    }
+
+    private void win(LinkedMap gameResult, WinningInformation... winningInformations) {
+        put(gameResult, winningInformations, WIN);
+    }
+
+    private void lose(LinkedMap gameResult, WinningInformation... winningInformations) {
+        put(gameResult, winningInformations, LOSE);
+    }
+
+    private void draw(LinkedMap gameResult, WinningInformation... winningInformations) {
+        put(gameResult, winningInformations, DRAW);
+    }
+
+    private void put(LinkedMap gameResultMap, WinningInformation[] winningInformations, GameResult gameResult) {
+        for (WinningInformation winningInformation : winningInformations) {
+            gameResultMap.put(winningInformation, gameResult);
+        }
     }
 
     /**
