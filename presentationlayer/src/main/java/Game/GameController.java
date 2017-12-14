@@ -324,13 +324,10 @@ public class GameController extends Controller<GameModel, GameView> {
             if (wis != null && wis.size() > 0) {
                 final ObservableList<WinningInformation> winningInformations = FXCollections.observableArrayList(wis);
                 final Map<WinningInformation, GameResult> gameResult = determineGameResult(winningInformations);
-                if (gameResult != null) {
-
-                    for (Map.Entry<WinningInformation, GameResult> entry : gameResult.entrySet()) {
+                for (Map.Entry<WinningInformation, GameResult> entry : gameResult.entrySet()) {
                         if (entry.getKey().getUserId() == myUser.getId()) {
-
+                            view.startWinnerStage(determineGameResult(winningInformations), entry);
                         }
-                    }
                 }
             } else {
                 activeUserId = gc.getUserIdHasTurn();

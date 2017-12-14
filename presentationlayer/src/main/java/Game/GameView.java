@@ -5,7 +5,6 @@ import Controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
-import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.WinningInformation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,24 +14,11 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -40,6 +26,7 @@ import javafx.stage.Stage;
 import org.apache.commons.collections.map.LinkedMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
@@ -506,10 +493,12 @@ public class GameView extends View<GameModel> {
     /**
      *
      * @author Murat Kelleci
+     * @param result
+     * @param gameResult
      */
 
-    public void startWinnerStage(LinkedMap gameResult) {
-        //displayWinnerDialog(gameResult);
+    public void startWinnerStage(LinkedMap gameResult, Map.Entry<WinningInformation, GameResult> myResult) {
+        displayWinnerDialog(myResult);
 
         BorderPane root = new BorderPane();
         this.stageDialog = new Stage();
@@ -521,7 +510,9 @@ public class GameView extends View<GameModel> {
         stageDialog.initModality(WINDOW_MODAL);
         Scene scene = new Scene(root, 400, 300);
         this.stageDialog.setScene(scene);
-        createVBox(FXCollections.emptyObservableList());
+        final ObservableList<WinningInformation> winningInformations = FXCollections.observableArrayList();
+        winningInformations.addAll(gameResult.keySet());
+        createVBox(winningInformations);
         root.setCenter(VBoxDisplayWinner);
         setTextDialog();
         stageDialog.show();
@@ -535,57 +526,55 @@ public class GameView extends View<GameModel> {
     /**
      *
      * @author Murat Kelleci
+     * @param GameResult
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
-    /*private void displayWinnerDialog(LinkedMap GameResult) {
-        switch (GameResult) {
-
+    private void displayWinnerDialog(Map.Entry<WinningInformation, GameResult> gameResult) {
+        switch (gameResult.getValue()) {
             case WIN:
-            Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
-            String winner = "winner";
-            Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
-            ImageView imgVwinnerPic = new ImageView(winnerPic);
-            winnerAlert.setGraphic(imgVwinnerPic);
-            winnerAlert.setHeaderText("");
-            winnerAlert.setTitle("Winner Dialog");
-            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
-                GameController.playSound(winner);
-            }
-            winnerAlert.showAndWait();
-            break;
+                Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
+                String winner = "winner";
+                Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
+                ImageView imgVwinnerPic = new ImageView(winnerPic);
+                winnerAlert.setGraphic(imgVwinnerPic);
+                winnerAlert.setHeaderText("");
+                winnerAlert.setTitle("Winner Dialog");
+                if (menuBar.getMenuItemSoundUnmute().isSelected()) {
+                    GameController.playSound(winner);
+                }
+                winnerAlert.showAndWait();
+                break;
             case DRAW:
-            Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
-            String draw = "draw";
-            Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
-            ImageView imgVdrawPic = new ImageView(drawPic);
+                Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
+                String draw = "draw";
+                Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
+                ImageView imgVdrawPic = new ImageView(drawPic);
 
 
-            drawAlert.setGraphic(imgVdrawPic);
-            drawAlert.setHeaderText("");
-            drawAlert.setTitle("Draw Dialog");
-            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
-                GameController.playSound(draw);
-            }
-            drawAlert.showAndWait();
-            break;
-
+                drawAlert.setGraphic(imgVdrawPic);
+                drawAlert.setHeaderText("");
+                drawAlert.setTitle("Draw Dialog");
+                if (menuBar.getMenuItemSoundUnmute().isSelected()) {
+                    GameController.playSound(draw);
+                }
+                drawAlert.showAndWait();
+                break;
             case LOSE:
-            Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
-            String loser = "loser";
-            Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
-            ImageView imgVloserPic = new ImageView(loserPic);
+                Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
+                String loser = "loser";
+                Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
+                ImageView imgVloserPic = new ImageView(loserPic);
 
-            loserAlert.setGraphic(imgVloserPic);
-            loserAlert.setHeaderText("");
-            loserAlert.setTitle("Looser Dialog");
+                loserAlert.setGraphic(imgVloserPic);
+                loserAlert.setHeaderText("");
+                loserAlert.setTitle("Looser Dialog");
 
-            if (menuBar.getMenuItemSoundUnmute().isSelected()) {
-                GameController.playSound(loser);
-            }
-            loserAlert.showAndWait();
-
+                if (menuBar.getMenuItemSoundUnmute().isSelected()) {
+                    GameController.playSound(loser);
+                }
+                loserAlert.showAndWait();
         }
-    }*/
+    }
 
 
     /**
@@ -605,7 +594,7 @@ public class GameView extends View<GameModel> {
         VBoxDisplayWinner.getChildren().addAll(tableView, hbox);
     }
 
-    private TableView<WinningInformation> createWinningUserTableView(final ObservableList<WinningInformation> winningInformations) {
+    private TableView<WinningInformation> createWinningUserTableView(ObservableList<WinningInformation> winningInformations) {
         TableView<WinningInformation> tableView = new TableView<>();
 
         TableColumn<WinningInformation, String> name = new TableColumn<>(getText("gameview.winningInformations.name"));
