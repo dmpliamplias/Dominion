@@ -57,9 +57,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
         /**
          *  author Manuel Wirz
+         *  Set different views for client and hoster
          *  */
-
-        // Hoster or normal Client? -> sets the view
 
         if (!serverConnectionService.isHoster()){
             view.getBtnStart().setVisible( false );
@@ -71,22 +70,34 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.getLvPlayers().setFocusTraversable( false );
         }
 
+        /**
+         *  Check if sound is on or off
+         *  */
 
         if (plServiceLocator.soundIsOn == false){
             super.view.menuBar.getMenuItemMusicMute().setSelected( true );
         }
 
-        // Start sound daudioClipefault
+        /**
+         *  Start sound default
+         *  */
+
         if(plServiceLocator.soundIsOn) {
             startSound();
         }
 
-        // Start and end background music
+        /**
+         *  Sets sound off
+         *  */
         
         super.view.menuBar.getMenuItemMusicMute().setOnAction( event -> {
             plServiceLocator.audioClip.stop();
             plServiceLocator.soundIsOn = false;
         } );
+
+        /**
+         *  Sets sound on
+         *  */
 
         super.view.menuBar.getMenuItemMusicUnmute().setOnAction( event -> {
 
@@ -96,28 +107,36 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             }
         } );
 
-        // Sends message with Enter
+        /**
+         *  Sends message in chat with Enter
+         *  */
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
                     if (event.getCode().equals( KeyCode.ENTER)){
                        sendMessage();
         }  });
 
-        // ActionHandler for start the game
+        /**
+         *  ActionHandler for start the game
+         *  */
 
         view.getBtnStart().setOnAction( (event) -> {
             startGame();
 
         } );
 
-        // ActionHandler for sending msg by pressing the button
+        /**
+         *  Sends message in chat due to pressing button
+         *  */
 
         view.getBtnChatSend().setOnAction( event -> {
             sendMessage();
         } );
 
 
-        // ActionHandler for showing some help  by pressing the button
+        /**
+         *  Showing help
+         *  */
 
         view.getBtnHelp().setOnAction( event -> {
             help();
@@ -134,11 +153,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     /**
      *  author Manuel Wirz
+     *  Method for backgorund music
+     *  https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
      *  */
-
-    // Method for backgorund music
-
-    // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
 
     public void startSound(){
 
@@ -158,6 +175,11 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         thread.start();
     }
 
+
+    /**
+     *  author Manuel Wirz
+     *  Starts Alert Information for some help
+     *  */
 
     private void help(){
         view.alert("lobbyview.help", Alert.AlertType.INFORMATION );
@@ -211,13 +233,14 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     }
 
     /**
-     * @author Michel Schlatter + Manuel Wirz
+     * @author Manuel Wirz
+     * Method for some checks if the correct options were selected in the lobby
+     * for starting the game
      */
     private void startGame() {
 
         ObservableList<String> players = view.lvPlayers.getItems();
 
-        // some checks for starting the correct end options
 
         if (!view.cbFinishPointCards.isSelected() && view.choiceBox.getSelectionModel().isEmpty()) {
             view.alert("lobbyview.falseStatement", Alert.AlertType.WARNING );
@@ -268,9 +291,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     /**
      * author Manuel Wirz
+     * Sets the chat message, send it to the server and display it on the client display
      */
-
-    // ChatController same Logic as in the GameController -> Look there for the comments for each method
 
     public void sendMessage() {
 
@@ -287,6 +309,12 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.alert( e.getMessage(), Alert.AlertType.ERROR );
         }
     }
+
+    /**
+     *  author Manuel Wirz
+     *  Method for receiving chat message form the server and display it
+     *  @param chatContainer
+     *  */
 
     public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
             Platform.runLater( () -> {

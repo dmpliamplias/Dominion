@@ -52,6 +52,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
 
         /**
          *  author Manuel Wirz
+         *  Sets the Actionsevent for the language
          *  */
 
         if(view.menuBarUsed){
@@ -67,6 +68,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
 
     /**
      *  author Manuel Wirz
+     *  set the language due to setOnAction Events
      *  */
 
     private void setonActionEvent() {

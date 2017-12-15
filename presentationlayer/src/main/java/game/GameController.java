@@ -81,10 +81,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         initialize();
     }
-
-    public GameController() {
-    }
-
+    
 
     public void initialize() {
         try {
