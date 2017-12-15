@@ -1,6 +1,6 @@
 package util;
 
-import Game.GameController;
+import game.GameController;
 import com.weddingcrashers.servermodels.*;
 import connection.ConnectionController;
 import javafx.application.Platform;

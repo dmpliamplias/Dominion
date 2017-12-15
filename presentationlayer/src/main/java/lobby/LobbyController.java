@@ -1,12 +1,11 @@
 package lobby;
 
-import Game.GameController;
-import Game.GameModel;
-import Game.GameView;
+import game.GameController;
+import game.GameModel;
+import game.GameView;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
-import com.weddingcrashers.service.Language;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import javafx.application.Platform;

@@ -1,7 +1,7 @@
-package Game;
+package game;
 
 
-import Controls.CardImageView;
+import controls.CardImageView;
 import base.Controller;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
@@ -36,7 +36,7 @@ import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.util.*;
 
-import static Game.GameResult.*;
+import static game.GameResult.*;
 import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**

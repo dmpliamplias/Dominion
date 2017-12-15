@@ -1,7 +1,7 @@
-package Game;
+package game;
 
-import Controls.CardImageView;
-import Controls.HandStackLayout;
+import controls.CardImageView;
+import controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 import org.apache.commons.collections.map.LinkedMap;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
