@@ -87,7 +87,6 @@ public class UserManagementView extends View<UserManagementModel> {
             @Override
             protected void updateItem(final User item, final boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty || item == null) {
                     setText(null);
                 }

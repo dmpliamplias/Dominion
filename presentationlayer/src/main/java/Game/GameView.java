@@ -597,17 +597,17 @@ public class GameView extends View<GameModel> {
     private TableView<WinningInformation> createWinningUserTableView(ObservableList<WinningInformation> winningInformations) {
         TableView<WinningInformation> tableView = new TableView<>();
 
+        TableColumn<WinningInformation, String> position = new TableColumn<>(getText("gameview.winningInformations.position"));
         TableColumn<WinningInformation, String> name = new TableColumn<>(getText("gameview.winningInformations.name"));
         TableColumn<WinningInformation, String> points = new TableColumn<>(getText("gameview.winningInformations.points"));
-        TableColumn<WinningInformation, String> position = new TableColumn<>(getText("gameview.winningInformations.position"));
 
         tableView.getColumns().addAll(position, name, points);
 
         tableView.setItems(winningInformations);
 
-        name.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        points.setCellValueFactory(new PropertyValueFactory<>("points"));
-        position.setCellValueFactory(new PropertyValueFactory<>("position"));
+        name.setCellValueFactory(new PropertyValueFactory<>("newPosition"));
+        points.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+        position.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         return tableView;
     }
