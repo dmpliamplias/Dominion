@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 import java.io.IOException;
 
+import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.WARNING;
 
 /**
@@ -91,8 +92,11 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         String userName = model.getUserName();
 
 
-        if (pw != null && !pw.isEmpty() && pw.equals(pw_confirm) && email != null && !email.isEmpty() && userName != null && !userName.isEmpty()) {
-
+        if (pw != null && !pw.isEmpty()  && email != null && !email.isEmpty() && userName != null && !userName.isEmpty()) {
+            if (!pw.equals(pw_confirm)) {
+                view.alert("registerview.error.pwNotEqual", ERROR);
+                return;
+            }
             RegisterContainer registerContainer = new RegisterContainer();
 
             User user = new User();
@@ -101,25 +105,20 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
                 user.setUserName(userName);
                 user.setPassword(pw);
                 registerContainer.setUser(user);
-
                 try {
                     serverConnectionService.sendObject(registerContainer);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     view.alert(e.getMessage(), Alert.AlertType.ERROR);
                 }
-
-
-            } else {
+            }
+            else {
                 setInfoMail();
             }
-
-
-
-        }else{
-
+        }
+        else {
             view.alert("registerview.error.uncompletedFields", WARNING);
         }
-
     }
 
     public void handleServerAnswer(RegisterContainer memberContainer){
