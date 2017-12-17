@@ -108,8 +108,6 @@ public class GameView extends View<GameModel> {
         fpCenter.getChildren().add(gp);
         gp.add(vb, 2, 14);
 
-        gp.setGridLinesVisible(false);
-
 
         // Creating 9 columns with different width
         ColumnConstraints column = new ColumnConstraints(85);
@@ -732,7 +730,7 @@ public class GameView extends View<GameModel> {
     }
 
 
-    // Moves all MoneyCards with one click to the button
+    // Moves all MoneyCards with one click on the button
     public void moveMoneyCardsToPlayArea() {
         ArrayList<CardImageView> moveList = new ArrayList<CardImageView>();
         for (int i = 0; i < handStackList.size(); i++) {
@@ -763,6 +761,7 @@ public class GameView extends View<GameModel> {
     }
 
 
+    // Updates the Action, Buy and Money Number
     public void updatelblInfo(int action, int buys, int money) {
         lblAction.setText("" + action);
         lblBuy.setText("" + buys);
@@ -778,6 +777,7 @@ public class GameView extends View<GameModel> {
         cardPlayingAreaList.clear();
     }
 
+    // The number of cards in the pullStack gets updated
     public void updateLblPullStack(int numberOfPullStack) {
         lblPullStack.setText("" + numberOfPullStack);
     }
