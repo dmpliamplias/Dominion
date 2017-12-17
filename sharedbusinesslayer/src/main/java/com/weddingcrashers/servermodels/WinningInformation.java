@@ -4,14 +4,16 @@ import java.io.Serializable;
 /***
  * @Author Michel Schlatter
  */
-public class WinningInformation implements Comparable<WinningInformation>, Serializable{
-    int clientId;
-    int userId;
-    int points;
-    int position;
-    int newPosition;
+public class WinningInformation implements Comparable<WinningInformation>, Serializable {
 
-    public WinningInformation(int clientId,int userId,int points){
+    private int clientId;
+    private int userId;
+    private int points;
+    private int position;
+    private int newPosition;
+    private String username;
+
+    public WinningInformation(int clientId, int userId, int points){
         this.clientId = clientId;
         this.userId = userId;
         this.points = points;
@@ -55,6 +57,14 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
 
     public void setNewPosition(final int newPosition) {
         this.newPosition = newPosition;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     @Override

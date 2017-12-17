@@ -602,9 +602,9 @@ public class GameView extends View<GameModel> {
 
         tableView.setItems(winningInformations);
 
-        name.setCellValueFactory(new PropertyValueFactory<>("newPosition"));
-        points.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-        position.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        name.setCellValueFactory(new PropertyValueFactory<>("username"));
+        points.setCellValueFactory(new PropertyValueFactory<>("points"));
+        position.setCellValueFactory(new PropertyValueFactory<>("newPosition"));
 
         return tableView;
     }
