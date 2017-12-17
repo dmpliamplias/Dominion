@@ -271,9 +271,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating title and showing game end option
+     * Return a VBox
      */
 
-    // Method for title and showing game end option -> return a VBox
     private VBox setTop() {
         this.setTop = new VBox();
         this.setTop.setAlignment(Pos.CENTER);
@@ -293,6 +294,12 @@ public class GameView extends View<GameModel> {
     }
 
 
+    /**
+     *  author Manuel Wirz
+     *  Method for creating showing actual round and the players with the points
+     *  Return a VBox
+     *  */
+
     public VBox setLeft() {
         this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setSpacing(20);
@@ -308,9 +315,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating Logger and Chat Area
+     * Returns a VBox
      */
 
-    // Method for creating logger
     public VBox loggerAndChat() {
 
         this.VBoxLogger = new VBox(10);
@@ -338,9 +346,9 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Set LoggerText into a Label to add color for each Client
      */
 
-    // same logic as in LobbyView
     protected void setLoggerContent(String msg, Color color) {
 
         Label lbl = new Label();
@@ -378,7 +386,6 @@ public class GameView extends View<GameModel> {
         gp.setHalignment(txt, HPos.CENTER);
     }
 
-
     private void setStyleOfButtons(Button btn) {
         btn.setPrefSize(200, 30);
         gp.setColumnSpan(btn, 3);
@@ -390,9 +397,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating chat area and buttons
+     * Returns a GridPane
      */
 
-    // GridPane for showing the chat and the buttons
     public GridPane addChatGridPane() {
 
         chatPane = new GridPane();
@@ -408,7 +416,6 @@ public class GameView extends View<GameModel> {
 
 
         // ----- Chatview -------
-
 
         this.btnChatSend = new Button();
         this.btnChatSend.setPrefSize(330, 50);
@@ -428,7 +435,8 @@ public class GameView extends View<GameModel> {
         this.btnSendText.getStyleClass().add("buttonChat");
 
 
-        // Create HBox +
+        // Create HBox
+
         hbChat = new HBox(10);
         hbChat.setMaxSize(700, 200);
         hbChat.setAlignment(Pos.CENTER);
@@ -609,10 +617,8 @@ public class GameView extends View<GameModel> {
         return tableView;
     }
 
-
     /**
-     * Author Michel Schlatter
-     *
+     * Author Michel Schlatter + Manuel Wirz
      * @param msg
      * @param color
      */
@@ -623,11 +629,9 @@ public class GameView extends View<GameModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
-
     /**
-     * Author Vanessa Cajochen
+     * Author Vanessa Cajochen + Manuel Wirz
      */
-
 
     protected void setTexts() {
         this.btnChatSend.setText(getText("chat.send"));
@@ -659,7 +663,6 @@ public class GameView extends View<GameModel> {
     public void stop() {
         stage.hide();
     }
-
 
     /**
      * Author Vanessa Cajochen
@@ -832,10 +835,13 @@ public class GameView extends View<GameModel> {
     }
 
 
+    /**
+     *  Getters and Setters
+     *  */
+
     public BorderPane getRoot() {
         return root;
     }
-
 
     public TextField getTextFieldChat() {
         return textFieldChat;
@@ -848,7 +854,6 @@ public class GameView extends View<GameModel> {
     public Button getBtnSendText() {
         return btnSendText;
     }
-
 
     public GridPane getChatPane() {
         return chatPane;
