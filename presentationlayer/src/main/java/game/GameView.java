@@ -87,7 +87,9 @@ public class GameView extends View<GameModel> {
 
 
     ImageView imgVtrayStack;
+public GameView() {
 
+}
     public GameView(Stage stage, GameModel model) {
         super(stage, model);
     }

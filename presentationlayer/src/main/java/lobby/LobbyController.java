@@ -324,6 +324,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     //@author Murat Kelleci am 24.10.2017
 
     private void goToRankingView() {
+        final GameView gameView = new GameView();
         final RankingView rankingView = StageFactory.crateRankingView();
         view.stop();
         rankingView.start();
