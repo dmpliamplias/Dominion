@@ -340,7 +340,6 @@ public class GameController extends Controller<GameModel, GameView> {
                 final Map<WinningInformation, GameResult> gameResult = determineGameResult(winningInformations);
                 for (Map.Entry<WinningInformation, GameResult> entry : gameResult.entrySet()) {
                         if (entry.getKey().getUserId() == myUser.getId()) {
-                            entry.getKey().setUsername(myUser.getUserName());
                             view.startWinnerStage(determineGameResult(winningInformations), entry);
                         }
                 }

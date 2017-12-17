@@ -13,10 +13,11 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
     private int newPosition;
     private String username;
 
-    public WinningInformation(int clientId, int userId, int points){
+    public WinningInformation(int clientId, int userId, String username, int points){
         this.clientId = clientId;
         this.userId = userId;
         this.points = points;
+        this.username = username;
     }
 
     public int getClientId() {
