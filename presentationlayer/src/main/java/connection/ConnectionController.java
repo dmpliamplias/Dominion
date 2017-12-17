@@ -6,8 +6,6 @@ import com.weddingcrashers.server.Server;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import login.LoginController;
-import login.LoginModel;
 import login.LoginView;
 import util.PLServiceLocator;
 import util.ServerConnectionService;
@@ -23,6 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.weddingcrashers.service.Language.*;
+import static util.StageFactory.createHelpStage;
+import static util.StageFactory.createLoginView;
 
 
 /**
@@ -31,12 +31,14 @@ import static com.weddingcrashers.service.Language.*;
  */
 public class ConnectionController extends Controller<ConnectionModel, ConnectionView> {
 
+    /**
+     * Constructor.
+     *
+     * @param model
+     * @param view
+     */
     public ConnectionController(ConnectionModel model, ConnectionView view){
         super(model,view);
-        initialize();
-    }
-
-    private  void initialize(){
 
         view.imgViewChFlag.setOnMouseClicked(e -> view.switchTranslator(SWISS_GERMAN));
         view.imgViewDeFlag.setOnMouseClicked(e -> view.switchTranslator(GERMAN));
@@ -47,70 +49,73 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
 
             view.btnConnect.setOnAction((ActionEvent event2) ->{
                 String portStr = view.fldPort.getText();
-                    if (portStr == null || portStr.equals("")) {
-                        this.view.alert("connectionview.portEmpty", Alert.AlertType.WARNING);
-                        return;
-                    }
-                    //int port = Integer.parseInt(portStr);
-                    // port must be between 1024-49151 and not 9092
-                    if (!checkPortRange(portStr) || Integer.parseInt(portStr) == 9092 || Integer.parseInt(portStr) < 1024 || Integer.parseInt(portStr)> 49151) {
-                        final DominionAlert alert = view.alert("connectionview.portDialog.contentText", Alert.AlertType.WARNING);
-                        alert.setTitle("connectionview.portDialog.title");
-                        alert.setHeaderText("connectionview.portDialog.headerText");
-                        return;
-                    }
-                    InetSocketAddress socketAddress = createServer(Integer.parseInt(portStr));
-                    if (socketAddress != null) {
-                        serviceLocator.startDatabase();
-                    }
-                    view.btnConnect.setDisable(true);
-                    view.btnJoinS.setDisable(true);
-                    view.btnStartS.setDisable(true);
+                if (portStr == null || portStr.equals("")) {
+                    this.view.alert("connectionview.portEmpty", Alert.AlertType.WARNING);
+                    return;
+                }
+                //int port = Integer.parseInt(portStr);
+                // port must be between 1024-49151 and not 9092
+                if (!checkPortRange(portStr) || Integer.parseInt(portStr) == 9092 || Integer.parseInt(portStr) < 1024 || Integer.parseInt(portStr)> 49151) {
+                    final DominionAlert alert = view.alert("connectionview.portDialog.contentText", Alert.AlertType.WARNING);
+                    alert.setTitle("connectionview.portDialog.title");
+                    alert.setHeaderText("connectionview.portDialog.headerText");
+                    return;
+                }
+                InetSocketAddress socketAddress = createServer(Integer.parseInt(portStr));
+                if (socketAddress != null) {
+                    serviceLocator.startDatabase();
+                }
+                view.btnConnect.setDisable(true);
+                view.btnJoinS.setDisable(true);
+                view.btnStartS.setDisable(true);
 
-                    String address = socketAddress.toString();
-                    System.out.println("Socketadress: " + address);
+                String address = socketAddress.toString();
+                System.out.println("Socketadress: " + address);
 
-                    try {
-                        model.setIP(InetAddress.getLocalHost().getHostAddress());
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
-                    model.setPort(socketAddress.getPort());
+                try {
+                    model.setIP(InetAddress.getLocalHost().getHostAddress());
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                model.setPort(socketAddress.getPort());
 
-                    view.createConnectedDialog().show();
-                    view.refreshInfoDialog();
+                view.createConnectedDialog().show();
+                view.refreshInfoDialog();
 
-                    view.btnCopyPort.setOnAction((event4) -> {
-                        CopytoCbPort();
-                    });
-
-                    view.btnCopyIP.setOnAction((event5) -> {
-                        CopytoCbIP();
-                    });
-
-                    view.btnOK.setOnAction((event3) -> {
-                        goToLoginView();
-
-                    });
+                view.btnCopyPort.setOnAction((event4) -> {
+                    CopytoCbPort();
                 });
-        });
 
+                view.btnCopyIP.setOnAction((event5) -> {
+                    CopytoCbIP();
+                });
+
+                view.btnOK.setOnAction((event3) -> {
+                    goToLoginView();
+
+                });
+            });
+        });
 
         view.btnJoinS.setOnAction((event) -> {
-          Stage stage =  view.createJoinDialog();
-              view.btnJoinOK.setOnAction((event2) ->{
-                  view.refreshModelFromInfoDialog();
-                  try {
-                      this.join(model.getIP(), model.getPort(), false);
-                      goToLoginView();
-                  } catch (IOException e) {
-                      this.view.alert("Keine Verbindung möglich. " + System.lineSeparator() +e.getMessage(), Alert.AlertType.ERROR);
-                  }
-              });
-              stage.show();
+            Stage stage =  view.createJoinDialog();
+            view.btnJoinOK.setOnAction((event2) ->{
+                view.refreshModelFromInfoDialog();
+                try {
+                    this.join(model.getIP(), model.getPort(), false);
+                    goToLoginView();
+                } catch (IOException e) {
+                    this.view.alert("Keine Verbindung möglich. " + System.lineSeparator() +e.getMessage(), Alert.AlertType.ERROR);
+                }
+            });
+            stage.show();
         });
 
+        view.btnHelp.setOnAction(e -> {
+            createHelpView();
+        });
     }
+
     /**
      *@author Michel Schlatter
      * @param port
@@ -142,25 +147,25 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             }
     }
 
-
     private void goToLoginView(){
-        LoginModel model = new LoginModel();
-        LoginView view = new LoginView(this.view.getStage(), model);
-        LoginController loginController = new LoginController(view,model);
-
-        this.view.stop();
-        view.start();
+        final LoginView loginView = createLoginView(view);
+        view.stop();
+        loginView.start();
     }
 
+    private void createHelpView() {
+        final Stage helpStage = createHelpStage();
+        helpStage.show();
+    }
 
-    public void CopytoCbPort (){
+    private void CopytoCbPort (){
         String str = Integer.toString(model.getPort());
         StringSelection stringS = new StringSelection(str);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringS, stringS);
     }
 
-    public void CopytoCbIP () {
+    private void CopytoCbIP () {
         String str = model.getIP();
         StringSelection stringS = new StringSelection(str);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -175,7 +180,4 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         return (matcher.matches());
     }
 
-
-
-    
 }

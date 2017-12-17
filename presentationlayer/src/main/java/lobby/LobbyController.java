@@ -1,13 +1,13 @@
 package lobby;
 
-import game.GameController;
-import game.GameModel;
-import game.GameView;
 import base.Controller;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
+import game.GameController;
+import game.GameModel;
+import game.GameView;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -15,10 +15,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
-import javafx.stage.Stage;
-import ranking.RankingController;
-import ranking.RankingModel;
 import ranking.RankingView;
+import util.StageFactory;
 import util.ViewUtils;
 
 import java.io.IOException;
@@ -326,11 +324,8 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     //@author Murat Kelleci am 24.10.2017
 
     private void goToRankingView() {
-        Stage s = new Stage(  );
-        RankingModel model = new RankingModel();
-        RankingView view = new RankingView(s, model);
-        RankingController rankingController = new RankingController(model, view);
-        this.view.stop();
-        view.start();
+        final RankingView rankingView = StageFactory.crateRankingView();
+        view.stop();
+        rankingView.start();
     }
 }
