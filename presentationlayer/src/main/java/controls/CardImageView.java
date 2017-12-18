@@ -1,4 +1,4 @@
-package Controls;
+package controls;
 
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.service.Language;

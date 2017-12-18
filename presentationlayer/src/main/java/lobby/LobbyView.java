@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import static util.StyleSheetPath.LOBBY;
 
 /**
- *  author Michel Schlatter + Manuel Wirz
+ *  author Manuel Wirz
  *  */
 
 public class LobbyView extends View<LobbyModel> {
@@ -54,7 +54,10 @@ public class LobbyView extends View<LobbyModel> {
     protected VBox vBoxAddMenu;
     protected VBox hBoxOptionClient;
     protected BorderPane root;
-    protected ImageView imgWait;
+    protected Image imgWaitCH;
+    protected Image imgWaitENG;
+    protected Image imgWaitDE;
+    protected ImageView clientImg;
 
 
     protected ObservableList<String> observablePlayerList = FXCollections.observableArrayList();
@@ -68,26 +71,35 @@ public class LobbyView extends View<LobbyModel> {
         super(stage, model);
     }
 
+    /**
+     *  author Manuel Wirz
+     *  Method for creating stage, scene and set the Root
+     *  */
+
     public Scene create_GUI(){
 
-        // root settings
+        /**
+         *  Root settings and layout
+         *  */
+
         this.root = new BorderPane();
-
-
-
-        //Scene and stage settings
-        Scene scene = new Scene(root, 1150, 600);
-        setStylesheet(scene, LOBBY);
-        stage.setScene(scene);
-       
-
-        // root Layout
-
         root.setCenter(addVBoxGameSettings());
         root.setBottom(addGridPane());
         root.setRight(addClientList());
         root.setTop( addMenu());
         root.setLeft(addGameSettings());
+
+        /**
+         *  Scene and stage settings
+         *  create clientImgView
+         *  */
+
+        Scene scene = new Scene(root, 1150, 600);
+        setStylesheet(scene, LOBBY);
+        stage.setScene(scene);
+
+        this.clientImg = new ImageView(  );
+
 
         return scene;
     }
@@ -98,19 +110,18 @@ public class LobbyView extends View<LobbyModel> {
         return vBox;
     }
 
-
-    // Method for title and menubar returns a VBox
+    /**
+     *  author Manuel Wirz
+     *  Method for creating menubar and title
+     *  Returns a VBox
+     *  */
 
     public VBox addMenu(){
 
         this.vBoxAddMenu = new VBox(  );
-        vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
-
-
-
+        this.vBoxAddMenu.setAlignment( Pos.TOP_CENTER );
         this.textFieldGameSettings = new Text(  );
         this.textFieldGameSettings.getStyleClass().add( "title" );
-
 
         vBoxAddMenu.getChildren().addAll(menuBar, textFieldGameSettings );
 
@@ -119,7 +130,11 @@ public class LobbyView extends View<LobbyModel> {
         return vBoxAddMenu;
     }
 
-    // Method for client list return a VBox
+    /**
+     *  author Manuel Wirz
+     *  Method for showing PlayerList
+     *  Returns a VBox
+     *  */
 
     public VBox addClientList(){
 
@@ -140,7 +155,11 @@ public class LobbyView extends View<LobbyModel> {
     }
 
 
-    // Method for game settings return a VBox
+    /**
+     *  author Manuel Wirz
+     *  Method for showing game settings / end options
+     *  Returns a VBox
+     *  */
 
     public VBox addVBoxGameSettings(){
 
@@ -151,7 +170,9 @@ public class LobbyView extends View<LobbyModel> {
         vBoxGameSettings.setAlignment( Pos.CENTER );
 
 
-        // Option 1
+        /**
+         *  Creating option 1
+         *  */
 
         this.hBoxOption1 = new HBox(  );
         hBoxOption1.setPrefWidth( 500 );
@@ -170,9 +191,11 @@ public class LobbyView extends View<LobbyModel> {
         this.choiceBox.setPrefSize( 20,40 );
 
 
-        hBoxOption1.getChildren().addAll( txtOption1,/*textFieldRound,*/choiceBox );
+        hBoxOption1.getChildren().addAll( txtOption1,choiceBox );
 
-        // Option 2
+        /**
+         *  Creating option 2
+         *  */
 
         this.hBoxOption2 = new HBox(  );
         hBoxOption2.setPrefWidth( 500 );
@@ -189,11 +212,13 @@ public class LobbyView extends View<LobbyModel> {
 
 
 
-        hBoxOption2.getChildren().addAll( txtOption2/*, txtOption2Statement*/, cbFinishPointCards);
+        hBoxOption2.getChildren().addAll( txtOption2, cbFinishPointCards);
 
 
 
-        // Buttons for GameLobby
+        /**
+         *  Creating buttons for lobby
+         *  */
 
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPrefWidth( 500 );
@@ -217,7 +242,11 @@ public class LobbyView extends View<LobbyModel> {
         return  vBoxGameSettings;
     }
 
-    // Method for Chat returns a GridPane
+    /**
+     *  author Manuel Wirz
+     *  Method for showing chat
+     *  Returns a GridPane
+     *  */
 
     public GridPane addGridPane() {
 
@@ -226,7 +255,9 @@ public class LobbyView extends View<LobbyModel> {
         chatContent = new VBox();
 
 
-         // Layout GridPane
+        /**
+         *  Layout GridPane
+         *  */
 
         gridPane.setAlignment(Pos.BOTTOM_CENTER);
         gridPane.setHgap(10);
@@ -234,7 +265,9 @@ public class LobbyView extends View<LobbyModel> {
         gridPane.setPadding(new Insets(3, 3, 3, 3));
 
 
-        // Chatview
+        /**
+         *  Chatview
+         *  */
 
         this.btnChatSend  = new Button();
         this.btnChatSend.setPrefSize(250, 50);
@@ -268,7 +301,10 @@ public class LobbyView extends View<LobbyModel> {
 }
 
 
-    // Method for multilanguage
+    /**
+     *  author Manuel Wirz
+     *  Method for multi language
+     *  */
 
     protected void setTexts() {
 
@@ -286,26 +322,56 @@ public class LobbyView extends View<LobbyModel> {
         this.tpOption2.setText( getText( "lobbyview.tpOption2" ) );
         this.btnHelp.setText( getText( "lobbyview.btnHelp" ) );
 
+        loadImg();
+        setImg();
 
-        if (translator.getCurrentLanguage() == Language.ENGLISH){
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_ENG.png")));
-        } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_CH.png")));
-        } else {
-            imgWait = new ImageView(new Image(getClass().getResourceAsStream("/lobby/Wait_DE.png")));
-        }
     }
 
+    /**
+     *  author Manuel Wirz
+     *  Method create Img in different language
+     *  */
+
+    private void loadImg() {
+        imgWaitENG = new Image(getClass().getResourceAsStream( "/lobby/Wait_ENG.png" ) );
+        imgWaitCH = new Image(getClass().getResourceAsStream( "/lobby/Wait_CH.png" ));
+        imgWaitDE = new Image( getClass().getResourceAsStream( "/lobby/Wait_DE.png" ) );
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  Shows stage
+     *  */
     public void start() {
         stage.show();
     }
 
+    /**
+     *  author Manuel Wirz
+     *  sets the correct img in the ImageView (which language is selected)
+     *  */
+
+    public void setImg() {
+
+        if (translator.getCurrentLanguage() == Language.ENGLISH) {
+            clientImg.setImage(imgWaitENG);
+        } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN) {
+            clientImg.setImage(imgWaitCH);
+        } else {
+            clientImg.setImage(imgWaitDE);
+        }
+    }
+
+    /**
+     *  author Manuel Wirz
+     *  close stage
+     *  */
     public void stop(){
         stage.hide();
     }
 
     /**
-     * Author Michel Schlatter
+     * Author Michel Schlatter + Manuel Wirz
      * @param msg
      * @param color
      */
@@ -318,9 +384,9 @@ public class LobbyView extends View<LobbyModel> {
 
     /**
      *  author Manuel Wirz
+     *  Method for creating client view who is not the hoster
      *  */
 
-    // Method for client view who is not hoster
 
     public void  setWaitText(){
 
@@ -336,8 +402,10 @@ public class LobbyView extends View<LobbyModel> {
         imgHourglass.setPreserveRatio(true);
         imgHourglass.setFitHeight(80);
 
-        imgWait.setPreserveRatio(true);
-        imgWait.setFitHeight(50);
+
+        clientImg.setPreserveRatio(true);
+        clientImg.setFitHeight(50);
+
 
         HBox hBoxButtons = new HBox(  );
         hBoxButtons.setPadding( insets );
@@ -354,13 +422,15 @@ public class LobbyView extends View<LobbyModel> {
 
         hBoxButtons.getChildren().addAll( btnRanking, btnHelp );
 
-        this.hBoxOptionClient.getChildren().addAll(imgHourglass, imgWait, hBoxButtons );
+        this.hBoxOptionClient.getChildren().addAll(imgHourglass, clientImg, hBoxButtons );
         this.root.setCenter(hBoxOptionClient);
     }
 
-    // Method for stageDialog
+    /**
+     *  author Manuel Wirz
+     *   Getters and Setters for LobbyView
+     *  */
 
-    // Getters and Setters for LobbyView
     public ImageView getImgViewDeFlag() {
         return menuBar.getImgViewDeFlag();
     }

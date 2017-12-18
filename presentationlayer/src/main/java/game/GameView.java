@@ -1,7 +1,7 @@
-package Game;
+package game;
 
-import Controls.CardImageView;
-import Controls.HandStackLayout;
+import controls.CardImageView;
+import controls.HandStackLayout;
 import base.View;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.PlayerSet;
@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 import org.apache.commons.collections.map.LinkedMap;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 
 import static javafx.stage.Modality.WINDOW_MODAL;
@@ -88,7 +87,9 @@ public class GameView extends View<GameModel> {
 
 
     ImageView imgVtrayStack;
+public GameView() {
 
+}
     public GameView(Stage stage, GameModel model) {
         super(stage, model);
     }
@@ -108,8 +109,6 @@ public class GameView extends View<GameModel> {
         VBox vb = new VBox();
         fpCenter.getChildren().add(gp);
         gp.add(vb, 2, 14);
-
-        gp.setGridLinesVisible(false);
 
 
         // Creating 9 columns with different width
@@ -274,9 +273,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating title and showing game end option
+     * Return a VBox
      */
 
-    // Method for title and showing game end option -> return a VBox
     private VBox setTop() {
         this.setTop = new VBox();
         this.setTop.setAlignment(Pos.CENTER);
@@ -296,6 +296,12 @@ public class GameView extends View<GameModel> {
     }
 
 
+    /**
+     *  author Manuel Wirz
+     *  Method for creating showing actual round and the players with the points
+     *  Return a VBox
+     *  */
+
     public VBox setLeft() {
         this.VBoxPointsandPlayer = new VBox();
         this.VBoxPointsandPlayer.setSpacing(20);
@@ -311,9 +317,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating Logger and Chat Area
+     * Returns a VBox
      */
 
-    // Method for creating logger
     public VBox loggerAndChat() {
 
         this.VBoxLogger = new VBox(10);
@@ -341,9 +348,9 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Set LoggerText into a Label to add color for each Client
      */
 
-    // same logic as in LobbyView
     protected void setLoggerContent(String msg, Color color) {
 
         Label lbl = new Label();
@@ -381,7 +388,6 @@ public class GameView extends View<GameModel> {
         gp.setHalignment(txt, HPos.CENTER);
     }
 
-
     private void setStyleOfButtons(Button btn) {
         btn.setPrefSize(200, 30);
         gp.setColumnSpan(btn, 3);
@@ -393,9 +399,10 @@ public class GameView extends View<GameModel> {
 
     /**
      * author Manuel Wirz
+     * Method for creating chat area and buttons
+     * Returns a GridPane
      */
 
-    // GridPane for showing the chat and the buttons
     public GridPane addChatGridPane() {
 
         chatPane = new GridPane();
@@ -411,7 +418,6 @@ public class GameView extends View<GameModel> {
 
 
         // ----- Chatview -------
-
 
         this.btnChatSend = new Button();
         this.btnChatSend.setPrefSize(330, 50);
@@ -431,7 +437,8 @@ public class GameView extends View<GameModel> {
         this.btnSendText.getStyleClass().add("buttonChat");
 
 
-        // Create HBox +
+        // Create HBox
+
         hbChat = new HBox(10);
         hbChat.setMaxSize(700, 200);
         hbChat.setAlignment(Pos.CENTER);
@@ -594,25 +601,23 @@ public class GameView extends View<GameModel> {
     private TableView<WinningInformation> createWinningUserTableView(ObservableList<WinningInformation> winningInformations) {
         TableView<WinningInformation> tableView = new TableView<>();
 
+        TableColumn<WinningInformation, String> position = new TableColumn<>(getText("gameview.winningInformations.position"));
         TableColumn<WinningInformation, String> name = new TableColumn<>(getText("gameview.winningInformations.name"));
         TableColumn<WinningInformation, String> points = new TableColumn<>(getText("gameview.winningInformations.points"));
-        TableColumn<WinningInformation, String> position = new TableColumn<>(getText("gameview.winningInformations.position"));
 
         tableView.getColumns().addAll(position, name, points);
 
         tableView.setItems(winningInformations);
 
-        name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        name.setCellValueFactory(new PropertyValueFactory<>("username"));
         points.setCellValueFactory(new PropertyValueFactory<>("points"));
-        position.setCellValueFactory(new PropertyValueFactory<>("position"));
+        position.setCellValueFactory(new PropertyValueFactory<>("newPosition"));
 
         return tableView;
     }
 
-
     /**
-     * Author Michel Schlatter
-     *
+     * Author Michel Schlatter + Manuel Wirz
      * @param msg
      * @param color
      */
@@ -623,11 +628,9 @@ public class GameView extends View<GameModel> {
         this.chatContent.getChildren().add(lbl);
     }
 
-
     /**
-     * Author Vanessa Cajochen
+     * Author Vanessa Cajochen + Manuel Wirz
      */
-
 
     protected void setTexts() {
         this.btnChatSend.setText(getText("chat.send"));
@@ -659,7 +662,6 @@ public class GameView extends View<GameModel> {
     public void stop() {
         stage.hide();
     }
-
 
     /**
      * Author Vanessa Cajochen
@@ -730,7 +732,7 @@ public class GameView extends View<GameModel> {
     }
 
 
-    // Moves all MoneyCards with one click to the button
+    // Moves all MoneyCards with one click on the button
     public void moveMoneyCardsToPlayArea() {
         ArrayList<CardImageView> moveList = new ArrayList<CardImageView>();
         for (int i = 0; i < handStackList.size(); i++) {
@@ -761,6 +763,7 @@ public class GameView extends View<GameModel> {
     }
 
 
+    // Updates the Action, Buy and Money Number
     public void updatelblInfo(int action, int buys, int money) {
         lblAction.setText("" + action);
         lblBuy.setText("" + buys);
@@ -776,6 +779,7 @@ public class GameView extends View<GameModel> {
         cardPlayingAreaList.clear();
     }
 
+    // The number of cards in the pullStack gets updated
     public void updateLblPullStack(int numberOfPullStack) {
         lblPullStack.setText("" + numberOfPullStack);
     }
@@ -830,10 +834,13 @@ public class GameView extends View<GameModel> {
     }
 
 
+    /**
+     *  Getters and Setters
+     *  */
+
     public BorderPane getRoot() {
         return root;
     }
-
 
     public TextField getTextFieldChat() {
         return textFieldChat;
@@ -846,7 +853,6 @@ public class GameView extends View<GameModel> {
     public Button getBtnSendText() {
         return btnSendText;
     }
-
 
     public GridPane getChatPane() {
         return chatPane;

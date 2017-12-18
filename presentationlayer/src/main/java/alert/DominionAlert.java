@@ -1,6 +1,7 @@
 package alert;
 
 import com.weddingcrashers.service.Translator;
+import javafx.scene.control.Alert;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
@@ -9,10 +10,11 @@ import static javafx.scene.layout.Region.USE_PREF_SIZE;
  *
  * @author dmpliamplias
  */
-public class DominionAlert extends BaseAlert {
+public class DominionAlert extends Alert {
 
     // ---- Members
 
+    /** The translator. */
     private Translator translator;
 
 
@@ -33,23 +35,22 @@ public class DominionAlert extends BaseAlert {
         showAndWait();
     }
 
-    public void title(String key) {
+
+    // ---- Methods
+
+    protected void title(String key) {
         final String title = translator.getString(key);
         setTitle(title);
     }
 
-    public void headerText(String key) {
+    protected void headerText(String key) {
         final String headerText = translator.getString(key);
         setHeaderText(headerText);
     }
 
-    public void contentText(String key) {
+    protected void contentText(String key) {
         final String contentText = translator.getString(key);
         setContentText(contentText);
     }
 
-    @Override
-    protected void setTexts() {
-
-    }
 }

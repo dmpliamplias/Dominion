@@ -1,8 +1,14 @@
-package Controls;
+package controls;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
+
+/**
+ *  @author Vanessa Cajochen
+ *  Some changes -
+ *  Credits: JavaFX 8: Grundlagen und fortgeschrittene Techniken, Chapter 5.9
+ *  */
 
 public class HandStackLayout extends Region {
     double cardInterval = 110;

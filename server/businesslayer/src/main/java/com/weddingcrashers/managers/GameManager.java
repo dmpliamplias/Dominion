@@ -4,7 +4,6 @@ import com.weddingcrashers.businessmodels.*;
 import com.weddingcrashers.model.Highscore;
 import com.weddingcrashers.model.User;
 import com.weddingcrashers.server.Client;
-import com.weddingcrashers.server.Server;
 import com.weddingcrashers.servermodels.*;
 import com.weddingcrashers.service.HighscoreService;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
@@ -192,7 +191,7 @@ public class GameManager extends Manager {
             HighscoreService hs = serviceLocator.getHighscoreService();
             for(Client c : players){
                int points = c.getDominionSet().calculatePoints();
-               winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), points));
+               winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), c.getUser().getUserName() ,points));
             }
             Collections.sort(winningInfos);
             for(WinningInformation info : winningInfos){

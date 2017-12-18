@@ -1,7 +1,7 @@
-package Game;
+package game;
 
 
-import Controls.CardImageView;
+import controls.CardImageView;
 import base.Controller;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
@@ -36,7 +36,7 @@ import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.util.*;
 
-import static Game.GameResult.*;
+import static game.GameResult.*;
 import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
@@ -81,10 +81,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         initialize();
     }
-
-    public GameController() {
-    }
-
+    
 
     public void initialize() {
         try {
@@ -163,15 +160,19 @@ public class GameController extends Controller<GameModel, GameView> {
 
         /**
          *  author Manuel Wirz
+         *  Checks which game end options is selected and sets the text
          *  */
-
-        // Checks which game end option is selected
 
         if (gameSettings.isPointCards() == true) {
             view.endOption.setText(view.endOptionPoints.getText());
         } else {
             view.endOption.setText(view.endOptionRounds.getText() + " " + gameSettings.getFinishAfterRounds());
         }
+
+        /**
+         *  author Manuel Wirz
+         *  ActionEventHandlers for the buttons
+         *  */
 
         view.getBtnLobby().setOnAction(event -> {
             goToLobbyView();
@@ -181,19 +182,24 @@ public class GameController extends Controller<GameModel, GameView> {
             goToRankingView();
         });
 
-        // EventHandler for sending a msg by pressing the button
+        /**
+         *  author Manuel Wirz
+         *  ActionEventHandlers for the chat
+         *  */
 
         view.getBtnChatSend().setOnAction(event -> {
             sendMessage();
         });
 
-        // EventHandler for sending a predefined msg by pressing the button
 
         view.getBtnSendText().setOnAction(event -> {
             sendButtonText();
         });
 
-        // Start and end background music
+        /**
+         *  author Manuel Wirz
+         *  Startes the background music or don't
+         *  */
 
         if (plServiceLocator.soundIsOn == false){
             super.view.menuBar.getMenuItemMusicMute().setSelected( true );
@@ -216,7 +222,10 @@ public class GameController extends Controller<GameModel, GameView> {
 
         } );
 
-        // EventHandler for sending a  msg by pressing enter
+        /**
+         *  author Manuel Wirz
+         *  ActionEventHandler for sending a msg in the chat by pressing enter
+         *  */
 
         view.getTextFieldChat().setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
@@ -224,16 +233,19 @@ public class GameController extends Controller<GameModel, GameView> {
             }
         });
 
+        /**
+         *  author Manuel Wirz
+         *  SetText for showing round default 1
+         *  */
+
         view.getTxtFieldShowRound().setText(view.getTxtShowRound().getText() + ": " +Integer.toString(1));
     }
 
     /**
      *  author Manuel Wirz
+     *  Method for playing sounds
+     *  https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
      *  */
-
-    // Method for sounds
-
-    // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
 
     public static synchronized void playSound(final String fileName) {
         new Thread(() -> {
@@ -249,9 +261,11 @@ public class GameController extends Controller<GameModel, GameView> {
         }).start();
     }
 
-    // Method for backgorund music
-
-    // https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+    /**
+     *  author Manuel Wirz
+     *  Method for background music
+     *  https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+     *  */
 
     public void startSound(){
 
@@ -442,6 +456,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      * author Manuel Wirz
+     * Method for displaying the played Card on the logger
+     * @param cardPlayedInfo
      */
     public void handleServerAnswer_logCardPlayed(CardPlayedInfo cardPlayedInfo) {
         Platform.runLater(() -> {
@@ -453,8 +469,6 @@ public class GameController extends Controller<GameModel, GameView> {
                             + view.getTxtLogger().getText() + ": "
                             + count + " "
                             + card.toString(serviceLocator.getTranslator()));
-
-
 
             view.setLoggerContent(logger, ViewUtils.getColorByClientId(cardPlayedInfo.getClientId()));
         });
@@ -506,8 +520,11 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    /**
+     *  author Manuel Wirz
+     *  Methode to receive the chatContainer from the server and set the text in the chat
+     *  */
 
-    // Methode for to receive the chatContainer from the server and set new text in the chat
     public void handleServerAnswer_receiveMessage(ChatContainer chatContainer) {
         Platform.runLater(() -> {
             view.setChatMessage(chatContainer.getMsg(), ViewUtils.getColorByClientId(chatContainer.getClientId()));
@@ -539,9 +556,9 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /** @author Murat Kelleci and Vanessa Cajochen
-     *
      * @param card
      */
+
     private void buyCards(Card card) {
         if (numberOfBuys > 0 && card.getCost() <= numberOfMoney) {
             if(getCard(unusedCards, card.getName()) != null) {
@@ -583,9 +600,8 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      *  author Manuel Wirz
+     *  Method to send the ChatContainer to the server and display the message in the own screen
      *  */
-
-    // Method to send the ChatContainer to the server and display the message in the own screen
 
     public void sendMessage() {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.getTextFieldChat().getText();
@@ -602,8 +618,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-
-    // Button to send predefined text to the server and display the message on the own screen
+    /**
+     *  author Manuel Wirz
+     *  Method to send predefined text  to the server and display the message on the own screen by pressing the button
+     *  */
 
     public void sendButtonText() {
 
@@ -621,11 +639,10 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-
     /** @author Murat Kelleci 24.11.17
-     *
      * @param imgv
      */
+
     private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
@@ -720,20 +737,17 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-
     /**  @author Murat Kelleci 20.11.17 -
-     *
      *  this methods gets the user and is needed for the buycards methode.
      */
+
     private User getUser() {
         return PLServiceLocator.getPLServiceLocator().getUser();
     }
 
-
     /**
      * author Vanessa Cajochen
      */
-
 
     private void enableOrDisableView() {
         if (myUser.getId() == activeUserId) {
@@ -746,6 +760,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      *  author Manuel Wirz + Michel Schlatter
+     *  Log and show active user incl. actual round
      *  */
 
     private void logActiveUser(){
@@ -819,7 +834,6 @@ public class GameController extends Controller<GameModel, GameView> {
         System.out.println(elapsedSeconds);
     }
 
-
     public int countCards(ArrayList<Card> list, String s) {
         int count = 0;
         for (int i = 0; i < (list.size()); i++) {
@@ -839,8 +853,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         return count;
     }
-
-
 
     public Card getCard(ArrayList<Card> list, String name) {
         Card c = null;
@@ -864,8 +876,6 @@ public class GameController extends Controller<GameModel, GameView> {
         return c;
     }
 
-
-
     public void drawHandCards(int numberOfDrawnCards) {
         for (int i = 0; i < numberOfDrawnCards; i++) {
             if (myCardSet.getPullStack().size() == 0){
@@ -885,7 +895,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
     }
 
-
     public void resetActionBuyMoney() {
         numberOfActions = 1;
         numberOfBuys = 1;
@@ -893,12 +902,12 @@ public class GameController extends Controller<GameModel, GameView> {
         updateActionBuyMoney();
     }
 
-
     /** Author Murat Kelleci
      *
      * @param playerSet
      * this methode sets the points and shows the actual player
      */
+
     public void setPointsToView(PlayerSet playerSet) {
         int userId = playerSet.getUserId();
         String userName = users.get(userId).getUserName();
@@ -907,7 +916,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
         this.view.setUserPoints(userId, userName, playerSet, activeUserId);
     }
-
 
     /*
     Author Vanessa Cajochen
@@ -959,13 +967,9 @@ public class GameController extends Controller<GameModel, GameView> {
         Collections.shuffle(myCardSet.getPullStack());
     }
 
-
     public void updateLblPullStack() {
         view.updateLblPullStack(myCardSet.getPullStack().size());
     }
-
-
-
 
     protected ArrayList<PlayerSet> getAllSets() {
         ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
@@ -983,7 +987,6 @@ public class GameController extends Controller<GameModel, GameView> {
         }
         return sets;
     }
-
 
     /** @author Murat Kelleci
      * here you come to the ranking or to the lobby

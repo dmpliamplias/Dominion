@@ -5,6 +5,9 @@ import com.weddingcrashers.service.Translator;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import static util.StageFactory.createHelpStage;
 
 /**
  * Dominion menu bar.
@@ -75,8 +78,8 @@ public class DominionMenuBar extends MenuBar {
         menuItemSoundUnmute.setToggleGroup(toggleGroupSound);
         menuItemSoundUnmute.setSelected(true);
 
-        // Help Menu
-        menuItemHelp = new MenuItem();
+        // HelpView Menu
+        createHelpMenuItem();
 
         this.getMenus().add(menuSettings);
         menuSettings.getItems().addAll(menuLanguage, menuMusic, menuSound, menuItemHelp);
@@ -103,6 +106,15 @@ public class DominionMenuBar extends MenuBar {
 
         setMenuTexts();
         view.setMenuBarUsed(true);
+
+    }
+
+    private void createHelpMenuItem() {
+        menuItemHelp = new MenuItem();
+        menuItemHelp.setOnAction(e -> {
+            final Stage helpStage = createHelpStage();
+            helpStage.show();
+        });
     }
 
     /**

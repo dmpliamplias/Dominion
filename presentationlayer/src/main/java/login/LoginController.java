@@ -122,6 +122,10 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         Platform.runLater(() -> {
             User user = result.getUser();
             if (user != null) { // success
+                if (user.isBlocked()) {
+                    view.alert("loginview.isBlocked", WARNING);
+                    return;
+                }
                 plServiceLocator.setUser(user);
                 if (user.isSuperUser() && getPLServiceLocator().getServerConnectionService().isHoster()) {
                     goToUserManagementView();

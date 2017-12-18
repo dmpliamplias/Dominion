@@ -24,7 +24,7 @@ public abstract class Controller<M extends Model, V extends View<M>> {
     /** The view. */
     protected V view;
     /** The translator. */
-    protected Translator translator;
+    private Translator translator;
     /** The server connection service. */
     protected ServerConnectionService serverConnectionService;
     /** The presentation layer service locator. */
@@ -49,47 +49,13 @@ public abstract class Controller<M extends Model, V extends View<M>> {
             serverConnectionService = plServiceLocator.getServerConnectionService();
         }
 
-        /**
-         *  author Manuel Wirz
-         *  */
-
-        if(view.menuBarUsed){
-
-            setonActionEvent();
+        if (view.menuBarUsed) {
+            switchLanguageAction();
         }
-
     }
 
-    protected Controller() {
 
-    }
-
-    /**
-     *  author Manuel Wirz
-     *  */
-
-    private void setonActionEvent() {
-
-        view.menuBar.getMenuItemCH().setOnAction( event -> {
-
-            view.switchTranslator(SWISS_GERMAN);
-
-        } );
-
-        view.menuBar.getMenuItemDE().setOnAction( event -> {
-
-            view.switchTranslator( GERMAN );
-
-        } );
-
-        view.menuBar.getMenuItemENG().setOnAction( event -> {
-
-            view.switchTranslator( ENGLISH );
-
-        } );
-
-    }
-
+    // ---- Methods
 
     /**
      * Returns the text for the given key.
@@ -97,9 +63,23 @@ public abstract class Controller<M extends Model, V extends View<M>> {
      * @param key the key to get the text for.
      * @return the text for the given key.
      */
-
     protected String getText(String key) {
         return translator.getString(key);
+    }
+
+    /**
+     * Switch the language for the language menu bar items.
+     */
+    private void switchLanguageAction() {
+        view.menuBar.getMenuItemCH().setOnAction( event -> {
+            view.switchTranslator(SWISS_GERMAN);
+        } );
+        view.menuBar.getMenuItemDE().setOnAction( event -> {
+            view.switchTranslator(GERMAN);
+        } );
+        view.menuBar.getMenuItemENG().setOnAction( event -> {
+            view.switchTranslator(ENGLISH);
+        } );
     }
 
 }

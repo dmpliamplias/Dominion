@@ -28,6 +28,7 @@ public class ConnectionView extends View<ConnectionModel> {
 	TextField fldIP;
 	Label lblPort;
 	Label lblInfo;
+	Label lblInfo2;
 	Label lblIP;
 	Stage stageCreateDialog;
 	Stage stageConnectedDialog;
@@ -294,7 +295,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		// Creating and labeling button, label, textfield
 		lblPort = new Label();
-		lblInfo = new Label();
+		lblInfo2 = new Label();
 		fldPort = new TextField();
 		lblIP = new Label();
 		fldIP = new TextField();
@@ -326,14 +327,14 @@ public class ConnectionView extends View<ConnectionModel> {
 		}
 
 		// Asign buttons, label, textfield to column, row
-		gp.setConstraints(lblInfo, 2, 1);
+		gp.setConstraints(lblInfo2, 2, 1);
 		gp.setConstraints(lblPort, 1, 3);
 		gp.setConstraints(fldPort, 2, 3);
 		gp.setConstraints(lblIP, 1, 2);
 		gp.setConstraints(fldIP, 2, 2);
 		gp.setConstraints(btnJoinOK, 5, 4);
-		gp.setColumnSpan(lblInfo, 5);
-		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnJoinOK, lblIP, fldIP);
+		gp.setColumnSpan(lblInfo2, 5);
+		gp.getChildren().addAll(lblPort, fldPort, lblInfo2, btnJoinOK, lblIP, fldIP);
 
 		fldIP.setDisable(false);
 		fldIP.requestFocus();
@@ -383,7 +384,7 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		if (stageJoinDialog!=null){
 			lblPort.setText(getText("connectionview.lblPort"));
-			lblInfo.setText(getText("connectionview.enterInfo"));
+			lblInfo2.setText(getText("connectionview.enterInfo"));
 			lblIP.setText(getText("connectionview.lblIp"));
 			btnJoinOK.setText(getText("connectionview.btnConnect"));
 			stageJoinDialog.setTitle(getText("connectionview.joinDialog.title"));

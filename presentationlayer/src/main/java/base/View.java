@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import menu.DominionMenuBar;
 
-import java.util.List;
-
 /**
  * View base model.
  *
@@ -63,6 +61,10 @@ public abstract class View<M extends Model> {
         stage.getIcons().add(imgIcon);
     }
 
+
+    public View() {
+
+    }
 
     // ---- Methods
 
@@ -126,8 +128,7 @@ public abstract class View<M extends Model> {
      * @param alertType the alert type.
      */
     public DominionAlert alert(String msg, Alert.AlertType alertType){
-        final DominionAlert dominionAlert = new DominionAlert(msg, alertType, translator);
-        return dominionAlert;
+        return new DominionAlert(msg, alertType, translator);
     }
 
     /**
