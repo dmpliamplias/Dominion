@@ -493,7 +493,6 @@ public class GameView extends View<GameModel> {
     /**
      *
      * @author Murat Kelleci
-     * @param result
      * @param gameResult
      */
 
@@ -526,7 +525,7 @@ public class GameView extends View<GameModel> {
     /**
      *
      * @author Murat Kelleci
-     * @param GameResult
+     * @param gameResult
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
     private void displayWinnerDialog(Map.Entry<WinningInformation, GameResult> gameResult) {
@@ -549,8 +548,6 @@ public class GameView extends View<GameModel> {
                 String draw = "draw";
                 Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
                 ImageView imgVdrawPic = new ImageView(drawPic);
-
-
                 drawAlert.setGraphic(imgVdrawPic);
                 drawAlert.setHeaderText("");
                 drawAlert.setTitle("Draw Dialog");

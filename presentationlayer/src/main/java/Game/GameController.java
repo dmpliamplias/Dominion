@@ -343,6 +343,12 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
+    /**
+     * @author Murat Kelleci 01.12.-14.12
+     * @param winningInformations
+     * @return
+     */
+
     private LinkedMap determineGameResult(List<WinningInformation> winningInformations) {
         final LinkedMap gameResult = new LinkedMap();
         // case two player
