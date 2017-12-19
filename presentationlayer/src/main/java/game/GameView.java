@@ -464,6 +464,8 @@ public GameView() {
      * @param set
      * @param activeUserId here you see the points in the view.
      * @Author Murat Kelleci
+     *  here are the buttons created depending on player. two buttons if 2 player etc.
+     *  the player who has the turn his buttons is marked greend and border is bold
      */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
@@ -501,6 +503,7 @@ public GameView() {
      *
      * @author Murat Kelleci
      * @param gameResult
+     * here is the winnerstage
      */
 
     public void startWinnerStage(LinkedMap gameResult, Map.Entry<WinningInformation, GameResult> myResult) {
@@ -584,8 +587,9 @@ public GameView() {
 
 
     /**
-     * @param winningInformations here is the Vbox and Tableview for WinningUser created.
+     * @param winningInformations
      * @author Murat Kelleci
+     * here is the Vbox and Tableview for WinningUser created.
      */
     public void createVBox(ObservableList<WinningInformation> winningInformations) {
         this.btnLobby.setPrefSize(180, 80);

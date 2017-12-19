@@ -388,6 +388,7 @@ public class GameController extends Controller<GameModel, GameView> {
      * @author Murat Kelleci 01.12.-14.12
      * @param winningInformations
      * @return
+     * this methode is used to show the correct gameresult depending on player see on line 367 and 370
      */
 
     private LinkedMap determineGameResult(List<WinningInformation> winningInformations) {
@@ -407,6 +408,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return null;
     }
 
+    // you take the first and the second. then you compare them. if the first has the same points then the second has the same position.
     private LinkedMap twoPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
@@ -419,7 +421,7 @@ public class GameController extends Controller<GameModel, GameView> {
         lose(gameResult, second);
         return gameResult;
     }
-
+    // same like 2 players
     private LinkedMap threePlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
@@ -446,6 +448,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return gameResult;
     }
 
+    // same like 2 and 3 players
     private LinkedMap fourPlayer(LinkedMap gameResultMap, List<WinningInformation> winningInformations) {
         gameResultMap = threePlayer(gameResultMap, winningInformations);
 
