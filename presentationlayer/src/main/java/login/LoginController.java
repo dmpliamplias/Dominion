@@ -83,7 +83,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             try {
                 serverConnectionService.sendObject(lc);
             } catch (IOException e) {
-                view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
             }
         } else {
 
@@ -101,7 +101,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
                 try {
                     serverConnectionService.sendObject(loginContainer);
                 } catch (Exception e) {
-                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                    view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
                 }
             } else {
                 view.alert("loginview.erroruncompletedfields", Alert.AlertType.WARNING);

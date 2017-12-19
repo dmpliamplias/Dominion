@@ -128,7 +128,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
             return ((InetSocketAddress)PLServiceLocator.getPLServiceLocator()
                     .getServerConnectionService().getConnection().getRemoteSocketAddress());
         } catch (Exception e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
         return null;
     }

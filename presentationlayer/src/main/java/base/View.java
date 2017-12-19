@@ -131,6 +131,11 @@ public abstract class View<M extends Model> {
         return new DominionAlert(contentTextKey, alertType, translator);
     }
 
+    public void simpleAlert(String msg, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType, msg);
+        alert.showAndWait();
+    }
+
     /**
      * Creates an alert for the given alert type and message.
      *
