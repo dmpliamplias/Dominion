@@ -441,7 +441,16 @@ public class GameController extends Controller<GameModel, GameView> {
                 third.setPosition(2);
                 lose(gameResult,third);
             }
+
+            }
+        else{
+
+            second.setPosition(2);
+            third.setPosition(2);
+            win(gameResult,first);
+            lose(gameResult,second,third);
             return gameResult;
+
         }
         win(gameResult, first);
         lose(gameResult, second, third);
@@ -452,34 +461,19 @@ public class GameController extends Controller<GameModel, GameView> {
     private LinkedMap fourPlayer(LinkedMap gameResultMap, List<WinningInformation> winningInformations) {
         gameResultMap = threePlayer(gameResultMap, winningInformations);
 
-        final WinningInformation lastWinningInformation = (WinningInformation) gameResultMap.lastKey();
+        final WinningInformation third = (WinningInformation) gameResultMap.lastKey();
         final WinningInformation fourth = winningInformations.get(3);
         if ((gameResultMap.getValue(gameResultMap.indexOf(gameResultMap.lastKey())) == DRAW)) {
-            if (lastWinningInformation.getPoints() == winningInformations.get(3).getPoints()) {
+            if (third.getPoints() == winningInformations.get(3).getPoints()) {
                 fourth.setPosition(1);
                 draw(gameResultMap, fourth);
                 return gameResultMap;
             }
-            final WinningInformation first = winningInformations.get(0);
-            final WinningInformation second = winningInformations.get(1);
-            final WinningInformation third = winningInformations.get(2);
-            gameResultMap.remove(first);
-            gameResultMap.remove(second);
-            gameResultMap.remove(third);
-            first.setPosition(1);
-            gameResultMap.put(first, WIN);
-            first.setPosition(1);
-            gameResultMap.put(second, WIN);
-            first.setPosition(1);
-            gameResultMap.put(third, WIN);
-            first.setPosition(2);
-            gameResultMap.put(fourth, LOSE);
-            return gameResultMap;
         }
-        if (lastWinningInformation.getPosition() == 2) {
+        if (third.getPosition() == 2) {
             fourth.setPosition(3);
         }
-        if (lastWinningInformation.getPosition() == 3) {
+        if (third.getPosition() == 3) {
             fourth.setPosition(4);
         }
         lose(gameResultMap, fourth);
