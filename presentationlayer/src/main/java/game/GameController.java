@@ -384,7 +384,7 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
         if (first.getPoints() == second.getPoints()) {
-            second.setNewPosition(1);
+            second.setPosition(1);
             draw(gameResult, first, second);
             return gameResult;
         }
@@ -398,18 +398,18 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation second = winningInformations.get(1);
         final WinningInformation third = winningInformations.get(2);
         if (first.getPoints() == second.getPoints()) {
-            second.setNewPosition(1);
+            second.setPosition(1);
             win(gameResult, first, second);
             if (second.getPoints() == third.getPoints()) {
                 //cleanup
                 gameResult.remove(first);
                 gameResult.remove(second);
 
-                third.setNewPosition(1);
+                third.setPosition(1);
                 draw(gameResult, first, second, third);
             }
             else {
-                third.setNewPosition(2);
+                third.setPosition(2);
                 lose(gameResult,third);
             }
             return gameResult;
@@ -426,10 +426,16 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation fourth = winningInformations.get(3);
         if ((gameResultMap.getValue(gameResultMap.indexOf(gameResultMap.lastKey())) == DRAW)) {
             if (third.getPoints() == winningInformations.get(3).getPoints()) {
-                fourth.setNewPosition(1);
+                fourth.setPosition(1);
                 draw(gameResultMap, fourth);
                 return gameResultMap;
             }
+        }
+        if (third.getPosition() == 2) {
+            fourth.setPosition(3);
+        }
+        if (third.getPosition() == 3) {
+            fourth.setPosition(4);
         }
         lose(gameResultMap, fourth);
 

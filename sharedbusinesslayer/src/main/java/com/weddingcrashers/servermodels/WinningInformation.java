@@ -10,7 +10,6 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
     private int userId;
     private int points;
     private int position;
-    private int newPosition;
     private String username;
 
     public WinningInformation(int clientId, int userId, String username, int points){
@@ -50,14 +49,6 @@ public class WinningInformation implements Comparable<WinningInformation>, Seria
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public int getNewPosition() {
-        return newPosition;
-    }
-
-    public void setNewPosition(final int newPosition) {
-        this.newPosition = newPosition;
     }
 
     public String getUsername() {
