@@ -436,14 +436,16 @@ public class GameController extends Controller<GameModel, GameView> {
 
                 third.setPosition(1);
                 draw(gameResult, first, second, third);
+                return gameResult;
             }
             else {
                 third.setPosition(2);
                 lose(gameResult,third);
+                return gameResult;
             }
 
             }
-        else{
+        else if(second.getPoints()==third.getPoints()){
 
             second.setPosition(2);
             third.setPosition(2);
