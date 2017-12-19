@@ -68,7 +68,9 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         LobbyView view = new LobbyView(s, model);
         new LobbyController(view, model);
         this.view.stop();
-        plServiceLocator.audioClip.stop();
+        if (plServiceLocator.audioClip != null) {
+            plServiceLocator.audioClip.stop();
+        }
         if(view != null && view.menuBar.getMenuItemMusicMute() != null) {
             if (view.menuBar.getMenuItemMusicMute().isSelected()) {
                 plServiceLocator.soundIsOn = false;
