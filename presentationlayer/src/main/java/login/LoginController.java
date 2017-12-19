@@ -88,6 +88,8 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         } else {
 
 
+            // rules/guidelines to log in
+
             String pw = model.getPassword();
             String email = model.getEmail();
 
@@ -113,6 +115,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
             goToLobbyView();
         });
     }
+
 
     public void handleServerAnswer(LoginContainer result) {
         Platform.runLater(() -> {

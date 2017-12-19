@@ -84,6 +84,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
 
     }
 
+    // here is the user registered and has to fullfill some rules/guidelines see regex etc.
     private void register() {
         view.refreshModel();
         String pw = model.getPassword();
