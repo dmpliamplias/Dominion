@@ -51,8 +51,6 @@ public class DominionMenuBar extends MenuBar {
      * @param translator the translator.
      */
     public DominionMenuBar(View view, Translator translator) {
-       this.translator = translator;
-
         // Base menu
         menuSettings = new Menu();
         menuLanguage = new Menu();
@@ -104,9 +102,8 @@ public class DominionMenuBar extends MenuBar {
         imgViewUnmute = new ImageView(new Image(getClass().getResourceAsStream("/base/unmute.png")));
         setIconSize(imgViewUnmute);
 
-        setMenuTexts();
+        setMenuTexts(translator);
         view.setMenuBarUsed(true);
-
     }
 
     private void createHelpMenuItem() {
@@ -120,7 +117,10 @@ public class DominionMenuBar extends MenuBar {
     /**
      * Sets the menu texts.
      */
-    public void setMenuTexts() {
+    public void setMenuTexts(Translator translator) {
+        this.translator = translator;
+
+
         menuSettings.setText(getText("menu.menuSetting"));
         menuLanguage.setText(getText("menu.menuLanguage"));
         menuMusic.setText(getText("menu.menuMusic"));

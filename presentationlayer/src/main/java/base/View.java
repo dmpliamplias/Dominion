@@ -141,7 +141,7 @@ public abstract class View<M extends Model> {
         translator = serviceLocator.getTranslator();
 
         setTexts();
-        menuBar.setMenuTexts();
+        menuBar.setMenuTexts(translator);
     }
 
     public void setMenuBarUsed(boolean menuBarUsed) {
