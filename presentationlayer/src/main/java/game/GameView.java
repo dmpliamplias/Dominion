@@ -533,6 +533,8 @@ public GameView() {
      *
      * @author Murat Kelleci
      * @param gameResult
+     * here is shown the display for each player. the winner will get the winner pic, draw the draw pic and dialog and the loser the loser pic and dialog.
+     * here is also the pic defined depending on win, draw or lose and the same for the sound which is also individual.
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
     private void displayWinnerDialog(Map.Entry<WinningInformation, GameResult> gameResult) {

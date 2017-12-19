@@ -23,12 +23,12 @@ import static util.StyleSheetPath.RANKING;
 */
 public class RankingView extends View<RankingModel> {
 
-    TableView<RankingViewModel> table;
+    private TableView<RankingViewModel> table;
 
-    protected Label lblRanking;
-    protected TableColumn<RankingViewModel, String> userNameColumn;
-    protected TableColumn<RankingViewModel, String> userHighScoreColumn;
-    protected TableColumn<RankingViewModel, String> rankingPositionColumn;
+    private Label lblRanking;
+    private TableColumn<RankingViewModel, String> userNameColumn;
+    private TableColumn<RankingViewModel, String> userHighScoreColumn;
+    private TableColumn<RankingViewModel, String> rankingPositionColumn;
     protected Button btnLobby;
 
     public RankingView(Stage stage, RankingModel model) {
@@ -86,7 +86,7 @@ public class RankingView extends View<RankingModel> {
 
     }
 
-    public void bindModelToView() {
+    protected void bindModelToView() {
 
         //For Loop from Script Kaspar Riesen Programming 1
 
