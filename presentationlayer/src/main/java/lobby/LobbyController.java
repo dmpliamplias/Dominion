@@ -295,7 +295,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     public void sendMessage() {
 
         String chatMessage =  plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
-        ChatContainer cc = new ChatContainer();
+        ChatContainer cc = new ChatContainer(Methods.ChatLobby);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( chatMessage );
         view.setChatMessage(chatMessage, ViewUtils.getColorByClientId(cc.getClientId()));

@@ -9,8 +9,8 @@ public class ChatContainer extends Container implements Serializable{
     String msg;
     int clientId;
 
-    public ChatContainer(){
-        super(Methods.Chat);
+    public ChatContainer(Methods chatMethod){
+        super(chatMethod);
     }
 
     public String getMsg() {

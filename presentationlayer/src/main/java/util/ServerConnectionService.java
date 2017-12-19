@@ -121,14 +121,14 @@ public class ServerConnectionService extends Thread{
             loginController.handleServerAnswer((LoginContainer)c);
         }else if(c.getMethod() == Methods.Login_SetUser_TestPurposesOnly && loginController != null){
             loginController.handleServerAnswer_TestPurposeLogin((LoginContainer)c);
-        }else if(c.getMethod() == Methods.Chat && gameController != null){
+        }else if(c.getMethod() == Methods.ChatGame && gameController != null){
             gameController.handleServerAnswer_receiveMessage((ChatContainer) c);
         } else if(c.getMethod() == Methods.StartGame && lobbyController != null){
             lobbyController.handleServerAnswer_startGame((LobbyContainer)c);
         }else if(c.getMethod() == Methods.Rankings) {
             RankingContainer rc = (RankingContainer) c;
             rankingController.handleServerAnswer( rc.getHighScores() );
-        }else if(c.getMethod() == Methods.Chat && lobbyController != null){
+        }else if(c.getMethod() == Methods.ChatLobby && lobbyController != null){
             lobbyController.handleServerAnswer_receiveMessage( (ChatContainer)c );
         }else if(c.getMethod() == Methods.Lobby_Players && lobbyController != null){
             lobbyController.handleServerAnswer_newPlayer((LobbyContainer) c);

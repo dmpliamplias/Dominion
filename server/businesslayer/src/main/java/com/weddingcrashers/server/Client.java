@@ -89,10 +89,13 @@ public class Client extends Thread {
             } else if (c.getMethod() == Methods.Register) {
                 RegisterContainer rc = (RegisterContainer) c;
                 _loginManager.createUser(rc.getUser());
-            } else if (c.getMethod() == Methods.Chat) {
+            } else if (c.getMethod() == Methods.ChatGame) {
                 ChatContainer cc = (ChatContainer) c;
-                _chatManager.broadCastChatMessageToAllClients(cc.getMsg());
-            } else if (c.getMethod() == Methods.StartGame) {
+                _chatManager.broadCastChatMessageToAllClients(cc.getMsg(),  Methods.ChatGame);
+            } else if (c.getMethod() == Methods.ChatLobby) {
+                ChatContainer cc = (ChatContainer) c;
+                _chatManager.broadCastChatMessageToAllClients(cc.getMsg(),  Methods.ChatLobby);
+            }else if (c.getMethod() == Methods.StartGame) {
                 LobbyContainer lc = (LobbyContainer) c;
                 _lobbyManager.startGame(lc);
             } else if (c.getMethod() == Methods.Lobby_Players) {

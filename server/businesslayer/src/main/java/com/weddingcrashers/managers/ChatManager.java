@@ -1,6 +1,7 @@
 package com.weddingcrashers.managers;
 
 import com.weddingcrashers.server.Client;
+import com.weddingcrashers.servermodels.Methods;
 import com.weddingcrashers.util.businesslayer.ServerUtils;
 import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
@@ -14,8 +15,8 @@ public class ChatManager extends Manager {
         super(c);
     }
 
-    public  void broadCastChatMessageToAllClients(String msg){
-        ChatContainer cc = new ChatContainer();
+    public  void broadCastChatMessageToAllClients(String msg, Methods chatMethod){
+        ChatContainer cc = new ChatContainer(chatMethod);
         cc.setMsg(msg);
         cc.setClientId(this.client.getClientId());
 

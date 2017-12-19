@@ -611,7 +611,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void sendMessage() {
         String message = plServiceLocator.getUser().getUserName() + ": " + view.getTextFieldChat().getText();
-        ChatContainer cc = new ChatContainer();
+        ChatContainer cc = new ChatContainer(Methods.ChatGame);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg(message);
         view.getTextFieldChat().clear();
@@ -632,7 +632,7 @@ public class GameController extends Controller<GameModel, GameView> {
     public void sendButtonText() {
 
         String message = plServiceLocator.getUser().getUserName() + ": " + view.getBtnSendText().getText();
-        ChatContainer cc = new ChatContainer();
+        ChatContainer cc = new ChatContainer(Methods.ChatGame);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg(message);
 
