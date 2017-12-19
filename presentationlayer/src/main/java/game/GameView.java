@@ -611,7 +611,7 @@ public GameView() {
 
         name.setCellValueFactory(new PropertyValueFactory<>("username"));
         points.setCellValueFactory(new PropertyValueFactory<>("points"));
-        position.setCellValueFactory(new PropertyValueFactory<>("newPosition"));
+        position.setCellValueFactory(new PropertyValueFactory<>("position"));
 
         return tableView;
     }
