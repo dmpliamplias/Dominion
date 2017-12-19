@@ -96,7 +96,7 @@ public class ServerConnectionService extends Thread{
     }
 
     private void displayError(ErrorContainer ec){
-        System.out.println("Error from Server recieved. display error:");
+        System.out.println("Error from Server recieved.");
         Platform.runLater(()->{
             Alert alert = new Alert(Alert.AlertType.ERROR, ec.getError());
 
