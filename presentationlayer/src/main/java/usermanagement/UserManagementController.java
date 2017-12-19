@@ -2,9 +2,7 @@ package usermanagement;
 
 import base.Controller;
 import com.weddingcrashers.model.User;
-import javafx.scene.control.Alert;
-import login.LoginController;
-import login.LoginModel;
+import javafx.stage.Stage;
 import login.LoginView;
 import usermanagement.dialog.user.CreateUserDialog;
 import usermanagement.dialog.user.DeleteUserDialog;
@@ -14,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
+import static util.ViewFactory.createLoginView;
 
 /**
  * The user management controller.
@@ -44,37 +43,39 @@ public class UserManagementController extends Controller<UserManagementModel, Us
      */
     private void initialize() {
         loadUsers();
-        openEditDialog();
-        openCreateDialog();
-        openDeleteDialog();
-        goToLoginButton();
+        setEditAction();
+        setCreateAction();
+        setDeleteAction();
+        setGotoLoginAction();
     }
 
     /**
      * Goes back to login view.
      */
-    private void goToLoginButton() {
+    private void setGotoLoginAction() {
         view.goToLoginButton.setOnAction(e -> {
-            final LoginModel model = new LoginModel();
-            final LoginView view = new LoginView(this.view.getStage(), model);
-            new LoginController(view, model);
+            final Stage stage = new Stage();
+            final LoginView loginView = createLoginView(stage);
 
-            this.view.stop();
-            view.start();
+            view.stop();
+            loginView.start();
         });
     }
 
     /**
      * Opens the edit dialog.
      */
-    private void openEditDialog() {
+    private void setEditAction() {
         view.editButton.setOnAction(e -> {
             final User selectedUser = view.listView.getSelectionModel().getSelectedItem();
             if (selectedUser == null) {
-                new SelectUserAlert();
+                view.alert("usermanagementview.selectUserContent",
+                        "usermanagementview.selectUserHeader",
+                        "usermanagementview.selectUserTitle",
+                        INFORMATION);
             }
             else {
-                final EditUserDialog editUserDialog = new EditUserDialog(selectedUser);
+                final EditUserDialog editUserDialog = new EditUserDialog(selectedUser, view.getTranslator());
                 final Optional<User> userOptional = editUserDialog.showAndWait();
                 if (userOptional.isPresent()) {
                     final User user = userOptional.get();
@@ -88,10 +89,10 @@ public class UserManagementController extends Controller<UserManagementModel, Us
     /**
      * Opens the create user dialog.
      */
-    private void openCreateDialog() {
+    private void setCreateAction() {
         view.createButton.setOnAction(e -> {
             final User newUser = new User();
-            final CreateUserDialog createUserDialog = new CreateUserDialog(newUser);
+            final CreateUserDialog createUserDialog = new CreateUserDialog(newUser, view.getTranslator());
             final Optional<User> userOptional = createUserDialog.showAndWait();
             if (userOptional.isPresent()) {
                 final User user = userOptional.get();
@@ -104,14 +105,17 @@ public class UserManagementController extends Controller<UserManagementModel, Us
     /**
      * Opens the delete dialog.
      */
-    private void openDeleteDialog() {
+    private void setDeleteAction() {
         view.deleteButton.setOnAction(e -> {
             final User selectedUser = view.listView.getSelectionModel().getSelectedItem();
             if (selectedUser == null) {
-                new SelectUserAlert();
+                view.alert("usermanagementview.selectUserContent",
+                        "usermanagementview.selectUserHeader",
+                        "usermanagementview.selectUserTitle",
+                        INFORMATION);
             }
             else {
-                final DeleteUserDialog deleteUserDialog = new DeleteUserDialog();
+                final DeleteUserDialog deleteUserDialog = new DeleteUserDialog(view.getTranslator());
                 final Optional<Boolean> optional = deleteUserDialog.showAndWait();
                 final Boolean deleted = optional.get();
                 if (deleted) {
@@ -138,24 +142,6 @@ public class UserManagementController extends Controller<UserManagementModel, Us
         final List<User> users = serviceLocator.getUserService().list();
         view.users.clear();
         view.users.addAll(users);
-    }
-
-    /**
-     * Private select user alert.
-     */
-    private class SelectUserAlert extends Alert {
-
-        // ---- Constructor
-
-        /**
-         * Constructor.
-         */
-        SelectUserAlert() {
-            super(INFORMATION);
-            this.setContentText("Please select a user.");
-            this.showAndWait();
-        }
-
     }
 
 }

@@ -1,14 +1,20 @@
 package game;
 
 
-import controls.CardImageView;
 import base.Controller;
 import com.weddingcrashers.businessmodels.Card;
 import com.weddingcrashers.businessmodels.KingCard;
 import com.weddingcrashers.businessmodels.MoneyCard;
 import com.weddingcrashers.businessmodels.PlayerSet;
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.servermodels.CardPlayedInfo;
+import com.weddingcrashers.servermodels.ChatContainer;
+import com.weddingcrashers.servermodels.GameContainer;
+import com.weddingcrashers.servermodels.GameSettings;
+import com.weddingcrashers.servermodels.Methods;
+import com.weddingcrashers.servermodels.ViewStatus;
+import com.weddingcrashers.servermodels.WinningInformation;
+import controls.CardImageView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,25 +25,30 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import lobby.LobbyController;
-import lobby.LobbyModel;
 import lobby.LobbyView;
 import org.apache.commons.collections.map.LinkedMap;
-import ranking.RankingController;
-import ranking.RankingModel;
 import ranking.RankingView;
 import sun.applet.Main;
 import util.PLServiceLocator;
+import util.ViewFactory;
 import util.ViewUtils;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import static game.GameResult.*;
+import static game.GameResult.DRAW;
+import static game.GameResult.LOSE;
+import static game.GameResult.WIN;
 import static javafx.scene.media.AudioClip.INDEFINITE;
+import static util.ViewFactory.createRankingView;
 
 /**
  *  author Michel Schlatter
@@ -998,27 +1009,25 @@ public class GameController extends Controller<GameModel, GameView> {
      * here you come to the ranking or to the lobby
      */
     private void goToRankingView() {
-        Stage s = new Stage(  );
-        RankingModel model = new RankingModel();
-        RankingView view = new RankingView(s, model);
-        RankingController rankingController = new RankingController(model, view);
+        Stage stage = new Stage();
+        final RankingView rankingView = createRankingView(stage);
+
         this.view.stop();
-        view.start();
+        rankingView.start();
     }
 
     private void goToLobbyView() {
-        LobbyModel model = new LobbyModel();
-        Stage s = new Stage(  );
-        LobbyView view = new LobbyView(s, model);
-        new LobbyController(view, model);
-        plServiceLocator.audioClip.stop();
+        Stage stage = new Stage();
+        final LobbyView lobbyView = ViewFactory.createLobbyView(stage);
+        if (plServiceLocator.audioClip != null) {
+            plServiceLocator.audioClip.stop();
+        }
         if(super.view.menuBar.getMenuItemMusicMute().isSelected()){
             plServiceLocator.soundIsOn = false;
         }
         this.view.stop();
-        view.start();
+        lobbyView.start();
     }
-
 
 }
 

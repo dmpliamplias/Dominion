@@ -1,5 +1,6 @@
 package usermanagement.dialog.user;
 
+import com.weddingcrashers.service.Translator;
 import javafx.scene.control.ButtonType;
 import usermanagement.dialog.BaseDialog;
 
@@ -18,11 +19,12 @@ public class DeleteUserDialog extends BaseDialog<Boolean> {
     /**
      * Constructor.
      */
-    public DeleteUserDialog() {
-        this.setContentText("You really want to delete the user?");
+    public DeleteUserDialog(Translator translator) {
+        super(translator);
+        setContentText(translator.getString("usermanagementview.deleteDialog.contentText"));
 
-        final ButtonType confirmButton = new ButtonType("Confirm", OK_DONE);
-        final ButtonType cancelButton = new ButtonType("Cancel", CANCEL_CLOSE);
+        final ButtonType confirmButton = new ButtonType(translator.getString("usermanagementview.dialog.confirm"), OK_DONE);
+        final ButtonType cancelButton = new ButtonType(translator.getString("usermanagementview.dialog.cancel"), CANCEL_CLOSE);
         this.getDialogPane().getButtonTypes().addAll(confirmButton, cancelButton);
 
         this.setResultConverter(dialogButton -> dialogButton == confirmButton);
@@ -32,13 +34,13 @@ public class DeleteUserDialog extends BaseDialog<Boolean> {
     // ---- Methods
 
     @Override
-    protected String title() {
-        return "User deletion";
+    protected String title(Translator translator) {
+        return translator.getString("usermanagementview.deleteDialog.title");
     }
 
     @Override
-    protected String headerText() {
-        return "Delete a user";
+    protected String headerText(Translator translator) {
+        return translator.getString("usermanagementview.deleteDialog.headerText");
     }
 
 }

@@ -1,6 +1,7 @@
 package usermanagement.dialog.user;
 
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.Translator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -49,10 +50,11 @@ public abstract class BaseUserDialog extends BaseDialog<User> {
     /**
      * Constructor.
      */
-    protected BaseUserDialog(User user) {
+    BaseUserDialog(User user, Translator translator) {
+        super(translator);
         this.user = user;
 
-        addBaseLayout();
+        addBaseLayout(translator);
         fillFields();
         convertResult();
         addFieldListeners();
@@ -68,9 +70,9 @@ public abstract class BaseUserDialog extends BaseDialog<User> {
     /**
      * Adds the base layout.
      */
-    private void addBaseLayout() {
-        confirmButton = new ButtonType("Confirm", OK_DONE);
-        final ButtonType cancelButton = new ButtonType("Cancel", CANCEL_CLOSE);
+    private void addBaseLayout(Translator translator) {
+        confirmButton = new ButtonType(translator.getString("usermanagementview.dialog.confirm"), OK_DONE);
+        final ButtonType cancelButton = new ButtonType(translator.getString("usermanagementview.dialog.cancel"), CANCEL_CLOSE);
         this.getDialogPane().getButtonTypes().addAll(confirmButton, cancelButton);
 
         // initialize fields
@@ -95,9 +97,9 @@ public abstract class BaseUserDialog extends BaseDialog<User> {
         grid.add(emailField, 1, 2);
         grid.add(new Label("Password:"), 0, 3);
         grid.add(passwordField, 1, 3);
-        grid.add(new Label("Is blocked:"), 0, 4);
+        grid.add(new Label("Blocked:"), 0, 4);
         grid.add(isBlockedBox, 1, 4);
-        grid.add(new Label("Is super user:"), 0, 5);
+        grid.add(new Label("Super user:"), 0, 5);
         grid.add(isSuperUserBox, 1, 5);
     }
 
@@ -108,8 +110,8 @@ public abstract class BaseUserDialog extends BaseDialog<User> {
         nameField.textProperty().addListener(new UserDialogChangeListener<>());
         emailField.textProperty().addListener(new UserDialogChangeListener<>());
         passwordField.textProperty().addListener(new UserDialogChangeListener<>());
-        isBlockedBox.textProperty().addListener(new UserDialogChangeListener<>());
-        isSuperUserBox.textProperty().addListener(new UserDialogChangeListener<>());
+        isBlockedBox.selectedProperty().addListener((new UserDialogChangeListener<>()));
+        isSuperUserBox.selectedProperty().addListener(new UserDialogChangeListener<>());
     }
 
     /**

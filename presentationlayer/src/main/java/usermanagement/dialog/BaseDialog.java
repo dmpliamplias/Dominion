@@ -1,5 +1,6 @@
 package usermanagement.dialog;
 
+import com.weddingcrashers.service.Translator;
 import javafx.scene.control.Dialog;
 
 /**
@@ -15,9 +16,9 @@ public abstract class BaseDialog<T> extends Dialog<T> {
     /**
      * Constructor.
      */
-    protected BaseDialog() {
-        this.setTitle(title());
-        this.setHeaderText(headerText());
+    protected BaseDialog(Translator translator) {
+        setTitle(title(translator));
+        setHeaderText(headerText(translator));
     }
 
     // ---- Methods
@@ -25,15 +26,17 @@ public abstract class BaseDialog<T> extends Dialog<T> {
     /**
      * Returns the title of the dialog.
      *
+     * @param translator the translator.
      * @return the title of the dialog.
      */
-    protected abstract String title();
+    protected abstract String title(Translator translator);
 
     /**
      * Returns the header text of the dialog.
      *
+     * @param translator the translator.
      * @return the header text of the dialog.
      */
-    protected abstract String headerText();
+    protected abstract String headerText(Translator translator);
 
 }

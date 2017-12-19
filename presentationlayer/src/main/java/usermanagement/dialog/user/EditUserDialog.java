@@ -2,6 +2,7 @@ package usermanagement.dialog.user;
 
 
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.Translator;
 
 /**
  * Edit user dialog.
@@ -17,8 +18,8 @@ public class EditUserDialog extends BaseUserDialog {
      *
      * @param user the user.
      */
-    public EditUserDialog(User user) {
-        super(user);
+    public EditUserDialog(User user, Translator translator) {
+        super(user, translator);
     }
 
 
@@ -35,13 +36,13 @@ public class EditUserDialog extends BaseUserDialog {
     }
 
     @Override
-    protected String title() {
-        return "Editing user";
+    protected String title(Translator translator) {
+        return translator.getString("usermanagementview.editDialog.title");
     }
 
     @Override
-    protected String headerText() {
-        return "Edit a user.";
+    protected String headerText(Translator translator) {
+        return translator.getString("usermanagementview.editDialog.headerText");
     }
 
 }

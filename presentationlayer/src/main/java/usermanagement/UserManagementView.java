@@ -2,9 +2,9 @@ package usermanagement;
 
 import base.View;
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.Translator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +16,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import static javafx.scene.text.FontWeight.NORMAL;
+import static util.StyleSheetPath.USERMANAGEMENT;
 
 /**
  * The user management view.
@@ -63,15 +64,27 @@ public class UserManagementView extends View<UserManagementModel> {
     protected Scene create_GUI() {
         stage.setHeight(700);
         stage.setWidth(1000);
-        // layout
-        final VBox root = new VBox();
-        root.setSpacing(15);
-        root.setPadding(new Insets(20));
 
-        root.getChildren().addAll(createTitle(), createListView(), createHBox());
+        // root
+        final VBox root = new VBox();
+
+        // menu
+        final VBox menu = new VBox();
+        menuBar.getMenuSettings().getItems().remove(menuBar.getMenuSound());
+        menuBar.getMenuSettings().getItems().remove(menuBar.getMenuMusic());
+        menu.getChildren().add(menuBar);
+
+        // content
+        final VBox content = new VBox();
+        content.setId("content");
+        content.getChildren().addAll(createTitle(), createListView(), createHBox());
+
+        root.getChildren().addAll(menu, content);
 
         final Scene scene = new Scene(root);
         stage.setScene(scene);
+
+        setStylesheet(scene, USERMANAGEMENT);
 
         return scene;
     }
@@ -136,6 +149,10 @@ public class UserManagementView extends View<UserManagementModel> {
         editButton.setText(getText("usermanagementview.edit"));
         deleteButton.setText(getText("usermanagementview.delete"));
         createButton.setText(getText("usermanagementview.create"));
+    }
+
+    Translator getTranslator() {
+        return translator;
     }
 
 }

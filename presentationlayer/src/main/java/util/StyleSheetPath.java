@@ -20,8 +20,10 @@ public final class StyleSheetPath {
     /** Register view css path. */
     public static final String REGISTER = "/register/register.css";
     /** CardImageView css path. */
-    public static final String CARDIMAGEVIEW = "controls/cardImageView.css";
+    public static final String CARDIMAGEVIEW = "/controls/cardImageView.css";
     /** RankingView css path. */
-    public static final String RANKING = "ranking/rankingTable.css";
+    public static final String RANKING = "/ranking/rankingTable.css";
+    /** User management css path. */
+    public static final String USERMANAGEMENT = "/usermanagement/usermanagement.css";
 
 }

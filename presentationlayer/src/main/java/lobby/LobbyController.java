@@ -2,7 +2,11 @@ package lobby;
 
 import base.Controller;
 import com.weddingcrashers.model.User;
-import com.weddingcrashers.servermodels.*;
+import com.weddingcrashers.servermodels.ChatContainer;
+import com.weddingcrashers.servermodels.GameSettings;
+import com.weddingcrashers.servermodels.LobbyContainer;
+import com.weddingcrashers.servermodels.Methods;
+import com.weddingcrashers.servermodels.ViewStatus;
 import com.weddingcrashers.service.ServiceLocator;
 import com.weddingcrashers.service.Translator;
 import game.GameController;
@@ -15,8 +19,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
+import javafx.stage.Stage;
 import ranking.RankingView;
-import util.StageFactory;
 import util.ViewUtils;
 
 import java.io.IOException;
@@ -26,6 +30,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import static javafx.scene.media.AudioClip.INDEFINITE;
+import static util.ViewFactory.createRankingView;
 
 /**
  *  author Michel Schlatter
@@ -223,7 +228,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         Platform.runLater(() -> {
             GameModel gameModel = new GameModel();
             GameView gameView = new GameView( this.view.getStage(), gameModel );
-            GameController gameController = new GameController(gameModel,gameView, lc.getPlayers(), lc.getGameSettings());
+            new GameController(gameModel,gameView, lc.getPlayers(), lc.getGameSettings());
 
             this.view.stop();
             gameView.start();
@@ -324,8 +329,9 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
     //@author Murat Kelleci am 24.10.2017
 
     private void goToRankingView() {
-        final GameView gameView = new GameView();
-        final RankingView rankingView = StageFactory.crateRankingView();
+        final Stage stage = new Stage();
+        final RankingView rankingView = createRankingView(stage);
+
         view.stop();
         rankingView.start();
     }

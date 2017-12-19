@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import static util.StageFactory.createHelpStage;
+import static util.ViewFactory.createHelpStage;
 
 /**
  * Dominion menu bar.
@@ -109,7 +109,8 @@ public class DominionMenuBar extends MenuBar {
     private void createHelpMenuItem() {
         menuItemHelp = new MenuItem();
         menuItemHelp.setOnAction(e -> {
-            final Stage helpStage = createHelpStage();
+            final Stage stage = new Stage();
+            final Stage helpStage = createHelpStage(stage);
             helpStage.show();
         });
     }
@@ -174,6 +175,10 @@ public class DominionMenuBar extends MenuBar {
 
     public Menu getMenuSound() {
         return menuSound;
+    }
+
+    public Menu getMenuMusic() {
+        return menuMusic;
     }
 
     public MenuItem getMenuItemDE() {

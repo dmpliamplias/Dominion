@@ -124,11 +124,34 @@ public abstract class View<M extends Model> {
     /**
      * Creates an alert for the given alert type and message.
      *
-     * @param msg the message.
+     * @param contentTextKey the key of the content text.
      * @param alertType the alert type.
      */
-    public DominionAlert alert(String msg, Alert.AlertType alertType){
-        return new DominionAlert(msg, alertType, translator);
+    public DominionAlert alert(String contentTextKey, Alert.AlertType alertType){
+        return new DominionAlert(contentTextKey, alertType, translator);
+    }
+
+    /**
+     * Creates an alert for the given alert type and message.
+     *
+     * @param contentTextKey the key of the content text.
+     * @param headerTextKey the key of the header text.
+     * @param alertType the alert type.
+     */
+    public DominionAlert alert(String contentTextKey, String headerTextKey, Alert.AlertType alertType){
+        return new DominionAlert(contentTextKey, headerTextKey, alertType, translator);
+    }
+
+    /**
+     * Creates an alert for the given alert type and message.
+     *
+     * @param contentTextKey the key of the content text.
+     * @param headerTextKey the key of the header text.
+     * @param titleTextKey the key of the title text.
+     * @param alertType the alert type.
+     */
+    public DominionAlert alert(String contentTextKey, String headerTextKey, String titleTextKey, Alert.AlertType alertType){
+        return new DominionAlert(contentTextKey, headerTextKey, titleTextKey, alertType, translator);
     }
 
     /**

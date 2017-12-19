@@ -21,8 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.weddingcrashers.service.Language.*;
-import static util.StageFactory.createHelpStage;
-import static util.StageFactory.createLoginView;
+import static util.ViewFactory.createHelpStage;
+import static util.ViewFactory.createLoginView;
 
 
 /**
@@ -148,13 +148,14 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
     }
 
     private void goToLoginView(){
-        final LoginView loginView = createLoginView(view);
+        final LoginView loginView = createLoginView(view.getStage());
         view.stop();
         loginView.start();
     }
 
     private void createHelpView() {
-        final Stage helpStage = createHelpStage();
+        final Stage stage = new Stage();
+        final Stage helpStage = createHelpStage(stage);
         helpStage.show();
     }
 

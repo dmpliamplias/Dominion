@@ -8,20 +8,17 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import lobby.LobbyController;
-import lobby.LobbyModel;
 import lobby.LobbyView;
-import register.RegisterController;
-import register.RegisterModel;
 import register.RegisterView;
-import usermanagement.UserManagementController;
-import usermanagement.UserManagementModel;
 import usermanagement.UserManagementView;
+import util.ViewFactory;
 
 import java.io.IOException;
 
-import static util.PLServiceLocator.getPLServiceLocator;
 import static javafx.scene.control.Alert.AlertType.WARNING;
+import static util.PLServiceLocator.getPLServiceLocator;
+import static util.ViewFactory.createLobbyView;
+import static util.ViewFactory.createUserManagementView;
 
 /** @author Murat Kelleci
  *
@@ -75,7 +72,6 @@ public class LoginController extends Controller<LoginModel, LoginView> {
      */
     public void login() {
         view.refreshModel();
-        if (model.getEmail().equals("ga")) goToUserManagementView();
         if (model.getEmail().equals("go")) {
             User u = new User();
             u.setUserEmail("anonymous@dom.ch");
@@ -141,33 +137,25 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
     private void goToUserManagementView() {
         final Stage stage = new Stage();
-        final UserManagementModel model = new UserManagementModel();
-        final UserManagementView view = new UserManagementView(stage, model);
-        new UserManagementController(model, view);
+        final UserManagementView userManagementView = createUserManagementView(stage);
 
         this.view.stop();
-        view.start();
+        userManagementView.start();
     }
 
     private void goToLobbyView() {
-        LobbyModel model = new LobbyModel();
-        Stage s = new Stage(  );
-        LobbyView view = new LobbyView(s, model);
-        new LobbyController(view, model);
+        Stage stage = new Stage();
+        final LobbyView lobbyView = createLobbyView(stage);
 
         this.view.stop();
-        view.start();
+        lobbyView.start();
     }
-
 
     private void goToRegisterView() {
-        RegisterModel model = new RegisterModel();
-        RegisterView view = new RegisterView(this.view.getStage(), model);
+        final RegisterView registerView = ViewFactory.createRegisterView(this.view.getStage());
 
-        RegisterController registerController = new RegisterController(view, model);
         this.view.stop();
-        view.start();
+        registerView.start();
     }
-
 
 }

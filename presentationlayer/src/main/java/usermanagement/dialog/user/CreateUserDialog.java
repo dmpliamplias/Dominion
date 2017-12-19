@@ -1,6 +1,7 @@
 package usermanagement.dialog.user;
 
 import com.weddingcrashers.model.User;
+import com.weddingcrashers.service.Translator;
 
 /**
  * The create user dialog.
@@ -16,8 +17,8 @@ public class CreateUserDialog extends BaseUserDialog {
      *
      * @param user the user.
      */
-    public CreateUserDialog(final User user) {
-        super(user);
+    public CreateUserDialog(final User user, Translator translator) {
+        super(user, translator);
     }
 
 
@@ -29,13 +30,13 @@ public class CreateUserDialog extends BaseUserDialog {
     }
 
     @Override
-    protected String title() {
-        return "User creation";
+    protected String title(Translator translator) {
+        return translator.getString("usermanagementview.createDialog.title");
     }
 
     @Override
-    protected String headerText() {
-        return "Create a new user";
+    protected String headerText(Translator translator) {
+        return translator.getString("usermanagementview.createDialog.headerText");
     }
 
 }

@@ -23,32 +23,65 @@ public class DominionAlert extends Alert {
     /**
      * Constructor.
      *
-     * @param key the message key.
+     * @param contentTextKey the message key.
      * @param alertType the alert type.
      */
-    public DominionAlert(String key, AlertType alertType, Translator translator) {
+    public DominionAlert(String contentTextKey, AlertType alertType, Translator translator) {
         super(alertType);
         this.translator = translator;
 
         getDialogPane().setMinHeight(USE_PREF_SIZE);
-        contentText(key);
+        contentText(contentTextKey);
+        showAndWait();
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param contentTextKey the message key.
+     * @param alertType the alert type.
+     */
+    public DominionAlert(String contentTextKey, String headerTextKey, AlertType alertType, Translator translator) {
+        super(alertType);
+        this.translator = translator;
+
+        getDialogPane().setMinHeight(USE_PREF_SIZE);
+        contentText(contentTextKey);
+        headerText(headerTextKey);
+        showAndWait();
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param contentTextKey the message key.
+     * @param alertType the alert type.
+     */
+    public DominionAlert(String contentTextKey, String headerTextKey, String titleTextKey, AlertType alertType, Translator translator) {
+        super(alertType);
+        this.translator = translator;
+
+        getDialogPane().setMinHeight(USE_PREF_SIZE);
+        contentText(contentTextKey);
+        headerText(headerTextKey);
+        title(titleTextKey);
         showAndWait();
     }
 
 
     // ---- Methods
 
-    protected void title(String key) {
+    private void title(String key) {
         final String title = translator.getString(key);
         setTitle(title);
     }
 
-    protected void headerText(String key) {
+    private void headerText(String key) {
         final String headerText = translator.getString(key);
         setHeaderText(headerText);
     }
 
-    protected void contentText(String key) {
+    private void contentText(String key) {
         final String contentText = translator.getString(key);
         setContentText(contentText);
     }
