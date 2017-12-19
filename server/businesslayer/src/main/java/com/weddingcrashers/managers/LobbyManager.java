@@ -45,6 +45,8 @@ public class LobbyManager extends Manager{
      * @param lcReceived
      */
     public void startGame(LobbyContainer lcReceived){
+        GameManager.dispose(); // reset static gamemanager fields
+
         LobbyContainer lc = new LobbyContainer(Methods.StartGame);
         ArrayList<Integer> clientIds = lcReceived.getClientIds_startGame();
         if(clientIds.size() <= 1){

@@ -11,6 +11,7 @@ import login.LoginController;
 import ranking.RankingController;
 import register.RegisterController;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,12 +29,14 @@ public class ServerConnectionService extends Thread{
     private  boolean isHoster;
     private ObjectInputStream objectInputStream;
     private  ObjectOutputStream objectOutputStream;
+    private volatile boolean errorShown = false;
 
     public ServerConnectionService(String url, int port) throws IOException{
         connection = new Socket(url,port);
         try {
             objectInputStream = new ObjectInputStream(connection.getInputStream());
-        } catch (IOException e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             showExceptionToUser(e);
         }
@@ -66,10 +69,10 @@ public class ServerConnectionService extends Thread{
             try {
                 Container c = this.<Container>receiveObject();
                 runMethod(c);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 ex.printStackTrace();
                 showExceptionToUser(ex);
-                ex.printStackTrace();
             }
         }
     }
@@ -92,18 +95,41 @@ public class ServerConnectionService extends Thread{
         sendObject(vc);
     }
 
-    private void showExceptionToUser(Exception ex){
+    private void displayError(ErrorContainer ec){
+        System.out.println("Error from Server recieved. display error:");
         Platform.runLater(()->{
-            try {
-                connection.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, ec.getError());
+
+            if(ec.getErrorCode()==403) { // lobby is full
+                alert.setOnCloseRequest((event)->{
+                    Platform.exit();
+                });
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    Platform.exit();
+                }
+            }else{
+                alert.showAndWait();
             }
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
-            alert.showAndWait();
         });
+
+    }
+
+    private synchronized void showExceptionToUser(Exception ex){
+        if(!errorShown) {
+            System.out.println("internal connection error.");
+            errorShown = true;
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("There was a problem with the server-connection. Please restart the programm and connect to the server again.");
+                alert.showAndWait();
+                alert.setOnCloseRequest((event) -> {
+                    errorShown = false;
+                    System.out.println("dialog closed.");
+                });
+            });
+        }
     }
     //-------------------------- Controller Communications -----------------------------------------------
 
@@ -155,24 +181,6 @@ public class ServerConnectionService extends Thread{
         }
     }
 
-    private void displayError(ErrorContainer ec){
-        Platform.runLater(()->{
-            Alert alert = new Alert(Alert.AlertType.ERROR, ec.getError());
-
-            if(ec.getErrorCode()==403) {
-                alert.setOnCloseRequest((event)->{
-                    Platform.exit();
-                });
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    Platform.exit();
-                }
-            }else{
-                alert.showAndWait();
-            }
-        });
-
-    }
 
 
     ConnectionController connectionController;

@@ -44,7 +44,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Register); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         this.view.btnRegister.setOnAction((event) -> {
@@ -110,7 +110,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
                     serverConnectionService.sendObject(registerContainer);
                 }
                 catch (Exception e) {
-                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                    view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
             else {

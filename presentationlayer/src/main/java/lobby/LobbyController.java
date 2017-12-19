@@ -55,7 +55,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         try {
             serverConnectionService.updateViewStatus( ViewStatus.Lobby ); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            this.view.simpleAlert( e.getMessage(), Alert.AlertType.ERROR );
         }
 
         /**
@@ -194,7 +194,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         try {
             serverConnectionService.sendObject(lc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -288,7 +288,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         try {
             serverConnectionService.sendObject( lc );
         } catch (IOException e) {
-            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            view.simpleAlert( e.getMessage(), Alert.AlertType.ERROR );
         }
     }
 
@@ -309,7 +309,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
         try {
             serverConnectionService.sendObject( cc );
         } catch (IOException e) {
-            view.alert( e.getMessage(), Alert.AlertType.ERROR );
+            view.simpleAlert( e.getMessage(), Alert.AlertType.ERROR );
         }
     }
 

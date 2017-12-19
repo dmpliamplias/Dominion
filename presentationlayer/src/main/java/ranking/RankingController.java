@@ -34,7 +34,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Ranking); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         // get Ranking from Server
@@ -42,7 +42,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         try {
             serverConnectionService.sendObject(rc);
         } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         this.view.btnLobby.setOnAction((event) -> {

@@ -98,14 +98,14 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnectionService.updateViewStatus(ViewStatus.Game); // set ViewStatus for Server
         } catch (IOException e) {
-            this.view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
         GameContainer gc = new GameContainer(Methods.InitialCardSets);
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
 
@@ -596,7 +596,7 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -623,7 +623,7 @@ public class GameController extends Controller<GameModel, GameView> {
                 try {
                     PLServiceLocator.getPLServiceLocator().getServerConnectionService().sendObject(gc);
                 } catch (IOException e) {
-                    view.alert(e.getMessage(), Alert.AlertType.ERROR);
+                    view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
         }
@@ -639,7 +639,7 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnectionService.sendObject(gc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -659,7 +659,7 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnectionService.sendObject(cc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -680,7 +680,7 @@ public class GameController extends Controller<GameModel, GameView> {
         try {
             serverConnectionService.sendObject(cc);
         } catch (IOException e) {
-            view.alert(e.getMessage(), Alert.AlertType.ERROR);
+            view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

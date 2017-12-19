@@ -216,10 +216,6 @@ public class GameManager extends Manager {
             }
         }
         broadCast(container);
-
-        if(abortGame){
-            GameManager.dispose();
-        }
     }
 
     /**
@@ -513,10 +509,13 @@ public class GameManager extends Manager {
      * resets the gamemanager so that a new game can be started
      */
     public static void dispose(){
-        for(Client c : players){
-            c.setDominionSet(null);
-            c.setActive(false);
+        if(players != null) {
+            for (Client c : players) {
+                c.setDominionSet(null);
+                c.setActive(false);
+            }
         }
+
         gameSettings = null;
         players = null;
         users = null;
