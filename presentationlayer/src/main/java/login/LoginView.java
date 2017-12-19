@@ -1,6 +1,7 @@
 package login;
 
 import base.View;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,14 +25,10 @@ import static util.StyleSheetPath.LOGIN;
 
 public class LoginView extends View<LoginModel> {
 
-
     protected Button btnLogin;
     protected Button btnSignUp;
     protected TextField user;
     protected PasswordField pw;
-
-
-
 
     public LoginView(Stage stage, LoginModel model) {
         super(stage, model);
@@ -80,7 +77,7 @@ public class LoginView extends View<LoginModel> {
         grPa.add(hbBtn, 1, 4);
 
         user = new TextField();
-        user.requestFocus();
+        Platform.runLater(() -> user.requestFocus());
         grPa.add(user,1,1);
 
         pw = new PasswordField();
