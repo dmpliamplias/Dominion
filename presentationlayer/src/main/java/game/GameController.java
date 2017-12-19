@@ -92,7 +92,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         initialize();
     }
-    
+
 
     public void initialize() {
         try {
