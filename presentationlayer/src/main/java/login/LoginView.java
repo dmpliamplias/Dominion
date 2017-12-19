@@ -80,6 +80,7 @@ public class LoginView extends View<LoginModel> {
         grPa.add(hbBtn, 1, 4);
 
         user = new TextField();
+        user.requestFocus();
         grPa.add(user,1,1);
 
         pw = new PasswordField();
