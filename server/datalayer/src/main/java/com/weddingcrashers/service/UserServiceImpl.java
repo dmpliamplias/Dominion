@@ -58,7 +58,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         contextUser.setBlocked(user.isBlocked());
         contextUser.setSuperUser(user.isSuperUser());
 
-        return objectUpdateService.update(user);
+        return objectUpdateService.update(contextUser);
     }
 
     @Override
