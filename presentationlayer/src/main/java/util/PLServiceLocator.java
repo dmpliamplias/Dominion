@@ -14,6 +14,7 @@ public class PLServiceLocator {
     public javafx.scene.media.AudioClip audioClip;
     private static PLServiceLocator sl;
     public boolean soundIsOn = new Boolean( true );
+    public boolean noiseIsOn = new Boolean( true );
 
     public  static PLServiceLocator getPLServiceLocator(){
         if(sl == null){
@@ -48,5 +49,9 @@ public class PLServiceLocator {
 
     public javafx.scene.media.AudioClip getAudioClip() {
         return audioClip;
+    }
+
+    public boolean isNoiseIsOn() {
+        return noiseIsOn;
     }
 }

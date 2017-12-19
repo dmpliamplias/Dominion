@@ -209,17 +209,33 @@ public class GameController extends Controller<GameModel, GameView> {
 
         /**
          *  author Manuel Wirz
-         *  Startes the background music or don't
+         *  Startes the background music and noises on or turn it off
          *  */
 
         if (plServiceLocator.soundIsOn == false){
             super.view.menuBar.getMenuItemMusicMute().setSelected( true );
         }
 
+        if (plServiceLocator.noiseIsOn == false){
+            super.view.menuBar.getMenuItemSoundMute().setSelected( true );
+        }
+
         super.view.menuBar.getMenuItemMusicMute().setOnAction( event -> {
 
             plServiceLocator.audioClip.stop();
             plServiceLocator.soundIsOn = false;
+
+        } );
+
+        super.view.menuBar.getMenuItemSoundUnmute().setOnAction( event -> {
+
+            plServiceLocator.noiseIsOn = true;
+
+        } );
+
+        super.view.menuBar.getMenuItemSoundMute().setOnAction( event -> {
+
+            plServiceLocator.noiseIsOn = false;
 
         } );
 
