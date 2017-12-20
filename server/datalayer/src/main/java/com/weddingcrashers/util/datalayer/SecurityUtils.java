@@ -10,6 +10,7 @@ import java.security.spec.InvalidKeySpecException;
 import static java.util.logging.Logger.getLogger;
 
 public class SecurityUtils {
+
     // ---- Statics
 
     /** The algorithm. */

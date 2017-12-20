@@ -30,7 +30,6 @@ public class SettingsServiceImpl extends BaseService implements SettingsService 
 
     @Override
     public Settings loadSettingsFor(final User user) {
-        // TODO: 30.09.2017 query that
         return null;
     }
 
