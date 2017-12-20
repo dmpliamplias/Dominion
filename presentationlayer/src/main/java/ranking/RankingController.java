@@ -21,8 +21,9 @@ import java.util.List;
 public class RankingController extends Controller<RankingModel, RankingView> {
 
 
-    //** @author Michel Schlatter
-
+    /**
+     * @author Murat Kelleci
+     */
 
     public RankingController(RankingModel model, RankingView view) {
         super(model, view);
@@ -37,7 +38,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
             this.view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        // get Ranking from Server
+        // get ranking from server
         RankingContainer rc = new RankingContainer();
         try {
             serverConnectionService.sendObject(rc);
@@ -50,7 +51,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         });
     }
 
-    ///** @author Murat Kelleci
+
 
     public void handleServerAnswer(List<Highscore> highscoreList){
         Platform.runLater(() ->{
@@ -60,7 +61,6 @@ public class RankingController extends Controller<RankingModel, RankingView> {
         });
     }
 
-    ///** @author Murat Kelleci
 
     private void goToLobbyView() {
         LobbyModel model = new LobbyModel();

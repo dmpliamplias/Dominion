@@ -385,7 +385,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /**
-     * @author Murat Kelleci 01.12.-14.12
+     * @author dmpliamplias
      * @param winningInformations
      * @return
      * this methode is used to show the correct gameresult depending on player see on line 367 and 370
@@ -454,6 +454,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     // same like 2 and 3 players
+
     private LinkedMap fourPlayer(LinkedMap gameResultMap, List<WinningInformation> winningInformations) {
         gameResultMap = threePlayer(gameResultMap, winningInformations);
 

@@ -2,8 +2,7 @@ package login;
 
 import base.Model;
 
-/**
- *  @author Michel Schlatter
+/**@author Murat Kelleci
  *  */
 public class LoginModel extends Model {
 

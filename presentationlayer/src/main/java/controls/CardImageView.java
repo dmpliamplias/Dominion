@@ -50,28 +50,23 @@ public class CardImageView extends ImageView {
             if (cardSize.equals(cardSize.miniSize)){
                 Image playCM = new Image(this.getClass().getResourceAsStream("/game/mini/"+ path));
 
-                //ToDo Murat setPreserveRatio verwenden dann brauchts Zeile setFitWidth nicht mehr.
-                //ToDo Murat umschreiben MagicNumbers
+
                 this.setFitHeight(miniSizeHeight);
-                //this.setFitWidth(100);
                 this.setPreserveRatio(true);
                 this.setImage(playCM);
             } else if (cardSize.equals(cardSize.bigSize)) {
                 Image playCB = new Image(this.getClass().getResourceAsStream("/game/big/"+ path));
                 this.setFitHeight(bigSizeHeight);
-                //this.setFitWidth(60);
                 this.setPreserveRatio(true);
                 this.setImage(playCB);
             } else if (cardSize.equals(cardSize.tooltip)) {
                 Image playCT = new Image(this.getClass().getResourceAsStream("/game/big/" + path));
                 this.setFitHeight(toolTipSizeHeight);
-                //this.setFitWidth(200);
                 this.setPreserveRatio(true);
                 this.setImage(playCT);
             } else if (cardSize.equals(cardSize.miniMini)){
                 Image playCM2 = new Image(this.getClass().getResourceAsStream("/game/mini/"+ path));
                 this.setFitHeight(miniMiniHeight);
-               // this.setFitWidth(70);
                 this.setPreserveRatio(true);
                 this.setImage(playCM2);
 

@@ -157,17 +157,7 @@ public class RegisterView extends View<RegisterModel>{
 
     }
 
-//    @Override
-//    protected HashMap<Labeled, String> labeledToKeyMap() {
-//        final HashMap<Labeled, String> map = new HashMap<>();
-//        map.put(btnRegister, "Register");
-//        map.put(btnCancel, "cancel");
-//        map.put(lblEmail, "Email");
-//        map.put(lblPw, "Password");
-//        map.put(lblPwconfirm, "Password_Confirmation");
-//        map.put(lblUserName, "Username");
-//        return map;
-//    }
+
 
 
     void refreshModel() {

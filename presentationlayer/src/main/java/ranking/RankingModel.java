@@ -5,7 +5,7 @@ import com.weddingcrashers.model.Highscore;
 
 import java.util.List;
 
-//** @author Michel Schlatter
+//** @author Murat Kelleci
 
 public class RankingModel extends Model {
     List<Highscore> highscores;

@@ -21,7 +21,6 @@ import static util.ViewFactory.createLobbyView;
 import static util.ViewFactory.createUserManagementView;
 
 /** @author Murat Kelleci
- *
  */
 public class LoginController extends Controller<LoginModel, LoginView> {
 
@@ -67,9 +66,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     }
 
 
-    /**
-     * @author Michel Schlatter
-     */
+
     public void login() {
         view.refreshModel();
         if (model.getEmail().equals("go")) {
