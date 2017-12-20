@@ -443,16 +443,10 @@ public class GameController extends Controller<GameModel, GameView> {
                 lose(gameResult,third);
                 return gameResult;
             }
-
-            }
-        else if(second.getPoints()==third.getPoints()){
-
+        }
+        if (second.getPoints() == third.getPoints()) {
             second.setPosition(2);
             third.setPosition(2);
-            win(gameResult,first);
-            lose(gameResult,second,third);
-            return gameResult;
-
         }
         win(gameResult, first);
         lose(gameResult, second, third);
@@ -466,7 +460,7 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation third = (WinningInformation) gameResultMap.lastKey();
         final WinningInformation fourth = winningInformations.get(3);
         if ((gameResultMap.getValue(gameResultMap.indexOf(gameResultMap.lastKey())) == DRAW)) {
-            if (third.getPoints() == winningInformations.get(3).getPoints()) {
+            if (third.getPoints() == fourth.getPoints()) {
                 fourth.setPosition(1);
                 draw(gameResultMap, fourth);
                 return gameResultMap;
