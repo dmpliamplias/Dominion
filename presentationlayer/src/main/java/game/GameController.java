@@ -459,7 +459,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
         final WinningInformation third = (WinningInformation) gameResultMap.lastKey();
         final WinningInformation fourth = winningInformations.get(3);
-        if ((gameResultMap.getValue(gameResultMap.indexOf(gameResultMap.lastKey())) == DRAW)) {
+        if ((gameResultMap.getValue(gameResultMap.indexOf(third)) == DRAW)) {
             if (third.getPoints() == fourth.getPoints()) {
                 fourth.setPosition(1);
                 draw(gameResultMap, fourth);
