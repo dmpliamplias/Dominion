@@ -4,8 +4,7 @@ import base.View;
 import com.weddingcrashers.service.Language;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -20,10 +19,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.effect.ColorAdjust;
@@ -35,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.ScrollPane;
 
 public class HelpView extends View<HelpModel> {
 
@@ -70,7 +66,34 @@ public class HelpView extends View<HelpModel> {
 
         tabPane.getTabs().addAll(tabConnection, tabLogin, tabRegister, tabLobby, tabGame, tabRules, tabCards);
 
-        // Creating vBox and add it to their specific tab
+        // Create ScrollPanes and add them to their specific tab
+        ScrollPane scrollConnection = new ScrollPane();
+        ScrollPane scrollLogin = new ScrollPane();
+        ScrollPane scrollRegister = new ScrollPane();
+        ScrollPane scrollLobby = new ScrollPane();
+        ScrollPane scrollGame = new ScrollPane();
+        ScrollPane scrollRules = new ScrollPane();
+        ScrollPane scrollCards = new ScrollPane();
+
+        tabConnection.setContent(scrollConnection);
+        tabLogin.setContent(scrollLogin);
+        tabRegister.setContent(scrollRegister);
+        tabLobby.setContent(scrollLobby);
+        tabGame.setContent(scrollGame);
+        tabRules.setContent(scrollRules);
+        tabCards.setContent(scrollCards);
+
+        //Vertical ScrollBar should never appear because Text is resizeable
+        scrollConnection.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollLogin.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollRegister.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollLobby.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollGame.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollRules.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollCards.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+
+        // Creating vBox and add it to their specific ScrollPane
         VBox vBoxConnection = new VBox();
         VBox vBoxLogin = new VBox();
         VBox vBoxRegister = new VBox();
@@ -79,14 +102,33 @@ public class HelpView extends View<HelpModel> {
         VBox vBoxRules = new VBox();
         VBox vBoxCards = new VBox();
 
-        tabConnection.setContent(vBoxConnection);
-        tabLogin.setContent(vBoxLogin);
-        tabRegister.setContent(vBoxRegister);
-        tabLobby.setContent(vBoxLobby);
-        tabGame.setContent(vBoxGame);
-        tabRules.setContent(vBoxRules);
-        tabCards.setContent(vBoxCards);
+        scrollConnection.setContent(vBoxConnection);
+        scrollLogin.setContent(vBoxLogin);
+        scrollRegister.setContent(vBoxRegister);
+        scrollLobby.setContent(vBoxLobby);
+        scrollGame.setContent(vBoxGame);
+        scrollRules.setContent(vBoxRules);
+        scrollCards.setContent(vBoxCards);
 
+        //vBox should have a gap to the right side and content should be aligned center
+        vBoxConnection.setPadding(new Insets(0, 0, 30, 20));
+        vBoxLogin.setPadding(new Insets(0, 0, 30, 20));
+        vBoxRegister.setPadding(new Insets(0, 0, 30, 20));
+        vBoxLobby.setPadding(new Insets(0, 0, 30, 20));
+        vBoxGame.setPadding(new Insets(0, 0, 30, 20));
+        vBoxRules.setPadding(new Insets(0, 0, 30, 20));
+        vBoxCards.setPadding(new Insets(0, 0, 30, 20));
+
+        vBoxConnection.setAlignment(Pos.TOP_CENTER);
+        vBoxLogin.setAlignment(Pos.TOP_CENTER);
+        vBoxRegister.setAlignment(Pos.TOP_CENTER);
+        vBoxLobby.setAlignment(Pos.TOP_CENTER);
+        vBoxGame.setAlignment(Pos.TOP_CENTER);
+        vBoxRules.setAlignment(Pos.TOP_CENTER);
+        vBoxCards.setAlignment(Pos.TOP_CENTER);
+
+
+        // Create Text
         Text txtConnection = new Text();
         Text txtLogin = new Text();
         Text txtRegister = new Text();
@@ -101,16 +143,15 @@ public class HelpView extends View<HelpModel> {
         // tabPane and text size adjusts to scene
         bp.prefHeightProperty().bind(scene.heightProperty());
         bp.prefWidthProperty().bind(scene.widthProperty());
-        txtConnection.wrappingWidthProperty().bind(scene.widthProperty());
-        txtGame.wrappingWidthProperty().bind(scene.widthProperty());
-        txtLobby.wrappingWidthProperty().bind(scene.widthProperty());
-        txtLogin.wrappingWidthProperty().bind(scene.widthProperty());
-        txtRegister.wrappingWidthProperty().bind(scene.widthProperty());
-        txtRules.wrappingWidthProperty().bind(scene.widthProperty());
-        txtCards.wrappingWidthProperty().bind(scene.widthProperty());
+        txtConnection.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtGame.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtLobby.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtLogin.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtRegister.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtRules.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
+        txtCards.wrappingWidthProperty().bind(scene.widthProperty().add(-30));
 
-
-
+        // setText according to Language
 
         if (translator.getCurrentLanguage() == Language.ENGLISH){
             tabConnection.setText("Connection");
@@ -166,21 +207,106 @@ public class HelpView extends View<HelpModel> {
             String newLine = "\n";
             String doubleNewLine = "\n\n";
             txtConnection.setText(newLine + "Um eine Runde Dominion zu spielen, muss zuerst der Host bestimmt werden, welcher sich mit dem Server verbindet und die IP- und Portnummer an die restlichen Mitspieler kommuniziert."
-                    + doubleNewLine + "Der Host klickt auf den Button \"Server starten\" und tippt im nachfolgenden Fenster die gewünschte Portnummer ein. Diese soll im Bereich von 1024-49151 (ausgeschlossen 9092) sein."
-                    + " Danach erscheint ein Dialog mit der IP- und Portnummer. Diese beiden Nummern müssen nun an die restlichen Mitspieler gesendet werden. Durch den \'Clipboard Button\' können die Nummern in die Zwischenablage gespeichert werden."
-                    + doubleNewLine + "Die restlichen Mitspieler klicken auf den Button \"Mit Server verbinden\" und tragen die Nummern ein. Danach kommen alle Spieler zum Login Fenster." + newLine);
+                    + doubleNewLine + "Der Host klickt auf den Button \"Server starten\" (Siehe A) und tippt im nachfolgenden Fenster die gewünschte Portnummer ein (Siehe C). Diese soll im Bereich von 1024-49151 (ausgeschlossen 9092) sein."
+                    + " Danach erscheint ein Dialog mit der IP- und Portnummer (Siehe D). Diese beiden Nummern müssen nun an die restlichen Mitspieler gesendet werden. Durch den \'Clipboard Button\' können die Nummern in die Zwischenablage gespeichert werden."
+                    + doubleNewLine + "Die restlichen Mitspieler klicken auf den Button \"Mit Server verbinden\" (Siehe B) und tragen die Nummern ein (Siehe E). Danach kommen alle Spieler zum Login Fenster." + doubleNewLine);
+
+            ImageView imgConnection1 = new ImageView(new Image(getClass().getResourceAsStream("/help/Connection1_DE.PNG")));
+            imgConnection1.setPreserveRatio(true);
+            imgConnection1.setFitHeight(250);
+
+            ImageView imgConnection2 = new ImageView(new Image(getClass().getResourceAsStream("/help/Connection2_DE.PNG")));
+            imgConnection2.setPreserveRatio(true);
+            imgConnection2.setFitHeight(250);
+
+            ImageView imgConnection3 = new ImageView(new Image(getClass().getResourceAsStream("/help/Connection3_DE.PNG")));
+            imgConnection3.setPreserveRatio(true);
+            imgConnection3.setFitHeight(250);
+
+            ImageView imgConnection4 = new ImageView(new Image(getClass().getResourceAsStream("/help/Connection4_DE.PNG")));
+            imgConnection4.setPreserveRatio(true);
+            imgConnection4.setFitHeight(250);
+
+            vBoxLogin.setMargin(imgConnection1, new Insets(0, 0, 30, 0));
+            vBoxLogin.setMargin(imgConnection2, new Insets(0, 0, 30, 0));
+            vBoxLogin.setMargin(imgConnection3, new Insets(0, 0, 30, 0));
+
+            vBoxConnection.getChildren().addAll(txtConnection, imgConnection1, imgConnection2, imgConnection3, imgConnection4);
 
 
-            vBoxConnection.getChildren().addAll(txtConnection);
-            vBoxConnection.setAlignment(Pos.TOP_CENTER);
+            // Text for Game
+            txtGame.setText(newLine + "Abschnitt A" + newLine + "Hier werden alle Spieler mit ihrem Benutzernamen und der aktuellen Punkteanzahl angezeigt. Der Spieler, welcher am Zug ist, wird durch eine grüne Umrandung hervorgehoben."
+            + doubleNewLine + "Abschnitt B" + newLine + "Hier wird angezeigt wie viele Aktionen, Käufe und virtuelles Geld dem Spieler zur Verfügung steht. Bei jedem Spielzug startet der Spieler mit einer Aktion und einem Kauf."
+            + doubleNewLine + "Abschnitt C" + newLine + "Hier liegen die Karten, welche gekauft werden können. Das rote Label zeigt die Anzahl der Karten, die noch gekauft werden können. Wenn der Spieler genügend Geld und genügend Kaufaktionen besitzt, kann er die Karte in der Kaufphase mit einem Mausklick kaufen. Die gekaufte Karte wandert direkt in den Ablagestapel. Verbleibt man mit dem Cursor 2 Sekunden auf einem Bild, wird es vergrössert dargestellt. "
+            + doubleNewLine + "Abschnitt D" + newLine + "Dieser Button führt den Spieler durch die verschiedenen Phasen. Möchte der Spieler die Aktionsphase beenden, kann er auf den Button \"Aktionsphase beenden\" klicken und befindet sich dann in der Kaufphase. In der Kaufphase können Geldkarten gespielt und Karten damit gekauft werden."
+            + doubleNewLine + "Abschnitt E" + newLine + "Dies sind die Handkarten des Spielers. Zu Beginn eines Spielzugs, befinden sich immer 5 Karten auf der Hand. Diese Anzahl kann sich verändern durch Aktionen von ausgespielten Aktionskarten oder auch durch das Ausspielen von Handkarten."
+            + doubleNewLine + "Abschnitt F" + newLine + "Dies ist der Nachziehstapel. Das rote Label zeigt die Anzahl Karten, welche sich noch im Stapel befinden. Falls es keine Karten mehr zu ziehen gibt, wird der Ablagestapel gemischt und die Karten kommen auf den Nachziehstapel."
+            + doubleNewLine + "Abschnitt G" + newLine + "Dies ist der Ablagestapel. Alle Handkarten sowie alle gespielten oder gekauften Karten werden nach dem Ende des Spielzugs auf den Ablagestapel gelegt. Die Karten werden offen hingelegt, somit ist immer die letzte Karte ersichtlich. Falls der Ablagestapel leer ist, wird die Rückseite einer leeren Karte angezeigt."
+            + doubleNewLine + "Abschnitt H" + newLine + "Dies ist der Platz für ausgespielte Karten. Sobald eine Karte aus der Hand gespielt wird, wandert sie von den Handkarten in diesen Bereich "
+            + doubleNewLine + "Abschnitt I" + newLine + "Dies ist das Protokoll für das gesamte Spiel. Es wird jeweils angezeigt, welcher Spieler am Zug ist, was er gekauft und was er gespielt hat."
+            + doubleNewLine + "Abschnitt J" + newLine + "Dies ist der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können. Falls jemand einen guten Spielzug durchgeführt hat, kann der Spieler auf den Button \"Guter Spielzug\" klicken."
+            + doubleNewLine
+            );
+
+            ImageView imgGameView = new ImageView(new Image(getClass().getResourceAsStream("/help/GameView_DE.PNG")));
+            imgGameView.setPreserveRatio(true);
+            imgGameView.setFitHeight(400);
+
+            vBoxGame.getChildren().addAll(txtGame, imgGameView);
 
 
-            txtGame.setText("");
-            txtLobby.setText("");
-            txtLogin.setText("");
+            // Text for Lobby
+            txtLobby.setText(newLine + "Abschnitt A" + newLine + "Hier kann der Host die Spielendoption auswählen. Das Spiel endet nach einer bestimmten Anzahl Runden oder regulär."
+            + doubleNewLine + "Abschnitt B" + newLine + "Hier werden alle Spieler mit ihrem Benutzernamen angezeigt, welche sich zurzeit in der Lobby befinden."
+            + doubleNewLine + "Abschnitt C" + newLine + "Dies ist der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können."
+            + doubleNewLine + "Abschnitt D" + newLine + "Wenn der Host eine Spielendoption ausgewählt hat und sich alle Mitspieler in der Lobby befinden, kann er mit einem Klick auf den Button \"Spiel starten\" das Spiel starten. Alle Spieler landen dann in der Spielansicht."
+            + doubleNewLine + "Abschnitt E" + newLine + "Mit einem Klick auf den Button \"Ranking\" gelangt der Spieler zur Rangliste. Diese Liste ist leer solange noch kein Spiel zu Ende gespielt worden ist."
+            + doubleNewLine + "Abschnitt F" + newLine + "Mit einem Klick auf den Button \"Info\" erhält der Spieler die Information, dass er eine Spielendoption auswählen soll. "
+            + doubleNewLine
+            );
+
+
+            ImageView imgLobbyHost = new ImageView(new Image(getClass().getResourceAsStream("/help/Lobby_Host_DE.PNG")));
+            imgLobbyHost.setPreserveRatio(true);
+            imgLobbyHost.setFitHeight(250);
+
+            ImageView imgLobby = new ImageView(new Image(getClass().getResourceAsStream("/help/Lobby_DE.PNG")));
+            imgLobby.setPreserveRatio(true);
+            imgLobby.setFitHeight(250);
+
+            vBoxLobby.getChildren().addAll(txtLobby, imgLobbyHost, imgLobby);
+            vBoxLobby.setMargin(imgLobbyHost, new Insets(0, 0, 30, 0));
+
+
+            // Text for Tab Login
+            txtLogin.setText(newLine + "Der Spieler muss sich nun mit seiner E-Mail Adresse und seinem Passwort einloggen (Siehe A). Stimmt die E-Mail Adresse mit dem Passwort überein, führt ein Klick auf den Button \"Login\" den Spieler in die Lobby.  "
+            + "Falls noch kein Login besteht, muss der Spieler auf den Button \"Registrieren\" klicken."
+            + doubleNewLine + "Hat ein Spieler sein Passwort vergessen, muss er den Host für einen Passwortwechsel anfragen. Der Host kann sich mit folgender E-Mail Adresse im Login anmelden: admin@dominion.com (Das Passwort steht aus Sicherheitsgründen in der Dokumentation)."
+            + " Damit gelangt der Host direkt zur Benutzerverwaltung (Siehe B). In der Benutzerverwaltung können Spieler hinzugefügt, gelöscht oder blockiert werden. Zusätzlich können hier die Passwörter geändert werden."
+            + doubleNewLine);
+
+            ImageView imgLoginDE = new ImageView(new Image(getClass().getResourceAsStream("/help/Login_DE.PNG")));
+            imgLoginDE.setPreserveRatio(true);
+            imgLoginDE.setFitHeight(250);
+
+            ImageView imgUserMgmt = new ImageView(new Image(getClass().getResourceAsStream("/help/Benutzerverwaltung_DE.PNG")));
+            imgUserMgmt.setPreserveRatio(true);
+            imgUserMgmt.setFitHeight(250);
+
+            vBoxLogin.getChildren().addAll(txtLogin, imgLoginDE, imgUserMgmt);
+            vBoxLogin.setMargin(imgLoginDE, new Insets(0, 0, 30, 0));
+
 
             // Text for Tab Register
-            txtRegister.setText("");
+            txtRegister.setText(newLine + "Für das Login muss man sich einmalig registrieren. Die E-Mail Adresse und das Passwort werden für das Login verwendet. Es wurde entschieden die E-Mail Adresse zu verwenden, da der Benutzername eher in Vergessenheit geraten kann. "
+            + "Der Benutzername wird im Chat, in der Lobby, in der Rangliste und im Spiel verwendet. Er ist für alle Mitspieler ersichtlich."
+            + doubleNewLine);
+
+            ImageView imgRegisterDE = new ImageView(new Image(getClass().getResourceAsStream("/help/Register_DE.PNG")));
+            imgRegisterDE.setPreserveRatio(true);
+            imgRegisterDE.setFitHeight(250);
+
+            vBoxRegister.getChildren().addAll(txtRegister, imgRegisterDE);
 
 
             // Text for Tab Rules
@@ -197,7 +323,6 @@ public class HelpView extends View<HelpModel> {
             );
 
             vBoxRules.getChildren().add(txtRules);
-            vBoxRules.setAlignment(Pos.TOP_CENTER);
 
 
             // Text for Tab Cards
@@ -212,7 +337,6 @@ public class HelpView extends View<HelpModel> {
             );
 
             vBoxCards.getChildren().addAll(txtCards);
-            vBoxCards.setAlignment(Pos.TOP_CENTER);
 
         }
 

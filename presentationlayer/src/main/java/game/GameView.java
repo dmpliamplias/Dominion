@@ -83,7 +83,7 @@ public class GameView extends View<GameModel> {
     protected Text txtBuy;
     protected Text txtTreasure;
     protected Image imgGreyOut;
-
+    private String points;
 
 
     ImageView imgVtrayStack;
@@ -103,7 +103,7 @@ public GameView() {
         root = new BorderPane();
         FlowPane fpCenter = new FlowPane();
         fpCenter.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1300, 650);
         setStylesheet(scene, GAME);
         gp = new GridPane();
         VBox vb = new VBox();
@@ -262,7 +262,7 @@ public GameView() {
 
 
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setTitle("Dominion");
 
 
@@ -469,7 +469,7 @@ public GameView() {
      */
     public void setUserPoints(int userId, String userName, PlayerSet set, int activeUserId) {
         String elementId = "UserPoints_" + userId;
-        String text = userName + ": " + Integer.toString(set.calculatePoints()) + " P";
+        String text = userName + ": \n" + Integer.toString(set.calculatePoints()) + " " + points;
         String activeUser = "UserPoints_" + activeUserId;
 
         Node elm = VBoxPointsandPlayer.lookup("#" + elementId);
@@ -479,8 +479,9 @@ public GameView() {
             // element does not exist yet
             lblUserNameAndPoints = new Label();
             lblUserNameAndPoints.getStyleClass().add("labelShowStats");
-            lblUserNameAndPoints.setPrefSize(150, 20);
+            lblUserNameAndPoints.setPrefSize(150, 50);
             lblUserNameAndPoints.setText(text);
+            lblUserNameAndPoints.setAlignment(Pos.CENTER_LEFT);
             lblUserNameAndPoints.setId(elementId);
             VBoxPointsandPlayer.getChildren().addAll(lblUserNameAndPoints);
 
@@ -657,6 +658,7 @@ public GameView() {
         this.btnEndActionPhase.setText(getText("gameview.endActionPhase"));
         this.btnPlayMoneyCards.setText(getText("gameview.playTreasure"));
         this.btnEndTurn.setText(getText("gameview.endTurn"));
+        this.points = getText("gameview.points");
 
 
     }
