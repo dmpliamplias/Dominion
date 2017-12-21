@@ -19,7 +19,7 @@ public class ServerUtils {
             if(!c.get_clientSocket().isClosed() ) {
                 ObjectOutputStream objectOutputStream = c.getObjectOutputStream();
                 objectOutputStream.writeObject(object);
-                objectOutputStream.reset(); // TODO: 08.12.2017 MIGI FALLS ES BEI MURAT IMMER NOCH NICHT GEHT => ALLE OBJEKTE CLONEN! (evtl nach writeobj?)
+                objectOutputStream.reset();
                 out.println("Server sent message: " + object.getMethod() + "  to Client: " + c.getClientId());
             }
         }catch(SocketException sEx){
