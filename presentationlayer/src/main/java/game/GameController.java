@@ -496,25 +496,22 @@ public class GameController extends Controller<GameModel, GameView> {
             lose(gameResultMap, fourth);
             return gameResultMap;
         }
-        if (lastWinningInformation.getPosition() == 2) {
-            if (lastWinningInformation.getPoints() == fourth.getPoints()) {
-                fourth.setPosition(2);
-            }
-            else {
-                fourth.setPosition(3);
-            }
-        }
-        if (lastWinningInformation.getPosition() == 3) {
-            if (lastWinningInformation.getPoints() == fourth.getPoints()) {
-                fourth.setPosition(3);
-            }
-            else {
-                fourth.setPosition(4);
-            }
-        }
+        setPosition(lastWinningInformation, fourth, 2);
+        setPosition(lastWinningInformation, fourth, 3);
         lose(gameResultMap, fourth);
 
         return gameResultMap;
+    }
+
+    private void setPosition(WinningInformation lastWinningInformation, WinningInformation fourth, int realPosition) {
+        if (lastWinningInformation.getPosition() == realPosition) {
+            if (lastWinningInformation.getPoints() == fourth.getPoints()) {
+                fourth.setPosition(realPosition);
+            }
+            else {
+                fourth.setPosition(realPosition + 1);
+            }
+        }
     }
 
     private void win(LinkedMap gameResult, WinningInformation... winningInformations) {
