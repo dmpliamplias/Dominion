@@ -7,8 +7,6 @@ package com.weddingcrashers.db;
  */
 public class DatabaseStatics {
 
-    // TODO: 16.10.2017 dyoni make user management
-
     // ---- Statics
 
     /** The persistence unit name. */

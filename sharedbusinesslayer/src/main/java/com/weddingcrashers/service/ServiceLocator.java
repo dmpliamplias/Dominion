@@ -25,7 +25,6 @@ public class ServiceLocator {
 
     // ---- Members
 
-    // TODO: 31.10.17 dmpliamplias maybe conf for default language or last played language.
     /** The H2 database. */
     private H2Database h2Database;
 

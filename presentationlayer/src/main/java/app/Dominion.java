@@ -138,6 +138,10 @@ public class Dominion extends Application {
             view.stop();
         }
 
+        if (serviceLocator.isDbRunning()) {
+            serviceLocator.shutdownDatabase();
+        }
+
         Server.dispose();
         ServerConnectionService serverConnectionService = PLServiceLocator.getPLServiceLocator().getServerConnectionService();
         LobbyContainer lbContainer = new LobbyContainer(Methods.ImOut);
@@ -149,10 +153,6 @@ public class Dominion extends Application {
             }
             serverConnectionService.dispose();
         }
-        if (serviceLocator.isDbRunning()) {
-            serviceLocator.shutdownDatabase();
-        }
-
         getLogger().info("Application terminated");
     }
 

@@ -21,15 +21,11 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "ID")
     private long id;
 
-    /** Creation date. */
     @Column(name = "CREATION_DATE", nullable = false)
     private LocalDateTime creationDate;
-//
-//    @Column(name = "EDITED_AT")
-//    private LocalDateTime editedAt;
-//
-//    @Column(name = "EDITED_BY")
-//    private User user;
+
+    @Column(name = "DELETED")
+    private boolean deleted = false;
 
 
     // ---- Constructor

@@ -6,12 +6,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(Settings.class)
-public abstract class Settings_ {
+public abstract class Settings_ extends com.weddingcrashers.model.BaseEntity_ {
 
 	public static volatile SingularAttribute<Settings, String> settings;
 	public static volatile SingularAttribute<Settings, Boolean> sound;
-	public static volatile SingularAttribute<Settings, Long> id;
-	public static volatile SingularAttribute<Settings, Long> user;
+	public static volatile SingularAttribute<Settings, User> user;
 
 }
 
