@@ -385,12 +385,11 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /**
-     * @author dmpliamplias
-     * @param winningInformations
-     * @return
-     * this methode is used to show the correct gameresult depending on player see on line 367 and 370
+     * Determines the game result.
+     *
+     * @param winningInformations the winning informations to determine the game result.
+     * @return the game result map.
      */
-
     private LinkedMap determineGameResult(List<WinningInformation> winningInformations) {
         final LinkedMap gameResult = new LinkedMap();
         // case two player
@@ -408,7 +407,13 @@ public class GameController extends Controller<GameModel, GameView> {
         return null;
     }
 
-    // you take the first and the second. then you compare them. if the first has the same points then the second has the same position.
+    /**
+     * Two player case.
+     *
+     * @param gameResult the game result.
+     * @param winningInformations the winning informations.
+     * @return the game result for two player.
+     */
     private LinkedMap twoPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
@@ -421,7 +426,14 @@ public class GameController extends Controller<GameModel, GameView> {
         lose(gameResult, second);
         return gameResult;
     }
-    // same like 2 players
+
+    /**
+     * Three player case.
+     *
+     * @param gameResult the game result.
+     * @param winningInformations the winning informations.
+     * @return the game result for three player.
+     */
     private LinkedMap threePlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
@@ -453,8 +465,13 @@ public class GameController extends Controller<GameModel, GameView> {
         return gameResult;
     }
 
-    // same like 2 and 3 players
-
+    /**
+     * Four player case.
+     *
+     * @param gameResultMap the game result.
+     * @param winningInformations the winning informations.
+     * @return the game result for four player.
+     */
     private LinkedMap fourPlayer(LinkedMap gameResultMap, List<WinningInformation> winningInformations) {
         gameResultMap = threePlayer(gameResultMap, winningInformations);
 
@@ -466,27 +483,25 @@ public class GameController extends Controller<GameModel, GameView> {
                 draw(gameResultMap, fourth);
                 return gameResultMap;
             }
-            final WinningInformation first = winningInformations.get(0);
-            final WinningInformation second = winningInformations.get(1);
-            final WinningInformation third = winningInformations.get(2);
-            gameResultMap.remove(first);
-            gameResultMap.remove(second);
-            gameResultMap.remove(third);
-            first.setPosition(1);
-            gameResultMap.put(first, WIN);
-            first.setPosition(1);
-            gameResultMap.put(second, WIN);
-            first.setPosition(1);
-            gameResultMap.put(third, WIN);
-            first.setPosition(2);
-            gameResultMap.put(fourth, LOSE);
+            fourth.setPosition(2);
+            lose(gameResultMap, fourth);
             return gameResultMap;
         }
         if (lastWinningInformation.getPosition() == 2) {
-            fourth.setPosition(3);
+            if (lastWinningInformation.getPoints() == fourth.getPoints()) {
+                fourth.setPosition(2);
+            }
+            else {
+                fourth.setPosition(3);
+            }
         }
         if (lastWinningInformation.getPosition() == 3) {
-            fourth.setPosition(4);
+            if (lastWinningInformation.getPoints() == fourth.getPoints()) {
+                fourth.setPosition(3);
+            }
+            else {
+                fourth.setPosition(4);
+            }
         }
         lose(gameResultMap, fourth);
 
