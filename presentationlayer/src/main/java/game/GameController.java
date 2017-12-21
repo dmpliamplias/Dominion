@@ -483,6 +483,15 @@ public class GameController extends Controller<GameModel, GameView> {
                 draw(gameResultMap, fourth);
                 return gameResultMap;
             }
+            final WinningInformation first = (WinningInformation) gameResultMap.firstKey();
+            final WinningInformation second = (WinningInformation) gameResultMap.nextKey(first);
+            final WinningInformation third = (WinningInformation) gameResultMap.lastKey();
+
+            gameResultMap.remove(first);
+            gameResultMap.remove(second);
+            gameResultMap.remove(third);
+            win(gameResultMap, first, second, third);
+
             fourth.setPosition(2);
             lose(gameResultMap, fourth);
             return gameResultMap;
