@@ -28,7 +28,7 @@ public class EditUserDialog extends BaseUserDialog {
     @Override
     protected void fillFields() {
         idField.setText(String.valueOf(user.getId()));
-        nameField.setText(user.getUserName());
+        nameField.setText(user.getUsername());
         emailField.setText(user.getUserEmail());
         passwordField.setText(user.getPassword());
         isBlockedBox.setSelected(user.isBlocked());

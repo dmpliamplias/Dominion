@@ -330,7 +330,7 @@ public class GameController extends Controller<GameModel, GameView> {
                     enemyCards = new HashMap<Integer, PlayerSet>();
                 }
                 this.enemyCards.put(set.getUserId(), set);
-                System.out.println("got an enemycard from => userid: " + users.get(set.getUserId()).getUserName());
+                System.out.println("got an enemycard from => userid: " + users.get(set.getUserId()).getUsername());
             }
         }
         this.unusedCards = gc.getUnusedCards();
@@ -344,7 +344,7 @@ public class GameController extends Controller<GameModel, GameView> {
             enableOrDisableView();
 
             for (PlayerSet playerSet : gc.getPlayerSets()) {
-                System.out.println("Drawing the calculated points on client: " + myUser.getUserName() + " playersetsize: " + getAllSets().size());
+                System.out.println("Drawing the calculated points on client: " + myUser.getUsername() + " playersetsize: " + getAllSets().size());
                 if (playerSet != null) {
                     setPointsToView(playerSet);
                 }
@@ -543,7 +543,7 @@ public class GameController extends Controller<GameModel, GameView> {
             Card card = cardPlayedInfo.getCard();
             int count = cardPlayedInfo.getCount();
             String logger = new String(
-                    user.getUserName() + " "
+                    user.getUsername() + " "
                             + view.getTxtLogger().getText() + ": "
                             + count + " "
                             + card.toString(serviceLocator.getTranslator()));
@@ -591,7 +591,7 @@ public class GameController extends Controller<GameModel, GameView> {
             System.out.println("Card buyed: " + updatedSet.calculatePoints());
 
             view.setLoggerContent(
-                    users.get(updatedSet.getUserId()).getUserName()
+                    users.get(updatedSet.getUserId()).getUsername()
                     + " " + view.getTxtLogger2().getText() + ": "
                     + buyedInfo.getCard().toString(serviceLocator.getTranslator()),
                     ViewUtils.getColorByClientId(buyedInfo.getClientId()));
@@ -682,7 +682,7 @@ public class GameController extends Controller<GameModel, GameView> {
      *  */
 
     public void sendMessage() {
-        String message = plServiceLocator.getUser().getUserName() + ": " + view.getTextFieldChat().getText();
+        String message = plServiceLocator.getUser().getUsername() + ": " + view.getTextFieldChat().getText();
         ChatContainer cc = new ChatContainer(Methods.ChatGame);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg(message);
@@ -703,7 +703,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void sendButtonText() {
 
-        String message = plServiceLocator.getUser().getUserName() + ": " + view.getBtnSendText().getText();
+        String message = plServiceLocator.getUser().getUsername() + ": " + view.getBtnSendText().getText();
         ChatContainer cc = new ChatContainer(Methods.ChatGame);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg(message);
@@ -846,7 +846,7 @@ public class GameController extends Controller<GameModel, GameView> {
         view.setLoggerContent(
                 System.lineSeparator() +
                 view.getTxtFieldShowRound().getText() + " - "+
-                activeUser.getUserName() + " " +
+                activeUser.getUsername() + " " +
                 view.getTxtLoggerIsYourTurn().getText(),
                 Color.BLACK);
     }
@@ -988,7 +988,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     public void setPointsToView(PlayerSet playerSet) {
         int userId = playerSet.getUserId();
-        String userName = users.get(userId).getUserName();
+        String userName = users.get(userId).getUsername();
         System.out.println(userId);
         System.out.println(userName);
 

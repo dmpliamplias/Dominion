@@ -15,8 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import static util.StyleSheetPath.RANKING;
-
 
 /**
  *@author Murat Kelleci - Credits:http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
@@ -93,7 +91,12 @@ public class RankingView extends View<RankingModel> {
         final ObservableList<RankingViewModel> vmList = FXCollections.observableArrayList();
         for (Highscore hs : model.getHighscores()) {
             RankingViewModel vm = new RankingViewModel();
-            vm.setName(hs.getUser().getUserName());
+            final StringBuilder sb = new StringBuilder();
+            sb.append(hs.getUser().getUsername());
+            if (hs.getUser().isDeleted()) {
+                sb.append(" ").append(getText("rankingview.userDeleted"));
+            }
+            vm.setName(sb.toString());
             vm.setPoints(hs.getPoints());
             vm.setPosition(model.getHighscores().indexOf(hs) + 1);
             vmList.add(vm);

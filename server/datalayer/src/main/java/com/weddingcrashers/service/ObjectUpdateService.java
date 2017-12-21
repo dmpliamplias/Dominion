@@ -40,8 +40,9 @@ interface ObjectUpdateService<T extends BaseEntity> {
      * Lists all entries the given entity class.
      *
      * @param clazz the entity class to list.
+     * @param showInactive show inactive entities.
      * @return all entries.
      */
-    List<T> list(Class clazz);
+    List<T> list(Class clazz, boolean showInactive);
 
 }

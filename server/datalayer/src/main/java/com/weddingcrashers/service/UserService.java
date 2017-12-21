@@ -52,8 +52,9 @@ public interface UserService {
     /**
      * Lists all users.
      *
+     * @param showInactive show inactive users.
      * @return a list with all users.
      */
-    List<User> list();
+    List<User> list(boolean showInactive);
 
 }

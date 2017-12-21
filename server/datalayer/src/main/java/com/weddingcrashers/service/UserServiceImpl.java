@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         final EntityManager em = EntityManagerFactory.getEntityManager();
         final User contextUser = em.find(user.getClass(), user.getId());
-        contextUser.setUserName(user.getUserName());
+        contextUser.setUserName(user.getUsername());
         contextUser.setUserEmail(user.getUserEmail());
         contextUser.setPassword(generatePBKDF2WithHMACSHA1Password(user.getPassword()));
         contextUser.setBlocked(user.isBlocked());
@@ -106,8 +106,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public List<User> list() {
-        return objectUpdateService.list(User.class);
+    public List<User> list(boolean showInactive) {
+        return objectUpdateService.list(User.class, showInactive);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class UserServiceImpl extends BaseService implements UserService {
      * @return the query for the given specification.
      */
     private CriteriaQuery<User> getUserByQuery(Root<User> from, CriteriaBuilder cb, CriteriaQuery<User> query, SingularAttribute<User, String> attribute, String value) {
-        query.where(cb.equal(from.get(attribute), value));
+        query.where(cb.equal(from.get(attribute), value), cb.equal(from.get(User_.deleted), false));
         return query;
     }
 

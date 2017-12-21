@@ -74,6 +74,12 @@ public class UserManagementController extends Controller<UserManagementModel, Us
                         "usermanagementview.selectUserTitle",
                         INFORMATION);
             }
+            else if (selectedUser.isDeleted()) {
+                view.alert("usermanagementview.cannotEditContent",
+                        "usermanagementview.cannotEditHeader",
+                        "usermanagementview.cannotEditTitle",
+                        INFORMATION);
+            }
             else {
                 final EditUserDialog editUserDialog = new EditUserDialog(selectedUser, view.getTranslator());
                 final Optional<User> userOptional = editUserDialog.showAndWait();
@@ -130,7 +136,7 @@ public class UserManagementController extends Controller<UserManagementModel, Us
      * Loads the users.
      */
     private void loadUsers() {
-        final List<User> users = serviceLocator.getUserService().list();
+        final List<User> users = serviceLocator.getUserService().list(true);
         view.users.addAll(users);
         view.listView.setItems(view.users);
     }
@@ -139,7 +145,7 @@ public class UserManagementController extends Controller<UserManagementModel, Us
      * Refresh users.
      */
     private void refreshUsers() {
-        final List<User> users = serviceLocator.getUserService().list();
+        final List<User> users = serviceLocator.getUserService().list(true);
         view.users.clear();
         view.users.addAll(users);
     }

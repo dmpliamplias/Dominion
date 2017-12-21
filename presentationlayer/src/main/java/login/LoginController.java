@@ -14,6 +14,7 @@ import usermanagement.UserManagementView;
 import util.ViewFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 import static javafx.scene.control.Alert.AlertType.WARNING;
 import static util.PLServiceLocator.getPLServiceLocator;

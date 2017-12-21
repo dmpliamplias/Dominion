@@ -74,13 +74,12 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
         notNull(entity);
 
         final EntityManager em = getEntityManager();
-        boolean deleted = false;
         try {
             startTransaction(em);
             entity = em.find(entity.getClass(), entity.getId());
-            em.remove(entity);
+//            em.remove(entity);
+            entity.setDeleted(true);
             commitTransaction();
-            deleted = true;
         }
         catch (Exception e) {
             logException(getServiceLogger(), e);
@@ -89,7 +88,7 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
         finally {
             releaseResources();
         }
-        return deleted;
+        return entity.isDeleted();
     }
 
     /**
@@ -97,11 +96,17 @@ class ObjectUpdateServiceImpl extends BaseService implements ObjectUpdateService
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<BaseEntity> list(Class clazz) {
+    public List<BaseEntity> list(Class clazz, boolean showInactive) {
         notNull(clazz);
 
         final EntityManager em = getEntityManager();
-        return em.createQuery("from " + clazz.getSimpleName()).getResultList();
+        final StringBuilder sb = new StringBuilder();
+        sb.append("from ").append(clazz.getSimpleName());
+        if (!showInactive) {
+            sb.append(" where deleted = false");
+        }
+        final String query = sb.toString();
+        return em.createQuery(query).getResultList();
     }
 
     @Override

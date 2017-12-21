@@ -212,7 +212,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
             view.observablePlayerList.clear();
             while (iter.hasNext()) {
                 Map.Entry<Integer, User> item = (Map.Entry) iter.next();
-                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUserName());
+                view.observablePlayerList.add( item.getKey() + ": " + item.getValue().getUsername());
             }
 
             view.lvPlayers.setItems( view.observablePlayerList);
@@ -299,7 +299,7 @@ public class LobbyController extends Controller <LobbyModel, LobbyView> {
 
     public void sendMessage() {
 
-        String chatMessage =  plServiceLocator.getUser().getUserName() + ": " + view.textFieldChat.getText();
+        String chatMessage =  plServiceLocator.getUser().getUsername() + ": " + view.textFieldChat.getText();
         ChatContainer cc = new ChatContainer(Methods.ChatLobby);
         cc.setClientId(plServiceLocator.getServerConnectionService().getClientId());
         cc.setMsg( chatMessage );

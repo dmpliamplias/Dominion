@@ -104,7 +104,12 @@ public class UserManagementView extends View<UserManagementModel> {
                     setText(null);
                 }
                 else {
-                    setText(item.getUserName() + " (" + item.getUserEmail() + ")");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(item.getUsername()).append(" (").append(item.getUserEmail()).append(")");
+                    if (item.isDeleted()) {
+                        sb.append(" [DELETED]");
+                    }
+                    setText(sb.toString());
                 }
             }
         });

@@ -63,7 +63,7 @@ public class User extends BaseEntity implements Comparable {
 
     // ---- Methods
 
-    public String getUserName() {
+    public String getUsername() {
         return userName;
     }
 

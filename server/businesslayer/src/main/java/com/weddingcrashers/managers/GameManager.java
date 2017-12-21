@@ -191,7 +191,7 @@ public class GameManager extends Manager {
             HighscoreService hs = serviceLocator.getHighscoreService();
             for(Client c : players){
                int points = c.getDominionSet().calculatePoints();
-               winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), c.getUser().getUserName() ,points));
+               winningInfos.add(new WinningInformation(c.getClientId(), (int)c.getUser().getId(), c.getUser().getUsername() ,points));
             }
             Collections.sort(winningInfos);
             for(WinningInformation info : winningInfos){

@@ -34,7 +34,7 @@ public class HighscoreServiceImpl extends BaseService implements HighscoreServic
 
     @Override
     public List<Highscore> getAllHighscores() {
-        return objectUpdateService.list(Highscore.class);
+        return objectUpdateService.list(Highscore.class, true);
     }
 
     @Override

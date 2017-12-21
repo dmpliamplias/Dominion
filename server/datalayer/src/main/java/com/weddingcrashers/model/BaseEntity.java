@@ -52,4 +52,11 @@ public abstract class BaseEntity implements Serializable {
         return creationDate;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(final boolean deleted) {
+        this.deleted = deleted;
+    }
 }
