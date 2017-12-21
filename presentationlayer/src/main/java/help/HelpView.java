@@ -206,10 +206,10 @@ public class HelpView extends View<HelpModel> {
             // Text for Tab Connection
             String newLine = "\n";
             String doubleNewLine = "\n\n";
-            txtConnection.setText(newLine + "Um eine Runde Dominion zu spielen, muss zuerst der Host bestimmt werden, welcher sich mit dem Server verbindet und die IP- und Portnummer an die restlichen Mitspieler kommuniziert."
+            txtConnection.setText(newLine + "Um Dominion spielen zu können, muss zuerst der Host bestimmt werden, welcher sich mit dem Server verbindet und die IP- und Portnummer an die restlichen Mitspieler kommuniziert."
                     + doubleNewLine + "Der Host klickt auf den Button \"Server starten\" (Siehe A) und tippt im nachfolgenden Fenster die gewünschte Portnummer ein (Siehe C). Diese soll im Bereich von 1024-49151 (ausgeschlossen 9092) sein."
-                    + " Danach erscheint ein Dialog mit der IP- und Portnummer (Siehe D). Diese beiden Nummern müssen nun an die restlichen Mitspieler gesendet werden. Durch den \'Clipboard Button\' können die Nummern in die Zwischenablage gespeichert werden."
-                    + doubleNewLine + "Die restlichen Mitspieler klicken auf den Button \"Mit Server verbinden\" (Siehe B) und tragen die Nummern ein (Siehe E). Danach kommen alle Spieler zum Login Fenster." + doubleNewLine);
+                    + " Danach erscheint ein Dialog mit der IP- und Portnummer (Siehe D). Diese beiden Nummern müssen nun an die restlichen Mitspieler gesendet bzw. zur Verfügung gestellt werden. Durch den \'Clipboard Button\' können die Nummern in die Zwischenablage gespeichert werden."
+                    + doubleNewLine + "Die restlichen Mitspieler klicken auf den Button \"Mit Server verbinden\" (Siehe B) und geben in die entsprecheden Felder jeweils die IP- und Portnummer ein (Siehe E). Danach kommen alle Spieler zum Login Fenster." + doubleNewLine);
 
             ImageView imgConnection1 = new ImageView(new Image(getClass().getResourceAsStream("/help/Connection1_DE.PNG")));
             imgConnection1.setPreserveRatio(true);
@@ -235,16 +235,16 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Game
-            txtGame.setText(newLine + "Abschnitt A" + newLine + "Hier werden alle Spieler mit ihrem Benutzernamen und der aktuellen Punkteanzahl angezeigt. Der Spieler, welcher am Zug ist, wird durch eine grüne Umrandung hervorgehoben."
-            + doubleNewLine + "Abschnitt B" + newLine + "Hier wird angezeigt wie viele Aktionen, Käufe und virtuelles Geld dem Spieler zur Verfügung steht. Bei jedem Spielzug startet der Spieler mit einer Aktion und einem Kauf."
-            + doubleNewLine + "Abschnitt C" + newLine + "Hier liegen die Karten, welche gekauft werden können. Das rote Label zeigt die Anzahl der Karten, die noch gekauft werden können. Wenn der Spieler genügend Geld und genügend Kaufaktionen besitzt, kann er die Karte in der Kaufphase mit einem Mausklick kaufen. Die gekaufte Karte wandert direkt in den Ablagestapel. Verbleibt man mit dem Cursor 2 Sekunden auf einem Bild, wird es vergrössert dargestellt. "
+            txtGame.setText(newLine + "Abschnitt A" + newLine + "In diesem Bereich sind die jeweiligen Spieler mit ihrem Benutzernamen und der aktuellen Punkteanzahl ersichtlich. Der Spieler, welcher jeweils am Zug ist, wird durch eine grüne Umrandung hervorgehoben."
+            + doubleNewLine + "Abschnitt B" + newLine + "Dieser Bereich zeigt an, wie viele Aktionen, Käufe und virtuelles Geld dem Spieler zur Verfügung steht. Bei jedem Spielzug startet der Spieler mit einer Aktion und einem Kauf."
+            + doubleNewLine + "Abschnitt C" + newLine + "In diesem Bereich liegen die Karten, welche gekauft werden können. Das rote Label zeigt die Anzahl der Karten, die noch gekauft werden können. Wenn der Spieler genügend Geld und genügend Kaufaktionen besitzt, kann er die Karte in der Kaufphase mit einem Mausklick kaufen. Die gekaufte Karte wandert direkt in den Ablagestapel. Verbleibt man mit dem Cursor 1-2 Sekunden auf einem Bild, wird es vergrössert dargestellt. "
             + doubleNewLine + "Abschnitt D" + newLine + "Dieser Button führt den Spieler durch die verschiedenen Phasen. Möchte der Spieler die Aktionsphase beenden, kann er auf den Button \"Aktionsphase beenden\" klicken und befindet sich dann in der Kaufphase. In der Kaufphase können Geldkarten gespielt und Karten damit gekauft werden."
             + doubleNewLine + "Abschnitt E" + newLine + "Dies sind die Handkarten des Spielers. Zu Beginn eines Spielzugs, befinden sich immer 5 Karten auf der Hand. Diese Anzahl kann sich verändern durch Aktionen von ausgespielten Aktionskarten oder auch durch das Ausspielen von Handkarten."
             + doubleNewLine + "Abschnitt F" + newLine + "Dies ist der Nachziehstapel. Das rote Label zeigt die Anzahl Karten, welche sich noch im Stapel befinden. Falls es keine Karten mehr zu ziehen gibt, wird der Ablagestapel gemischt und die Karten kommen auf den Nachziehstapel."
             + doubleNewLine + "Abschnitt G" + newLine + "Dies ist der Ablagestapel. Alle Handkarten sowie alle gespielten oder gekauften Karten werden nach dem Ende des Spielzugs auf den Ablagestapel gelegt. Die Karten werden offen hingelegt, somit ist immer die letzte Karte ersichtlich. Falls der Ablagestapel leer ist, wird die Rückseite einer leeren Karte angezeigt."
             + doubleNewLine + "Abschnitt H" + newLine + "Dies ist der Platz für ausgespielte Karten. Sobald eine Karte aus der Hand gespielt wird, wandert sie von den Handkarten in diesen Bereich "
-            + doubleNewLine + "Abschnitt I" + newLine + "Dies ist das Protokoll für das gesamte Spiel. Es wird jeweils angezeigt, welcher Spieler am Zug ist, was er gekauft und was er gespielt hat."
-            + doubleNewLine + "Abschnitt J" + newLine + "Dies ist der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können. Falls jemand einen guten Spielzug durchgeführt hat, kann der Spieler auf den Button \"Guter Spielzug\" klicken."
+            + doubleNewLine + "Abschnitt I" + newLine + "Dies ist die Anzeige für den Spielverlauf für das gesamte Spiel. Es wird jeweils angezeigt, welcher Spieler am Zug ist, was er gekauft und was er gespielt hat."
+            + doubleNewLine + "Abschnitt J" + newLine + "Dies ist der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können. Falls jemand einen guten Spielzug durchgeführt hat, können die anderen Spieler auf den Button \"Guter Spielzug\" klicken."
             + doubleNewLine
             );
 
@@ -256,9 +256,9 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Lobby
-            txtLobby.setText(newLine + "Abschnitt A" + newLine + "Hier kann der Host die Spielendoption auswählen. Das Spiel endet nach einer bestimmten Anzahl Runden oder regulär."
-            + doubleNewLine + "Abschnitt B" + newLine + "Hier werden alle Spieler mit ihrem Benutzernamen angezeigt, welche sich zurzeit in der Lobby befinden."
-            + doubleNewLine + "Abschnitt C" + newLine + "Dies ist der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können."
+            txtLobby.setText(newLine + "Abschnitt A" + newLine + "In diesem Bereich kann der Host die Spielendoption auswählen. Das Spiel endet nach einer bestimmten Anzahl Runden oder regulär."
+            + doubleNewLine + "Abschnitt B" + newLine + "Dieser Bereich zeigt alle Spieler mit ihrem Benutzernamen an, welche sich zurzeit in der Lobby befinden."
+            + doubleNewLine + "Abschnitt C" + newLine + "In diesem Bereich befindet sich der Chat. Mittels Chat können die Spieler miteinander kommunizieren. Jeder Spieler erhält eine eigene Farbe, damit die Nachrichten unterschieden werden können."
             + doubleNewLine + "Abschnitt D" + newLine + "Wenn der Host eine Spielendoption ausgewählt hat und sich alle Mitspieler in der Lobby befinden, kann er mit einem Klick auf den Button \"Spiel starten\" das Spiel starten. Alle Spieler landen dann in der Spielansicht."
             + doubleNewLine + "Abschnitt E" + newLine + "Mit einem Klick auf den Button \"Ranking\" gelangt der Spieler zur Rangliste. Diese Liste ist leer solange noch kein Spiel zu Ende gespielt worden ist."
             + doubleNewLine + "Abschnitt F" + newLine + "Mit einem Klick auf den Button \"Info\" erhält der Spieler die Information, dass er eine Spielendoption auswählen soll. "
@@ -279,8 +279,8 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Tab Login
-            txtLogin.setText(newLine + "Der Spieler muss sich nun mit seiner E-Mail Adresse und seinem Passwort einloggen (Siehe A). Stimmt die E-Mail Adresse mit dem Passwort überein, führt ein Klick auf den Button \"Login\" den Spieler in die Lobby.  "
-            + "Falls noch kein Login besteht, muss der Spieler auf den Button \"Registrieren\" klicken."
+            txtLogin.setText(newLine + "Der jeweilige Spieler muss sich nun mit seiner E-Mail Adresse und seinem Passwort einloggen (Siehe A). Stimmt die E-Mail Adresse mit dem Passwort überein, führt ein Klick auf den Button \"Login\" den Spieler in die Lobby.  "
+            + "Falls noch kein Login besteht, muss der Spieler auf den Button \"Registrieren\" klicken. Initial muss sich jeder Spieler vor dem ersten Spielen registrieren."
             + doubleNewLine + "Hat ein Spieler sein Passwort vergessen, muss er den Host für einen Passwortwechsel anfragen. Der Host kann sich mit folgender E-Mail Adresse im Login anmelden: admin@dominion.com (Das Passwort steht aus Sicherheitsgründen in der Dokumentation)."
             + " Damit gelangt der Host direkt zur Benutzerverwaltung (Siehe B). In der Benutzerverwaltung können Spieler hinzugefügt, gelöscht oder blockiert werden. Zusätzlich können hier die Passwörter geändert werden."
             + doubleNewLine);
@@ -311,14 +311,14 @@ public class HelpView extends View<HelpModel> {
 
             // Text for Tab Rules
             txtRules.setText(newLine + "Zugablauf" + newLine
-            + "1. Phase: Aktion - Der Spieler kann Aktionskarten auf seiner Hand ausspielen. Zu Beginn des Spielzugs hat jeder Spieler nur 1 Aktion zur Verfügung."
+            + "1. Phase: Aktion - Der Spieler kann Aktionskarten aus seiner Hand ausspielen. Zu Beginn des Spielzugs hat jeder Spieler nur 1 Aktion zur Verfügung."
             + " Diese Zahl kann jedoch durch die Anweisungen auf bestimmten Aktionskarten erhöht werden. Die Aktionsphase kann auch übersprungen werden."
             + doubleNewLine + "2. Phase: Kauf - Der Spieler kann Karten aus dem Vorrat kaufen. Gekaufte Karten wandern direkt auf den Ablagestapel Dafür muss er genügend Kaufaktionen und genügend Geld besitzen. Zu Beginn des Spielzugs hat jeder Spieler nur 1 Kaufaktion zur Verfügung. "
             + " Diese Zahl kann jedoch durch die Anweisungen auf bestimmten Aktionskarten erhöht werden. Die Kaufphase kann auch übersprungen werden."
             + doubleNewLine + "3. Phase: Aufräumen - Der Spieler legt alle ausgespielten Aktions- und Geldkarten und seine verbliebenen Handkarten auf den Ablagestapel. Die Karten werden immer offen auf den Ablagestapel gelegt, so dass die oberste Karte ersichtlich ist. Diese Phase muss gespielt werden."
             + " Danach zieht der Spieler 5 Karten vom Nachziehstapel und nimmt diese auf seine Hand."
             + doubleNewLine + doubleNewLine + "Spielende"
-            + newLine + "Es können 2 Optionen ausgewählt werden um das Spiel zu beenden." + newLine + "1. Das Spiel endet nach einer definierten Anzahl Runden." + newLine + "2. Das Spiel endet, in dem eine der beiden Bedingugen eintritt: Der Provinzstapel ist leer oder 3 beliebige Aktionskartenstapel aus dem Vorrat sind leer."
+            + newLine + "Es können 2 Optionen ausgewählt werden um das Spiel zu beenden." + newLine + "1. Das Spiel endet nach einer definierten Anzahl an Runden." + newLine + "2. Das Spiel endet, in dem eine der beiden Bedingugen eintritt: Der Provinzstapel ist leer oder 3 beliebige Aktionskartenstapel aus dem Vorrat sind leer."
             + doubleNewLine + "Nach dem Ende des Spiels, werden die Siegespunkte im gesamten Kartensatz (Handkarten, Ablage- und Nachziehstapel) gezählt. Der Spieler mit den meisten Punkten gewinnt das Spiel."
             );
 
