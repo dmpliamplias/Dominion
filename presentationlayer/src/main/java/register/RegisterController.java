@@ -26,7 +26,7 @@ import static javafx.scene.control.Alert.AlertType.WARNING;
 
 public class RegisterController extends Controller<RegisterModel, RegisterView> {
 
-// Pattern-Definition E-Mail
+    // Pattern-Definition E-Mail
     // https://stackoverflow.com/questions/8204680/java-regex-email
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -139,7 +139,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         });
     }
 
-    //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class
+    //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class.
     private void goToLoginView(){
         LoginModel model =new LoginModel();
         LoginView view =new LoginView(this.view.getStage(), model);

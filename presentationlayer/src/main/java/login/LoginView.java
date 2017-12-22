@@ -119,7 +119,7 @@ public class LoginView extends View<LoginModel> {
 
         return scene;
     }
-
+    // here are the texts set same like reisterview etc.
     protected void setTexts(){
         this.stage.setTitle(getText("loginview.title"));
         user.setPromptText(getText("registerview.email"));

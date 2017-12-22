@@ -67,7 +67,7 @@ public class LoginController extends Controller<LoginModel, LoginView> {
     }
 
 
-
+    // dummy user login
     public void login() {
         view.refreshModel();
         if (model.getEmail().equals("go")) {

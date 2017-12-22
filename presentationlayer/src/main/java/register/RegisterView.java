@@ -142,7 +142,7 @@ public class RegisterView extends View<RegisterModel>{
         return scene;
     }
 
-
+    // here are the texts set same like loginview etc...
     protected void setTexts() {
 
         this.stage.setTitle(getText("registerview.titel"));

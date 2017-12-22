@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 */
 public class RankingView extends View<RankingModel> {
 
+
     private TableView<RankingViewModel> table;
 
     private Label lblRanking;
@@ -60,7 +61,7 @@ public class RankingView extends View<RankingModel> {
 
 
             Scene scene = new Scene(vbox);
-            //setStylesheet(scene, RANKING);
+
 
             this.stage.setScene(scene);
 
@@ -87,6 +88,7 @@ public class RankingView extends View<RankingModel> {
     protected void bindModelToView() {
 
         //For Loop from Script Kaspar Riesen Programming 1
+        // here is the methode to bind model to the view
 
         final ObservableList<RankingViewModel> vmList = FXCollections.observableArrayList();
         for (Highscore hs : model.getHighscores()) {

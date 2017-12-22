@@ -52,7 +52,7 @@ public class RankingController extends Controller<RankingModel, RankingView> {
     }
 
 
-
+    // gets highscorelist from server and sorts them and sets highscore
     public void handleServerAnswer(List<Highscore> highscoreList){
         Platform.runLater(() ->{
             Collections.sort(highscoreList);

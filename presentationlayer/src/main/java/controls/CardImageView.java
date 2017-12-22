@@ -34,6 +34,7 @@ public class CardImageView extends ImageView {
         this.setCardImageViewDesign();
     }
 
+    // this methode sets the cardimagevies design depending on language which card and cardsize etc.
     private void setCardImageViewDesign(){
 
         try {

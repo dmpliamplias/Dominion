@@ -720,6 +720,7 @@ public class GameController extends Controller<GameModel, GameView> {
      * @param imgv
      */
 
+    // here is running runaction after clicking on each card
     private void setCardImageViewAction(CardImageView imgv) {
         imgv.setOnMouseClicked(e -> {
             runAction(imgv);
