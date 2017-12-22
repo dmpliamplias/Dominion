@@ -2,7 +2,7 @@ package com.weddingcrashers.servermodels;
 
 import java.io.Serializable;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class WinningInformation implements Comparable<WinningInformation>, Serializable {
 

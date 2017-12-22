@@ -6,7 +6,7 @@ import javafx.concurrent.Task;
 import java.applet.AudioClip;
 
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class PLServiceLocator {
 

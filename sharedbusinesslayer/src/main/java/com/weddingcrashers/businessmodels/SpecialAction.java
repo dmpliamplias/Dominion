@@ -1,6 +1,6 @@
 package com.weddingcrashers.businessmodels;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 
 public enum SpecialAction {

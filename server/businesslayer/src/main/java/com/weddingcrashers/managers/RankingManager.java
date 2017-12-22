@@ -9,7 +9,7 @@ import com.weddingcrashers.service.ServiceLocator;
 import java.util.List;
 
 /**
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class RankingManager extends Manager {
 

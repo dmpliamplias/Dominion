@@ -6,7 +6,7 @@ import com.weddingcrashers.businessmodels.PlayerSet;
 import java.io.Serializable;
 import java.util.ArrayList;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class GameContainer extends Container implements Serializable, Cloneable {
     PlayerSet dominionSet;

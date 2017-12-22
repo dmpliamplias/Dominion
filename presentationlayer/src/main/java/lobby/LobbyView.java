@@ -369,7 +369,7 @@ public class LobbyView extends View<LobbyModel> {
     }
 
     /**
-     * Author Michel Schlatter + Manuel Wirz
+     * author Michel Schlatter + Manuel Wirz
      * @param msg
      * @param color
      */

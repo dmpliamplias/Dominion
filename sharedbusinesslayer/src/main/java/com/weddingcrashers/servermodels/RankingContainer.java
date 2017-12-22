@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class RankingContainer extends  Container implements Serializable {
     List<Highscore> highScores;

@@ -659,7 +659,7 @@ public GameView() {
     }
 
     /**
-     * Author Michel Schlatter + Manuel Wirz
+     * @author Michel Schlatter + Manuel Wirz
      * @param msg
      * @param color
      */

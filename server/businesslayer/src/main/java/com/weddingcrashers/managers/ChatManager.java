@@ -7,7 +7,7 @@ import com.weddingcrashers.servermodels.ChatContainer;
 import com.weddingcrashers.servermodels.ViewStatus;
 
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class ChatManager extends Manager {
 

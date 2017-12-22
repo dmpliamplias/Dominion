@@ -4,7 +4,7 @@ import com.weddingcrashers.model.User;
 
 import java.io.Serializable;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class RegisterContainer extends Container implements Serializable {
     User user;

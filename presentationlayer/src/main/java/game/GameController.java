@@ -978,7 +978,7 @@ public class GameController extends Controller<GameModel, GameView> {
         updateActionBuyMoney();
     }
 
-    /** Author Murat Kelleci
+    /** author Murat Kelleci
      *
      * @param playerSet
      * this methode sets the points and shows the actual player

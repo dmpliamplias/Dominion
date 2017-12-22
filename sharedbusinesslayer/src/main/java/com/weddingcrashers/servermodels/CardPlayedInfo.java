@@ -4,7 +4,7 @@ import com.weddingcrashers.businessmodels.Card;
 
 import java.io.Serializable;
 /***
- * @Author Michel Schlatter
+ * @author Michel Schlatter
  */
 public class CardPlayedInfo implements Serializable {
     int userId;
