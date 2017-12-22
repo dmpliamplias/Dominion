@@ -88,8 +88,6 @@ public class LoginController extends Controller<LoginModel, LoginView> {
         }
     }
 
-}
-
     public void handleServerAnswer_TestPurposeLogin(LoginContainer lc) {
         Platform.runLater(() -> {
             plServiceLocator.setUser(lc.getUser());
