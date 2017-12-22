@@ -555,10 +555,13 @@ public GameView() {
                 ImageView imgVwinnerPic;
                 if (translator.getCurrentLanguage() == Language.ENGLISH) {
                     imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_EN.PNG")));
+                    winnerAlert.setTitle("Winner Dialog");
                 } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
                     imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_CH.PNG")));
+                    winnerAlert.setTitle("Gwünner Dialog");
                 } else {
                     imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_DE.PNG")));
+                    winnerAlert.setTitle("Gewinner Dialog");
                 }
                 imgVwinnerPic.setPreserveRatio(true);
                 imgVwinnerPic.setFitHeight(60);
@@ -566,7 +569,6 @@ public GameView() {
                 winnerAlert.getDialogPane().setContent(stPa);
                 winnerAlert.setGraphic(null);
                 winnerAlert.setHeaderText("");
-                winnerAlert.setTitle("Winner Dialog");
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                     GameController.playSound(winner);
                 }
@@ -578,10 +580,13 @@ public GameView() {
                 ImageView imgVdrawPic;
                 if (translator.getCurrentLanguage() == Language.ENGLISH) {
                     imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_EN.PNG")));
+                    drawAlert.setTitle("Draw Dialog");
                 } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
                     imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_CH.PNG")));
+                    drawAlert.setTitle("Unentschiedä Dialog");
                 } else {
                     imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_DE.PNG")));
+                    drawAlert.setTitle("Unentschieden Dialog");
                 }
                 imgVdrawPic.setPreserveRatio(true);
                 imgVdrawPic.setFitHeight(50);
@@ -589,7 +594,6 @@ public GameView() {
                 drawAlert.getDialogPane().setContent(stPa);
                 drawAlert.setGraphic(null);
                 drawAlert.setHeaderText("");
-                drawAlert.setTitle("Draw Dialog");
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                     GameController.playSound(draw);
                 }
@@ -601,10 +605,13 @@ public GameView() {
                 ImageView imgVloserPic;
                 if (translator.getCurrentLanguage() == Language.ENGLISH) {
                     imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_EN.PNG")));
+                    loserAlert.setTitle("Loser Dialog");
                 } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
                     imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_CH.PNG")));
+                    loserAlert.setTitle("Verlürer Dialog");
                 } else {
                     imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_DE.PNG")));
+                    loserAlert.setTitle("Verlierer Dialog");
                 }
                 stPa.getChildren().addAll(imgVbackground, imgVloserPic);
                 imgVloserPic.setPreserveRatio(true);
@@ -612,7 +619,6 @@ public GameView() {
                 loserAlert.getDialogPane().setContent(stPa);
                 loserAlert.setGraphic(null);
                 loserAlert.setHeaderText("");
-                loserAlert.setTitle("Loser Dialog");
 
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                     GameController.playSound(loser);
