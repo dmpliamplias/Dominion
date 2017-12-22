@@ -385,7 +385,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      * Determines the game result.
-     *
      * @param winningInformations the winning informations to determine the game result.
      * @return the game result map.
      */
@@ -408,7 +407,6 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      * Two player case.
-     *
      * @param gameResult the game result.
      * @param winningInformations the winning informations.
      * @return the game result for two player.

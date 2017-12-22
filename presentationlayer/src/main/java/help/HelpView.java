@@ -184,12 +184,12 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Game
-            txtGame.setText(newLine + "Section A" + newLine + "This sections shows all players with their chosen username and the current victory points. The player who is currently playing will be highlighted with a green frame."
+            txtGame.setText(newLine + "Section A" + newLine + "This section shows all players with their chosen username and the current victory points. The player who is currently playing will be highlighted with a green frame."
                     + doubleNewLine + "Section B" + newLine + "This section shows how many actions, buys and coins the player has. With each new turn, the player starts with one action and one buy."
-                    + doubleNewLine + "Section C" + newLine + "Here are laying all cards which can be bought. The red label indicates the number of cards which are still available. If the player has enough coins and enough buys, he can buy a card with a mouseclick through the buy phase. The bought card will move directly to the traystack. If you remain with your cursor for a few seconds on the card, the card will be displayed bigger. "
-                    + doubleNewLine + "Section D" + newLine + "This button will lead the player though the different phases. If a player wants to end the current action phase, he can click on the button \"End action phase\" and will move to the buy phase. In the buy phase, all treasure cards can be played in order to buy cards."
+                    + doubleNewLine + "Section C" + newLine + "This section shows all cards which can be bought. The red label indicates the number of cards which are still available. If the player has enough coins and enough buys, he can buy a card with a mouseclick through the buy phase. The bought card will move directly to the traystack. If you remain with your cursor for a few seconds on the card, the card will be displayed bigger. "
+                    + doubleNewLine + "Section D" + newLine + "This button will lead the player through the different phases. If a player wants to end the current action phase, he can click on the button \"End action phase\" and will move to the buy phase. In the buy phase, all treasure cards can be played in order to buy cards."
                     + doubleNewLine + "Section E" + newLine + "The handcards will be displayed here. At the beginning of each turn, there will always be 5 cards. That number can change through the round because of actions of played cards and played cards itself."
-                    + doubleNewLine + "Section F" + newLine + "This is the pullstack. The red label indicated the remaining cards in the pullstack. If the player has to draw cards and the pullstack is empty, the traystack will be shuffled and put on the pullstack."
+                    + doubleNewLine + "Section F" + newLine + "This is the pullstack. The red label indicates the remaining cards in the pullstack. If the player has to draw cards and the pullstack is empty, the traystack will be shuffled and put on the pullstack."
                     + doubleNewLine + "Section G" + newLine + "This ist the traystack. All handcards, played cards and bought cards will move to this stack after the end of the turn. All cards will face up in order that the last card will be visible. If the pullstack is empty, the backside of an empty card will be displayed."
                     + doubleNewLine + "Section H" + newLine + "This is the area of played cards. As soon as a card is played from the handcards, it will move to this area."
                     + doubleNewLine + "Section I" + newLine + "This is the game log. It will show which player is currently playing and what each player bought and played."
@@ -208,7 +208,7 @@ public class HelpView extends View<HelpModel> {
             txtLobby.setText(newLine + "Section A" + newLine + "In this section, the host can choose the game end option. The game ends after a certain number of rounds or it ends regular."
                     + doubleNewLine + "Section B" + newLine + "This section shows all players with their username, which are currently in the lobby."
                     + doubleNewLine + "Section C" + newLine + "This is the chat. All players can communicate with each other through the chat. Each player receives an unique color in order to distinguish the messages."
-                    + doubleNewLine + "Section D" + newLine + "If the host chose a game end option and all players are already in the lobby, he can click on the button \"Start Game\" to start the game."
+                    + doubleNewLine + "Section D" + newLine + "If the host chooses a game end option and all players are already in the lobby, he can click on the button \"Start Game\" to start the game."
                     + doubleNewLine + "Section E" + newLine + "With a click on the button \"Ranking\" the player will see the ranking list. This list is empty as long as a game has never been played."
                     + doubleNewLine + "Section F" + newLine + "With a click on the button  \"Info\" the player receives the information that he has to select a game end option."
                     + doubleNewLine
@@ -231,7 +231,7 @@ public class HelpView extends View<HelpModel> {
             txtLogin.setText(newLine + "The player has to log in with his email and his password (See A). If the email and password matches, the player can click on the button \"Login\" and will go to the lobby.  "
                     + "If the player has no login, he has to click on the button \"Register\". \n" + "Initially, each player must register before the first play"
                     + doubleNewLine + "If the player has forgotten his password, he has to contact the host. The host can login with the following email: admin@dominion.com (\n" + "The password is in the documentation for security reasons)."
-                    + " Damit gelangt der Host direkt zur Benutzerverwaltung (Siehe B). In der Benutzerverwaltung können Spieler hinzugefügt, gelöscht oder blockiert werden. Zusätzlich können hier die Passwörter geändert werden."
+                    + " With the username and password the host comes to the usermanagement (See B). In the usermanagement you can create,delete, edit and even block a user. Here you can also change the passwords of the users."
                     + doubleNewLine);
 
             ImageView imgLogin = new ImageView(new Image(getClass().getResourceAsStream("/help/Login_EN.PNG")));
@@ -259,10 +259,10 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Tab Rules
-            txtRules.setText(newLine + "Zugablauf" + newLine
+            txtRules.setText(newLine + "A turn" + newLine
                     + "1. Phase: Action - The player can play action cards from his hand. At the beginning of the turn, each player has only 1 action available."
                     + "However, this number can be increased by the instructions on certain action cards. The action phase can also be skipped."
-                    + doubleNewLine + "2. Phase: Buy - The player can buy cards. Bought cards move directly to the traystack. For this he must have enough buy actions and enough money. At the beginning of the turn, each player has only 1 buy action available."
+                    + doubleNewLine + "2. Phase: Buy - The player can buy cards. Bought cards move directly to the traystack. For this the player must have enough buy actions and enough money. At the beginning of the turn, each player has only 1 buy action available."
                     + " However, this number can be increased by the instructions on certain action cards. The buy phase can also be skipped."
                     + doubleNewLine + "3. Phase: Clean-up - The player places all Action and Money Cards and his remaining cards on the traystack. The cards are always placed face up on the traystack, so that the top card is visible. This phase has to be played."
                     + " Then the player draws 5 cards from the pullstack and puts them on his hand."
