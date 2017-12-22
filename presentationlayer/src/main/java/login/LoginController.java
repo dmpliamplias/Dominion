@@ -13,15 +13,13 @@ import register.RegisterView;
 import usermanagement.UserManagementView;
 import util.ViewFactory;
 
-import java.io.IOException;
-import java.util.List;
-
 import static javafx.scene.control.Alert.AlertType.WARNING;
 import static util.PLServiceLocator.getPLServiceLocator;
 import static util.ViewFactory.createLobbyView;
 import static util.ViewFactory.createUserManagementView;
 
-/** @author Murat Kelleci
+/**
+ * @author Murat Kelleci
  */
 public class LoginController extends Controller<LoginModel, LoginView> {
 
@@ -40,17 +38,19 @@ public class LoginController extends Controller<LoginModel, LoginView> {
          *  */
 
         view.user.setOnKeyPressed((event) -> {
-            if (event.getCode().equals( KeyCode.ENTER)){
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 view.refreshModel();
                 login();
-            }  });
+            }
+        });
 
 
         view.pw.setOnKeyPressed((event) -> {
-            if (event.getCode().equals( KeyCode.ENTER)){
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 view.refreshModel();
                 login();
-            }  });
+            }
+        });
 
 
         /**
@@ -66,46 +66,29 @@ public class LoginController extends Controller<LoginModel, LoginView> {
 
     }
 
-
     // dummy user login
     public void login() {
         view.refreshModel();
-        if (model.getEmail().equals("go")) {
-            User u = new User();
-            u.setUserEmail("anonymous@dom.ch");
-            u.setUserName("Anonymous");
-            u.setPassword("1234");
+        // rules/guidelines to log in
+        String pw = model.getPassword();
+        String email = model.getEmail();
 
-            LoginContainer lc = new LoginContainer(Methods.Login_SetUser_TestPurposesOnly);
-            lc.setUser(u);
+        if (pw != null && !pw.isEmpty() && email != null && !email.isEmpty()) {
+            LoginContainer loginContainer = new LoginContainer(Methods.Login);
+            loginContainer.setEmail(email);
+            loginContainer.setPassword(pw);
+
             try {
-                serverConnectionService.sendObject(lc);
-            } catch (IOException e) {
+                serverConnectionService.sendObject(loginContainer);
+            } catch (Exception e) {
                 view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
             }
         } else {
-
-
-            // rules/guidelines to log in
-
-            String pw = model.getPassword();
-            String email = model.getEmail();
-
-            if (pw != null && !pw.isEmpty() && email != null && !email.isEmpty()) {
-                LoginContainer loginContainer = new LoginContainer(Methods.Login);
-                loginContainer.setEmail(email);
-                loginContainer.setPassword(pw);
-
-                try {
-                    serverConnectionService.sendObject(loginContainer);
-                } catch (Exception e) {
-                    view.simpleAlert(e.getMessage(), Alert.AlertType.ERROR);
-                }
-            } else {
-                view.alert("loginview.erroruncompletedfields", Alert.AlertType.WARNING);
-            }
+            view.alert("loginview.erroruncompletedfields", Alert.AlertType.WARNING);
         }
     }
+
+}
 
     public void handleServerAnswer_TestPurposeLogin(LoginContainer lc) {
         Platform.runLater(() -> {
