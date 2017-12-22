@@ -16,27 +16,27 @@ import static util.StyleSheetPath.CONNECTION;
 
 public class ConnectionView extends View<ConnectionModel> {
 	
-    Button btnStartS;
-    Button btnJoinS;
-    Button btnHelp;
-    Button btnConnect;
-	Button btnOK;
-	Button btnCopyPort;
-	Button btnCopyIP;
-	Button btnJoinOK;
-	TextField fldPort;
-	TextField fldIP;
-	Label lblPort;
-	Label lblInfo;
-	Label lblInfo2;
-	Label lblIP;
-	Stage stageCreateDialog;
-	Stage stageConnectedDialog;
-	Stage stageJoinDialog;
-    ImageView imgViewDeFlag;
-    ImageView imgViewEngFlag;
-    ImageView imgViewChFlag;
-	Image imgIcon = new Image(getClass().getResourceAsStream("/base/castle.png"));
+    protected Button btnStartS;
+	protected Button btnJoinS;
+	protected Button btnHelp;
+	protected Button btnConnect;
+	protected Button btnOK;
+	protected Button btnCopyPort;
+	protected Button btnCopyIP;
+	protected Button btnJoinOK;
+	protected TextField fldPort;
+	protected TextField fldIP;
+	protected Label lblPort;
+	protected Label lblInfo;
+	protected Label lblInfo2;
+	protected Label lblIP;
+	protected Stage stageCreateDialog;
+	protected Stage stageConnectedDialog;
+	protected Stage stageJoinDialog;
+	protected ImageView imgViewDeFlag;
+	protected ImageView imgViewEngFlag;
+	protected ImageView imgViewChFlag;
+	protected Image imgIcon = new Image(getClass().getResourceAsStream("/base/castle.png"));
 
 
     public ConnectionView(Stage stage, ConnectionModel model){
@@ -108,9 +108,9 @@ public class ConnectionView extends View<ConnectionModel> {
 
 		
 		// Asign column and row to buttons
-		gp.setConstraints(btnStartS, 1, 1);
-		gp.setConstraints(btnJoinS, 1, 3);
-		gp.setConstraints(btnHelp, 1, 5);
+		GridPane.setConstraints(btnStartS, 1, 1);
+		GridPane.setConstraints(btnJoinS, 1, 3);
+		GridPane.setConstraints(btnHelp, 1, 5);
 		gp.getChildren().addAll(btnJoinS, btnStartS, btnHelp);
 
 
@@ -164,11 +164,11 @@ public class ConnectionView extends View<ConnectionModel> {
 		}
 		
 		// Asign buttons, label, textfield to column, row
-		gp.setConstraints(lblInfo, 2, 1);
-		gp.setConstraints(lblPort, 1, 2);
-		gp.setConstraints(fldPort, 2, 2);
-	 	gp.setConstraints(btnConnect, 4, 4);
-		gp.setColumnSpan(lblInfo, 4);
+		GridPane.setConstraints(lblInfo, 2, 1);
+		GridPane.setConstraints(lblPort, 1, 2);
+		GridPane.setConstraints(fldPort, 2, 2);
+		GridPane.setConstraints(btnConnect, 4, 4);
+		GridPane.setColumnSpan(lblInfo, 4);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnConnect);
 
 		stageCreateDialog.setScene(scene2);
@@ -250,15 +250,15 @@ public class ConnectionView extends View<ConnectionModel> {
 		}
 		
 		// Asign buttons, label, textfield to column, row
-		gp.setConstraints(lblInfo, 2, 1);
-	   	gp.setConstraints(lblPort, 1, 3);
-		gp.setConstraints(fldPort, 2, 3);
-		gp.setConstraints(lblIP, 1, 2);
-		gp.setConstraints(fldIP, 2, 2);
-		gp.setConstraints(btnOK, 4, 4);
-		gp.setConstraints(btnCopyPort, 3, 3);
-		gp.setConstraints(btnCopyIP, 3, 2);
-		gp.setColumnSpan(lblInfo, 5);
+		GridPane.setConstraints(lblInfo, 2, 1);
+		GridPane.setConstraints(lblPort, 1, 3);
+		GridPane.setConstraints(fldPort, 2, 3);
+		GridPane.setConstraints(lblIP, 1, 2);
+		GridPane.setConstraints(fldIP, 2, 2);
+		GridPane.setConstraints(btnOK, 4, 4);
+		GridPane.setConstraints(btnCopyPort, 3, 3);
+		GridPane.setConstraints(btnCopyIP, 3, 2);
+		GridPane.setColumnSpan(lblInfo, 5);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo, btnOK, lblIP, fldIP, btnCopyPort, btnCopyIP);
 
 		fldIP.setDisable(true);
@@ -327,13 +327,13 @@ public class ConnectionView extends View<ConnectionModel> {
 		}
 
 		// Asign buttons, label, textfield to column, row
-		gp.setConstraints(lblInfo2, 2, 1);
-		gp.setConstraints(lblPort, 1, 3);
-		gp.setConstraints(fldPort, 2, 3);
-		gp.setConstraints(lblIP, 1, 2);
-		gp.setConstraints(fldIP, 2, 2);
-		gp.setConstraints(btnJoinOK, 5, 4);
-		gp.setColumnSpan(lblInfo2, 5);
+		GridPane.setConstraints(lblInfo2, 2, 1);
+		GridPane.setConstraints(lblPort, 1, 3);
+		GridPane.setConstraints(fldPort, 2, 3);
+		GridPane.setConstraints(lblIP, 1, 2);
+		GridPane.setConstraints(fldIP, 2, 2);
+		GridPane.setConstraints(btnJoinOK, 5, 4);
+		GridPane.setColumnSpan(lblInfo2, 5);
 		gp.getChildren().addAll(lblPort, fldPort, lblInfo2, btnJoinOK, lblIP, fldIP);
 
 		fldIP.setDisable(false);
@@ -360,6 +360,7 @@ public class ConnectionView extends View<ConnectionModel> {
 		model.setPort(Integer.parseInt(fldPort.getText()));
 		model.setIP(fldIP.getText());
 	}
+
 
 	protected void setTexts() {
 		this.stage.setTitle(getText("connectionview.stage.first.title"));

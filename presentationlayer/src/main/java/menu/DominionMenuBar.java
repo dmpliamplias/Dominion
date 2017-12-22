@@ -32,13 +32,11 @@ public class DominionMenuBar extends MenuBar {
     private RadioMenuItem menuItemMusicUnmute;
     private RadioMenuItem menuItemSoundMute;
     private RadioMenuItem menuItemSoundUnmute;
-
     private ImageView imgViewEngFlag;
     private ImageView imgViewChFlag;
     private ImageView imgViewDeFlag;
     private ImageView imgViewMute;
     private ImageView imgViewUnmute;
-
     private Translator translator;
 
 
@@ -115,12 +113,11 @@ public class DominionMenuBar extends MenuBar {
         });
     }
 
-    /**
-     * Sets the menu texts.
-     */
+
+     // Sets the menu texts.
+
     public void setMenuTexts(Translator translator) {
         this.translator = translator;
-
 
         menuSettings.setText(getText("menu.menuSetting"));
         menuLanguage.setText(getText("menu.menuLanguage"));
@@ -145,11 +142,9 @@ public class DominionMenuBar extends MenuBar {
         menuItemSoundMute.setGraphic(imgViewMute);
     }
 
-    /**
-     * Sets the image view size.
-     *
-     * @param imgV the image view.
-     */
+
+     // Sets the image view size.
+
     private void setIconSize(ImageView imgV){
         imgV.setFitHeight(20);
         imgV.setFitWidth(20);
@@ -193,9 +188,7 @@ public class DominionMenuBar extends MenuBar {
         return menuItemCH;
     }
 
-    public ImageView getImgViewEngFlag() {
-        return imgViewEngFlag;
-    }
+    public ImageView getImgViewEngFlag() { return imgViewEngFlag;}
 
     public ImageView getImgViewChFlag() {
         return imgViewChFlag;

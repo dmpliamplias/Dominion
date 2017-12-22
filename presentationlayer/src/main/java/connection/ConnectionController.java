@@ -53,7 +53,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
                     this.view.alert("connectionview.portEmpty", Alert.AlertType.WARNING);
                     return;
                 }
-                //int port = Integer.parseInt(portStr);
+
                 // port must be between 1024-49151 and not 9092
                 if (!checkPortRange(portStr) || Integer.parseInt(portStr) == 9092 || Integer.parseInt(portStr) < 1024 || Integer.parseInt(portStr)> 49151) {
                     final DominionAlert alert = view.alert("connectionview.portDialog.contentText", Alert.AlertType.WARNING);
@@ -159,6 +159,12 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         helpStage.show();
     }
 
+    /**
+     * @author Vanessa Cajochen
+     */
+
+    //Credits to http://www.java2s.com/Code/Java/JavaFX/Addingtooltiptographicnode.htm
+    //copies port number to clibboard
     private void CopytoCbPort (){
         String str = Integer.toString(model.getPort());
         StringSelection stringS = new StringSelection(str);
@@ -166,6 +172,8 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         clipboard.setContents(stringS, stringS);
     }
 
+    //Credits to http://www.java2s.com/Code/Java/JavaFX/Addingtooltiptographicnode.htm
+    // copies IP nummer to clibboard
     private void CopytoCbIP () {
         String str = model.getIP();
         StringSelection stringS = new StringSelection(str);
@@ -173,6 +181,7 @@ public class ConnectionController extends Controller<ConnectionModel, Connection
         clipboard.setContents(stringS, stringS);
     }
 
+    // Checks if Port is a numeric value
     private boolean checkPortRange(String port){
         String regrex = "[1-9][0-9][0-9][0-9][0-9]?";
         Pattern pattern = Pattern.compile(regrex);

@@ -63,17 +63,17 @@ public class GameView extends View<GameModel> {
     protected TextField txtFieldShowRound;
     protected Text txtShowRound;
     protected Label txtLogger;
-    HandStackLayout hs;
-    HandStackLayout cardPlayingArea;
-    ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
-    ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
-    ArrayList<String> EmptyCard = new ArrayList<String>();
-    Label lblPullStack;
+    protected HandStackLayout hs;
+    protected HandStackLayout cardPlayingArea;
+    protected ArrayList<CardImageView> handStackList = new ArrayList<CardImageView>();
+    protected ArrayList<CardImageView> cardPlayingAreaList = new ArrayList<CardImageView>();
+    protected ArrayList<String> EmptyCard = new ArrayList<String>();
+    protected Label lblPullStack;
     protected Button btnPlayMoneyCards;
     protected Button btnEndTurn;
     protected Button btnEndActionPhase;
-    ImageView imgVGreyOutButton;
-    ImageView imgVGreyOutHandStack;
+    protected ImageView imgVGreyOutButton;
+    protected ImageView imgVGreyOutHandStack;
     protected Label txtLogger2;
     protected Text txtLoggerIsYourTurn;
     protected Text txtLoggerTurnIsOver;
@@ -84,10 +84,9 @@ public class GameView extends View<GameModel> {
     protected Text txtBuy;
     protected Text txtTreasure;
     protected Image imgGreyOut;
-    private String points;
+    protected String points;
+    protected ImageView imgVtrayStack;
 
-
-    ImageView imgVtrayStack;
 public GameView() {
 
 }
@@ -96,9 +95,8 @@ public GameView() {
     }
 
     /**
-     * author Vanessa Cajochen
+     * @author Vanessa Cajochen
      */
-
     public Scene create_GUI() {
 
         root = new BorderPane();
@@ -138,12 +136,12 @@ public GameView() {
         ImageView imgVpullStack = new ImageView(pullStack);
         imgVpullStack.setFitHeight(120);
         imgVpullStack.setFitWidth(75);
-        gp.setRowSpan(imgVpullStack, 4);
-        gp.setConstraints(imgVpullStack, 1, 15);
+        GridPane.setRowSpan(imgVpullStack, 4);
+        GridPane.setConstraints(imgVpullStack, 1, 15);
         gp.getChildren().add(imgVpullStack);
         lblPullStack = new Label();
         setLabelFormat(lblPullStack);
-        gp.setConstraints(lblPullStack, 1, 15);
+        GridPane.setConstraints(lblPullStack, 1, 15);
 
 
         // Set backside of trashStack
@@ -154,33 +152,33 @@ public GameView() {
         ImageView imgVBracketLeft = new ImageView(imgBracketLeft);
         imgVBracketLeft.setFitHeight(120);
         imgVBracketLeft.setPreserveRatio(true);
-        gp.setConstraints(imgVBracketLeft, 1, 8);
-        gp.setRowSpan(imgVBracketLeft, 4);
-        gp.setValignment(imgVBracketLeft, VPos.TOP);
-        gp.setHalignment(imgVBracketLeft, HPos.RIGHT);
+        GridPane.setConstraints(imgVBracketLeft, 1, 8);
+        GridPane.setRowSpan(imgVBracketLeft, 4);
+        GridPane.setValignment(imgVBracketLeft, VPos.TOP);
+        GridPane.setHalignment(imgVBracketLeft, HPos.RIGHT);
         gp.getChildren().add(imgVBracketLeft);
 
         Image imgBracketRight = new Image(getClass().getResourceAsStream(BASE_PATH + "/curlyBracketRight.png"));
         ImageView imgVBracketRight = new ImageView(imgBracketRight);
         imgVBracketRight.setFitHeight(120);
         imgVBracketRight.setPreserveRatio(true);
-        gp.setConstraints(imgVBracketRight, 8, 8);
-        gp.setRowSpan(imgVBracketRight, 4);
-        gp.setValignment(imgVBracketRight, VPos.TOP);
-        gp.setHalignment(imgVBracketRight, HPos.LEFT);
+        GridPane.setConstraints(imgVBracketRight, 8, 8);
+        GridPane.setRowSpan(imgVBracketRight, 4);
+        GridPane.setValignment(imgVBracketRight, VPos.TOP);
+        GridPane.setHalignment(imgVBracketRight, HPos.LEFT);
         gp.getChildren().add(imgVBracketRight);
 
 
         // PaneLayout for Hand and PlayingArea
         hs = new HandStackLayout();
         gp.getChildren().add(hs);
-        gp.setConstraints(hs, 2, 15);
-        gp.setRowSpan(hs, 4);
+        GridPane.setConstraints(hs, 2, 15);
+        GridPane.setRowSpan(hs, 4);
 
         cardPlayingArea = new HandStackLayout();
         gp.getChildren().add(cardPlayingArea);
-        gp.setConstraints(cardPlayingArea, 2, 8);
-        gp.setRowSpan(cardPlayingArea, 4);
+        GridPane.setConstraints(cardPlayingArea, 2, 8);
+        GridPane.setRowSpan(cardPlayingArea, 4);
 
 
         // Creates 3 buttons. But only 1 will be shown at the same time
@@ -200,27 +198,27 @@ public GameView() {
 
         lblAction = new Label();
         setLabelStyle(lblAction);
-        gp.setConstraints(lblAction, 1, 8);
+        GridPane.setConstraints(lblAction, 1, 8);
 
         lblBuy = new Label();
         setLabelStyle(lblBuy);
-        gp.setConstraints(lblBuy, 1, 10);
+        GridPane.setConstraints(lblBuy, 1, 10);
 
         lblTreasure = new Label();
         setLabelStyle(lblTreasure);
-        gp.setConstraints(lblTreasure, 1, 12);
+        GridPane.setConstraints(lblTreasure, 1, 12);
 
         txtAction = new Text();
         setTextStyle(txtAction);
-        gp.setConstraints(txtAction, 1, 7);
+        GridPane.setConstraints(txtAction, 1, 7);
 
         txtBuy = new Text();
         setTextStyle(txtBuy);
-        gp.setConstraints(txtBuy, 1, 9);
+        GridPane.setConstraints(txtBuy, 1, 9);
 
         txtTreasure = new Text();
         setTextStyle(txtTreasure);
-        gp.setConstraints(txtTreasure, 1, 11);
+        GridPane.setConstraints(txtTreasure, 1, 11);
 
 
         // Images for greyOut. If it is not the users'turn, the handcards and button are grayed out.
@@ -230,20 +228,20 @@ public GameView() {
         imgVGreyOutHandStack = new ImageView(imgGreyOut);
         imgVGreyOutHandStack.setFitHeight(120);
         imgVGreyOutHandStack.setFitWidth(540);
-        gp.setRowSpan(imgVGreyOutHandStack, 6);
-        gp.setColumnSpan(imgVGreyOutHandStack, 4);
-        gp.setValignment(imgVGreyOutHandStack, VPos.TOP);
+        GridPane.setRowSpan(imgVGreyOutHandStack, 6);
+        GridPane.setColumnSpan(imgVGreyOutHandStack, 4);
+        GridPane.setValignment(imgVGreyOutHandStack, VPos.TOP);
         imgVGreyOutHandStack.setOpacity(0.5);
 
         imgVGreyOutButton = new ImageView(imgGreyOut);
         imgVGreyOutButton.setFitHeight(30);
         imgVGreyOutButton.setFitWidth(200);
-        gp.setColumnSpan(imgVGreyOutButton, 2);
-        gp.setHalignment(imgVGreyOutButton, HPos.LEFT);
+        GridPane.setColumnSpan(imgVGreyOutButton, 2);
+        GridPane.setHalignment(imgVGreyOutButton, HPos.LEFT);
         imgVGreyOutButton.setOpacity(0.5);
 
-        gp.setConstraints(imgVGreyOutHandStack, 2, 15);
-        gp.setConstraints(imgVGreyOutButton, 4, 13);
+        GridPane.setConstraints(imgVGreyOutHandStack, 2, 15);
+        GridPane.setConstraints(imgVGreyOutButton, 4, 13);
 
 
         this.btnLobby = new Button();
@@ -362,13 +360,13 @@ public GameView() {
     }
 
     /**
-     * author Vanessa Cajochen
+     * @author Vanessa Cajochen
      */
 
 
     private void setLabelFormat(Label lbl) {
         gp.getChildren().add(lbl);
-        gp.setValignment(lbl, VPos.TOP);
+        GridPane.setValignment(lbl, VPos.TOP);
         lbl.getStyleClass().add("labelNumber");
         lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black; -fx-font-size: 10;");
         lbl.setPrefSize(16, 15);
@@ -380,21 +378,21 @@ public GameView() {
         lbl.getStyleClass().add("labelInfo");
         lbl.setAlignment(Pos.CENTER);
         gp.getChildren().addAll(lbl);
-        gp.setHalignment(lbl, HPos.CENTER);
+        GridPane.setHalignment(lbl, HPos.CENTER);
     }
 
     private void setTextStyle(Text txt) {
         gp.getChildren().addAll(txt);
         txt.getStyleClass().add("textInfo");
-        gp.setHalignment(txt, HPos.CENTER);
+        GridPane.setHalignment(txt, HPos.CENTER);
     }
 
     private void setStyleOfButtons(Button btn) {
         btn.setPrefSize(200, 30);
-        gp.setColumnSpan(btn, 3);
+        GridPane.setColumnSpan(btn, 3);
         btn.getStyleClass().add("buttonGameView");
-        gp.setConstraints(btn, 4, 13);
-        gp.setHalignment(btn, HPos.LEFT);
+        GridPane.setConstraints(btn, 4, 13);
+        GridPane.setHalignment(btn, HPos.LEFT);
     }
 
 
@@ -464,7 +462,7 @@ public GameView() {
      * @param userName
      * @param set
      * @param activeUserId here you see the points in the view.
-     * @Author Murat Kelleci
+     * @author Murat Kelleci
      *  here are the buttons created depending on player. two buttons if 2 player etc.
      *  the player who has the turn his buttons is marked greend and border is bold
      */
@@ -673,7 +671,7 @@ public GameView() {
     }
 
     /**
-     * Author Vanessa Cajochen + Manuel Wirz
+     * @author Vanessa Cajochen + Manuel Wirz
      */
 
     protected void setTexts() {
@@ -709,7 +707,7 @@ public GameView() {
     }
 
     /**
-     * Author Vanessa Cajochen
+     * @author Vanessa Cajochen
      */
     public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col, int row, int rowSpan, int cardCount) {
 
@@ -718,8 +716,8 @@ public GameView() {
                 EmptyCard.add("" + col + row);
                 ImageView imgVEmptyCard = new ImageView(imgGreyOut);
                 imgVEmptyCard.setOpacity(0.5);
-                gp.setConstraints(imgVEmptyCard, col, row);
-                gp.setRowSpan(imgVEmptyCard, rowSpan);
+                GridPane.setConstraints(imgVEmptyCard, col, row);
+                GridPane.setRowSpan(imgVEmptyCard, rowSpan);
                 gp.getChildren().add(imgVEmptyCard);
 
                 if (size == CardImageView.CardSize.miniMini) {
@@ -732,7 +730,7 @@ public GameView() {
             }
 
             Label lbl = new Label();
-            gp.setConstraints(lbl, col, row);
+            GridPane.setConstraints(lbl, col, row);
             setLabelFormat(lbl);
             lbl.setText(Integer.toString(cardCount));
 
@@ -742,8 +740,8 @@ public GameView() {
         } else {
             CardImageView imgView = new CardImageView(card, size);
 
-            gp.setConstraints(imgView, col, row);
-            gp.setRowSpan(imgView, rowSpan);
+            GridPane.setConstraints(imgView, col, row);
+            GridPane.setRowSpan(imgView, rowSpan);
             gp.getChildren().add(imgView);
 
             Tooltip tooltip = new Tooltip();
@@ -752,7 +750,7 @@ public GameView() {
             Tooltip.install(imgView, tooltip);
 
             Label lbl = new Label();
-            gp.setConstraints(lbl, col, row);
+            GridPane.setConstraints(lbl, col, row);
             setLabelFormat(lbl);
             lbl.setText(Integer.toString(cardCount));
 
@@ -849,9 +847,9 @@ public GameView() {
         imgVtrayStack = new CardImageView(card, CardImageView.CardSize.bigSize);
         imgVtrayStack.setFitHeight(120);
         imgVtrayStack.setFitWidth(75);
-        gp.setRowSpan(imgVtrayStack, 4);
-        gp.setHalignment(imgVtrayStack, HPos.LEFT);
-        gp.setConstraints(imgVtrayStack, 0, 15);
+        GridPane.setRowSpan(imgVtrayStack, 4);
+        GridPane.setHalignment(imgVtrayStack, HPos.LEFT);
+        GridPane.setConstraints(imgVtrayStack, 0, 15);
         gp.getChildren().add(imgVtrayStack);
     }
 
@@ -860,9 +858,9 @@ public GameView() {
         imgVtrayStack = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/back.jpg")));
         imgVtrayStack.setFitHeight(120);
         imgVtrayStack.setFitWidth(75);
-        gp.setRowSpan(imgVtrayStack, 4);
-        gp.setHalignment(imgVtrayStack, HPos.LEFT);
-        gp.setConstraints(imgVtrayStack, 0, 15);
+        GridPane.setRowSpan(imgVtrayStack, 4);
+        GridPane.setHalignment(imgVtrayStack, HPos.LEFT);
+        GridPane.setConstraints(imgVtrayStack, 0, 15);
         gp.getChildren().add(imgVtrayStack);
     }
 

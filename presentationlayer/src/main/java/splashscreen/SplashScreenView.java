@@ -44,6 +44,10 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     // ---- Methods
 
+    /**
+     *  @author Vanessa Cajochen
+     *  */
+
     @Override
     protected Scene create_GUI() {
         stage.initStyle(TRANSPARENT);
@@ -73,25 +77,28 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
         pane.getChildren().addAll(Manuel, Vanessa, Michel, Dyoni, Murat);
 
-
+        // Image Dominion
         ImageView imgVDominion = new ImageView(new Image(getClass().getResourceAsStream("/splashscreen/dominion.png")));
         imgVDominion.setPreserveRatio(true);
         imgVDominion.setFitWidth(350);
         imgVDominion.setLayoutX(25);
         imgVDominion.setLayoutY(25);
 
+
+        // Image Text PC Game
         ImageView imgVPcGame = new ImageView(new Image(getClass().getResourceAsStream("/splashscreen/pcGame.png")));
         imgVPcGame.setPreserveRatio(true);
         imgVPcGame.setFitWidth(90);
         imgVPcGame.setLayoutX(155);
         imgVPcGame.setLayoutY(130);
 
+        // setting progressindicator size and layout
         progress = new ProgressIndicator();
         progress.setPrefSize(75, 75);
         progress.setLayoutX(162.5);
         progress.setLayoutY(210);
 
-
+        // Image Text created by
         ImageView imgVCreatedBy = new ImageView(new Image(getClass().getResourceAsStream("/splashscreen/createdBy_.png")));
         imgVCreatedBy.setPreserveRatio(true);
         imgVCreatedBy.setFitWidth(75);
@@ -108,6 +115,8 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     }
 
+    // creating Transition for each name
+    // name moves from 1 point to another and each name has a short delay in order that no names cross each other
     private void createTransition(Text name){
         name.setTranslateX(500);
         name.setTranslateY(330);
@@ -127,7 +136,6 @@ public class SplashScreenView extends View<SplashScreenModel> {
 
     @Override
     protected void setTexts() {
-        // nop
     }
 
 }

@@ -4,32 +4,17 @@ import base.View;
 import com.weddingcrashers.service.Language;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.io.File;
-
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Side;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.scene.control.ScrollPane;
 
 public class HelpView extends View<HelpModel> {
@@ -37,6 +22,10 @@ public class HelpView extends View<HelpModel> {
     public HelpView(Stage stage, HelpModel model){
         super(stage, model);
     }
+
+    /**
+     * @author Vanessa Cajochen
+     */
 
     public Scene create_GUI(){
 
@@ -110,7 +99,7 @@ public class HelpView extends View<HelpModel> {
         scrollRules.setContent(vBoxRules);
         scrollCards.setContent(vBoxCards);
 
-        //vBox should have a gap to the right side and content should be aligned center
+        //vBox should have a gap to the right side and bottom and content should be aligned center
         vBoxConnection.setPadding(new Insets(0, 0, 30, 20));
         vBoxLogin.setPadding(new Insets(0, 0, 30, 20));
         vBoxRegister.setPadding(new Insets(0, 0, 30, 20));
@@ -227,9 +216,9 @@ public class HelpView extends View<HelpModel> {
             imgConnection4.setPreserveRatio(true);
             imgConnection4.setFitHeight(250);
 
-            vBoxLogin.setMargin(imgConnection1, new Insets(0, 0, 30, 0));
-            vBoxLogin.setMargin(imgConnection2, new Insets(0, 0, 30, 0));
-            vBoxLogin.setMargin(imgConnection3, new Insets(0, 0, 30, 0));
+            VBox.setMargin(imgConnection1, new Insets(0, 0, 30, 0));
+            VBox.setMargin(imgConnection2, new Insets(0, 0, 30, 0));
+            VBox.setMargin(imgConnection3, new Insets(0, 0, 30, 0));
 
             vBoxConnection.getChildren().addAll(txtConnection, imgConnection1, imgConnection2, imgConnection3, imgConnection4);
 
@@ -275,7 +264,7 @@ public class HelpView extends View<HelpModel> {
             imgLobby.setFitHeight(250);
 
             vBoxLobby.getChildren().addAll(txtLobby, imgLobbyHost, imgLobby);
-            vBoxLobby.setMargin(imgLobbyHost, new Insets(0, 0, 30, 0));
+            VBox.setMargin(imgLobbyHost, new Insets(0, 0, 30, 0));
 
 
             // Text for Tab Login
@@ -294,7 +283,7 @@ public class HelpView extends View<HelpModel> {
             imgUserMgmt.setFitHeight(250);
 
             vBoxLogin.getChildren().addAll(txtLogin, imgLoginDE, imgUserMgmt);
-            vBoxLogin.setMargin(imgLoginDE, new Insets(0, 0, 30, 0));
+            VBox.setMargin(imgLoginDE, new Insets(0, 0, 30, 0));
 
 
             // Text for Tab Register

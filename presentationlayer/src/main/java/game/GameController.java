@@ -57,20 +57,19 @@ import static util.ViewFactory.createRankingView;
 public class GameController extends Controller<GameModel, GameView> {
 
     private PlayerSet myCardSet;
-    ArrayList<Card> unusedCards;
-    HashMap<Integer, User> usersAndClientIds; // Key = ClientId
-    HashMap<Integer, User> users; // Key = UserId
-    HashMap<Integer, PlayerSet> enemyCards; // Key = UserID
-    GameSettings gameSettings;
-    User myUser;
-    int activeUserId;
-    int numberOfActions;
-    int numberOfBuys;
-    int numberOfMoney;
-    boolean actionPhaseOver = false;
-    boolean firstPlayerSetReceived = false;
-    ArrayList<String> cardNames;
-    boolean initalUserTurnLogged;
+    private ArrayList<Card> unusedCards;
+    private HashMap<Integer, User> usersAndClientIds; // Key = ClientId
+    private HashMap<Integer, User> users; // Key = UserId
+    private HashMap<Integer, PlayerSet> enemyCards; // Key = UserID
+    private GameSettings gameSettings;
+    private User myUser;
+    private int activeUserId;
+    private int numberOfActions;
+    private int numberOfBuys;
+    private int numberOfMoney;
+    private boolean actionPhaseOver = false;
+    private boolean firstPlayerSetReceived = false;
+    private ArrayList<String> cardNames;
 
     public GameController(GameModel model, GameView view, HashMap<Integer, User> usersAndClientIds,
                           GameSettings gameSettings) {
@@ -109,6 +108,10 @@ public class GameController extends Controller<GameModel, GameView> {
             e.printStackTrace();
         }
 
+        /**
+         *  @author Vanessa Cajochen
+         *  */
+
         cardNames = new ArrayList<String>();
         cardNames.add("Kupfer");
         cardNames.add("Silber");
@@ -125,14 +128,10 @@ public class GameController extends Controller<GameModel, GameView> {
         cardNames.add("Schmiede");
         cardNames.add("Markt");
 
-
-        /**
-         *  author Vanessa Cajochen
-         *  */
-
         resetActionBuyMoney();
         updateActionBuyMoney();
 
+        // when button is clicked, all treasures will be played and sound will be played
         view.btnPlayMoneyCards.setOnAction(event -> {
 
             String coin = new String( "coin" );
@@ -614,7 +613,7 @@ public class GameController extends Controller<GameModel, GameView> {
 
     /**
      * this method must be called when a player plays a card
-     * @Author Michel Schlatter
+     * @author Michel Schlatter
      * @param c the card played
      * @param count - count of the card played. eg 7. copper
      */
@@ -727,13 +726,15 @@ public class GameController extends Controller<GameModel, GameView> {
         });
     }
 
-    // Author Vanessa Cajochen
+    /**
+     * @author Vanessa Cajochen
+     * Depending on which card has been clicked a different actions will be run
+     * mini sized cards can be bought, big sized cards can be played
+     */
     private void runAction(CardImageView imgv) {
 
         String card = new String("card");
         String coin = new String( "coin" );
-
-
 
         Card c = imgv.getCard();
         if (imgv.getCardSize() == CardImageView.CardSize.miniSize | imgv.getCardSize() == CardImageView.CardSize.miniMini) {
@@ -757,7 +758,7 @@ public class GameController extends Controller<GameModel, GameView> {
                     playSound( coin );
                 }
 
-                // btn weg wenn alle MoneyCards gespielt sind
+                // removes btn when all treasure cards have been played
                 boolean containsMoneyCard = false;
                 for (int i = 0; i < view.handStackList.size(); i++) {
                     System.out.println("Size: " + view.handStackList.size());
@@ -824,7 +825,7 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /**
-     * author Vanessa Cajochen
+     * @author Vanessa Cajochen
      */
 
     private void enableOrDisableView() {
@@ -852,17 +853,13 @@ public class GameController extends Controller<GameModel, GameView> {
     }
 
     /**
-     * author Vanessa Cajochen
+     * @author Vanessa Cajochen
      */
 
     public void updateUnusedCards(ArrayList<Card> unusedCards) {
         if (unusedCards == null || unusedCards.size() == 0) {
             return;
         }
-
-        long tStart = System.currentTimeMillis();
-
-
 
         ArrayList<int[]> indexes = new ArrayList<int[]>();
         indexes.add(new int[]{2, 1, 2});
@@ -906,12 +903,9 @@ public class GameController extends Controller<GameModel, GameView> {
                 setCardImageViewAction(imgView);
             }
         }
-        long tEnd = System.currentTimeMillis();
-        long tDelta = tEnd - tStart;
-        double elapsedSeconds = tDelta / 1000.0;
-        System.out.println(elapsedSeconds);
     }
 
+    // counts a specific card in the list
     public int countCards(ArrayList<Card> list, String s) {
         int count = 0;
         for (int i = 0; i < (list.size()); i++) {
@@ -922,6 +916,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return count;
     }
 
+    // counts a specific card in the list based on the image
     public int countCards(String name, ArrayList<CardImageView> list) {
         int count = 0;
         for (int i = 0; i < (list.size()); i++) {
@@ -932,6 +927,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return count;
     }
 
+    // returns a specific card from the list
     public Card getCard(ArrayList<Card> list, String name) {
         Card c = null;
         for (int i = 0; i < (list.size()); i++) {
@@ -943,6 +939,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return c;
     }
 
+    // returns a specific card from the list based on the image
     public Card getCard(String name, ArrayList<CardImageView> list) {
         Card c = null;
         for (int i = 0; i < (list.size()); i++) {
@@ -954,6 +951,7 @@ public class GameController extends Controller<GameModel, GameView> {
         return c;
     }
 
+    // cards get draw from pullStack
     public void drawHandCards(int numberOfDrawnCards) {
         for (int i = 0; i < numberOfDrawnCards; i++) {
             if (myCardSet.getPullStack().size() == 0){
@@ -995,8 +993,8 @@ public class GameController extends Controller<GameModel, GameView> {
         this.view.setUserPoints(userId, userName, playerSet, activeUserId);
     }
 
-    /*
-    Author Vanessa Cajochen
+    /**
+     * @author Vanessa Cajochen
      */
 
     public void updateActionBuyMoney() {
@@ -1049,6 +1047,9 @@ public class GameController extends Controller<GameModel, GameView> {
         view.updateLblPullStack(myCardSet.getPullStack().size());
     }
 
+    /**
+     * @author Michel Schlatter
+     */
     protected ArrayList<PlayerSet> getAllSets() {
         ArrayList<PlayerSet> sets = new ArrayList<PlayerSet>();
         sets.add(myCardSet);
