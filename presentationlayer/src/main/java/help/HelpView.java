@@ -398,8 +398,8 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Tab Register
-            txtRegister.setText(newLine + "Für das Login muss man sich einmalig registrieren. Die E-Mail Adresse und das Passwort werden für das Login verwendet. Es wurde entschieden die E-Mail Adresse zu verwenden, da der Benutzername eher in Vergessenheit geraten kann. "
-                    + "Der Benutzername wird im Chat, in der Lobby, in der Rangliste und im Spiel verwendet. Er ist für alle Mitspieler ersichtlich."
+            txtRegister.setText(newLine + "Fürs Login muen mer sich eimalig registrierä. D'email und s'Passwort werdet fürs Login verwendet. Es isch entschiedä worde, d'email z'verwende will mer de Benutzername eher vergisst. "
+                    + "De Benutzername wird im Chat, ih de Lobby, ih de Rangliste und im Spiel verwendet und isch für all Mitspieler ersichtlich."
                     + doubleNewLine);
 
             ImageView imgRegister = new ImageView(new Image(getClass().getResourceAsStream("/help/Register_CH.PNG")));
@@ -411,15 +411,15 @@ public class HelpView extends View<HelpModel> {
 
             // Text for Tab Rules
             txtRules.setText(newLine + "Zugablauf" + newLine
-                    + "1. Phase: Aktion - Der Spieler kann Aktionskarten aus seiner Hand ausspielen. Zu Beginn des Spielzugs hat jeder Spieler nur 1 Aktion zur Verfügung."
-                    + " Diese Zahl kann jedoch durch die Anweisungen auf bestimmten Aktionskarten erhöht werden. Die Aktionsphase kann auch übersprungen werden."
-                    + doubleNewLine + "2. Phase: Kauf - Der Spieler kann Karten aus dem Vorrat kaufen. Gekaufte Karten wandern direkt auf den Ablagestapel Dafür muss er genügend Kaufaktionen und genügend Geld besitzen. Zu Beginn des Spielzugs hat jeder Spieler nur 1 Kaufaktion zur Verfügung. "
-                    + " Diese Zahl kann jedoch durch die Anweisungen auf bestimmten Aktionskarten erhöht werden. Die Kaufphase kann auch übersprungen werden."
-                    + doubleNewLine + "3. Phase: Aufräumen - Der Spieler legt alle ausgespielten Aktions- und Geldkarten und seine verbliebenen Handkarten auf den Ablagestapel. Die Karten werden immer offen auf den Ablagestapel gelegt, so dass die oberste Karte ersichtlich ist. Diese Phase muss gespielt werden."
-                    + " Danach zieht der Spieler 5 Karten vom Nachziehstapel und nimmt diese auf seine Hand."
-                    + doubleNewLine + doubleNewLine + "Spielende"
-                    + newLine + "Es können 2 Optionen ausgewählt werden um das Spiel zu beenden." + newLine + "1. Das Spiel endet nach einer definierten Anzahl an Runden." + newLine + "2. Das Spiel endet, in dem eine der beiden Bedingugen eintritt: Der Provinzstapel ist leer oder 3 beliebige Aktionskartenstapel aus dem Vorrat sind leer."
-                    + doubleNewLine + "Nach dem Ende des Spiels, werden die Siegespunkte im gesamten Kartensatz (Handkarten, Ablage- und Nachziehstapel) gezählt. Der Spieler mit den meisten Punkten gewinnt das Spiel."
+                    + "1. Phase: Aktion - De Speler chan Aktionskarte vo sinere Hand usspiele. Am Ahfang vom Spielzug hät jede Spieler nur 1 Aktion zur Verfüegig."
+                    + " Die Zahl chan sich aber durch Ahwiisige vo bestimmte Karte erhöhe. D'Aktionsphase chan au übersprunge werdä."
+                    + doubleNewLine + "2. Phase: Kauf - Dä Spieler chan Karte usem Vorrat kaufe. Die kaufte Karte wanderet direkt uf de Ablagestapel. Defür muess de Spieler gnüegend Kaufaktione und gnüegend Geld bsitze. Am Ahfang vo jedem Spielzug het jedä Spieler nur 1 Kaufaktion zur Verfüegig. "
+                    + " Die Zahl chan sich aber durch Ahwiisige vo bestimmte Karte erhöhe. D'Kaufphase chan au übersprunge werdä."
+                    + doubleNewLine + "3. Phase: Ufruume - De Spieler leiht all usgspielte Aktions- und Geldkarte und sini verbliebende Handkarte uf de Ablagestapel. Die Karte werdet immer offe uf de Ablagestapel gleit. Somit isch die obersti Karte ersichtlich. Die Phase muen gspielt werde."
+                    + " Danach zieht de Spieler 5 Karte vom Nahziehstapel und nimmt die uf sini Hand."
+                    + doubleNewLine + doubleNewLine + "Spielendi"
+                    + newLine + "Es chönd 2 Optione usgwählt werde ums Spiel z'beände." + newLine + "1. S'Spiel endet nach ere definierte Ahzahl Rundene." + newLine + "2. S'Spiel endet wenni eini vo beidne Bedingige ihtritt: De Provinzstapel isch leer oder 3 beliebigi Aktionskartestapel usem Vorrat sind leer."
+                    + doubleNewLine + "Nachem Endi vom Spiel, werdet die Siegespünkt im gsamte Kartesatz (Handkarte, Ablage- und Nahziehstapel) zählt. De Spieler mit de meiste Pünkt gwünnt s'Spiel."
             );
 
             vBoxRules.getChildren().add(txtRules);
