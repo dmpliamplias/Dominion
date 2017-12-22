@@ -139,7 +139,7 @@ public class RegisterController extends Controller<RegisterModel, RegisterView> 
         });
     }
 
-    //@author Murat Kelleci -Credits Michel Schlatter from ConnectionController Class.
+    //@author Murat Kelleci
     private void goToLoginView(){
         LoginModel model =new LoginModel();
         LoginView view =new LoginView(this.view.getStage(), model);

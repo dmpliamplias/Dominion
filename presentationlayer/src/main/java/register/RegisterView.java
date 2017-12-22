@@ -43,16 +43,16 @@ public class RegisterView extends View<RegisterModel>{
 
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root,416,372);
-        GridPane grid = new GridPane();
+        GridPane grPa = new GridPane();
 
 
 
         // Settings and positioning of m GridPane
 
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(15, 0, 15, 0));
+        grPa.setAlignment(Pos.CENTER);
+        grPa.setHgap(10);
+        grPa.setVgap(10);
+        grPa.setPadding(new Insets(15, 0, 15, 0));
 
         setStylesheet(scene, REGISTER);
 
@@ -79,28 +79,28 @@ public class RegisterView extends View<RegisterModel>{
         HBox hbImg = new HBox(10);
         hbImg.setAlignment(Pos.BOTTOM_CENTER);
         hbImg.getChildren().addAll(imgVbtnRegister, imgVbtnCancel);
-        grid.add(hbImg, 1, 5);
+        grPa.add(hbImg, 1, 5);
 
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btnRegister);
         hbBtn.getChildren().add(btnCancel);
-        grid.add(hbBtn, 1, 5);
+        grPa.add(hbBtn, 1, 5);
 
 
         // Creation of all needed TextFields
         txtEmail = new TextField();
-        grid.add(txtEmail,1,1);
+        grPa.add(txtEmail,1,1);
 
         txtUserName=new TextField();
-        grid.add(txtUserName,1,2);
+        grPa.add(txtUserName,1,2);
 
         txtPw = new PasswordField();
-        grid.add(txtPw,1,3);
+        grPa.add(txtPw,1,3);
 
         txtPw_confirm= new PasswordField();
-        grid.add(txtPw_confirm,1,4);
+        grPa.add(txtPw_confirm,1,4);
 
 
         // Create Title Register
@@ -135,7 +135,7 @@ public class RegisterView extends View<RegisterModel>{
         }
 
 
-        root.setCenter(grid);
+        root.setCenter(grPa);
 
         this.stage.setScene(scene);
 

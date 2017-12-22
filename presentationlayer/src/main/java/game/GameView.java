@@ -539,9 +539,9 @@ public GameView() {
      * here is shown the display for each player. the winner will get the winner pic, draw the draw pic and dialog and the loser the loser pic and dialog.
      * here is also the pic defined depending on win, draw or lose and the same for the sound which is also individual.
      */
-    // Pictures are not final just placeholder for better pics. Same for draw wav file.
+
     private void displayWinnerDialog(Map.Entry<WinningInformation, GameResult> gameResult) {
-        StackPane stackPane = new StackPane();
+        StackPane stPa = new StackPane();
         ImageView imgVbackground = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/dialogBackground.jpg")));
         imgVbackground.setPreserveRatio(true);
         imgVbackground.setFitHeight(250);
@@ -562,8 +562,8 @@ public GameView() {
                 }
                 imgVwinnerPic.setPreserveRatio(true);
                 imgVwinnerPic.setFitHeight(60);
-                stackPane.getChildren().addAll(imgVconfetti, imgVwinnerPic);
-                winnerAlert.getDialogPane().setContent(stackPane);
+                stPa.getChildren().addAll(imgVconfetti, imgVwinnerPic);
+                winnerAlert.getDialogPane().setContent(stPa);
                 winnerAlert.setGraphic(null);
                 winnerAlert.setHeaderText("");
                 winnerAlert.setTitle("Winner Dialog");
@@ -585,8 +585,8 @@ public GameView() {
                 }
                 imgVdrawPic.setPreserveRatio(true);
                 imgVdrawPic.setFitHeight(50);
-                stackPane.getChildren().addAll(imgVbackground, imgVdrawPic);
-                drawAlert.getDialogPane().setContent(stackPane);
+                stPa.getChildren().addAll(imgVbackground, imgVdrawPic);
+                drawAlert.getDialogPane().setContent(stPa);
                 drawAlert.setGraphic(null);
                 drawAlert.setHeaderText("");
                 drawAlert.setTitle("Draw Dialog");
@@ -606,10 +606,10 @@ public GameView() {
                 } else {
                     imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_DE.PNG")));
                 }
-                stackPane.getChildren().addAll(imgVbackground, imgVloserPic);
+                stPa.getChildren().addAll(imgVbackground, imgVloserPic);
                 imgVloserPic.setPreserveRatio(true);
                 imgVloserPic.setFitHeight(50);
-                loserAlert.getDialogPane().setContent(stackPane);
+                loserAlert.getDialogPane().setContent(stPa);
                 loserAlert.setGraphic(null);
                 loserAlert.setHeaderText("");
                 loserAlert.setTitle("Loser Dialog");
