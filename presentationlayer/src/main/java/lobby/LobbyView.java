@@ -185,7 +185,7 @@ public class LobbyView extends View<LobbyModel> {
         this.txtOption1.setPrefWidth( 500 );
         this.txtOption1.setPrefHeight( 50 );
         this.choiceBox = new ChoiceBox( FXCollections.observableArrayList(
-            "",2,10,11,12,13,14,15,16,17,18,19,20) );
+            "",10,11,12,13,14,15,16,17,18,19,20) );
         this.choiceBox.setPrefSize( 20,40 );
 
 

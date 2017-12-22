@@ -253,7 +253,7 @@ public GameView() {
         this.txtLoggerIsYourTurn = new Text();
         this.txtLoggerTurnIsOver = new Text();
 
-        //root.setBottom.
+
         root.setCenter(fpCenter);
         root.setRight(loggerAndChat());
         root.setTop(setTop());
@@ -361,6 +361,7 @@ public GameView() {
 
     /**
      * @author Vanessa Cajochen
+     * Methods for chaning the format and style forLabel und Text
      */
 
 
@@ -714,6 +715,8 @@ public GameView() {
 
     /**
      * @author Vanessa Cajochen
+     * Method that creates the imageview, tooltip and label for card.
+     * If the card is sold out, it will be greyed out.
      */
     public CardImageView setCardImageView(Card card, CardImageView.CardSize size, int col, int row, int rowSpan, int cardCount) {
 
