@@ -414,6 +414,8 @@ public class GameController extends Controller<GameModel, GameView> {
     private LinkedMap twoPlayer(LinkedMap gameResult, List<WinningInformation> winningInformations) {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
+
+        // @author Murat Kelleci - comparison of player points and return the winner.
         if (first.getPoints() == second.getPoints()) {
             second.setPosition(1);
             draw(gameResult, first, second);
@@ -435,6 +437,8 @@ public class GameController extends Controller<GameModel, GameView> {
         final WinningInformation first = winningInformations.get(0);
         final WinningInformation second = winningInformations.get(1);
         final WinningInformation third = winningInformations.get(2);
+
+        // @author Murat Kelleci - comparison of player points and return the winner.
         if (first.getPoints() == second.getPoints()) {
             second.setPosition(1);
             win(gameResult, first, second);
