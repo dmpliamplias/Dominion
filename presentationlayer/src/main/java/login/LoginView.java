@@ -65,7 +65,7 @@ public class LoginView extends View<LoginModel> {
         imgVbtnRegister.setPreserveRatio(true);
         imgVbtnRegister.setFitWidth(130);
 
-
+        // Creation of new HBox
         HBox hbImg = new HBox(10);
         hbImg.setAlignment(Pos.BOTTOM_CENTER);
         hbImg.getChildren().addAll(imgVbtnLogin, imgVbtnRegister);
@@ -119,7 +119,7 @@ public class LoginView extends View<LoginModel> {
 
         return scene;
     }
-    // here are the texts set same like reisterview etc.
+    // here are the texts set same like registerview etc.
     protected void setTexts(){
         this.stage.setTitle(getText("loginview.title"));
         user.setPromptText(getText("registerview.email"));
