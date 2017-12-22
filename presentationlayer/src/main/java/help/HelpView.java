@@ -426,14 +426,14 @@ public class HelpView extends View<HelpModel> {
 
 
             // Text for Tab Cards
-            txtCards.setText(newLine + "Dorf - Zieh eine Karte und erhalte 2 Aktionen."
-                    + doubleNewLine + "Gärten - Diese Königreichskarte ist eine Punktekarte, keine Aktionskarte. Sie hat bis zum Ende des Spiels keine Funktion. Bei der Wertung, zählt sie 1 Siegespunkt pro volle 10 Karten im gesamten Kartensatz."
-                    + doubleNewLine + "Geldverleiher - Entsorge ein Kupfer aus deiner Hand und erhalte dafür 3 virtuelles Geld."
-                    + doubleNewLine + "Holzfäller - Du erhältst einen zusätzlichen Kauf und 2 virtuelles Geld."
-                    + doubleNewLine + "Jahrmarkt - Du erhältst 2 Aktionen, einen zusätzlichen Kauf und 2 virtuelles Geld."
-                    + doubleNewLine + "Laboratorium - Zieh 2 Karten und erhalte eine zusätzliche Aktion."
-                    + doubleNewLine + "Markt - Zieh eine Karte und erhalte 1 zusätzliche Aktion, einen zusätzlichen Kauf und 1 virtuelles Geld."
-                    + doubleNewLine + "Schmiede - Zieh 3 Karten."
+            txtCards.setText(newLine + "Dorf - Zieh e Kartä und erhalt 2 Aktione."
+                    + doubleNewLine + "Gärtä - Die Königrichkarte isch e Punktekarte kei Aktionskarte. Sie het bis zum Endi vom Spiel kei Funktion. Bi de Wertig, zählt sie 1 Siegespunkt pro volli 10 Karte im gsamte Kartesatz."
+                    + doubleNewLine + "Geldverleihär - Entsorg es Kupfer us dinere Hand und erhalt defür 3 virtuelles Geld."
+                    + doubleNewLine + "Holzfällär - Du erhaltisch 1 KAuf und 2 virtuelles Geld."
+                    + doubleNewLine + "Chilbi - Du erhaltisch 2 Aktione, 1 Kauf und 2 virtuelles Geld."
+                    + doubleNewLine + "Laboratorium - Zieh 2 Karte und erhalt 1 Aktion."
+                    + doubleNewLine + "Märt - Zieh 1 Karte, erhalt 1 Aktion, 1 Kauf und 1 virtuelles Geld."
+                    + doubleNewLine + "Schmiedi - Zieh 3 Karte."
             );
 
             vBoxCards.getChildren().addAll(txtCards);
