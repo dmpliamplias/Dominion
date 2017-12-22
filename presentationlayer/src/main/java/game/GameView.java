@@ -1,5 +1,6 @@
 package game;
 
+import com.weddingcrashers.service.Language;
 import controls.CardImageView;
 import controls.HandStackLayout;
 import base.View;
@@ -542,13 +543,30 @@ public GameView() {
      */
     // Pictures are not final just placeholder for better pics. Same for draw wav file.
     private void displayWinnerDialog(Map.Entry<WinningInformation, GameResult> gameResult) {
+        StackPane stackPane = new StackPane();
+        ImageView imgVbackground = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/dialogBackground.jpg")));
+        imgVbackground.setPreserveRatio(true);
+        imgVbackground.setFitHeight(250);
+
         switch (gameResult.getValue()) {
+
             case WIN:
                 Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
                 String winner = "winner";
-                Image winnerPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/winner.jpg"));
-                ImageView imgVwinnerPic = new ImageView(winnerPic);
-                winnerAlert.setGraphic(imgVwinnerPic);
+                ImageView imgVconfetti = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/confetti.gif")));
+                ImageView imgVwinnerPic;
+                if (translator.getCurrentLanguage() == Language.ENGLISH) {
+                    imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_EN.PNG")));
+                } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
+                    imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_CH.PNG")));
+                } else {
+                    imgVwinnerPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/winner_DE.PNG")));
+                }
+                imgVwinnerPic.setPreserveRatio(true);
+                imgVwinnerPic.setFitHeight(60);
+                stackPane.getChildren().addAll(imgVconfetti, imgVwinnerPic);
+                winnerAlert.getDialogPane().setContent(stackPane);
+                winnerAlert.setGraphic(null);
                 winnerAlert.setHeaderText("");
                 winnerAlert.setTitle("Winner Dialog");
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
@@ -559,9 +577,19 @@ public GameView() {
             case DRAW:
                 Alert drawAlert = new Alert(Alert.AlertType.INFORMATION);
                 String draw = "draw";
-                Image drawPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/draw.jpg"));
-                ImageView imgVdrawPic = new ImageView(drawPic);
-                drawAlert.setGraphic(imgVdrawPic);
+                ImageView imgVdrawPic;
+                if (translator.getCurrentLanguage() == Language.ENGLISH) {
+                    imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_EN.PNG")));
+                } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
+                    imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_CH.PNG")));
+                } else {
+                    imgVdrawPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/draw_DE.PNG")));
+                }
+                imgVdrawPic.setPreserveRatio(true);
+                imgVdrawPic.setFitHeight(50);
+                stackPane.getChildren().addAll(imgVbackground, imgVdrawPic);
+                drawAlert.getDialogPane().setContent(stackPane);
+                drawAlert.setGraphic(null);
                 drawAlert.setHeaderText("");
                 drawAlert.setTitle("Draw Dialog");
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
@@ -572,12 +600,21 @@ public GameView() {
             case LOSE:
                 Alert loserAlert = new Alert(Alert.AlertType.INFORMATION);
                 String loser = "loser";
-                Image loserPic = new Image(getClass().getResourceAsStream(BASE_PATH + "/loser.jpg"));
-                ImageView imgVloserPic = new ImageView(loserPic);
-
-                loserAlert.setGraphic(imgVloserPic);
+                ImageView imgVloserPic;
+                if (translator.getCurrentLanguage() == Language.ENGLISH) {
+                    imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_EN.PNG")));
+                } else if (translator.getCurrentLanguage() == Language.SWISS_GERMAN){
+                    imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_CH.PNG")));
+                } else {
+                    imgVloserPic = new ImageView(new Image(getClass().getResourceAsStream(BASE_PATH + "/loser_DE.PNG")));
+                }
+                stackPane.getChildren().addAll(imgVbackground, imgVloserPic);
+                imgVloserPic.setPreserveRatio(true);
+                imgVloserPic.setFitHeight(50);
+                loserAlert.getDialogPane().setContent(stackPane);
+                loserAlert.setGraphic(null);
                 loserAlert.setHeaderText("");
-                loserAlert.setTitle("Looser Dialog");
+                loserAlert.setTitle("Loser Dialog");
 
                 if (menuBar.getMenuItemSoundUnmute().isSelected()) {
                     GameController.playSound(loser);
